@@ -104,7 +104,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(TargetPath)" "D:\Steam\steamapps\common\Sonic Mania\mods\Competition Plus + Menu Prototype" /Y
-start "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
+start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>TASKKILL /F /IM SonicMania.exe</Command>
@@ -147,7 +147,7 @@ start "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
     <PostBuildEvent />
     <PostBuildEvent>
       <Command>xcopy "$(TargetPath)" "D:\Steam\steamapps\common\Sonic Mania\mods\Competition Plus + Menu Prototype" /Y
-start "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
+start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>TASKKILL /F /IM SonicMania.exe</Command>
