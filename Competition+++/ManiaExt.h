@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "SonicMania.h"
+#include <string>
 
 // Music struct
 struct struct_0
@@ -62,18 +63,18 @@ struct EntityUIInfoLabel : SonicMania::Entity
 	/* 0x00000076 */ BYTE field_76;
 	/* 0x00000077 */ BYTE field_77;
 	/* 0x00000078 */ SonicMania::Vector2 Size;
-	/* 0x00000080 */ DWORD Text;
-	/* 0x00000084 */ WORD field_84;
+	/* 0x00000080 */ wchar_t* Text;
+	/* 0x00000084 */ WORD TextLength;
 	/* 0x00000086 */ BYTE field_86;
 	/* 0x00000087 */ BYTE field_87;
 	/* 0x00000088 */ DWORD field_88;
 	/* 0x0000008C */ SonicMania::EntityAnimationData AnimData2;
 };
 
-struct EntityUIText : SonicMania::Entity
+struct EntityUITextPrivate : SonicMania::Entity
 {
-	/* 0x00000058 */ DWORD State;
-	/* 0x0000005C */ DWORD StateDraw;
+	/* 0x00000058 */ void* State;
+	/* 0x0000005C */ void* StateDraw;
 	/* 0x00000060 */ DWORD Text;
 	/* 0x00000064 */ WORD field_64;
 	/* 0x00000066 */ WORD field_66;
@@ -103,6 +104,9 @@ struct Button : SonicMania::Entity
 
 //int UIBackgroundMainOffset = 0xAC68E4;
 
+extern void SetScreenCount(int count);
+extern void ConvertASCII2Unicode(wchar_t* dest, char* src, size_t size, int offset);
+extern void DrawTextSprite(std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative);
 extern bool PlayerInRange(int player, int x1, int y1, int x2, int y2);
 extern bool PlayerInRange(SonicMania::EntityPlayer* player, int x1, int y1, int x2, int y2);
 extern BYTE* GetUIButtonPointer(int slotID);

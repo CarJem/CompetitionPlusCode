@@ -15,7 +15,7 @@ namespace CompPlus_Common
 	{
 		CompetitionPlus::IZChangeStage(key);
 		GameState = GameStates::GameState_NotRunning;
-		CompetitionPlus::RequirePointRefresh = true;
+		CompetitionPlus::StageRefresh = true;
 		CompetitionPlus::IdleTime = 10;
 	}
 
@@ -24,7 +24,7 @@ namespace CompPlus_Common
 		LoadScene(LevelID);
 		CurrentSceneInt = LevelID;
 		GameState = GameStates::GameState_NotRunning;
-		CompetitionPlus::RequirePointRefresh = true;
+		CompetitionPlus::StageRefresh = true;
 		CompetitionPlus::IdleTime = 10;
 	}
 

@@ -8,6 +8,7 @@
 
 namespace CompPlus_HubWorld
 {
+    extern void LoadLevelSelect();
     extern void UpdateHUBWorld();
     extern void EnterLevelSelectLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
 };

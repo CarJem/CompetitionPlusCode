@@ -1,7 +1,22 @@
 #include "stdafx.h"
 #include "ManiaExt.h"
+#include <string>
 
 using namespace SonicMania;
+
+void SetScreenCount(int count) 
+{
+	BYTE* Pointer = *(BYTE**)((baseAddress + 0xA530FC));
+	WriteData((BYTE*)baseAddress + 0xA530FC, (BYTE)count);
+}
+
+
+void ConvertASCII2Unicode(wchar_t* dest, char* src, size_t size, int offset)
+{
+	memset(dest, 0, size * 2);
+	for (int i = 0; i < size; ++i)
+		dest[i] = src[i] + offset;
+}
 
 bool PlayerInRange(int player, int x1, int y1, int x2, int y2)
 {
@@ -36,6 +51,58 @@ bool PlayerInRange(EntityPlayer* player, int x1, int y1, int x2, int y2)
 BYTE* GetUIBGPointer()
 {
 	return *(BYTE**)(baseAddress + 0xAC68E4);
+}
+
+int DevFontSpriteID = 0;
+bool DevFontLoaded = false;
+
+void DrawTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative)
+{
+	if (!DevFontLoaded) 
+	{
+		DevFontSpriteID = LoadAnimation("Dev/Font.bin", Scope_Global);
+		DevFontLoaded = true;
+		return;
+	}
+
+	/*
+	if (ScreenRelative) 
+	{
+		int x = SonicMania::OBJ_Camera->XPos;
+		int y = SonicMania::OBJ_Camera->YPos;
+
+		LocationStart = Vector2(x + LocationStart.GetFullX(), y + LocationStart.GetFullY());
+	}
+	*/
+
+	int SpriteFrame = 0;
+	int BuildLength = 0;
+	EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+	for (int i = 0; i < Name.length(); i++)
+	{
+		SpriteFrame = int(Name[i]);
+
+		BuildLength = BuildLength + 8;
+
+
+	}
+	//LocationStart.X = LocationStart.X - BuildLength;
+	//Offset lenth to build to our point. 
+
+	for (int i = 0; i < Name.length(); i++)
+	{
+		SpriteFrame = int(Name[i]);
+		RingTemp->DrawOrder = Player1.DrawOrder;
+		RingTemp->DrawFX = SonicMania::FX_Rotate;
+
+
+		RingTemp->Rotation = Player1.Rotation;
+		RingTemp->Angle = Player1.Angle;
+		SetSpriteAnimation(DevFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
+		DrawSprite(&RingTemp->ActNumbersData, &LocationStart, true);
+		LocationStart.X = LocationStart.X + 8;
+
+	}
 }
 
 void WriteColor(int offset, int r, int g, int b)

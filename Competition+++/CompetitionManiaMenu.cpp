@@ -10,6 +10,8 @@ namespace CompPlus_CompetitionMenu
 {
     using namespace SonicMania;
 
+	int UIVsRoundPickerSlotID = 232;
+
 	void UpdateManiaMenu()
 	{
 		SonicMania::UIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(590);
@@ -17,27 +19,17 @@ namespace CompPlus_CompetitionMenu
 		object.Obfuscate = true;
 		object.XOut = false;
 		object.ZoneID = 11;
-		object.Act = 101;
+		object.Act = 106;
 
 		SonicMania::UIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(591);
 		object2.Disabled = false;
 		object2.Obfuscate = true;
 		object2.XOut = false;
 		object2.ZoneID = 11;
-		object2.Act = 102;
+		object2.Act = 107;
 
-		SonicMania::UIVsZoneButton& object3 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(592);
-		object3.Disabled = false;
-		object3.Obfuscate = true;
-		object3.XOut = false;
-		object3.ZoneID = 11;
-		object3.Act = 103;
-
-		SonicMania::UIVsZoneButton& object4 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(593);
-		object4.Disabled = true;
-		object4.Obfuscate = true;
-		object4.XOut = true;
-		object4.ZoneID = 11;
-		object4.Act = 104;
+		SetUIBG_BGColor(74, 211, 156);
+		SetUIBG_FGLowColor(247, 146, 24);
+		SetUIBG_FGHighColor(57, 178, 206);
 	}
 };

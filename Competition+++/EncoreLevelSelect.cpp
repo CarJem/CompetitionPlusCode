@@ -155,6 +155,7 @@ namespace CompPlus_EncoreLevelSelect
 
 	void UpdateEncoreLSelect()
 	{
+		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupEncoreLSelectMenuPoints();
 		SetupEncoreSelector();
 

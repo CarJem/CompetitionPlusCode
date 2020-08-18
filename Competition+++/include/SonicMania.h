@@ -620,6 +620,7 @@ namespace SonicMania
 #define MOVESET_ERSS    (SonicMania::Ability)(baseAddress + 0x000C2340) // Egg Reverie Super Sonic
 
 
+
 #define PLAYERID1 0
 #define PLAYERID2 1
 #define PLAYERID3 2

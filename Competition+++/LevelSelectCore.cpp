@@ -85,6 +85,11 @@ namespace CompPlus_LevelSelectCore
 
 	}
 
+	void UniversalLSelectLoop() 
+	{
+		SetScreenCount(1);
+	}
+
 	void LevelSelectDelayLoop(int selectorID, int levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
 	{
 		if (FastWarp && SceneLoadWaitTimer < 50)

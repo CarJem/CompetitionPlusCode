@@ -21,7 +21,7 @@ namespace CompetitionPlus
 		Scene_CompPlus_HubWorld = 138
 	};
 
-	extern bool RequirePointRefresh;
+	extern bool StageRefresh;
 	extern int IdleTime;
 
 	//extern IZAPI::StageInfo GetCurrentStage();
@@ -29,8 +29,8 @@ namespace CompetitionPlus
 	//
 	extern void IZChangeStage(const char* key);
 
-	extern void MultiColorMods();
 	extern void UpdateMenus();
+	extern void DrawHook();
 
 	extern void OnStageLoad(IZAPI::StageInfo info);
 	extern void OnStageUnload(IZAPI::StageInfo info);

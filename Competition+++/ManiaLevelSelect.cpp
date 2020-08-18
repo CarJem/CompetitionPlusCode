@@ -104,6 +104,8 @@ namespace CompPlus_ManiaLevelSelect
 		short start_x = MLS_MenuPoints[reset_y][reset_x].Position.X;
 		short start_y = MLS_MenuPoints[reset_y][reset_x].Position.Y;
 
+
+
 		ResetMenuPos(MenuPos_X, MenuPos_Y, reset_x, reset_y, LastMenuPos_X, LastMenuPos_Y, SwapLevelSelect);
 		InitPosition(start_x, start_y);
 
@@ -138,8 +140,12 @@ namespace CompPlus_ManiaLevelSelect
 
 	void UpdateManiaLSelect()
 	{
+
+		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupManiaLSelectMenuPoints();
 		SetupManiaSelector();
+
+
 
 		if (!LevelSelected)
 		{

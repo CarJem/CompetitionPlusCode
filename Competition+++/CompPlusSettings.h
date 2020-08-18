@@ -1,3 +1,4 @@
+#include "SonicMania.h"
 #pragma once
 namespace CompPlusSettings
 {
@@ -56,11 +57,16 @@ namespace CompPlusSettings
         Announcer_Sonic2 = 1
     };
 
+#define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
 
     //Gameplay Settings
     extern bool InfiniteLives;
     extern bool InfiniteTime;
     extern int InitalLives; // Ignored when InfiniteLives = true;
+
+    //Developer Settings
+    extern bool EnableDevMode;
+    extern bool EnableDebugMode;
 
     //Stock Competition Settings
     extern int NumberOfRounds; // Ignored when EndlessRounds = true;
@@ -72,46 +78,43 @@ namespace CompPlusSettings
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
 
-    // Basic Global Player Configuration : Ignored when AdvancedPlayerConfiguration = true;
-    extern SonicAbility AbilitiesSonic;
-    extern bool AbilitiesTails;
-    extern bool AbilitiesKnuckles;
-    extern bool AbilitiesRay;
-    extern bool AbilitiesMighty;
+    extern bool DropdashAbility;
+    extern bool InstaSheildAbility;
+
+    extern bool Player1PeeloutAbility;
+    extern bool Player2PeeloutAbility;
+    extern bool Player3PeeloutAbility;
+    extern bool Player4PeeloutAbility;
 
     extern ChosenPlayer Player1ChosenPlayer;
     extern ChosenPlayer Player2ChosenPlayer;
     extern ChosenPlayer Player3ChosenPlayer;
     extern ChosenPlayer Player4ChosenPlayer;
 
-    // Advanced Player Configuration
-    extern bool AdvancedPlayerConfiguration;
-
-    // Advanced Player 1 Configuration
-    extern ThreeStateBool Player1Peelout;
-    extern ThreeStateBool Player1Dropdash;
-    extern ThreeStateBool Player1Instasheild;
     extern PlayerAbility Player1AbilitySet;
-
-    // Advanced Player 2 Configuration
-    extern ThreeStateBool Player2Peelout;
-    extern ThreeStateBool Player2Dropdash;
-    extern ThreeStateBool Player2Instasheild;
     extern PlayerAbility Player2AbilitySet;
-
-    // Advanced Player 3 Configuration
-    extern ThreeStateBool Player3Peelout;
-    extern ThreeStateBool Player3Dropdash;
-    extern ThreeStateBool Player3Instasheild;
     extern PlayerAbility Player3AbilitySet;
-
-    // Advanced Player 4 Configuration
-    extern ThreeStateBool Player4Peelout;
-    extern ThreeStateBool Player4Dropdash;
-    extern ThreeStateBool Player4Instasheild;
     extern PlayerAbility Player4AbilitySet;
 
 
+
+    extern void SetDropdashAbility(bool State);
+
+    extern void SetPeeloutAbility(int PlayerID, bool State);
+
+    extern void SetInstaSheildAbility(bool State);
+
+    extern void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability);
+
+    extern void SetPlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
+
+    extern void SetPlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force = true);
+
+    extern void FixAbilites(SonicMania::EntityPlayer* Player);
+
+    extern void StageLoadApplyConfig();
+
     extern void UpdateSettingsLoop();
 }
+
 

@@ -6,6 +6,8 @@
 #include "CompSettings.h"
 #include "GeneralSettings.h"
 #include "PlayerConfiguration.h"
+#include "Common.h"
+#include <string>
 
 namespace CompPlus_Settings_Base
 {
@@ -14,45 +16,33 @@ namespace CompPlus_Settings_Base
 	using namespace CompPlus_Settings_CompetitionPage;
 	using namespace CompPlus_Settings_GeneralPage;
 	using namespace CompPlus_Settings_PlayerConfig;
+	using namespace CompPlus_Common;
 
-	int ViewPortID = 56;
-	int GeneralPageID = 178;
-	int CompetitionPageID = 69;
+	static int OnScreenDrawReturn = baseAddress + 0x7FFE;
+	bool IsInit = false;
+	bool CanDraw = false;
 
-	int LastSceneID = 0;
-	int CurrentPage = 0;
-
-
-	void GetPage()
+	void DoMenuOnScreenDraw()
 	{
-		if (CurrentPage == 0)
-		{			
-			CompPlus_Settings_GeneralPage::UpdateSettingsMenu();
-		}
-		else if (CurrentPage == 1)
+		if (CanDraw) 
 		{
-			CompPlus_Settings_CompetitionPage::UpdateSettingsMenu();
-		}
-		else if (CurrentPage == 2) 
-		{
-			CompPlus_Settings_PlayerConfig::UpdateSettingsMenu();		
-		}
+			DrawRect(120, 120, 12, 12, 0x00, 250, Ink_Alpha, true);
+			DrawTextSprite("HEY THERE", SonicMania::Vector2(50,10), true);
+			DrawTextSprite("I don't suck!", SonicMania::Vector2(50, 20), true);
 
+			//DrawCircle(0, 0, 40, 0x00, 250, Ink_Alpha, true);
+			//DrawCircle(120, 120, 100, 0xFFFFFF, 0, Ink_None, true);
+		}
+	}
+
+	void InitSettings() 
+	{
+		IsInit = true;
 	}
 
 	void UpdateSettingsMenu()
 	{
 		FixSummary();
-		GetPage();
-	}
-
-	void SetCurrentPage(int pageNum) 
-	{
-		CurrentPage = pageNum;
-	}
-
-	void CheckForPointRefresh()
-	{
-
+		if (!IsInit) InitSettings();
 	}
 };
