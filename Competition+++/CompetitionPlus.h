@@ -32,7 +32,7 @@ namespace CompetitionPlus
 	extern void UpdateMenus();
 	extern void DrawHook();
 
-	extern void OnStageLoad(IZAPI::StageInfo info);
-	extern void OnStageUnload(IZAPI::StageInfo info);
+	extern void OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
+	extern void OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 };
 

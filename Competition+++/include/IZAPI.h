@@ -1,24 +1,41 @@
 #pragma once
 #include <vector>
-
+#include <windows.h>
 extern "C"
 {
     namespace IZAPI
     {
-        
+        // Enums
+        enum StageLoadPhase
+        {
+            StageLoadPhase_NotLoaded,
+            StageLoadPhase_Load,
+            StageLoadPhase_Loaded
+        };
+
         // Structs
         struct StageInfo
         {
             const char* StageKey;
             const char* StageID;
             const char* StageName;
+            const char* SceneID;
         };
 
+
         // Function Types
-        typedef void(__cdecl* StageLoadEvent)(StageInfo);
+        typedef void(__cdecl* StageLoadEvent)(StageInfo, StageLoadPhase);
 
         // Functions
-        extern void IZInit();
+        extern bool IZInit();
+
+        extern HMODULE DetectIZDLL();
+
+        // Gets the version of InfinityZone
+        extern int GetIZVersion();
+
+        // Gets the supported version of IZAPI
+        extern int GetIZAPIMajorVersion();
 
         // Registers an event for when a stage loads
         extern void RegisterStageLoadEvent(StageLoadEvent event);
@@ -30,7 +47,7 @@ extern "C"
         extern void LoadStagesFile(const char* path);
 
         // Switches custom stages
-        extern void ChangeStage(const char* key);
+        extern void ChangeStage(const char* key, const char* sceneID = nullptr);
 
         // Performs an asset reset
         extern void PerformAssetReset();

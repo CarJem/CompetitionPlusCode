@@ -31,6 +31,7 @@ namespace CompetitionPlus
 
 	void IZChangeStage(const char* key)
 	{
+		// TODO: Add Scene ID
 		IZAPI::ChangeStage(key);
 	}
 
@@ -111,26 +112,32 @@ namespace CompetitionPlus
 		CompPlus_Settings_Base::DoMenuOnScreenDraw();
 	}
 
-	void __cdecl OnStageLoad(IZAPI::StageInfo info)
+	void __cdecl OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{
-		printf("StageLoad: %s\n", info.StageName);
-		CurrentStage = info;
-		StageRefresh = true;
-		IdleTime = 10;
+		if (phase == IZAPI::StageLoadPhase_Loaded)
+		{
+			printf("StageLoad: %s\n", info.StageName);
+			CurrentStage = info;
+			StageRefresh = true;
+			IdleTime = 10;
+		}
     }
 
-	void __cdecl OnStageUnload(IZAPI::StageInfo info)
+	void __cdecl OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{		
-		printf("StageUnload: %s\n", info.StageName);
-		CurrentStage = { };
-		StageRefresh = true;
-		IdleTime = 10;
+		printf("StageUnload: %d\n", phase);
+		if (phase == IZAPI::StageLoadPhase_NotLoaded)
+		{
+			printf("StageUnload: %s\n", info.StageName);
+			CurrentStage = { };
+			StageRefresh = true;
+			IdleTime = 10;
+			BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
+			WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)13);
 
-		BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
-		WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)13);
-
-		if (!strcmp(info.StageKey, "CPLOGOS")) CompPlus_Common::LoadLevel(142);
-		else if (!strcmp(info.StageKey, "CPLOGOS2")) CompPlus_Common::LoadLevel(1);
+			if (!strcmp(info.StageKey, "CPLOGOS")) CompPlus_Common::LoadLevel(142);
+			else if (!strcmp(info.StageKey, "CPLOGOS2")) CompPlus_Common::LoadLevel(1);
+		}
     }
 };
 
