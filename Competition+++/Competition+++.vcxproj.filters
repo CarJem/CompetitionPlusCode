@@ -1,45 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Core">
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{dfa46945-ae5e-43ff-b2b2-d8c4faa49b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level Selects">
+      <UniqueIdentifier>{c091c5b9-4226-4b04-befc-8109701b1807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
       <UniqueIdentifier>{b1bdbe9e-a36c-4e76-8998-0003a5b1d14e}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files\Core">
-      <UniqueIdentifier>{d5e2f886-0e50-4f1c-a22f-8613aa90450a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Extensions">
-      <UniqueIdentifier>{dd6829c6-afb0-42ce-8932-fea84f8c1aa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Extensions">
+    <Filter Include="Extensions">
       <UniqueIdentifier>{56f541ab-8d49-4a79-a3fd-e35d9a7cecaa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scenes">
-      <UniqueIdentifier>{aae6c983-31db-45d6-b746-80b48b162ef4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scenes\Level Selects">
-      <UniqueIdentifier>{4fe7ce74-1ce5-454e-94ce-76fa07393d9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Scenes">
-      <UniqueIdentifier>{dfa46945-ae5e-43ff-b2b2-d8c4faa49b66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Scenes\Level Selects">
-      <UniqueIdentifier>{c091c5b9-4226-4b04-befc-8109701b1807}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Internal">
+    <Filter Include="Internal">
       <UniqueIdentifier>{fd34e2b7-125d-42c0-a330-cab227ad3b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Startup Logos">
+      <UniqueIdentifier>{1b8b064f-ca8e-4094-82c9-4736c88f17d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,111 +30,111 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomLevelSelect.h">
-      <Filter>Header Files\Scenes\Level Selects</Filter>
+      <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
     <ClInclude Include="EncoreLevelSelect.h">
-      <Filter>Header Files\Scenes\Level Selects</Filter>
+      <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
     <ClInclude Include="ManiaLevelSelect.h">
-      <Filter>Header Files\Scenes\Level Selects</Filter>
+      <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
     <ClInclude Include="PhantomLevelSelect.h">
-      <Filter>Header Files\Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ManiaExt.h">
-      <Filter>Header Files\Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="PointScrolling.h">
-      <Filter>Header Files\Extensions</Filter>
+      <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
     <ClInclude Include="LevelSelectCore.h">
-      <Filter>Header Files\Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlusSettings.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
     <ClInclude Include="CompetitionManiaMenu.h">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="HubWorld.h">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SettingsMenu.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="CompetitionPlus.h">
-      <Filter>Header Files</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header Files\Internal</Filter>
+      <Filter>Internal</Filter>
     </ClInclude>
     <ClInclude Include="include\SonicMania.h">
-      <Filter>Header Files\Internal</Filter>
+      <Filter>Internal</Filter>
     </ClInclude>
     <ClInclude Include="include\MemAccess.h">
-      <Filter>Header Files\Internal</Filter>
+      <Filter>Internal</Filter>
     </ClInclude>
     <ClInclude Include="include\ManiaModLoader.h">
-      <Filter>Header Files\Internal</Filter>
+      <Filter>Internal</Filter>
     </ClInclude>
     <ClInclude Include="include\IZAPI.h">
-      <Filter>Header Files\Internal</Filter>
+      <Filter>Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlusSettings.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ManiaExt.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="PointScrolling.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="CompetitionPlus.h" />
+    <ClInclude Include="GenericLogos.h">
+      <Filter>Scenes\Startup Logos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
-      <Filter>Source Files\Extensions</Filter>
+      <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="ManiaExt.cpp">
-      <Filter>Source Files\Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomLevelSelect.cpp">
-      <Filter>Source Files\Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="EncoreLevelSelect.cpp">
-      <Filter>Source Files\Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="ManiaLevelSelect.cpp">
-      <Filter>Source Files\Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="PhantomLevelSelect.cpp">
-      <Filter>Source Files\Scenes\Level Selects</Filter>
+      <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSelectCore.cpp">
-      <Filter>Source Files\Scenes\Level Selects</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Common.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="CompPlusSettings.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Base.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="CompetitionManiaMenu.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="HubWorld.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SettingsMenu.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="CompetitionPlus.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CustomLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="EncoreLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectCore.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="ManiaLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhantomLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="CompetitionPlus.cpp" />
+    <ClCompile Include="GenericLogos.cpp">
+      <Filter>Scenes\Startup Logos</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

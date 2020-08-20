@@ -13,6 +13,7 @@
 #include "Common.h"
 #include "HubWorld.h"
 #include "SettingsMenu.h"
+#include "GenericLogos.h"
 
 #include "IZAPI.h"
 
@@ -21,13 +22,16 @@ namespace CompetitionPlus
 {
 	using namespace SonicMania;
 
-	bool StageRefresh = true;
+	bool UseStockLogos = false;
 	bool StartupStageEnabled = false;
+	bool USL_StockLoaded = false;
+
+
+	bool StageRefresh = true;
 	bool HasStartupInit = false;
 	int IdleTime = 0;
 	HMODULE InfinityZoneDLL = nullptr;
 	IZAPI::StageInfo CurrentStage = {};
-	bool NextTitleSequence = false;
 
 	void IZChangeStage(const char* key)
 	{
@@ -38,13 +42,9 @@ namespace CompetitionPlus
 	{
 		if (!HasStartupInit)
 		{
-			if (StartupStageEnabled)
-			{
-				CompPlus_Common::LoadLevel_IZ("CPHW");
-			}
+			if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPHW");
 			HasStartupInit = true;
 		}
-
 	}
 
 	void DrawTest()
@@ -53,9 +53,33 @@ namespace CompetitionPlus
 		else CompPlus_Settings_Base::CanDraw = false;
 	}
 
+	void LogoLinking() 
+	{
+		if (UseStockLogos) 
+		{
+			if (CurrentSceneInt == 0 && !USL_StockLoaded) USL_StockLoaded = true;
+			else if (CurrentSceneInt == 1 && USL_StockLoaded) 
+			{
+				CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
+				USL_StockLoaded = false;
+			}
+		}
+		else if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
+		{
+
+		}
+
+		if (CurrentSceneInt == 1) 
+		{
+			SetUIBG_BGColor(199, 235, 255);
+			SetUIBG_FGLowColor(247, 146, 24);
+			SetUIBG_FGHighColor(57, 178, 206);
+		}
+	}
+
 	void ManiaMenuLinking() 
 	{
-		if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
+		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
 		else if (CurrentSceneInt == 140) CompPlus_Common::LoadLevel_IZ("CPHW");
 		else if (CurrentSceneInt == 141) CompPlus_HubWorld::LoadLevelSelect();
 		else if (CurrentSceneInt == 142) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
@@ -71,6 +95,8 @@ namespace CompetitionPlus
 			else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
 			else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::UpdateHUBWorld();
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS3", true);
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateGenericLogos(1, (char*)"", false);
 		}
 		else
 		{
@@ -111,15 +137,20 @@ namespace CompetitionPlus
 		CompPlus_Settings_Base::DoMenuOnScreenDraw();
 	}
 
-	void __cdecl OnStageLoad(IZAPI::StageInfo info)
+	void __cdecl OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{
 		printf("StageLoad: %s\n", info.StageName);
 		CurrentStage = info;
 		StageRefresh = true;
 		IdleTime = 10;
+
+		if (phase == IZAPI::StageLoadPhase_NotLoaded) 
+		{
+			CompPlusSettings::LoadAnnouncers();
+		}
     }
 
-	void __cdecl OnStageUnload(IZAPI::StageInfo info)
+	void __cdecl OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{		
 		printf("StageUnload: %s\n", info.StageName);
 		CurrentStage = { };
@@ -130,7 +161,6 @@ namespace CompetitionPlus
 		WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)13);
 
 		if (!strcmp(info.StageKey, "CPLOGOS")) CompPlus_Common::LoadLevel(142);
-		else if (!strcmp(info.StageKey, "CPLOGOS2")) CompPlus_Common::LoadLevel(1);
     }
 };
 

@@ -54,10 +54,17 @@ namespace CompPlusSettings
 
     enum AnnouncerType : int {
         Announcer_Default = 0,
-        Announcer_Sonic2 = 1
+        Announcer_Sonic2 = 1,
+        Announcer_Garrulous64 = 2,
+        Announcer_Angelthegamer = 3,
+        Announcer_Daniel = 4,
+        Announcer_Memes = 5
     };
 
 #define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
+
+    //Internal Values
+    extern int NumberOfAnnouncers;
 
     //Gameplay Settings
     extern bool InfiniteLives;
@@ -113,6 +120,8 @@ namespace CompPlusSettings
     extern void FixAbilites(SonicMania::EntityPlayer* Player);
 
     extern void StageLoadApplyConfig();
+
+    extern void LoadAnnouncers();
 
     extern void UpdateSettingsLoop();
 }

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CompPlusSettings.h"
+#include "IZAPI.h"
+#include "CompetitionPlus.h"
 #include "SonicMania.h"
 #include "ManiaExt.h"
 
@@ -9,6 +11,7 @@ namespace CompPlusSettings
 
 	//Internal
 	bool FixPlayers = false;
+	int NumberOfAnnouncers = 6;
 
 
 	//Developer Settings
@@ -39,8 +42,8 @@ namespace CompPlusSettings
 	bool Player3PeeloutAbility = false;
 	bool Player4PeeloutAbility = false;
 
-    ChosenPlayer Player1ChosenPlayer = ChosenPlayer_Sonic;
-    ChosenPlayer Player2ChosenPlayer = ChosenPlayer_Tails;
+    ChosenPlayer Player1ChosenPlayer = ChosenPlayer_Default;
+    ChosenPlayer Player2ChosenPlayer = ChosenPlayer_Default;
     ChosenPlayer Player3ChosenPlayer = ChosenPlayer_Default;
     ChosenPlayer Player4ChosenPlayer = ChosenPlayer_Default;
 
@@ -346,6 +349,39 @@ namespace CompPlusSettings
 		SetSonicAbilites();
 
 		FixPlayers = true;
+	}
+
+	void LoadAnnouncers() 
+	{
+		//if (CurrentAnnouncer == Announcer_Angelthegamer)
+		//{
+		/*
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Go.wav", "Data/SoundFX/VO_ATG/Go.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Goal.wav", "Data/SoundFX/VO_ATG/Goal.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/ItsADraw.wav", "Data/SoundFX/VO_ATG/ItsADraw.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/ItsADraw_Set.wav", "Data/SoundFX/VO_ATG/ItsADraw_Set.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Knuckles.wav", "Data/SoundFX/VO_ATG/Knuckles.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/KnuxWins.wav", "Data/SoundFX/VO_ATG/KnuxWins.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Mighty.wav", "Data/SoundFX/VO_ATG/Mighty.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/MightyWins.wav", "Data/SoundFX/VO_ATG/MightyWins.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/NewRecordMid.wav", "Data/SoundFX/VO_ATG/NewRecordMid.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/NewRecordTop.wav", "Data/SoundFX/VO_ATG/NewRecordTop.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/One.wav", "Data/SoundFX/VO_ATG/One.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Player1.wav", "Data/SoundFX/VO_ATG/Player1.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Player2.wav", "Data/SoundFX/VO_ATG/Player2.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Player3.wav", "Data/SoundFX/VO_ATG/Player3.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Player4.wav", "Data/SoundFX/VO_ATG/Player4.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Ray.wav", "Data/SoundFX/VO_ATG/Ray.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/RayWins.wav", "Data/SoundFX/VO_ATG/RayWins.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Sonic.wav", "Data/SoundFX/VO_ATG/Sonic.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/SonicWins.wav", "Data/SoundFX/VO_ATG/SonicWins.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Tails.wav", "Data/SoundFX/VO_ATG/Tails.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/TailsWins.wav", "Data/SoundFX/VO_ATG/TailsWins.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/TheWinnerIs.wav", "Data/SoundFX/VO_ATG/TheWinnerIs.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Three.wav", "Data/SoundFX/VO_ATG/Three.wav");
+			IZAPI::SetGlobalAsset("Data/SoundFX/VO/Two.wav", "Data/SoundFX/VO_ATG/Two.wav");
+			*/
+		//}
 	}
 
 	void DevModeLoop() 

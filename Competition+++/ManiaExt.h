@@ -4,6 +4,22 @@
 #include "SonicMania.h"
 #include <string>
 
+
+namespace SonicMania
+{
+	FunctionPointer(__int16, CreateObject, (SonicMania::Object* ObjectStruct, const char* ObjectName, unsigned int EntitySize, int ObjSize,
+		void (*Update)(), void (*LateUpdate)(), void* EarlyUpdate, void* Draw, void* Startup, void* StageLoad, int a11, int a12,
+		void* GetAttributes), 0x1D3090);
+
+	// ADDITIONS
+	DataArray(unsigned short, Framebuffer, 0x6ECA88, 432 * 240);		// 424x240 display
+
+	DataPointer(float, StreamVolume, 0xA53078);
+	DataPointer(float, SFXVolume, 0xA5307C);
+
+	DataPointer(DWORD*, ScreenInfo, 0xAA7628);
+}
+
 // Music struct
 struct struct_0
 {
@@ -103,6 +119,8 @@ struct Button : SonicMania::Entity
 };
 
 //int UIBackgroundMainOffset = 0xAC68E4;
+
+
 
 extern void SetScreenCount(int count);
 extern void ConvertASCII2Unicode(wchar_t* dest, char* src, size_t size, int offset);
