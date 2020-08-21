@@ -87,6 +87,9 @@
     <ClInclude Include="GenericLogos.h">
       <Filter>Scenes\Startup Logos</Filter>
     </ClInclude>
+    <ClInclude Include="ChaotixLevelSelect.h">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -135,6 +138,9 @@
     <ClCompile Include="CompetitionPlus.cpp" />
     <ClCompile Include="GenericLogos.cpp">
       <Filter>Scenes\Startup Logos</Filter>
+    </ClCompile>
+    <ClCompile Include="ChaotixLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

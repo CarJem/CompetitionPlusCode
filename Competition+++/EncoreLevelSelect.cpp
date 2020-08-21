@@ -61,39 +61,39 @@ namespace CompPlus_EncoreLevelSelect
 		int startingSlot = ELS_MenuPointStartingSlot;
 
 		ELS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[0][1] = MenuPoint(startingSlot, Scene::Scene_GHZ1_e);
-		ELS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, Scene::Scene_GHZ2_e);
-		ELS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, Scene::Scene_CPZ1_e);
-		ELS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, Scene::Scene_CPZ2_e);
-		ELS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, Scene::Scene_SPZ1_e);
-		ELS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, Scene::Scene_SPZ2_e);
+		ELS_MenuPoints[0][1] = MenuPoint(startingSlot, SceneExt::Scene_GHZ1_e);
+		ELS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, SceneExt::Scene_GHZ2_e);
+		ELS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, SceneExt::Scene_CPZ1_e);
+		ELS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, SceneExt::Scene_CPZ2_e);
+		ELS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, SceneExt::Scene_SPZ1_e);
+		ELS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, SceneExt::Scene_SPZ2_e);
 		ELS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
 		ELS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPMLS");
-		ELS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, Scene::Scene_FBZ1_e);
-		ELS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, Scene::Scene_FBZ2_e);
-		ELS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, Scene::Scene_PSZ1_e);
-		ELS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, Scene::Scene_PSZ2_e);
-		ELS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, Scene::Scene_SSZ1_e);
-		ELS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, Scene::Scene_SSZ2_e);
+		ELS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, SceneExt::Scene_FBZ1_e);
+		ELS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, SceneExt::Scene_FBZ2_e);
+		ELS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, SceneExt::Scene_PSZ1_e);
+		ELS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, SceneExt::Scene_PSZ2_e);
+		ELS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, SceneExt::Scene_SSZ1_e);
+		ELS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, SceneExt::Scene_SSZ2_e);
 		ELS_MenuPoints[1][7] = MenuPoint(MLS_MenuPointRight, "CPCLS");
 
 		ELS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, Scene::Scene_HCZ1_e);
-		ELS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, Scene::Scene_HCZ2_e);
-		ELS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, Scene::Scene_MSZ1_e);
-		ELS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, Scene::Scene_MSZ2_e);
-		ELS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, Scene::Scene_OOZ1_e);
-		ELS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, Scene::Scene_OOZ2_e);
+		ELS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, SceneExt::Scene_HCZ1_e);
+		ELS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, SceneExt::Scene_HCZ2_e);
+		ELS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, SceneExt::Scene_MSZ1_e);
+		ELS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, SceneExt::Scene_MSZ2_e);
+		ELS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, SceneExt::Scene_OOZ1_e);
+		ELS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, SceneExt::Scene_OOZ2_e);
 		ELS_MenuPoints[2][7] = MenuPoint(true, 7, 1);
 
 		ELS_MenuPoints[3][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, Scene::Scene_LRZ1_e);
-		ELS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, Scene::Scene_LRZ2_e);
-		ELS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, Scene::Scene_MMZ1_e);
-		ELS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, Scene::Scene_MMZ2_e);
-		ELS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, Scene::Scene_TMZ1_e);
-		ELS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, Scene::Scene_TMZ2_e);
+		ELS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, SceneExt::Scene_LRZ1_e);
+		ELS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, SceneExt::Scene_LRZ2_e);
+		ELS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, SceneExt::Scene_MMZ1_e);
+		ELS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, SceneExt::Scene_MMZ2_e);
+		ELS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, SceneExt::Scene_TMZ1_e);
+		ELS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, SceneExt::Scene_TMZ2_e);
 		ELS_MenuPoints[3][7] = MenuPoint(true, 7, 1);
 
 		int reset_x = 1;

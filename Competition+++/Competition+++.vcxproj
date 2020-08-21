@@ -178,6 +178,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChaotixLevelSelect.h" />
     <ClInclude Include="CompetitionManiaMenu.h" />
     <ClInclude Include="CompetitionPlus.h" />
     <ClInclude Include="CompPlusSettings.h" />
@@ -200,6 +201,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChaotixLevelSelect.cpp" />
     <ClCompile Include="CompetitionManiaMenu.cpp" />
     <ClCompile Include="CompetitionPlus.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

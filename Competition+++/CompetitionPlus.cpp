@@ -8,6 +8,7 @@
 #include "ManiaLevelSelect.h"
 #include "EncoreLevelSelect.h"
 #include "CustomLevelSelect.h"
+#include "ChaotixLevelSelect.h"
 #include "PhantomLevelSelect.h"
 #include "CompetitionManiaMenu.h"
 #include "Common.h"
@@ -22,7 +23,7 @@ namespace CompetitionPlus
 {
 	using namespace SonicMania;
 
-	bool UseStockLogos = false;
+	bool UseStockLogos = true;
 	bool StartupStageEnabled = false;
 	bool USL_StockLoaded = false;
 
@@ -92,11 +93,13 @@ namespace CompetitionPlus
 			if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
+			else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::UpdateChaotixLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
 			else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::UpdateHUBWorld();
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS3", true);
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateGenericLogos(1, (char*)"", false);
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS4", true);
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateGenericLogos(1, (char*)"", false);
 		}
 		else
 		{
@@ -116,6 +119,7 @@ namespace CompetitionPlus
 			CompPlus_ManiaLevelSelect::CheckForPointRefresh();
 			CompPlus_EncoreLevelSelect::CheckForPointRefresh();
 			CompPlus_CustomLevelSelect::CheckForPointRefresh();
+			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
 			CompPlusSettings::StageLoadApplyConfig();
 			StageRefresh = false;
 		}

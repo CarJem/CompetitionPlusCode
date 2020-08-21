@@ -446,6 +446,12 @@ namespace CompPlus_HubWorld
 			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
 			Label3.TextLength = (WORD)15;
 		}
+		else if (State == 2)
+		{
+			char* on_text = (char*)"LSELECT: CHAOTIX";
+			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+			Label3.TextLength = (WORD)16;
+		}
 	}
 
 	void UpdateToggleDisplay(int SlotID, int x, int y, bool State)
@@ -657,6 +663,7 @@ namespace CompPlus_HubWorld
 
 	void SetHUBVisualSettings() 
 	{
+		//Disable Timer
 		SonicMania::Timer.ResetTimer();
 		if (SonicMania::Timer.Enabled)
 		{
@@ -664,8 +671,7 @@ namespace CompPlus_HubWorld
 		}
 
 		//Disable HUD
-		//BYTE* Pointer = *(BYTE**)((baseAddress + 0x47B065));
-		//WriteData((BYTE*)(Pointer), (BYTE)0);
+		WriteData((BYTE*)(baseAddress + 0x47B065), (BYTE)0);
 	}
 
 
@@ -691,6 +697,7 @@ namespace CompPlus_HubWorld
 		if (CurrentLevelSelect == 0) LoadLevel_IZ("CPMLS");
 		else if (CurrentLevelSelect == 1) LoadLevel_IZ("CPELS");
 		else if (CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
+		else if (CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
 	}
 
 	void EnterLevelSelectLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
