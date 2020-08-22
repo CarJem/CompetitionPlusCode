@@ -90,6 +90,9 @@
     <ClInclude Include="ChaotixLevelSelect.h">
       <Filter>Scenes\Level Selects</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Announcers.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">

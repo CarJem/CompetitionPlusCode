@@ -146,7 +146,7 @@ namespace CompPlus_HubWorld
 		int y2 = Controller.Position.Y + GetControllerY2();
 		bool NewValue = OldValue;
 
-		for (int RealID = 1; RealID < 4; RealID++)
+		for (int RealID = 1; RealID <= 4; RealID++)
 		{
 			SonicMania::EntityPlayer* Player;
 			if (RealID == 1) Player = &Player1;
@@ -193,7 +193,7 @@ namespace CompPlus_HubWorld
 		int y2 = Controller.Position.Y + GetControllerY2();
 		int NewValue = OldValue;
 
-		for (int RealID = 1; RealID < 4; RealID++)
+		for (int RealID = 1; RealID <= 4; RealID++)
 		{
 			SonicMania::EntityPlayer* Player;
 			if (RealID == 1) Player = &Player1;

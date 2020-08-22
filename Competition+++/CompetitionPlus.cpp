@@ -16,6 +16,8 @@
 #include "SettingsMenu.h"
 #include "GenericLogos.h"
 
+#include "CompPlus_Announcers.h"
+
 #include "IZAPI.h"
 
 
@@ -23,9 +25,7 @@ namespace CompetitionPlus
 {
 	using namespace SonicMania;
 
-	bool UseStockLogos = true;
-	bool StartupStageEnabled = false;
-	bool USL_StockLoaded = false;
+	bool StartupStageEnabled = true;
 
 
 	bool StageRefresh = true;
@@ -43,7 +43,7 @@ namespace CompetitionPlus
 	{
 		if (!HasStartupInit)
 		{
-			if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPHW");
+			if (StartupStageEnabled) CompPlus_Common::LoadLevel(2);
 			HasStartupInit = true;
 		}
 	}
@@ -56,19 +56,7 @@ namespace CompetitionPlus
 
 	void LogoLinking() 
 	{
-		if (UseStockLogos) 
-		{
-			if (CurrentSceneInt == 0 && !USL_StockLoaded) USL_StockLoaded = true;
-			else if (CurrentSceneInt == 1 && USL_StockLoaded) 
-			{
-				CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
-				USL_StockLoaded = false;
-			}
-		}
-		else if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
-		{
-
-		}
+		if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
 
 		if (CurrentSceneInt == 1) 
 		{
@@ -81,6 +69,7 @@ namespace CompetitionPlus
 	void ManiaMenuLinking() 
 	{
 		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
+		else if (CurrentSceneInt == 139) CompPlus_Common::LoadLevel(1);
 		else if (CurrentSceneInt == 140) CompPlus_Common::LoadLevel_IZ("CPHW");
 		else if (CurrentSceneInt == 141) CompPlus_HubWorld::LoadLevelSelect();
 		else if (CurrentSceneInt == 142) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
@@ -99,7 +88,7 @@ namespace CompetitionPlus
 			else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::UpdateHUBWorld();
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS3", true);
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS4", true);
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateGenericLogos(1, (char*)"", false);
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateGenericLogos(139, (char*)"", false);
 		}
 		else
 		{
@@ -147,11 +136,6 @@ namespace CompetitionPlus
 		CurrentStage = info;
 		StageRefresh = true;
 		IdleTime = 10;
-
-		if (phase == IZAPI::StageLoadPhase_NotLoaded) 
-		{
-			CompPlusSettings::LoadAnnouncers();
-		}
     }
 
 	void __cdecl OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
@@ -166,5 +150,10 @@ namespace CompetitionPlus
 
 		if (!strcmp(info.StageKey, "CPLOGOS")) CompPlus_Common::LoadLevel(142);
     }
+
+	extern void LoadAnnouncers() 
+	{
+		//CompPlus_Announcers::LoadAnnouncerFX();
+	}
 };
 

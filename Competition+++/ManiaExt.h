@@ -38,11 +38,7 @@ struct struct_0
 DataArray(struct_0, stru_26B818, 0x0026B818, 16);
 
 
-/*
-dd is DWORD
-dw is WORD
-db is BYTE
-*/
+
 
 struct ObjectUIPicture : SonicMania::Object
 {
@@ -65,6 +61,78 @@ struct EntityUIPicture : SonicMania::Entity
 	/* 0x00000067 */ BYTE field_67;
 	/* 0x00000068 */ DWORD ZoneID;
 	/* 0x0000006C */ SonicMania::EntityAnimationData AnimData;
+};
+
+/*
+dd is DWORD
+dw is WORD
+db is BYTE
+*/
+
+struct EntityUIButton : SonicMania::Entity {
+	/* 00000058 */ DWORD field_58;
+	/* 0000005C */ DWORD dword5C;
+	/* 00000060 */ DWORD dword60;
+	/* 00000064 */ DWORD field_64;
+	/* 00000068 */ DWORD dword68;
+	/* 0000006C */ DWORD dword6C;
+	/* 00000070 */ DWORD dword70;
+	/* 00000074 */ DWORD dword74;
+	/* 00000078 */ DWORD dword78;
+	/* 0000007C */ DWORD dword7C;
+	/* 00000080 */ BYTE gap80[128];
+	/* 00000100 */ DWORD Disabled;
+	/* 00000104 */ SonicMania::Vector2 Size;
+	/* 0000010C */ DWORD ListID;
+	/* 00000110 */ DWORD FrameID;
+	/* 00000114 */ DWORD Align;
+	/* 00000118 */ DWORD ChoiceCount;
+	/* 0000011C */ DWORD ChoiceDir;
+	/* 0000011D */ DWORD Unused1;
+	/* 0000011E */ DWORD Unused2;
+	/* 0000011F */ DWORD Unused3;
+	/* 00000120 */ DWORD Invisible;
+	/* 00000124 */ DWORD AlignsP1;
+	/* 00000128 */ DWORD FreeBindP2;
+	/* 0000012C */ DWORD Transition;
+	/* 00000130 */ DWORD StopMusic;
+	/* 00000134 */ DWORD field_134;
+	/* 00000138 */ DWORD dword138;
+	/* 0000013C */ BYTE gap13C[16];
+	/* 0000014C */ DWORD dword14C;
+	/* 00000150 */ BYTE gap150[20];
+	/* 00000164 */ SonicMania::EntityAnimationData entityanimationdata164l;
+	/* 0000017C */ WORD word17C;
+	/* 0000017E */ BYTE field_17E;
+	/* 0000017F */ BYTE field_17F;
+	/* 00000180 */ DWORD dword180;
+	/* 00000184 */ DWORD dword184;
+};
+
+struct EntityUIVsRoundPicker : SonicMania::Entity
+{
+	/* 00000058 */ DWORD gap58;
+	/* 0000005C */ DWORD dword5C;
+	/* 00000060 */ DWORD dword60;
+	/* 00000064 */ BYTE Unknown1[156];
+	/* 00000100 */ DWORD Disabled;    
+	/* 00000104 */ SonicMania::Vector2 Size;
+	/* 0000010C */ DWORD Align;
+	/* 00000110 */ DWORD ArrowWidth;
+	/* 00000114 */ DWORD Val;
+	/* 00000118 */ DWORD MaxVal;
+	/* 0000011C */ BYTE gap11C[4];     
+	/* 00000120 */ DWORD dword120;
+	/* 00000124 */ BYTE gap124[16];         
+	/* 00000134 */ DWORD dword134;
+	/* 00000138 */ BYTE gap138[12];         
+	/* 00000144 */ SonicMania::EntityAnimationData AnimData1;
+	/* 0000015C */ SonicMania::EntityAnimationData AnimData2;
+	/* 00000174 */ SonicMania::EntityAnimationData AnimData3;
+	/* 0000018C */ SonicMania::EntityAnimationData AnimData4;
+	/* 000001A4 */ WORD word1A4;
+	/* 000001A6 */ BYTE field_1A6;
+	/* 000001A7 */ BYTE field_1A7;
 };
 
 struct EntityUIInfoLabel : SonicMania::Entity

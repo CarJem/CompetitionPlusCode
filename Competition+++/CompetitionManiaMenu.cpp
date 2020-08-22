@@ -10,7 +10,7 @@ namespace CompPlus_CompetitionMenu
 {
     using namespace SonicMania;
 
-	int UIVsRoundPickerSlotID = 232;
+	int UIVsRoundPickerSlotID = 228;
 
 	void UpdateManiaMenu()
 	{
@@ -27,6 +27,9 @@ namespace CompPlus_CompetitionMenu
 		object2.XOut = false;
 		object2.ZoneID = 11;
 		object2.Act = 107;
+
+		EntityUIVsRoundPicker& roundPicker = *GetEntityFromSceneSlot<EntityUIVsRoundPicker>(232);
+		roundPicker.MaxVal = 999;
 
 		SetUIBG_BGColor(74, 211, 156);
 		SetUIBG_FGLowColor(247, 146, 24);

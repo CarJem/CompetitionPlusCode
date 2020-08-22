@@ -21,8 +21,7 @@ namespace CompPlus_Common
 
 	void LoadLevel(int LevelID)
 	{
-		LoadScene(LevelID);
-		CurrentSceneInt = LevelID;
+		SonicMania::CurrentSceneInt = LevelID;
 		GameState = GameStates::GameState_NotRunning;
 		CompetitionPlus::StageRefresh = true;
 		CompetitionPlus::IdleTime = 10;

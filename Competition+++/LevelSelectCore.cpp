@@ -24,11 +24,11 @@ namespace CompPlus_LevelSelectCore
 		{
 			if (level.isIZ)
 			{
-				LoadLevel_IZ(level.LevelID_IZ);
+				CompPlus_Common::LoadLevel_IZ(level.LevelID_IZ);
 			}
 			else
 			{
-				LoadLevel(level.LevelID);
+				CompPlus_Common::LoadLevel(level.LevelID);
 			}
 
 			SceneLoadWaitTimer = 0;

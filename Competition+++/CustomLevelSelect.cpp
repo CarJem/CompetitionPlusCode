@@ -62,19 +62,19 @@ namespace CompPlus_CustomLevelSelect
 
 
 		CLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPCLS");
-		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPCLS");
-		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPCLS");
-		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPCLS");
+		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPAIZEX");
+		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPDHZ");
+		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ");
+		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPGPZ");
 		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCLS");
 		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCLS");
 		CLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
 		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPELS");
-		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPCLS");
-		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPCLS");
-		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPCLS");
-		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPCLS");
+		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPTSZ");
+		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPDHZE");
+		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE");
+		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPGPZE");
 		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCLS");
 		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCLS");
 		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPCXLS");

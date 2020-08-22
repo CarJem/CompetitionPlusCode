@@ -18,31 +18,6 @@ extern "C"
 	//SoundFX Defines from SonicMania/Data/Sounds/
 	const char* SFX_CompPlus1 = "CompPlus/MenuBleepClassic.wav";
 	const char* SFX_CompPlus2 = "CompPlus/MenuAcceptClassic.wav";
-
-	const char* SFX_CompPlus_VO_ATG_1 = "VO_ATG/Go.wav";
-	const char* SFX_CompPlus_VO_ATG_2 = "VO_ATG/Goal.wav";
-	const char* SFX_CompPlus_VO_ATG_3 = "VO_ATG/ItsADraw.wav";
-	const char* SFX_CompPlus_VO_ATG_4 = "VO_ATG/ItsADraw_Set.wav";
-	const char* SFX_CompPlus_VO_ATG_5 = "VO_ATG/Knuckles.wav";
-	const char* SFX_CompPlus_VO_ATG_6 = "VO_ATG/KnuxWins.wav";
-	const char* SFX_CompPlus_VO_ATG_7 = "VO_ATG/Mighty.wav";
-	const char* SFX_CompPlus_VO_ATG_8 = "VO_ATG/MightyWins.wav";
-	const char* SFX_CompPlus_VO_ATG_9 = "VO_ATG/NewRecordMid.wav";
-	const char* SFX_CompPlus_VO_ATG_10 = "VO_ATG/NewRecordTop.wav";
-	const char* SFX_CompPlus_VO_ATG_11 = "VO_ATG/One.wav";
-	const char* SFX_CompPlus_VO_ATG_12 = "VO_ATG/Player1.wav";
-	const char* SFX_CompPlus_VO_ATG_13 = "VO_ATG/Player2.wav";
-	const char* SFX_CompPlus_VO_ATG_14 = "VO_ATG/Player3.wav";
-	const char* SFX_CompPlus_VO_ATG_15 = "VO_ATG/Player4.wav";
-	const char* SFX_CompPlus_VO_ATG_16 = "VO_ATG/Ray.wav";
-	const char* SFX_CompPlus_VO_ATG_17 = "VO_ATG/RayWins.wav";
-	const char* SFX_CompPlus_VO_ATG_18 = "VO_ATG/Sonic.wav";
-	const char* SFX_CompPlus_VO_ATG_19 = "VO_ATG/SonicWins.wav";
-	const char* SFX_CompPlus_VO_ATG_20 = "VO_ATG/Tails.wav";
-	const char* SFX_CompPlus_VO_ATG_21 = "VO_ATG/TailsWins.wav";
-	const char* SFX_CompPlus_VO_ATG_22 = "VO_ATG/TheWinnerIs.wav";
-	const char* SFX_CompPlus_VO_ATG_23 = "VO_ATG/Three.wav";
-	const char* SFX_CompPlus_VO_ATG_24 = "VO_ATG/Two.wav";
 	/*----------------------------------------------*/
 
 	bool LoadedSounds = false;
@@ -53,35 +28,8 @@ extern "C"
 			//Load Sounds on First Run. //Global Scope fine for most things
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
-
-			LoadSoundFX(SFX_CompPlus_VO_ATG_1, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_2, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_3, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_4, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_5, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_6, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_7, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_8, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_9, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_10, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_11, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_12, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_13, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_14, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_15, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_16, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_17, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_18, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_19, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_20, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_21, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_22, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_23, Scope_Global);
-			LoadSoundFX(SFX_CompPlus_VO_ATG_24, Scope_Global);
-
 			LoadedSounds = true;
 		}
-
 	}
 
 	__declspec(dllexport) void OnScreenUpdate()
@@ -94,6 +42,7 @@ extern "C"
 		if (GameState & GameState_Running && !(GameState & GameState_SoftPause))
 		{
 			LoadSounds();
+			CompetitionPlus::LoadAnnouncers();
 			CompetitionPlus::UpdateMenus();
 		}
 	}

@@ -182,6 +182,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <ClInclude Include="CompetitionManiaMenu.h" />
     <ClInclude Include="CompetitionPlus.h" />
     <ClInclude Include="CompPlusSettings.h" />
+    <ClInclude Include="CompPlus_Announcers.h" />
     <ClInclude Include="CustomLevelSelect.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
     <ClInclude Include="HubWorld.h" />

@@ -121,8 +121,6 @@ namespace CompPlusSettings
 
     extern void StageLoadApplyConfig();
 
-    extern void LoadAnnouncers();
-
     extern void UpdateSettingsLoop();
 }
 
