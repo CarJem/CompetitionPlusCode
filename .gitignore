@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Game/Mods/Patches.dat
+/Game/Mods/ManiaModLoader.ini
+/Game/Mods/ManiaModLoader.dll
+/Game/Mods/Codes.lst
+/Game/Mods/Codes.dat
+/MiscFiles
