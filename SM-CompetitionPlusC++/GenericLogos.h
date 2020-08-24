@@ -3,6 +3,10 @@ namespace CompPlus_GenericLogos
 {
     extern bool LoopCompleted;
 
-    extern void UpdateGenericLogos(int NextStageID, char* NextStageKey, bool isIZ);
+    extern void UpdateIZLogos();
+
+    extern void UpdateATGLogos();
+
+    extern void UpdateCJLogos();
 };
 

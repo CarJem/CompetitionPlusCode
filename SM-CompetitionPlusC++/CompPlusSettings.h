@@ -75,6 +75,14 @@ namespace CompPlusSettings
     extern bool EnableDevMode;
     extern bool EnableDebugMode;
 
+    extern bool DevMode_ControlPlayer1;
+    extern bool DevMode_ControlPlayer2;
+    extern bool DevMode_ControlPlayer3;
+    extern bool DevMode_ControlPlayer4;
+
+    extern bool DevMode_ControllerSwap;
+    extern int DevMode_ControllerSwapPosition;
+
     //Stock Competition Settings
     extern int NumberOfRounds; // Ignored when EndlessRounds = true;
     extern ItemsConfig MonitorTypes;
@@ -103,7 +111,7 @@ namespace CompPlusSettings
     extern PlayerAbility Player3AbilitySet;
     extern PlayerAbility Player4AbilitySet;
 
-
+    extern void DevMode_WarpAllPlayersTo(int PlayerID);
 
     extern void SetDropdashAbility(bool State);
 

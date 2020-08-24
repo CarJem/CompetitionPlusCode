@@ -15,9 +15,26 @@ namespace CompPlusSettings
 
 
 	//Developer Settings
-	bool EnableDevMode = false;
-	bool EnableDebugMode = false;
+	bool EnableDevMode = true;
+	bool EnableDebugMode = true;
 
+	bool DevMode_ControlPlayer1 = true;
+	bool DevMode_ControlPlayer2 = false;
+	bool DevMode_ControlPlayer3 = false;
+	bool DevMode_ControlPlayer4 = false;
+
+	bool DevMode_ControllerSwap = false;
+	int DevMode_ControllerSwapPosition = 0;
+
+	Controller InitalInputP1;
+	Controller InitalInputP2;
+	Controller InitalInputP3;
+	Controller InitalInputP4;
+
+	bool P1_InputSaved = false;
+	bool P2_InputSaved = false;
+	bool P3_InputSaved = false;
+	bool P4_InputSaved = false;
 
     //Gameplay Settings
     bool InfiniteLives = false;
@@ -51,6 +68,43 @@ namespace CompPlusSettings
     PlayerAbility Player2AbilitySet = AbilitySet_Default;
     PlayerAbility Player3AbilitySet = AbilitySet_Default;
     PlayerAbility Player4AbilitySet = AbilitySet_Default;
+
+	void DevMode_WarpAllPlayersTo(int PlayerID) 
+	{
+		int x, y;
+		if (PlayerID == 4)
+		{
+			x = Player4.Position.X;
+			y = Player4.Position.Y;
+		}
+		else if (PlayerID == 3)
+		{
+			x = Player3.Position.X;
+			y = Player3.Position.Y;
+		}
+		else if (PlayerID == 2)
+		{
+			x = Player2.Position.X;
+			y = Player2.Position.Y;
+		}
+		else 
+		{
+			x = Player1.Position.X;
+			y = Player1.Position.Y;
+		}
+
+		Player1.Position.X = x;
+		Player1.Position.Y = y;
+
+		Player2.Position.X = x;
+		Player2.Position.Y = y;
+
+		Player3.Position.X = x;
+		Player3.Position.Y = y;
+
+		Player4.Position.X = x;
+		Player4.Position.Y = y;
+	}
 
 	void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability)
 	{
@@ -329,6 +383,38 @@ namespace CompPlusSettings
 		}
 	}
 
+	void SetInfiniteLives() 
+	{
+		if (InfiniteLives) 
+		{
+			SonicMania::Player1.LifeCount = 99;
+			SonicMania::Player2.LifeCount = 99;
+			SonicMania::Player3.LifeCount = 99;
+			SonicMania::Player4.LifeCount = 99;
+		}
+	}
+
+	void SetInitalLives() 
+	{
+		SonicMania::Player1.LifeCount = InitalLives;
+		SonicMania::Player2.LifeCount = InitalLives;
+		SonicMania::Player3.LifeCount = InitalLives;
+		SonicMania::Player4.LifeCount = InitalLives;
+	}
+
+	void SetTimerMode() 
+	{
+		if (InfiniteTime) 
+		{
+			if (SonicMania::Timer.Enabled)
+			{
+				//Disable Timer
+				SonicMania::Timer.ResetTimer();
+				SonicMania::Timer.Enabled = false;
+			}
+		}
+	}
+
 	void StageLoadApplyConfig() 
 	{
 		SetAbility(1, Player1AbilitySet);
@@ -347,25 +433,116 @@ namespace CompPlusSettings
 		SetPeeloutAbility(4, Player4PeeloutAbility);
 
 		SetSonicAbilites();
+		SetInitalLives();
+		SetTimerMode();
 
 		FixPlayers = true;
 	}
 
+	void DevMode_BindPlayer1() 
+	{
+		if (DevMode_ControlPlayer1 || !EnableDevMode) 
+		{
+			if (P1_InputSaved) 
+			{
+				 SonicMania::PlayerControllers[1] = InitalInputP1;
+				 P1_InputSaved = false;
+			}
+			InitalInputP1 = SonicMania::PlayerControllers[1];
+		}
+
+		if (!DevMode_ControlPlayer1) 
+		{
+			if (!P1_InputSaved)
+			{
+				InitalInputP1 = SonicMania::PlayerControllers[1];
+				P1_InputSaved = true;
+				SonicMania::PlayerControllers[1] = SonicMania::Controller();
+			}
+
+		}
+	}
+
+	void DevMode_BindController(int TargetPlayerID) 
+	{
+		switch (TargetPlayerID)
+		{
+			case 2:
+				if (!P2_InputSaved)
+				{
+					InitalInputP2 = SonicMania::PlayerControllers[TargetPlayerID];
+					P2_InputSaved = true;
+				}
+				break;
+			case 3:
+				if (!P3_InputSaved)
+				{
+					InitalInputP3 = SonicMania::PlayerControllers[TargetPlayerID];
+					P3_InputSaved = true;
+				}
+				break;
+			case 4:
+				if (!P4_InputSaved)
+				{
+					InitalInputP4 = SonicMania::PlayerControllers[TargetPlayerID];
+					P4_InputSaved = true;
+				}
+				break;
+		}
+
+		SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP1;
+
+
+	}
+
+	void DevMode_RestoreController(int TargetPlayerID)
+	{
+		switch (TargetPlayerID)
+		{
+		case 2:
+			if (P2_InputSaved)
+			{
+				SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP2;
+				P2_InputSaved = false;
+			}
+			break;
+		case 3:
+			if (P3_InputSaved)
+			{
+				SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP3;
+				P3_InputSaved = false;
+			}
+			break;
+		case 4:
+			if (P4_InputSaved)
+			{
+				SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP4;
+				P4_InputSaved = false;
+			}
+			break;
+		}
+	}
+
 	void DevModeLoop() 
 	{
+		DevMode_BindPlayer1();
+
 		if (EnableDevMode) 
 		{
-			int x = Player1.Position.X;
-			int y = Player1.Position.Y;
+			if (DevMode_ControlPlayer2) DevMode_BindController(2);
+			else DevMode_RestoreController(2);
 
-			Player2.Position.X = x;
-			Player2.Position.Y = y;
+			if (DevMode_ControlPlayer3) DevMode_BindController(3);
+			else DevMode_RestoreController(3);
 
-			Player3.Position.X = x;
-			Player3.Position.Y = y;
-
-			Player4.Position.X = x;
-			Player4.Position.Y = y;
+			if (DevMode_ControlPlayer4) DevMode_BindController(4);
+			else DevMode_RestoreController(4);
+		}
+		else 
+		{
+			DevMode_RestoreController(2);
+			DevMode_RestoreController(3);
+			DevMode_RestoreController(4);
 		}
 	}
 
@@ -381,10 +558,6 @@ namespace CompPlusSettings
 	{
 		if (SonicMania::Timer.Enabled == true && FixPlayers)
 		{
-			//SetPlayer(1, Player1ChosenPlayer, true);
-			//SetPlayer(2, Player2ChosenPlayer, true);
-			//SetPlayer(3, Player3ChosenPlayer, true);
-			//SetPlayer(4, Player4ChosenPlayer, true);
 			FixPlayers = false;
 		}
 

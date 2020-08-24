@@ -43,7 +43,7 @@ namespace CompetitionPlus
 	{
 		if (!HasStartupInit)
 		{
-			if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCXMSSZ1");
+			if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPLOGOS4");
 			HasStartupInit = true;
 		}
 	}
@@ -85,9 +85,9 @@ namespace CompetitionPlus
 			else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
 			else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
 			else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::UpdateHUBWorld();
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS3", true);
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateGenericLogos(0, (char*)"CPLOGOS4", true);
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateGenericLogos(1, (char*)"", false);
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
+			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
 		}
 		else
 		{
@@ -152,7 +152,7 @@ namespace CompetitionPlus
 
 	extern void LoadAnnouncers() 
 	{
-		//CompPlus_Announcers::LoadAnnouncerFX();
+		CompPlus_Announcers::LoadAnnouncerFX();
 	}
 };
 

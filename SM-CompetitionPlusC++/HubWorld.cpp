@@ -259,9 +259,9 @@ namespace CompPlus_HubWorld
 		if (DevStatus != CompPlusSettings::EnableDevMode) CompPlusSettings::EnableDevMode = DebugStatus;
 
 		//Level Select NUD
-		int LevelStatus = UpDownController(SwapLevelSelectController, CurrentLevelSelect, 0, 2, -1);
+		int LevelStatus = UpDownController(SwapLevelSelectController, CurrentLevelSelect, 0, 3, -1);
 		if (LevelStatus != CurrentLevelSelect) CurrentLevelSelect = LevelStatus;
-		LevelStatus = UpDownController(SwapLevelSelectController2, CurrentLevelSelect, 0, 2, -1);
+		LevelStatus = UpDownController(SwapLevelSelectController2, CurrentLevelSelect, 0, 3, -1);
 		if (LevelStatus != CurrentLevelSelect) CurrentLevelSelect = LevelStatus;
 
 		//Insta-Sheild Toggle
@@ -446,7 +446,7 @@ namespace CompPlus_HubWorld
 			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
 			Label3.TextLength = (WORD)15;
 		}
-		else if (State == 2)
+		else if (State == 3)
 		{
 			char* on_text = (char*)"LSELECT: CHAOTIX";
 			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);

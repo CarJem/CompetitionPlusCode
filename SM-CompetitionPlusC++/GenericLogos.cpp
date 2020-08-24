@@ -11,14 +11,26 @@ namespace CompPlus_GenericLogos
 	using namespace SonicMania;
 	using namespace CompPlus_Common;
 
-	int SceneLoadWaitTimer = 0;
-	int SceneLoadWaitMax = 300;
+	int GR_SceneLoadWaitTimer = 0;
+	int GR_SceneLoadWaitMax = 300;
+
+	int CJ_SceneLoadWaitTimer = 0;
+	int CJ_SceneLoadWaitMax = 125;
+
+	int ATG_SceneLoadWaitTimer = 0;
+	int ATG_SceneLoadWaitMax = 125;
+
+	int IZ_SceneLoadWaitTimer = 0;
+	int IZ_SceneLoadWaitMax = 375;
+
 	int FadeWait = 50;
 	int SceneSkipMin = 50;
 
 	bool FadeStarted = false;
 
-	void SceneTransition(int LevelID, char* LevelKey, bool isIZ)
+
+
+	void SceneTransition(int& SceneLoadWaitTimer, int& SceneLoadWaitMax, int LevelID, char* LevelKey, bool isIZ)
 	{
 		if (SceneLoadWaitTimer >= SceneLoadWaitMax + FadeWait)
 		{
@@ -52,17 +64,82 @@ namespace CompPlus_GenericLogos
 		}
 	}
 
-	void UpdateGenericLogos(int NextStageID, char* NextStageKey, bool isIZ)
+	void UpdateGenericLogos(bool AllowSkip, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, int NextStageID, char* NextStageKey, bool isIZ)
 	{
 		CompPlus_Common::FixSummary();
-		if (PlayerControllers[0].A.Press || PlayerControllers[0].B.Press || PlayerControllers[0].C.Press || PlayerControllers[0].X.Press || PlayerControllers[0].Y.Press || PlayerControllers[0].Z.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press)
+		if (AllowSkip) 
 		{
-			if (SceneLoadWaitTimer <= SceneLoadWaitMax) 
+			if (PlayerControllers[0].A.Press || PlayerControllers[0].B.Press || PlayerControllers[0].C.Press || PlayerControllers[0].X.Press || PlayerControllers[0].Y.Press || PlayerControllers[0].Z.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press)
 			{
-				if (SceneLoadWaitTimer >= SceneSkipMin) SceneLoadWaitTimer = SceneLoadWaitMax;
+				if (SceneLoadWaitTimer <= SceneLoadWaitMax)
+				{
+					if (SceneLoadWaitTimer >= SceneSkipMin) SceneLoadWaitTimer = SceneLoadWaitMax;
+				}
 			}
 		}
 
-		SceneTransition(NextStageID, NextStageKey, isIZ);
+
+		SceneTransition(SceneLoadWaitTimer, SceneLoadWaitMax, NextStageID, NextStageKey, isIZ);
 	}
+
+
+	int IZ_Logo_SlotID = 219;
+	int IZ_Logo2_SlotID = 221;
+	int IZ_Logo3_SlotID = 223;
+
+	int IZ_LogoText_SlotID = 225;
+	int IZ_LogoText2_SlotID = 114;
+	int IZ_LogoText3_SlotID = 226;
+
+	void ApplyIZEffect(int SlotID, bool isText) 
+	{
+		Entity& Part1 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotID);
+
+		Part1.InkEffect = Ink_Alpha;
+
+		int _alpha = 0;
+
+		if (IZ_SceneLoadWaitTimer >= 250)
+		{
+			int atMax = (IZ_SceneLoadWaitTimer * 2 >= 200 ? 200 : IZ_SceneLoadWaitTimer * 2);
+			int timePassed = (IZ_SceneLoadWaitTimer - 250) * 2;
+			int fadeOut = atMax - timePassed;
+			_alpha = (fadeOut <= 0 ? 0 : fadeOut);
+		}
+		else 
+		{
+			_alpha = (IZ_SceneLoadWaitTimer >= 200 ? 200 : IZ_SceneLoadWaitTimer);
+		}
+
+		Part1.Alpha = _alpha;
+
+		if (isText) 
+		{
+			Part1.DrawOrder = 14;
+		}
+	}
+
+	void UpdateIZLogos() 
+	{
+		ApplyIZEffect(IZ_Logo_SlotID, false);
+		ApplyIZEffect(IZ_Logo2_SlotID, false);
+		ApplyIZEffect(IZ_Logo3_SlotID, true);
+		ApplyIZEffect(IZ_LogoText_SlotID, true);
+		ApplyIZEffect(IZ_LogoText2_SlotID, true);
+		ApplyIZEffect(IZ_LogoText3_SlotID, true);
+
+		UpdateGenericLogos(false, IZ_SceneLoadWaitTimer, IZ_SceneLoadWaitMax, 1, (char*)"", false);
+	}
+
+	void UpdateATGLogos() 
+	{
+		UpdateGenericLogos(true, ATG_SceneLoadWaitTimer, ATG_SceneLoadWaitMax, 0, (char*)"CPLOGOS3", true);
+	}
+
+	void UpdateCJLogos() 
+	{
+		UpdateGenericLogos(true, CJ_SceneLoadWaitTimer, CJ_SceneLoadWaitMax, 0, (char*)"CPLOGOS4", true);
+	}
+
+
 };

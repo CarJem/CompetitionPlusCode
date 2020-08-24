@@ -62,39 +62,39 @@ namespace CompPlus_ManiaLevelSelect
 		int startingSlot = MLS_MenuPointStartingSlot;
 
 		MLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		MLS_MenuPoints[0][1] = MenuPoint(startingSlot, SceneExt::Scene_GHZ1);
-		MLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, SceneExt::Scene_GHZ2);
-		MLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, SceneExt::Scene_CPZ1);
-		MLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, SceneExt::Scene_CPZ2);
-		MLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, SceneExt::Scene_SPZ1);
-		MLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, SceneExt::Scene_SPZ2);
+		MLS_MenuPoints[0][1] = MenuPoint(startingSlot, (int)SceneExt::Scene_GHZ1, "GREEN HILL ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, (int)SceneExt::Scene_GHZ2, "GREEN HILL ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, (int)SceneExt::Scene_CPZ1, "CHEMICAL PLANT ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, (int)SceneExt::Scene_CPZ2, "CHEMICAL PLANT ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, (int)SceneExt::Scene_SPZ1, "STUDIOPOLIS ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, (int)SceneExt::Scene_SPZ2, "STUDIOPOLIS ZONE ACT 2", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
-		MLS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPCXLS");
-		MLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, SceneExt::Scene_FBZ1);
-		MLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, SceneExt::Scene_FBZ2);
-		MLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, SceneExt::Scene_PSZ1);
-		MLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, SceneExt::Scene_PSZ2);
-		MLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, SceneExt::Scene_SSZ1);
-		MLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, SceneExt::Scene_SSZ2);
-		MLS_MenuPoints[1][7] = MenuPoint(MLS_MenuPointRight, "CPELS");
+		MLS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPCXLS", " ", " ", " ");
+		MLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, (int)SceneExt::Scene_FBZ1, "FLYING BATTERY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, (int)SceneExt::Scene_FBZ2, "FLYING BATTERY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, (int)SceneExt::Scene_PSZ1, "PRESS GARDEN ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, (int)SceneExt::Scene_PSZ2, "PRESS GARDEN ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, (int)SceneExt::Scene_SSZ1, "STARDUST SPEEDWAY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, (int)SceneExt::Scene_SSZ2, "STARDUST SPEEDWAY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][7] = MenuPoint(MLS_MenuPointRight, "CPELS", " ", " ", " ");
 
 		MLS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
-		MLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, SceneExt::Scene_HCZ1);
-		MLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, SceneExt::Scene_HCZ2);
-		MLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, SceneExt::Scene_MSZ1);
-		MLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, SceneExt::Scene_MSZ2);
-		MLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, SceneExt::Scene_OOZ1);
-		MLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, SceneExt::Scene_OOZ2);
+		MLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, (int)SceneExt::Scene_HCZ1, "HYRDOCITY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, (int)SceneExt::Scene_HCZ2, "HYRDOCITY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, (int)SceneExt::Scene_MSZ1, "MIRAGE SALOON ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, (int)SceneExt::Scene_MSZ2, "MIRAGE SALOON ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, (int)SceneExt::Scene_OOZ1, "OIL OCEAN ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, (int)SceneExt::Scene_OOZ2, "OIL OCEAN ZONE ACT 2", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[2][7] = MenuPoint(true, 7, 1);
 
 		MLS_MenuPoints[3][0] = MenuPoint(true, 0, 1);
-		MLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, SceneExt::Scene_LRZ1);
-		MLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, SceneExt::Scene_LRZ2);
-		MLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, SceneExt::Scene_MMZ1);
-		MLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, SceneExt::Scene_MMZ2);
-		MLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, SceneExt::Scene_TMZ1);
-		MLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, SceneExt::Scene_TMZ2);
+		MLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, (int)SceneExt::Scene_LRZ1, "LAVA REEF ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, (int)SceneExt::Scene_LRZ2, "LAVA REEF ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, (int)SceneExt::Scene_MMZ1, "METALLIC MADNESS ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, (int)SceneExt::Scene_MMZ2, "METALLIC MADNESS ZONE ACT 2", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, (int)SceneExt::Scene_TMZ1, "TITANIC MONARCH ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, (int)SceneExt::Scene_TMZ2, "TITANIC MONARCH ZONE ACT 2", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[3][7] = MenuPoint(true, 7, 1);
 
 
@@ -112,6 +112,8 @@ namespace CompPlus_ManiaLevelSelect
 		SetManiaLSelectBGColors();
 
 		AreMenuPointsLoaded = true;
+
+		ZoneInfoLoop(MLS_MenuPoints[MenuPos_Y][MenuPos_X], MLS_UIControlSlot, 205, 206, 207, 208, 209, true);
 	}
 
 	void SetupManiaSelector()
@@ -196,12 +198,17 @@ namespace CompPlus_ManiaLevelSelect
 				}
 			}
 
+			ZoneInfoLoop(MLS_MenuPoints[MenuPos_Y][MenuPos_X], MLS_UIControlSlot, 205, 206, 207, 208, 209, UpdateMenuScroll);
 			UpdateLevelSelectSelection(MenuPos_X, MenuPos_Y, MLS_MenuMax_X, MLS_MenuMax_Y, MLS_MenuPoints);
 			UpdateLevelSelectScroll(MenuPos_X, MenuPos_Y, LastMenuPos_X, LastMenuPos_Y, UpdateMenuScroll, MLS_UIControlSlot, MLS_SelectorImage, MLS_MenuPoints);
+			ZoneInfoLoop(MLS_MenuPoints[MenuPos_Y][MenuPos_X], MLS_UIControlSlot, 205, 206, 207, 208, 209, UpdateMenuScroll);
 
 			if ((PlayerControllers[0].A.Press || PlayerControllers[0].C.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press) && !PlayerControllers[0].B.Press)
 			{
-				if (!LevelSelected) LevelSelectDelay(false, LevelSelected);
+				if (MLS_MenuPoints[MenuPos_Y][MenuPos_X].OnInteract() == MenuPointState_LoadStage)
+				{
+					if (!LevelSelected) LevelSelectDelay(true, LevelSelected);
+				}
 			}
 			else if (PlayerControllers[0].B.Press)
 			{

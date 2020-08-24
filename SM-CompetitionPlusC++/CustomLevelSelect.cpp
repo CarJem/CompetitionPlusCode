@@ -62,39 +62,39 @@ namespace CompPlus_CustomLevelSelect
 
 
 		CLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPAIZEX");
-		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPDHZ");
-		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ");
-		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPGPZ");
-		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCLS");
-		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCLS");
+		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPAIZEX", "ANGEL ISLAND ZONE (EXT EDITION)", "JUBBALUB", " ");
+		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPDHZ", "DESERT HILL ZONE", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ", "SPECIAL STAGE ZONE ACT 1", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPGPZ", "GUST PLANET ZONE ACT 1", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, true);
+		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, true);
 		CLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
-		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPELS");
-		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPTSZ");
-		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPDHZE");
-		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE");
-		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPGPZE");
-		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCLS");
-		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCLS");
-		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPCXLS");
+		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPELS", " ", " ", " ");
+		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPTSZ", "COMP. PLUS TEST SCENE ZONE", "CARJEM GENERATIONS", " ");
+		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPDHZE", "DESERT HILL ZONE (ENCORE)", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE", "SPECIAL STAGE ZONE ACT 1 (ENCORE)", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPGPZE", "GUST PLANET ZONE ACT 1 (ENCORE)", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, true);
+		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, true);
+		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPCXLS", " ", " ", " ");
 
 		CLS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, "CPCLS");
-		CLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, "CPCLS");
-		CLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, "CPCLS");
-		CLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, "CPCLS");
-		CLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, "CPCLS");
-		CLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, "CPCLS");
+		CLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, true);
+		CLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, true);
+		CLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, true);
+		CLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, true);
+		CLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, true);
+		CLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, true);
 		CLS_MenuPoints[2][7] = MenuPoint(true, 7, 1);
 
 		CLS_MenuPoints[3][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, "CPCLS");
-		CLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, "CPCLS");
-		CLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, "CPCLS");
-		CLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, "CPCLS");
-		CLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, "CPCLS");
-		CLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, "CPCLS");
+		CLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, true);
+		CLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, true);
+		CLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, true);
+		CLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, true);
+		CLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, true);
+		CLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, true);
 		CLS_MenuPoints[3][7] = MenuPoint(true, 7, 1);
 
 		int reset_x = 1;
@@ -109,6 +109,8 @@ namespace CompPlus_CustomLevelSelect
 		SetCustomLSelectBGColors();
 
 		AreMenuPointsLoaded = true;
+
+		ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 211, 212, 213, 214, 215, true);
 	}
 
 	void SetupCustomSelector()
@@ -191,12 +193,18 @@ namespace CompPlus_CustomLevelSelect
 				}
 			}
 
+			ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 211, 212, 213, 214, 215, UpdateMenuScroll);
 			UpdateLevelSelectSelection(MenuPos_X, MenuPos_Y, CLS_MenuMax_X, CLS_MenuMax_Y, CLS_MenuPoints);
 			UpdateLevelSelectScroll(MenuPos_X, MenuPos_Y, LastMenuPos_X, LastMenuPos_Y, UpdateMenuScroll, CLS_UIControlSlot, CLS_SelectorImage, CLS_MenuPoints);
+			ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 211, 212, 213, 214, 215, UpdateMenuScroll);
 
 			if ((PlayerControllers[0].A.Press || PlayerControllers[0].C.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press) && !PlayerControllers[0].B.Press)
 			{
-				if (!LevelSelected) LevelSelectDelay(true, LevelSelected);
+				if (CLS_MenuPoints[MenuPos_Y][MenuPos_X].OnInteract() == MenuPointState_LoadStage)
+				{
+					if (!LevelSelected) LevelSelectDelay(true, LevelSelected);
+				}
+
 			}
 			else if (PlayerControllers[0].B.Press)
 			{

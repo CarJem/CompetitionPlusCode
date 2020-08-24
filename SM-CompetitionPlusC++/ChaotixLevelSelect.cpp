@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "PointScrolling.h"
 #include "ManiaExt.h"
@@ -62,39 +62,39 @@ namespace CompPlus_ChaotixLevelSelect
 
 
 		CLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPCXMIIZ1");
-		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPCXMAAZ");
-		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPCXMSSZ1");
-		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPCXMBBZ");
-		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCXMMMZ1");
-		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCXMTTZ1");
+		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPCXMIIZ1", "ISOLATED ISLAND ACT 1", "STARWARRIOR/MCNUGGIE", " ");
+		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPCXMAAZ", "AMAZING ARENA ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPCXMSSZ1", "SPEED SLIDER ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPCXMBBZ", "BOTANIC BASE ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCXMMMZ1", "MARINA MADNESS ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCXMTTZ1", "TECHNO TOWER ACT 1", "NEOEXPERIENCES", " ");
 		CLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
-		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPCLS");
-		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPCXMIIZ1E");
-		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPCXMAAZE");
-		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPCXMSSZ1E");
-		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPCXMBBZE");
-		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCXMMMZ1E");
-		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCXLS");
-		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPMLS");
+		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPCLS", " ", " ", " ");
+		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPCXMIIZ1E", "ISOLATED ISLAND ACT 1 (ENCORE)", "STARWARRIOR/MCNUGGIE", " ", true);
+		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPCXMAAZE", "AMAZING ARENA ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPCXMSSZ1E", "SPEED SLIDER ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPCXMBBZE", "BOTANIC BASE ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCXMMMZ1E", "MARINA MADNESS ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCXMTTZ1E", "TECHNO TOWER ACT 1 (ENCORE)", "NEOEXPERIENCES", " ");
+		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPMLS", " ", " ", " ");
 
 		CLS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, "CPCXLS");
-		CLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, "CPCXLS");
-		CLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, "CPCXLS");
-		CLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, "CPCXLS");
-		CLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, "CPCXLS");
-		CLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, "CPCXLS");
+		CLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, true);
+		CLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, true);
+		CLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, true);
+		CLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, true);
+		CLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, true);
+		CLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, true);
 		CLS_MenuPoints[2][7] = MenuPoint(true, 7, 1);
 
 		CLS_MenuPoints[3][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, "CPCXLS");
-		CLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, "CPCXLS");
-		CLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, "CPCXLS");
-		CLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, "CPCXLS");
-		CLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, "CPCXLS");
-		CLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, "CPCXLS");
+		CLS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, true);
+		CLS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, true);
+		CLS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, true);
+		CLS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, true);
+		CLS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, true);
+		CLS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, true);
 		CLS_MenuPoints[3][7] = MenuPoint(true, 7, 1);
 
 		int reset_x = 1;
@@ -109,6 +109,8 @@ namespace CompPlus_ChaotixLevelSelect
 		SetChaotixLSelectBGColors();
 
 		AreMenuPointsLoaded = true;
+
+		ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 231, 232, 233, 234, 235, true);
 	}
 
 	void SetupChaotixSelector()
@@ -191,12 +193,17 @@ namespace CompPlus_ChaotixLevelSelect
 				}
 			}
 
+			ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 231, 232, 233, 234, 235, UpdateMenuScroll);
 			UpdateLevelSelectSelection(MenuPos_X, MenuPos_Y, CLS_MenuMax_X, CLS_MenuMax_Y, CLS_MenuPoints);
 			UpdateLevelSelectScroll(MenuPos_X, MenuPos_Y, LastMenuPos_X, LastMenuPos_Y, UpdateMenuScroll, CLS_UIControlSlot, CLS_SelectorImage, CLS_MenuPoints);
+			ZoneInfoLoop(CLS_MenuPoints[MenuPos_Y][MenuPos_X], CLS_UIControlSlot, 231, 232, 233, 234, 235, UpdateMenuScroll);
 
 			if ((PlayerControllers[0].A.Press || PlayerControllers[0].C.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press) && !PlayerControllers[0].B.Press)
 			{
-				if (!LevelSelected) LevelSelectDelay(false, LevelSelected);
+				if (CLS_MenuPoints[MenuPos_Y][MenuPos_X].OnInteract() == MenuPointState_LoadStage)
+				{
+					if (!LevelSelected) LevelSelectDelay(true, LevelSelected);
+				}
 			}
 			else if (PlayerControllers[0].B.Press)
 			{

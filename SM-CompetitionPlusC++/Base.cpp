@@ -6,6 +6,7 @@
 #include "SonicMania.h"
 #include "CompetitionPlus.h"
 #include "IZAPI.h"
+#include "DevMenu.h"
 #include <vector>
 #include <ctime>
 #include <algorithm>
@@ -39,11 +40,15 @@ extern "C"
 
 	__declspec(dllexport) void OnFrame()
 	{
-		if (GameState & GameState_Running && !(GameState & GameState_SoftPause))
+		if (GameState & GameState_Running)
 		{
-			LoadSounds();
-			CompetitionPlus::LoadAnnouncers();
-			CompetitionPlus::UpdateMenus();
+			if (!(GameState & GameState_SoftPause)) 
+			{
+				LoadSounds();
+				CompetitionPlus::LoadAnnouncers();
+				CompetitionPlus::UpdateMenus();
+			}
+			UpdateCompPlusDevMenu();
 		}
 	}
 

@@ -184,6 +184,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <ClInclude Include="CompPlusSettings.h" />
     <ClInclude Include="CompPlus_Announcers.h" />
     <ClInclude Include="CustomLevelSelect.h" />
+    <ClInclude Include="DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
     <ClInclude Include="HubWorld.h" />
     <ClInclude Include="include\IZAPI.h" />
@@ -210,6 +211,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     </ClCompile>
     <ClCompile Include="CompPlusSettings.cpp" />
     <ClCompile Include="CustomLevelSelect.cpp" />
+    <ClCompile Include="DevMenu.cpp" />
     <ClCompile Include="dllmain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

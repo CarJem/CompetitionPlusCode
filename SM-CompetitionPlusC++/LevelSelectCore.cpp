@@ -8,6 +8,7 @@
 #include <vector>
 
 
+
 namespace CompPlus_LevelSelectCore
 {
 	using namespace CompPlus_Common;
@@ -233,6 +234,28 @@ namespace CompPlus_LevelSelectCore
 
 	}
 
+	void MoveObject(int x, int y, int targetSlotID, int slotID)
+	{
+		Entity& targetPos = *GetEntityFromSceneSlot<Entity>(targetSlotID);
+		Entity& target = *GetEntityFromSceneSlot<Entity>(slotID);
+		target.Position.X = targetPos.Position.X + x;
+		target.Position.Y = targetPos.Position.Y + y;
+	}
+
+	void SetUIInfoLabelDescription(int SlotID, char* _text, int size)
+	{
+		EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+		Label.Visible = true;
+		ConvertASCII2Unicode(Label.Text, _text, strlen(_text), -32);
+		Label.TextLength = (WORD)size;
+	}
+
+	void HideLabel(int SlotID) 
+	{
+		EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+		Label.Visible = false;
+	}
+
 	void UpdateLevelSelectScroll(int& MenuPos_X, int& MenuPos_Y, int& LastMenuPos_X, int& LastMenuPos_Y, bool& UpdateMenuScroll, int& UIControlSlot, int& SelectorImage, MenuPoint** MenuPoints)
 	{
 		if (MenuPoints[MenuPos_Y][MenuPos_X].isBlank)
@@ -249,7 +272,42 @@ namespace CompPlus_LevelSelectCore
 
 		ScrollToPosition(x1, y1, x2, y2, UIControlSlot, UpdateMenuScroll);
 		ScrollToPosition(x1, y1, x2, y2, SelectorImage, UpdateMenuScroll);
+
+
 		UpdateMenuScroll = false;
+	}
+
+	void ZoneInfoLoop(MenuPoint SelectedZone, int& UIControlSlot, int DescriptionTextASlot, int DescriptionTextBSlot, int DescriptionTextCSlot, int DescriptionTextDSlot, int DescriptionTextESlot, bool UpdateMenuScroll)
+	{
+		if (UpdateMenuScroll) 
+		{
+			if ((char*)SelectedZone.CP_Name != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextCSlot, (char*)SelectedZone.CP_Name, strlen(SelectedZone.CP_Name));
+			else HideLabel(DescriptionTextCSlot);
+			if ((char*)SelectedZone.CP_Author != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextDSlot, (char*)SelectedZone.CP_Author, strlen(SelectedZone.CP_Author));
+			else HideLabel(DescriptionTextDSlot);
+
+			HideLabel(DescriptionTextESlot);
+		}
+		else 
+		{
+			int x2 = 0;
+			int y2 = 0;
+
+			MoveObject(x2 - 256, y2 + 5 + 80, UIControlSlot, DescriptionTextASlot);
+			MoveObject(x2 - 256, y2 + 5 + 104, UIControlSlot, DescriptionTextBSlot);
+			MoveObject(x2 - 0, y2 + 98, UIControlSlot, DescriptionTextCSlot);
+			MoveObject(x2 - 0, y2 + 110, UIControlSlot, DescriptionTextDSlot);
+			MoveObject(x2 - 0, y2 + 200, UIControlSlot, DescriptionTextESlot);
+
+			Entity& bg1 = *GetEntityFromSceneSlot<Entity>(DescriptionTextASlot);
+			Entity& bg2 = *GetEntityFromSceneSlot<Entity>(DescriptionTextBSlot);
+
+			bg1.InkEffect = Ink_Alpha;
+			bg2.InkEffect = Ink_Alpha;
+
+			bg1.Alpha = 150;
+			bg2.Alpha = 150;
+		}
 	}
 
 	void UpdateLastPos(int& LastMenuPos_X, int& LastMenuPos_Y, int& MenuPos_X, int& MenuPos_Y)

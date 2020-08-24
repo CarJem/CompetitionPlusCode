@@ -93,6 +93,9 @@
     <ClInclude Include="CompPlus_Announcers.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="DevMenu.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="ChaotixLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="DevMenu.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

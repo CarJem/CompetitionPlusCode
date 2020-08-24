@@ -61,39 +61,39 @@ namespace CompPlus_EncoreLevelSelect
 		int startingSlot = ELS_MenuPointStartingSlot;
 
 		ELS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[0][1] = MenuPoint(startingSlot, SceneExt::Scene_GHZ1_e);
-		ELS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, SceneExt::Scene_GHZ2_e);
-		ELS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, SceneExt::Scene_CPZ1_e);
-		ELS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, SceneExt::Scene_CPZ2_e);
-		ELS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, SceneExt::Scene_SPZ1_e);
-		ELS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, SceneExt::Scene_SPZ2_e);
+		ELS_MenuPoints[0][1] = MenuPoint(startingSlot, (int)SceneExt::Scene_GHZ1_e, "GREEN HILL ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, (int)SceneExt::Scene_GHZ2_e, "GREEN HILL ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, (int)SceneExt::Scene_CPZ1_e, "CHEMICAL PLANT ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, (int)SceneExt::Scene_CPZ2_e, "CHEMICAL PLANT ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, (int)SceneExt::Scene_SPZ1_e, "STUDIOPOLIS ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, (int)SceneExt::Scene_SPZ2_e, "STUDIOPOLIS ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
 		ELS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
-		ELS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPMLS");
-		ELS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, SceneExt::Scene_FBZ1_e);
-		ELS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, SceneExt::Scene_FBZ2_e);
-		ELS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, SceneExt::Scene_PSZ1_e);
-		ELS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, SceneExt::Scene_PSZ2_e);
-		ELS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, SceneExt::Scene_SSZ1_e);
-		ELS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, SceneExt::Scene_SSZ2_e);
-		ELS_MenuPoints[1][7] = MenuPoint(MLS_MenuPointRight, "CPCLS");
+		ELS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPMLS", " ", " ", " ");
+		ELS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, (int)SceneExt::Scene_FBZ1_e, "FLYING BATTERY ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, (int)SceneExt::Scene_FBZ2_e, "FLYING BATTERY ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, (int)SceneExt::Scene_PSZ1_e, "PRESS GARDEN ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, (int)SceneExt::Scene_PSZ2_e, "PRESS GARDEN ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, (int)SceneExt::Scene_SSZ1_e, "STARDUST SPEEDWAY ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, (int)SceneExt::Scene_SSZ2_e, "STARDUST SPEEDWAY ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[1][7] = MenuPoint(MLS_MenuPointRight, "CPCLS", " ", " ", " ");
 
 		ELS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, SceneExt::Scene_HCZ1_e);
-		ELS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, SceneExt::Scene_HCZ2_e);
-		ELS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, SceneExt::Scene_MSZ1_e);
-		ELS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, SceneExt::Scene_MSZ2_e);
-		ELS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, SceneExt::Scene_OOZ1_e);
-		ELS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, SceneExt::Scene_OOZ2_e);
+		ELS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, (int)SceneExt::Scene_HCZ1_e, "HYRDOCITY ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, (int)SceneExt::Scene_HCZ2_e, "HYRDOCITY ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, (int)SceneExt::Scene_MSZ1_e, "MIRAGE SALOON ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, (int)SceneExt::Scene_MSZ2_e, "MIRAGE SALOON ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, (int)SceneExt::Scene_OOZ1_e, "OIL OCEAN ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, (int)SceneExt::Scene_OOZ2_e, "OIL OCEAN ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
 		ELS_MenuPoints[2][7] = MenuPoint(true, 7, 1);
 
 		ELS_MenuPoints[3][0] = MenuPoint(true, 0, 1);
-		ELS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, SceneExt::Scene_LRZ1_e);
-		ELS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, SceneExt::Scene_LRZ2_e);
-		ELS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, SceneExt::Scene_MMZ1_e);
-		ELS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, SceneExt::Scene_MMZ2_e);
-		ELS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, SceneExt::Scene_TMZ1_e);
-		ELS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, SceneExt::Scene_TMZ2_e);
+		ELS_MenuPoints[3][1] = MenuPoint(startingSlot + 18, (int)SceneExt::Scene_LRZ1_e, "LAVA REEF ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[3][2] = MenuPoint(startingSlot + 19, (int)SceneExt::Scene_LRZ2_e, "LAVA REEF ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[3][3] = MenuPoint(startingSlot + 20, (int)SceneExt::Scene_MMZ1_e, "METALLIC MADNESS ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[3][4] = MenuPoint(startingSlot + 21, (int)SceneExt::Scene_MMZ2_e, "METALLIC MADNESS ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[3][5] = MenuPoint(startingSlot + 22, (int)SceneExt::Scene_TMZ1_e, "TITANIC MONARCH ZONE ACT 1 (ENCORE)", "SEGA / MANIA TEAM", " ");
+		ELS_MenuPoints[3][6] = MenuPoint(startingSlot + 23, (int)SceneExt::Scene_TMZ2_e, "TITANIC MONARCH ZONE ACT 2 (ENCORE)", "SEGA / MANIA TEAM", " ");
 		ELS_MenuPoints[3][7] = MenuPoint(true, 7, 1);
 
 		int reset_x = 1;
@@ -108,6 +108,8 @@ namespace CompPlus_EncoreLevelSelect
 		SetEncoreLSelectBGColors();
 
 		AreMenuPointsLoaded = true;
+
+		ZoneInfoLoop(ELS_MenuPoints[MenuPos_Y][MenuPos_X], ELS_UIControlSlot, 229, 230, 231, 232, 233, true);
 	}
 
 	void UpdateEncoreLSelectScroll()
@@ -209,12 +211,17 @@ namespace CompPlus_EncoreLevelSelect
 				}
 			}
 
+			ZoneInfoLoop(ELS_MenuPoints[MenuPos_Y][MenuPos_X], ELS_UIControlSlot, 229, 230, 231, 232, 233, UpdateMenuScroll);
 			UpdateLevelSelectSelection(MenuPos_X, MenuPos_Y, ELS_MenuMax_X, ELS_MenuMax_Y, ELS_MenuPoints);
 			UpdateLevelSelectScroll(MenuPos_X, MenuPos_Y, LastMenuPos_X, LastMenuPos_Y, UpdateMenuScroll, ELS_UIControlSlot, ELS_SelectorImage, ELS_MenuPoints);
+			ZoneInfoLoop(ELS_MenuPoints[MenuPos_Y][MenuPos_X], ELS_UIControlSlot, 229, 230, 231, 232, 233, UpdateMenuScroll);
 
 			if ((PlayerControllers[0].A.Press || PlayerControllers[0].C.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press) && !PlayerControllers[0].B.Press)
 			{
-				if (!LevelSelected) LevelSelectDelay(false, LevelSelected);
+				if (ELS_MenuPoints[MenuPos_Y][MenuPos_X].OnInteract() == MenuPointState_LoadStage)
+				{
+					if (!LevelSelected) LevelSelectDelay(true, LevelSelected);
+				}
 			}
 			else if (PlayerControllers[0].B.Press)
 			{

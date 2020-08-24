@@ -148,7 +148,7 @@ struct EntityUIInfoLabel : SonicMania::Entity
 	/* 0x00000077 */ BYTE field_77;
 	/* 0x00000078 */ SonicMania::Vector2 Size;
 	/* 0x00000080 */ wchar_t* Text;
-	/* 0x00000084 */ WORD TextLength;
+	/* 0x00000084 */ int TextLength;
 	/* 0x00000086 */ BYTE field_86;
 	/* 0x00000087 */ BYTE field_87;
 	/* 0x00000088 */ DWORD field_88;
@@ -159,8 +159,8 @@ struct EntityUITextPrivate : SonicMania::Entity
 {
 	/* 0x00000058 */ void* State;
 	/* 0x0000005C */ void* StateDraw;
-	/* 0x00000060 */ DWORD Text;
-	/* 0x00000064 */ WORD field_64;
+	/* 0x00000060 */ wchar_t* Text;
+	/* 0x00000064 */ WORD TextLength;
 	/* 0x00000066 */ WORD field_66;
 	/* 0x00000068 */ DWORD Tag;
 	/* 0x0000006C */ DWORD field_6C;
