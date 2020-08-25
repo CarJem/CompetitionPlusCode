@@ -130,7 +130,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -184,6 +184,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <ClInclude Include="CompPlusSettings.h" />
     <ClInclude Include="CompPlus_Announcers.h" />
     <ClInclude Include="CustomLevelSelect.h" />
+    <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
     <ClInclude Include="HubWorld.h" />
@@ -211,6 +212,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     </ClCompile>
     <ClCompile Include="CompPlusSettings.cpp" />
     <ClCompile Include="CustomLevelSelect.cpp" />
+    <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="DevMenu.cpp" />
     <ClCompile Include="dllmain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

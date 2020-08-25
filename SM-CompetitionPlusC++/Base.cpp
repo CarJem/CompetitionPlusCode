@@ -11,11 +11,14 @@
 #include <ctime>
 #include <algorithm>
 #include <string>
+#include "LevelSelectCore.h"
 
 extern "C"
 {
 	using namespace SonicMania;
 
+	extern wchar_t Strings[3];
+ 
 	//SoundFX Defines from SonicMania/Data/Sounds/
 	const char* SFX_CompPlus1 = "CompPlus/MenuBleepClassic.wav";
 	const char* SFX_CompPlus2 = "CompPlus/MenuAcceptClassic.wav";
@@ -29,6 +32,7 @@ extern "C"
 			//Load Sounds on First Run. //Global Scope fine for most things
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
+			CompetitionPlus::InitMod();
 			LoadedSounds = true;
 		}
 	}
@@ -40,12 +44,11 @@ extern "C"
 
 	__declspec(dllexport) void OnFrame()
 	{
+		LoadSounds();
 		if (GameState & GameState_Running)
 		{
 			if (!(GameState & GameState_SoftPause)) 
 			{
-				LoadSounds();
-				CompetitionPlus::LoadAnnouncers();
 				CompetitionPlus::UpdateMenus();
 			}
 			UpdateCompPlusDevMenu();
@@ -83,6 +86,7 @@ extern "C"
 	{
 		const std::string path_cpp = path;
 		IZAPI::IZInit();
+		CompetitionPlus::InitSettings((path_cpp + "\\Settings.xml").c_str());
 		IZAPI::LoadStagesFile((path_cpp + "\\Stages.xml").c_str());
 		IZAPI::RegisterStageLoadEvent(CompetitionPlus::OnStageLoad);
 		IZAPI::RegisterStageUnloadEvent(CompetitionPlus::OnStageUnload);
@@ -95,7 +99,8 @@ extern "C"
 		SetCurrentDirectoryA(path);
 		// Load files here
 		SetCurrentDirectoryA(buffer);
-		//PatchOnScreenDrawHook();
+		std::string finalPath = (std::string)buffer + "\\" + path;
+		CompPlus_LevelSelectCore::Init();
 	}
 	__declspec(dllexport) ModInfo ManiaModInfo = { ModLoaderVer, GameVer };
 

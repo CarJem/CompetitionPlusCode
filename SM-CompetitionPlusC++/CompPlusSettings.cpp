@@ -4,6 +4,11 @@
 #include "CompetitionPlus.h"
 #include "SonicMania.h"
 #include "ManiaExt.h"
+#include "depends/tinyxml2/tinyxml2.h"
+#include <fstream>
+#include <algorithm>
+#include <iostream>
+#include <sstream>
 
 namespace CompPlusSettings 
 {
@@ -13,6 +18,7 @@ namespace CompPlusSettings
 	bool FixPlayers = false;
 	int NumberOfAnnouncers = 6;
 
+	std::string Settings_FilePath;
 
 	//Developer Settings
 	bool EnableDevMode = true;
@@ -415,6 +421,12 @@ namespace CompPlusSettings
 		}
 	}
 
+	void SetAnnouncer(AnnouncerType Value) 
+	{
+		CurrentAnnouncer = Value;
+		SaveSettings();
+	}
+
 	void StageLoadApplyConfig() 
 	{
 		SetAbility(1, Player1AbilitySet);
@@ -563,6 +575,64 @@ namespace CompPlusSettings
 
 		DebugModeLoop();
 		DevModeLoop();
+	}
+
+	void LoadSettings()
+	{
+
+		unsigned int size = 0;
+
+		// Open file
+		std::ifstream file(Settings_FilePath);
+
+		// Get size and allocate memory
+		file.seekg(0, std::ios::end);
+		size = static_cast<unsigned int>(file.tellg());
+		char* xml = (char*)malloc(size);
+		file.seekg(0, std::ios::beg);
+
+		// Read file
+		file.read(xml, size);
+
+		if (xml && size)
+		{
+			tinyxml2::XMLDocument document;
+			document.Parse(static_cast<const char*>(xml), size);
+
+			tinyxml2::XMLElement* xmlSettings = document.FirstChildElement("Settings");
+			if (xmlSettings)
+			{
+				tinyxml2::XMLElement* xmlOption = xmlSettings->FirstChildElement("SelectedAnnouncer");
+				if (xmlOption)
+				{
+					const char* str_value = xmlOption->GetText();
+					int value = atoi(str_value);
+					CurrentAnnouncer = (AnnouncerType)value;
+				}
+			}
+			else
+			{
+
+			}
+		}
+		// Clean up
+		free(xml);
+	}
+
+	std::string IntToString(int a)
+	{
+		std::stringstream temp;
+		temp << a;
+		return temp.str();
+	}
+
+	void SaveSettings() 
+	{
+		tinyxml2::XMLDocument document;
+
+		std::string text = "<Settings><SelectedAnnouncer>" + IntToString(CurrentAnnouncer) + "</SelectedAnnouncer></Settings>";
+		document.Parse((const char*)text.c_str());
+		document.SaveFile(Settings_FilePath.c_str());
 	}
  
 }

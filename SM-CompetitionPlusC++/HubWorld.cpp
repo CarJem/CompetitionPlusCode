@@ -316,7 +316,7 @@ namespace CompPlus_HubWorld
 
 		//Announcer Type NUD
 		int AnnouncerTypeStatus = UpDownController(AnnouncerTypeController, (int)CompPlusSettings::CurrentAnnouncer, 0, CompPlusSettings::NumberOfAnnouncers - 1, -1);
-		if (AnnouncerTypeStatus != (int)CompPlusSettings::CurrentAnnouncer) CompPlusSettings::CurrentAnnouncer = (CompPlusSettings::AnnouncerType)AnnouncerTypeStatus;
+		if (AnnouncerTypeStatus != (int)CompPlusSettings::CurrentAnnouncer) CompPlusSettings::SetAnnouncer((CompPlusSettings::AnnouncerType)AnnouncerTypeStatus);
 
 		//Victory Type NUD
 		int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlusSettings::VictoryStyle, 0, 1, -1);

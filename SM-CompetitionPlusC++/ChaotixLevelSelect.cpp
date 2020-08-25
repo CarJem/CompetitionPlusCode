@@ -62,21 +62,21 @@ namespace CompPlus_ChaotixLevelSelect
 
 
 		CLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
-		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPCXMIIZ1", "ISOLATED ISLAND ACT 1", "STARWARRIOR/MCNUGGIE", " ");
-		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPCXMAAZ", "AMAZING ARENA ACT 1", "THE VAGABOND", " ");
-		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPCXMSSZ1", "SPEED SLIDER ACT 1", "THE VAGABOND", " ");
-		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPCXMBBZ", "BOTANIC BASE ACT 1", "THE VAGABOND", " ");
-		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCXMMMZ1", "MARINA MADNESS ACT 1", "THE VAGABOND", " ");
-		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCXMTTZ1", "TECHNO TOWER ACT 1", "NEOEXPERIENCES", " ");
+		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPCXMIIZ1", "ISOLATED ISLAND ZONE ACT 1", "STAR WARRIOR / MCNUGGIE", " ");
+		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPCXMAAZ", "AMAZING ARENA ZONE ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPCXMSSZ1", "SPEED SLIDER ZONE ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPCXMBBZ", "BOTANIC BASE ZONE ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "CPCXMMMZ1", "MARINA MADNESS ZONE ACT 1", "THE VAGABOND", " ");
+		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, "CPCXMTTZ1", "TECHNO TOWER ZONE ACT 1", "NEOEXPERIENCES / MUSIC: COBALTBW", " ");
 		CLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
 		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPCLS", " ", " ", " ");
-		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPCXMIIZ1E", "ISOLATED ISLAND ACT 1 (ENCORE)", "STARWARRIOR/MCNUGGIE", " ", true);
-		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPCXMAAZE", "AMAZING ARENA ACT 1 (ENCORE)", "THE VAGABOND", " ");
-		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPCXMSSZ1E", "SPEED SLIDER ACT 1 (ENCORE)", "THE VAGABOND", " ");
-		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPCXMBBZE", "BOTANIC BASE ACT 1 (ENCORE)", "THE VAGABOND", " ");
-		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCXMMMZ1E", "MARINA MADNESS ACT 1 (ENCORE)", "THE VAGABOND", " ");
-		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCXMTTZ1E", "TECHNO TOWER ACT 1 (ENCORE)", "NEOEXPERIENCES", " ");
+		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPCXMIIZ1E", "ISOLATED ISLAND ZONE ACT 1 (ENCORE)", "STAR WARRIOR / MCNUGGIE", " ", true);
+		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPCXMAAZE", "AMAZING ARENA ZONE ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPCXMSSZ1E", "SPEED SLIDER ZONE ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPCXMBBZE", "BOTANIC BASE ZONE ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "CPCXMMMZ1E", "MARINA MADNESS ZONE ACT 1 (ENCORE)", "THE VAGABOND", " ");
+		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, "CPCXMTTZ1E", "TECHNO TOWER ZONE ACT 1 (ENCORE)", "NEOEXPERIENCES / MUSIC: COBALTBW", " ");
 		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPMLS", " ", " ", " ");
 
 		CLS_MenuPoints[2][0] = MenuPoint(true, 0, 1);

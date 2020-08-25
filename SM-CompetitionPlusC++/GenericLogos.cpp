@@ -15,7 +15,7 @@ namespace CompPlus_GenericLogos
 	int GR_SceneLoadWaitMax = 300;
 
 	int CJ_SceneLoadWaitTimer = 0;
-	int CJ_SceneLoadWaitMax = 125;
+	int CJ_SceneLoadWaitMax = 175;
 
 	int ATG_SceneLoadWaitTimer = 0;
 	int ATG_SceneLoadWaitMax = 125;

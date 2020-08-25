@@ -1,4 +1,5 @@
 #include "SonicMania.h"
+#include <string>
 #pragma once
 namespace CompPlusSettings
 {
@@ -66,6 +67,8 @@ namespace CompPlusSettings
     //Internal Values
     extern int NumberOfAnnouncers;
 
+    extern std::string Settings_FilePath;
+
     //Gameplay Settings
     extern bool InfiniteLives;
     extern bool InfiniteTime;
@@ -119,6 +122,8 @@ namespace CompPlusSettings
 
     extern void SetInstaSheildAbility(bool State);
 
+    extern void SetAnnouncer(AnnouncerType Value);
+
     extern void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability);
 
     extern void SetPlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
@@ -130,6 +135,10 @@ namespace CompPlusSettings
     extern void StageLoadApplyConfig();
 
     extern void UpdateSettingsLoop();
+
+    extern void LoadSettings();
+
+    extern void SaveSettings();
 }
 
 

@@ -82,7 +82,7 @@ namespace CompPlus_ManiaLevelSelect
 		MLS_MenuPoints[2][0] = MenuPoint(true, 0, 1);
 		MLS_MenuPoints[2][1] = MenuPoint(startingSlot + 12, (int)SceneExt::Scene_HCZ1, "HYRDOCITY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[2][2] = MenuPoint(startingSlot + 13, (int)SceneExt::Scene_HCZ2, "HYRDOCITY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
-		MLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, (int)SceneExt::Scene_MSZ1, "MIRAGE SALOON ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[2][3] = MenuPoint(startingSlot + 14, (int)SceneExt::Scene_MSZ1, "MIRAGE SALOON ZONE ACT 1K", "SEGA / MANIA TEAM (EDITS: SONIKKO)", " ");
 		MLS_MenuPoints[2][4] = MenuPoint(startingSlot + 15, (int)SceneExt::Scene_MSZ2, "MIRAGE SALOON ZONE ACT 2", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[2][5] = MenuPoint(startingSlot + 16, (int)SceneExt::Scene_OOZ1, "OIL OCEAN ZONE ACT 1", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[2][6] = MenuPoint(startingSlot + 17, (int)SceneExt::Scene_OOZ2, "OIL OCEAN ZONE ACT 2", "SEGA / MANIA TEAM", " ");

@@ -64,7 +64,7 @@ namespace CompPlus_CustomLevelSelect
 		CLS_MenuPoints[0][0] = MenuPoint(true, 0, 1);
 		CLS_MenuPoints[0][1] = MenuPoint(startingSlot + 0, "CPAIZEX", "ANGEL ISLAND ZONE (EXT EDITION)", "JUBBALUB", " ");
 		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPDHZ", "DESERT HILL ZONE", "ANGELTHEGAMER", " ");
-		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ", "SPECIAL STAGE ZONE ACT 1", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ", "SPECIAL STAGE ZONE", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPGPZ", "GUST PLANET ZONE ACT 1", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, true);
 		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, true);
@@ -73,7 +73,7 @@ namespace CompPlus_CustomLevelSelect
 		CLS_MenuPoints[1][0] = MenuPoint(CLS_MenuPointLeft, "CPELS", " ", " ", " ");
 		CLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, "CPTSZ", "COMP. PLUS TEST SCENE ZONE", "CARJEM GENERATIONS", " ");
 		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPDHZE", "DESERT HILL ZONE (ENCORE)", "ANGELTHEGAMER", " ");
-		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE", "SPECIAL STAGE ZONE ACT 1 (ENCORE)", "ANGELTHEGAMER", " ");
+		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE", "SPECIAL STAGE ZONE (ENCORE)", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPGPZE", "GUST PLANET ZONE ACT 1 (ENCORE)", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, true);
 		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, true);

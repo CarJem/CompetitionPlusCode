@@ -24,6 +24,9 @@
     <Filter Include="Scenes\Startup Logos">
       <UniqueIdentifier>{1b8b064f-ca8e-4094-82c9-4736c88f17d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Depends">
+      <UniqueIdentifier>{8a2a5dff-9ff0-4175-b87c-c47e20e4396b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -96,6 +99,9 @@
     <ClInclude Include="DevMenu.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="depends\tinyxml2\tinyxml2.h">
+      <Filter>Depends</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -150,6 +156,9 @@
     </ClCompile>
     <ClCompile Include="DevMenu.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
+      <Filter>Depends</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

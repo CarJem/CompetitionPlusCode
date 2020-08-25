@@ -143,16 +143,18 @@ namespace CompetitionPlus
 		CurrentStage = { };
 		StageRefresh = true;
 		IdleTime = 10;
-
-		BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
-		WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)13);
-
-		if (!strcmp(info.StageKey, "CPLOGOS")) CompPlus_Common::LoadLevel(142);
+		if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(142);
     }
 
-	extern void LoadAnnouncers() 
+	extern void InitMod()
 	{
 		CompPlus_Announcers::LoadAnnouncerFX();
+	}
+
+	extern void InitSettings(const char* path) 
+	{
+		CompPlusSettings::Settings_FilePath = path;
+		CompPlusSettings::LoadSettings();
 	}
 };
 

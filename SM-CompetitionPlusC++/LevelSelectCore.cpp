@@ -13,6 +13,8 @@ namespace CompPlus_LevelSelectCore
 {
 	using namespace CompPlus_Common;
 
+	static wchar_t* Strings[3];
+
 	void LevelSelectDelayLoop(int selectorID, MenuPoint level, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
 	{
 		if (FastWarp && SceneLoadWaitTimer < 30)
@@ -242,12 +244,14 @@ namespace CompPlus_LevelSelectCore
 		target.Position.Y = targetPos.Position.Y + y;
 	}
 
-	void SetUIInfoLabelDescription(int SlotID, char* _text, int size)
+	void SetUIInfoLabelDescription(int SlotID, char* _text, int size, int index)
 	{
 		EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+		Label.Text = (wchar_t*)Strings[index];
 		Label.Visible = true;
 		ConvertASCII2Unicode(Label.Text, _text, strlen(_text), -32);
 		Label.TextLength = (WORD)size;
+		
 	}
 
 	void HideLabel(int SlotID) 
@@ -281,12 +285,14 @@ namespace CompPlus_LevelSelectCore
 	{
 		if (UpdateMenuScroll) 
 		{
-			if ((char*)SelectedZone.CP_Name != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextCSlot, (char*)SelectedZone.CP_Name, strlen(SelectedZone.CP_Name));
+			
+			if ((char*)SelectedZone.CP_Name != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextCSlot, (char*)SelectedZone.CP_Name, strlen(SelectedZone.CP_Name), 0);
 			else HideLabel(DescriptionTextCSlot);
-			if ((char*)SelectedZone.CP_Author != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextDSlot, (char*)SelectedZone.CP_Author, strlen(SelectedZone.CP_Author));
+			if ((char*)SelectedZone.CP_Author != nullptr && (char*)SelectedZone.CP_Name != "" && (char*)SelectedZone.CP_Name != " ") SetUIInfoLabelDescription(DescriptionTextDSlot, (char*)SelectedZone.CP_Author, strlen(SelectedZone.CP_Author), 1);
 			else HideLabel(DescriptionTextDSlot);
 
 			HideLabel(DescriptionTextESlot);
+			
 		}
 		else 
 		{
@@ -297,7 +303,7 @@ namespace CompPlus_LevelSelectCore
 			MoveObject(x2 - 256, y2 + 5 + 104, UIControlSlot, DescriptionTextBSlot);
 			MoveObject(x2 - 0, y2 + 98, UIControlSlot, DescriptionTextCSlot);
 			MoveObject(x2 - 0, y2 + 110, UIControlSlot, DescriptionTextDSlot);
-			MoveObject(x2 - 0, y2 + 200, UIControlSlot, DescriptionTextESlot);
+			MoveObject(x2 - 0, y2 + 150, UIControlSlot, DescriptionTextESlot);
 
 			Entity& bg1 = *GetEntityFromSceneSlot<Entity>(DescriptionTextASlot);
 			Entity& bg2 = *GetEntityFromSceneSlot<Entity>(DescriptionTextBSlot);
@@ -314,5 +320,11 @@ namespace CompPlus_LevelSelectCore
 	{
 		LastMenuPos_Y = MenuPos_Y;
 		LastMenuPos_X = MenuPos_X;
+	}
+
+	void Init()
+	{
+		for (int i = 0; i < 3; ++i)
+			Strings[i] = (wchar_t*)malloc(128);
 	}
 };
