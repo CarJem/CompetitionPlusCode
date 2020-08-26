@@ -284,33 +284,24 @@ namespace CompPlus_Announcers
 		VirtualProtect((void*)NewRecordTop_MemoryAdd, 0x00178000, PAGE_EXECUTE_READWRITE, &PalettesMemory);
 	}
 
-	void LogInfo(const char* name, const char* text, ...)
-	{
-		if (!ConsoleEnabled)
-			return;
-		char buffer[512];
-		va_list ap;
-		va_start(ap, text);
-		_vsprintf_p(buffer, 512, text, ap);
-		va_end(ap);
-		printf("[INFO]  [%s] %s\n", name, buffer);
-	}
-
 	inline void SwapSound(int* Path, char* String)
 	{
-		LogInfo("CompPlus_Announcers::SwapSound", "Swaping SoundFX: %s", String);
+		//LogInfo("CompPlus_Announcers::SwapSound", "Swaping SoundFX: %s", String);
 		*Path = (int)(&String[0]);
 	}
 
 	inline void LoadSoundFX_Debug(const char* path, SonicMania::Scope scope) 
 	{
-		LogInfo("CompPlus_Announcers::LoadSoundFX", "Loading SoundFX: %s", path);
+		//LogInfo("CompPlus_Announcers::LoadSoundFX", "Loading SoundFX: %s", path);
 		LoadSoundFX(path, scope);
 	}
 
+
+    CompPlusSettings::AnnouncerType LoadedAnnouncer;
+
 	inline void ChangeAnnouncer() 
 	{
-		if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Garrulous64)
+		if (LoadedAnnouncer == CompPlusSettings::Announcer_Garrulous64)
 		{
 			SwapSound(Player1_MemoryAdd, (char*)Player1_Garrulous64);
 			SwapSound(Player2_MemoryAdd, (char*)Player2_Garrulous64);
@@ -345,7 +336,7 @@ namespace CompPlus_Announcers
 			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Garrulous64);
 			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Garrulous64);
 		}
-		else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Angelthegamer)
+		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Angelthegamer)
 		{
 			SwapSound(Player1_MemoryAdd, (char*)Player1_ATG);
 			SwapSound(Player2_MemoryAdd, (char*)Player2_ATG);
@@ -380,7 +371,7 @@ namespace CompPlus_Announcers
 			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_ATG);
 			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_ATG);
 		}
-		else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Memes)
+		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Memes)
 		{
 			SwapSound(Player1_MemoryAdd, (char*)Player1_Memes);
 			SwapSound(Player2_MemoryAdd, (char*)Player2_Memes);
@@ -415,7 +406,7 @@ namespace CompPlus_Announcers
 			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Memes);
 			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Memes);
 		}
-		else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Daniel)
+		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Daniel)
 		{
 			SwapSound(Player1_MemoryAdd, (char*)Player1_DanielUK);
 			SwapSound(Player2_MemoryAdd, (char*)Player2_DanielUK);
@@ -450,7 +441,7 @@ namespace CompPlus_Announcers
 			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_DanielUK);
 			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_DanielUK);
 		}
-		else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Sonic2)
+		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Sonic2)
 		{
 			SwapSound(Player1_MemoryAdd, (char*)Player1_Sonic3);
 			SwapSound(Player2_MemoryAdd, (char*)Player2_Sonic3);
@@ -526,6 +517,7 @@ namespace CompPlus_Announcers
 	{
 		if (!HasAnnouncersLoaded)
 		{
+            LoadedAnnouncer = CompPlusSettings::CurrentAnnouncer;
 			SetWriteProtection();
 
 			if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Garrulous64)

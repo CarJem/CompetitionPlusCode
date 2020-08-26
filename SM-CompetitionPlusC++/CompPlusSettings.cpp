@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+#include "Helpers.h"
 
 namespace CompPlusSettings 
 {
@@ -161,10 +162,10 @@ namespace CompPlusSettings
 
 		int MovesetID = 21;
 
-		if (DropdashAbility && InstaSheildAbility) MovesetID = 13;			// Max Control Moveset
-		else if (DropdashAbility && !InstaSheildAbility) MovesetID = 2;	// Mania Moveset
-		else if (!DropdashAbility && InstaSheildAbility) MovesetID = 24;	// S3&K Moveset
-		else if (!DropdashAbility && !InstaSheildAbility) MovesetID = 21;	// CD Moveset
+		if (DropdashAbility && InstaSheildAbility) MovesetID = 13;	      // Max Control Moveset
+		else if (DropdashAbility && !InstaSheildAbility) MovesetID = 0;	  // Mania Moveset
+		else if (!DropdashAbility && InstaSheildAbility) MovesetID = 8;	  // S3&K Moveset
+		else if (!DropdashAbility && !InstaSheildAbility) MovesetID = 21; // CD Moveset
 
 
 		BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
@@ -210,6 +211,16 @@ namespace CompPlusSettings
 		InstaSheildAbility = State;
 		SetSonicAbilites();
 	}
+    
+    SonicMania::Character GetCharacter(CompPlusSettings::ChosenPlayer Character)
+    {
+        if (Character == ChosenPlayer_Sonic) return SonicMania::Character_Sonic;
+        else if (Character == ChosenPlayer_Tails) return SonicMania::Character_Tails;
+        else if (Character == ChosenPlayer_Knuckles) return SonicMania::Character_Knux;
+        else if (Character == ChosenPlayer_Mighty) return SonicMania::Character_Mighty;
+        else if (Character == ChosenPlayer_Ray) return SonicMania::Character_Ray;
+        else return SonicMania::Character_None;
+    }
 
 	void SetPlayer(int PlayerID, SonicMania::Character Character, bool Force)
 	{
@@ -224,21 +235,25 @@ namespace CompPlusSettings
 		if (PlayerID == 1)
 		{
 			if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags = ((0 << (int)Character) | SonicMania::Options->CompetitionSession.CharacterFlags);
 			CompPlusSettings::Player1ChosenPlayer = Player;
 		}
 		else if (PlayerID == 2)
 		{
 			if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags = ((1 << (int)Character) | SonicMania::Options->CompetitionSession.CharacterFlags);
 			CompPlusSettings::Player2ChosenPlayer = Player;
 		}
 		else if (PlayerID == 3)
 		{
 			if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags = ((2 << (int)Character) | SonicMania::Options->CompetitionSession.CharacterFlags);
 			CompPlusSettings::Player3ChosenPlayer = Player;
 		}
 		else if (PlayerID == 4)
 		{
 			if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags = ((3 << (int)Character) | SonicMania::Options->CompetitionSession.CharacterFlags);
 			CompPlusSettings::Player4ChosenPlayer = Player;
 		}
 	}
@@ -397,28 +412,37 @@ namespace CompPlusSettings
 			SonicMania::Player2.LifeCount = 99;
 			SonicMania::Player3.LifeCount = 99;
 			SonicMania::Player4.LifeCount = 99;
+
+            SonicMania::Options->CompetitionSession.InitalLives_P1 = 99;
+            SonicMania::Options->CompetitionSession.InitalLives_P2 = 99;
+            SonicMania::Options->CompetitionSession.InitalLives_P3 = 99;
+            SonicMania::Options->CompetitionSession.InitalLives_P4 = 99;
 		}
 	}
 
 	void SetInitalLives() 
 	{
-		SonicMania::Player1.LifeCount = InitalLives;
-		SonicMania::Player2.LifeCount = InitalLives;
-		SonicMania::Player3.LifeCount = InitalLives;
-		SonicMania::Player4.LifeCount = InitalLives;
+        SonicMania::Options->CompetitionSession.InitalLives_P1 = InitalLives;
+        SonicMania::Options->CompetitionSession.InitalLives_P2 = InitalLives;
+        SonicMania::Options->CompetitionSession.InitalLives_P3 = InitalLives;
+        SonicMania::Options->CompetitionSession.InitalLives_P4 = InitalLives;
+
+        SonicMania::Player1.LifeCount = InitalLives;
+        SonicMania::Player2.LifeCount = InitalLives;
+        SonicMania::Player3.LifeCount = InitalLives;
+        SonicMania::Player4.LifeCount = InitalLives;
 	}
 
-	void SetTimerMode() 
+	void UpdateTimer(bool isLimited) 
 	{
-		if (InfiniteTime) 
+		if (!isLimited)
 		{
-			if (SonicMania::Timer.Enabled)
-			{
-				//Disable Timer
-				SonicMania::Timer.ResetTimer();
-				SonicMania::Timer.Enabled = false;
-			}
+            //TODO : Actual Infinite Time
 		}
+        else 
+        {
+
+        }
 	}
 
 	void SetAnnouncer(AnnouncerType Value) 
@@ -446,7 +470,6 @@ namespace CompPlusSettings
 
 		SetSonicAbilites();
 		SetInitalLives();
-		SetTimerMode();
 
 		FixPlayers = true;
 	}
@@ -568,10 +591,8 @@ namespace CompPlusSettings
 
 	void UpdateSettingsLoop()
 	{
-		if (SonicMania::Timer.Enabled == true && FixPlayers)
-		{
-			FixPlayers = false;
-		}
+		if (SonicMania::Timer.Enabled == true && FixPlayers) FixPlayers = false;
+        UpdateTimer(!InfiniteTime);
 
 		DebugModeLoop();
 		DevModeLoop();
@@ -602,13 +623,70 @@ namespace CompPlusSettings
 			tinyxml2::XMLElement* xmlSettings = document.FirstChildElement("Settings");
 			if (xmlSettings)
 			{
-				tinyxml2::XMLElement* xmlOption = xmlSettings->FirstChildElement("SelectedAnnouncer");
-				if (xmlOption)
-				{
-					const char* str_value = xmlOption->GetText();
-					int value = atoi(str_value);
-					CurrentAnnouncer = (AnnouncerType)value;
-				}
+                for (auto xmlOption = xmlSettings->FirstChildElement(); xmlOption != nullptr; xmlOption = xmlOption->NextSiblingElement())
+                {
+                    LogInfo("XML", xmlOption->Name());
+                    if (!strcmp(xmlOption->Name(), "SelectedAnnouncer"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        int value = atoi(str_value);
+                        CurrentAnnouncer = (AnnouncerType)value;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "InitalLives"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        int value = atoi(str_value);
+                        InitalLives = value;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "InfiniteLives"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") InfiniteLives = true;
+                        else InfiniteLives = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "InfiniteTime"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") InfiniteTime = true;
+                        else InfiniteTime = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "UseDropdash"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") DropdashAbility = true;
+                        else DropdashAbility = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "UseInstaSheild"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") InstaSheildAbility = true;
+                        else InstaSheildAbility = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "PeeloutP1"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") Player1PeeloutAbility = true;
+                        else Player1PeeloutAbility = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "PeeloutP2"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") Player2PeeloutAbility = true;
+                        else Player2PeeloutAbility = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "PeeloutP3"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") Player3PeeloutAbility = true;
+                        else Player3PeeloutAbility = false;
+                    }
+                    else if (!strcmp(xmlOption->Name(), "PeeloutP4"))
+                    {
+                        const char* str_value = xmlOption->GetText();
+                        if (str_value == "1") Player4PeeloutAbility = true;
+                        else Player4PeeloutAbility = false;
+                    }
+                }
 			}
 			else
 			{
@@ -630,9 +708,33 @@ namespace CompPlusSettings
 	{
 		tinyxml2::XMLDocument document;
 
-		std::string text = "<Settings><SelectedAnnouncer>" + IntToString(CurrentAnnouncer) + "</SelectedAnnouncer></Settings>";
+        std::string text = "<Settings>";
+        text += "<SelectedAnnouncer>" + IntToString(CurrentAnnouncer) + "</SelectedAnnouncer>";
+        text += "<InitalLives>" + IntToString(InitalLives) + "</InitalLives>";
+        text += "<InfiniteLives>" + std::to_string(InfiniteLives) + "</InfiniteLives>";
+        text += "<InfiniteTime>" + std::to_string(InfiniteTime) + "</InfiniteTime>";
+        text += "<UseDropdash>" + std::to_string(DropdashAbility) + "</UseDropdash>";
+        text += "<UseInstaSheild>" + std::to_string(InstaSheildAbility) + "</UseInstaSheild>";
+        text += "<PeeloutP1>" + std::to_string(Player1PeeloutAbility) + "</PeeloutP1>";
+        text += "<PeeloutP2>" + std::to_string(Player2PeeloutAbility) + "</PeeloutP2>";
+        text += "<PeeloutP3>" + std::to_string(Player3PeeloutAbility) + "</PeeloutP3>";
+        text += "<PeeloutP4>" + std::to_string(Player4PeeloutAbility) + "</PeeloutP4>";
+        text += "</Settings>";
 		document.Parse((const char*)text.c_str());
 		document.SaveFile(Settings_FilePath.c_str());
 	}
+
+    void MatchVSPlayers() 
+    {
+        SonicMania::Character P1_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags & 0xFF >> 1);
+        SonicMania::Character P2_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 8 & 0xFF >> 1);
+        SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 16 & 0xFF >> 1);
+        SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 24 & 0xFF >> 1);
+
+        CompPlusSettings::SetPlayer(1, P1_Char, false);
+        CompPlusSettings::SetPlayer(2, P2_Char, false);
+        CompPlusSettings::SetPlayer(3, P3_Char, false);
+        CompPlusSettings::SetPlayer(4, P4_Char, false);
+    }
  
 }

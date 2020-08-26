@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "HubWorld.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
@@ -96,7 +96,7 @@ namespace CompPlus_HubWorld
 
 	#pragma region Other Variables
 
-
+    static wchar_t* Strings[100];
 	bool isSettingChanged = false;	//Controller Press Detection
 	int CurrentLevelSelect = 0;
 	bool LevelSelected = false;
@@ -334,12 +334,14 @@ namespace CompPlus_HubWorld
 
 	#pragma region Drawing
 
-	void UpdateAbilitySwapperDisplay(int SlotID, int x, int y, CompPlusSettings::PlayerAbility Ability)
+	void UpdateAbilitySwapperDisplay(int SlotID, int x, int y, CompPlusSettings::PlayerAbility Ability, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 
 		Label3.Position.X = x;
 		Label3.Position.Y = y;
+
+        Label3.Text = (wchar_t*)Strings[index];
 
 		if (Ability == CompPlusSettings::AbilitySet_Sonic)
 		{
@@ -379,13 +381,14 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-	void UpdatePlayerSwapperDisplay(int SlotID, int x, int y, CompPlusSettings::ChosenPlayer Player)
+	void UpdatePlayerSwapperDisplay(int SlotID, int x, int y, CompPlusSettings::ChosenPlayer Player, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 
 		Label3.Position.X = x;
 		Label3.Position.Y = y;
 
+        Label3.Text = (wchar_t*)Strings[index];
 		if (Player == CompPlusSettings::ChosenPlayer_Sonic)
 		{
 			char* on_text = (char*)"SONIC";
@@ -424,9 +427,11 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-	void UpdateLevelSelectStatusDisplay(int State)
+	void UpdateLevelSelectStatusDisplay(int State, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SelectedLevelSelectText);
+
+        Label3.Text = (wchar_t*)Strings[index];
 
 		if (State == 0)
 		{
@@ -454,12 +459,14 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-	void UpdateToggleDisplay(int SlotID, int x, int y, bool State)
+	void UpdateToggleDisplay(int SlotID, int x, int y, bool State, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 
 		Label3.Position.X = x;
 		Label3.Position.Y = y;
+
+        Label3.Text = (wchar_t*)Strings[index];
 
 		if (State)
 		{
@@ -475,12 +482,14 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-	void UpdateToggleDisplayInverted(int SlotID, int x, int y, bool State)
+	void UpdateToggleDisplayInverted(int SlotID, int x, int y, bool State, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 
 		Label3.Position.X = x;
 		Label3.Position.Y = y;
+
+        Label3.Text = (wchar_t*)Strings[index];
 
 		if (!State)
 		{
@@ -496,60 +505,70 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-	void UpdateGeneralDisplay(int SlotID, int x, int y, char* _text, int size)
+    void UpdateGeneralDisplay(int SlotID, char* _text, int size, int index)
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        Label3.Text = (wchar_t*)Strings[index];
+        ConvertASCII2Unicode(Label3.Text, _text, strlen(_text), -32);
+        Label3.TextLength = (WORD)size;
+    }
+
+	void UpdateGeneralDisplay(int SlotID, int x, int y, char* _text, int size, int index)
 	{
 		EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 
 		Label3.Position.X = x;
 		Label3.Position.Y = y;
 
+        Label3.Text = (wchar_t*)Strings[index];
 		ConvertASCII2Unicode(Label3.Text, _text, strlen(_text), -32);
 		Label3.TextLength = (WORD)size;
 	}
 
-	void UpdateAnnouncerDisplay(int SlotID, int x, int y)
+	void UpdateAnnouncerDisplay(int SlotID, int x, int y, int index)
 	{
 		switch (CompPlusSettings::CurrentAnnouncer) 
 		{
 			case CompPlusSettings::Announcer_Default:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC MANIA", 11);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC MANIA", 11, index);
 				break;
 			case CompPlusSettings::Announcer_Sonic2:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC 2", 7);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC 2", 7, index);
 				break;
 			case CompPlusSettings::Announcer_Garrulous64:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"GARRULOUS64", 11);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"GARRULOUS64", 11, index);
 				break;
 			case CompPlusSettings::Announcer_Angelthegamer:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"ANGELTHEGAMER", 13);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"ANGELTHEGAMER", 13, index);
 				break;
 			case CompPlusSettings::Announcer_Daniel:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"DANIEL", 13);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"DANIEL", 6, index);
 				break;
 			case CompPlusSettings::Announcer_Memes:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"MEMES", 13);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"MEMES", 5, index);
 				break;
 		}
 	}
 
-	void UpdateVictoryMethodDisplay(int SlotID, int x, int y)
+	void UpdateVictoryMethodDisplay(int SlotID, int x, int y, int index)
 	{
 		switch (CompPlusSettings::VictoryStyle)
 		{
 			case CompPlusSettings::VictoryMode_Default:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"ORIGINAL", 8);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"ORIGINAL", 8, index);
 				break;
 			case CompPlusSettings::VictoryMode_Winner:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"WINNER", 6);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"WINNER", 6, index);
 				break;
 		}
 	}
 
-	void UpdateLivesDisplay(int SlotID, int x, int y)
+	void UpdateLivesDisplay(int SlotID, int x, int y, int index)
 	{
 		if (CompPlusSettings::InfiniteLives)
 		{
-			UpdateGeneralDisplay(SlotID, x, y, (char*)"INFINITE", 8);
+			UpdateGeneralDisplay(SlotID, x, y, (char*)"INFINITE", 8, index);
 		}
 		else
 		{
@@ -557,47 +576,180 @@ namespace CompPlus_HubWorld
 			s.insert(0, "x");
 			char* text = (char*)s.c_str();
 			int size = (int)s.length();
-			UpdateGeneralDisplay(SlotID, x, y, text, size);
+			UpdateGeneralDisplay(SlotID, x, y, text, size, index);
 		}
 	}
+
+    int RoundsCounterText = 69;
+    int P1_WinsCounterText = 267;
+    int P2_WinsCounterText = 268;
+    int P3_WinsCounterText = 269;
+    int P4_WinsCounterText = 270;
+
+    int P1_WinsCounterText_Board = 280;
+    int P2_WinsCounterText_Board = 281;
+    int P3_WinsCounterText_Board = 282;
+    int P4_WinsCounterText_Board = 283;
+
+    int P1_TimeCounterText_Board = 284;
+    int P2_TimeCounterText_Board = 285;
+    int P3_TimeCounterText_Board = 286;
+    int P4_TimeCounterText_Board = 287;
+
+    int P1_ScoreCounterText_Board = 288;
+    int P2_ScoreCounterText_Board = 289;
+    int P3_ScoreCounterText_Board = 290;
+    int P4_ScoreCounterText_Board = 291;
+
+    int P1_RingsCounterText_Board = 292;
+    int P2_RingsCounterText_Board = 293;
+    int P3_RingsCounterText_Board = 294;
+    int P4_RingsCounterText_Board = 295;
+
+    int P1_ItemsCounterText_Board = 296;
+    int P2_ItemsCounterText_Board = 297;
+    int P3_ItemsCounterText_Board = 298;
+    int P4_ItemsCounterText_Board = 299;
+
+    int P1_TotalRingsCounterText_Board = 301;
+    int P2_TotalRingsCounterText_Board = 302;
+    int P3_TotalRingsCounterText_Board = 303;
+    int P4_TotalRingsCounterText_Board = 304;
+
+    void UpdateScoreboardDisplays(int lastIndex) 
+    {
+        std::string roundNumber = std::to_string(SonicMania::Options->CompetitionSession.CurrentRound) + "\\" + std::to_string(SonicMania::Options->CompetitionSession.TotalRounds);
+        UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
+        lastIndex++;
+
+        std::string winsP1 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P1);
+        UpdateGeneralDisplay(P1_WinsCounterText, (char*)winsP1.c_str(), winsP1.length(), lastIndex);
+        lastIndex++;
+        std::string winsP2 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P2);
+        UpdateGeneralDisplay(P2_WinsCounterText, (char*)winsP2.c_str(), winsP2.length(), lastIndex);
+        lastIndex++;
+        std::string winsP3 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P3);
+        UpdateGeneralDisplay(P3_WinsCounterText, (char*)winsP3.c_str(), winsP3.length(), lastIndex);
+        lastIndex++;
+        std::string winsP4 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P4);
+        UpdateGeneralDisplay(P4_WinsCounterText, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
+        lastIndex++;
+
+        UpdateGeneralDisplay(P1_WinsCounterText_Board, (char*)winsP1.c_str(), winsP1.length(), lastIndex);
+        lastIndex++;
+        UpdateGeneralDisplay(P2_WinsCounterText_Board, (char*)winsP2.c_str(), winsP2.length(), lastIndex);
+        lastIndex++;
+        UpdateGeneralDisplay(P3_WinsCounterText_Board, (char*)winsP3.c_str(), winsP3.length(), lastIndex);
+        lastIndex++;
+        UpdateGeneralDisplay(P4_WinsCounterText_Board, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
+        lastIndex++;
+
+        std::string timeP1 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P1) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P1) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P1);
+        UpdateGeneralDisplay(P1_TimeCounterText_Board, (char*)timeP1.c_str(), timeP1.length(), lastIndex);
+        lastIndex++;
+        std::string timeP2 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P2) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P2) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P2);
+        UpdateGeneralDisplay(P2_TimeCounterText_Board, (char*)timeP2.c_str(), timeP2.length(), lastIndex);
+        lastIndex++;
+        std::string timeP3 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P3) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P3) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P3);
+        UpdateGeneralDisplay(P3_TimeCounterText_Board, (char*)timeP3.c_str(), timeP3.length(), lastIndex);
+        lastIndex++;
+        std::string timeP4 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P4) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P4) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P4);
+        UpdateGeneralDisplay(P4_TimeCounterText_Board, (char*)timeP4.c_str(), timeP4.length(), lastIndex);
+        lastIndex++;
+
+        std::string scoreP1 = std::to_string(SonicMania::Options->CompetitionSession.Score_P1);
+        UpdateGeneralDisplay(P1_ScoreCounterText_Board, (char*)scoreP1.c_str(), scoreP1.length(), lastIndex);
+        lastIndex++;
+        std::string scoreP2 = std::to_string(SonicMania::Options->CompetitionSession.Score_P2);
+        UpdateGeneralDisplay(P2_ScoreCounterText_Board, (char*)scoreP2.c_str(), scoreP2.length(), lastIndex);
+        lastIndex++;
+        std::string scoreP3 = std::to_string(SonicMania::Options->CompetitionSession.Score_P3);
+        UpdateGeneralDisplay(P3_ScoreCounterText_Board, (char*)scoreP3.c_str(), scoreP3.length(), lastIndex);
+        lastIndex++;
+        std::string scoreP4 = std::to_string(SonicMania::Options->CompetitionSession.Score_P4);
+        UpdateGeneralDisplay(P4_ScoreCounterText_Board, (char*)scoreP4.c_str(), scoreP4.length(), lastIndex);
+        lastIndex++;
+
+        std::string ringsP1 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P1);
+        UpdateGeneralDisplay(P1_RingsCounterText_Board, (char*)ringsP1.c_str(), ringsP1.length(), lastIndex);
+        lastIndex++;
+        std::string ringsP2 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P2);
+        UpdateGeneralDisplay(P2_RingsCounterText_Board, (char*)ringsP2.c_str(), ringsP2.length(), lastIndex);
+        lastIndex++;
+        std::string ringsP3 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P3);
+        UpdateGeneralDisplay(P3_RingsCounterText_Board, (char*)ringsP3.c_str(), ringsP3.length(), lastIndex);
+        lastIndex++;
+        std::string ringsP4 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P4);
+        UpdateGeneralDisplay(P4_RingsCounterText_Board, (char*)ringsP4.c_str(), ringsP4.length(), lastIndex);
+        lastIndex++;
+
+        std::string itemsP1 = std::to_string(SonicMania::Options->CompetitionSession.Items_P1);
+        UpdateGeneralDisplay(P1_ItemsCounterText_Board, (char*)itemsP1.c_str(), itemsP1.length(), lastIndex);
+        lastIndex++;
+        std::string itemsP2 = std::to_string(SonicMania::Options->CompetitionSession.Items_P2);
+        UpdateGeneralDisplay(P2_ItemsCounterText_Board, (char*)itemsP2.c_str(), itemsP2.length(), lastIndex);
+        lastIndex++;
+        std::string itemsP3 = std::to_string(SonicMania::Options->CompetitionSession.Items_P3);
+        UpdateGeneralDisplay(P3_ItemsCounterText_Board, (char*)itemsP3.c_str(), itemsP3.length(), lastIndex);
+        lastIndex++;
+        std::string itemsP4 = std::to_string(SonicMania::Options->CompetitionSession.Items_P4);
+        UpdateGeneralDisplay(P4_ItemsCounterText_Board, (char*)itemsP4.c_str(), itemsP4.length(), lastIndex);
+        lastIndex++;
+
+
+        std::string totalringsP1 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P1);
+        UpdateGeneralDisplay(P1_TotalRingsCounterText_Board, (char*)totalringsP1.c_str(), totalringsP1.length(), lastIndex);
+        lastIndex++;
+        std::string totalringsP2 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P2);
+        UpdateGeneralDisplay(P2_TotalRingsCounterText_Board, (char*)totalringsP2.c_str(), totalringsP2.length(), lastIndex);
+        lastIndex++;
+        std::string totalringsP3 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P3);
+        UpdateGeneralDisplay(P3_TotalRingsCounterText_Board, (char*)totalringsP3.c_str(), totalringsP3.length(), lastIndex);
+        lastIndex++;
+        std::string totalringsP4 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P4);
+        UpdateGeneralDisplay(P4_TotalRingsCounterText_Board, (char*)totalringsP4.c_str(), totalringsP4.length(), lastIndex);
+        lastIndex++;
+    }
 
 	void UpdateHUBDisplays()
 	{
 		//Character Select Display
-		UpdatePlayerSwapperDisplay(SwapPlayerText_P1, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 48, CompPlusSettings::Player1ChosenPlayer);
-		UpdatePlayerSwapperDisplay(SwapPlayerText_P2, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 32, CompPlusSettings::Player2ChosenPlayer);
-		UpdatePlayerSwapperDisplay(SwapPlayerText_P3, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 16, CompPlusSettings::Player3ChosenPlayer);
-		UpdatePlayerSwapperDisplay(SwapPlayerText_P4, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 0, CompPlusSettings::Player4ChosenPlayer);
+		UpdatePlayerSwapperDisplay(SwapPlayerText_P1, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 48, CompPlusSettings::Player1ChosenPlayer, 0);
+		UpdatePlayerSwapperDisplay(SwapPlayerText_P2, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 32, CompPlusSettings::Player2ChosenPlayer, 1);
+		UpdatePlayerSwapperDisplay(SwapPlayerText_P3, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 16, CompPlusSettings::Player3ChosenPlayer, 2);
+		UpdatePlayerSwapperDisplay(SwapPlayerText_P4, Pos_SwapPlayerText.X, Pos_SwapPlayerText.Y - 0, CompPlusSettings::Player4ChosenPlayer, 3);
 		//Player Ability Display
-		UpdateAbilitySwapperDisplay(SwapAbilityText_P1, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 48, CompPlusSettings::Player1AbilitySet);
-		UpdateAbilitySwapperDisplay(SwapAbilityText_P2, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 32, CompPlusSettings::Player2AbilitySet);
-		UpdateAbilitySwapperDisplay(SwapAbilityText_P3, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 16, CompPlusSettings::Player3AbilitySet);
-		UpdateAbilitySwapperDisplay(SwapAbilityText_P4, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 0, CompPlusSettings::Player4AbilitySet);
+		UpdateAbilitySwapperDisplay(SwapAbilityText_P1, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 48, CompPlusSettings::Player1AbilitySet, 4);
+		UpdateAbilitySwapperDisplay(SwapAbilityText_P2, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 32, CompPlusSettings::Player2AbilitySet, 5);
+		UpdateAbilitySwapperDisplay(SwapAbilityText_P3, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 16, CompPlusSettings::Player3AbilitySet, 6);
+		UpdateAbilitySwapperDisplay(SwapAbilityText_P4, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 0, CompPlusSettings::Player4AbilitySet, 7);
 		//Peelout Ability Display
-		UpdateToggleDisplay(PeeloutToggleText_P1, Pos_PeeloutText.X, Pos_PeeloutText.Y - 48, CompPlusSettings::Player1PeeloutAbility);
-		UpdateToggleDisplay(PeeloutToggleText_P2, Pos_PeeloutText.X, Pos_PeeloutText.Y - 32, CompPlusSettings::Player2PeeloutAbility);
-		UpdateToggleDisplay(PeeloutToggleText_P3, Pos_PeeloutText.X, Pos_PeeloutText.Y - 16, CompPlusSettings::Player3PeeloutAbility);
-		UpdateToggleDisplay(PeeloutToggleText_P4, Pos_PeeloutText.X, Pos_PeeloutText.Y - 0, CompPlusSettings::Player4PeeloutAbility);
+		UpdateToggleDisplay(PeeloutToggleText_P1, Pos_PeeloutText.X, Pos_PeeloutText.Y - 48, CompPlusSettings::Player1PeeloutAbility, 8);
+		UpdateToggleDisplay(PeeloutToggleText_P2, Pos_PeeloutText.X, Pos_PeeloutText.Y - 32, CompPlusSettings::Player2PeeloutAbility, 9);
+		UpdateToggleDisplay(PeeloutToggleText_P3, Pos_PeeloutText.X, Pos_PeeloutText.Y - 16, CompPlusSettings::Player3PeeloutAbility, 10);
+		UpdateToggleDisplay(PeeloutToggleText_P4, Pos_PeeloutText.X, Pos_PeeloutText.Y - 0, CompPlusSettings::Player4PeeloutAbility, 11);
 		//Dropdash Display
-		UpdateToggleDisplay(DropDashToggleText, Pos_DropDashText.X, Pos_DropDashText.Y, CompPlusSettings::DropdashAbility);
+		UpdateToggleDisplay(DropDashToggleText, Pos_DropDashText.X, Pos_DropDashText.Y, CompPlusSettings::DropdashAbility, 12);
 		//Insta-Sheild Display
-		UpdateToggleDisplay(InstaSheildToggleText, Pos_InstaSheildText.X, Pos_InstaSheildText.Y, CompPlusSettings::InstaSheildAbility);
+		UpdateToggleDisplay(InstaSheildToggleText, Pos_InstaSheildText.X, Pos_InstaSheildText.Y, CompPlusSettings::InstaSheildAbility, 13);
 		//Debug Mode Display
-		UpdateToggleDisplay(DebugModeText, Pos_DebugModeText.X, Pos_DebugModeText.Y, CompPlusSettings::EnableDebugMode);
+		UpdateToggleDisplay(DebugModeText, Pos_DebugModeText.X, Pos_DebugModeText.Y, CompPlusSettings::EnableDebugMode, 14);
 		//Dev Mode Display
-		UpdateToggleDisplay(DevModeText, Pos_DevModeText.X, Pos_DevModeText.Y, CompPlusSettings::EnableDevMode);
+		UpdateToggleDisplay(DevModeText, Pos_DevModeText.X, Pos_DevModeText.Y, CompPlusSettings::EnableDevMode, 15);
 		//Level Select Display
-		UpdateLevelSelectStatusDisplay(CurrentLevelSelect);
+		UpdateLevelSelectStatusDisplay(CurrentLevelSelect, 16);
 		//Lives Display
-		UpdateLivesDisplay(LivesNUDText, Pos_LivesNUDText.X, Pos_LivesNUDText.Y);
+		UpdateLivesDisplay(LivesNUDText, Pos_LivesNUDText.X, Pos_LivesNUDText.Y, 17);
 		//Remove Time Display
-		UpdateToggleDisplayInverted(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlusSettings::InfiniteTime);
+		UpdateToggleDisplayInverted(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlusSettings::InfiniteTime, 18);
 		//Infinite Rounds Display
-		UpdateToggleDisplay(InfiniteRoundsToggleText, Pos_InfiniteRoundsText.X, Pos_InfiniteRoundsText.Y, CompPlusSettings::EndlessRounds);
+		UpdateToggleDisplay(InfiniteRoundsToggleText, Pos_InfiniteRoundsText.X, Pos_InfiniteRoundsText.Y, CompPlusSettings::EndlessRounds, 19);
 		//Announcer Type Display
-		UpdateAnnouncerDisplay(AnnouncerTypeText, Pos_AnnouncerTypeText.X, Pos_AnnouncerTypeText.Y);
+		UpdateAnnouncerDisplay(AnnouncerTypeText, Pos_AnnouncerTypeText.X, Pos_AnnouncerTypeText.Y, 20);
 		//Victory Method Display
-		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y);
+		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y, 21);
+        //Scoreboard Displays
+        UpdateScoreboardDisplays(22);
 	}
 
 	void UpdateHUBPositions()
@@ -742,6 +894,12 @@ namespace CompPlus_HubWorld
 		stru_26B818[0].playStatus = 0;
 
 	}
+
+    void Init()
+    {
+        for (int i = 0; i < 100; ++i)
+            Strings[i] = (wchar_t*)malloc(128);
+    }
 
 
 }

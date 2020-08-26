@@ -92,7 +92,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -104,8 +104,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "D:\Steam\steamapps\common\Sonic Mania\mods\Competition Plus + Menu Prototype" /Y
-start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>TASKKILL /F /IM SonicMania.exe 2&gt;nul &amp;set errorlevel=0</Command>
@@ -187,6 +187,8 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
+    <ClInclude Include="GeneralTweaks.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="HubWorld.h" />
     <ClInclude Include="include\IZAPI.h" />
     <ClInclude Include="include\ManiaModLoader.h" />
@@ -223,6 +225,7 @@ start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GeneralTweaks.cpp" />
     <ClCompile Include="HubWorld.cpp" />
     <ClCompile Include="LevelSelectCore.cpp" />
     <ClCompile Include="ManiaExt.cpp">

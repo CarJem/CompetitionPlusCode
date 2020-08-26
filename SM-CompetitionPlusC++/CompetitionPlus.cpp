@@ -11,14 +11,19 @@
 #include "ChaotixLevelSelect.h"
 #include "PhantomLevelSelect.h"
 #include "CompetitionManiaMenu.h"
+#include "LevelSelectCore.h"
 #include "Common.h"
 #include "HubWorld.h"
 #include "SettingsMenu.h"
 #include "GenericLogos.h"
+#include "GeneralTweaks.h"
 
 #include "CompPlus_Announcers.h"
 
 #include "IZAPI.h"
+
+#include <iostream>
+#include <fstream>
 
 
 namespace CompetitionPlus
@@ -43,7 +48,7 @@ namespace CompetitionPlus
 	{
 		if (!HasStartupInit)
 		{
-			if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPLOGOS4");
+			if (StartupStageEnabled) CompPlus_Common::LoadLevel(2);
 			HasStartupInit = true;
 		}
 	}
@@ -88,6 +93,7 @@ namespace CompetitionPlus
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
 			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
 		}
 		else
 		{
@@ -135,6 +141,7 @@ namespace CompetitionPlus
 		CurrentStage = info;
 		StageRefresh = true;
 		IdleTime = 10;
+        CompPlus_Announcers::ChangeAnnouncer();
     }
 
 	void __cdecl OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
@@ -146,7 +153,13 @@ namespace CompetitionPlus
 		if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(142);
     }
 
-	extern void InitMod()
+    extern void InitMod() 
+    {
+        CompPlus_LevelSelectCore::Init();
+        CompPlus_HubWorld::Init();
+    }
+
+	extern void InitAnnouncerFX()
 	{
 		CompPlus_Announcers::LoadAnnouncerFX();
 	}

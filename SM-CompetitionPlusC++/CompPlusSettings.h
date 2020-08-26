@@ -139,6 +139,8 @@ namespace CompPlusSettings
     extern void LoadSettings();
 
     extern void SaveSettings();
+
+    extern void MatchVSPlayers();
 }
 
 

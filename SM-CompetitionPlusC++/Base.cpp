@@ -32,7 +32,7 @@ extern "C"
 			//Load Sounds on First Run. //Global Scope fine for most things
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
-			CompetitionPlus::InitMod();
+			CompetitionPlus::InitAnnouncerFX();
 			LoadedSounds = true;
 		}
 	}
@@ -99,8 +99,7 @@ extern "C"
 		SetCurrentDirectoryA(path);
 		// Load files here
 		SetCurrentDirectoryA(buffer);
-		std::string finalPath = (std::string)buffer + "\\" + path;
-		CompPlus_LevelSelectCore::Init();
+        CompetitionPlus::InitMod();
 	}
 	__declspec(dllexport) ModInfo ManiaModInfo = { ModLoaderVer, GameVer };
 

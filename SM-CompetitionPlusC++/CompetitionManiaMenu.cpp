@@ -5,12 +5,15 @@
 #include "PointScrolling.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
+#include "CompPlusSettings.h"
 
 namespace CompPlus_CompetitionMenu
 {
     using namespace SonicMania;
 
 	int UIVsRoundPickerSlotID = 228;
+
+    bool inMatch = false;
 
 	void UpdateManiaMenu()
 	{
@@ -30,6 +33,19 @@ namespace CompPlus_CompetitionMenu
 
 		EntityUIVsRoundPicker& roundPicker = *GetEntityFromSceneSlot<EntityUIVsRoundPicker>(232);
 		roundPicker.MaxVal = 999;
+
+        if (SonicMania::Options->CompetitionSession.inMatch == 1) 
+        {
+            if (!inMatch) 
+            {
+                CompPlusSettings::MatchVSPlayers();
+                inMatch = true;
+            }
+        }
+        else 
+        {
+            inMatch = false;
+        }
 
 		SetUIBG_BGColor(74, 211, 156);
 		SetUIBG_FGLowColor(247, 146, 24);

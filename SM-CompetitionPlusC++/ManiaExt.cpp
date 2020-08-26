@@ -93,7 +93,7 @@ void DrawTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative
 	{
 		SpriteFrame = int(Name[i]);
 		RingTemp->DrawOrder = Player1.DrawOrder;
-		RingTemp->DrawFX = SonicMania::FX_Rotate;
+		RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
 
 
 		RingTemp->Rotation = Player1.Rotation;

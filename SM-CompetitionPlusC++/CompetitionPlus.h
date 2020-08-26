@@ -149,6 +149,7 @@ namespace CompetitionPlus
 	extern void OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 
     extern void InitMod();
+    extern void InitAnnouncerFX();
     extern void InitSettings(const char* path);
 };
 

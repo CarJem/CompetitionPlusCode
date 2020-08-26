@@ -102,6 +102,12 @@
     <ClInclude Include="depends\tinyxml2\tinyxml2.h">
       <Filter>Depends</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralTweaks.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -159,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
       <Filter>Depends</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralTweaks.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,10 +1,8 @@
-﻿#pragma once
+#pragma once
 #define _USE_MATH_DEFINES
 #include <MemAccess.h>
 #include <cmath>
-#ifdef _WIN32
-#include <windows.h>
-#endif
+#include <cstdio>
 
 
 #pragma region PreprocessorDefines
@@ -62,6 +60,8 @@ namespace SonicMania
     struct Obj_Lovetester;
     struct Obj_PauseMenu;
     struct Obj_FXRuby;
+    struct Obj_DebugMode;
+    struct GameOptions;
 
     //Misc
     struct Hitbox;
@@ -248,12 +248,16 @@ namespace SonicMania
     };
     BitFlag(GameStates, byte)
 
-        enum DrawingFX : byte
+        enum DrawingFX : BYTE
     {
-        FX_None = 0b0000, // 1
-        FX_Flip = 0b0001, // 2
-        FX_Rotate = 0b0010, // 4
-        FX_Scale = 0b0100  // 8
+        DrawingFX_None = 0,
+        DrawingFX_Flip = 1,
+        DrawingFX_Rotate_NoFlip = 2,
+        DrawingFX_Rotate = 3,
+        DrawingFX_Scale_NoFlip = 4,
+        DrawingFX_Scale = 5,
+        DrawingFX_RotoZoom_NoFlip = 6,
+        DrawingFX_RotoZoom = 7,
     };
     BitFlag(DrawingFX, byte)
 
@@ -279,7 +283,7 @@ namespace SonicMania
         ACTIVE_XBOUNDS,
         ACTIVE_YBOUNDS,
         ACTIVE_BOUNDS2,
-        ACTIVE_NEVER3 = 255
+        ACTIVE_NEVER3 = 255,
     };
 
     enum FlipFlags : byte
@@ -530,7 +534,10 @@ namespace SonicMania
         //UI - 
         ObjectType_UIWaitSpinner = 0x00AC6DA0,
         ObjectType_PauseMenu = 0x00AC6EF0,
-        ObjectType_FXRuby = 0x00AC6E90
+        ObjectType_FXRuby = 0x00AC6E90,
+
+        //System
+        ObjectType_DebugMode = 0x00AC6930
     };
 
     enum TransparencyFlag : byte
@@ -618,7 +625,7 @@ namespace SonicMania
 #define MOVESET_MIGHTY  (SonicMania::Ability)(baseAddress + 0x000C8B70)
 #define MOVESET_RAY     (SonicMania::Ability)(baseAddress + 0x000C8DF0)
 #define MOVESET_ERSS    (SonicMania::Ability)(baseAddress + 0x000C2340) // Egg Reverie Super Sonic
-
+#define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
 
 
 #define PLAYERID1 0
@@ -647,8 +654,8 @@ namespace SonicMania
         {
             X = (short)x;
             Y = (short)y;
-            SubX = (ushort)(x - (ushort)(x)) * 0x10000;
-            SubX = (ushort)(y - (ushort)(y)) * 0x10000;
+            SubX = (ushort)((x - (ushort)(x)) * 0x10000);
+            SubX = (ushort)((y - (ushort)(y)) * 0x10000);
         }
 
         Vector2(int x) : Vector2()
@@ -805,13 +812,13 @@ namespace SonicMania
         void SetFullX(float x)
         {
             X = (short)x;
-            SubX = (ushort)(x - (ushort)(x)) * 0x10000;
+            SubX = (ushort)((x - (ushort)(x)) * 0x10000);
         }
 
         void SetFullY(float y)
         {
             Y = (short)y;
-            SubY = (ushort)(y - (ushort)(y)) * 0x10000;
+            SubY = (ushort)((y - (ushort)(y)) * 0x10000);
         }
 
         bool inline IsNull()
@@ -820,17 +827,17 @@ namespace SonicMania
         }
 
     public:
-        ushort SubX;
+        ushort SubX = 0;
         short X = 0;
 
-        ushort SubY;
+        ushort SubY = 0;
         short Y = 0;
     };
     struct Color
     {
-        byte Red;
-        byte Green;
-        byte Blue;
+        byte Red = 0;
+        byte Green = 0;
+        byte Blue = 0;
 
         Color()
         {
@@ -871,23 +878,23 @@ namespace SonicMania
 
         inline void Tint(float tint)
         {
-            Red   = (byte)(Red   * tint);
+            Red = (byte)(Red * tint);
             Green = (byte)(Green * tint);
-            Blue  = (byte)(Blue  * tint);
+            Blue = (byte)(Blue * tint);
         }
 
         inline void Blend(byte r, byte g, byte b, float a)
         {
-            Red   = (byte)(a * r + (1 - a) * Red);
+            Red = (byte)(a * r + (1 - a) * Red);
             Green = (byte)(a * g + (1 - a) * Green);
-            Blue  = (byte)(a * b + (1 - a) * Blue);
+            Blue = (byte)(a * b + (1 - a) * Blue);
         }
 
         inline void Blend(Color color, float a)
         {
-            Red   = (byte)(a * color.Red + (1 - a) * Red);
+            Red = (byte)(a * color.Red + (1 - a) * Red);
             Green = (byte)(a * color.Green + (1 - a) * Green);
-            Blue  = (byte)(a * color.Blue + (1 - a) * Blue);
+            Blue = (byte)(a * color.Blue + (1 - a) * Blue);
         }
 
 
@@ -1040,7 +1047,7 @@ namespace SonicMania
     FastcallFunctionPointer(void, ApplyShieldEffect, (Entity* entity), 0x000C5910);
     FunctionPointer(Entity*, SpawnObject_Internal, (short objectID, short subObject, DWORD x, DWORD y), 0x001D3E00);
     FunctionPointer(void, DespawnEntity_Internal, (Entity* entity, DWORD a2, DWORD a3), 0x001D3CF0);
-    FunctionPointer(int*, LoadStaticObject, (int ObjStruct, int a2, Scope scope), 0x001D32B0);
+    FunctionPointer(FILE*, LoadStaticObject, (int ObjStruct, int a2, Scope scope), 0x001D32B0);
     //Collision
     FunctionPointer(int, ObjectTileCollision, (Entity* Entity, unsigned __int16 CollisionLayers, char CollisionMode, char CollisionPlane, int XOffset, int YOffset, int SetPos), 0x001BF5F0); //Check Collision at a certain point
     FunctionPointer(int, ObjectPathGrip, (Entity* Entity, unsigned __int16 CollisionLayers, char CollisionMode, char CollisionPlane, int XOffset, int YOffset, int SetPos), 0x001BFB40); //Check Collision around a certain point
@@ -1115,6 +1122,7 @@ namespace SonicMania
 
     // Other
     DataPointer(Scene, CurrentScene, 0x00A535C4);
+    DataPointer(GameOptions*, Options, 0x00AA763C);
     DataPointer(short, CurrentSceneInt, 0x00A535C4);
     DataPointer(Category, CurrentCategory, 0x00A535E0);
     DataPointer(byte, CurrentCategoryInt, 0x00A535E0);
@@ -1160,6 +1168,7 @@ namespace SonicMania
     DataPointer(Obj_PlaneSwitch*, OBJ_PlaneSwitch, 0x00AC6C0C);
     DataPointer(Obj_FXRuby*, OBJ_FXRuby, 0x00AC6EF0);
     DataPointer(Obj_PauseMenu*, OBJ_PauseMenu, 0x00AC6E90);
+    DataPointer(Obj_DebugMode*, OBJ_DebugMode, 0x00AC6930);
 
 #pragma endregion
 
@@ -2313,6 +2322,46 @@ namespace SonicMania
         /* 0000017C */ EntityAnimationData AnimData7;
 
     };
+    struct EntityDebugMode
+    {
+        /* 0x00000000 */ int blank;
+        /* 0x00000004 */ short Sprites[0x100];
+        /* 0x00000204 */ DWORD draw[0x100];
+        /* 0x00000604 */ DWORD Spawn[0x100];
+        /* 0x00000A04 */ EntityAnimationData DebugData;
+        /* 0x00000A1C */ int ObjID;
+        /* 0x00000A20 */ int DebugItemCount;
+        /* 0x00000A24 */ DWORD PlayerActive;
+        /* 0x00000A28 */ BYTE DebugItemSubType;
+        /* 0x00000A29 */ BYTE SubTypeCount;
+        /* 0x00000A2A */ BYTE field_A2a;
+        /* 0x00000A2B */ BYTE field_A2B;
+        /* 0x00000A2C */ BYTE field_A2C;
+    };
+
+    struct EntitySpikes : Entity
+    {
+        /* 0x00000058 */ void* State;
+        /* 0x0000005C */ int Type;
+        /* 0x00000060 */ int Moving;
+        /* 0x00000064 */ BYTE Count;
+        /* 0x00000065 */ BYTE Stagger;
+        /* 0x00000066 */ short Timer;
+        /* 0x00000068 */ short PlaneFilter;
+        /* 0x0000006C */ DWORD dword6C;
+        /* 0x00000070 */ DWORD gap70;
+        /* 0x00000074 */ DWORD field_74;
+        /* 0x00000078 */ DWORD field_78;
+        /* 0x0000007C */ short field_7C;
+        /* 0x0000007E */ BYTE field_7E;
+        /* 0x0000007F */ BYTE field_7F;
+        /* 0x00000080 */ short word80;
+        /* 0x00000082 */ short word82;
+        /* 0x00000084 */ short word84;
+        /* 0x00000086 */ short word86;
+        /* 0x00000088 */ EntityAnimationData Animation;
+
+    };
 #pragma endregion
 
 #pragma region Object 
@@ -2503,6 +2552,21 @@ namespace SonicMania
         WORD SpriteIndex;
         WORD SFX_Whack;
     };
+    struct Obj_DebugMode : Object
+    {
+        WORD Sprites[0x100];
+        int (*DrawPtrs[0x100])();
+        Entity* (*SpawnPtrs[0x100])();
+        EntityAnimationData DebugData;
+        DWORD ObjID;
+        DWORD DebugItemCount;
+        DWORD PlayerActive;
+        BYTE DebugItemSubType;
+        BYTE SubtypeCount;
+        BYTE field_A2A;
+        BYTE field_A2B;
+        BYTE field_A2C;
+    };
     struct Obj_PauseMenu : Object
     {
         short SFX_Bleep;
@@ -2689,6 +2753,137 @@ namespace SonicMania
         //TO-DO: fill out later
     };
 
+    struct CompetitionSession 
+    {
+        int Unknown_Gap_0[22];
+        int inMatch;
+        int NumberOfPlayers;
+        int Unknown_60;
+        int Unknown_64;
+        int Unknown_68;
+        int CurrentRound;
+        int TotalRounds;
+        int MonitorMode;
+        int Unknown_78;
+        int Unknown_Gap_7C[12];
+        int CharacterFlags;
+        int WinnerFlag;
+        int Unkown_B4;
+        int Unkown_B8;
+        int Rings_P1;
+        int Rings_P2;
+        int Rings_P3;
+        int Rings_P4;
+        int Score_P1;
+        int Score_P2;
+        int Score_P3;
+        int Score_P4;
+        int Items_P1;
+        int Items_P2;
+        int Items_P3;
+        int Items_P4;
+        int TimeMinutes_P1;
+        int TimeSeconds_P1;
+        int TimeMilliseconds_P1;
+        int TimeMinutes_P2;
+        int TimeSeconds_P2;
+        int TimeMilliseconds_P2;
+        int TimeMinutes_P3;
+        int TimeSeconds_P3;
+        int TimeMilliseconds_P3;
+        int TimeMinutes_P4;
+        int TimeSeconds_P4;
+        int TimeMilliseconds_P4;
+        int Unknown_11C;
+        int TotalRings_P1;
+        int TotalRings_P2;
+        int TotalRings_P3;
+        int TotalRings_P4;
+        int Wins_P1;
+        int Wins_P2;
+        int Wins_P3;
+        int Wins_P4;
+        int InitalLives_P1;
+        int InitalLives_P2;
+        int InitalLives_P3;
+        int InitalLives_P4;
+        int Unknown_150;
+        int Unknown_154;
+        int Unknown_156;
+        int Unknown_15C;
+        int ReadOnlyDisplayMode;
+        int Unknown_Gap_164[4007];
+    };
+
+    struct GameOptions {
+        int GameMode;
+        int PlayerID;
+        int SpecialCleared;
+        int SpecialRingID;
+        int BlueSpheresID;
+        int BlueSpheresInit;
+        int  AtlEnabled; // Act Transition Load
+        int  AtlEntityCount; // An Entity Bank Basically
+        int  AtlEntitySlot[0x20];// Entity SlotIDs
+        int AtlEntityData[0x4000];// Entities
+        int  SaveLoaded;
+        int  SaveRAM[0x4000];
+        int  SaveSlotID;
+        int  NoSaveSlot[0x400];
+        int  MenuParam[0x4000];
+        int  ItemMode;
+        int SuppressTitlecard;
+        int SuppressAutoMusic;
+        CompetitionSession CompetitionSession;
+        int  MedalMods; // Stuff Like Instashield and etc (Bonus Stuff that medals unlock)
+        int  ParallaxOffset[256];
+        int  EnableIntro;
+        int  OptionsLoaded;
+        int  OptionsRAM[0x80];
+        int  PresenceID;
+        int  MedallionDebug;
+        int  NoSave;
+        int  NotifiedAutosave;
+        int RecallEntities;
+        int  RestartRings;
+        int  Restart1UP;
+        int  RestartShield;
+        int  RestartPos[4];
+        int  RestartSlot[4];
+        int  RestartDir[4];
+        int  RestartMinutes;
+        int  RestartSeconds;
+        int  RestartMilliseconds;
+        int  TempMinutes;
+        int  TempSeconds;
+        int  TempMilliseconds;
+        int  RestartScore;
+        int  RestartScore1UP;
+        int  RestartLives[4];
+        int  RestartMusicID;
+        int RestartFlags;
+        int  TempFlags;
+        int  Continues;
+        int  InitCoolBonus;
+        int  CoolBonus[4];
+        int  ReplayWriteBuffer[0x40000];
+        int  ReplayReadBuffer[0x40000];
+        int  ReplayTempWBuffer[0x40000];
+        int  ReplayTempRBuffer[0x40000];
+        int  ReplayTableID;
+        int  ReplayTableLoaded;
+        int  TATableID;
+        int  TATableLoaded;
+        int  Stock; // Encore Lives
+        int  CharacterFlags;
+        int  VapeMode; // Vape Mode
+        int  Secrets;
+        int  SuperSecret;
+        int  SuperMusicEnabled; // Play Super Music when going super?
+        int  LastHasPlus;
+        int  HasPlusInitial;
+    };
+
 #pragma endregion
 
 #pragma region Pointer Functions
@@ -2805,6 +3000,16 @@ namespace SonicMania
     }
 
     static ushort GetSpritePointer(int SpritePointer, int offset)
+    {
+        int* pointer = (int*)(baseAddress + SpritePointer);
+        if (!*pointer)
+            return 0;
+        pointer = (int*)(*pointer + offset);
+        if (!*pointer)
+            return 0;
+        return *pointer;
+    }
+    static INT GetPointer(int SpritePointer, int offset) //CnG Uses this everywhere, tired of copying it into every header. 
     {
         int* pointer = (int*)(baseAddress + SpritePointer);
         if (!*pointer)
