@@ -25,6 +25,7 @@ extern "C"
 	/*----------------------------------------------*/
 
 	bool LoadedSounds = false;
+
 	void LoadSounds()
 	{
 		if (!LoadedSounds)
@@ -44,15 +45,16 @@ extern "C"
 
 	__declspec(dllexport) void OnFrame()
 	{
-		LoadSounds();
 		if (GameState & GameState_Running)
 		{
-			if (!(GameState & GameState_SoftPause)) 
-			{
-				CompetitionPlus::UpdateMenus();
-			}
+            LoadSounds();
+			if (!(GameState & GameState_SoftPause)) CompetitionPlus::UpdateMenus();
 			UpdateCompPlusDevMenu();
 		}
+        else if (GameState & GameState_NotRunning)
+        {
+            CompetitionPlus::OnSceneReset();
+        }
 	}
 
 	void DoMenuOnScreenDraw()

@@ -21,41 +21,29 @@
     <Filter Include="Internal">
       <UniqueIdentifier>{fd34e2b7-125d-42c0-a330-cab227ad3b33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Startup Logos">
-      <UniqueIdentifier>{1b8b064f-ca8e-4094-82c9-4736c88f17d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Depends">
       <UniqueIdentifier>{8a2a5dff-9ff0-4175-b87c-c47e20e4396b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Headers">
+      <UniqueIdentifier>{e6327ade-5bab-4d8a-bef2-afaf9f8af033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\Headers">
+      <UniqueIdentifier>{72e3e5dc-9086-4a46-b168-f79ac83777e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\General Scenes">
+      <UniqueIdentifier>{dda5318e-dd06-4602-883d-c8a8de7344bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\General Scenes\Headers">
+      <UniqueIdentifier>{ff0e87e1-f768-4091-a4ed-362e9f5ecbc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level Selects\Headers">
+      <UniqueIdentifier>{e15aeec9-8804-4d23-9e49-a2f8f9750ac9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CustomLevelSelect.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="EncoreLevelSelect.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="ManiaLevelSelect.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="PhantomLevelSelect.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSelectCore.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="CompetitionManiaMenu.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="HubWorld.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsMenu.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Internal</Filter>
     </ClInclude>
@@ -71,42 +59,71 @@
     <ClInclude Include="include\IZAPI.h">
       <Filter>Internal</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlusSettings.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ManiaExt.h">
-      <Filter>Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="PointScrolling.h">
-      <Filter>Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="CompetitionPlus.h" />
-    <ClInclude Include="GenericLogos.h">
-      <Filter>Scenes\Startup Logos</Filter>
-    </ClInclude>
-    <ClInclude Include="ChaotixLevelSelect.h">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Announcers.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="depends\tinyxml2\tinyxml2.h">
       <Filter>Depends</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompetitionPlus.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Announcers.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlusSettings.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DevMenu.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="Helpers.h">
-      <Filter>Extensions</Filter>
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ManiaExt.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PointScrolling.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompetitionManiaMenu.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="GeneralTweaks.h">
-      <Filter>Scenes</Filter>
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HubWorld.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsMenu.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChaotixLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="EncoreLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectCore.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ManiaLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhantomLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericLogos.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditsScene.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,15 +145,6 @@
     <ClCompile Include="CompPlusSettings.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompetitionManiaMenu.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="HubWorld.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsMenu.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="CustomLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
@@ -153,10 +161,6 @@
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
     <ClCompile Include="Base.cpp" />
-    <ClCompile Include="CompetitionPlus.cpp" />
-    <ClCompile Include="GenericLogos.cpp">
-      <Filter>Scenes\Startup Logos</Filter>
-    </ClCompile>
     <ClCompile Include="ChaotixLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
@@ -166,8 +170,26 @@
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
       <Filter>Depends</Filter>
     </ClCompile>
+    <ClCompile Include="CompetitionPlus.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionManiaMenu.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="GeneralTweaks.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="HubWorld.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsMenu.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericLogos.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditsScene.cpp">
+      <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

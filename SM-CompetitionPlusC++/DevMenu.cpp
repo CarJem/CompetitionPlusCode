@@ -183,7 +183,7 @@ int CompetitionPlus_MainDevMenu()
 
 
 
-    SonicMania::DevMenu_DrawRect(0, 0, 1000, 1000, 0x00ff83, 255, 0, 1);
+    SonicMania::DevMenu_DrawRect(0, 0, 1000, 1000, (CompPlusSettings::DarkDevMenu ? 0x000000 : 0x009e52), 255, 0, 1);
 
     DevMenu_DrawText_(centerX, "Sonic Mania - Competition Plus", YPosition - 60, SonicMania::Alignment_Center, standard_text_color);
     DevMenu_DrawText_(centerX, "Version 5.0.0 (SAGE DEMO)", YPosition - 48, SonicMania::Alignment_Center, standard_text_color);

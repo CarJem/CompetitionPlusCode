@@ -153,6 +153,22 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
+	<Stage stageName="SMCP Credits Zone" stageID="CP_CustomStages/CP_Credits" stageKey="CPCREDITS" flags="3">
+		<Scenes>
+			<Scene id="1" />
+		</Scenes>
+		<StageUnlocks>
+			<Core_GHZ />
+		</StageUnlocks>
+		<StageAssets>
+		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
+		</StageAssets>
+	</Stage>
+	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK6" flags="255">
+	  <Scenes>
+      <Scene id="1" />
+    </Scenes>
+	</Stage>
 	<Stage stageName="SMCP Angel Island Zone" stageID="CP_StockStages/AIZ" stageKey="CPAIZEX" flags="3">
 		<Scenes>
 		  <Scene id="EXT" />
@@ -262,6 +278,9 @@
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
+		<StageUnlocks>
+			<Core_GHZ />
+		</StageUnlocks>
 	</Stage>
 	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK4" flags="255">
 		<Scenes>

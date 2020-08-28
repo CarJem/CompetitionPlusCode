@@ -4,6 +4,7 @@
 #include "ManiaExt.h"
 #include "SonicMania.h"
 #include "CompetitionPlus.h"
+#include "CompPlusSettings.h"
 
 namespace CompPlus_Common
 {
@@ -57,4 +58,12 @@ namespace CompPlus_Common
 		//Remove A/Start from the Game Summary
 		WriteData((BYTE*)(baseAddress + 0x00190618), (BYTE)0xEB);
 	}
+
+    void LoadLastLevelSelect() 
+    {
+        if (CompPlusSettings::CurrentLevelSelect == 0) LoadLevel_IZ("CPMLS");
+        else if (CompPlusSettings::CurrentLevelSelect == 1) LoadLevel_IZ("CPELS");
+        else if (CompPlusSettings::CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
+        else if (CompPlusSettings::CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
+    }
 };

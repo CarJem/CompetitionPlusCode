@@ -55,7 +55,7 @@ namespace CompPlusSettings
 
     enum AnnouncerType : int {
         Announcer_Default = 0,
-        Announcer_Sonic2 = 1,
+        Announcer_Classic = 1,
         Announcer_Garrulous64 = 2,
         Announcer_Angelthegamer = 3,
         Announcer_Daniel = 4,
@@ -64,19 +64,20 @@ namespace CompPlusSettings
 
 #define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
 
-    //Internal Values
+    #pragma region Internal Variables
+
     extern int NumberOfAnnouncers;
-
     extern std::string Settings_FilePath;
+    extern SonicMania::CompetitionSession LastSession;
 
-    //Gameplay Settings
-    extern bool InfiniteLives;
-    extern bool InfiniteTime;
-    extern int InitalLives; // Ignored when InfiniteLives = true;
+    #pragma endregion
+
+    #pragma region Setting Variables
 
     //Developer Settings
     extern bool EnableDevMode;
     extern bool EnableDebugMode;
+    extern bool DarkDevMenu;
 
     extern bool DevMode_ControlPlayer1;
     extern bool DevMode_ControlPlayer2;
@@ -91,13 +92,15 @@ namespace CompPlusSettings
     extern ItemsConfig MonitorTypes;
 
     //Competition Plus Settings
+    extern int InitalLives; // Ignored when InfiniteLives = true;
+    extern bool InfiniteLives;
+    extern bool TimeLimit;
     extern bool EndlessRounds;
+    extern bool DropdashAbility;
+    extern bool InstaSheildAbility;
     extern VictoryMode VictoryStyle;
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
-
-    extern bool DropdashAbility;
-    extern bool InstaSheildAbility;
 
     extern bool Player1PeeloutAbility;
     extern bool Player2PeeloutAbility;
@@ -114,15 +117,40 @@ namespace CompPlusSettings
     extern PlayerAbility Player3AbilitySet;
     extern PlayerAbility Player4AbilitySet;
 
+    //Status States
+    extern int CurrentLevelSelect;
+    extern int P1_LastPlacement;
+    extern int P2_LastPlacement;
+    extern int P3_LastPlacement;
+    extern int P4_LastPlacement;
+
+    #pragma endregion
+
+    extern void SetLastMatchResults();
+
     extern void DevMode_WarpAllPlayersTo(int PlayerID);
 
-    extern void SetDropdashAbility(bool State);
+    extern void SetTimeLimit(bool Value);
 
-    extern void SetPeeloutAbility(int PlayerID, bool State);
+    extern void SetCurrentLSelect(int Value);
 
-    extern void SetInstaSheildAbility(bool State);
+    extern void SetVictoryMethod(CompPlusSettings::VictoryMode Value);
+
+    extern void SetMonitorMode(CompPlusSettings::ItemsConfig Value);
+
+    extern void SetNumberOfRounds(int Value);
+
+    extern void SetEndlessRounds(bool Value);
+
+    extern void SetDropdashAbility(bool Value);
+
+    extern void SetPeeloutAbility(int PlayerID, bool Value);
+
+    extern void SetInstaSheildAbility(bool Value);
 
     extern void SetAnnouncer(AnnouncerType Value);
+
+    extern void SetInitalLives(int value);
 
     extern void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability);
 
@@ -132,15 +160,15 @@ namespace CompPlusSettings
 
     extern void FixAbilites(SonicMania::EntityPlayer* Player);
 
-    extern void StageLoadApplyConfig();
+    extern void RefreshSettings();
 
-    extern void UpdateSettingsLoop();
+    extern void OnFrame();
 
     extern void LoadSettings();
 
     extern void SaveSettings();
 
-    extern void MatchVSPlayers();
+    extern void FixUnmatchingVSPlayers();
 }
 
 

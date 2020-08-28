@@ -25,9 +25,13 @@ namespace CompPlus_HubWorld
             Y = 0;
         }
     };
-    extern void LoadLevelSelect();
-    extern void UpdateHUBWorld();
-    extern void EnterLevelSelectLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
+
+    extern bool isRestart;
+
+    void SetSpawnPositions(SonicMania::EntityPlayer& Player, int Placement);
+
+    extern void OnFrame();
+    extern void WarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
     extern void Init();
 };
 

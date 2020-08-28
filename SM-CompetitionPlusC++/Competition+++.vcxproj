@@ -183,6 +183,7 @@
     <ClInclude Include="CompetitionPlus.h" />
     <ClInclude Include="CompPlusSettings.h" />
     <ClInclude Include="CompPlus_Announcers.h" />
+    <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="CustomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="DevMenu.h" />
@@ -213,6 +214,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CompPlusSettings.cpp" />
+    <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="CustomLevelSelect.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="DevMenu.cpp" />

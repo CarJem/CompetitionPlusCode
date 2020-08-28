@@ -17,6 +17,7 @@
 #include "SettingsMenu.h"
 #include "GenericLogos.h"
 #include "GeneralTweaks.h"
+#include "CreditsScene.h"
 
 #include "CompPlus_Announcers.h"
 
@@ -30,34 +31,49 @@ namespace CompetitionPlus
 {
 	using namespace SonicMania;
 
-	bool StartupStageEnabled = false;
+    #pragma region Variables
 
+    bool HasStartupInit = false;
+	bool StartupStageEnabled = true;
 
 	bool StageRefresh = true;
-	bool HasStartupInit = false;
 	int IdleTime = 0;
 	HMODULE InfinityZoneDLL = nullptr;
 	IZAPI::StageInfo CurrentStage = {};
 
-	void IZChangeStage(const char* key)
-	{
-		IZAPI::ChangeStage(key);
-	}
+    #pragma endregion
 
-	void StartupStage()
-	{
-		if (!HasStartupInit)
-		{
-			if (StartupStageEnabled) CompPlus_Common::LoadLevel(2);
-			HasStartupInit = true;
-		}
-	}
+    #pragma region Init Calls
 
-	void DrawTest()
-	{
-		if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::CanDraw = true;
-		else CompPlus_Settings_Base::CanDraw = false;
-	}
+    extern void InitMod()
+    {
+        CompPlus_LevelSelectCore::Init();
+        CompPlus_HubWorld::Init();
+    }
+
+    extern void InitAnnouncerFX()
+    {
+        CompPlus_Announcers::LoadAnnouncerFX();
+    }
+
+    extern void InitSettings(const char* path)
+    {
+        CompPlusSettings::Settings_FilePath = path;
+        CompPlusSettings::LoadSettings();
+    }
+
+    void FrameInit()
+    {
+        if (!HasStartupInit)
+        {
+            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+            HasStartupInit = true;
+        }
+    }
+
+    #pragma endregion
+
+    #pragma region General Methods
 
 	void LogoLinking() 
 	{
@@ -75,7 +91,7 @@ namespace CompetitionPlus
 	{
 		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
 		else if (CurrentSceneInt == 140) CompPlus_Common::LoadLevel_IZ("CPHW");
-		else if (CurrentSceneInt == 141) CompPlus_HubWorld::LoadLevelSelect();
+		else if (CurrentSceneInt == 141) CompPlus_Common::LoadLastLevelSelect();
 		else if (CurrentSceneInt == 142) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
 	}
 
@@ -83,16 +99,17 @@ namespace CompetitionPlus
 	{
 		if (IdleTime == 0)
 		{
-			if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
-			else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
-			else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
-			else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::UpdateChaotixLSelect();
-			else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
-			else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
-			else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::UpdateHUBWorld();
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
-			else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
+            else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
+            else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
+            else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::UpdateChaotixLSelect();
+            else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
+            else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
+            else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::OnFrame();
+            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
+            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
+            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            else if (!strcmp(CurrentStage.StageKey, "CPCREDITS")) CompPlus_Credits::OnFrame();
             CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
 		}
 		else
@@ -103,10 +120,11 @@ namespace CompetitionPlus
 
 	void GenericZoneLoop() 
 	{
-		if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu();
+        if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu(true);
+        else CompPlus_CompetitionMenu::UpdateManiaMenu(false);
 	}
 
-	void RequirePointRefreshCheck() 
+	void CheckForStageRefresh() 
 	{
 		if (StageRefresh)
 		{
@@ -114,26 +132,44 @@ namespace CompetitionPlus
 			CompPlus_EncoreLevelSelect::CheckForPointRefresh();
 			CompPlus_CustomLevelSelect::CheckForPointRefresh();
 			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
-			CompPlusSettings::StageLoadApplyConfig();
 			StageRefresh = false;
 		}
+
+        if (SonicMania::Timer.Enabled == false) 
+        {
+            CompPlusSettings::RefreshSettings();
+        }
 	}
 
 	void UpdateMenus()
 	{
-		CompPlusSettings::UpdateSettingsLoop();
-		StartupStage();
+        FrameInit();
+		CompPlusSettings::OnFrame();
 		ManiaMenuLinking();
-		RequirePointRefreshCheck();
+		CheckForStageRefresh();
 
 		if (CurrentStage.StageKey) InfinityZoneLoop();
 		else GenericZoneLoop();
 	}
 
+    void OnSceneReset() 
+    {
+        CompPlus_HubWorld::isRestart = true;
+    }
+
 	void DrawHook() 
 	{
 		CompPlus_Settings_Base::DoMenuOnScreenDraw();
 	}
+
+    #pragma endregion
+
+    #pragma region InfinityZone Calls
+
+    void IZChangeStage(const char* key)
+    {
+        IZAPI::ChangeStage(key);
+    }
 
 	void __cdecl OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{
@@ -153,21 +189,7 @@ namespace CompetitionPlus
 		if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(142);
     }
 
-    extern void InitMod() 
-    {
-        CompPlus_LevelSelectCore::Init();
-        CompPlus_HubWorld::Init();
-    }
+    #pragma endregion
 
-	extern void InitAnnouncerFX()
-	{
-		CompPlus_Announcers::LoadAnnouncerFX();
-	}
-
-	extern void InitSettings(const char* path) 
-	{
-		CompPlusSettings::Settings_FilePath = path;
-		CompPlusSettings::LoadSettings();
-	}
 };
 

@@ -37,9 +37,6 @@ struct struct_0
 };
 DataArray(struct_0, stru_26B818, 0x0026B818, 16);
 
-
-
-
 struct ObjectUIPicture : SonicMania::Object
 {
 	/* 0x00000004 */ WORD SpriteIndex;
@@ -62,12 +59,6 @@ struct EntityUIPicture : SonicMania::Entity
 	/* 0x00000068 */ DWORD ZoneID;
 	/* 0x0000006C */ SonicMania::EntityAnimationData AnimData;
 };
-
-/*
-dd is DWORD
-dw is WORD
-db is BYTE
-*/
 
 struct EntityUIButton : SonicMania::Entity {
 	/* 00000058 */ DWORD field_58;
@@ -174,6 +165,48 @@ struct EntityUITextPrivate : SonicMania::Entity
 	/* 0x00000088 */ DWORD  Data3;
 	/* 0x0000008C */ DWORD Highlighted;
 	/* 0x00000090 */ SonicMania::EntityAnimationData  AnimData;
+};
+
+/*
+dd is DWORD
+dw is WORD
+db is BYTE
+*/
+
+struct EntityUIControl : SonicMania::Entity
+{
+    /* 0x00000058 */ DWORD field_58;
+    /* 0x0000005C */ DWORD field_5C;
+    /* 0x00000060 */ DWORD SelectedElement;
+    /* 0x00000064 */ DWORD Tag;
+    /* 0x00000068 */ DWORD field_68;
+    /* 0x0000006C */ DWORD parentTag;
+    /* 0x00000070 */ DWORD field_70;
+    /* 0x00000074 */ DWORD ActiveOnLoad;
+    /* 0x00000078 */ DWORD NoWidgets;
+    /* 0x0000007C */ DWORD ResetSelection;
+    /* 0x00000080 */ BYTE field_80;
+    /* 0x00000081 */ BYTE byte81;
+    /* 0x00000082 */ BYTE RowCount;
+    /* 0x00000083 */ BYTE ColumnCount;
+    /* 0x00000084 */ BYTE StartingID;
+    /* 0x00000085 */ DWORD field_85;
+    /* 0x00000086 */ DWORD field_86;
+    /* 0x00000087 */ DWORD field_87;
+    /* 0x00000088 */ SonicMania::Vector2 Size;
+    /* 0x00000090 */ SonicMania::Vector2 CameraOffset;
+    /* 0x00000098 */ SonicMania::Vector2 ScrollSpeed;
+    /* 0x000000A0 */ DWORD NoClamp;
+    /* 0x000000A4 */ DWORD NoWrap;
+    /* 0x000000A8 */ DWORD dwordA;
+    /* 0x000000AC */ DWORD dwordAC;
+    /* 0x000000B0 */ DWORD gapB0[20];
+    /* 0x000000C4 */ DWORD dwordC4;
+    /* 0x000000C8 */ DWORD gapC8[4];
+    /* 0x000000CC */ DWORD dwordCC;
+    /* 0x000000D0 */ DWORD gapD0[4];
+    /* 0x000000D4 */ DWORD dwordD4;
+    /* 0x000000D8 */ DWORD field_D8[336];
 };
 
 struct Button : SonicMania::Entity

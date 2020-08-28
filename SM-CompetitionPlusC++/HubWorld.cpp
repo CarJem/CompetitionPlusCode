@@ -53,12 +53,17 @@ namespace CompPlus_HubWorld
 	int VictoryMethodSwapperController = 182;
 	int LivesNUDController = 178;
 	int RemoveTimeToggleController = 179;
+    int ItemBoxModeController = 180;
+    int NumberOfRoundsController = 352;
 
 	int AnnouncerTypeText = 132;
 	int InfiniteRoundsToggleText = 136;
 	int VictoryMethodSwapperText = 134;
 	int LivesNUDText = 127;
 	int RemoveTimeToggleText = 130;
+    int ItemBoxModeText = 206;
+    int NumberOfRoundsText = 351;
+
 
 	// Developer Settings
 	int DevModeText = 138;
@@ -68,13 +73,111 @@ namespace CompPlus_HubWorld
 	int DebugModeController = 185;
 	// ---------------------------
 
-	int SelectedLevelSelectText = 205;
+    int SelectedLevelSelectText = 205;
+
+    int RoundsCounterText = 69;
+    int P1_WinsCounterText = 267;
+    int P2_WinsCounterText = 268;
+    int P3_WinsCounterText = 269;
+    int P4_WinsCounterText = 270;
+
+    int P1_WinsCounterText_Board = 280;
+    int P2_WinsCounterText_Board = 281;
+    int P3_WinsCounterText_Board = 282;
+    int P4_WinsCounterText_Board = 283;
+
+    int P1_TimeCounterText_Board = 284;
+    int P2_TimeCounterText_Board = 285;
+    int P3_TimeCounterText_Board = 286;
+    int P4_TimeCounterText_Board = 287;
+
+    int P1_ScoreCounterText_Board = 288;
+    int P2_ScoreCounterText_Board = 289;
+    int P3_ScoreCounterText_Board = 290;
+    int P4_ScoreCounterText_Board = 291;
+
+    int P1_RingsCounterText_Board = 292;
+    int P2_RingsCounterText_Board = 293;
+    int P3_RingsCounterText_Board = 294;
+    int P4_RingsCounterText_Board = 295;
+
+    int P1_ItemsCounterText_Board = 296;
+    int P2_ItemsCounterText_Board = 297;
+    int P3_ItemsCounterText_Board = 298;
+    int P4_ItemsCounterText_Board = 299;
+
+    int P1_TotalRingsCounterText_Board = 301;
+    int P2_TotalRingsCounterText_Board = 302;
+    int P3_TotalRingsCounterText_Board = 303;
+    int P4_TotalRingsCounterText_Board = 304;
+
+    int RespawnObject_FirstPlace = 114;
+    int RespawnObject_SecondPlace = 111;
+    int RespawnObject_ThirdPlace = 105;
+    int RespawnObject_FouthPlace = 112;
+
+    int P1_HUD_1 = 311;
+    int P1_HUD_2 = 313;
+    int P1_HUD_3 = 314;
+
+    int P2_HUD_1 = 315;
+    int P2_HUD_2 = 316;
+    int P2_HUD_3 = 317;
+
+    int P3_HUD_1 = 318;
+    int P3_HUD_2 = 319;
+    int P3_HUD_3 = 320; 
+
+    int P4_HUD_1 = 321;
+    int P4_HUD_2 = 322;
+    int P4_HUD_3 = 323;
+
+    int WarpSlotID_PlayerSettings = 80;
+    int WarpSlotID_OtherSettings = 81;
+    int WarpSlotID_Ranking = 79;
+    int WarpSlotID_LevelSelect = 75;
+    int WarpSlotID_ReturnToLast = 74;
 
 	#pragma endregion
 
+    #pragma region Warp Room Variables
+
+    bool P1_IsInWarpRoom = false;
+    bool P2_IsInWarpRoom = false;
+    bool P3_IsInWarpRoom = false;
+    bool P4_IsInWarpRoom = false;
+
+    int WarpTimerMax = 512;
+    int WarpTimerCurrent_P1 = 0;
+    int WarpTimerCurrent_P2 = 0;
+    int WarpTimerCurrent_P3 = 0;
+    int WarpTimerCurrent_P4 = 0;
+
+    bool P1_IsInWarpLoop = false;
+    bool P2_IsInWarpLoop = false;
+    bool P3_IsInWarpLoop = false;
+    bool P4_IsInWarpLoop = false;
+
+    int P1_WarpAlpha = 255;
+    int P2_WarpAlpha = 255;
+    int P3_WarpAlpha = 255;
+    int P4_WarpAlpha = 255;
+
+    INT_Position P1_WarpQueue = INT_Position(0, 0);
+    INT_Position P2_WarpQueue = INT_Position(0, 0);
+    INT_Position P3_WarpQueue = INT_Position(0, 0);
+    INT_Position P4_WarpQueue = INT_Position(0, 0);
+
+    INT_Position P1_LastWarpPosition = INT_Position(0, 0);
+    INT_Position P2_LastWarpPosition = INT_Position(0, 0);
+    INT_Position P3_LastWarpPosition = INT_Position(0, 0);
+    INT_Position P4_LastWarpPosition = INT_Position(0, 0);
+
+    #pragma endregion
+
 	#pragma region Reserved Entity Positions
 
-	INT_Position Pos_OutOfBounds = INT_Position(-100, -100);
+	INT_Position Pos_OutOfBounds = INT_Position(-10000, -10000);
 	INT_Position Pos_SwapPlayerText = INT_Position();
 	INT_Position Pos_SwapAbilityText = INT_Position();
 	INT_Position Pos_PeeloutText = INT_Position();
@@ -87,6 +190,8 @@ namespace CompPlus_HubWorld
 	INT_Position Pos_InfiniteRoundsText = INT_Position();
 	INT_Position Pos_AnnouncerTypeText = INT_Position();
 	INT_Position Pos_VictoryMethodText = INT_Position();
+    INT_Position Pos_ItemBoxModeText = INT_Position();
+    INT_Position Pos_NumberOfRoundsText = INT_Position();
 
 	#pragma endregion
 
@@ -96,22 +201,23 @@ namespace CompPlus_HubWorld
 
 	#pragma region Other Variables
 
-    static wchar_t* Strings[100];
+    static wchar_t* Strings[110];
 	bool isSettingChanged = false;	//Controller Press Detection
-	int CurrentLevelSelect = 0;
 	bool LevelSelected = false;
 	bool LevelSelectedWarpSoundPlayed = false;
 	int SceneLoadWaitTimer = 0;
 	int SceneLoadWaitMax = 100;
 	int SettingWaitTimer = 100;
+    bool isRestart;
+
+    int P1_HUDAlpha = 255;
+    int P2_HUDAlpha = 255;
+    int P3_HUDAlpha = 255;
+    int P4_HUDAlpha = 255;
 
 	#pragma endregion
 
-
-
-
-
-	#pragma region Controller Triggers
+	#pragma region Controller Trigger Methods
 
 
 	int GetControllerX1() 
@@ -136,7 +242,7 @@ namespace CompPlus_HubWorld
 		SettingWaitTimer = 10;
 	}
 
-	bool ToggleController(int ControlSlotID, bool OldValue, int PlayerID)
+	bool ToggleController(int ControlSlotID, bool OldValue)
 	{
 		Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
 
@@ -175,15 +281,14 @@ namespace CompPlus_HubWorld
 			{
 				if (SettingWaitTimer == 0) isSettingChanged = false;
 			}
-
-			if (PlayerID == RealID) return NewValue;
-			else if (PlayerID == -1 && isSettingChanged) return NewValue;
+            
+            if (isSettingChanged) return NewValue;
 		}
 
 		return NewValue;
 	}
 
-	int UpDownController(int ControlSlotID, int OldValue, int Min, int Max, int PlayerID)
+	int UpDownController(int ControlSlotID, int OldValue, int Min, int Max)
 	{
 		Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
 
@@ -222,13 +327,94 @@ namespace CompPlus_HubWorld
 			{
 				if (SettingWaitTimer == 0) isSettingChanged = false;
 			}
-
-			if (PlayerID == RealID) return NewValue;
-			else if (PlayerID == -1 && isSettingChanged) return NewValue;
+            
+            if (isSettingChanged) return NewValue;
 		}
 
 		return NewValue;
 	}
+
+    bool ToggleController(int ControlSlotID, bool OldValue, int RealID)
+    {
+        Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
+
+        int x1 = Controller.Position.X - GetControllerX1();
+        int y1 = Controller.Position.Y - GetControllerY1();
+        int x2 = Controller.Position.X + GetControllerX2();
+        int y2 = Controller.Position.Y + GetControllerY2();
+        bool NewValue = OldValue;
+
+        SonicMania::EntityPlayer* Player;
+        if (RealID == 1) Player = &Player1;
+        else if (RealID == 2) Player = &Player2;
+        else if (RealID == 3) Player = &Player3;
+        else if (RealID == 4) Player = &Player4;
+        else Player = &Player1;
+
+        if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+        {
+            if (OldValue == true) NewValue = false;
+            else NewValue = true;
+            CompPlus_Common::PlayMenuMoveSoundFX(false);
+            isSettingChanged = true;
+            SettingWaitTimerActivate();
+        }
+        else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+        {
+            if (OldValue == true) NewValue = false;
+            else NewValue = true;
+            CompPlus_Common::PlayMenuMoveSoundFX(false);
+            isSettingChanged = true;
+            SettingWaitTimerActivate();
+        }
+        else if (!Player->Up && !Player->Down && isSettingChanged)
+        {
+            if (SettingWaitTimer == 0) isSettingChanged = false;
+        }
+
+        return NewValue;
+    }
+
+    int UpDownController(int ControlSlotID, int OldValue, int Min, int Max, int RealID)
+    {
+        Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
+
+        int x1 = Controller.Position.X - GetControllerX1();
+        int y1 = Controller.Position.Y - GetControllerY1();
+        int x2 = Controller.Position.X + GetControllerX2();
+        int y2 = Controller.Position.Y + GetControllerY2();
+        int NewValue = OldValue;
+
+        SonicMania::EntityPlayer* Player;
+        if (RealID == 1) Player = &Player1;
+        else if (RealID == 2) Player = &Player2;
+        else if (RealID == 3) Player = &Player3;
+        else if (RealID == 4) Player = &Player4;
+        else Player = &Player1;
+
+        if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+        {
+            if (OldValue + 1 > Max) NewValue = Min;
+            else NewValue = OldValue + 1;
+            CompPlus_Common::PlayMenuMoveSoundFX(false);
+            isSettingChanged = true;
+            SettingWaitTimerActivate();
+        }
+        else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+        {
+            if (OldValue - 1 < Min) NewValue = Max;
+            else NewValue = OldValue - 1;
+            CompPlus_Common::PlayMenuMoveSoundFX(false);
+            isSettingChanged = true;
+            SettingWaitTimerActivate();
+        }
+        else if (!Player->Up && !Player->Down && isSettingChanged)
+        {
+            if (SettingWaitTimer == 0) isSettingChanged = false;
+        }
+
+        return NewValue;
+    }
 
 	void ChangeCharacter(int PlayerID, int Value) 
 	{
@@ -241,35 +427,30 @@ namespace CompPlus_HubWorld
 		CompPlusSettings::SetAbility(PlayerID, (CompPlusSettings::PlayerAbility)Value);
 	}
 
-	void SetInitalLives(int Value) 
-	{
-		if (Value == 0 || Value == 100) CompPlusSettings::InfiniteLives = true;
-		else CompPlusSettings::InfiniteLives = false;
-		CompPlusSettings::InitalLives = Value;
-	}
-
 	void CheckSettings()
 	{
 		//Debug Mode Toggle
-		bool DebugStatus = ToggleController(DebugModeController, CompPlusSettings::EnableDebugMode, -1);
+		bool DebugStatus = ToggleController(DebugModeController, CompPlusSettings::EnableDebugMode);
 		if (DebugStatus != CompPlusSettings::EnableDebugMode) CompPlusSettings::EnableDebugMode = DebugStatus;
 
 		//Dev Mode Toggle
-		bool DevStatus = ToggleController(DevModeController, CompPlusSettings::EnableDevMode, -1);
+		bool DevStatus = ToggleController(DevModeController, CompPlusSettings::EnableDevMode);
 		if (DevStatus != CompPlusSettings::EnableDevMode) CompPlusSettings::EnableDevMode = DebugStatus;
 
 		//Level Select NUD
-		int LevelStatus = UpDownController(SwapLevelSelectController, CurrentLevelSelect, 0, 3, -1);
-		if (LevelStatus != CurrentLevelSelect) CurrentLevelSelect = LevelStatus;
-		LevelStatus = UpDownController(SwapLevelSelectController2, CurrentLevelSelect, 0, 3, -1);
-		if (LevelStatus != CurrentLevelSelect) CurrentLevelSelect = LevelStatus;
+		int LevelStatus = UpDownController(SwapLevelSelectController, CompPlusSettings::CurrentLevelSelect, 0, 3);
+		if (LevelStatus != CompPlusSettings::CurrentLevelSelect) CompPlusSettings::CurrentLevelSelect = LevelStatus;
+		LevelStatus = UpDownController(SwapLevelSelectController2, CompPlusSettings::CurrentLevelSelect, 0, 3);
+		if (LevelStatus != CompPlusSettings::CurrentLevelSelect) CompPlusSettings::CurrentLevelSelect = LevelStatus;
+
+        if (LevelStatus != CompPlusSettings::CurrentLevelSelect) CompPlusSettings::SaveSettings();
 
 		//Insta-Sheild Toggle
-		bool InstaSheildStatus = ToggleController(InstaSheildController, CompPlusSettings::InstaSheildAbility, -1);
+		bool InstaSheildStatus = ToggleController(InstaSheildController, CompPlusSettings::InstaSheildAbility);
 		if (InstaSheildStatus != CompPlusSettings::InstaSheildAbility) CompPlusSettings::SetInstaSheildAbility(InstaSheildStatus);
 
 		//Dropdash Toggle
-		bool DropdashStatus = ToggleController(DropDashController, CompPlusSettings::DropdashAbility, -1);
+		bool DropdashStatus = ToggleController(DropDashController, CompPlusSettings::DropdashAbility);
 		if (DropdashStatus != CompPlusSettings::DropdashAbility) CompPlusSettings::SetDropdashAbility(DropdashStatus);
 
 		//Character NUD
@@ -284,13 +465,13 @@ namespace CompPlus_HubWorld
 
 		//Ability NUD
 		int AbilityP1Status = UpDownController(SwapAbilityController, (int)CompPlusSettings::Player1AbilitySet, 1, 5, 1);
-		if (AbilityP1Status != (int)CompPlusSettings::Player1AbilitySet) ChangeAbility(1, (CompPlusSettings::ChosenPlayer)AbilityP1Status);
+		if (AbilityP1Status != (int)CompPlusSettings::Player1AbilitySet) ChangeAbility(1, (CompPlusSettings::PlayerAbility)AbilityP1Status);
 		int AbilityP2Status = UpDownController(SwapAbilityController, (int)CompPlusSettings::Player2AbilitySet, 1, 5, 2);
-		if (AbilityP2Status != (int)CompPlusSettings::Player2AbilitySet) ChangeAbility(2, (CompPlusSettings::ChosenPlayer)AbilityP2Status);
+		if (AbilityP2Status != (int)CompPlusSettings::Player2AbilitySet) ChangeAbility(2, (CompPlusSettings::PlayerAbility)AbilityP2Status);
 		int AbilityP3Status = UpDownController(SwapAbilityController, (int)CompPlusSettings::Player3AbilitySet, 1, 5, 3);
-		if (AbilityP3Status != (int)CompPlusSettings::Player3AbilitySet) ChangeAbility(3, (CompPlusSettings::ChosenPlayer)AbilityP3Status);
+		if (AbilityP3Status != (int)CompPlusSettings::Player3AbilitySet) ChangeAbility(3, (CompPlusSettings::PlayerAbility)AbilityP3Status);
 		int AbilityP4Status = UpDownController(SwapAbilityController, (int)CompPlusSettings::Player4AbilitySet, 1, 5, 4);
-		if (AbilityP4Status != (int)CompPlusSettings::Player4AbilitySet) ChangeAbility(4, (CompPlusSettings::ChosenPlayer)AbilityP4Status);
+		if (AbilityP4Status != (int)CompPlusSettings::Player4AbilitySet) ChangeAbility(4, (CompPlusSettings::PlayerAbility)AbilityP4Status);
 
 		//Peelout Toggle
 		bool PeeloutStateP1Status = ToggleController(PeeloutController, (bool)CompPlusSettings::Player1PeeloutAbility, 1);
@@ -303,24 +484,32 @@ namespace CompPlus_HubWorld
 		if (PeeloutStateP4Status != (bool)CompPlusSettings::Player4PeeloutAbility) CompPlusSettings::SetPeeloutAbility(4, PeeloutStateP4Status);
 
 		//Inital Lives NUD
-		int LivesStatus = UpDownController(LivesNUDController, CompPlusSettings::InitalLives, 0, 99, -1);
-		if (LivesStatus != CompPlusSettings::InitalLives) SetInitalLives(LivesStatus);
+		int LivesStatus = UpDownController(LivesNUDController, CompPlusSettings::InitalLives, 1, 100);
+		if (LivesStatus != CompPlusSettings::InitalLives) CompPlusSettings::SetInitalLives(LivesStatus);
 
 		//Infinite Time Toggle
-		bool InfiniteTimeStatus = ToggleController(RemoveTimeToggleController, CompPlusSettings::InfiniteTime, -1);
-		if (InfiniteTimeStatus != CompPlusSettings::InfiniteTime) CompPlusSettings::InfiniteTime = InfiniteTimeStatus;
+		bool InfiniteTimeStatus = ToggleController(RemoveTimeToggleController, CompPlusSettings::TimeLimit);
+		if (InfiniteTimeStatus != CompPlusSettings::TimeLimit) CompPlusSettings::SetTimeLimit(InfiniteTimeStatus);
 
 		//Infinite Rounds Toggle
-		bool InfiniteRoundsStatus = ToggleController(InfiniteRoundsToggleController, CompPlusSettings::EndlessRounds, -1);
-		if (InfiniteRoundsStatus != CompPlusSettings::EndlessRounds) CompPlusSettings::EndlessRounds = InfiniteRoundsStatus;
+		bool InfiniteRoundsStatus = ToggleController(InfiniteRoundsToggleController, CompPlusSettings::EndlessRounds);
+		if (InfiniteRoundsStatus != CompPlusSettings::EndlessRounds) CompPlusSettings::SetEndlessRounds(InfiniteRoundsStatus);
 
 		//Announcer Type NUD
-		int AnnouncerTypeStatus = UpDownController(AnnouncerTypeController, (int)CompPlusSettings::CurrentAnnouncer, 0, CompPlusSettings::NumberOfAnnouncers - 1, -1);
+		int AnnouncerTypeStatus = UpDownController(AnnouncerTypeController, (int)CompPlusSettings::CurrentAnnouncer, 0, CompPlusSettings::NumberOfAnnouncers - 1);
 		if (AnnouncerTypeStatus != (int)CompPlusSettings::CurrentAnnouncer) CompPlusSettings::SetAnnouncer((CompPlusSettings::AnnouncerType)AnnouncerTypeStatus);
 
 		//Victory Type NUD
-		int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlusSettings::VictoryStyle, 0, 1, -1);
-		if (VictoryTypeStatus != (int)CompPlusSettings::VictoryStyle) CompPlusSettings::VictoryStyle = (CompPlusSettings::VictoryMode)VictoryTypeStatus;
+		int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlusSettings::VictoryStyle, 0, 1);
+		if (VictoryTypeStatus != (int)CompPlusSettings::VictoryStyle) CompPlusSettings::SetVictoryMethod((CompPlusSettings::VictoryMode)VictoryTypeStatus);
+
+        //Item Box Config NUD
+        int ItemBoxStatus = UpDownController(ItemBoxModeController, (int)CompPlusSettings::MonitorTypes, 0, 2);
+        if (ItemBoxStatus != (int)CompPlusSettings::MonitorTypes) CompPlusSettings::SetMonitorMode((CompPlusSettings::ItemsConfig)ItemBoxStatus);
+
+        //Number of Rounds NUD
+        int NumberOfRoundsStatus = UpDownController(NumberOfRoundsController, (int)CompPlusSettings::NumberOfRounds, 2, 99);
+        if (NumberOfRoundsStatus != (int)CompPlusSettings::NumberOfRounds) CompPlusSettings::SetNumberOfRounds(NumberOfRoundsStatus);
 
 		CompPlusSettings::FixAbilites(&Player1);
 		CompPlusSettings::FixAbilites(&Player2);
@@ -332,7 +521,7 @@ namespace CompPlus_HubWorld
 
 	#pragma endregion
 
-	#pragma region Drawing
+	#pragma region Controller/Statistic Drawing Methods
 
 	void UpdateAbilitySwapperDisplay(int SlotID, int x, int y, CompPlusSettings::PlayerAbility Ability, int index)
 	{
@@ -533,8 +722,8 @@ namespace CompPlus_HubWorld
 			case CompPlusSettings::Announcer_Default:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC MANIA", 11, index);
 				break;
-			case CompPlusSettings::Announcer_Sonic2:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"SONIC 2", 7, index);
+			case CompPlusSettings::Announcer_Classic:
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"CLASSIC", 7, index);
 				break;
 			case CompPlusSettings::Announcer_Garrulous64:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"GARRULOUS64", 11, index);
@@ -543,7 +732,7 @@ namespace CompPlus_HubWorld
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"ANGELTHEGAMER", 13, index);
 				break;
 			case CompPlusSettings::Announcer_Daniel:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"DANIEL", 6, index);
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"DANIEL UK", 9, index);
 				break;
 			case CompPlusSettings::Announcer_Memes:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"MEMES", 5, index);
@@ -580,47 +769,184 @@ namespace CompPlus_HubWorld
 		}
 	}
 
-    int RoundsCounterText = 69;
-    int P1_WinsCounterText = 267;
-    int P2_WinsCounterText = 268;
-    int P3_WinsCounterText = 269;
-    int P4_WinsCounterText = 270;
-
-    int P1_WinsCounterText_Board = 280;
-    int P2_WinsCounterText_Board = 281;
-    int P3_WinsCounterText_Board = 282;
-    int P4_WinsCounterText_Board = 283;
-
-    int P1_TimeCounterText_Board = 284;
-    int P2_TimeCounterText_Board = 285;
-    int P3_TimeCounterText_Board = 286;
-    int P4_TimeCounterText_Board = 287;
-
-    int P1_ScoreCounterText_Board = 288;
-    int P2_ScoreCounterText_Board = 289;
-    int P3_ScoreCounterText_Board = 290;
-    int P4_ScoreCounterText_Board = 291;
-
-    int P1_RingsCounterText_Board = 292;
-    int P2_RingsCounterText_Board = 293;
-    int P3_RingsCounterText_Board = 294;
-    int P4_RingsCounterText_Board = 295;
-
-    int P1_ItemsCounterText_Board = 296;
-    int P2_ItemsCounterText_Board = 297;
-    int P3_ItemsCounterText_Board = 298;
-    int P4_ItemsCounterText_Board = 299;
-
-    int P1_TotalRingsCounterText_Board = 301;
-    int P2_TotalRingsCounterText_Board = 302;
-    int P3_TotalRingsCounterText_Board = 303;
-    int P4_TotalRingsCounterText_Board = 304;
-
-    void UpdateScoreboardDisplays(int lastIndex) 
+    void UpdateNumberOfRoundsDisplay(int SlotID, int x, int y, int index)
     {
-        std::string roundNumber = std::to_string(SonicMania::Options->CompetitionSession.CurrentRound) + "\\" + std::to_string(SonicMania::Options->CompetitionSession.TotalRounds);
-        UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
-        lastIndex++;
+        if (CompPlusSettings::EndlessRounds)
+        {
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"INFINITE", 8, index);
+        }
+        else
+        {
+            std::string s = std::to_string(CompPlusSettings::NumberOfRounds);
+            s.insert(0, "x");
+            char* text = (char*)s.c_str();
+            int size = (int)s.length();
+            UpdateGeneralDisplay(SlotID, x, y, text, size, index);
+        }
+    }
+
+    void UpdateItemBoxModeDisplay(int SlotID, int x, int y, int index)
+    {
+        switch (CompPlusSettings::MonitorTypes)
+        {
+            case CompPlusSettings::ItemsConfig_Default:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"FIXED", 5, index);
+                break;
+            case CompPlusSettings::ItemsConfig_Random:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"RANDOM", 6, index);
+                break;
+            case CompPlusSettings::ItemsConfig_Teleporters:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"TELEPORT", 8, index);
+                break;
+        }
+    }
+
+    std::string GetPlayerPositionString(int PlayerID) 
+    {
+        int Position = 0;
+        if (PlayerID == 1) Position = CompPlusSettings::P1_LastPlacement;
+        else if (PlayerID == 2) Position = CompPlusSettings::P2_LastPlacement;
+        else if (PlayerID == 3) Position = CompPlusSettings::P3_LastPlacement;
+        else if (PlayerID == 4) Position = CompPlusSettings::P4_LastPlacement;
+
+        if (Position == 1) return "1st";
+        else if (Position == 2) return "2nd";
+        else if (Position == 3) return "3rd";
+        else if (Position == 4) return "4th";
+        else return "";
+    }
+
+    void UpdateHUBPrivateHUDAlpha(SonicMania::EntityPlayer& Player, Entity& Entity, int& HUDAlpha, bool& isInWarpLoop, bool& isInQuickWarp)
+    {
+        Entity.InkEffect = Ink_Alpha;
+        if ((Player.XVelocity == 0 && Player.YVelocity == 0) && !isInWarpLoop && !isInQuickWarp)
+        {
+            Entity.Alpha = (HUDAlpha < 256 ? HUDAlpha : 256);
+            if (HUDAlpha < 256) HUDAlpha = HUDAlpha + 20;
+        }
+        else
+        {
+            Entity.Alpha = (HUDAlpha > 0 ? HUDAlpha : 0);
+            if (HUDAlpha > 0) HUDAlpha = HUDAlpha - 20;
+            else HUDAlpha = 0;
+        }
+    }
+
+    int UpdateHUBPrivateHUD(SonicMania::EntityPlayer& Player, int& HUDAlpha, bool& isInQuickWarp, bool& isInWarpLoop, int PlayerSlot, int StatSlot, int ExtraSlot, int lastIndex)
+    {
+        int upper_offset = 30;
+        int lower_offset = 20;
+
+        Entity& HUD_PlayerID = *GetEntityFromSceneSlot<Entity>(PlayerSlot);
+        Entity& HUD_Statistics = *GetEntityFromSceneSlot<Entity>(StatSlot);
+        Entity& HUD_Extra = *GetEntityFromSceneSlot<Entity>(ExtraSlot);
+
+        HUD_PlayerID.DrawOrder = 14;
+        HUD_Statistics.DrawOrder = 14;
+        HUD_Extra.DrawOrder = 14;
+
+
+        if (Player.Active)
+        {
+            UpdateHUBPrivateHUDAlpha(Player, HUD_PlayerID, HUDAlpha, isInWarpLoop, isInQuickWarp);
+            UpdateHUBPrivateHUDAlpha(Player, HUD_Statistics, HUDAlpha, isInWarpLoop, isInQuickWarp);
+            UpdateHUBPrivateHUDAlpha(Player, HUD_Extra, HUDAlpha, isInWarpLoop, isInQuickWarp);
+
+            int x = Player.Position.X;
+            int y = Player.Position.Y;
+
+            HUD_PlayerID.Position.X = x;
+            HUD_PlayerID.Position.Y = y - upper_offset;
+
+            HUD_Statistics.Position.X = x;
+            HUD_Statistics.Position.Y = y + lower_offset;
+
+            HUD_Extra.Position.X = Pos_OutOfBounds.X;
+            HUD_Extra.Position.Y = Pos_OutOfBounds.Y;
+
+            if (Player.PlayerID == Player1.PlayerID)
+            {
+                UpdateGeneralDisplay(PlayerSlot, (char*)"P1", 2, lastIndex);
+                lastIndex++;
+
+                std::string pos = GetPlayerPositionString(1);
+                UpdateGeneralDisplay(StatSlot, (char*)pos.c_str(), pos.length(), lastIndex);
+                lastIndex++;
+                //UpdateGeneralDisplay(ExtraSlot, (char*)"", 0, lastIndex);
+                //lastIndex++;
+            }
+            else if (Player.PlayerID == Player2.PlayerID)
+            {
+                UpdateGeneralDisplay(PlayerSlot, (char*)"P2", 2, lastIndex);
+                lastIndex++;
+                std::string pos = GetPlayerPositionString(2);
+                UpdateGeneralDisplay(StatSlot, (char*)pos.c_str(), pos.length(), lastIndex);
+                lastIndex++;
+                //UpdateGeneralDisplay(ExtraSlot, (char*)"", 0, lastIndex);
+                //lastIndex++;
+            }
+            else if (Player.PlayerID == Player3.PlayerID)
+            {
+                UpdateGeneralDisplay(PlayerSlot, (char*)"P3", 2, lastIndex);
+                lastIndex++;
+                std::string pos = GetPlayerPositionString(3);
+                UpdateGeneralDisplay(StatSlot, (char*)pos.c_str(), pos.length(), lastIndex);
+                lastIndex++;
+                //UpdateGeneralDisplay(ExtraSlot, (char*)"", 0, lastIndex);
+                //lastIndex++;
+            }
+            else if (Player.PlayerID == Player4.PlayerID)
+            {
+                UpdateGeneralDisplay(PlayerSlot, (char*)"P4", 2, lastIndex);
+                lastIndex++;
+                std::string pos = GetPlayerPositionString(4);
+                UpdateGeneralDisplay(StatSlot, (char*)pos.c_str(), pos.length(), lastIndex);
+                lastIndex++;
+                //UpdateGeneralDisplay(ExtraSlot, (char*)"", 0, lastIndex);
+                //lastIndex++;
+            }
+        }
+        else
+        {
+            int x = Pos_OutOfBounds.X;
+            int y = Pos_OutOfBounds.Y;
+
+            HUD_PlayerID.Position.X = x;
+            HUD_PlayerID.Position.Y = y;
+
+            HUD_Statistics.Position.X = x;
+            HUD_Statistics.Position.Y = y;
+
+            HUD_Extra.Position.X = x;
+            HUD_Extra.Position.Y = y;
+        }
+        return lastIndex;
+    }
+
+    int UpdateHUBPrivateHUDs(int lastIndex)
+    {
+        lastIndex = UpdateHUBPrivateHUD(Player1, P1_HUDAlpha, P1_IsInWarpRoom, P1_IsInWarpLoop, P1_HUD_1, P1_HUD_2, P1_HUD_3, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player2, P2_HUDAlpha, P2_IsInWarpRoom, P2_IsInWarpLoop, P2_HUD_1, P2_HUD_2, P2_HUD_3, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player3, P3_HUDAlpha, P3_IsInWarpRoom, P3_IsInWarpLoop, P3_HUD_1, P3_HUD_2, P3_HUD_3, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player4, P4_HUDAlpha, P4_IsInWarpRoom, P4_IsInWarpLoop, P4_HUD_1, P4_HUD_2, P4_HUD_3, lastIndex);
+        return lastIndex;
+    }
+
+    int UpdateScoreboardDisplays(int lastIndex) 
+    {
+        if (CompPlusSettings::EndlessRounds) 
+        {
+            std::string roundNumber = "INFINITE";
+            UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
+            lastIndex++;
+        }
+        else 
+        {       
+            std::string roundNumber = std::to_string(SonicMania::Options->CompetitionSession.CurrentRound + 1) + "\\" + std::to_string(SonicMania::Options->CompetitionSession.TotalRounds);
+            UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
+            lastIndex++;
+        }
+        
 
         std::string winsP1 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P1);
         UpdateGeneralDisplay(P1_WinsCounterText, (char*)winsP1.c_str(), winsP1.length(), lastIndex);
@@ -644,71 +970,73 @@ namespace CompPlus_HubWorld
         UpdateGeneralDisplay(P4_WinsCounterText_Board, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
         lastIndex++;
 
-        std::string timeP1 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P1) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P1) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P1);
+        std::string timeP1 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P1) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P1 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P1) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P1 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P1);
         UpdateGeneralDisplay(P1_TimeCounterText_Board, (char*)timeP1.c_str(), timeP1.length(), lastIndex);
         lastIndex++;
-        std::string timeP2 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P2) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P2) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P2);
+        std::string timeP2 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P2) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P2 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P2) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P2 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P2);
         UpdateGeneralDisplay(P2_TimeCounterText_Board, (char*)timeP2.c_str(), timeP2.length(), lastIndex);
         lastIndex++;
-        std::string timeP3 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P3) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P3) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P3);
+        std::string timeP3 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P3) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P3 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P3) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P3 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P3);
         UpdateGeneralDisplay(P3_TimeCounterText_Board, (char*)timeP3.c_str(), timeP3.length(), lastIndex);
         lastIndex++;
-        std::string timeP4 = std::to_string(SonicMania::Options->CompetitionSession.TimeMinutes_P4) + "\'" + std::to_string(SonicMania::Options->CompetitionSession.TimeSeconds_P4) + "\"" + std::to_string(SonicMania::Options->CompetitionSession.TimeMilliseconds_P4);
+        std::string timeP4 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P4) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P4 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P4) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P4 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P4);
         UpdateGeneralDisplay(P4_TimeCounterText_Board, (char*)timeP4.c_str(), timeP4.length(), lastIndex);
         lastIndex++;
 
-        std::string scoreP1 = std::to_string(SonicMania::Options->CompetitionSession.Score_P1);
+        std::string scoreP1 = std::to_string(CompPlusSettings::LastSession.Score_P1);
         UpdateGeneralDisplay(P1_ScoreCounterText_Board, (char*)scoreP1.c_str(), scoreP1.length(), lastIndex);
         lastIndex++;
-        std::string scoreP2 = std::to_string(SonicMania::Options->CompetitionSession.Score_P2);
+        std::string scoreP2 = std::to_string(CompPlusSettings::LastSession.Score_P2);
         UpdateGeneralDisplay(P2_ScoreCounterText_Board, (char*)scoreP2.c_str(), scoreP2.length(), lastIndex);
         lastIndex++;
-        std::string scoreP3 = std::to_string(SonicMania::Options->CompetitionSession.Score_P3);
+        std::string scoreP3 = std::to_string(CompPlusSettings::LastSession.Score_P3);
         UpdateGeneralDisplay(P3_ScoreCounterText_Board, (char*)scoreP3.c_str(), scoreP3.length(), lastIndex);
         lastIndex++;
-        std::string scoreP4 = std::to_string(SonicMania::Options->CompetitionSession.Score_P4);
+        std::string scoreP4 = std::to_string(CompPlusSettings::LastSession.Score_P4);
         UpdateGeneralDisplay(P4_ScoreCounterText_Board, (char*)scoreP4.c_str(), scoreP4.length(), lastIndex);
         lastIndex++;
 
-        std::string ringsP1 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P1);
+        std::string ringsP1 = std::to_string(CompPlusSettings::LastSession.Rings_P1);
         UpdateGeneralDisplay(P1_RingsCounterText_Board, (char*)ringsP1.c_str(), ringsP1.length(), lastIndex);
         lastIndex++;
-        std::string ringsP2 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P2);
+        std::string ringsP2 = std::to_string(CompPlusSettings::LastSession.Rings_P2);
         UpdateGeneralDisplay(P2_RingsCounterText_Board, (char*)ringsP2.c_str(), ringsP2.length(), lastIndex);
         lastIndex++;
-        std::string ringsP3 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P3);
+        std::string ringsP3 = std::to_string(CompPlusSettings::LastSession.Rings_P3);
         UpdateGeneralDisplay(P3_RingsCounterText_Board, (char*)ringsP3.c_str(), ringsP3.length(), lastIndex);
         lastIndex++;
-        std::string ringsP4 = std::to_string(SonicMania::Options->CompetitionSession.Rings_P4);
+        std::string ringsP4 = std::to_string(CompPlusSettings::LastSession.Rings_P4);
         UpdateGeneralDisplay(P4_RingsCounterText_Board, (char*)ringsP4.c_str(), ringsP4.length(), lastIndex);
         lastIndex++;
 
-        std::string itemsP1 = std::to_string(SonicMania::Options->CompetitionSession.Items_P1);
+        std::string itemsP1 = std::to_string(CompPlusSettings::LastSession.Items_P1);
         UpdateGeneralDisplay(P1_ItemsCounterText_Board, (char*)itemsP1.c_str(), itemsP1.length(), lastIndex);
         lastIndex++;
-        std::string itemsP2 = std::to_string(SonicMania::Options->CompetitionSession.Items_P2);
+        std::string itemsP2 = std::to_string(CompPlusSettings::LastSession.Items_P2);
         UpdateGeneralDisplay(P2_ItemsCounterText_Board, (char*)itemsP2.c_str(), itemsP2.length(), lastIndex);
         lastIndex++;
-        std::string itemsP3 = std::to_string(SonicMania::Options->CompetitionSession.Items_P3);
+        std::string itemsP3 = std::to_string(CompPlusSettings::LastSession.Items_P3);
         UpdateGeneralDisplay(P3_ItemsCounterText_Board, (char*)itemsP3.c_str(), itemsP3.length(), lastIndex);
         lastIndex++;
-        std::string itemsP4 = std::to_string(SonicMania::Options->CompetitionSession.Items_P4);
+        std::string itemsP4 = std::to_string(CompPlusSettings::LastSession.Items_P4);
         UpdateGeneralDisplay(P4_ItemsCounterText_Board, (char*)itemsP4.c_str(), itemsP4.length(), lastIndex);
         lastIndex++;
 
 
-        std::string totalringsP1 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P1);
+        std::string totalringsP1 = std::to_string(CompPlusSettings::LastSession.TotalRings_P1);
         UpdateGeneralDisplay(P1_TotalRingsCounterText_Board, (char*)totalringsP1.c_str(), totalringsP1.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP2 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P2);
+        std::string totalringsP2 = std::to_string(CompPlusSettings::LastSession.TotalRings_P2);
         UpdateGeneralDisplay(P2_TotalRingsCounterText_Board, (char*)totalringsP2.c_str(), totalringsP2.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP3 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P3);
+        std::string totalringsP3 = std::to_string(CompPlusSettings::LastSession.TotalRings_P3);
         UpdateGeneralDisplay(P3_TotalRingsCounterText_Board, (char*)totalringsP3.c_str(), totalringsP3.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP4 = std::to_string(SonicMania::Options->CompetitionSession.TotalRings_P4);
+        std::string totalringsP4 = std::to_string(CompPlusSettings::LastSession.TotalRings_P4);
         UpdateGeneralDisplay(P4_TotalRingsCounterText_Board, (char*)totalringsP4.c_str(), totalringsP4.length(), lastIndex);
         lastIndex++;
+
+        return lastIndex;
     }
 
 	void UpdateHUBDisplays()
@@ -737,19 +1065,24 @@ namespace CompPlus_HubWorld
 		//Dev Mode Display
 		UpdateToggleDisplay(DevModeText, Pos_DevModeText.X, Pos_DevModeText.Y, CompPlusSettings::EnableDevMode, 15);
 		//Level Select Display
-		UpdateLevelSelectStatusDisplay(CurrentLevelSelect, 16);
+		UpdateLevelSelectStatusDisplay(CompPlusSettings::CurrentLevelSelect, 16);
 		//Lives Display
 		UpdateLivesDisplay(LivesNUDText, Pos_LivesNUDText.X, Pos_LivesNUDText.Y, 17);
 		//Remove Time Display
-		UpdateToggleDisplayInverted(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlusSettings::InfiniteTime, 18);
+		UpdateToggleDisplayInverted(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlusSettings::TimeLimit, 18);
 		//Infinite Rounds Display
 		UpdateToggleDisplay(InfiniteRoundsToggleText, Pos_InfiniteRoundsText.X, Pos_InfiniteRoundsText.Y, CompPlusSettings::EndlessRounds, 19);
 		//Announcer Type Display
 		UpdateAnnouncerDisplay(AnnouncerTypeText, Pos_AnnouncerTypeText.X, Pos_AnnouncerTypeText.Y, 20);
 		//Victory Method Display
 		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y, 21);
+        //Item Box Mode Type Display
+        UpdateItemBoxModeDisplay(ItemBoxModeText, Pos_ItemBoxModeText.X, Pos_ItemBoxModeText.Y, 22);
+        //Numbe Of Rounds Display
+        UpdateNumberOfRoundsDisplay(NumberOfRoundsText, Pos_NumberOfRoundsText.X, Pos_NumberOfRoundsText.Y, 23);
         //Scoreboard Displays
-        UpdateScoreboardDisplays(22);
+        int lastIndex = UpdateScoreboardDisplays(24);
+        lastIndex = UpdateHUBPrivateHUDs(lastIndex);
 	}
 
 	void UpdateHUBPositions()
@@ -773,6 +1106,8 @@ namespace CompPlus_HubWorld
 		Entity& E10 = *GetEntityFromSceneSlot<Entity>(AnnouncerTypeController);
 		Entity& E11 = *GetEntityFromSceneSlot<Entity>(VictoryMethodSwapperController);
 		Entity& E12 = *GetEntityFromSceneSlot<Entity>(RemoveTimeToggleController);
+        Entity& E13 = *GetEntityFromSceneSlot<Entity>(ItemBoxModeController);
+        Entity& E14 = *GetEntityFromSceneSlot<Entity>(NumberOfRoundsController);
 
 		Pos_SwapPlayerText.X = E1.Position.X + OffsetX;
 		Pos_SwapPlayerText.Y = E1.Position.Y + OffsetY;
@@ -809,29 +1144,283 @@ namespace CompPlus_HubWorld
 
 		Pos_RemoveTimeText.X = E12.Position.X + OffsetX;
 		Pos_RemoveTimeText.Y = E12.Position.Y + OffsetY_2;
+
+        Pos_ItemBoxModeText.X = E13.Position.X + OffsetX;
+        Pos_ItemBoxModeText.Y = E13.Position.Y + OffsetY_2;
+
+        Pos_NumberOfRoundsText.X = E14.Position.X + OffsetX;
+        Pos_NumberOfRoundsText.Y = E14.Position.Y + OffsetY_2;
 	}
 
 	#pragma endregion
 
-	void SetHUBVisualSettings() 
-	{
-		//Disable Timer
-		SonicMania::Timer.ResetTimer();
-		if (SonicMania::Timer.Enabled)
-		{
-			SonicMania::Timer.Enabled = false;
-		}
+    #pragma region HUB Startup Methods
 
-		//Disable HUD
-		WriteData((BYTE*)(baseAddress + 0x47B065), (BYTE)0);
-	}
+    void SetSpawnPosition(SonicMania::EntityPlayer& Player, int Placement)
+    {
+        Entity& FirstPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_FirstPlace);
+        Entity& SecondPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_SecondPlace);
+        Entity& ThirdPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_ThirdPlace);
+        Entity& ForthPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_FouthPlace);
+
+        if (Placement == 1)
+        {
+            Player.Position.X = FirstPlacePodieumSpawn.Position.X;
+            Player.Position.Y = FirstPlacePodieumSpawn.Position.Y;
+        }
+        else if (Placement == 2)
+        {
+            Player.Position.X = SecondPlacePodieumSpawn.Position.X;
+            Player.Position.Y = SecondPlacePodieumSpawn.Position.Y;
+        }
+        else if (Placement == 3)
+        {
+            Player.Position.X = ThirdPlacePodieumSpawn.Position.X;
+            Player.Position.Y = ThirdPlacePodieumSpawn.Position.Y;
+        }
+        else if (Placement == 4)
+        {
+            Player.Position.X = ForthPlacePodieumSpawn.Position.X;
+            Player.Position.Y = ForthPlacePodieumSpawn.Position.Y;
+        }
+
+        if (Player.Active)
+        {
+            Player.Camera->Position.X = Player.Position.X;
+            Player.Camera->Position.Y = Player.Position.Y;
+        }
+    }
+
+    void SetSpawnPositions()
+    {
+        SetSpawnPosition(Player1, CompPlusSettings::P1_LastPlacement);
+        SetSpawnPosition(Player2, CompPlusSettings::P2_LastPlacement);
+        SetSpawnPosition(Player3, CompPlusSettings::P3_LastPlacement);
+        SetSpawnPosition(Player4, CompPlusSettings::P4_LastPlacement);
+    }
+
+
+    void SetHUBVisualSettings()
+    {
+        //Disable Timer
+        SonicMania::Timer.ResetTimer();
+
+        //Disable HUD
+        WriteData((BYTE*)(baseAddress + 0x47B065), (BYTE)0);
+    }
+
+    #pragma endregion
+
+    #pragma region  HUB Quick Warp Room
 
 
 
-	void UpdateHUBWorld() 
+
+
+    void SetIsInWarpRoomState(int PlayerID, bool value)
+    {
+        if (PlayerID == 1) P1_IsInWarpRoom = value;
+        else if (PlayerID == 2) P2_IsInWarpRoom = value;
+        else if (PlayerID == 3) P3_IsInWarpRoom = value;
+        else if (PlayerID == 4) P4_IsInWarpRoom = value;
+    }
+
+    INT_Position GetLastWarpPosition(int PlayerID)
+    {
+        if (PlayerID == 1) return P1_LastWarpPosition;
+        else if (PlayerID == 2) return P2_LastWarpPosition;
+        else if (PlayerID == 3) return P3_LastWarpPosition;
+        else if (PlayerID == 4) return P4_LastWarpPosition;
+        else return INT_Position(0, 0);
+    }
+
+    void QueueWarp(SonicMania::EntityPlayer& Player, int x, int y, bool isEnter, int PlayerID)
+    {
+        if (PlayerID == 1) 
+        { 
+            P1_WarpQueue = INT_Position(x,y);
+            P1_IsInWarpLoop = true;
+            if (!isEnter) P1_WarpAlpha = 0;
+        }
+        else if (PlayerID == 2) 
+        {
+            P2_WarpQueue = INT_Position(x, y);
+            P2_IsInWarpLoop = true;
+            if (!isEnter) P2_WarpAlpha = 0;
+        }
+        else if (PlayerID == 3) 
+        {
+            P3_WarpQueue = INT_Position(x, y);
+            P3_IsInWarpLoop = true;
+            if (!isEnter) P3_WarpAlpha = 0;
+        }
+        else if (PlayerID == 4) 
+        {
+            P4_WarpQueue = INT_Position(x, y);
+            P4_IsInWarpLoop = true;
+            if (!isEnter) P4_WarpAlpha = 0;
+        }
+        SetIsInWarpRoomState(PlayerID, isEnter);
+    }
+
+    void TeleWarp(SonicMania::EntityPlayer& Player, int x, int y, int PlayerID)
+    {
+        Player.Position.X = x;
+        Player.Position.Y = y;
+        Player.Camera->Position.X = x;
+        Player.Camera->Position.Y = y;
+        Player.XVelocity = 0;
+        Player.YVelocity = 0;
+        Player.Camera->GroundCamOffsetY = 0;
+    }
+
+    void CheckQuickWarp()
+    {
+        if (P1_IsInWarpRoom == false && Player1.Active)
+        {
+            P1_LastWarpPosition.X = (int)Player1.Position.X;
+            P1_LastWarpPosition.Y = (int)Player1.Position.Y;
+        }
+        if (P2_IsInWarpRoom == false && Player2.Active)
+        {
+            P2_LastWarpPosition.X = (int)Player2.Position.X;
+            P2_LastWarpPosition.Y = (int)Player2.Position.Y;
+        }
+        if (P3_IsInWarpRoom == false && Player3.Active)
+        {
+            P3_LastWarpPosition.X = (int)Player3.Position.X;
+            P3_LastWarpPosition.Y = (int)Player3.Position.Y;
+        }
+        if (P4_IsInWarpRoom == false && Player4.Active)
+        {
+            P4_LastWarpPosition.X = (int)Player4.Position.X;
+            P4_LastWarpPosition.Y = (int)Player4.Position.Y;
+        }
+
+        if (PlayerControllers[1].Y.Press && !P1_IsInWarpRoom && Player1.Grounded && Player1.XVelocity == 0 && Player1.YVelocity == 0) QueueWarp(Player1, 14400, 4750, true, 1);
+        if (PlayerControllers[2].Y.Press && !P2_IsInWarpRoom && Player2.Grounded && Player2.XVelocity == 0 && Player2.YVelocity == 0) QueueWarp(Player2, 14400, 4750, true, 2);
+        if (PlayerControllers[3].Y.Press && !P3_IsInWarpRoom && Player3.Grounded && Player3.XVelocity == 0 && Player3.YVelocity == 0) QueueWarp(Player3, 14400, 4750, true, 3);
+        if (PlayerControllers[4].Y.Press && !P4_IsInWarpRoom && Player4.Grounded && Player4.XVelocity == 0 && Player4.YVelocity == 0) QueueWarp(Player4, 14400, 4750, true, 4);
+    }
+
+    void CheckPlayerReturnWarp(SonicMania::EntityPlayer& Player, int SlotID, int X1, int Y1, int X2, int Y2, int PlayerID)
+    {
+        Entity& WarpDetector = *GetEntityFromSceneSlot<Entity>(SlotID);
+        int _X1 = WarpDetector.Position.X + X1;
+        int _Y1 = WarpDetector.Position.Y + Y1;
+        int _X2 = WarpDetector.Position.X + X2;
+        int _Y2 = WarpDetector.Position.Y + Y2;
+
+        if (PlayerInRange(&Player, _X1, _Y1, _X2, _Y2))
+        {
+            INT_Position Warp = GetLastWarpPosition(PlayerID);
+            QueueWarp(Player, Warp.X, Warp.Y, false, PlayerID);
+        }
+    }
+
+    void CheckPlayerQuickWarp(SonicMania::EntityPlayer &Player, int SlotID, int X1, int Y1, int X2, int Y2, int WarpX, int WarpY, int PlayerID)
+    {
+        Entity& WarpDetector = *GetEntityFromSceneSlot<Entity>(SlotID);
+        int _X1 = WarpDetector.Position.X + X1;
+        int _Y1 = WarpDetector.Position.Y + Y1;
+        int _X2 = WarpDetector.Position.X + X2;
+        int _Y2 = WarpDetector.Position.Y + Y2;
+
+        if (PlayerInRange(&Player, _X1, _Y1, _X2, _Y2))
+        {
+            QueueWarp(Player, WarpX, WarpY, false, PlayerID);
+        }
+    }
+
+    void CheckPlayersReturnWarp(int SlotID, int X1, int Y1, int X2, int Y2)
+    {
+        CheckPlayerReturnWarp(SonicMania::Player1, SlotID, X1, Y1, X2, Y2, 1);
+        CheckPlayerReturnWarp(SonicMania::Player2, SlotID, X1, Y1, X2, Y2, 2);
+        CheckPlayerReturnWarp(SonicMania::Player3, SlotID, X1, Y1, X2, Y2, 3);
+        CheckPlayerReturnWarp(SonicMania::Player4, SlotID, X1, Y1, X2, Y2, 4);
+    }
+
+    void CheckPlayersQuickWarp(int SlotID, int X1, int Y1, int X2, int Y2, int WarpX, int WarpY)
+    {
+        CheckPlayerQuickWarp(SonicMania::Player1, SlotID, X1, Y1, X2, Y2, WarpX, WarpY, 1);
+        CheckPlayerQuickWarp(SonicMania::Player2, SlotID, X1, Y1, X2, Y2, WarpX, WarpY, 2);
+        CheckPlayerQuickWarp(SonicMania::Player3, SlotID, X1, Y1, X2, Y2, WarpX, WarpY, 3);
+        CheckPlayerQuickWarp(SonicMania::Player4, SlotID, X1, Y1, X2, Y2, WarpX, WarpY, 4);
+    }
+
+    void WarpLoop(SonicMania::EntityPlayer& Player, int PlayerID, int& WarpAlpha, bool& IsInWarpLoop, INT_Position& WarpQueue)
+    {
+        if (Player.Active) 
+        {
+            Player.InkEffect = Ink_Alpha;
+            if (IsInWarpLoop)
+            {
+                Player.Alpha = (WarpAlpha > 0 ? WarpAlpha : 0);
+                if (WarpAlpha > 0) WarpAlpha = WarpAlpha - 10;
+                else 
+                {
+                    WarpAlpha = 0;
+                    TeleWarp(Player, WarpQueue.X, WarpQueue.Y, PlayerID);
+                    IsInWarpLoop = false;
+                }
+            }
+            else
+            {
+                Player.Alpha = (WarpAlpha < 256 ? WarpAlpha : 256);
+                if (WarpAlpha < 256) WarpAlpha = WarpAlpha + 10;
+            }
+        }
+    }
+
+    void UpdateWarpEffects()
+    {
+        WarpLoop(Player1, 1, P1_WarpAlpha, P1_IsInWarpLoop, P1_WarpQueue);
+        WarpLoop(Player2, 2, P2_WarpAlpha, P2_IsInWarpLoop, P2_WarpQueue);
+        WarpLoop(Player3, 3, P3_WarpAlpha, P3_IsInWarpLoop, P3_WarpQueue);
+        WarpLoop(Player4, 4, P4_WarpAlpha, P4_IsInWarpLoop, P4_WarpQueue);
+    }
+
+    void UpdateQuickWarpRoom() 
+    {
+        UpdateWarpEffects();
+        CheckQuickWarp();
+        CheckPlayersQuickWarp(WarpSlotID_PlayerSettings, -50, -50, 50, 50, 15922, 16200);
+        CheckPlayersQuickWarp(WarpSlotID_OtherSettings, -50, -50, 50, 50, 11299, 10907);
+        CheckPlayersQuickWarp(WarpSlotID_Ranking, -50, -50, 50, 50, 8580, 10398);
+        CheckPlayersQuickWarp(WarpSlotID_LevelSelect, -50, -50, 50, 50, 9553, 10310);
+        CheckPlayersReturnWarp(WarpSlotID_ReturnToLast, -50, -55, 50, 50);
+    }
+
+    void ResetWarps() 
+    {
+        P1_IsInWarpRoom = false;
+        P2_IsInWarpRoom = false;
+        P3_IsInWarpRoom = false;
+        P4_IsInWarpRoom = false;
+        P1_LastWarpPosition = INT_Position(0, 0);
+        P2_LastWarpPosition = INT_Position(0, 0);
+        P3_LastWarpPosition = INT_Position(0, 0);
+        P4_LastWarpPosition = INT_Position(0, 0);
+    }
+
+    #pragma endregion
+
+
+    #pragma region HUB General Methods
+
+	void OnFrame() 
 	{	
 		SetHUBVisualSettings();
+        UpdateQuickWarpRoom();
 
+        if (SonicMania::Timer.Enabled == false) isRestart = true;
+
+        if (isRestart) 
+        {
+            SetSpawnPositions();
+            ResetWarps();
+            isRestart = false;
+        }
 
 		Button& ConfirmButton = *GetEntityFromSceneSlot<Button>(EnterLSelectButton);
 
@@ -841,18 +1430,10 @@ namespace CompPlus_HubWorld
 
 		if (ConfirmButton.Pressed) LevelSelected = true;
 		
-		if (LevelSelected) EnterLevelSelectLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+		if (LevelSelected) WarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
 	}
 
-	void LoadLevelSelect() 
-	{
-		if (CurrentLevelSelect == 0) LoadLevel_IZ("CPMLS");
-		else if (CurrentLevelSelect == 1) LoadLevel_IZ("CPELS");
-		else if (CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
-		else if (CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
-	}
-
-	void EnterLevelSelectLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+	void WarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
 	{
 		if (FastWarp && SceneLoadWaitTimer < 50)
 		{
@@ -897,9 +1478,11 @@ namespace CompPlus_HubWorld
 
     void Init()
     {
-        for (int i = 0; i < 100; ++i)
+        for (int i = 0; i < 110; ++i)
             Strings[i] = (wchar_t*)malloc(128);
     }
+
+    #pragma endregion
 
 
 }

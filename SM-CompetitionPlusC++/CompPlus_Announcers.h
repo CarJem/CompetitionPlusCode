@@ -77,171 +77,171 @@ namespace CompPlus_Announcers
 
 	#pragma region ATG VO Paths
 
-	const char* Player1_ATG = "VO_ATG/Player1.wav";
-	const char* Player2_ATG = "VO_ATG/Player2.wav";
-	const char* Player3_ATG = "VO_ATG/Player3.wav";
-	const char* Player4_ATG = "VO_ATG/Player4.wav";
+	const char* Player1_ATG = "VO1/Player1.wav";
+	const char* Player2_ATG = "VO1/Player2.wav";
+	const char* Player3_ATG = "VO1/Player3.wav";
+	const char* Player4_ATG = "VO1/Player4.wav";
 
-	const char* Three_ATG = "VO_ATG/Three.wav";
-	const char* Two_ATG = "VO_ATG/Two.wav";
-	const char* One_ATG = "VO_ATG/One.wav";
-	const char* Go_ATG = "VO_ATG/Go.wav";
-	const char* Goal_ATG = "VO_ATG/Goal.wav";
+	const char* Three_ATG = "VO1/Three.wav";
+	const char* Two_ATG = "VO1/Two.wav";
+	const char* One_ATG = "VO1/One.wav";
+	const char* Go_ATG = "VO1/Go.wav";
+	const char* Goal_ATG = "VO1/Goal.wav";
 
-	const char* Sonic_ATG = "VO_ATG/Sonic.wav";
-	const char* SonicWins_ATG = "VO_ATG/SonicWins.wav";
-	const char* Tails_ATG = "VO_ATG/Tails.wav";
-	const char* TailsWins_ATG = "VO_ATG/TailsWins.wav";
-	const char* Knuckles_ATG = "VO_ATG/Knuckles.wav";
-	const char* KnuxWins_ATG = "VO_ATG/KnuxWins.wav";
-	const char* Mighty_ATG = "VO_ATG/Mighty.wav";
-	const char* MightyWins_ATG = "VO_ATG/MightyWins.wav";
-	const char* Ray_ATG = "VO_ATG/Ray.wav";
-	const char* RayWins_ATG = "VO_ATG/RayWins.wav";
+	const char* Sonic_ATG = "VO1/Sonic.wav";
+	const char* SonicWins_ATG = "VO1/SonicWins.wav";
+	const char* Tails_ATG = "VO1/Tails.wav";
+	const char* TailsWins_ATG = "VO1/TailsWins.wav";
+	const char* Knuckles_ATG = "VO1/Knuckles.wav";
+	const char* KnuxWins_ATG = "VO1/KnuxWins.wav";
+	const char* Mighty_ATG = "VO1/Mighty.wav";
+	const char* MightyWins_ATG = "VO1/MightyWins.wav";
+	const char* Ray_ATG = "VO1/Ray.wav";
+	const char* RayWins_ATG = "VO1/RayWins.wav";
 
-	const char* TheWinnerIs_ATG = "VO_ATG/TheWinnerIs.wav";
+	const char* TheWinnerIs_ATG = "VO1/TheWinnerIs.wav";
 
-	const char* ItsADraw_ATG = "VO_ATG/ItsADraw.wav";
-	const char* ItsADraw_Set_ATG = "VO_ATG/ItsADraw_Set.wav";
+	const char* ItsADraw_ATG = "VO1/ItsADraw.wav";
+	const char* ItsADraw_Set_ATG = "VO1/ItsADraw_Set.wav";
 
-	const char* NewRecordMid_ATG = "VO_ATG/NewRecordMid.wav";
-	const char* NewRecordTop_ATG = "VO_ATG/NewRecordTop.wav";
+	const char* NewRecordMid_ATG = "VO1/NewRecordMid.wav";
+	const char* NewRecordTop_ATG = "VO1/NewRecordTop.wav";
 
 	#pragma endregion
 
 	#pragma region Garrulous64 VO Paths
 
-		const char* Player1_Garrulous64 = "VO_Garrulous64/Player1.wav";
-		const char* Player2_Garrulous64 = "VO_Garrulous64/Player2.wav";
-		const char* Player3_Garrulous64 = "VO_Garrulous64/Player3.wav";
-		const char* Player4_Garrulous64 = "VO_Garrulous64/Player4.wav";
+		const char* Player1_Garrulous64 = "VO2/Player1.wav";
+		const char* Player2_Garrulous64 = "VO2/Player2.wav";
+		const char* Player3_Garrulous64 = "VO2/Player3.wav";
+		const char* Player4_Garrulous64 = "VO2/Player4.wav";
 
-		const char* Three_Garrulous64 = "VO_Garrulous64/Three.wav";
-		const char* Two_Garrulous64 = "VO_Garrulous64/Two.wav";
-		const char* One_Garrulous64 = "VO_Garrulous64/One.wav";
-		const char* Go_Garrulous64 = "VO_Garrulous64/Go.wav";
-		const char* Goal_Garrulous64 = "VO_Garrulous64/Goal.wav";
+		const char* Three_Garrulous64 = "VO2/Three.wav";
+		const char* Two_Garrulous64 = "VO2/Two.wav";
+		const char* One_Garrulous64 = "VO2/One.wav";
+		const char* Go_Garrulous64 = "VO2/Go.wav";
+		const char* Goal_Garrulous64 = "VO2/Goal.wav";
 
-		const char* Sonic_Garrulous64 = "VO_Garrulous64/Sonic.wav";
-		const char* SonicWins_Garrulous64 = "VO_Garrulous64/SonicWins.wav";
-		const char* Tails_Garrulous64 = "VO_Garrulous64/Tails.wav";
-		const char* TailsWins_Garrulous64 = "VO_Garrulous64/TailsWins.wav";
-		const char* Knuckles_Garrulous64 = "VO_Garrulous64/Knuckles.wav";
-		const char* KnuxWins_Garrulous64 = "VO_Garrulous64/KnuxWins.wav";
-		const char* Mighty_Garrulous64 = "VO_Garrulous64/Mighty.wav";
-		const char* MightyWins_Garrulous64 = "VO_Garrulous64/MightyWins.wav";
-		const char* Ray_Garrulous64 = "VO_Garrulous64/Ray.wav";
-		const char* RayWins_Garrulous64 = "VO_Garrulous64/RayWins.wav";
+		const char* Sonic_Garrulous64 = "VO2/Sonic.wav";
+		const char* SonicWins_Garrulous64 = "VO2/SonicWins.wav";
+		const char* Tails_Garrulous64 = "VO2/Tails.wav";
+		const char* TailsWins_Garrulous64 = "VO2/TailsWins.wav";
+		const char* Knuckles_Garrulous64 = "VO2/Knuckles.wav";
+		const char* KnuxWins_Garrulous64 = "VO2/KnuxWins.wav";
+		const char* Mighty_Garrulous64 = "VO2/Mighty.wav";
+		const char* MightyWins_Garrulous64 = "VO2/MightyWins.wav";
+		const char* Ray_Garrulous64 = "VO2/Ray.wav";
+		const char* RayWins_Garrulous64 = "VO2/RayWins.wav";
 
-		const char* TheWinnerIs_Garrulous64 = "VO_Garrulous64/TheWinnerIs.wav";
+		const char* TheWinnerIs_Garrulous64 = "VO2/TheWinnerIs.wav";
 
-		const char* ItsADraw_Garrulous64 = "VO_Garrulous64/ItsADraw.wav";
-		const char* ItsADraw_Set_Garrulous64 = "VO_Garrulous64/ItsADraw_Set.wav";
+		const char* ItsADraw_Garrulous64 = "VO2/ItsADraw.wav";
+		const char* ItsADraw_Set_Garrulous64 = "VO2/ItsADraw_Set.wav";
 
-		const char* NewRecordMid_Garrulous64 = "VO_Garrulous64/NewRecordMid.wav";
-		const char* NewRecordTop_Garrulous64 = "VO_Garrulous64/NewRecordTop.wav";
+		const char* NewRecordMid_Garrulous64 = "VO2/NewRecordMid.wav";
+		const char* NewRecordTop_Garrulous64 = "VO2/NewRecordTop.wav";
 
 	#pragma endregion
 
 	#pragma region DanielUK VO Paths
 
-			const char* Player1_DanielUK = "VO_DanielUK/Player1.wav";
-			const char* Player2_DanielUK = "VO_DanielUK/Player2.wav";
-			const char* Player3_DanielUK = "VO_DanielUK/Player3.wav";
-			const char* Player4_DanielUK = "VO_DanielUK/Player4.wav";
+			const char* Player1_DanielUK = "VO3/Player1.wav";
+			const char* Player2_DanielUK = "VO3/Player2.wav";
+			const char* Player3_DanielUK = "VO3/Player3.wav";
+			const char* Player4_DanielUK = "VO3/Player4.wav";
 
-			const char* Three_DanielUK = "VO_DanielUK/Three.wav";
-			const char* Two_DanielUK = "VO_DanielUK/Two.wav";
-			const char* One_DanielUK = "VO_DanielUK/One.wav";
-			const char* Go_DanielUK = "VO_DanielUK/Go.wav";
-			const char* Goal_DanielUK = "VO_DanielUK/Goal.wav";
+			const char* Three_DanielUK = "VO3/Three.wav";
+			const char* Two_DanielUK = "VO3/Two.wav";
+			const char* One_DanielUK = "VO3/One.wav";
+			const char* Go_DanielUK = "VO3/Go.wav";
+			const char* Goal_DanielUK = "VO3/Goal.wav";
 
-			const char* Sonic_DanielUK = "VO_DanielUK/Sonic.wav";
-			const char* SonicWins_DanielUK = "VO_DanielUK/SonicWins.wav";
-			const char* Tails_DanielUK = "VO_DanielUK/Tails.wav";
-			const char* TailsWins_DanielUK = "VO_DanielUK/TailsWins.wav";
-			const char* Knuckles_DanielUK = "VO_DanielUK/Knuckles.wav";
-			const char* KnuxWins_DanielUK = "VO_DanielUK/KnuxWins.wav";
-			const char* Mighty_DanielUK = "VO_DanielUK/Mighty.wav";
-			const char* MightyWins_DanielUK = "VO_DanielUK/MightyWins.wav";
-			const char* Ray_DanielUK = "VO_DanielUK/Ray.wav";
-			const char* RayWins_DanielUK = "VO_DanielUK/RayWins.wav";
+			const char* Sonic_DanielUK = "VO3/Sonic.wav";
+			const char* SonicWins_DanielUK = "VO3/SonicWins.wav";
+			const char* Tails_DanielUK = "VO3/Tails.wav";
+			const char* TailsWins_DanielUK = "VO3/TailsWins.wav";
+			const char* Knuckles_DanielUK = "VO3/Knuckles.wav";
+			const char* KnuxWins_DanielUK = "VO3/KnuxWins.wav";
+			const char* Mighty_DanielUK = "VO3/Mighty.wav";
+			const char* MightyWins_DanielUK = "VO3/MightyWins.wav";
+			const char* Ray_DanielUK = "VO3/Ray.wav";
+			const char* RayWins_DanielUK = "VO3/RayWins.wav";
 
-			const char* TheWinnerIs_DanielUK = "VO_DanielUK/TheWinnerIs.wav";
+			const char* TheWinnerIs_DanielUK = "VO3/TheWinnerIs.wav";
 
-			const char* ItsADraw_DanielUK = "VO_DanielUK/ItsADraw.wav";
-			const char* ItsADraw_Set_DanielUK = "VO_DanielUK/ItsADraw_Set.wav";
+			const char* ItsADraw_DanielUK = "VO3/ItsADraw.wav";
+			const char* ItsADraw_Set_DanielUK = "VO3/ItsADraw_Set.wav";
 
-			const char* NewRecordMid_DanielUK = "VO_DanielUK/NewRecordMid.wav";
-			const char* NewRecordTop_DanielUK = "VO_DanielUK/NewRecordTop.wav";
+			const char* NewRecordMid_DanielUK = "VO3/NewRecordMid.wav";
+			const char* NewRecordTop_DanielUK = "VO3/NewRecordTop.wav";
 
 	#pragma endregion
 
 	#pragma region Memes VO Paths
 
-				const char* Player1_Memes = "VO_Memes/Player1.wav";
-				const char* Player2_Memes = "VO_Memes/Player2.wav";
-				const char* Player3_Memes = "VO_Memes/Player3.wav";
-				const char* Player4_Memes = "VO_Memes/Player4.wav";
+				const char* Player1_Memes = "VO4/Player1.wav";
+				const char* Player2_Memes = "VO4/Player2.wav";
+				const char* Player3_Memes = "VO4/Player3.wav";
+				const char* Player4_Memes = "VO4/Player4.wav";
 
-				const char* Three_Memes = "VO_Memes/Three.wav";
-				const char* Two_Memes = "VO_Memes/Two.wav";
-				const char* One_Memes = "VO_Memes/One.wav";
-				const char* Go_Memes = "VO_Memes/Go.wav";
-				const char* Goal_Memes = "VO_Memes/Goal.wav";
+				const char* Three_Memes = "VO4/Three.wav";
+				const char* Two_Memes = "VO4/Two.wav";
+				const char* One_Memes = "VO4/One.wav";
+				const char* Go_Memes = "VO4/Go.wav";
+				const char* Goal_Memes = "VO4/Goal.wav";
 
-				const char* Sonic_Memes = "VO_Memes/Sonic.wav";
-				const char* SonicWins_Memes = "VO_Memes/SonicWins.wav";
-				const char* Tails_Memes = "VO_Memes/Tails.wav";
-				const char* TailsWins_Memes = "VO_Memes/TailsWins.wav";
-				const char* Knuckles_Memes = "VO_Memes/Knuckles.wav";
-				const char* KnuxWins_Memes = "VO_Memes/KnuxWins.wav";
-				const char* Mighty_Memes = "VO_Memes/Mighty.wav";
-				const char* MightyWins_Memes = "VO_Memes/MightyWins.wav";
-				const char* Ray_Memes = "VO_Memes/Ray.wav";
-				const char* RayWins_Memes = "VO_Memes/RayWins.wav";
+				const char* Sonic_Memes = "VO4/Sonic.wav";
+				const char* SonicWins_Memes = "VO4/SonicWins.wav";
+				const char* Tails_Memes = "VO4/Tails.wav";
+				const char* TailsWins_Memes = "VO4/TailsWins.wav";
+				const char* Knuckles_Memes = "VO4/Knuckles.wav";
+				const char* KnuxWins_Memes = "VO4/KnuxWins.wav";
+				const char* Mighty_Memes = "VO4/Mighty.wav";
+				const char* MightyWins_Memes = "VO4/MightyWins.wav";
+				const char* Ray_Memes = "VO4/Ray.wav";
+				const char* RayWins_Memes = "VO4/RayWins.wav";
 
-				const char* TheWinnerIs_Memes = "VO_Memes/TheWinnerIs.wav";
+				const char* TheWinnerIs_Memes = "VO4/TheWinnerIs.wav";
 
-				const char* ItsADraw_Memes = "VO_Memes/ItsADraw.wav";
-				const char* ItsADraw_Set_Memes = "VO_Memes/ItsADraw_Set.wav";
+				const char* ItsADraw_Memes = "VO4/ItsADraw.wav";
+				const char* ItsADraw_Set_Memes = "VO4/ItsADraw_Set.wav";
 
-				const char* NewRecordMid_Memes = "VO_Memes/NewRecordMid.wav";
-				const char* NewRecordTop_Memes = "VO_Memes/NewRecordTop.wav";
+				const char* NewRecordMid_Memes = "VO4/NewRecordMid.wav";
+				const char* NewRecordTop_Memes = "VO4/NewRecordTop.wav";
 
 	#pragma endregion
 
 	#pragma region Sonic 2/3 VO Paths
 
-			const char* Player1_Sonic3 = "VO_Sonic3/Player1.wav";
-			const char* Player2_Sonic3 = "VO_Sonic3/Player2.wav";
-			const char* Player3_Sonic3 = "VO_Sonic3/Player3.wav";
-			const char* Player4_Sonic3 = "VO_Sonic3/Player4.wav";
+			const char* Player1_Classic = "VO5/Player1.wav";
+			const char* Player2_Classic = "VO5/Player2.wav";
+			const char* Player3_Classic = "VO5/Player3.wav";
+			const char* Player4_Classic = "VO5/Player4.wav";
 
-			const char* Three_Sonic3 = "VO_Sonic3/Three.wav";
-			const char* Two_Sonic3 = "VO_Sonic3/Two.wav";
-			const char* One_Sonic3 = "VO_Sonic3/One.wav";
-			const char* Go_Sonic3 = "VO_Sonic3/Go.wav";
-			const char* Goal_Sonic3 = "VO_Sonic3/Goal.wav";
+			const char* Three_Classic = "VO5/Three.wav";
+			const char* Two_Classic = "VO5/Two.wav";
+			const char* One_Classic = "VO5/One.wav";
+			const char* Go_Classic = "VO5/Go.wav";
+			const char* Goal_Classic = "VO5/Goal.wav";
 
-			const char* Sonic_Sonic3 = "VO_Sonic3/Sonic.wav";
-			const char* SonicWins_Sonic3 = "VO_Sonic3/SonicWins.wav";
-			const char* Tails_Sonic3 = "VO_Sonic3/Tails.wav";
-			const char* TailsWins_Sonic3 = "VO_Sonic3/TailsWins.wav";
-			const char* Knuckles_Sonic3 = "VO_Sonic3/Knuckles.wav";
-			const char* KnuxWins_Sonic3 = "VO_Sonic3/KnuxWins.wav";
-			const char* Mighty_Sonic3 = "VO_Sonic3/Mighty.wav";
-			const char* MightyWins_Sonic3 = "VO_Sonic3/MightyWins.wav";
-			const char* Ray_Sonic3 = "VO_Sonic3/Ray.wav";
-			const char* RayWins_Sonic3 = "VO_Sonic3/RayWins.wav";
+			const char* Sonic_Classic = "VO5/Sonic.wav";
+			const char* SonicWins_Classic = "VO5/SonicWins.wav";
+			const char* Tails_Classic = "VO5/Tails.wav";
+			const char* TailsWins_Classic = "VO5/TailsWins.wav";
+			const char* Knuckles_Classic = "VO5/Knuckles.wav";
+			const char* KnuxWins_Classic = "VO5/KnuxWins.wav";
+			const char* Mighty_Classic = "VO5/Mighty.wav";
+			const char* MightyWins_Classic = "VO5/MightyWins.wav";
+			const char* Ray_Classic = "VO5/Ray.wav";
+			const char* RayWins_Classic = "VO5/RayWins.wav";
 
-			const char* TheWinnerIs_Sonic3 = "VO_Sonic3/TheWinnerIs.wav";
+			const char* TheWinnerIs_Classic = "VO5/TheWinnerIs.wav";
 
-			const char* ItsADraw_Sonic3 = "VO_Sonic3/ItsADraw.wav";
-			const char* ItsADraw_Set_Sonic3 = "VO_Sonic3/ItsADraw_Set.wav";
+			const char* ItsADraw_Classic = "VO5/ItsADraw.wav";
+			const char* ItsADraw_Set_Classic = "VO5/ItsADraw_Set.wav";
 
-			const char* NewRecordMid_Sonic3 = "VO_Sonic3/NewRecordMid.wav";
-			const char* NewRecordTop_Sonic3 = "VO_Sonic3/NewRecordTop.wav";
+			const char* NewRecordMid_Classic = "VO5/NewRecordMid.wav";
+			const char* NewRecordTop_Classic = "VO5/NewRecordTop.wav";
 
 	#pragma endregion
 
@@ -441,40 +441,40 @@ namespace CompPlus_Announcers
 			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_DanielUK);
 			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_DanielUK);
 		}
-		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Sonic2)
+		else if (LoadedAnnouncer == CompPlusSettings::Announcer_Classic)
 		{
-			SwapSound(Player1_MemoryAdd, (char*)Player1_Sonic3);
-			SwapSound(Player2_MemoryAdd, (char*)Player2_Sonic3);
-			SwapSound(Player3_MemoryAdd, (char*)Player3_Sonic3);
-			SwapSound(Player4_MemoryAdd, (char*)Player4_Sonic3);
+			SwapSound(Player1_MemoryAdd, (char*)Player1_Classic);
+			SwapSound(Player2_MemoryAdd, (char*)Player2_Classic);
+			SwapSound(Player3_MemoryAdd, (char*)Player3_Classic);
+			SwapSound(Player4_MemoryAdd, (char*)Player4_Classic);
 
-			SwapSound(SonicWins_MemoryAdd, (char*)SonicWins_Sonic3);
-			SwapSound(TailsWins_MemoryAdd, (char*)TailsWins_Sonic3);
-			SwapSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Sonic3);
-			SwapSound(MightyWins_MemoryAdd, (char*)MightyWins_Sonic3);
-			SwapSound(RayWins_MemoryAdd, (char*)RayWins_Sonic3);
+			SwapSound(SonicWins_MemoryAdd, (char*)SonicWins_Classic);
+			SwapSound(TailsWins_MemoryAdd, (char*)TailsWins_Classic);
+			SwapSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Classic);
+			SwapSound(MightyWins_MemoryAdd, (char*)MightyWins_Classic);
+			SwapSound(RayWins_MemoryAdd, (char*)RayWins_Classic);
 
-			SwapSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Sonic3);
-			SwapSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Sonic3);
+			SwapSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Classic);
+			SwapSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Classic);
 
-			SwapSound(Three_MemoryAdd, (char*)Three_Sonic3);
-			SwapSound(Two_MemoryAdd, (char*)Two_Sonic3);
-			SwapSound(One_MemoryAdd, (char*)One_Sonic3);
-			SwapSound(Go_MemoryAdd, (char*)Go_Sonic3);
+			SwapSound(Three_MemoryAdd, (char*)Three_Classic);
+			SwapSound(Two_MemoryAdd, (char*)Two_Classic);
+			SwapSound(One_MemoryAdd, (char*)One_Classic);
+			SwapSound(Go_MemoryAdd, (char*)Go_Classic);
 
-			SwapSound(Sonic_MemoryAdd, (char*)Sonic_Sonic3);
-			SwapSound(Tails_MemoryAdd, (char*)Tails_Sonic3);
-			SwapSound(Knuckles_MemoryAdd, (char*)Knuckles_Sonic3);
-			SwapSound(Mighty_MemoryAdd, (char*)Mighty_Sonic3);
-			SwapSound(Ray_MemoryAdd, (char*)Ray_Sonic3);
+			SwapSound(Sonic_MemoryAdd, (char*)Sonic_Classic);
+			SwapSound(Tails_MemoryAdd, (char*)Tails_Classic);
+			SwapSound(Knuckles_MemoryAdd, (char*)Knuckles_Classic);
+			SwapSound(Mighty_MemoryAdd, (char*)Mighty_Classic);
+			SwapSound(Ray_MemoryAdd, (char*)Ray_Classic);
 
-			SwapSound(Goal_MemoryAdd, (char*)Goal_Sonic3);
-			SwapSound(Goal_MemoryAdd_2, (char*)Goal_Sonic3);
+			SwapSound(Goal_MemoryAdd, (char*)Goal_Classic);
+			SwapSound(Goal_MemoryAdd_2, (char*)Goal_Classic);
 
-			SwapSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Sonic3);
+			SwapSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Classic);
 
-			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Sonic3);
-			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Sonic3);
+			SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Classic);
+			SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Classic);
 		}
 		else
 		{
@@ -640,35 +640,35 @@ namespace CompPlus_Announcers
 				LoadSoundFX_Debug(NewRecordMid_DanielUK, Scope_Global);
 				LoadSoundFX_Debug(NewRecordTop_DanielUK, Scope_Global);
 			}
-			else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Sonic2)
+			else if (CompPlusSettings::CurrentAnnouncer == CompPlusSettings::Announcer_Classic)
 			{
-				LoadSoundFX_Debug(Player1_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Player2_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Player3_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Player4_Sonic3, Scope_Global);
+				LoadSoundFX_Debug(Player1_Classic, Scope_Global);
+				LoadSoundFX_Debug(Player2_Classic, Scope_Global);
+				LoadSoundFX_Debug(Player3_Classic, Scope_Global);
+				LoadSoundFX_Debug(Player4_Classic, Scope_Global);
 
-				LoadSoundFX_Debug(Three_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Two_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(One_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Go_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Goal_Sonic3, Scope_Global);
+				LoadSoundFX_Debug(Three_Classic, Scope_Global);
+				LoadSoundFX_Debug(Two_Classic, Scope_Global);
+				LoadSoundFX_Debug(One_Classic, Scope_Global);
+				LoadSoundFX_Debug(Go_Classic, Scope_Global);
+				LoadSoundFX_Debug(Goal_Classic, Scope_Global);
 
-				LoadSoundFX_Debug(Sonic_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(SonicWins_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Tails_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(TailsWins_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Knuckles_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(KnuxWins_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Mighty_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(MightyWins_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(Ray_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(RayWins_Sonic3, Scope_Global);
+				LoadSoundFX_Debug(Sonic_Classic, Scope_Global);
+				LoadSoundFX_Debug(SonicWins_Classic, Scope_Global);
+				LoadSoundFX_Debug(Tails_Classic, Scope_Global);
+				LoadSoundFX_Debug(TailsWins_Classic, Scope_Global);
+				LoadSoundFX_Debug(Knuckles_Classic, Scope_Global);
+				LoadSoundFX_Debug(KnuxWins_Classic, Scope_Global);
+				LoadSoundFX_Debug(Mighty_Classic, Scope_Global);
+				LoadSoundFX_Debug(MightyWins_Classic, Scope_Global);
+				LoadSoundFX_Debug(Ray_Classic, Scope_Global);
+				LoadSoundFX_Debug(RayWins_Classic, Scope_Global);
 
-				LoadSoundFX_Debug(TheWinnerIs_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(ItsADraw_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(ItsADraw_Set_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(NewRecordMid_Sonic3, Scope_Global);
-				LoadSoundFX_Debug(NewRecordTop_Sonic3, Scope_Global);
+				LoadSoundFX_Debug(TheWinnerIs_Classic, Scope_Global);
+				LoadSoundFX_Debug(ItsADraw_Classic, Scope_Global);
+				LoadSoundFX_Debug(ItsADraw_Set_Classic, Scope_Global);
+				LoadSoundFX_Debug(NewRecordMid_Classic, Scope_Global);
+				LoadSoundFX_Debug(NewRecordTop_Classic, Scope_Global);
 
 			}
 

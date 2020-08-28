@@ -440,12 +440,12 @@ namespace SonicMania
         ObjectType_NewTron = 0x00AC6F84,
         ObjectType_BatBrain = 0x00AC6F90,
         ObjectType_Splats = 0x00AC6900,
-        ObjectType_DDWrecker = 0x00AC67F0,
-        ObjectType_DERobot = 0x00AC6D70,
+        ObjectType_DDWrecker = 0x00AC67F0, //Boss Act 1
+        ObjectType_DERobot = 0x00AC6D70, //Boss Act 2
         // Chemical Plant Zone
         ObjectType_Grabber = 0x00AC6648,
         ObjectType_Spiny = 0x00AC6704,
-        ObjectType_AmoebaDroid = 0x00AC6880,
+        ObjectType_AmoebaDroid = 0x00AC6880, //Boss Act 1
         ObjectType_Sweep = 0x00AC6870,
         ObjectType_CatakillerJR = 0x00AC6798,
         // Studiopolis Zone
@@ -453,8 +453,9 @@ namespace SonicMania
         ObjectType_ShutterBug = 0x00AC6E58,
         ObjectType_Tubinaut = 0x00AC6AD0,
         ObjectType_WallCrawl = 0x00AC6B14,
-        ObjectType_HeavyGunner = 0x00AC6C2C,
-        ObjectType_WeatherMobile = 0x00AC6A80,
+        ObjectType_HeavyGunner = 0x00AC6C2C, //Boss Act 1
+        ObjectType_WeatherMobile = 0x00AC6A80, //Boss Act 2
+        ObjectType_CircleBumper = 0x00AC6904,
         // Flying Battery
         ObjectType_TechnoSqueek = 0x00AC69FC,
         ObjectType_Blaster = 0x00AC6A6C,
@@ -465,13 +466,14 @@ namespace SonicMania
         ObjectType_SplatsJar = 0x004ACF50,
         ObjectType_Woodrow = 0x00AC6674,
         ObjectType_IceBomba = 0x00AC6E5C,
-        ObjectType_HeavyShinobi = 0x00AC6E18,
+        ObjectType_HeavyShinobi = 0x00AC6B08,
         // StarDust Speed Way
         ObjectType_Hotaru = 0x00AC6808,
         ObjectType_Dango = 0x00AC6F34,
         ObjectType_Kanabun = 0x00AC67FC,
         ObjectType_Kabasira = 0x004ACF50,
         ObjectType_SilverSonic = 0x00AC679C,
+        ObjectType_MetalSonic = 0x00AC6B34, //Boss Act2 M
         // HydroCity Zone
         ObjectType_Jellygnite = 0x00AC6B9C,
         ObjectType_Pointdexter = 0x00AC6A2C,
@@ -904,7 +906,7 @@ namespace SonicMania
     {
         /* 0x00000000 */ BOOL Down;
         /* 0x00000004 */ BOOL Press;
-        /* 0x00000008 */ BOOL Release;
+        /* 0x00000008 */ DWORD Key;
     };
     struct Controller
     {
@@ -2753,7 +2755,7 @@ namespace SonicMania
         //TO-DO: fill out later
     };
 
-    struct CompetitionSession 
+    struct CompetitionSession
     {
         int Unknown_Gap_0[22];
         int inMatch;
@@ -2768,8 +2770,8 @@ namespace SonicMania
         int Unknown_Gap_7C[12];
         int CharacterFlags;
         int WinnerFlag;
-        int Unkown_B4;
-        int Unkown_B8;
+        int Unknown_B4;
+        int Unknown_B8;
         int Rings_P1;
         int Rings_P2;
         int Rings_P3;
@@ -2784,17 +2786,17 @@ namespace SonicMania
         int Items_P4;
         int TimeMinutes_P1;
         int TimeSeconds_P1;
-        int TimeMilliseconds_P1;
+        int TimeCentiseconds_P1;
         int TimeMinutes_P2;
         int TimeSeconds_P2;
-        int TimeMilliseconds_P2;
+        int TimeCentiseconds_P2;
         int TimeMinutes_P3;
         int TimeSeconds_P3;
-        int TimeMilliseconds_P3;
+        int TimeCentiseconds_P3;
         int TimeMinutes_P4;
         int TimeSeconds_P4;
-        int TimeMilliseconds_P4;
-        int Unknown_11C;
+        int TimeCentiseconds_P4;
+        int FinishFlags;
         int TotalRings_P1;
         int TotalRings_P2;
         int TotalRings_P3;
@@ -2834,7 +2836,7 @@ namespace SonicMania
         int  ItemMode;
         int SuppressTitlecard;
         int SuppressAutoMusic;
-        CompetitionSession CompetitionSession;
+        CompetitionSession  CompetitionSession;
         int  MedalMods; // Stuff Like Instashield and etc (Bonus Stuff that medals unlock)
         int  ParallaxOffset[256];
         int  EnableIntro;

@@ -1,12 +1,19 @@
 <Settings>
-    <SelectedAnnouncer>1</SelectedAnnouncer>
+    <SelectedAnnouncer>0</SelectedAnnouncer>
     <InitalLives>3</InitalLives>
-    <InfiniteLives>0</InfiniteLives>
-    <InfiniteTime>0</InfiniteTime>
-    <UseDropdash>0</UseDropdash>
+    <TimeLimit>0</TimeLimit>
+    <UseDropdash>1</UseDropdash>
     <UseInstaSheild>0</UseInstaSheild>
     <PeeloutP1>0</PeeloutP1>
     <PeeloutP2>0</PeeloutP2>
     <PeeloutP3>0</PeeloutP3>
     <PeeloutP4>0</PeeloutP4>
+    <CurrentLSelect>0</CurrentLSelect>
+    <VictoryStyle>0</VictoryStyle>
+    <EndlessRounds>0</EndlessRounds>
+    <NumberOfRounds>3</NumberOfRounds>
+    <MonitorMode>1</MonitorMode>
+    <EnableDebugMode>1</EnableDebugMode>
+    <EnableDevMode>1</EnableDevMode>
+    <DarkDevMenu>1</DarkDevMenu>
 </Settings>
