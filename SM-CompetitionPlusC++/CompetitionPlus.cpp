@@ -34,9 +34,10 @@ namespace CompetitionPlus
     #pragma region Variables
 
     bool HasStartupInit = false;
-	bool StartupStageEnabled = true;
+	bool StartupStageEnabled = false;
 
 	bool StageRefresh = true;
+    int LastSceneID = 0;
 	int IdleTime = 0;
 	HMODULE InfinityZoneDLL = nullptr;
 	IZAPI::StageInfo CurrentStage = {};
@@ -74,6 +75,15 @@ namespace CompetitionPlus
     #pragma endregion
 
     #pragma region General Methods
+
+    void OnLegacySceneChange()
+    {
+        if (LastSceneID == CurrentSceneInt)
+        {
+            LastSceneID = CurrentSceneInt;
+            StageRefresh = true;
+        }
+    }
 
 	void LogoLinking() 
 	{
@@ -120,8 +130,7 @@ namespace CompetitionPlus
 
 	void GenericZoneLoop() 
 	{
-        if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu(true);
-        else CompPlus_CompetitionMenu::UpdateManiaMenu(false);
+        if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu();
 	}
 
 	void CheckForStageRefresh() 
@@ -132,18 +141,16 @@ namespace CompetitionPlus
 			CompPlus_EncoreLevelSelect::CheckForPointRefresh();
 			CompPlus_CustomLevelSelect::CheckForPointRefresh();
 			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
+            CompPlusSettings::RefreshSettings();
+            CompPlusSettings::SaveSettings();
 			StageRefresh = false;
 		}
-
-        if (SonicMania::Timer.Enabled == false) 
-        {
-            CompPlusSettings::RefreshSettings();
-        }
 	}
 
 	void UpdateMenus()
 	{
         FrameInit();
+        OnLegacySceneChange();
 		CompPlusSettings::OnFrame();
 		ManiaMenuLinking();
 		CheckForStageRefresh();

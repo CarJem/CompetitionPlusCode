@@ -18,66 +18,59 @@ namespace CompPlus_CompetitionMenu
     int UIButtonASlotID = 231;
     int UIButtonBSlotID = 232;
     int UIButtonScreenLayoutSlotID = 239;
+    int UIVsResultsScreenUIControl = 357;
+    int UIVsLevelSelectUIControl = 586;
 
-	void UpdateManiaMenu(bool inZone)
-	{
-        if (inZone) 
+    void UpdatePreMatchStuff() 
+    {
+        if (!inMatch)
         {
-            SonicMania::UIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(590);
-            object.Disabled = false;
-            //object.Obfuscate = true;
-            object.XOut = false;
-            object.ZoneID = 11;
-            object.Act = 106;
+            CompPlusSettings::FixUnmatchingVSPlayers();
+            inMatch = true;
+        }
+    }
 
-            SonicMania::UIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(591);
-            object2.Disabled = false;
-            //object2.Obfuscate = true;
-            object2.XOut = false;
-            object2.ZoneID = 11;
-            object2.Act = 107;
+	void UpdateManiaMenu()
+	{
+        SonicMania::UIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(590);
+        object.Disabled = false;
+        //object.Obfuscate = true;
+        object.XOut = false;
+        object.ZoneID = 11;
+        object.Act = 106;
 
-            EntityUIVsRoundPicker& roundPicker = *GetEntityFromSceneSlot<EntityUIVsRoundPicker>(232);
-            roundPicker.MaxVal = 999;
+        SonicMania::UIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(591);
+        object2.Disabled = false;
+        //object2.Obfuscate = true;
+        object2.XOut = false;
+        object2.ZoneID = 11;
+        object2.Act = 107;
 
-            EntityUIControl& uiControlTest = *GetEntityFromSceneSlot<EntityUIControl>(UIControlSlotID);
-            if (uiControlTest.SelectedElement == 0) 
-            {
-                uiControlTest.SelectedElement = 2;
-            }
-            else if (uiControlTest.SelectedElement == 1) 
-            {
-                uiControlTest.SelectedElement = 3;
-            }
+        EntityUIVsRoundPicker& roundPicker = *GetEntityFromSceneSlot<EntityUIVsRoundPicker>(232);
+        roundPicker.MaxVal = 999;
 
-            if (SonicMania::Options->CompetitionSession.inMatch == 1)
-            {
-                if (!inMatch)
-                {
-                    CompPlusSettings::FixUnmatchingVSPlayers();
-                    inMatch = true;
-                }
-            }
-            else
-            {
-                inMatch = false;
-            }
+        EntityUIControl& CompetitionSettingsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIControlSlotID);
+        EntityUIControl& CompetitionResultsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsResultsScreenUIControl);
+        EntityUIControl& CompetitionLevelSelectPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsLevelSelectUIControl);
+        
+        if (CompetitionSettingsPage.SelectedElement == 0) CompetitionSettingsPage.SelectedElement = 2;
+        else if (CompetitionSettingsPage.SelectedElement == 1) CompetitionSettingsPage.SelectedElement = 3;
 
-            if (SonicMania::Options->CompetitionSession.FinishFlags != 0 && !StoredResults)
-            {
-                CompPlusSettings::LastSession = SonicMania::Options->CompetitionSession;
-                CompPlusSettings::SetLastMatchResults();
-                StoredResults = true;
-            }
+        if (SonicMania::Options->CompetitionSession.inMatch == 1) UpdatePreMatchStuff();
+        else inMatch = false;
 
-            SetUIBG_BGColor(74, 211, 156);
-            SetUIBG_FGLowColor(247, 146, 24);
-            SetUIBG_FGHighColor(57, 178, 206);
+        if (CompetitionResultsPage.Visible && StoredResults == false)
+        {
+            SonicMania::Options->CompetitionSession.FinishFlags = 0;
+            StoredResults = true;
         }
         else 
         {
             StoredResults = false;
         }
 
+        SetUIBG_BGColor(74, 211, 156);
+        SetUIBG_FGLowColor(247, 146, 24);
+        SetUIBG_FGHighColor(57, 178, 206);
 	}
 };

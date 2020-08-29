@@ -12,7 +12,7 @@
     <VictoryStyle>0</VictoryStyle>
     <EndlessRounds>0</EndlessRounds>
     <NumberOfRounds>3</NumberOfRounds>
-    <MonitorMode>1</MonitorMode>
+    <MonitorMode>0</MonitorMode>
     <EnableDebugMode>1</EnableDebugMode>
     <EnableDevMode>1</EnableDevMode>
     <DarkDevMenu>1</DarkDevMenu>

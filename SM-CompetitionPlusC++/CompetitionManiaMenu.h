@@ -1,6 +1,6 @@
 #pragma once
 namespace CompPlus_CompetitionMenu
 {
-    extern void UpdateManiaMenu(bool inZone);
+    extern void UpdateManiaMenu();
 };
 

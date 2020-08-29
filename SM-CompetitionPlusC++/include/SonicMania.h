@@ -2769,9 +2769,7 @@ namespace SonicMania
         int Unknown_78;
         int Unknown_Gap_7C[12];
         int CharacterFlags;
-        int WinnerFlag;
-        int Unknown_B4;
-        int Unknown_B8;
+        BYTE WinnerFlag[12];
         int Rings_P1;
         int Rings_P2;
         int Rings_P3;

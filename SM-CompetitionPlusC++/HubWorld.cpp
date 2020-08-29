@@ -208,7 +208,7 @@ namespace CompPlus_HubWorld
 	int SceneLoadWaitTimer = 0;
 	int SceneLoadWaitMax = 100;
 	int SettingWaitTimer = 100;
-    bool isRestart;
+    bool isRestart = true;
 
     int P1_HUDAlpha = 255;
     int P2_HUDAlpha = 255;
@@ -500,7 +500,7 @@ namespace CompPlus_HubWorld
 		if (AnnouncerTypeStatus != (int)CompPlusSettings::CurrentAnnouncer) CompPlusSettings::SetAnnouncer((CompPlusSettings::AnnouncerType)AnnouncerTypeStatus);
 
 		//Victory Type NUD
-		int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlusSettings::VictoryStyle, 0, 1);
+		int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlusSettings::VictoryStyle, 0, 5);
 		if (VictoryTypeStatus != (int)CompPlusSettings::VictoryStyle) CompPlusSettings::SetVictoryMethod((CompPlusSettings::VictoryMode)VictoryTypeStatus);
 
         //Item Box Config NUD
@@ -747,9 +747,21 @@ namespace CompPlus_HubWorld
 			case CompPlusSettings::VictoryMode_Default:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"ORIGINAL", 8, index);
 				break;
-			case CompPlusSettings::VictoryMode_Winner:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"WINNER", 6, index);
+			case CompPlusSettings::VictoryMode_Time:
+				UpdateGeneralDisplay(SlotID, x, y, (char*)"TIME", 4, index);
 				break;
+            case CompPlusSettings::VictoryMode_Rings:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"RINGS", 5, index);
+                break;
+            case CompPlusSettings::VictoryMode_TotalRings:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"ALL RINGS", 9, index);
+                break;
+            case CompPlusSettings::VictoryMode_Score:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"SCORE", 5, index);
+                break;
+            case CompPlusSettings::VictoryMode_Items:
+                UpdateGeneralDisplay(SlotID, x, y, (char*)"ITEMS", 5, index);
+                break;
 		}
 	}
 
@@ -942,7 +954,7 @@ namespace CompPlus_HubWorld
         }
         else 
         {       
-            std::string roundNumber = std::to_string(SonicMania::Options->CompetitionSession.CurrentRound + 1) + "\\" + std::to_string(SonicMania::Options->CompetitionSession.TotalRounds);
+            std::string roundNumber = std::to_string(CompPlusSettings::CurrentRound_Plus + 1) + "\\" + std::to_string(CompPlusSettings::NumberOfRounds);
             UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
             lastIndex++;
         }

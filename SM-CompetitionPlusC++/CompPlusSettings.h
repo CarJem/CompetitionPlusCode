@@ -32,7 +32,11 @@ namespace CompPlusSettings
 
     enum VictoryMode : int {
         VictoryMode_Default = 0,
-        VictoryMode_Winner = 1
+        VictoryMode_Time = 1,
+        VictoryMode_Score = 2,
+        VictoryMode_Rings = 3,
+        VictoryMode_TotalRings = 4,
+        VictoryMode_Items = 5
     };
 
     enum PlayerAbility : int {
@@ -62,6 +66,43 @@ namespace CompPlusSettings
         Announcer_Memes = 5
     };
 
+    struct ScorableInt 
+    {
+        int Value;
+        int PlayerID = 0;
+
+        ScorableInt() 
+        {
+
+        }
+
+        ScorableInt(int _value, int _playerID) : ScorableInt()
+        {
+            Value = _value;
+            PlayerID = _playerID;
+        }
+    };
+
+    struct Time 
+    {
+        int Minutes;
+        int Seconds;
+        int Centiseconds;
+        int PlayerID;
+
+        Time()
+        {
+
+        }
+
+        Time(int m, int s, int c) : Time()
+        {
+            Minutes = m;
+            Seconds = s;
+            Centiseconds = s;
+        }
+    };
+
 #define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
 
     #pragma region Internal Variables
@@ -69,6 +110,8 @@ namespace CompPlusSettings
     extern int NumberOfAnnouncers;
     extern std::string Settings_FilePath;
     extern SonicMania::CompetitionSession LastSession;
+    extern int CurrentRound_Plus;
+    extern bool AllowUpdateVictory;
 
     #pragma endregion
 
@@ -161,6 +204,8 @@ namespace CompPlusSettings
     extern void FixAbilites(SonicMania::EntityPlayer* Player);
 
     extern void RefreshSettings();
+
+    extern void OnStageChange();
 
     extern void OnFrame();
 
