@@ -2,7 +2,7 @@
 #include "ManiaModLoader.h"
 #include "PointScrolling.h"
 #include "ManiaExt.h"
-#include "CompPlusSettings.h"
+#include "CompPlus_Settings.h"
 
 #include "SonicMania.h"
 #include "ManiaLevelSelect.h"
@@ -12,7 +12,7 @@
 #include "PhantomLevelSelect.h"
 #include "CompetitionManiaMenu.h"
 #include "LevelSelectCore.h"
-#include "Common.h"
+#include "CompPlus_Common.h"
 #include "HubWorld.h"
 #include "SettingsMenu.h"
 #include "GenericLogos.h"
@@ -28,7 +28,7 @@
 #include <fstream>
 
 
-namespace CompetitionPlus
+namespace CompPlus_Core
 {
 	using namespace SonicMania;
 
@@ -60,8 +60,8 @@ namespace CompetitionPlus
 
     extern void InitSettings(const char* path)
     {
-        CompPlusSettings::Settings_FilePath = path;
-        CompPlusSettings::LoadSettings();
+        CompPlus_Settings::Settings_FilePath = path;
+        CompPlus_Settings::LoadSettings();
     }
 
     void FrameInit()
@@ -142,8 +142,8 @@ namespace CompetitionPlus
 			CompPlus_EncoreLevelSelect::CheckForPointRefresh();
 			CompPlus_CustomLevelSelect::CheckForPointRefresh();
 			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
-            CompPlusSettings::RefreshSettings();
-            CompPlusSettings::SaveSettings();
+            CompPlus_Settings::RefreshSettings();
+            CompPlus_Settings::SaveSettings();
 			StageRefresh = false;
 		}
 	}
@@ -152,7 +152,7 @@ namespace CompetitionPlus
 	{
         FrameInit();
         OnLegacySceneChange();
-		CompPlusSettings::OnFrame();
+        CompPlus_Settings::OnFrame();
 		ManiaMenuLinking();
 		CheckForStageRefresh();
         CompPlus_Scoring::OnFrame();

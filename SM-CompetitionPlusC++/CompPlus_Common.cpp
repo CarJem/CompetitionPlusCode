@@ -3,29 +3,29 @@
 #include "PointScrolling.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
-#include "CompetitionPlus.h"
-#include "CompPlusSettings.h"
+#include "CompPlus_Core.h"
+#include "CompPlus_Settings.h"
 
 namespace CompPlus_Common
 {
 	using namespace SonicMania;
-	using namespace CompetitionPlus;
+	using namespace CompPlus_Core;
 
 
 	void LoadLevel_IZ(const char* key)
 	{
-		CompetitionPlus::IZChangeStage(key);
+		CompPlus_Core::IZChangeStage(key);
 		GameState = GameStates::GameState_NotRunning;
-		CompetitionPlus::StageRefresh = true;
-		CompetitionPlus::IdleTime = 10;
+		CompPlus_Core::StageRefresh = true;
+		CompPlus_Core::IdleTime = 10;
 	}
 
 	void LoadLevel(int LevelID)
 	{
 		SonicMania::CurrentSceneInt = LevelID;
 		GameState = GameStates::GameState_NotRunning;
-		CompetitionPlus::StageRefresh = true;
-		CompetitionPlus::IdleTime = 10;
+		CompPlus_Core::StageRefresh = true;
+		CompPlus_Core::IdleTime = 10;
 	}
 
 	void PlayMenuMoveSoundFX(bool isClassic)
@@ -61,14 +61,14 @@ namespace CompPlus_Common
 
     void LoadLastLevelSelect() 
     {
-        if (CompPlusSettings::CurrentLevelSelect == 0) LoadLevel_IZ("CPMLS");
-        else if (CompPlusSettings::CurrentLevelSelect == 1) LoadLevel_IZ("CPELS");
-        else if (CompPlusSettings::CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
-        else if (CompPlusSettings::CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
+        if (CompPlus_Settings::CurrentLevelSelect == 0) LoadLevel_IZ("CPMLS");
+        else if (CompPlus_Settings::CurrentLevelSelect == 1) LoadLevel_IZ("CPELS");
+        else if (CompPlus_Settings::CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
+        else if (CompPlus_Settings::CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
     }
 
     void SetLastLevelSelect(int Value) 
     {
-        if (CompPlusSettings::CurrentLevelSelect != Value) CompPlusSettings::SetCurrentLSelect(Value);
+        if (CompPlus_Settings::CurrentLevelSelect != Value) CompPlus_Settings::SetCurrentLSelect(Value);
     }
 };

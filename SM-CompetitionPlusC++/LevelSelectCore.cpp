@@ -4,7 +4,7 @@
 #include "PointScrolling.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
-#include "Common.h"
+#include "CompPlus_Common.h"
 #include <vector>
 
 

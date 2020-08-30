@@ -180,14 +180,14 @@
   <ItemGroup>
     <ClInclude Include="ChaotixLevelSelect.h" />
     <ClInclude Include="CompetitionManiaMenu.h" />
-    <ClInclude Include="CompetitionPlus.h" />
-    <ClInclude Include="CompPlusSettings.h" />
+    <ClInclude Include="CompPlus_Core.h" />
+    <ClInclude Include="CompPlus_Settings.h" />
     <ClInclude Include="CompPlus_Announcers.h" />
     <ClInclude Include="CompPlus_Scoring.h" />
     <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="CustomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
-    <ClInclude Include="DevMenu.h" />
+    <ClInclude Include="CompPlus_DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
     <ClInclude Include="GeneralTweaks.h" />
     <ClInclude Include="Helpers.h" />
@@ -199,7 +199,7 @@
     <ClInclude Include="LevelSelectCore.h" />
     <ClInclude Include="ManiaExt.h" />
     <ClInclude Include="ManiaLevelSelect.h" />
-    <ClInclude Include="Common.h" />
+    <ClInclude Include="CompPlus_Common.h" />
     <ClInclude Include="PhantomLevelSelect.h" />
     <ClInclude Include="PointScrolling.h" />
     <ClInclude Include="SettingsMenu.h" />
@@ -210,16 +210,17 @@
   <ItemGroup>
     <ClCompile Include="ChaotixLevelSelect.cpp" />
     <ClCompile Include="CompetitionManiaMenu.cpp" />
-    <ClCompile Include="CompetitionPlus.cpp">
+    <ClCompile Include="CompPlus_Core.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="CompPlusSettings.cpp" />
+    <ClCompile Include="CompPlus_Announcers.cpp" />
+    <ClCompile Include="CompPlus_Settings.cpp" />
     <ClCompile Include="CompPlus_Scoring.cpp" />
     <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="CustomLevelSelect.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
-    <ClCompile Include="DevMenu.cpp" />
+    <ClCompile Include="CompPlus_DevMenu.cpp" />
     <ClCompile Include="dllmain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -237,7 +238,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ManiaLevelSelect.cpp" />
-    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="CompPlus_Common.cpp" />
     <ClCompile Include="PhantomLevelSelect.cpp" />
     <ClCompile Include="PointScrolling.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{dfa46945-ae5e-43ff-b2b2-d8c4faa49b66}</UniqueIdentifier>
     </Filter>
@@ -17,9 +13,6 @@
     </Filter>
     <Filter Include="Extensions">
       <UniqueIdentifier>{56f541ab-8d49-4a79-a3fd-e35d9a7cecaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Internal">
-      <UniqueIdentifier>{fd34e2b7-125d-42c0-a330-cab227ad3b33}</UniqueIdentifier>
     </Filter>
     <Filter Include="Depends">
       <UniqueIdentifier>{8a2a5dff-9ff0-4175-b87c-c47e20e4396b}</UniqueIdentifier>
@@ -39,45 +32,21 @@
     <Filter Include="Scenes\Level Selects\Headers">
       <UniqueIdentifier>{e15aeec9-8804-4d23-9e49-a2f8f9750ac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Internal">
+      <UniqueIdentifier>{ff8657e2-9033-4ae3-a039-7dc82d95097d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Internal\Headers">
+      <UniqueIdentifier>{23204ba7-82c3-4dcf-b1b4-0a2afb2cbbb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SonicMania.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="include\MemAccess.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ManiaModLoader.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IZAPI.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
     <ClInclude Include="depends\tinyxml2\tinyxml2.h">
       <Filter>Depends</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompetitionPlus.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Announcers.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlusSettings.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Helpers.h">
@@ -128,6 +97,36 @@
     <ClInclude Include="CompPlus_Scoring.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Settings.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Common.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MemAccess.h">
+      <Filter>Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Internal\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IZAPI.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SonicMania.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ManiaModLoader.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -135,18 +134,6 @@
     </ClCompile>
     <ClCompile Include="ManiaExt.cpp">
       <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlusSettings.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="CustomLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
@@ -167,14 +154,8 @@
     <ClCompile Include="ChaotixLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
-    <ClCompile Include="DevMenu.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
       <Filter>Depends</Filter>
-    </ClCompile>
-    <ClCompile Include="CompetitionPlus.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="CompetitionManiaMenu.cpp">
       <Filter>Scenes\General Scenes</Filter>
@@ -196,6 +177,27 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Scoring.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Settings.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Announcers.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Common.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Internal</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

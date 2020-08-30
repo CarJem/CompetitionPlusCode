@@ -5,7 +5,7 @@
 #include "SonicMania.h"
 #include "IZAPI.h"
 
-namespace CompetitionPlus
+namespace CompPlus_Core
 {
     enum SceneExt : short
     {

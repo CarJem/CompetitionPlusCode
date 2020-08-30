@@ -3,7 +3,7 @@
 #include "ManiaModLoader.h"
 #include "PointScrolling.h"
 #include "ManiaExt.h"
-#include "CompPlusSettings.h"
+#include "CompPlus_Settings.h"
 #include "SonicMania.h"
 #include "CompPlus_Scoring.h"
 
@@ -34,7 +34,7 @@ namespace CompPlus_CompetitionMenu
     {
         if (!inMatch)
         {
-            CompPlusSettings::FixUnmatchingVSPlayers();
+            CompPlus_Settings::FixUnmatchingVSPlayers();
             inMatch = true;
         }
     }
@@ -111,6 +111,7 @@ namespace CompPlus_CompetitionMenu
         if (CompetitionLevelSelect.Visible) 
         {
             CompPlus_Scoring::ClearInternalWins();
+            StoredResults = false;
         }
     }
 

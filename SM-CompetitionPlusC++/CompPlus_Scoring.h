@@ -51,16 +51,12 @@ namespace CompPlus_Scoring
             Centiseconds = s;
         }
 
+
         bool operator < (const ScorableTime& time) const
         {
-            if (Minutes < time.Minutes) return true;
-            else
-            {
-                if (Seconds < time.Seconds)
-                    return true;
-                else
-                    return Centiseconds < time.Centiseconds;
-            }
+            int first = (Minutes * 6000) + (Seconds * 100) + Centiseconds;
+            int second = (time.Minutes * 6000) + (time.Seconds * 100) + time.Centiseconds;
+            return first < second;
         }
     };
 

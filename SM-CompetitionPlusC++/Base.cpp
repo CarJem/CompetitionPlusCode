@@ -4,9 +4,9 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "SonicMania.h"
-#include "CompetitionPlus.h"
+#include "CompPlus_Core.h"
 #include "IZAPI.h"
-#include "DevMenu.h"
+#include "CompPlus_DevMenu.h"
 #include <vector>
 #include <ctime>
 #include <algorithm>
@@ -33,7 +33,7 @@ extern "C"
 			//Load Sounds on First Run. //Global Scope fine for most things
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
-			CompetitionPlus::InitAnnouncerFX();
+			CompPlus_Core::InitAnnouncerFX();
 			LoadedSounds = true;
 		}
 	}
@@ -48,18 +48,18 @@ extern "C"
 		if (GameState & GameState_Running)
 		{
             LoadSounds();
-			if (!(GameState & GameState_SoftPause)) CompetitionPlus::UpdateMenus();
+			if (!(GameState & GameState_SoftPause)) CompPlus_Core::UpdateMenus();
 			UpdateCompPlusDevMenu();
 		}
         else if (GameState & GameState_NotRunning)
         {
-            CompetitionPlus::OnSceneReset();
+            CompPlus_Core::OnSceneReset();
         }
 	}
 
 	void DoMenuOnScreenDraw()
 	{
-		CompetitionPlus::DrawHook();
+		CompPlus_Core::DrawHook();
 	}
 
 	static int OnScreenDrawReturn = baseAddress + 0x7FFE;
@@ -88,10 +88,10 @@ extern "C"
 	{
 		const std::string path_cpp = path;
 		IZAPI::IZInit();
-		CompetitionPlus::InitSettings((path_cpp + "\\Settings.xml").c_str());
+		CompPlus_Core::InitSettings((path_cpp + "\\Settings.xml").c_str());
 		IZAPI::LoadStagesFile((path_cpp + "\\Stages.xml").c_str());
-		IZAPI::RegisterStageLoadEvent(CompetitionPlus::OnStageLoad);
-		IZAPI::RegisterStageUnloadEvent(CompetitionPlus::OnStageUnload);
+		IZAPI::RegisterStageLoadEvent(CompPlus_Core::OnStageLoad);
+		IZAPI::RegisterStageUnloadEvent(CompPlus_Core::OnStageUnload);
 	}
 
 	__declspec(dllexport) void Init(const char* path)
@@ -101,7 +101,7 @@ extern "C"
 		SetCurrentDirectoryA(path);
 		// Load files here
 		SetCurrentDirectoryA(buffer);
-        CompetitionPlus::InitMod();
+        CompPlus_Core::InitMod();
 	}
 	__declspec(dllexport) ModInfo ManiaModInfo = { ModLoaderVer, GameVer };
 

@@ -4,7 +4,7 @@
 #include "PointScrolling.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
-#include "CompetitionPlus.h"
+#include "CompPlus_Core.h"
 
 namespace CompPlus_ManiaLevelSelect
 {

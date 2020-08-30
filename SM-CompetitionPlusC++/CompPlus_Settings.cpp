@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "CompPlusSettings.h"
+#include "CompPlus_Settings.h"
 #include "IZAPI.h"
-#include "CompetitionPlus.h"
+#include "CompPlus_Core.h"
 #include "SonicMania.h"
 #include "ManiaExt.h"
 #include "depends/tinyxml2/tinyxml2.h"
@@ -11,7 +11,7 @@
 #include <sstream>
 #include "Helpers.h"
 
-namespace CompPlusSettings 
+namespace CompPlus_Settings 
 {
 	using namespace SonicMania;
 
@@ -98,7 +98,7 @@ namespace CompPlusSettings
 
     #pragma region Get Methods
 
-    SonicMania::Character GetCharacter(CompPlusSettings::ChosenPlayer Character)
+    SonicMania::Character GetCharacter(CompPlus_Settings::ChosenPlayer Character)
     {
         if (Character == ChosenPlayer_Sonic) return SonicMania::Character_Sonic;
         else if (Character == ChosenPlayer_Tails) return SonicMania::Character_Tails;
@@ -127,10 +127,10 @@ namespace CompPlusSettings
         SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
         SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
 
-        CompPlusSettings::UpdatePlayer(1, P1_Char, false);
-        CompPlusSettings::UpdatePlayer(2, P2_Char, false);
-        CompPlusSettings::UpdatePlayer(3, P3_Char, false);
-        CompPlusSettings::UpdatePlayer(4, P4_Char, false);
+        CompPlus_Settings::UpdatePlayer(1, P1_Char, false);
+        CompPlus_Settings::UpdatePlayer(2, P2_Char, false);
+        CompPlus_Settings::UpdatePlayer(3, P3_Char, false);
+        CompPlus_Settings::UpdatePlayer(4, P4_Char, false);
     }
 
     void FixAbilites(SonicMania::EntityPlayer* Player)
@@ -150,11 +150,11 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_TAILS)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_KNUX)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_MIGHTY)
             {
@@ -162,7 +162,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_RAY)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Sonic);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
             }
         }
         else if (Player->Character == Character_Tails)
@@ -177,7 +177,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_KNUX)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_MIGHTY)
             {
@@ -185,7 +185,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_RAY)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Sonic);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
             }
         }
         else if (Player->Character == Character_Knux)
@@ -196,7 +196,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_TAILS)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Knuckles);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Knuckles);
             }
             else if (Player->Moveset == MOVESET_KNUX)
             {
@@ -208,7 +208,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_RAY)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Sonic);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
             }
         }
         else if (Player->Character == Character_Mighty)
@@ -219,11 +219,11 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_TAILS)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_KNUX)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_MIGHTY)
             {
@@ -231,7 +231,7 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_RAY)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Sonic);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
             }
         }
         else if (Player->Character == Character_Ray)
@@ -242,11 +242,11 @@ namespace CompPlusSettings
             }
             else if (Player->Moveset == MOVESET_TAILS)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_KNUX)
             {
-                SetAbility(RealID, CompPlusSettings::AbilitySet_Mighty);
+                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
             }
             else if (Player->Moveset == MOVESET_MIGHTY)
             {
@@ -317,13 +317,13 @@ namespace CompPlusSettings
 
     void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force)
     {
-        CompPlusSettings::ChosenPlayer Player = CompPlusSettings::ChosenPlayer_Default;
+        CompPlus_Settings::ChosenPlayer Player = CompPlus_Settings::ChosenPlayer_Default;
 
-        if (Character == Characters_Sonic) Player = CompPlusSettings::ChosenPlayer_Sonic;
-        else if (Character == Characters_Tails) Player = CompPlusSettings::ChosenPlayer_Tails;
-        else if (Character == Characters_Knuckles) Player = CompPlusSettings::ChosenPlayer_Knuckles;
-        else if (Character == Character_Mighty) Player = CompPlusSettings::ChosenPlayer_Mighty;
-        else if (Character == Characters_Ray) Player = CompPlusSettings::ChosenPlayer_Ray;
+        if (Character == Characters_Sonic) Player = CompPlus_Settings::ChosenPlayer_Sonic;
+        else if (Character == Characters_Tails) Player = CompPlus_Settings::ChosenPlayer_Tails;
+        else if (Character == Characters_Knuckles) Player = CompPlus_Settings::ChosenPlayer_Knuckles;
+        else if (Character == Character_Mighty) Player = CompPlus_Settings::ChosenPlayer_Mighty;
+        else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
 
 
         int CharacterID = (int)Character;
@@ -333,30 +333,30 @@ namespace CompPlusSettings
         {
             if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
-            CompPlusSettings::Player1ChosenPlayer = Player;
+            CompPlus_Settings::Player1ChosenPlayer = Player;
         }
         else if (PlayerID == 2)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
-            CompPlusSettings::Player2ChosenPlayer = Player;
+            CompPlus_Settings::Player2ChosenPlayer = Player;
         }
         else if (PlayerID == 3)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
-            CompPlusSettings::Player3ChosenPlayer = Player;
+            CompPlus_Settings::Player3ChosenPlayer = Player;
         }
         else if (PlayerID == 4)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
-            CompPlusSettings::Player4ChosenPlayer = Player;
+            CompPlus_Settings::Player4ChosenPlayer = Player;
         }
         FixRayAndMighty2P();
     }
 
-    void UpdatePlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force)
+    void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force)
     {
         SonicMania::Character Player = SonicMania::Character_None;
 
@@ -380,7 +380,7 @@ namespace CompPlusSettings
 
     #pragma region Change Settings Methods
 
-    void SetMonitorMode(CompPlusSettings::ItemsConfig Value) 
+    void SetMonitorMode(CompPlus_Settings::ItemsConfig Value) 
     {
         MonitorTypes = Value;      
         SaveSettings();
@@ -392,43 +392,43 @@ namespace CompPlusSettings
         SaveSettings();
     }
 
-    void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability)
+    void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability)
 	{
 		if (PlayerID == 1)
 		{
-			CompPlusSettings::Player1AbilitySet = Ability;
-			if (Ability == CompPlusSettings::AbilitySet_Sonic) Player1.Moveset = MOVESET_SONIC;
-			else if (Ability == CompPlusSettings::AbilitySet_Tails) Player1.Moveset = MOVESET_TAILS;
-			else if (Ability == CompPlusSettings::AbilitySet_Knuckles)Player1.Moveset = MOVESET_KNUX;
-			else if (Ability == CompPlusSettings::AbilitySet_Mighty) Player1.Moveset = MOVESET_MIGHTY;
-			else if (Ability == CompPlusSettings::AbilitySet_Ray) Player1.Moveset = MOVESET_RAY;
+			CompPlus_Settings::Player1AbilitySet = Ability;
+			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player1.Moveset = MOVESET_SONIC;
+			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player1.Moveset = MOVESET_TAILS;
+			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player1.Moveset = MOVESET_KNUX;
+			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player1.Moveset = MOVESET_MIGHTY;
+			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player1.Moveset = MOVESET_RAY;
 		}
 		else if (PlayerID == 2)
 		{
-			CompPlusSettings::Player2AbilitySet = Ability;
-			if (Ability == CompPlusSettings::AbilitySet_Sonic) Player2.Moveset = MOVESET_SONIC;
-			else if (Ability == CompPlusSettings::AbilitySet_Tails) Player2.Moveset = MOVESET_TAILS;
-			else if (Ability == CompPlusSettings::AbilitySet_Knuckles)Player2.Moveset = MOVESET_KNUX;
-			else if (Ability == CompPlusSettings::AbilitySet_Mighty) Player2.Moveset = MOVESET_MIGHTY;
-			else if (Ability == CompPlusSettings::AbilitySet_Ray) Player2.Moveset = MOVESET_RAY;
+			CompPlus_Settings::Player2AbilitySet = Ability;
+			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player2.Moveset = MOVESET_SONIC;
+			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player2.Moveset = MOVESET_TAILS;
+			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player2.Moveset = MOVESET_KNUX;
+			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player2.Moveset = MOVESET_MIGHTY;
+			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player2.Moveset = MOVESET_RAY;
 		}
 		else if (PlayerID == 3)
 		{
-			CompPlusSettings::Player3AbilitySet = Ability;
-			if (Ability == CompPlusSettings::AbilitySet_Sonic) Player3.Moveset = MOVESET_SONIC;
-			else if (Ability == CompPlusSettings::AbilitySet_Tails) Player3.Moveset = MOVESET_TAILS;
-			else if (Ability == CompPlusSettings::AbilitySet_Knuckles)Player3.Moveset = MOVESET_KNUX;
-			else if (Ability == CompPlusSettings::AbilitySet_Mighty) Player3.Moveset = MOVESET_MIGHTY;
-			else if (Ability == CompPlusSettings::AbilitySet_Ray) Player3.Moveset = MOVESET_RAY;
+			CompPlus_Settings::Player3AbilitySet = Ability;
+			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player3.Moveset = MOVESET_SONIC;
+			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player3.Moveset = MOVESET_TAILS;
+			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player3.Moveset = MOVESET_KNUX;
+			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player3.Moveset = MOVESET_MIGHTY;
+			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player3.Moveset = MOVESET_RAY;
 		}
 		else if (PlayerID == 4)
 		{
-			CompPlusSettings::Player4AbilitySet = Ability;
-			if (Ability == CompPlusSettings::AbilitySet_Sonic) Player4.Moveset = MOVESET_SONIC;
-			else if (Ability == CompPlusSettings::AbilitySet_Tails) Player4.Moveset = MOVESET_TAILS;
-			else if (Ability == CompPlusSettings::AbilitySet_Knuckles)Player4.Moveset = MOVESET_KNUX;
-			else if (Ability == CompPlusSettings::AbilitySet_Mighty) Player4.Moveset = MOVESET_MIGHTY;
-			else if (Ability == CompPlusSettings::AbilitySet_Ray) Player4.Moveset = MOVESET_RAY;
+			CompPlus_Settings::Player4AbilitySet = Ability;
+			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player4.Moveset = MOVESET_SONIC;
+			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player4.Moveset = MOVESET_TAILS;
+			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player4.Moveset = MOVESET_KNUX;
+			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player4.Moveset = MOVESET_MIGHTY;
+			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player4.Moveset = MOVESET_RAY;
 		}      
 	}
 
@@ -447,22 +447,22 @@ namespace CompPlusSettings
 		if (PlayerID == 1)
 		{
 			Player1.UpAbility = PeeloutState;
-			CompPlusSettings::Player1PeeloutAbility = State;
+			CompPlus_Settings::Player1PeeloutAbility = State;
 		}
 		else if (PlayerID == 2)
 		{
 			Player2.UpAbility = PeeloutState;
-			CompPlusSettings::Player2PeeloutAbility = State;
+			CompPlus_Settings::Player2PeeloutAbility = State;
 		}
 		else if (PlayerID == 3)
 		{
 			Player3.UpAbility = PeeloutState;
-			CompPlusSettings::Player3PeeloutAbility = State;
+			CompPlus_Settings::Player3PeeloutAbility = State;
 		}
 		else if (PlayerID == 4)
 		{
 			Player4.UpAbility = PeeloutState;
-			CompPlusSettings::Player4PeeloutAbility = State;
+			CompPlus_Settings::Player4PeeloutAbility = State;
 		}
 		UpdateSonicAbilities();  
 	}
@@ -496,7 +496,7 @@ namespace CompPlusSettings
         SaveSettings();
     }
 
-    void SetVictoryMethod(CompPlusSettings::VictoryMode State) 
+    void SetVictoryMethod(CompPlus_Settings::VictoryMode State) 
     {
         VictoryStyle = State;
         SaveSettings();

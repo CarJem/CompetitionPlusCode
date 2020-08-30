@@ -3,15 +3,15 @@
 #include "PointScrolling.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
-#include "CompetitionPlus.h"
-#include "Common.h"
+#include "CompPlus_Core.h"
+#include "CompPlus_Common.h"
 #include "LevelSelectCore.h"
 
 
 namespace CompPlus_ManiaLevelSelect
 {
 	using namespace SonicMania;
-	using namespace CompetitionPlus;
+	using namespace CompPlus_Core;
 	using namespace CompPlus_Common;
 	using namespace CompPlus_LevelSelectCore;
 

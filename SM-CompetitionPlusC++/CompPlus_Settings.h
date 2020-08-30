@@ -1,7 +1,7 @@
 #include "SonicMania.h"
 #include <string>
 #pragma once
-namespace CompPlusSettings
+namespace CompPlus_Settings
 {
     enum ThreeStateBool : int {
         Indeterminate = 0,
@@ -36,7 +36,8 @@ namespace CompPlusSettings
         VictoryMode_Score = 2,
         VictoryMode_Rings = 3,
         VictoryMode_TotalRings = 4,
-        VictoryMode_Items = 5
+        VictoryMode_Items = 5,
+        VictoryMode_AntiRings = 6
     };
 
     enum PlayerAbility : int {
@@ -133,9 +134,9 @@ namespace CompPlusSettings
 
     extern void SetCurrentLSelect(int Value);
 
-    extern void SetVictoryMethod(CompPlusSettings::VictoryMode Value);
+    extern void SetVictoryMethod(CompPlus_Settings::VictoryMode Value);
 
-    extern void SetMonitorMode(CompPlusSettings::ItemsConfig Value);
+    extern void SetMonitorMode(CompPlus_Settings::ItemsConfig Value);
 
     extern void SetNumberOfRounds(int Value);
 
@@ -151,11 +152,11 @@ namespace CompPlusSettings
 
     extern void SetInitalLives(int value);
 
-    extern void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability);
+    extern void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability);
 
     extern void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
 
-    extern void UpdatePlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force = true);
+    extern void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force = true);
 
     extern void FixAbilites(SonicMania::EntityPlayer* Player);
 

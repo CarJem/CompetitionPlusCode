@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include "CompPlus_Scoring.h"
-#include "CompPlusSettings.h"
+#include "CompPlus_Settings.h"
 
 
 namespace CompPlus_Scoring
@@ -51,6 +51,7 @@ namespace CompPlus_Scoring
     std::vector<ScorableInt> RingRanking;
     std::vector<ScorableInt> ItemRanking;
     std::vector<ScorableInt> AverageRanking;
+    std::vector<ScorableInt> AntiRingRanking;
 
     #pragma region Comparors/Helpers
 
@@ -208,7 +209,7 @@ namespace CompPlus_Scoring
         if (NumberOfPlayers == 2) PlayerTimes = { Player1Time, Player2Time };
         if (NumberOfPlayers == 3) PlayerTimes = { Player1Time, Player2Time, Player3Time };
         if (NumberOfPlayers == 4) PlayerTimes = { Player1Time, Player2Time, Player3Time, Player4Time };
-        std::sort(PlayerTimes.begin(), PlayerTimes.end());
+        std::sort(PlayerTimes.begin(), PlayerTimes.end(), TimeSorter);
 
         PlayerTimes = GetPositionData(PlayerTimes);
         return PlayerTimes;
@@ -380,11 +381,15 @@ namespace CompPlus_Scoring
 
     void SetFinalRanking_ForLoop(int CurrentPlayer, bool& HasWon, bool& isTied, int& WinnerID, int Position, bool& HasWinner)
     {
+        int P1_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x00 & 0xFF >> 1);
+        int P2_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x08 & 0xFF >> 1);
+        int P3_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
+        int P4_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
         if (CurrentPlayer == 1)
         {
             if (HasWon)
             {
-                WinnerID = 1;
+                WinnerID = P1_Char;
                 SonicMania::Options->CompetitionSession.Wins_P1 += 1;
                 P1_WinsPlus += 1;
 
@@ -397,7 +402,7 @@ namespace CompPlus_Scoring
         {
             if (HasWon)
             {
-                WinnerID = 2;
+                WinnerID = P2_Char;
                 SonicMania::Options->CompetitionSession.Wins_P2 += 1;
                 P2_WinsPlus += 1;
 
@@ -410,7 +415,7 @@ namespace CompPlus_Scoring
         {
             if (HasWon)
             {
-                WinnerID = 3;
+                WinnerID = P3_Char;
                 SonicMania::Options->CompetitionSession.Wins_P3 += 1;
                 P3_WinsPlus += 1;
 
@@ -423,7 +428,7 @@ namespace CompPlus_Scoring
         {
             if (HasWon)
             {
-                WinnerID = 4;
+                WinnerID = P4_Char;
                 SonicMania::Options->CompetitionSession.Wins_P4 += 1;
                 P4_WinsPlus += 1;
 
@@ -472,27 +477,30 @@ namespace CompPlus_Scoring
         SetFinalRanking_Final(isTied, HasWinner, CurrentRound, WinnerID);
     }
 
-    void SetWinnerBasedOnSpecific(CompPlusSettings::VictoryMode Setting)
+    void SetWinnerBasedOnSpecific(CompPlus_Settings::VictoryMode Setting)
     {
         switch (Setting)
         {
-        case CompPlusSettings::VictoryMode_Time:
+        case CompPlus_Settings::VictoryMode_Time:
             SetFinalRanking(TimeRanking);
             break;
-        case CompPlusSettings::VictoryMode_Score:
+        case CompPlus_Settings::VictoryMode_Score:
             SetFinalRanking(ScoreRanking);
             break;
-        case CompPlusSettings::VictoryMode_Rings:
+        case CompPlus_Settings::VictoryMode_Rings:
             SetFinalRanking(RingRanking);
             break;
-        case CompPlusSettings::VictoryMode_TotalRings:
+        case CompPlus_Settings::VictoryMode_TotalRings:
             SetFinalRanking(TotalRingRanking);
             break;
-        case CompPlusSettings::VictoryMode_Items:
+        case CompPlus_Settings::VictoryMode_Items:
             SetFinalRanking(ItemRanking);
             break;
-        case CompPlusSettings::VictoryMode_Default:
+        case CompPlus_Settings::VictoryMode_Default:
             SetFinalRanking(AverageRanking);
+            break;
+        case CompPlus_Settings::VictoryMode_AntiRings:
+            SetFinalRanking(AntiRingRanking);
             break;
         }
     }
@@ -509,8 +517,9 @@ namespace CompPlus_Scoring
                 ScoreRanking = GetScoreRanking();
                 ItemRanking = GetItemRanking();
                 AverageRanking = GetAverageRanking();
+                AntiRingRanking = GetAntiRingsRanking();
 
-                SetWinnerBasedOnSpecific(CompPlusSettings::VictoryStyle);
+                SetWinnerBasedOnSpecific(CompPlus_Settings::VictoryStyle);
 
                 WinWait = 0;
                 AllowUpdateVictory = false;
@@ -588,7 +597,7 @@ namespace CompPlus_Scoring
 
     void UpdateMatchLength()
     {
-        int MaxRounds = CompPlusSettings::NumberOfRounds;
+        int MaxRounds = CompPlus_Settings::NumberOfRounds;
 
         // At beginning of match
         int WinThreshold = (MaxRounds / 2) + 1;
@@ -638,8 +647,8 @@ namespace CompPlus_Scoring
     {
         if (!CompPlus_Scoring::CanGoToFinalResults)
         {
-            if (SonicMania::Options->CompetitionSession.TotalRounds != CompPlusSettings::NumberOfRounds) SonicMania::Options->CompetitionSession.TotalRounds = CompPlusSettings::NumberOfRounds;
-            if (CompPlusSettings::EndlessRounds && SonicMania::Options->CompetitionSession.CurrentRound != 0) SonicMania::Options->CompetitionSession.CurrentRound = 0;
+            if (SonicMania::Options->CompetitionSession.TotalRounds != CompPlus_Settings::NumberOfRounds) SonicMania::Options->CompetitionSession.TotalRounds = CompPlus_Settings::NumberOfRounds;
+            if (CompPlus_Settings::EndlessRounds && SonicMania::Options->CompetitionSession.CurrentRound != 0) SonicMania::Options->CompetitionSession.CurrentRound = 0;
         }
         else
         {
