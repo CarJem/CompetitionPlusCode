@@ -1,0 +1,3 @@
+namespace CompPlus_Internal {
+
+}

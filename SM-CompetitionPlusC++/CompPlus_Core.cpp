@@ -35,7 +35,7 @@ namespace CompPlus_Core
     #pragma region Variables
 
     bool HasStartupInit = false;
-	bool StartupStageEnabled = false;
+	bool StartupStageEnabled = true;
 
 	bool StageRefresh = true;
     int LastSceneID = 0;
@@ -51,6 +51,7 @@ namespace CompPlus_Core
     {
         CompPlus_LevelSelectCore::Init();
         CompPlus_HubWorld::Init();
+        CompPlus_CompetitionMenu::Init();
     }
 
     extern void InitAnnouncerFX()
@@ -68,7 +69,7 @@ namespace CompPlus_Core
     {
         if (!HasStartupInit)
         {
-            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+            if (StartupStageEnabled) CompPlus_Common::LoadLevel(2);
             HasStartupInit = true;
         }
     }

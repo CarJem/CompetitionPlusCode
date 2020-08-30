@@ -181,6 +181,7 @@
     <ClInclude Include="ChaotixLevelSelect.h" />
     <ClInclude Include="CompetitionManiaMenu.h" />
     <ClInclude Include="CompPlus_Core.h" />
+    <ClInclude Include="CompPlus_Internal.h" />
     <ClInclude Include="CompPlus_Settings.h" />
     <ClInclude Include="CompPlus_Announcers.h" />
     <ClInclude Include="CompPlus_Scoring.h" />
@@ -215,6 +216,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CompPlus_Announcers.cpp" />
+    <ClCompile Include="CompPlus_Internal.cpp" />
     <ClCompile Include="CompPlus_Settings.cpp" />
     <ClCompile Include="CompPlus_Scoring.cpp" />
     <ClCompile Include="CreditsScene.cpp" />

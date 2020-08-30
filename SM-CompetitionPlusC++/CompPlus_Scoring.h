@@ -64,6 +64,8 @@ namespace CompPlus_Scoring
 
     extern bool AllowUpdateVictory;
 
+    extern const char* LastZone;
+
     extern int WinWait;
     extern int WinWaitMax;
 

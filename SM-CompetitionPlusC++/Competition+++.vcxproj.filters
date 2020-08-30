@@ -127,6 +127,9 @@
     <ClInclude Include="include\ManiaModLoader.h">
       <Filter>Extensions</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Internal.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -198,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Internal.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

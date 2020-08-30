@@ -6,6 +6,7 @@
 #include "SonicMania.h"
 #include "CompPlus_Common.h"
 #include <vector>
+#include "CompPlus_Scoring.h"
 
 
 
@@ -25,14 +26,16 @@ namespace CompPlus_LevelSelectCore
 
 		if (SceneLoadWaitTimer >= SceneLoadWaitMax)
 		{
-			if (level.isIZ)
-			{
-				CompPlus_Common::LoadLevel_IZ(level.LevelID_IZ);
-			}
-			else
-			{
-				CompPlus_Common::LoadLevel(level.LevelID);
-			}
+            if (level.isIZ)
+            {
+                CompPlus_Scoring::LastZone = level.CP_Name;
+                CompPlus_Common::LoadLevel_IZ(level.LevelID_IZ);
+            }
+            else
+            {
+                CompPlus_Scoring::LastZone = level.CP_Name;
+                CompPlus_Common::LoadLevel(level.LevelID);
+            }
 
 			SceneLoadWaitTimer = 0;
 			LevelSelected = false;

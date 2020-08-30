@@ -16,6 +16,8 @@ namespace CompPlus_Scoring
 
      bool AllowUpdateVictory = false;
 
+     const char* LastZone = "???";
+
      int WinWait = 0;
      int WinWaitMax = 100;
 
@@ -578,6 +580,7 @@ namespace CompPlus_Scoring
         SonicMania::Options->CompetitionSession.Wins_P2 = 0;
         SonicMania::Options->CompetitionSession.Wins_P3 = 0;
         SonicMania::Options->CompetitionSession.Wins_P4 = 0;
+        LastZone = "???";
     }
 
     void ClearInternalWins()
@@ -588,6 +591,7 @@ namespace CompPlus_Scoring
             SonicMania::Options->CompetitionSession.Wins_P2 = 0;
             SonicMania::Options->CompetitionSession.Wins_P3 = 0;
             SonicMania::Options->CompetitionSession.Wins_P4 = 0;
+            LastZone = "???";
         }
     }
 
