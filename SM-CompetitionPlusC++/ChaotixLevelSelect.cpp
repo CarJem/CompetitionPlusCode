@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "PointScrolling.h"
 #include "ManiaExt.h"
@@ -139,6 +139,7 @@ namespace CompPlus_ChaotixLevelSelect
 
 	void UpdateChaotixLSelect()
 	{
+        CompPlus_Common::SetLastLevelSelect(3);
 		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupChaotixLSelectMenuPoints();
 		SetupChaotixSelector();

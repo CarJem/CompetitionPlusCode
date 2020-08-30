@@ -142,7 +142,7 @@ namespace CompPlus_ManiaLevelSelect
 
 	void UpdateManiaLSelect()
 	{
-
+        CompPlus_Common::SetLastLevelSelect(0);
 		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupManiaLSelectMenuPoints();
 		SetupManiaSelector();

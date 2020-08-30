@@ -2,11 +2,11 @@
 #include "HubWorld.h"
 #include "ManiaExt.h"
 #include "SonicMania.h"
-#include "CompetitionPlus.h"
 #include "CompPlusSettings.h"
 #include "Common.h"
 #include <string>
 #include <sstream>
+#include "CompPlus_Scoring.h"
 
 namespace CompPlus_HubWorld
 {
@@ -418,7 +418,7 @@ namespace CompPlus_HubWorld
 
 	void ChangeCharacter(int PlayerID, int Value) 
 	{
-		CompPlusSettings::SetPlayer(PlayerID, (CompPlusSettings::ChosenPlayer)Value);
+		CompPlusSettings::UpdatePlayer(PlayerID, (CompPlusSettings::ChosenPlayer)Value);
 		CompPlusSettings::SetAbility(PlayerID, (CompPlusSettings::PlayerAbility)Value);
 	}
 
@@ -816,10 +816,10 @@ namespace CompPlus_HubWorld
     std::string GetPlayerPositionString(int PlayerID) 
     {
         int Position = 0;
-        if (PlayerID == 1) Position = CompPlusSettings::P1_LastPlacement;
-        else if (PlayerID == 2) Position = CompPlusSettings::P2_LastPlacement;
-        else if (PlayerID == 3) Position = CompPlusSettings::P3_LastPlacement;
-        else if (PlayerID == 4) Position = CompPlusSettings::P4_LastPlacement;
+        if (PlayerID == 1) Position = CompPlus_Scoring::P1_LastPlacement;
+        else if (PlayerID == 2) Position = CompPlus_Scoring::P2_LastPlacement;
+        else if (PlayerID == 3) Position = CompPlus_Scoring::P3_LastPlacement;
+        else if (PlayerID == 4) Position = CompPlus_Scoring::P4_LastPlacement;
 
         if (Position == 1) return "1st";
         else if (Position == 2) return "2nd";
@@ -954,22 +954,22 @@ namespace CompPlus_HubWorld
         }
         else 
         {       
-            std::string roundNumber = std::to_string(CompPlusSettings::CurrentRound_Plus + 1) + "\\" + std::to_string(CompPlusSettings::NumberOfRounds);
+            std::string roundNumber = std::to_string(CompPlus_Scoring::CurrentRound_Plus + 1) + "\\" + std::to_string(CompPlusSettings::NumberOfRounds);
             UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
             lastIndex++;
         }
         
 
-        std::string winsP1 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P1);
+        std::string winsP1 = std::to_string(CompPlus_Scoring::P1_WinsPlus);
         UpdateGeneralDisplay(P1_WinsCounterText, (char*)winsP1.c_str(), winsP1.length(), lastIndex);
         lastIndex++;
-        std::string winsP2 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P2);
+        std::string winsP2 = std::to_string(CompPlus_Scoring::P2_WinsPlus);
         UpdateGeneralDisplay(P2_WinsCounterText, (char*)winsP2.c_str(), winsP2.length(), lastIndex);
         lastIndex++;
-        std::string winsP3 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P3);
+        std::string winsP3 = std::to_string(CompPlus_Scoring::P3_WinsPlus);
         UpdateGeneralDisplay(P3_WinsCounterText, (char*)winsP3.c_str(), winsP3.length(), lastIndex);
         lastIndex++;
-        std::string winsP4 = std::to_string(SonicMania::Options->CompetitionSession.Wins_P4);
+        std::string winsP4 = std::to_string(CompPlus_Scoring::P4_WinsPlus);
         UpdateGeneralDisplay(P4_WinsCounterText, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
         lastIndex++;
 
@@ -982,69 +982,69 @@ namespace CompPlus_HubWorld
         UpdateGeneralDisplay(P4_WinsCounterText_Board, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
         lastIndex++;
 
-        std::string timeP1 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P1) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P1 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P1) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P1 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P1);
+        std::string timeP1 = std::to_string(CompPlus_Scoring::LastSession.TimeMinutes_P1) + "\'" + (CompPlus_Scoring::LastSession.TimeSeconds_P1 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeSeconds_P1) + "\"" + (CompPlus_Scoring::LastSession.TimeCentiseconds_P1 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeCentiseconds_P1);
         UpdateGeneralDisplay(P1_TimeCounterText_Board, (char*)timeP1.c_str(), timeP1.length(), lastIndex);
         lastIndex++;
-        std::string timeP2 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P2) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P2 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P2) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P2 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P2);
+        std::string timeP2 = std::to_string(CompPlus_Scoring::LastSession.TimeMinutes_P2) + "\'" + (CompPlus_Scoring::LastSession.TimeSeconds_P2 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeSeconds_P2) + "\"" + (CompPlus_Scoring::LastSession.TimeCentiseconds_P2 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeCentiseconds_P2);
         UpdateGeneralDisplay(P2_TimeCounterText_Board, (char*)timeP2.c_str(), timeP2.length(), lastIndex);
         lastIndex++;
-        std::string timeP3 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P3) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P3 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P3) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P3 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P3);
+        std::string timeP3 = std::to_string(CompPlus_Scoring::LastSession.TimeMinutes_P3) + "\'" + (CompPlus_Scoring::LastSession.TimeSeconds_P3 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeSeconds_P3) + "\"" + (CompPlus_Scoring::LastSession.TimeCentiseconds_P3 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeCentiseconds_P3);
         UpdateGeneralDisplay(P3_TimeCounterText_Board, (char*)timeP3.c_str(), timeP3.length(), lastIndex);
         lastIndex++;
-        std::string timeP4 = std::to_string(CompPlusSettings::LastSession.TimeMinutes_P4) + "\'" + (CompPlusSettings::LastSession.TimeSeconds_P4 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeSeconds_P4) + "\"" + (CompPlusSettings::LastSession.TimeCentiseconds_P4 < 10 ? "0" : "") + std::to_string(CompPlusSettings::LastSession.TimeCentiseconds_P4);
+        std::string timeP4 = std::to_string(CompPlus_Scoring::LastSession.TimeMinutes_P4) + "\'" + (CompPlus_Scoring::LastSession.TimeSeconds_P4 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeSeconds_P4) + "\"" + (CompPlus_Scoring::LastSession.TimeCentiseconds_P4 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeCentiseconds_P4);
         UpdateGeneralDisplay(P4_TimeCounterText_Board, (char*)timeP4.c_str(), timeP4.length(), lastIndex);
         lastIndex++;
 
-        std::string scoreP1 = std::to_string(CompPlusSettings::LastSession.Score_P1);
+        std::string scoreP1 = std::to_string(CompPlus_Scoring::LastSession.Score_P1);
         UpdateGeneralDisplay(P1_ScoreCounterText_Board, (char*)scoreP1.c_str(), scoreP1.length(), lastIndex);
         lastIndex++;
-        std::string scoreP2 = std::to_string(CompPlusSettings::LastSession.Score_P2);
+        std::string scoreP2 = std::to_string(CompPlus_Scoring::LastSession.Score_P2);
         UpdateGeneralDisplay(P2_ScoreCounterText_Board, (char*)scoreP2.c_str(), scoreP2.length(), lastIndex);
         lastIndex++;
-        std::string scoreP3 = std::to_string(CompPlusSettings::LastSession.Score_P3);
+        std::string scoreP3 = std::to_string(CompPlus_Scoring::LastSession.Score_P3);
         UpdateGeneralDisplay(P3_ScoreCounterText_Board, (char*)scoreP3.c_str(), scoreP3.length(), lastIndex);
         lastIndex++;
-        std::string scoreP4 = std::to_string(CompPlusSettings::LastSession.Score_P4);
+        std::string scoreP4 = std::to_string(CompPlus_Scoring::LastSession.Score_P4);
         UpdateGeneralDisplay(P4_ScoreCounterText_Board, (char*)scoreP4.c_str(), scoreP4.length(), lastIndex);
         lastIndex++;
 
-        std::string ringsP1 = std::to_string(CompPlusSettings::LastSession.Rings_P1);
+        std::string ringsP1 = std::to_string(CompPlus_Scoring::LastSession.Rings_P1);
         UpdateGeneralDisplay(P1_RingsCounterText_Board, (char*)ringsP1.c_str(), ringsP1.length(), lastIndex);
         lastIndex++;
-        std::string ringsP2 = std::to_string(CompPlusSettings::LastSession.Rings_P2);
+        std::string ringsP2 = std::to_string(CompPlus_Scoring::LastSession.Rings_P2);
         UpdateGeneralDisplay(P2_RingsCounterText_Board, (char*)ringsP2.c_str(), ringsP2.length(), lastIndex);
         lastIndex++;
-        std::string ringsP3 = std::to_string(CompPlusSettings::LastSession.Rings_P3);
+        std::string ringsP3 = std::to_string(CompPlus_Scoring::LastSession.Rings_P3);
         UpdateGeneralDisplay(P3_RingsCounterText_Board, (char*)ringsP3.c_str(), ringsP3.length(), lastIndex);
         lastIndex++;
-        std::string ringsP4 = std::to_string(CompPlusSettings::LastSession.Rings_P4);
+        std::string ringsP4 = std::to_string(CompPlus_Scoring::LastSession.Rings_P4);
         UpdateGeneralDisplay(P4_RingsCounterText_Board, (char*)ringsP4.c_str(), ringsP4.length(), lastIndex);
         lastIndex++;
 
-        std::string itemsP1 = std::to_string(CompPlusSettings::LastSession.Items_P1);
+        std::string itemsP1 = std::to_string(CompPlus_Scoring::LastSession.Items_P1);
         UpdateGeneralDisplay(P1_ItemsCounterText_Board, (char*)itemsP1.c_str(), itemsP1.length(), lastIndex);
         lastIndex++;
-        std::string itemsP2 = std::to_string(CompPlusSettings::LastSession.Items_P2);
+        std::string itemsP2 = std::to_string(CompPlus_Scoring::LastSession.Items_P2);
         UpdateGeneralDisplay(P2_ItemsCounterText_Board, (char*)itemsP2.c_str(), itemsP2.length(), lastIndex);
         lastIndex++;
-        std::string itemsP3 = std::to_string(CompPlusSettings::LastSession.Items_P3);
+        std::string itemsP3 = std::to_string(CompPlus_Scoring::LastSession.Items_P3);
         UpdateGeneralDisplay(P3_ItemsCounterText_Board, (char*)itemsP3.c_str(), itemsP3.length(), lastIndex);
         lastIndex++;
-        std::string itemsP4 = std::to_string(CompPlusSettings::LastSession.Items_P4);
+        std::string itemsP4 = std::to_string(CompPlus_Scoring::LastSession.Items_P4);
         UpdateGeneralDisplay(P4_ItemsCounterText_Board, (char*)itemsP4.c_str(), itemsP4.length(), lastIndex);
         lastIndex++;
 
 
-        std::string totalringsP1 = std::to_string(CompPlusSettings::LastSession.TotalRings_P1);
+        std::string totalringsP1 = std::to_string(CompPlus_Scoring::LastSession.TotalRings_P1);
         UpdateGeneralDisplay(P1_TotalRingsCounterText_Board, (char*)totalringsP1.c_str(), totalringsP1.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP2 = std::to_string(CompPlusSettings::LastSession.TotalRings_P2);
+        std::string totalringsP2 = std::to_string(CompPlus_Scoring::LastSession.TotalRings_P2);
         UpdateGeneralDisplay(P2_TotalRingsCounterText_Board, (char*)totalringsP2.c_str(), totalringsP2.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP3 = std::to_string(CompPlusSettings::LastSession.TotalRings_P3);
+        std::string totalringsP3 = std::to_string(CompPlus_Scoring::LastSession.TotalRings_P3);
         UpdateGeneralDisplay(P3_TotalRingsCounterText_Board, (char*)totalringsP3.c_str(), totalringsP3.length(), lastIndex);
         lastIndex++;
-        std::string totalringsP4 = std::to_string(CompPlusSettings::LastSession.TotalRings_P4);
+        std::string totalringsP4 = std::to_string(CompPlus_Scoring::LastSession.TotalRings_P4);
         UpdateGeneralDisplay(P4_TotalRingsCounterText_Board, (char*)totalringsP4.c_str(), totalringsP4.length(), lastIndex);
         lastIndex++;
 
@@ -1205,10 +1205,10 @@ namespace CompPlus_HubWorld
 
     void SetSpawnPositions()
     {
-        SetSpawnPosition(Player1, CompPlusSettings::P1_LastPlacement);
-        SetSpawnPosition(Player2, CompPlusSettings::P2_LastPlacement);
-        SetSpawnPosition(Player3, CompPlusSettings::P3_LastPlacement);
-        SetSpawnPosition(Player4, CompPlusSettings::P4_LastPlacement);
+        SetSpawnPosition(Player1, CompPlus_Scoring::P1_LastPlacement);
+        SetSpawnPosition(Player2, CompPlus_Scoring::P2_LastPlacement);
+        SetSpawnPosition(Player3, CompPlus_Scoring::P3_LastPlacement);
+        SetSpawnPosition(Player4, CompPlus_Scoring::P4_LastPlacement);
     }
 
 

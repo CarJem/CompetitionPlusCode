@@ -19,12 +19,10 @@ namespace CompPlusSettings
 
     int NumberOfAnnouncers = 6;
     bool FixPlayers = false;
-    bool AllowUpdateVictory = false;
     std::string Settings_FilePath;
+    bool SettingsLoaded = false;
     int DevMode_ControllerSwapPosition = 0;
 
-    int CurrentRound_Plus = 0;
-    int LastRound_NoPlus = 0;
 
     char ETA_OriginalCode[0x02];
     char TLK_OriginalCode[0x06];
@@ -39,58 +37,13 @@ namespace CompPlusSettings
     Controller InitalInputP3;
     Controller InitalInputP4;
 
-    bool InitalInputCollected = false;
-
     bool P1_InputSaved = false;
     bool P2_InputSaved = false;
     bool P3_InputSaved = false;
     bool P4_InputSaved = false;
 
-    #pragma endregion
+    bool InitalInputCollected = false;
 
-    #pragma region Status Variables
-
-    SonicMania::CompetitionSession LastSession;
-
-    int P1_Placement = 0;
-    int P2_Placement = 0;
-    int P3_Placement = 0;
-    int P4_Placement = 0;
-
-    int P1_LastPlacement = 0;
-    int P2_LastPlacement = 0;
-    int P3_LastPlacement = 0;
-    int P4_LastPlacement = 0;
-
-    int P1_TimeRanking = 0;
-    int P2_TimeRanking = 0;
-    int P3_TimeRanking = 0;
-    int P4_TimeRanking = 0;
-
-    int P1_TotalRingRanking = 0;
-    int P2_TotalRingRanking = 0;
-    int P3_TotalRingRanking = 0;
-    int P4_TotalRingRanking = 0;
-
-    int P1_ScoreRanking = 0;
-    int P2_ScoreRanking = 0;
-    int P3_ScoreRanking = 0;
-    int P4_ScoreRanking = 0;
-
-    int P1_RingRanking = 0;
-    int P2_RingRanking = 0;
-    int P3_RingRanking = 0;
-    int P4_RingRanking = 0;
-
-    int P1_ItemRanking = 0;
-    int P2_ItemRanking = 0;
-    int P3_ItemRanking = 0;
-    int P4_ItemRanking = 0;
-
-    int P1_AverageRanking = 0;
-    int P2_AverageRanking = 0;
-    int P3_AverageRanking = 0;
-    int P4_AverageRanking = 0;
 
     #pragma endregion
 
@@ -119,7 +72,7 @@ namespace CompPlusSettings
     bool EndlessRounds = false;
     bool DropdashAbility = true;
     bool InstaSheildAbility = false;
-    VictoryMode VictoryStyle = VictoryMode_Default;
+    VictoryMode VictoryStyle = VictoryMode_Time;
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
 
@@ -143,73 +96,19 @@ namespace CompPlusSettings
 
     #pragma endregion
 
-    #pragma region Extension Methods
+    #pragma region Get Methods
 
-    bool TimeLessThan(Time& me, Time& t)
+    SonicMania::Character GetCharacter(CompPlusSettings::ChosenPlayer Character)
     {
-        if (me.Minutes < t.Minutes) return true;
-        else
-        {
-            if (me.Seconds < t.Seconds) return true;
-            else
-            {
-                if (me.Centiseconds < t.Centiseconds) return true;
-                else return false;
-            }
-
-        }
-    }
-
-    void ScorableIntStructSort(ScorableInt a[], int n) {
-        int i, j, max;
-        ScorableInt temp;
-        for (i = 0; i < n - 1; i++)
-        {
-            max = i;
-            for (j = i + 1; j < n; j++)
-            {
-                if (a[j].Value < a[max].Value) max = j;
-                temp = a[i];
-                a[i] = a[max];
-                a[max] = temp;
-            }
-        }
-    }
-
-    void ScorableIntStructSortReverse(ScorableInt a[], int n) {
-        int i, j, max;
-        ScorableInt temp;
-        for (i = 0; i < n - 1; i++) 
-        {
-            max = i;
-            for (j = i + 1; j < n; j++) 
-            {
-                if (a[j].Value > a[max].Value) max = j;
-                temp = a[i];
-                a[i] = a[max];
-                a[max] = temp;
-            }
-        }
-    }
-
-    void TimeStructSort(Time a[], int n) {
-        int i, j, min;
-        Time temp;
-        for (i = 0; i < n - 1; i++)
-        {
-            min = i;
-            for (j = i + 1; j < n; j++)
-            {
-                if (TimeLessThan(a[j], a[min])) min = j;
-                temp = a[i];
-                a[i] = a[min];
-                a[min] = temp;
-            }
-        }
+        if (Character == ChosenPlayer_Sonic) return SonicMania::Character_Sonic;
+        else if (Character == ChosenPlayer_Tails) return SonicMania::Character_Tails;
+        else if (Character == ChosenPlayer_Knuckles) return SonicMania::Character_Knux;
+        else if (Character == ChosenPlayer_Mighty) return SonicMania::Character_Mighty;
+        else if (Character == ChosenPlayer_Ray) return SonicMania::Character_Ray;
+        else return SonicMania::Character_None;
     }
 
     #pragma endregion
-
 
     #pragma region Fix Methods
 
@@ -228,10 +127,10 @@ namespace CompPlusSettings
         SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
         SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
 
-        CompPlusSettings::SetPlayer(1, P1_Char, false);
-        CompPlusSettings::SetPlayer(2, P2_Char, false);
-        CompPlusSettings::SetPlayer(3, P3_Char, false);
-        CompPlusSettings::SetPlayer(4, P4_Char, false);
+        CompPlusSettings::UpdatePlayer(1, P1_Char, false);
+        CompPlusSettings::UpdatePlayer(2, P2_Char, false);
+        CompPlusSettings::UpdatePlayer(3, P3_Char, false);
+        CompPlusSettings::UpdatePlayer(4, P4_Char, false);
     }
 
     void FixAbilites(SonicMania::EntityPlayer* Player)
@@ -375,407 +274,29 @@ namespace CompPlusSettings
 
     #pragma endregion
 
-    #pragma region Get Methods
+    #pragma region Update Player Methods
 
-    SonicMania::Character GetCharacter(CompPlusSettings::ChosenPlayer Character)
+    void UpdatePlayerSprites(SonicMania::EntityPlayer& Player)
     {
-        if (Character == ChosenPlayer_Sonic) return SonicMania::Character_Sonic;
-        else if (Character == ChosenPlayer_Tails) return SonicMania::Character_Tails;
-        else if (Character == ChosenPlayer_Knuckles) return SonicMania::Character_Knux;
-        else if (Character == ChosenPlayer_Mighty) return SonicMania::Character_Mighty;
-        else if (Character == ChosenPlayer_Ray) return SonicMania::Character_Ray;
-        else return SonicMania::Character_None;
-    }
-
-    Time GetPlayerTime(int PlayerID)
-    {
-        Time PlayerTime;
-        PlayerTime.PlayerID = PlayerID;
-        int NumberOfPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-        if (PlayerID == 1 && NumberOfPlayers >= 1)
+        if (Player.Character == Characters_Sonic)
         {
-            PlayerTime.Minutes = SonicMania::Options->CompetitionSession.TimeMinutes_P1;
-            PlayerTime.Seconds = SonicMania::Options->CompetitionSession.TimeSeconds_P1;
-            PlayerTime.Centiseconds = SonicMania::Options->CompetitionSession.TimeCentiseconds_P1;
-        }
-        else if (PlayerID == 2 && NumberOfPlayers >= 2)
-        {
-            PlayerTime.Minutes = SonicMania::Options->CompetitionSession.TimeMinutes_P2;
-            PlayerTime.Seconds = SonicMania::Options->CompetitionSession.TimeSeconds_P2;
-            PlayerTime.Centiseconds = SonicMania::Options->CompetitionSession.TimeCentiseconds_P2;
-        }
-        else if (PlayerID == 3 && NumberOfPlayers >= 3)
-        {
-            PlayerTime.Minutes = SonicMania::Options->CompetitionSession.TimeMinutes_P3;
-            PlayerTime.Seconds = SonicMania::Options->CompetitionSession.TimeSeconds_P3;
-            PlayerTime.Centiseconds = SonicMania::Options->CompetitionSession.TimeCentiseconds_P3;
-        }
-        else if (PlayerID == 4 && NumberOfPlayers >= 4)
-        {
-            PlayerTime.Minutes = SonicMania::Options->CompetitionSession.TimeMinutes_P4;
-            PlayerTime.Seconds = SonicMania::Options->CompetitionSession.TimeSeconds_P4;
-            PlayerTime.Centiseconds = SonicMania::Options->CompetitionSession.TimeCentiseconds_P4;
-        }
-        else 
-        {
-            PlayerTime.Minutes = 99;
-            PlayerTime.Seconds = 99;
-            PlayerTime.Centiseconds = 99;
-        }
-        return PlayerTime;
-    }
-
-    void GetTimeRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
-    {
-        Time Player1Time = GetPlayerTime(1);
-        Time Player2Time = GetPlayerTime(2);
-        Time Player3Time = GetPlayerTime(3);
-        Time Player4Time = GetPlayerTime(4);
-
-        Time PlayerTimes[4] = { Player1Time, Player2Time, Player3Time, Player4Time };
-        TimeStructSort(PlayerTimes, 4);
-
-        int Position = 1;
-
-        int CurrentRound = SonicMania::Options->CompetitionSession.CurrentRound;
-
-        for (int i = 0; i < 4; i++) 
-        {
-            if (PlayerTimes[i].PlayerID == 1)
+            if (Player.State == PLAYERSTATE_HAMMERDROP)
             {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 1;
-                }
-                P1_Placement = Position;
-                Position++;
-            }
-            else if (PlayerTimes[i].PlayerID == 2)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 2;
-                }
-                P2_Placement = Position;
-                Position++;
-            }
-            else if (PlayerTimes[i].PlayerID == 3)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 3;
-                }
-                P3_Placement = Position;
-                Position++;
-            }
-            else if (PlayerTimes[i].PlayerID == 4)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 4;
-                }
-                P4_Placement = Position;
-                Position++;
+                //Player.Animation.CurrentAnimation = 54; //551
+                //SetSpriteAnimation(0, 54, &Player.Animation, true, 6);
             }
         }
     }
 
-    void GetTotalRingsRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
+    void UpdateMultiPlayerSprites()
     {
-        ScorableInt Player1Score = ScorableInt(SonicMania::Options->CompetitionSession.TotalRings_P1, 1);
-        ScorableInt Player2Score = ScorableInt(SonicMania::Options->CompetitionSession.TotalRings_P2, 2);
-        ScorableInt Player3Score = ScorableInt(SonicMania::Options->CompetitionSession.TotalRings_P3, 3);
-        ScorableInt Player4Score = ScorableInt(SonicMania::Options->CompetitionSession.TotalRings_P4, 4);
-
-        ScorableInt PlayerScores[4] = { Player1Score, Player2Score, Player3Score, Player4Score };
-        ScorableIntStructSortReverse(PlayerScores, 4);
-
-        int Position = 1;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if ((int)PlayerScores[i].PlayerID == 1)
-            {
-                P1_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 2)
-            {
-                P2_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 3)
-            {
-                P3_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 4)
-            {
-                P4_Placement = Position;
-                Position++;
-            }
-        }
+        UpdatePlayerSprites(Player1);
+        UpdatePlayerSprites(Player2);
+        UpdatePlayerSprites(Player3);
+        UpdatePlayerSprites(Player4);
     }
 
-    void GetRingsRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
-    {
-        ScorableInt Player1Score = ScorableInt(SonicMania::Options->CompetitionSession.Rings_P1, 1);
-        ScorableInt Player2Score = ScorableInt(SonicMania::Options->CompetitionSession.Rings_P2, 2);
-        ScorableInt Player3Score = ScorableInt(SonicMania::Options->CompetitionSession.Rings_P3, 3);
-        ScorableInt Player4Score = ScorableInt(SonicMania::Options->CompetitionSession.Rings_P4, 4);
-
-        ScorableInt PlayerScores[4] = { Player1Score, Player2Score, Player3Score, Player4Score };
-        ScorableIntStructSortReverse(PlayerScores, 4);
-
-        int Position = 1;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if ((int)PlayerScores[i].PlayerID == 1)
-            {
-                P1_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 2)
-            {
-                P2_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 3)
-            {
-                P3_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 4)
-            {
-                P4_Placement = Position;
-                Position++;
-            }
-        }
-    }
-
-    void GetScoreRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
-    {
-        ScorableInt Player1Score = ScorableInt(SonicMania::Options->CompetitionSession.Score_P1, 1);
-        ScorableInt Player2Score = ScorableInt(SonicMania::Options->CompetitionSession.Score_P2, 2);
-        ScorableInt Player3Score = ScorableInt(SonicMania::Options->CompetitionSession.Score_P3, 3);
-        ScorableInt Player4Score = ScorableInt(SonicMania::Options->CompetitionSession.Score_P4, 4);
-
-        ScorableInt PlayerScores[4] = { Player1Score, Player2Score, Player3Score, Player4Score };
-        ScorableIntStructSortReverse(PlayerScores, 4);
-
-        int Position = 1;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if ((int)PlayerScores[i].PlayerID == 1)
-            {
-                P1_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 2)
-            {
-                P2_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 3)
-            {
-                P3_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 4)
-            {
-                P4_Placement = Position;
-                Position++;
-            }
-        }
-    }
-
-    void GetItemRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
-    {
-        ScorableInt Player1Score = ScorableInt(SonicMania::Options->CompetitionSession.Items_P1, 1);
-        ScorableInt Player2Score = ScorableInt(SonicMania::Options->CompetitionSession.Items_P2, 2);
-        ScorableInt Player3Score = ScorableInt(SonicMania::Options->CompetitionSession.Items_P3, 3);
-        ScorableInt Player4Score = ScorableInt(SonicMania::Options->CompetitionSession.Items_P4, 4);
-
-        ScorableInt PlayerScores[4] = { Player1Score, Player2Score, Player3Score, Player4Score };
-        ScorableIntStructSortReverse(PlayerScores, 4);
-
-        int Position = 1;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if ((int)PlayerScores[i].PlayerID == 1)
-            {
-                P1_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 2)
-            {
-                P2_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 3)
-            {
-                P3_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 4)
-            {
-                P4_Placement = Position;
-                Position++;
-            }
-        }
-    }
-
-    void GetAverageRanking(int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement) 
-    {
-        ScorableInt Player1Score = ScorableInt(P1_TimeRanking + P1_ScoreRanking + P1_RingRanking + P1_ItemRanking + P1_TotalRingRanking, 1);
-        ScorableInt Player2Score = ScorableInt(P2_TimeRanking + P2_ScoreRanking + P2_RingRanking + P2_ItemRanking + P2_TotalRingRanking, 2);
-        ScorableInt Player3Score = ScorableInt(P3_TimeRanking + P3_ScoreRanking + P3_RingRanking + P3_ItemRanking + P3_TotalRingRanking, 3);
-        ScorableInt Player4Score = ScorableInt(P4_TimeRanking + P4_ScoreRanking + P4_RingRanking + P4_ItemRanking + P4_TotalRingRanking, 4);
-
-        ScorableInt PlayerScores[4] = { Player1Score, Player2Score, Player3Score, Player4Score };
-        ScorableIntStructSortReverse(PlayerScores, 4);
-
-        int Position = 1;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if ((int)PlayerScores[i].PlayerID == 1)
-            {
-                P1_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 2)
-            {
-                P2_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 3)
-            {
-                P3_Placement = Position;
-                Position++;
-            }
-            else if ((int)PlayerScores[i].PlayerID == 4)
-            {
-                P4_Placement = Position;
-                Position++;
-            }
-        }
-    }
-
-    #pragma endregion
-
-    #pragma region Set Methods
-
-    void SetFinalRanking(int PlayerRanks[4], int& P1_Placement, int& P2_Placement, int& P3_Placement, int& P4_Placement)
-    {
-        int CurrentRound = SonicMania::Options->CompetitionSession.CurrentRound;
-
-        for (int i = 0; i < 4; i++)
-        {
-            int Position = PlayerRanks[i];
-            int CurrentPlayer = i + 1;
-
-            if (CurrentPlayer == 1)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 1;
-                    SonicMania::Options->CompetitionSession.Wins_P1 += 1;
-                }
-                P1_Placement = Position;
-                Position++;
-            }
-            else if (CurrentPlayer == 2)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 2;
-                    SonicMania::Options->CompetitionSession.Wins_P2 += 1;
-                }
-                P2_Placement = Position;
-                Position++;
-            }
-            else if (CurrentPlayer == 3)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 3;
-                    SonicMania::Options->CompetitionSession.Wins_P3 += 1;
-                }
-                P3_Placement = Position;
-                Position++;
-            }
-            else if (CurrentPlayer == 4)
-            {
-                if (Position == 1)
-                {
-                    SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 4;
-                    SonicMania::Options->CompetitionSession.Wins_P4 += 1;
-                }
-                P4_Placement = Position;
-                Position++;
-            }
-        }
-    }
-
-    void SetWinnerBasedOnSpecific(CompPlusSettings::VictoryMode Setting) 
-    {
-        int PlayerTimes[4] = { P1_TimeRanking, P2_TimeRanking, P3_TimeRanking, P4_TimeRanking };
-        int PlayerScores[4] = { P1_ScoreRanking, P2_ScoreRanking, P3_ScoreRanking, P4_ScoreRanking };
-        int PlayerRings[4] = { P1_RingRanking, P2_RingRanking, P3_RingRanking, P4_RingRanking };
-        int PlayerItems[4] = { P1_ItemRanking, P2_ItemRanking, P3_ItemRanking, P4_ItemRanking };
-        int PlayerTotalRings[4] = { P1_TotalRingRanking, P2_TotalRingRanking, P3_TotalRingRanking, P4_TotalRingRanking };
-        int PlayerAverage[4] = { P1_AverageRanking, P2_AverageRanking, P3_AverageRanking, P4_AverageRanking };
-
-        switch (Setting)
-        {
-            case VictoryMode_Time:
-                SetFinalRanking(PlayerTimes, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-            case VictoryMode_Score:
-                SetFinalRanking(PlayerScores, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-            case VictoryMode_Rings:
-                SetFinalRanking(PlayerRings, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-            case VictoryMode_TotalRings:
-                SetFinalRanking(PlayerTotalRings, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-            case VictoryMode_Items:
-                SetFinalRanking(PlayerItems, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-            case VictoryMode_Default:
-                SetFinalRanking(PlayerAverage, P1_Placement, P2_Placement, P3_Placement, P4_Placement);
-                break;
-        }
-    }
-
-    void SetMonitorMode(CompPlusSettings::ItemsConfig Value) 
-    {
-        MonitorTypes = Value;       
-    }
-
-    void SetNumberOfRounds(int Value) 
-    {
-        NumberOfRounds = Value;     
-    }
-
-    void SetLastMatchResults() 
-    {
-        P1_LastPlacement = P1_Placement;
-        P2_LastPlacement = P2_Placement;
-        P3_LastPlacement = P3_Placement;
-        P4_LastPlacement = P4_Placement;
-        P1_Placement = 0;
-        P2_Placement = 0;
-        P3_Placement = 0;
-        P4_Placement = 0;
-    }
-
-    void SetSonicAbilities()
+    void UpdateSonicAbilities()
     {
         //21 : No Dropdash or Instasheild     - (CD)
         //13 : Dropdash and Instasheild		  - (Max Control)
@@ -792,6 +313,83 @@ namespace CompPlusSettings
 
         BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
         WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)MovesetID);
+    }
+
+    void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force)
+    {
+        CompPlusSettings::ChosenPlayer Player = CompPlusSettings::ChosenPlayer_Default;
+
+        if (Character == Characters_Sonic) Player = CompPlusSettings::ChosenPlayer_Sonic;
+        else if (Character == Characters_Tails) Player = CompPlusSettings::ChosenPlayer_Tails;
+        else if (Character == Characters_Knuckles) Player = CompPlusSettings::ChosenPlayer_Knuckles;
+        else if (Character == Character_Mighty) Player = CompPlusSettings::ChosenPlayer_Mighty;
+        else if (Character == Characters_Ray) Player = CompPlusSettings::ChosenPlayer_Ray;
+
+
+        int CharacterID = (int)Character;
+        //SonicMania::Options->CompetitionSession.CharacterFlags &= 0xFFFFFFFF ^ (0xFF << (PlayerID - 1));
+
+        if (PlayerID == 1)
+        {
+            if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
+            CompPlusSettings::Player1ChosenPlayer = Player;
+        }
+        else if (PlayerID == 2)
+        {
+            if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
+            CompPlusSettings::Player2ChosenPlayer = Player;
+        }
+        else if (PlayerID == 3)
+        {
+            if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
+            CompPlusSettings::Player3ChosenPlayer = Player;
+        }
+        else if (PlayerID == 4)
+        {
+            if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
+            CompPlusSettings::Player4ChosenPlayer = Player;
+        }
+        FixRayAndMighty2P();
+    }
+
+    void UpdatePlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force)
+    {
+        SonicMania::Character Player = SonicMania::Character_None;
+
+        if (Character == ChosenPlayer_Sonic) Player = SonicMania::Character_Sonic;
+        else if (Character == ChosenPlayer_Tails) Player = SonicMania::Character_Tails;
+        else if (Character == ChosenPlayer_Knuckles) Player = SonicMania::Character_Knux;
+        else if (Character == ChosenPlayer_Mighty) Player = SonicMania::Character_Mighty;
+        else if (Character == ChosenPlayer_Ray) Player = SonicMania::Character_Ray;
+        else if (Character == ChosenPlayer_Default)
+        {
+            if (PlayerID == 1) Player = Player1.Character;
+            if (PlayerID == 2) Player = Player2.Character;
+            if (PlayerID == 3) Player = Player3.Character;
+            if (PlayerID == 4) Player = Player4.Character;
+        }
+
+        UpdatePlayer(PlayerID, Player, Force);
+    }
+
+    #pragma endregion
+
+    #pragma region Change Settings Methods
+
+    void SetMonitorMode(CompPlusSettings::ItemsConfig Value) 
+    {
+        MonitorTypes = Value;      
+        SaveSettings();
+    }
+
+    void SetNumberOfRounds(int Value) 
+    {
+        NumberOfRounds = Value;     
+        SaveSettings();
     }
 
     void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability)
@@ -831,14 +429,14 @@ namespace CompPlusSettings
 			else if (Ability == CompPlusSettings::AbilitySet_Knuckles)Player4.Moveset = MOVESET_KNUX;
 			else if (Ability == CompPlusSettings::AbilitySet_Mighty) Player4.Moveset = MOVESET_MIGHTY;
 			else if (Ability == CompPlusSettings::AbilitySet_Ray) Player4.Moveset = MOVESET_RAY;
-		}
-        
+		}      
 	}
 
 	void SetDropdashAbility(bool Value)
 	{
 		DropdashAbility = Value;
-		SetSonicAbilities();       
+		UpdateSonicAbilities();       
+        SaveSettings();
 	}
 
 	void SetPeeloutAbility(int PlayerID, bool State)
@@ -866,13 +464,14 @@ namespace CompPlusSettings
 			Player4.UpAbility = PeeloutState;
 			CompPlusSettings::Player4PeeloutAbility = State;
 		}
-		SetSonicAbilities();  
+		UpdateSonicAbilities();  
 	}
 
 	void SetInstaSheildAbility(bool State)
 	{
 		InstaSheildAbility = State;
-		SetSonicAbilities();    
+		UpdateSonicAbilities();   
+        SaveSettings();
 	}
     
     void SetInitalLives(int value)
@@ -880,96 +479,44 @@ namespace CompPlusSettings
         InitalLives = value;
 
         if (InitalLives == 100) InfiniteLives = true;
-        else InfiniteLives = false;     
+        else InfiniteLives = false; 
+
+        SaveSettings();
     }
 
     void SetAnnouncer(AnnouncerType Value)
     {
         CurrentAnnouncer = Value;    
+        SaveSettings();
     }
-
-	void SetPlayer(int PlayerID, SonicMania::Character Character, bool Force)
-	{
-		CompPlusSettings::ChosenPlayer Player = CompPlusSettings::ChosenPlayer_Default;
-
-		if (Character == Characters_Sonic) Player = CompPlusSettings::ChosenPlayer_Sonic;
-		else if (Character == Characters_Tails) Player = CompPlusSettings::ChosenPlayer_Tails;
-		else if (Character == Characters_Knuckles) Player = CompPlusSettings::ChosenPlayer_Knuckles;
-		else if (Character == Character_Mighty) Player = CompPlusSettings::ChosenPlayer_Mighty;
-		else if (Character == Characters_Ray) Player = CompPlusSettings::ChosenPlayer_Ray;
-
-
-        int CharacterID = (int)Character;
-        //SonicMania::Options->CompetitionSession.CharacterFlags &= 0xFFFFFFFF ^ (0xFF << (PlayerID - 1));
-
-		if (PlayerID == 1)
-		{
-			if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
-            CompPlusSettings::Player1ChosenPlayer = Player;
-		}
-		else if (PlayerID == 2)
-		{
-			if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
-            CompPlusSettings::Player2ChosenPlayer = Player;
-		}
-		else if (PlayerID == 3)
-		{
-			if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
-            CompPlusSettings::Player3ChosenPlayer = Player;
-		}
-		else if (PlayerID == 4)
-		{
-			if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
-            CompPlusSettings::Player4ChosenPlayer = Player;
-		}
-        FixRayAndMighty2P();
-	}
-
-	void SetPlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force)
-	{
-		SonicMania::Character Player = SonicMania::Character_None;
-
-		if (Character == ChosenPlayer_Sonic) Player = SonicMania::Character_Sonic;
-		else if (Character == ChosenPlayer_Tails) Player = SonicMania::Character_Tails;
-		else if (Character == ChosenPlayer_Knuckles) Player = SonicMania::Character_Knux;
-		else if (Character == ChosenPlayer_Mighty) Player = SonicMania::Character_Mighty;
-		else if (Character == ChosenPlayer_Ray) Player = SonicMania::Character_Ray;
-		else if (Character == ChosenPlayer_Default)
-		{
-			if (PlayerID == 1) Player = Player1.Character;
-			if (PlayerID == 2) Player = Player2.Character;
-			if (PlayerID == 3) Player = Player3.Character;
-			if (PlayerID == 4) Player = Player4.Character;
-		}
-
-		SetPlayer(PlayerID, Player, Force);
-	}
 
     void SetTimeLimit(bool State) 
     {
         TimeLimit = State;       
+        SaveSettings();
     }
 
     void SetVictoryMethod(CompPlusSettings::VictoryMode State) 
     {
-        VictoryStyle = State;       
+        VictoryStyle = State;
+        SaveSettings();
     }
 
     void SetEndlessRounds(bool State)
     {
-        EndlessRounds = State;        
+        EndlessRounds = State;       
+        SaveSettings();
     }
 
     void SetCurrentLSelect(int value)
     {
         CurrentLevelSelect = value;      
+        SaveSettings();
     }
 
     #pragma endregion
+
+
 
     #pragma region Update Methods
 
@@ -978,102 +525,6 @@ namespace CompPlusSettings
         DisableVSPointAddingAddress();
         if (SonicMania::Options->CompetitionSession.MonitorMode != MonitorTypes) SonicMania::Options->CompetitionSession.MonitorMode = MonitorTypes;
         if (SonicMania::Options->ItemMode != MonitorTypes) SonicMania::Options->ItemMode = MonitorTypes;
-    }
-
-    void UpdatePlayerSprites(SonicMania::EntityPlayer &Player)
-    {
-        if (Player.Character == Characters_Sonic) 
-        {
-            if (Player.State == PLAYERSTATE_HAMMERDROP) 
-            {
-                //Player.Animation.CurrentAnimation = 54; //551
-                //SetSpriteAnimation(0, 54, &Player.Animation, true, 6);
-            }
-        }
-    }
-
-    void UpdateMultiPlayerSprites() 
-    {
-        UpdatePlayerSprites(Player1);
-        UpdatePlayerSprites(Player2);
-        UpdatePlayerSprites(Player3);
-        UpdatePlayerSprites(Player4);
-    }
-
-    void UpdateRounds() 
-    {
-        if (SonicMania::Options->CompetitionSession.TotalRounds != NumberOfRounds) SonicMania::Options->CompetitionSession.TotalRounds = NumberOfRounds;
-        if (EndlessRounds) 
-        {
-            if (SonicMania::Options->CompetitionSession.CurrentRound != 0) SonicMania::Options->CompetitionSession.CurrentRound = 0;
-        }
-        else 
-        {
-            if (SonicMania::Options->CompetitionSession.CurrentRound == 0) 
-            {
-                //Reset Personalized Round Counter
-                CurrentRound_Plus = 0;
-                LastRound_NoPlus = 0;
-            }
-            else 
-            {
-                if (SonicMania::Options->CompetitionSession.CurrentRound != LastRound_NoPlus) 
-                {
-                    if (SonicMania::Options->CompetitionSession.CurrentRound == 5 && CurrentRound_Plus != (NumberOfRounds - 1))
-                    {
-                        int Diff = SonicMania::Options->CompetitionSession.CurrentRound - LastRound_NoPlus;
-                        LastRound_NoPlus = 0;
-                        SonicMania::Options->CompetitionSession.CurrentRound = 0;
-                        CurrentRound_Plus += Diff;
-                    }
-                    else 
-                    {
-                        int Diff = SonicMania::Options->CompetitionSession.CurrentRound - LastRound_NoPlus;
-                        LastRound_NoPlus = SonicMania::Options->CompetitionSession.CurrentRound;
-                        CurrentRound_Plus += Diff;
-                    }
-                }
-            }
-        }
-    }
-
-    void UpdateWinnerForVictory() 
-    {
-        if (AllowUpdateVictory) 
-        {
-            GetTimeRanking(P1_TimeRanking, P2_TimeRanking, P3_TimeRanking, P4_TimeRanking);
-            GetRingsRanking(P1_RingRanking, P2_RingRanking, P3_RingRanking, P4_RingRanking);
-            GetTotalRingsRanking(P1_TotalRingRanking, P2_TotalRingRanking, P3_TotalRingRanking, P4_TotalRingRanking);
-            GetScoreRanking(P1_ScoreRanking, P2_ScoreRanking, P3_ScoreRanking, P4_ScoreRanking);
-            GetItemRanking(P1_ItemRanking, P2_ItemRanking, P3_ItemRanking, P4_ItemRanking);
-            GetAverageRanking(P1_AverageRanking, P2_AverageRanking, P3_AverageRanking, P4_AverageRanking);
-
-            SetWinnerBasedOnSpecific(VictoryStyle);
-
-
-            CompPlusSettings::LastSession = SonicMania::Options->CompetitionSession;
-            CompPlusSettings::SetLastMatchResults();
-
-            AllowUpdateVictory = false;
-        }
-
-    }
-
-    void UpdatePlayerResults() 
-    {
-        int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
-        int P1_FinishFlag = Player1.Active ? (FinishFlags >> 0x00 & 0xFF) : 0;
-        int P2_FinishFlag = Player2.Active ? (FinishFlags >> 0x08 & 0xFF) : 0;
-        int P3_FinishFlag = Player3.Active ? (FinishFlags >> 0x10 & 0xFF) : 0;
-        int P4_FinishFlag = Player4.Active ? (FinishFlags >> 0x18 & 0xFF) : 0;
-
-        bool P1_Finished = Player1.Active ? P1_FinishFlag != 0 : true;
-        bool P2_Finished = Player2.Active ? P2_FinishFlag != 0 : true;
-        bool P3_Finished = Player3.Active ? P3_FinishFlag != 0 : true;
-        bool P4_Finished = Player4.Active ? P4_FinishFlag != 0 : true;
-
-        if (P1_Finished && P2_Finished && P3_Finished && P4_Finished && Timer.Enabled) UpdateWinnerForVictory();
-        else AllowUpdateVictory = true;
     }
 
     void UpdateLives()
@@ -1337,9 +788,40 @@ namespace CompPlusSettings
         SetPeeloutAbility(3, Player3PeeloutAbility);
         SetPeeloutAbility(4, Player4PeeloutAbility);
 
-        SetSonicAbilities();
+        UpdateSonicAbilities();
 
         FixPlayers = true;
+    }
+
+    void LogLoadSetting(const char* Name, std::string Value)
+    {
+        std::string output = Name;
+        output += " = " + Value;
+        LogInfo("LoadXML", output.c_str());
+    }
+
+    void LogSaveSetting(const char* Name, std::string Value)
+    {
+        std::string output = Name;
+        output += " = " + Value;
+        LogInfo("SaveXML", output.c_str());
+    }
+
+    int XMLGetInt(tinyxml2::XMLElement* xmlOption)
+    {
+        const char* str_value = xmlOption->GetText();
+        int value = atoi(str_value);
+        return value;
+    }
+
+    bool XMLGetBool(tinyxml2::XMLElement* xmlOption)
+    {
+        const char* str_value = xmlOption->GetText();
+        bool value;
+        if (str_value == "1") value = true;
+        else value = false;
+
+        return value;
     }
 
     void LoadSettings()
@@ -1368,108 +850,124 @@ namespace CompPlusSettings
             {
                 for (auto xmlOption = xmlSettings->FirstChildElement(); xmlOption != nullptr; xmlOption = xmlOption->NextSiblingElement())
                 {
-                    LogInfo("XML", xmlOption->Name());
                     if (!strcmp(xmlOption->Name(), "SelectedAnnouncer"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         CurrentAnnouncer = (AnnouncerType)value;
+
+                        LogLoadSetting("SelectedAnnouncer", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "InitalLives"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         InitalLives = value;
+
+                        LogLoadSetting("InitalLives", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "TimeLimit"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") TimeLimit = true;
-                        else TimeLimit = false;
+                        bool value = XMLGetBool(xmlOption);
+                        TimeLimit = value;
+
+                        LogLoadSetting("TimeLimit", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "UseDropdash"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") DropdashAbility = true;
-                        else DropdashAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        DropdashAbility = value;
+
+                        LogLoadSetting("UseDropdash", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "UseInstaSheild"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") InstaSheildAbility = true;
-                        else InstaSheildAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        InstaSheildAbility = value;
+
+                        LogLoadSetting("UseInstaSheild", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "PeeloutP1"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") Player1PeeloutAbility = true;
-                        else Player1PeeloutAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        Player1PeeloutAbility = value;
+
+                        LogLoadSetting("PeeloutP1", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "PeeloutP2"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") Player2PeeloutAbility = true;
-                        else Player2PeeloutAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        Player2PeeloutAbility = value;
+
+                        LogLoadSetting("PeeloutP2", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "PeeloutP3"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") Player3PeeloutAbility = true;
-                        else Player3PeeloutAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        Player3PeeloutAbility = value;
+
+                        LogLoadSetting("PeeloutP3", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "PeeloutP4"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") Player4PeeloutAbility = true;
-                        else Player4PeeloutAbility = false;
+                        bool value = XMLGetBool(xmlOption);
+                        Player4PeeloutAbility = value;
+
+                        LogLoadSetting("PeeloutP4", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "CurrentLSelect"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         CurrentLevelSelect = value;
+
+                        LogLoadSetting("CurrentLSelect", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "VictoryStyle"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         VictoryStyle = (VictoryMode)value;
+
+                        LogLoadSetting("VictoryStyle", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "EndlessRounds"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") EndlessRounds = true;
-                        else EndlessRounds = false;
+                        bool value = XMLGetBool(xmlOption);
+                        EndlessRounds = value;
+
+                        LogLoadSetting("EndlessRounds", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "MonitorMode"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         MonitorTypes = (ItemsConfig)value;
+
+                        LogLoadSetting("MonitorMode", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "NumberOfRounds"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        int value = atoi(str_value);
+                        int value = XMLGetInt(xmlOption);
                         NumberOfRounds = value;
+
+                        LogLoadSetting("NumberOfRounds", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "EnableDebugMode"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") EnableDebugMode = true;
-                        else EnableDebugMode = false;
+                        bool value = XMLGetBool(xmlOption);
+                        EnableDebugMode = value;
+
+                        LogLoadSetting("EnableDebugMode", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "EnableDevMode"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") EnableDevMode = true;
-                        else EnableDevMode = false;
+                        bool value = XMLGetBool(xmlOption);
+                        EnableDevMode = value;
+
+                        LogLoadSetting("EnableDevMode", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "DarkDevMenu"))
                     {
-                        const char* str_value = xmlOption->GetText();
-                        if (str_value == "1") DarkDevMenu = true;
-                        else DarkDevMenu = false;
+                        bool value = XMLGetBool(xmlOption);
+                        DarkDevMenu = value;
+
+                        LogLoadSetting("DarkDevMenu", std::to_string(value));
                     }
                 }
             }
@@ -1480,52 +978,71 @@ namespace CompPlusSettings
         }
         // Clean up
         free(xml);
+
+        file.close();
+        SettingsLoaded = true;
+    }
+
+    void AddtoSaveSettings(std::string Name, std::string Value, std::string& text)
+    {
+        text += "<" + Name + ">" + Value + "</" + Name + ">";
+        LogSaveSetting(Name.c_str(), Value);
     }
 
     void SaveSettings()
     {
-        tinyxml2::XMLDocument document;
+        if (SettingsLoaded) 
+        {
+            tinyxml2::XMLDocument document;
 
-        std::string text = "<Settings>";
-        text += "<SelectedAnnouncer>" + IntToString(CurrentAnnouncer) + "</SelectedAnnouncer>";
-        text += "<InitalLives>" + IntToString(InitalLives) + "</InitalLives>";
-        text += "<TimeLimit>" + std::to_string(TimeLimit) + "</TimeLimit>";
-        text += "<UseDropdash>" + std::to_string(DropdashAbility) + "</UseDropdash>";
-        text += "<UseInstaSheild>" + std::to_string(InstaSheildAbility) + "</UseInstaSheild>";
-        text += "<PeeloutP1>" + std::to_string(Player1PeeloutAbility) + "</PeeloutP1>";
-        text += "<PeeloutP2>" + std::to_string(Player2PeeloutAbility) + "</PeeloutP2>";
-        text += "<PeeloutP3>" + std::to_string(Player3PeeloutAbility) + "</PeeloutP3>";
-        text += "<PeeloutP4>" + std::to_string(Player4PeeloutAbility) + "</PeeloutP4>";
-        text += "<CurrentLSelect>" + std::to_string(CurrentLevelSelect) + "</CurrentLSelect>";
-        text += "<VictoryStyle>" + std::to_string(VictoryStyle) + "</VictoryStyle>";
-        text += "<EndlessRounds>" + std::to_string(EndlessRounds) + "</EndlessRounds>";
-        text += "<NumberOfRounds>" + std::to_string(NumberOfRounds) + "</NumberOfRounds>";
-        text += "<MonitorMode>" + std::to_string(MonitorTypes) + "</MonitorMode>";
-        text += "<EnableDebugMode>" + std::to_string(EnableDebugMode) + "</EnableDebugMode>";
-        text += "<EnableDevMode>" + std::to_string(EnableDevMode) + "</EnableDevMode>";
-        text += "<DarkDevMenu>" + std::to_string(DarkDevMenu) + "</DarkDevMenu>";
-        text += "</Settings>";
-        document.Parse((const char*)text.c_str());
-        document.SaveFile(Settings_FilePath.c_str());
+            std::string text = "<Settings>";
+            AddtoSaveSettings("SelectedAnnouncer", IntToString(CurrentAnnouncer), text);
+            AddtoSaveSettings("CurrentLSelect", IntToString(CurrentLevelSelect), text);
+            AddtoSaveSettings("VictoryStyle", IntToString(VictoryStyle), text);
+
+
+            AddtoSaveSettings("UseDropdash", IntToString(DropdashAbility), text);
+            AddtoSaveSettings("UseInstaSheild", IntToString(InstaSheildAbility), text);
+
+            AddtoSaveSettings("PeeloutP1", IntToString(Player1PeeloutAbility), text);
+            AddtoSaveSettings("PeeloutP2", IntToString(Player2PeeloutAbility), text);
+            AddtoSaveSettings("PeeloutP3", IntToString(Player3PeeloutAbility), text);
+            AddtoSaveSettings("PeeloutP4", IntToString(Player4PeeloutAbility), text);
+
+            AddtoSaveSettings("InitalLives", IntToString(InitalLives), text);
+            AddtoSaveSettings("TimeLimit", IntToString(TimeLimit), text);
+            AddtoSaveSettings("EndlessRounds", IntToString(EndlessRounds), text);
+            AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text);
+            AddtoSaveSettings("MonitorMode", IntToString(MonitorTypes), text);
+
+            AddtoSaveSettings("EnableDebugMode", IntToString(EnableDebugMode), text);
+            AddtoSaveSettings("EnableDevMode", IntToString(EnableDevMode), text);
+            AddtoSaveSettings("DarkDevMenu", IntToString(DarkDevMenu), text);
+
+            text += "</Settings>";
+            document.Parse((const char*)text.c_str());
+            document.SaveFile(Settings_FilePath.c_str());
+        }
     }
 
     #pragma endregion
 
     void OnStageChange() 
     {
-        SaveSettings();
+
     }
 
     void OnFrame()
     {
-        if (FixPlayers) FixPlayers = false;
-        UpdateLives();
-        UpdateRounds();
-        UpdatePlayerResults();
-        UpdateStockSettings();
-        UpdateMultiPlayerSprites();
-        UpdateTimer(!TimeLimit);
-        DevModeLoop();
+        if (SettingsLoaded) 
+        {
+            if (FixPlayers) FixPlayers = false;
+            UpdateLives();
+            UpdateStockSettings();
+            UpdateMultiPlayerSprites();
+            UpdateTimer(!TimeLimit);
+            DevModeLoop();
+        }
     }
 
 

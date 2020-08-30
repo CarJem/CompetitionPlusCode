@@ -66,42 +66,7 @@ namespace CompPlusSettings
         Announcer_Memes = 5
     };
 
-    struct ScorableInt 
-    {
-        int Value;
-        int PlayerID = 0;
 
-        ScorableInt() 
-        {
-
-        }
-
-        ScorableInt(int _value, int _playerID) : ScorableInt()
-        {
-            Value = _value;
-            PlayerID = _playerID;
-        }
-    };
-
-    struct Time 
-    {
-        int Minutes;
-        int Seconds;
-        int Centiseconds;
-        int PlayerID;
-
-        Time()
-        {
-
-        }
-
-        Time(int m, int s, int c) : Time()
-        {
-            Minutes = m;
-            Seconds = s;
-            Centiseconds = s;
-        }
-    };
 
 #define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
 
@@ -109,9 +74,6 @@ namespace CompPlusSettings
 
     extern int NumberOfAnnouncers;
     extern std::string Settings_FilePath;
-    extern SonicMania::CompetitionSession LastSession;
-    extern int CurrentRound_Plus;
-    extern bool AllowUpdateVictory;
 
     #pragma endregion
 
@@ -162,14 +124,8 @@ namespace CompPlusSettings
 
     //Status States
     extern int CurrentLevelSelect;
-    extern int P1_LastPlacement;
-    extern int P2_LastPlacement;
-    extern int P3_LastPlacement;
-    extern int P4_LastPlacement;
 
     #pragma endregion
-
-    extern void SetLastMatchResults();
 
     extern void DevMode_WarpAllPlayersTo(int PlayerID);
 
@@ -197,9 +153,9 @@ namespace CompPlusSettings
 
     extern void SetAbility(int PlayerID, CompPlusSettings::PlayerAbility Ability);
 
-    extern void SetPlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
+    extern void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
 
-    extern void SetPlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force = true);
+    extern void UpdatePlayer(int PlayerID, CompPlusSettings::ChosenPlayer Character, bool Force = true);
 
     extern void FixAbilites(SonicMania::EntityPlayer* Player);
 

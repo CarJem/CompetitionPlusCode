@@ -66,4 +66,9 @@ namespace CompPlus_Common
         else if (CompPlusSettings::CurrentLevelSelect == 2) LoadLevel_IZ("CPCLS");
         else if (CompPlusSettings::CurrentLevelSelect == 3) LoadLevel_IZ("CPCXLS");
     }
+
+    void SetLastLevelSelect(int Value) 
+    {
+        if (CompPlusSettings::CurrentLevelSelect != Value) CompPlusSettings::SetCurrentLSelect(Value);
+    }
 };

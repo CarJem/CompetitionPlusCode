@@ -139,6 +139,7 @@ namespace CompPlus_CustomLevelSelect
 
 	void UpdateCustomLSelect()
 	{
+        CompPlus_Common::SetLastLevelSelect(2);
 		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupCustomLSelectMenuPoints();
 		SetupCustomSelector();

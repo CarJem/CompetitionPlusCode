@@ -7,5 +7,6 @@ namespace CompPlus_Common
 	extern void PlayMenuAcceptSoundFX(bool isClassic);
 	extern void FixSummary();
     extern void LoadLastLevelSelect();
+    extern void SetLastLevelSelect(int Value);
 };
 

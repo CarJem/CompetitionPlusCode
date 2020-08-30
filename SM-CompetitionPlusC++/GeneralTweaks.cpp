@@ -21,9 +21,18 @@ namespace CompPlus_GeneralTweaks
         }
     }
 
+    void UpdateTSZ()
+    {
+        SonicMania::Player1.Right = true;
+        SonicMania::Player2.Right = true;
+        SonicMania::Player3.Right = true;
+        SonicMania::Player4.Right = true;
+    }
+
     void UpdateScenes(const char* CurrentScene) 
     {
         if (!strcmp(CurrentScene, "CPSZ")) UpdateSZ();
         else if (!strcmp(CurrentScene, "CPSZE")) UpdateSZ();    
+        else if (!strcmp(CurrentScene, "CPTSZ")) UpdateTSZ();
     }
 }

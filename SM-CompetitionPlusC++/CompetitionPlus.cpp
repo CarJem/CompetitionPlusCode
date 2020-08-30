@@ -18,6 +18,7 @@
 #include "GenericLogos.h"
 #include "GeneralTweaks.h"
 #include "CreditsScene.h"
+#include "CompPlus_Scoring.h"
 
 #include "CompPlus_Announcers.h"
 
@@ -154,6 +155,7 @@ namespace CompetitionPlus
 		CompPlusSettings::OnFrame();
 		ManiaMenuLinking();
 		CheckForStageRefresh();
+        CompPlus_Scoring::OnFrame();
 
 		if (CurrentStage.StageKey) InfinityZoneLoop();
 		else GenericZoneLoop();

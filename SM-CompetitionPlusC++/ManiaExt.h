@@ -173,6 +173,52 @@ dw is WORD
 db is BYTE
 */
 
+struct EntityUIVsResults : SonicMania::Entity
+{
+    /* 00000058*/ DWORD State;
+    /* 0000005C*/ BYTE  Unknown1[164];
+    /* 00000100*/ DWORD Disabled;
+    /* 00000104*/ DWORD PlayerID;
+    /* 00000108*/ DWORD NumRows;
+    /* 0000010C*/ DWORD TrophyCount;
+    /* 00000110*/ BYTE  Row0Label;
+    /* 00000111*/ BYTE  Row1Label;
+    /* 00000112*/ BYTE  Row2Label;
+    /* 00000113*/ BYTE  Row3Label;
+    /* 00000114*/ BYTE  Row4Label;
+    /* 00000115*/ BYTE  Row5Label;
+    /* 00000116*/ BYTE  Row6Label;
+    /* 00000117*/ BYTE  Row7Label;
+    /* 00000118*/ BYTE  Row8Label;
+    /* 00000119*/ BYTE  Row9Label;
+    /* 0000011A*/ BYTE  Row10Label;
+    /* 0000011B*/ BYTE  Row11Label;
+    /* 0000011C*/ BYTE  Row12Label;
+    /* 0000011D*/ BYTE  field_11D;
+    /* 0000011E*/ BYTE  field_11E;
+    /* 0000011F*/ BYTE  field_11F;
+    /* 00000120*/ DWORD Row0Highlight;
+    /* 00000124*/ DWORD Row1Highlight;
+    /* 00000128*/ DWORD Row2Highlight;
+    /* 0000012C*/ DWORD Row3Highlight;
+    /* 00000130*/ DWORD Row4Highlight;
+    /* 00000134*/ DWORD Row5Highlight;
+    /* 00000138*/ DWORD Row6Highlight;
+    /* 0000013C*/ DWORD Row7Highlight;
+    /* 00000140*/ DWORD Row8Highlight;
+    /* 00000144*/ DWORD Row9Highlight;
+    /* 00000148*/ DWORD Row10Highlight;
+    /* 0000014C*/ DWORD Row11Highlight;
+    /* 00000150*/ DWORD Row12Highlight;
+    /* 00000154*/ BYTE  Unknown2[104];
+    /* 000001BC*/ DWORD dword1BC;
+    /* 000001C0*/ BYTE  Unknown3[484];
+    /* 000003A4*/ WORD  word3A4;
+    /* 000003A6*/ BYTE  field_3A6;
+    /* 000003A7*/ BYTE  field_3A7;
+};
+
+
 struct EntityUIControl : SonicMania::Entity
 {
     /* 0x00000058 */ DWORD field_58;
@@ -180,7 +226,7 @@ struct EntityUIControl : SonicMania::Entity
     /* 0x00000060 */ DWORD SelectedElement;
     /* 0x00000064 */ DWORD Tag;
     /* 0x00000068 */ DWORD field_68;
-    /* 0x0000006C */ DWORD parentTag;
+    /* 0x0000006C */ wchar_t* parentTag;
     /* 0x00000070 */ DWORD field_70;
     /* 0x00000074 */ DWORD ActiveOnLoad;
     /* 0x00000078 */ DWORD NoWidgets;

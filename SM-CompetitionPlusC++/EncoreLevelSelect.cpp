@@ -157,6 +157,7 @@ namespace CompPlus_EncoreLevelSelect
 
 	void UpdateEncoreLSelect()
 	{
+        CompPlus_Common::SetLastLevelSelect(1);
 		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupEncoreLSelectMenuPoints();
 		SetupEncoreSelector();
