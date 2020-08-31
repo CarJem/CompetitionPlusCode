@@ -2,7 +2,7 @@
     <SelectedAnnouncer>0</SelectedAnnouncer>
     <CurrentLSelect>0</CurrentLSelect>
     <VictoryStyle>1</VictoryStyle>
-    <UseDropdash>1</UseDropdash>
+    <UseDropdash>0</UseDropdash>
     <UseInstaSheild>0</UseInstaSheild>
     <PeeloutP1>0</PeeloutP1>
     <PeeloutP2>0</PeeloutP2>
@@ -13,7 +13,7 @@
     <EndlessRounds>0</EndlessRounds>
     <NumberOfRounds>3</NumberOfRounds>
     <MonitorMode>0</MonitorMode>
-    <EnableDebugMode>1</EnableDebugMode>
-    <EnableDevMode>1</EnableDevMode>
-    <DarkDevMenu>1</DarkDevMenu>
+    <EnableDebugMode>0</EnableDebugMode>
+    <EnableDevMode>0</EnableDevMode>
+    <DarkDevMenu>0</DarkDevMenu>
 </Settings>
