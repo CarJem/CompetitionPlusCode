@@ -35,7 +35,7 @@ namespace CompPlus_Core
     #pragma region Variables
 
     bool HasStartupInit = false;
-	bool StartupStageEnabled = true;
+	bool StartupStageEnabled = false;
 
 	bool StageRefresh = true;
     int LastSceneID = 0;
