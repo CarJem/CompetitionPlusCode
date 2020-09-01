@@ -4,17 +4,18 @@
 #include <string>
 #include <sstream>
 
-void LogInfo(const char* name, const char* text, ...)
-{
-    if (!ConsoleEnabled)
-        return;
-    char buffer[512];
-    va_list ap;
-    va_start(ap, text);
-    _vsprintf_p(buffer, 512, text, ap);
-    va_end(ap);
-    printf("[INFO]  [%s] %s\n", name, buffer);
-}
+// Functions
+extern intptr_t GetAddressFromJump(intptr_t jmp);
+extern int LoadFile(char* filename, fileinfo* info, void* unknown);
+extern void* LoadAndReadFile(const char* filename, int* length);
+extern int ReadBytesFromFile(fileinfo* file, void* buffer, int bytes);
+extern int DecryptBytes(fileinfo* file, void* buffer, int bufferSize);
+extern void ReplaceString(std::string& str, std::string& from, std::string& to);
+extern void LogDebug(const char* name, const char* text, ...);
+extern void LogError(const char* name, const char* text, ...);
+extern void LogWarn(const char* name, const char* text, ...);
+extern void LogInfo(const char* name, const char* text, ...);
+extern std::string IntToString(int a);
 
 inline BOOL ReplaceJNEwithJump(void* writeaddress, void* funcaddress)
 {
@@ -23,11 +24,4 @@ inline BOOL ReplaceJNEwithJump(void* writeaddress, void* funcaddress)
     *(int32_t*)(data + 1) = (uint32_t)funcaddress - ((uint32_t)writeaddress + 5);
     data[6] = 0x90;
     return WriteData(writeaddress, data);
-}
-
-std::string IntToString(int a)
-{
-    std::stringstream temp;
-    temp << a;
-    return temp.str();
 }

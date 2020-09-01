@@ -205,5 +205,8 @@
     <ClCompile Include="CompPlus_Internal.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

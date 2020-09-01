@@ -22,6 +22,7 @@ extern "C"
 	//SoundFX Defines from SonicMania/Data/Sounds/
 	const char* SFX_CompPlus1 = "CompPlus/MenuBleepClassic.wav";
 	const char* SFX_CompPlus2 = "CompPlus/MenuAcceptClassic.wav";
+    const char* SFX_CompPlus3 = "CompPlus/LHPZSecret.wav";
 	/*----------------------------------------------*/
 
 	bool LoadedSounds = false;
@@ -33,6 +34,7 @@ extern "C"
 			//Load Sounds on First Run. //Global Scope fine for most things
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
+            LoadSoundFX(SFX_CompPlus3, Scope_Global);
 			CompPlus_Core::InitAnnouncerFX();
 			LoadedSounds = true;
 		}
@@ -84,6 +86,8 @@ extern "C"
 		WriteJump((void*)(baseAddress + 0x7FF9), OnScreenDrawHook);
 	}
 
+    const char* FullPath;
+
 	__declspec(dllexport) void PostInit(const char* path)
 	{
 		const std::string path_cpp = path;
@@ -98,6 +102,7 @@ extern "C"
 	{
 		char buffer[MAX_PATH];
 		GetCurrentDirectoryA(MAX_PATH, buffer);
+        FullPath = buffer;
 		SetCurrentDirectoryA(path);
 		// Load files here
 		SetCurrentDirectoryA(buffer);

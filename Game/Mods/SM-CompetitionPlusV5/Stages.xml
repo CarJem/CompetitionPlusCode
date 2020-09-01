@@ -74,7 +74,7 @@
 		  <GHZ_Decoration />
 		  <GHZ_ZipLine />
 		  <HCZ_Bridge />
-		  <HCZ_Button />
+		  <FBZ_Button />
 	  </StageUnlocks>
 	  <StageAssets>
 		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB/Batbrain.bin" />
@@ -98,6 +98,19 @@
 		  <Asset basePath="Data/Sprites/GHZ/ZipLine.bin"  newPath="Data/Sprites/HUB/ZipLine.bin" />		  
 		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		  
 	  </StageAssets>
+	</Stage>
+	<Stage stageName="SMCP Credits Zone" stageID="CP_CustomStages/CP_Credits" stageKey="CPCREDITS" flags="3">
+		<Scenes>
+			<Scene id="1" />
+		</Scenes>
+		<StageUnlocks>
+			<Core_GHZ />
+			<FBZ_Button />
+		</StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/FBZ/Button.bin"  newPath="Data/Sprites/CP_Cred/Button.bin" />
+		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
+		</StageAssets>
 	</Stage>
 	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK2" flags="255">
 	  <Scenes>
@@ -152,17 +165,6 @@
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
-	</Stage>
-	<Stage stageName="SMCP Credits Zone" stageID="CP_CustomStages/CP_Credits" stageKey="CPCREDITS" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageUnlocks>
-			<Core_GHZ />
-		</StageUnlocks>
-		<StageAssets>
-		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
-		</StageAssets>
 	</Stage>
 	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK6" flags="255">
 	  <Scenes>

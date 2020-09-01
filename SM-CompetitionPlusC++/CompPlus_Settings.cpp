@@ -61,6 +61,8 @@ namespace CompPlus_Settings
     bool DevMode_ControlPlayer3 = false;
     bool DevMode_ControlPlayer4 = false;
 
+    bool LHPZ_SecretUnlocked = false;
+
     //Stock Competition Settings
     int NumberOfRounds = 3; // Ignored when EndlessRounds = true;
     ItemsConfig MonitorTypes = ItemsConfig_Default;
@@ -92,7 +94,7 @@ namespace CompPlus_Settings
     PlayerAbility Player4AbilitySet = AbilitySet_Default;
 
     //Status States
-    extern int CurrentLevelSelect = 0;
+    int CurrentLevelSelect = 0;
 
     #pragma endregion
 
@@ -826,6 +828,10 @@ namespace CompPlus_Settings
 
     void LoadSettings()
     {
+        std::string message = "Loading \"";
+        message += Settings_FilePath;
+        message += "\"...";
+        LogInfo("CompPlus_Settings::LoadSettings", message.c_str());
         unsigned int size = 0;
 
         // Open file
@@ -842,10 +848,11 @@ namespace CompPlus_Settings
 
         if (xml && size)
         {
+            LogInfo("CompPlus_Settings::LoadSettings", "Prasing File....");
             tinyxml2::XMLDocument document;
             document.Parse(static_cast<const char*>(xml), size);
 
-            tinyxml2::XMLElement* xmlSettings = document.FirstChildElement("Settings");
+            auto xmlSettings = document.FirstChildElement("Settings");
             if (xmlSettings)
             {
                 for (auto xmlOption = xmlSettings->FirstChildElement(); xmlOption != nullptr; xmlOption = xmlOption->NextSiblingElement())
@@ -969,11 +976,18 @@ namespace CompPlus_Settings
 
                         LogLoadSetting("DarkDevMenu", std::to_string(value));
                     }
+                    else if (!strcmp(xmlOption->Name(), "LHPZ_SecretUnlocked"))
+                    {
+                    bool value = XMLGetBool(xmlOption);
+                    DarkDevMenu = value;
+
+                    LogLoadSetting("LHPZ_SecretUnlocked", std::to_string(value));
+                    }
                 }
             }
             else
             {
-
+                LogError("CompPlus_Settings::LoadSettings", "Unable to Read File....");
             }
         }
         // Clean up
@@ -993,13 +1007,13 @@ namespace CompPlus_Settings
     {
         if (SettingsLoaded) 
         {
+            LogInfo("CompPlus_Settings::SaveSettings", "Saving XML File....");
             tinyxml2::XMLDocument document;
 
             std::string text = "<Settings>";
             AddtoSaveSettings("SelectedAnnouncer", IntToString(CurrentAnnouncer), text);
             AddtoSaveSettings("CurrentLSelect", IntToString(CurrentLevelSelect), text);
             AddtoSaveSettings("VictoryStyle", IntToString(VictoryStyle), text);
-
 
             AddtoSaveSettings("UseDropdash", IntToString(DropdashAbility), text);
             AddtoSaveSettings("UseInstaSheild", IntToString(InstaSheildAbility), text);
@@ -1018,10 +1032,19 @@ namespace CompPlus_Settings
             AddtoSaveSettings("EnableDebugMode", IntToString(EnableDebugMode), text);
             AddtoSaveSettings("EnableDevMode", IntToString(EnableDevMode), text);
             AddtoSaveSettings("DarkDevMenu", IntToString(DarkDevMenu), text);
+            if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", IntToString(LHPZ_SecretUnlocked), text);
 
             text += "</Settings>";
             document.Parse((const char*)text.c_str());
-            document.SaveFile(Settings_FilePath.c_str());
+            tinyxml2::XMLError error = document.SaveFile(Settings_FilePath.c_str(), true);
+            if (error != 0) 
+            {
+                LogError("CompPlus_Settings::SaveSettings", "Error Saving File!");
+            }
+            else 
+            {
+                LogInfo("CompPlus_Settings::SaveSettings", "Saved Successfully!");
+            }
         }
     }
 

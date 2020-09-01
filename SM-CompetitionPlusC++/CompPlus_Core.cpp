@@ -52,6 +52,7 @@ namespace CompPlus_Core
         CompPlus_LevelSelectCore::Init();
         CompPlus_HubWorld::Init();
         CompPlus_CompetitionMenu::Init();
+        CompPlus_Credits::Init();
     }
 
     extern void InitAnnouncerFX()
@@ -69,7 +70,7 @@ namespace CompPlus_Core
     {
         if (!HasStartupInit)
         {
-            if (StartupStageEnabled) CompPlus_Common::LoadLevel(2);
+            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
             HasStartupInit = true;
         }
     }
@@ -121,7 +122,7 @@ namespace CompPlus_Core
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-            else if (!strcmp(CurrentStage.StageKey, "CPCREDITS")) CompPlus_Credits::OnFrame();
+            if (!strcmp(CurrentStage.StageKey, "CPCREDITS")) CompPlus_Credits::OnFrame();
             CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
 		}
 		else
@@ -130,9 +131,22 @@ namespace CompPlus_Core
 		}
 	}
 
+    void PoyoPoyoRuleset() 
+    {
+        if (SonicMania::Options->CompetitionSession.inMatch) 
+        {
+            if (SonicMania::Options->CompetitionSession.CurrentRound == SonicMania::Options->CompetitionSession.TotalRounds)
+            {
+                CompPlus_Scoring::CanGoToFinalResults = false;
+            }
+        }
+
+    }
+
 	void GenericZoneLoop() 
 	{
         if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu();
+        else if (CurrentSceneInt == SceneExt::Scene_PuyoPuyo) PoyoPoyoRuleset();
 	}
 
 	void CheckForStageRefresh() 
@@ -165,6 +179,7 @@ namespace CompPlus_Core
     void OnSceneReset() 
     {
         CompPlus_HubWorld::isRestart = true;
+        CompPlus_Credits::ResetScene();
     }
 
 	void DrawHook() 
@@ -188,6 +203,7 @@ namespace CompPlus_Core
 		StageRefresh = true;
 		IdleTime = 10;
         CompPlus_Announcers::ChangeAnnouncer();
+        OnSceneReset();
     }
 
 	void __cdecl OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
@@ -197,6 +213,7 @@ namespace CompPlus_Core
 		StageRefresh = true;
 		IdleTime = 10;
 		if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(142);
+        OnSceneReset();
     }
 
     #pragma endregion

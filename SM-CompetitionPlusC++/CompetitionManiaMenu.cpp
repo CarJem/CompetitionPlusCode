@@ -23,17 +23,27 @@ namespace CompPlus_CompetitionMenu
     int UIVsResultsScreenUIControl = 357;
     int UIVsLevelSelectUIControl = 586;
     int UIVsPlayerSelectUIControl = 352;
+    int UIVsFinalResultsScreenUIControl = 356;
 
     int EntityUIVsResultsP1_SlotID = 241;
     int EntityUIVsResultsP2_SlotID = 242;
     int EntityUIVsResultsP3_SlotID = 243;
     int EntityUIVsResultsP4_SlotID = 244;
 
-    int UIInfoWinCounterLabel_SlotID_Position = 687;
-    int UIInfoZoneLabel_SlotID_Position = 690;
+    int UIHeadingResultsSlotID = 63;
+
+    int EntityUIVsFinalResultsP1_SlotID = 245;
+    int EntityUIVsFinalResultsP2_SlotID = 246;
+    int EntityUIVsFinalResultsP3_SlotID = 247;
+    int EntityUIVsFinalResultsP4_SlotID = 248;
 
     int UIInfoWinCounterLabel_SlotID = 687;
+    int UIInfoWinCounterLabel2_SlotID = 707;
     int UIInfoZoneLabel_SlotID = 690;
+    int UIInfoRoundLabel1_SlotID = 700;
+    int UIInfoRoundLabel2_SlotID = 705;
+    int UIInfoRoundLabel3_SlotID = 68;
+
 
     static wchar_t* Strings[10];
 
@@ -43,22 +53,6 @@ namespace CompPlus_CompetitionMenu
     {
         if (!isPatched) 
         {
-            /*
-            void* dest1 = (void*)(baseAddress + 0x1F21C0);
-            void* dest2 = (void*)(baseAddress + 0x1CE8D4);
-            void* dest3 = (void*)(baseAddress + 0x1CE820);
-            // NOP bytes
-            char nops1[4];
-            char nops2[4];
-            char nops3[8];
-            memset(nops1, 0x90, sizeof nops1);
-            memset(nops2, 0x90, sizeof nops2);
-            memset(nops3, 0x90, sizeof nops3);
-
-            WriteData(dest1, nops1, 0x02);
-            //WriteData(dest2, nops2, 0x02);
-            //WriteData(dest3, nops2, 0x06);
-            */
             isPatched = true;
         }
 
@@ -79,6 +73,71 @@ namespace CompPlus_CompetitionMenu
         object.Position.Y = y;
     }
 
+    void UpdateLastRoundLabel()
+    {
+        EntityUIInfoLabel& LastRound = *GetEntityFromSceneSlot<EntityUIInfoLabel>(UIInfoRoundLabel1_SlotID);
+        std::string __text = "";
+        if (CompPlus_Settings::EndlessRounds)
+        {
+            __text += "Endless Rounds";
+        }
+        else
+        {
+            __text += "Round ";
+            __text += std::to_string(CompPlus_Scoring::LastCurrentRound);
+            __text += "/";
+            __text += std::to_string(CompPlus_Settings::NumberOfRounds);
+        }
+
+
+        char* _text = (char*)__text.c_str();
+        LastRound.Text = (wchar_t*)Strings[2];
+        ConvertASCII2Unicode(LastRound.Text, _text, strlen(_text), -32);
+        LastRound.TextLength = __text.length();
+    }
+
+    void UpdateCurrentRoundLabels() 
+    {
+        EntityUIInfoLabel& LastRound = *GetEntityFromSceneSlot<EntityUIInfoLabel>(UIInfoRoundLabel2_SlotID);
+        std::string __text = "";
+        if (CompPlus_Settings::EndlessRounds)
+        {
+            __text += "Endless Rounds";
+        }
+        else
+        {
+            __text += "Round ";
+            __text += std::to_string(CompPlus_Scoring::LastCurrentRound + 1);
+            __text += "/";
+            __text += std::to_string(CompPlus_Settings::NumberOfRounds);
+        }
+
+        char* _text = (char*)__text.c_str();
+        LastRound.Text = (wchar_t*)Strings[3];
+        ConvertASCII2Unicode(LastRound.Text, _text, strlen(_text), -32);
+        LastRound.TextLength = __text.length();
+    }
+
+    void UpdateFinalResultsRoundLabel()
+    {
+        EntityUIInfoLabel& LastRound = *GetEntityFromSceneSlot<EntityUIInfoLabel>(UIInfoRoundLabel3_SlotID);
+        std::string __text = std::to_string(CompPlus_Settings::NumberOfRounds);
+        __text += " Rounds";
+
+        char* _text = (char*)__text.c_str();
+        LastRound.Text = (wchar_t*)Strings[4];
+        ConvertASCII2Unicode(LastRound.Text, _text, strlen(_text), -32);
+        LastRound.TextLength = __text.length();
+    }
+
+    void UpdateFinalUIVsResults() 
+    {
+        EntityUIVsResults& P1_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsFinalResultsP1_SlotID);
+        EntityUIVsResults& P2_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsFinalResultsP2_SlotID);
+        EntityUIVsResults& P3_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsFinalResultsP3_SlotID);
+        EntityUIVsResults& P4_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsFinalResultsP4_SlotID);
+    }
+
     void UpdateWinsDisplay(int Wins, int x, int y, int SlotIDs[14])
     {
         SonicMania::Entity& UIInfoLabelTop = *GetEntityFromSceneSlot<SonicMania::Entity>(SlotIDs[0]);
@@ -86,8 +145,8 @@ namespace CompPlus_CompetitionMenu
         SonicMania::Entity& UIInfoLabelBottom = *GetEntityFromSceneSlot<SonicMania::Entity>(SlotIDs[2]);
 
         EntityUIPicture& SingleTrophy1 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[3]);
-        EntityUIPicture& SingleTrophy2 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[5]);
-        EntityUIPicture& SingleTrophy3 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[4]);
+        EntityUIPicture& SingleTrophy2 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[4]);
+        EntityUIPicture& SingleTrophy3 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[5]);
         EntityUIPicture& SingleTrophy4 = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[6]);
 
         EntityUIPicture& FivesTrophy = *GetEntityFromSceneSlot<EntityUIPicture>(SlotIDs[7]);
@@ -214,9 +273,9 @@ namespace CompPlus_CompetitionMenu
         }
     }
 
-    void UpdateRetroWinsDisplay() 
+    void UpdateRetroWinsDisplay(int SlotID) 
     {
-        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(UIInfoWinCounterLabel_SlotID);
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
         std::string __text = "";
 
         __text += std::to_string(CompPlus_Scoring::P1_WinsPlus);
@@ -236,6 +295,8 @@ namespace CompPlus_CompetitionMenu
             __text += std::to_string(CompPlus_Scoring::P4_WinsPlus);
         }
 
+        Label3.DrawOrder = 12;
+
         char* _text = (char*)__text.c_str();
         Label3.Text = (wchar_t*)Strings[0];
         ConvertASCII2Unicode(Label3.Text, _text, strlen(_text), -32);
@@ -253,12 +314,14 @@ namespace CompPlus_CompetitionMenu
         Label3.TextLength = __text.length();
     }
 
-    void UpdateResultsScoreboard()
+    void UpdateResultsScoreboard(bool isFinalResults)
     {
-        SonicMania::Entity& P1_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(EntityUIVsResultsP1_SlotID);
-        SonicMania::Entity& P2_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(EntityUIVsResultsP2_SlotID);
-        SonicMania::Entity& P3_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(EntityUIVsResultsP3_SlotID);
-        SonicMania::Entity& P4_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(EntityUIVsResultsP4_SlotID);
+        SonicMania::Entity& P1_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(isFinalResults ? EntityUIVsFinalResultsP1_SlotID : EntityUIVsResultsP1_SlotID);
+        SonicMania::Entity& P2_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(isFinalResults ? EntityUIVsFinalResultsP2_SlotID : EntityUIVsResultsP2_SlotID);
+        SonicMania::Entity& P3_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(isFinalResults ? EntityUIVsFinalResultsP3_SlotID : EntityUIVsResultsP3_SlotID);
+        SonicMania::Entity& P4_Results = *GetEntityFromSceneSlot<SonicMania::Entity>(isFinalResults ? EntityUIVsFinalResultsP4_SlotID : EntityUIVsResultsP4_SlotID);
+
+        int OffsetY = isFinalResults ? 39 : 39;
 
         int P1_SlotIDs[14] = { 61, 67, 387, 428, 429, 430, 418, 433, 431, 434, 432, 438, 416, 417 };
         int P2_SlotIDs[14] = { 386, 408, 409, 435, 469, 450, 451, 473, 471, 470, 467, 475, 476, 472 };
@@ -268,7 +331,7 @@ namespace CompPlus_CompetitionMenu
         
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 1)
         {
-            UpdateWinsDisplay(CompPlus_Scoring::P1_WinsPlus, P1_Results.Position.X, P1_Results.Position.Y - 39, P1_SlotIDs);
+            UpdateWinsDisplay(CompPlus_Scoring::P1_WinsPlus, P1_Results.Position.X, P1_Results.Position.Y - OffsetY, P1_SlotIDs);
         }
         else 
         {
@@ -276,7 +339,7 @@ namespace CompPlus_CompetitionMenu
         }
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2)
         {
-            UpdateWinsDisplay(CompPlus_Scoring::P2_WinsPlus, P2_Results.Position.X, P2_Results.Position.Y - 39, P2_SlotIDs);
+            UpdateWinsDisplay(CompPlus_Scoring::P2_WinsPlus, P2_Results.Position.X, P2_Results.Position.Y - OffsetY, P2_SlotIDs);
         }
         else
         {
@@ -284,7 +347,7 @@ namespace CompPlus_CompetitionMenu
         }
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 3)
         {
-            UpdateWinsDisplay(CompPlus_Scoring::P3_WinsPlus, P3_Results.Position.X, P3_Results.Position.Y - 39, P3_SlotIDs);
+            UpdateWinsDisplay(CompPlus_Scoring::P3_WinsPlus, P3_Results.Position.X, P3_Results.Position.Y - OffsetY, P3_SlotIDs);
         }
         else
         {
@@ -292,7 +355,7 @@ namespace CompPlus_CompetitionMenu
         }
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 4)
         {
-            UpdateWinsDisplay(CompPlus_Scoring::P4_WinsPlus, P4_Results.Position.X, P4_Results.Position.Y - 39, P4_SlotIDs);
+            UpdateWinsDisplay(CompPlus_Scoring::P4_WinsPlus, P4_Results.Position.X, P4_Results.Position.Y - OffsetY, P4_SlotIDs);
         }
         else
         {
@@ -325,12 +388,29 @@ namespace CompPlus_CompetitionMenu
         else inMatch = false;
     }
 
+    void UpdateFinalResultsPage() 
+    {
+        EntityUIControl& CompetitionFinalResultsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsFinalResultsScreenUIControl);
+
+        if (CompetitionFinalResultsPage.Visible)
+        {
+            UpdateResultsScoreboard(true);
+        }
+        UpdateFinalUIVsResults();
+        UpdateFinalResultsRoundLabel();
+        UpdateRetroWinsDisplay(UIInfoWinCounterLabel2_SlotID);
+    }
+
     void UpdateResultsPage() 
     {
         EntityUIVsResults& P1_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsResultsP1_SlotID);
         EntityUIVsResults& P2_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsResultsP2_SlotID);
         EntityUIVsResults& P3_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsResultsP3_SlotID);
         EntityUIVsResults& P4_Results = *GetEntityFromSceneSlot<EntityUIVsResults>(EntityUIVsResultsP4_SlotID);
+
+        SonicMania::Entity& object = *GetEntityFromSceneSlot<SonicMania::Entity>(UIHeadingResultsSlotID);
+        object.Visible = false;
+        
 
         EntityUIControl& CompetitionResultsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsResultsScreenUIControl);
 
@@ -341,8 +421,12 @@ namespace CompPlus_CompetitionMenu
             StoredResults = true;
         }
 
-        UpdateResultsScoreboard();
-        UpdateRetroWinsDisplay();
+        if (CompetitionResultsPage.Visible) 
+        {
+            UpdateResultsScoreboard(false);
+        }
+
+        UpdateRetroWinsDisplay(UIInfoWinCounterLabel_SlotID);
         UpdateZoneDisplay();
     }
 
@@ -388,11 +472,15 @@ namespace CompPlus_CompetitionMenu
         UpdateOptionsPage();
         UpdateMiscStuff();
         UpdateResultsPage();
+
+        UpdateLastRoundLabel();
+        UpdateCurrentRoundLabels();
+        UpdateFinalResultsPage();
 	}
 
     void Init() 
     {
-        for (int i = 0; i < 2; ++i)
+        for (int i = 0; i < 10; ++i)
             Strings[i] = (wchar_t*)malloc(128);
     }
 };

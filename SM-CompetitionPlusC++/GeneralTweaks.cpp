@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "CompPlus_Scoring.h"
+
 namespace CompPlus_GeneralTweaks
 {
     void UpdateSZ() 

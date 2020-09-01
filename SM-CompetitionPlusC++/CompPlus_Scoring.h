@@ -69,9 +69,6 @@ namespace CompPlus_Scoring
     extern int WinWait;
     extern int WinWaitMax;
 
-    extern int CurrentRound_Plus;
-    extern int LastRound_NoPlus;
-
     extern int P1_Placement;
     extern int P2_Placement;
     extern int P3_Placement;
@@ -92,8 +89,12 @@ namespace CompPlus_Scoring
     extern bool P3_HasWon;
     extern bool P4_HasWon;
 
+    extern int LastCurrentRound;
+
     extern bool ThisMatchIsTied;
     extern bool CanGoToFinalResults;
+
+    extern int GetCurrentRound();
 
     extern void SyncLastResults();
 

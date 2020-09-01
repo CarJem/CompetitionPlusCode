@@ -209,6 +209,7 @@ namespace CompPlus_HubWorld
 	int SceneLoadWaitMax = 100;
 	int SettingWaitTimer = 100;
     bool isRestart = true;
+    bool CreditsSelected = false;
 
     int P1_HUDAlpha = 255;
     int P2_HUDAlpha = 255;
@@ -954,7 +955,7 @@ namespace CompPlus_HubWorld
         }
         else 
         {       
-            std::string roundNumber = std::to_string(CompPlus_Scoring::CurrentRound_Plus + 1) + "\\" + std::to_string(CompPlus_Settings::NumberOfRounds);
+            std::string roundNumber = std::to_string(CompPlus_Scoring::GetCurrentRound() + 1) + "\\" + std::to_string(CompPlus_Settings::NumberOfRounds);
             UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
             lastIndex++;
         }
@@ -1211,7 +1212,6 @@ namespace CompPlus_HubWorld
         SetSpawnPosition(Player4, CompPlus_Scoring::P4_LastPlacement);
     }
 
-
     void SetHUBVisualSettings()
     {
         //Disable Timer
@@ -1417,11 +1417,80 @@ namespace CompPlus_HubWorld
 
     #pragma endregion
 
-
     #pragma region HUB General Methods
+
+    void CreditsWarp() 
+    {
+        for (int RealID = 1; RealID <= 4; RealID++)
+        {
+            SonicMania::EntityPlayer* Player;
+            if (RealID == 1) Player = &Player1;
+            else if (RealID == 2) Player = &Player2;
+            else if (RealID == 3) Player = &Player3;
+            else if (RealID == 4) Player = &Player4;
+            else Player = &Player1;
+            bool isPlayerInRange = PlayerInRange(Player, 12512, 10704, 12592, 10752);
+            if (isPlayerInRange && !CreditsSelected)
+            {
+                CreditsSelected = true;
+                P1_IsInWarpRoom = true;
+                P2_IsInWarpRoom = true;
+                P3_IsInWarpRoom = true;
+                P4_IsInWarpRoom = true;
+            }
+        }
+    }
+
+    void CreditsWarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+    {
+        if (FastWarp && SceneLoadWaitTimer < 50)
+        {
+            SceneLoadWaitTimer = 50;
+        }
+
+
+        if (SceneLoadWaitTimer >= SceneLoadWaitMax)
+        {
+            SceneLoadWaitTimer = 0;
+            LevelSelected = false;
+            LevelSelectedWarpSoundPlayed = false;
+            P1_IsInWarpRoom = false;
+            P2_IsInWarpRoom = false;
+            P3_IsInWarpRoom = false;
+            P4_IsInWarpRoom = false;
+            CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+        }
+        else
+        {
+            if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
+            {
+                PlaySoundFXS("Global/SpecialWarp.wav");
+                LevelSelectedWarpSoundPlayed = true;
+
+                Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
+                EntityFXFade* FxFadeR = (EntityFXFade*)FXFade;
+
+                FxFadeR->Time = 0;
+                FxFadeR->SpeedIn = 10;
+                FxFadeR->Wait = 3;
+                FxFadeR->SpeedOut = 0;
+                FxFadeR->Color = 0x000000;
+                FxFadeR->OneWay = true;
+                FxFadeR->EventOnly = false;
+                FxFadeR->Overhud = false;
+                FxFadeR->FadeOutBlack = true;
+
+            }
+            SceneLoadWaitTimer++;
+        }
+
+        stru_26B818[0].playStatus = 0;
+
+    }
 
 	void OnFrame() 
 	{	
+        CreditsWarp();
 		SetHUBVisualSettings();
         UpdateQuickWarpRoom();
 
@@ -1442,6 +1511,9 @@ namespace CompPlus_HubWorld
 
 		if (ConfirmButton.Pressed) LevelSelected = true;
 		
+
+        if (CreditsSelected) CreditsWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+
 		if (LevelSelected) WarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
 	}
 
@@ -1487,6 +1559,8 @@ namespace CompPlus_HubWorld
 		stru_26B818[0].playStatus = 0;
 
 	}
+
+
 
     void Init()
     {
