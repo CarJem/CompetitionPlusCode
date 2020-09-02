@@ -70,7 +70,7 @@ namespace CompPlus_Core
     {
         if (!HasStartupInit)
         {
-            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPHW");
             HasStartupInit = true;
         }
     }
@@ -122,7 +122,8 @@ namespace CompPlus_Core
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-            if (!strcmp(CurrentStage.StageKey, "CPCREDITS")) CompPlus_Credits::OnFrame();
+            CompPlus_Credits::OnFrame(!strcmp(CurrentStage.StageKey, "CPCREDITS"));
+
             CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
 		}
 		else

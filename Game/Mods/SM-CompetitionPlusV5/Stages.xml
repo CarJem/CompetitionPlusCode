@@ -166,11 +166,6 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK6" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
-	</Stage>
 	<Stage stageName="SMCP Angel Island Zone" stageID="CP_StockStages/AIZ" stageKey="CPAIZEX" flags="3">
 		<Scenes>
 		  <Scene id="EXT" />
@@ -208,6 +203,7 @@
       <Scene id="1" />
     </Scenes>
 		<StageAssets>
+		  <Asset basePath="Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin" newPath="Data/Objects/CompPlus/36D61A3DE508B500AE0ECF8D33F32943.bin" />
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 	      <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
@@ -230,6 +226,7 @@
       <Scene id="1" />
     </Scenes>
 		<StageAssets>
+		  <Asset basePath="Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin" newPath="Data/Objects/CompPlus/36D61A3DE508B500AE0ECF8D33F32943.bin" />
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
@@ -283,6 +280,69 @@
 		<StageUnlocks>
 			<Core_GHZ />
 		</StageUnlocks>
+	</Stage>
+	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK6" flags="255">
+	  <Scenes>
+      <Scene id="1" />
+    </Scenes>
+	</Stage>
+	<Stage stageName="SMCP LHPZ Zone M" stageID="HPZ" stageKey="LHPZ1" flags="3">
+	  <Scenes>
+      <Scene id="1" />
+     </Scenes>
+	  <StageUnlocks>
+		<HCZ_Decoration />
+		<HCZ_Platform />
+		<HCZ_Bridge />
+		<MSZ_RotatingSpikes />
+		<MSZ_SwingRope />
+		<SSZ_SDashWheel />
+		<HPZ_Jellygnite />
+		<HPZ_Redz />
+		<HPZ_Stegway />
+		<HPZ_Batbot />
+	  </StageUnlocks>
+	  <StageAssets>
+		<Asset basePath="Data/Sprites/HCZ/AniTiles.gif"   newPath="Data/Sprites/HPZ/AniTiles.gif" />
+		<Asset basePath="Data/Sprites/HCZ/AniTiles2.gif"   newPath="Data/Sprites/HPZ/AniTiles2.gif" />
+		<Asset basePath="Data/Sprites/HCZ/AniTiles3.gif"   newPath="Data/Sprites/HPZ/AniTiles3.gif" />
+		<Asset basePath="Data/Sprites/MSZ/RotatingSpikes.bin"  newPath="Data/Sprites/HPZ/MonkeyDude.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Platform.bin"    newPath="Data/Sprites/HPZ/Platform.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Bridge.bin"      newPath="Data/Sprites/HPZ/Bridge.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Decoration.bin"  newPath="Data/Sprites/HPZ/Decoration.bin" />
+		<Asset basePath="Data/Sprites/SSZ1/SDashWheel.bin" newPath="Data/Sprites/HPZ/SDashWheel.bin" />
+		<Asset basePath="Data/Palettes/EncoreHCZ.act"      newPath="Data/Palettes/EncoreHPZ.act" />
+		<Asset basePath="Data/Palettes/EncoreHCZw.act"     newPath="Data/Palettes/EncoreHPZw.act" />
+	  </StageAssets>
+	</Stage>
+	<Stage stageName="SMCP LHPZ Zone E" stageID="HPZ" stageKey="LHPZ1E" flags="5">
+		  <Scenes>
+      <Scene id="1" />
+     </Scenes>
+		  <StageUnlocks>
+		<HCZ_Decoration />
+		<HCZ_Platform />
+		<HCZ_Bridge />
+		<MSZ_RotatingSpikes />
+		<MSZ_SwingRope />
+		<SSZ_SDashWheel />
+		<HPZ_Jellygnite />
+		<HPZ_Redz />
+		<HPZ_Stegway />
+		<HPZ_Batbot />
+	  </StageUnlocks>
+	  <StageAssets>
+		<Asset basePath="Data/Sprites/HCZ/AniTiles.gif"   newPath="Data/Sprites/HPZ/AniTiles.gif" />
+		<Asset basePath="Data/Sprites/HCZ/AniTiles2.gif"   newPath="Data/Sprites/HPZ/AniTiles2.gif" />
+		<Asset basePath="Data/Sprites/HCZ/AniTiles3.gif"   newPath="Data/Sprites/HPZ/AniTiles3.gif" />
+		<Asset basePath="Data/Sprites/MSZ/RotatingSpikes.bin"  newPath="Data/Sprites/HPZ/MonkeyDude.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Platform.bin"    newPath="Data/Sprites/HPZ/Platform.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Bridge.bin"      newPath="Data/Sprites/HPZ/Bridge.bin" />
+		<Asset basePath="Data/Sprites/HCZ/Decoration.bin"  newPath="Data/Sprites/HPZ/Decoration.bin" />
+		<Asset basePath="Data/Sprites/SSZ1/SDashWheel.bin" newPath="Data/Sprites/HPZ/SDashWheel.bin" />
+		<Asset basePath="Data/Palettes/EncoreHCZ.act"      newPath="Data/Palettes/EncoreHPZ.act" />
+		<Asset basePath="Data/Palettes/EncoreHCZw.act"     newPath="Data/Palettes/EncoreHPZw.act" />
+	  </StageAssets>
 	</Stage>
 	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK4" flags="255">
 		<Scenes>

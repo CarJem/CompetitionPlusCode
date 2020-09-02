@@ -64,6 +64,8 @@ namespace CompPlus_HubWorld
     int ItemBoxModeText = 206;
     int NumberOfRoundsText = 351;
 
+    int VSModeTextSlot = 361;
+    int WinsTallyTextSlot = 362;
 
 	// Developer Settings
 	int DevModeText = 138;
@@ -119,18 +121,22 @@ namespace CompPlus_HubWorld
     int P1_HUD_1 = 311;
     int P1_HUD_2 = 313;
     int P1_HUD_3 = 314;
+    int P1_HUD_4 = 364;
 
     int P2_HUD_1 = 315;
     int P2_HUD_2 = 316;
     int P2_HUD_3 = 317;
+    int P2_HUD_4 = 365;
 
     int P3_HUD_1 = 318;
     int P3_HUD_2 = 319;
-    int P3_HUD_3 = 320; 
+    int P3_HUD_3 = 320;
+    int P3_HUD_4 = 366;
 
     int P4_HUD_1 = 321;
     int P4_HUD_2 = 322;
     int P4_HUD_3 = 323;
+    int P4_HUD_4 = 367;
 
     int WarpSlotID_PlayerSettings = 80;
     int WarpSlotID_OtherSettings = 81;
@@ -814,6 +820,65 @@ namespace CompPlus_HubWorld
         }
     }
 
+    void UpdateWinsTallyDisplay(int SlotID, int index) 
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+        std::string __text = "";
+
+        __text += std::to_string(CompPlus_Scoring::P1_WinsPlus);
+        if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2)
+        {
+            __text += " : ";
+            __text += std::to_string(CompPlus_Scoring::P2_WinsPlus);
+        }
+        if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 3)
+        {
+            __text += " : ";
+            __text += std::to_string(CompPlus_Scoring::P3_WinsPlus);
+        }
+        if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 4)
+        {
+            __text += " : ";
+            __text += std::to_string(CompPlus_Scoring::P4_WinsPlus);
+        }
+
+        Label3.DrawOrder = 12;
+
+        char* _text = (char*)__text.c_str();
+        Label3.Text = (wchar_t*)Strings[0];
+        ConvertASCII2Unicode(Label3.Text, _text, strlen(_text), -32);
+        Label3.TextLength = __text.length();
+    }
+
+    void UpdateVSModeDisplay(int SlotID, int index)
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+        int x = Label3.Position.X;
+        int y = Label3.Position.Y;
+
+        switch (CompPlus_Settings::VictoryStyle)
+        {
+        case CompPlus_Settings::VictoryMode_Default:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - ORIGINAL", 18, index);
+            break;
+        case CompPlus_Settings::VictoryMode_Time:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - TIME", 14, index);
+            break;
+        case CompPlus_Settings::VictoryMode_Rings:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - RINGS", 15, index);
+            break;
+        case CompPlus_Settings::VictoryMode_TotalRings:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - ALL RINGS", 19, index);
+            break;
+        case CompPlus_Settings::VictoryMode_Score:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - SCORE", 15, index);
+            break;
+        case CompPlus_Settings::VictoryMode_Items:
+            UpdateGeneralDisplay(SlotID, x, y, (char*)"VS MODE - ITEMS", 15, index);
+            break;
+        }
+    }
+
     std::string GetPlayerPositionString(int PlayerID) 
     {
         int Position = 0;
@@ -827,6 +892,17 @@ namespace CompPlus_HubWorld
         else if (Position == 3) return "3rd";
         else if (Position == 4) return "4th";
         else return "";
+    }
+
+    bool GetIsPlayerAWinner(int PlayerID)
+    {
+        int Position = 0;
+        if (PlayerID == 1) Position = CompPlus_Scoring::P1_LastPlacement;
+        else if (PlayerID == 2) Position = CompPlus_Scoring::P2_LastPlacement;
+        else if (PlayerID == 3) Position = CompPlus_Scoring::P3_LastPlacement;
+        else if (PlayerID == 4) Position = CompPlus_Scoring::P4_LastPlacement;
+
+        return Position == 1;
     }
 
     void UpdateHUBPrivateHUDAlpha(SonicMania::EntityPlayer& Player, Entity& Entity, int& HUDAlpha, bool& isInWarpLoop, bool& isInQuickWarp)
@@ -845,7 +921,7 @@ namespace CompPlus_HubWorld
         }
     }
 
-    int UpdateHUBPrivateHUD(SonicMania::EntityPlayer& Player, int& HUDAlpha, bool& isInQuickWarp, bool& isInWarpLoop, int PlayerSlot, int StatSlot, int ExtraSlot, int lastIndex)
+    int UpdateHUBPrivateHUD(SonicMania::EntityPlayer& Player, int& HUDAlpha, bool& isInQuickWarp, bool& isInWarpLoop, int PlayerSlot, int StatSlot, int ExtraSlot, int CrownSlot, int lastIndex)
     {
         int upper_offset = 30;
         int lower_offset = 20;
@@ -853,20 +929,27 @@ namespace CompPlus_HubWorld
         Entity& HUD_PlayerID = *GetEntityFromSceneSlot<Entity>(PlayerSlot);
         Entity& HUD_Statistics = *GetEntityFromSceneSlot<Entity>(StatSlot);
         Entity& HUD_Extra = *GetEntityFromSceneSlot<Entity>(ExtraSlot);
+        Entity& HUD_Winner = *GetEntityFromSceneSlot<Entity>(CrownSlot);
 
-        HUD_PlayerID.DrawOrder = 14;
-        HUD_Statistics.DrawOrder = 14;
-        HUD_Extra.DrawOrder = 14;
+        HUD_PlayerID.DrawOrder = Player.DrawOrder;
+        HUD_Statistics.DrawOrder = Player.DrawOrder;
+        HUD_Extra.DrawOrder = Player.DrawOrder;
+        HUD_Winner.DrawOrder = Player.DrawOrder;
+
+        int PlayerID = 1;
 
 
         if (Player.Active)
         {
             UpdateHUBPrivateHUDAlpha(Player, HUD_PlayerID, HUDAlpha, isInWarpLoop, isInQuickWarp);
             UpdateHUBPrivateHUDAlpha(Player, HUD_Statistics, HUDAlpha, isInWarpLoop, isInQuickWarp);
-            UpdateHUBPrivateHUDAlpha(Player, HUD_Extra, HUDAlpha, isInWarpLoop, isInQuickWarp);
+            //UpdateHUBPrivateHUDAlpha(Player, HUD_Extra, HUDAlpha, isInWarpLoop, isInQuickWarp);
+            UpdateHUBPrivateHUDAlpha(Player, HUD_Winner, HUDAlpha, isInWarpLoop, isInQuickWarp);
+
 
             int x = Player.Position.X;
             int y = Player.Position.Y;
+
 
             HUD_PlayerID.Position.X = x;
             HUD_PlayerID.Position.Y = y - upper_offset;
@@ -877,8 +960,10 @@ namespace CompPlus_HubWorld
             HUD_Extra.Position.X = Pos_OutOfBounds.X;
             HUD_Extra.Position.Y = Pos_OutOfBounds.Y;
 
+
             if (Player.PlayerID == Player1.PlayerID)
             {
+                PlayerID = 1;
                 UpdateGeneralDisplay(PlayerSlot, (char*)"P1", 2, lastIndex);
                 lastIndex++;
 
@@ -890,6 +975,7 @@ namespace CompPlus_HubWorld
             }
             else if (Player.PlayerID == Player2.PlayerID)
             {
+                PlayerID = 2;
                 UpdateGeneralDisplay(PlayerSlot, (char*)"P2", 2, lastIndex);
                 lastIndex++;
                 std::string pos = GetPlayerPositionString(2);
@@ -900,6 +986,7 @@ namespace CompPlus_HubWorld
             }
             else if (Player.PlayerID == Player3.PlayerID)
             {
+                PlayerID = 3;
                 UpdateGeneralDisplay(PlayerSlot, (char*)"P3", 2, lastIndex);
                 lastIndex++;
                 std::string pos = GetPlayerPositionString(3);
@@ -910,6 +997,7 @@ namespace CompPlus_HubWorld
             }
             else if (Player.PlayerID == Player4.PlayerID)
             {
+                PlayerID = 4;
                 UpdateGeneralDisplay(PlayerSlot, (char*)"P4", 2, lastIndex);
                 lastIndex++;
                 std::string pos = GetPlayerPositionString(4);
@@ -917,6 +1005,20 @@ namespace CompPlus_HubWorld
                 lastIndex++;
                 //UpdateGeneralDisplay(ExtraSlot, (char*)"", 0, lastIndex);
                 //lastIndex++;
+            }
+
+            if (HUDAlpha != 0) 
+            {
+                if (GetIsPlayerAWinner(PlayerID))
+                {
+                    HUD_Winner.Position.X = x;
+                    HUD_Winner.Position.Y = y - upper_offset + 10;
+                }
+                else
+                {
+                    HUD_Winner.Position.X = Pos_OutOfBounds.X;
+                    HUD_Winner.Position.Y = Pos_OutOfBounds.Y;
+                }
             }
         }
         else
@@ -932,16 +1034,20 @@ namespace CompPlus_HubWorld
 
             HUD_Extra.Position.X = x;
             HUD_Extra.Position.Y = y;
+
+            //HUD_Winner.Position.X = x;
+            //HUD_Winner.Position.Y = y;
         }
+
         return lastIndex;
     }
 
     int UpdateHUBPrivateHUDs(int lastIndex)
     {
-        lastIndex = UpdateHUBPrivateHUD(Player1, P1_HUDAlpha, P1_IsInWarpRoom, P1_IsInWarpLoop, P1_HUD_1, P1_HUD_2, P1_HUD_3, lastIndex);
-        lastIndex = UpdateHUBPrivateHUD(Player2, P2_HUDAlpha, P2_IsInWarpRoom, P2_IsInWarpLoop, P2_HUD_1, P2_HUD_2, P2_HUD_3, lastIndex);
-        lastIndex = UpdateHUBPrivateHUD(Player3, P3_HUDAlpha, P3_IsInWarpRoom, P3_IsInWarpLoop, P3_HUD_1, P3_HUD_2, P3_HUD_3, lastIndex);
-        lastIndex = UpdateHUBPrivateHUD(Player4, P4_HUDAlpha, P4_IsInWarpRoom, P4_IsInWarpLoop, P4_HUD_1, P4_HUD_2, P4_HUD_3, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player1, P1_HUDAlpha, P1_IsInWarpRoom, P1_IsInWarpLoop, P1_HUD_1, P1_HUD_2, P1_HUD_3, P1_HUD_4, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player2, P2_HUDAlpha, P2_IsInWarpRoom, P2_IsInWarpLoop, P2_HUD_1, P2_HUD_2, P2_HUD_3, P2_HUD_4, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player3, P3_HUDAlpha, P3_IsInWarpRoom, P3_IsInWarpLoop, P3_HUD_1, P3_HUD_2, P3_HUD_3, P3_HUD_4, lastIndex);
+        lastIndex = UpdateHUBPrivateHUD(Player4, P4_HUDAlpha, P4_IsInWarpRoom, P4_IsInWarpLoop, P4_HUD_1, P4_HUD_2, P4_HUD_3, P4_HUD_4, lastIndex);
         return lastIndex;
     }
 
@@ -981,6 +1087,13 @@ namespace CompPlus_HubWorld
         UpdateGeneralDisplay(P3_WinsCounterText_Board, (char*)winsP3.c_str(), winsP3.length(), lastIndex);
         lastIndex++;
         UpdateGeneralDisplay(P4_WinsCounterText_Board, (char*)winsP4.c_str(), winsP4.length(), lastIndex);
+        lastIndex++;
+
+
+        UpdateWinsTallyDisplay(WinsTallyTextSlot, lastIndex);
+        lastIndex++;
+
+        UpdateVSModeDisplay(VSModeTextSlot, lastIndex);
         lastIndex++;
 
         std::string timeP1 = std::to_string(CompPlus_Scoring::LastSession.TimeMinutes_P1) + "\'" + (CompPlus_Scoring::LastSession.TimeSeconds_P1 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeSeconds_P1) + "\"" + (CompPlus_Scoring::LastSession.TimeCentiseconds_P1 < 10 ? "0" : "") + std::to_string(CompPlus_Scoring::LastSession.TimeCentiseconds_P1);
@@ -1091,7 +1204,7 @@ namespace CompPlus_HubWorld
 		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y, 21);
         //Item Box Mode Type Display
         UpdateItemBoxModeDisplay(ItemBoxModeText, Pos_ItemBoxModeText.X, Pos_ItemBoxModeText.Y, 22);
-        //Numbe Of Rounds Display
+        //Number Of Rounds Display
         UpdateNumberOfRoundsDisplay(NumberOfRoundsText, Pos_NumberOfRoundsText.X, Pos_NumberOfRoundsText.Y, 23);
         //Scoreboard Displays
         int lastIndex = UpdateScoreboardDisplays(24);
@@ -1197,7 +1310,7 @@ namespace CompPlus_HubWorld
             Player.Position.Y = ForthPlacePodieumSpawn.Position.Y;
         }
 
-        if (Player.Active)
+        if (Player.Camera != nullptr)
         {
             Player.Camera->Position.X = Player.Position.X;
             Player.Camera->Position.Y = Player.Position.Y;
@@ -1219,15 +1332,17 @@ namespace CompPlus_HubWorld
 
         //Disable HUD
         WriteData((BYTE*)(baseAddress + 0x47B065), (BYTE)0);
+
+        //Player Life Count Infinite
+        Player1.LifeCount = 99;
+        Player2.LifeCount = 99;
+        Player3.LifeCount = 99;
+        Player4.LifeCount = 99;
     }
 
     #pragma endregion
 
     #pragma region  HUB Quick Warp Room
-
-
-
-
 
     void SetIsInWarpRoomState(int PlayerID, bool value)
     {
@@ -1277,13 +1392,35 @@ namespace CompPlus_HubWorld
 
     void TeleWarp(SonicMania::EntityPlayer& Player, int x, int y, int PlayerID)
     {
+        int checkpoint_Offset = *(int*)(baseAddress + 0x00AC672C);
+
+        switch (PlayerID) 
+        {
+            case 1:
+                WriteData((int*)(checkpoint_Offset + 0x12), x);
+                WriteData((int*)(checkpoint_Offset + 0x16), y);
+                WriteData((int*)(checkpoint_Offset + 0x34), 1);
+                break;                                   
+            case 2:                                      
+                WriteData((int*)(checkpoint_Offset + 0x1A), x);
+                WriteData((int*)(checkpoint_Offset + 0x1E), y);
+                WriteData((int*)(checkpoint_Offset + 0x35), 1);
+                break;                                   
+            case 3:                                     
+                WriteData((int*)(checkpoint_Offset + 0x22), x);
+                WriteData((int*)(checkpoint_Offset + 0x26), y);
+                WriteData((int*)(checkpoint_Offset + 0x36), 1);
+                break;                                  
+            case 4:                                    
+                WriteData((int*)(checkpoint_Offset + 0x2A), x);
+                WriteData((int*)(checkpoint_Offset + 0x2E), y);
+                WriteData((int*)(checkpoint_Offset + 0x37), 1);
+                break;
+        }
+
+        Player.Kill();
         Player.Position.X = x;
         Player.Position.Y = y;
-        Player.Camera->Position.X = x;
-        Player.Camera->Position.Y = y;
-        Player.XVelocity = 0;
-        Player.YVelocity = 0;
-        Player.Camera->GroundCamOffsetY = 0;
     }
 
     void CheckQuickWarp()
@@ -1494,7 +1631,7 @@ namespace CompPlus_HubWorld
 		SetHUBVisualSettings();
         UpdateQuickWarpRoom();
 
-        if (SonicMania::Timer.Enabled == false) isRestart = true;
+        if (SonicMania::Timer.Enabled == false && SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2) isRestart = true;
 
         if (isRestart) 
         {
@@ -1512,7 +1649,7 @@ namespace CompPlus_HubWorld
 		if (ConfirmButton.Pressed) LevelSelected = true;
 		
 
-        if (CreditsSelected) CreditsWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+        if (CreditsSelected) CreditsWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, CreditsSelected, LevelSelectedWarpSoundPlayed);
 
 		if (LevelSelected) WarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
 	}

@@ -23,13 +23,19 @@ namespace CompPlus_Settings
     bool SettingsLoaded = false;
     int DevMode_ControllerSwapPosition = 0;
 
-
-    char ETA_OriginalCode[0x02];
-    char TLK_OriginalCode[0x06];
-
     bool HasCopiedOriginalTimeCode = false;
     bool IsLimitedWriten = false;
     bool IsUnlimitedWriten = false;
+    char ETA_OriginalCode[0x02];
+    char TLK_OriginalCode[0x06];
+
+    bool isUnlockWriten = false;
+    bool isLockWriten = false;
+    bool isVSControllerInputUnlocked = false;
+    bool HasCopiedOriginalControlUnlockCode = false;
+    char ControlLock_OriginalCode[0x06];
+
+
     bool DevMenuEnabledMemory;
 
     Controller InitalInputP1;
@@ -521,6 +527,40 @@ namespace CompPlus_Settings
 
 
     #pragma region Update Methods
+
+    void UpdateVSControlLockState()
+    {
+        void* vs_player_freeze_address = (void*)(baseAddress + 0xC3E2B);
+        // NOP bytes
+        char nops[6];
+        memset(nops, 0x90, sizeof nops);
+
+
+        if (!HasCopiedOriginalControlUnlockCode)
+        {
+            memcpy(ControlLock_OriginalCode, vs_player_freeze_address, 0x06);
+            HasCopiedOriginalControlUnlockCode = true;
+        }
+
+        if (!isVSControllerInputUnlocked)
+        {
+            if (!isLockWriten)
+            {
+                WriteData(vs_player_freeze_address, ControlLock_OriginalCode, 0x06);
+                isUnlockWriten = false;
+                isLockWriten = true;
+            }
+        }
+        else
+        {
+            if (!isUnlockWriten)
+            {
+                WriteData(vs_player_freeze_address, nops, 0x06);
+                isLockWriten = false;
+                isUnlockWriten = true;
+            }
+        }
+    }
 
     void UpdateStockSettings() 
     {
@@ -1060,6 +1100,8 @@ namespace CompPlus_Settings
         if (SettingsLoaded) 
         {
             if (FixPlayers) FixPlayers = false;
+            
+            UpdateVSControlLockState();
             UpdateLives();
             UpdateStockSettings();
             UpdateMultiPlayerSprites();

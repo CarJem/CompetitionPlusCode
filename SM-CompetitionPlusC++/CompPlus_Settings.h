@@ -87,6 +87,8 @@ namespace CompPlus_Settings
 
     extern bool LHPZ_SecretUnlocked;
 
+    extern bool isVSControllerInputUnlocked;
+
     extern bool DevMode_ControlPlayer1;
     extern bool DevMode_ControlPlayer2;
     extern bool DevMode_ControlPlayer3;

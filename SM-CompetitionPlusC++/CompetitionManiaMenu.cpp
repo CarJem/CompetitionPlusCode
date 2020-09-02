@@ -384,6 +384,10 @@ namespace CompPlus_CompetitionMenu
 
     void UpdateMiscStuff() 
     {
+        Entity& diaorma = *GetEntityFromSceneSlot<Entity>(285);
+        diaorma.Visible = false;
+        
+
         if (SonicMania::Options->CompetitionSession.inMatch == 1) UpdatePreMatchStuff();
         else inMatch = false;
     }
