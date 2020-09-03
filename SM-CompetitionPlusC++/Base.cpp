@@ -23,6 +23,7 @@ extern "C"
 	const char* SFX_CompPlus1 = "CompPlus/MenuBleepClassic.wav";
 	const char* SFX_CompPlus2 = "CompPlus/MenuAcceptClassic.wav";
     const char* SFX_CompPlus3 = "CompPlus/LHPZSecret.wav";
+    const char* SFX_CompPlus4 = "CompPlus/GPZ_Button.wav";
 	/*----------------------------------------------*/
 
 	bool LoadedSounds = false;
@@ -35,6 +36,7 @@ extern "C"
 			LoadSoundFX(SFX_CompPlus1, Scope_Global);
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
             LoadSoundFX(SFX_CompPlus3, Scope_Global);
+            LoadSoundFX(SFX_CompPlus4, Scope_Global);
 			CompPlus_Core::InitAnnouncerFX();
 			LoadedSounds = true;
 		}
@@ -50,13 +52,11 @@ extern "C"
 		if (GameState & GameState_Running)
 		{
             LoadSounds();
-			if (!(GameState & GameState_SoftPause)) CompPlus_Core::UpdateMenus();
+			if (!(GameState & GameState_SoftPause)) CompPlus_Core::OnFrame();
 			UpdateCompPlusDevMenu();
 		}
-        else if (GameState & GameState_NotRunning)
-        {
-            CompPlus_Core::OnSceneReset();
-        }
+        else if (GameState & GameState_NotRunning ) CompPlus_Core::OnSceneReset();
+        else if (GameState & GameState_SoftPause) CompPlus_Core::OnSceneReset();
 	}
 
 	void DoMenuOnScreenDraw()

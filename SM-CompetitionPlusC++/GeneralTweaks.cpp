@@ -12,6 +12,9 @@
 
 namespace CompPlus_GeneralTweaks
 {
+
+    bool GustPlanetGravityEnabled = false;
+
     void UpdateSZ() 
     {
         if (!SonicMania::Timer.Enabled) 

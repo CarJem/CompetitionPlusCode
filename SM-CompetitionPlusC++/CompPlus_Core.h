@@ -138,7 +138,7 @@ namespace CompPlus_Core
 	//
 	extern void IZChangeStage(const char* key);
 
-	extern void UpdateMenus();
+	extern void OnFrame();
 	extern void DrawHook();
 
     extern void OnSceneReset();

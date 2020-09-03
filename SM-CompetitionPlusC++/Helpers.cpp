@@ -142,6 +142,12 @@ void LogInfo(const char* name, const char* text, ...)
     printf("[INFO]  [%s] %s\n", name, buffer);
 }
 
+std::string BoolToString(bool b)
+{
+    std::string temp = b ? "1" : "0";
+    return temp;
+}
+
 std::string IntToString(int a)
 {
     std::stringstream temp;

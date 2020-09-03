@@ -77,8 +77,11 @@
 		  <FBZ_Button />
 	  </StageUnlocks>
 	  <StageAssets>
+		  <Asset basePath="Data/Sprites/PSZ2/Objects3.gif" newPath="Data/Sprites/HUB/Computer.gif" />
+		  <Asset basePath="Data/Sprites/CPZ/StickyPlatform.bin"  newPath="Data/Sprites/HUB/StickyPlatform.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB/Batbrain.bin" />
-		  <Asset basePath="Data/Sprites/GHZ/Bridge.bin"  newPath="Data/Sprites/HUB/Bridge.bin" />
+		  <Asset basePath="Data/Sprites/FBZ/Objects.gif"  newPath="Data/Sprites/HUB/Objects-FBZ.gif" />
+		  <Asset basePath="Data/Sprites/HCZ/Bridge.bin"  newPath="Data/Sprites/HUB/Bridge.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/BurningLog.bin"  newPath="Data/Sprites/HUB/BurningLog.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/BuzzBomber.bin"  newPath="Data/Sprites/HUB/BuzzBomber.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/CheckerBall.bin"  newPath="Data/Sprites/HUB/CheckerBall.bin" />
@@ -108,7 +111,7 @@
 			<FBZ_Button />
 		</StageUnlocks>
 		<StageAssets>
-			<Asset basePath="Data/Sprites/FBZ/Button.bin"  newPath="Data/Sprites/CP_Cred/Button.bin" />
+			<Asset basePath="Data/Sprites/FBZ/Objects.bin"  newPath="Data/Sprites/CP_Cred/Objects.bin" />
 		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
 		</StageAssets>
 	</Stage>
@@ -207,6 +210,7 @@
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 	      <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
+		  <Asset basePath="Data/Sprites/FBZ/Button.bin"  newPath="Data/Sprites/CP_GPZ/Button.bin" />
 		  <Asset basePath="Data/Sprites/LRZ1/Fireworm.bin"  newPath="Data/Sprites/CP_GPZ/Fireworm.bin" />
 		  <Asset basePath="Data/Sprites/LRZ1/Platform.bin"  newPath="Data/Sprites/CP_GPZ/Platform.bin" />
 		  <Asset basePath="Data/Sprites/PSZ1/Splats.bin"  newPath="Data/Sprites/CP_GPZ/Splats.bin" />
@@ -219,6 +223,7 @@
 		<PSZ1_Splats />
 		<SSZ2_SpeedBooster />
 		<SPZ1_Turbinaut />
+		<FBZ_Button/>
 	</StageUnlocks>
 	</Stage>
 	<Stage stageName="SMCP Gust Planet Zone E" stageID="CP_CustomStages/CP_GPZ" stageKey="CPGPZE" flags="5">
@@ -231,6 +236,7 @@
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
 		  <Asset basePath="Data/Palettes/EncoreLRZ1.act"  newPath="Data/Palettes/CP_Custom/EncoreGPZ1.act" />
+		  <Asset basePath="Data/Sprites/FBZ/Button.bin"  newPath="Data/Sprites/CP_GPZ/Button.bin" />
 		  <Asset basePath="Data/Sprites/LRZ1/Fireworm.bin"  newPath="Data/Sprites/CP_GPZ/Fireworm.bin" />
 		  <Asset basePath="Data/Sprites/LRZ1/Platform.bin"  newPath="Data/Sprites/CP_GPZ/Platform.bin" />
 		  <Asset basePath="Data/Sprites/PSZ1/Splats.bin"  newPath="Data/Sprites/CP_GPZ/Splats.bin" />
@@ -243,6 +249,7 @@
 		<PSZ1_Splats />
 		<SSZ2_SpeedBooster />
 		<SPZ1_Turbinaut />
+		<FBZ_Button/>
 	</StageUnlocks>
 	</Stage>
 	<Stage stageName="SMCP Special Zone M" stageID="CP_CustomStages/CP_SZ" stageKey="CPSZ" flags="3">

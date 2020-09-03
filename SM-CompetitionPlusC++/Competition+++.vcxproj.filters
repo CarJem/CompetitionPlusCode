@@ -38,6 +38,12 @@
     <Filter Include="Internal\Headers">
       <UniqueIdentifier>{23204ba7-82c3-4dcf-b1b4-0a2afb2cbbb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Custom Scenes">
+      <UniqueIdentifier>{c464cd53-764c-4dec-9d27-f3e08cc0ea8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Custom Scenes\Headers">
+      <UniqueIdentifier>{5c9e604b-ffef-429d-91aa-4a63c76fce3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -130,6 +136,9 @@
     <ClInclude Include="CompPlus_Internal.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="GustPlanet.h">
+      <Filter>Scenes\Custom Scenes\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -207,6 +216,9 @@
     </ClCompile>
     <ClCompile Include="Helpers.cpp">
       <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="GustPlanet.cpp">
+      <Filter>Scenes\Custom Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

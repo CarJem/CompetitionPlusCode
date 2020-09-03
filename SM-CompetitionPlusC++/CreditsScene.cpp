@@ -198,7 +198,7 @@ namespace CompPlus_Credits
 
         Label1.Text = (wchar_t*)Strings[2];
         ConvertASCII2Unicode(Label1.Text, (char*)ringCounter.c_str(), strlen(ringCounter.c_str()), -32);
-        Label1.TextLength = (WORD)15;
+        Label1.TextLength = (WORD)ringCounter.length();
     }
 
     void SpawnRingsAtPosition(Vector2 Position, int Num, int Speed)
@@ -380,7 +380,7 @@ namespace CompPlus_Credits
     {
         if (PlayerControllers[0].Y.Down)
         {
-            CameraXPos += 16;
+            CameraXPos += 1;
         }
         else
         {
@@ -454,7 +454,7 @@ namespace CompPlus_Credits
             else
             {
                 CameraXPos = CameraXEndPos;
-                if (UnlockWait >= UnlockWaitMax || PlayerControllers[0].Y.Down)
+                if (UnlockWait >= UnlockWaitMax)
                 {
                     isUnlockedCamera = true;
                 }
@@ -530,7 +530,11 @@ namespace CompPlus_Credits
     void ZoneLoopInit()
     {
         DeIntZoneInitalized = false;
-        if (SonicMania::Timer.Enabled == false) SonicMania::Timer.Enabled = true;
+        if (SonicMania::Timer.Enabled == false) 
+        {
+            CompPlus_Settings::RefreshSettings();
+            SonicMania::Timer.Enabled = true;
+        }
         SetScreenCount(1);
         CompPlus_Settings::isVSControllerInputUnlocked = true;
     }

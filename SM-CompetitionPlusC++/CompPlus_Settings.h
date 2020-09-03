@@ -41,7 +41,7 @@ namespace CompPlus_Settings
     };
 
     enum PlayerAbility : int {
-        AbilitySet_Default = 0,
+        AbilitySet_Compatibility = 0,
         AbilitySet_Sonic = 1,
         AbilitySet_Tails = 2,
         AbilitySet_Knuckles = 3,
@@ -112,10 +112,10 @@ namespace CompPlus_Settings
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
 
-    extern bool Player1PeeloutAbility;
-    extern bool Player2PeeloutAbility;
-    extern bool Player3PeeloutAbility;
-    extern bool Player4PeeloutAbility;
+    extern ThreeStateBool Player1PeeloutAbility;
+    extern ThreeStateBool Player2PeeloutAbility;
+    extern ThreeStateBool Player3PeeloutAbility;
+    extern ThreeStateBool Player4PeeloutAbility;
 
     extern ChosenPlayer Player1ChosenPlayer;
     extern ChosenPlayer Player2ChosenPlayer;
@@ -148,7 +148,7 @@ namespace CompPlus_Settings
 
     extern void SetDropdashAbility(bool Value);
 
-    extern void SetPeeloutAbility(int PlayerID, bool Value);
+    extern void SetPeeloutAbility(int PlayerID, ThreeStateBool Value);
 
     extern void SetInstaSheildAbility(bool Value);
 
@@ -156,13 +156,11 @@ namespace CompPlus_Settings
 
     extern void SetInitalLives(int value);
 
-    extern void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability);
+    extern void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability, bool Force);
 
-    extern void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force = true);
+    extern void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force);
 
-    extern void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force = true);
-
-    extern void FixAbilites(SonicMania::EntityPlayer* Player);
+    extern void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force);
 
     extern void RefreshSettings();
 

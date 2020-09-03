@@ -144,6 +144,12 @@ namespace CompPlus_HubWorld
     int WarpSlotID_LevelSelect = 75;
     int WarpSlotID_ReturnToLast = 74;
 
+    int WarpDestSlotID_PlayerSettings = 60;
+    int WarpDestSlotID_OtherSettings = 61;
+    int WarpDestSlotID_Ranking = 62;
+    int WarpDestSlotID_LevelSelect = 72;
+    int WarpDestSlotID_WarpHub = 73;
+
 	#pragma endregion
 
     #pragma region Warp Room Variables
@@ -169,15 +175,21 @@ namespace CompPlus_HubWorld
     int P3_WarpAlpha = 255;
     int P4_WarpAlpha = 255;
 
-    INT_Position P1_WarpQueue = INT_Position(0, 0);
-    INT_Position P2_WarpQueue = INT_Position(0, 0);
-    INT_Position P3_WarpQueue = INT_Position(0, 0);
-    INT_Position P4_WarpQueue = INT_Position(0, 0);
+    INT_Position WarpDest_PlayerSettings = INT_Position(0, 0);
+    INT_Position WarpDest_OtherSettings = INT_Position(0, 0);
+    INT_Position WarpDest_Ranking = INT_Position(0, 0);
+    INT_Position WarpDest_LevelSelect = INT_Position(0, 0);
+    INT_Position WarpDest_WarpHub = INT_Position(0, 0);
 
     INT_Position P1_LastWarpPosition = INT_Position(0, 0);
     INT_Position P2_LastWarpPosition = INT_Position(0, 0);
     INT_Position P3_LastWarpPosition = INT_Position(0, 0);
     INT_Position P4_LastWarpPosition = INT_Position(0, 0);
+
+    INT_Position P1_WarpQueue = INT_Position(0, 0);
+    INT_Position P2_WarpQueue = INT_Position(0, 0);
+    INT_Position P3_WarpQueue = INT_Position(0, 0);
+    INT_Position P4_WarpQueue = INT_Position(0, 0);
 
     #pragma endregion
 
@@ -207,7 +219,7 @@ namespace CompPlus_HubWorld
 
 	#pragma region Other Variables
 
-    static wchar_t* Strings[110];
+    static wchar_t* Strings[120];
 	bool isSettingChanged = false;	//Controller Press Detection
 	bool LevelSelected = false;
 	bool LevelSelectedWarpSoundPlayed = false;
@@ -382,7 +394,7 @@ namespace CompPlus_HubWorld
         return NewValue;
     }
 
-    int UpDownController(int ControlSlotID, int OldValue, int Min, int Max, int RealID)
+    int UpDownController(int ControlSlotID, int OldValue, int Min, int Max, int RealID, bool& isUp)
     {
         Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
 
@@ -406,6 +418,7 @@ namespace CompPlus_HubWorld
             CompPlus_Common::PlayMenuMoveSoundFX(false);
             isSettingChanged = true;
             SettingWaitTimerActivate();
+            isUp = true;
         }
         else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
         {
@@ -414,6 +427,7 @@ namespace CompPlus_HubWorld
             CompPlus_Common::PlayMenuMoveSoundFX(false);
             isSettingChanged = true;
             SettingWaitTimerActivate();
+            isUp = false;
         }
         else if (!Player->Up && !Player->Down && isSettingChanged)
         {
@@ -425,13 +439,118 @@ namespace CompPlus_HubWorld
 
 	void ChangeCharacter(int PlayerID, int Value) 
 	{
-		CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value);
-		CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value);
+		CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, false);
+		CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, false);
 	}
 
-	void ChangeAbility(int PlayerID, int Value)
+	void ChangeAbility(int PlayerID, int Value, bool isUp)
 	{
-		CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value);
+        CompPlus_Settings::PlayerAbility Ability = (CompPlus_Settings::PlayerAbility)Value;
+        CompPlus_Settings::ChosenPlayer ChosenPlayer;
+
+        if (PlayerID == 4) ChosenPlayer = CompPlus_Settings::Player4ChosenPlayer;
+        if (PlayerID == 3) ChosenPlayer = CompPlus_Settings::Player3ChosenPlayer;
+        if (PlayerID == 2) ChosenPlayer = CompPlus_Settings::Player2ChosenPlayer;
+        else ChosenPlayer = CompPlus_Settings::Player1ChosenPlayer;
+        
+        CompPlus_Settings::SetAbility(PlayerID, Ability, false);
+
+        if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Sonic)
+        {
+            if (isUp)
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+            }
+            else
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+            }
+        }
+        if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Tails)
+        {
+            if (isUp)
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+            }
+            else
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+            }
+        }
+        if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Knuckles)
+        {
+            if (isUp)
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+            }
+            else
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+            }
+
+        }
+        if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Mighty)
+        {
+            if (isUp)
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+            }
+            else
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+            }
+        }
+        if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Ray)
+        {
+            if (isUp)
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, false);
+            }
+            else
+            {
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, false);
+            }
+        }
 	}
 
 	void CheckSettings()
@@ -461,34 +580,35 @@ namespace CompPlus_HubWorld
 		if (DropdashStatus != CompPlus_Settings::DropdashAbility) CompPlus_Settings::SetDropdashAbility(DropdashStatus);
 
 		//Character NUD
-		int CharacterP1Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player1ChosenPlayer, 1, 5, 1);
+        bool isUp = false;
+		int CharacterP1Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player1ChosenPlayer, 1, 5, 1, isUp);
 		if (CharacterP1Status != (int)CompPlus_Settings::Player1ChosenPlayer) ChangeCharacter(1, (CompPlus_Settings::ChosenPlayer)CharacterP1Status);
-		int CharacterP2Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player2ChosenPlayer, 1, 5, 2);
+		int CharacterP2Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player2ChosenPlayer, 1, 5, 2, isUp);
 		if (CharacterP2Status != (int)CompPlus_Settings::Player2ChosenPlayer) ChangeCharacter(2, (CompPlus_Settings::ChosenPlayer)CharacterP2Status);
-		int CharacterP3Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player3ChosenPlayer, 1, 5, 3);
+		int CharacterP3Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player3ChosenPlayer, 1, 5, 3, isUp);
 		if (CharacterP3Status != (int)CompPlus_Settings::Player3ChosenPlayer) ChangeCharacter(3, (CompPlus_Settings::ChosenPlayer)CharacterP3Status);
-		int CharacterP4Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player4ChosenPlayer, 1, 5, 4);
+		int CharacterP4Status = UpDownController(SwapPlayerController, (int)CompPlus_Settings::Player4ChosenPlayer, 1, 5, 4, isUp);
 		if (CharacterP4Status != (int)CompPlus_Settings::Player4ChosenPlayer) ChangeCharacter(4, (CompPlus_Settings::ChosenPlayer)CharacterP4Status);
 
 		//Ability NUD
-		int AbilityP1Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player1AbilitySet, 1, 5, 1);
-		if (AbilityP1Status != (int)CompPlus_Settings::Player1AbilitySet) ChangeAbility(1, (CompPlus_Settings::PlayerAbility)AbilityP1Status);
-		int AbilityP2Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player2AbilitySet, 1, 5, 2);
-		if (AbilityP2Status != (int)CompPlus_Settings::Player2AbilitySet) ChangeAbility(2, (CompPlus_Settings::PlayerAbility)AbilityP2Status);
-		int AbilityP3Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player3AbilitySet, 1, 5, 3);
-		if (AbilityP3Status != (int)CompPlus_Settings::Player3AbilitySet) ChangeAbility(3, (CompPlus_Settings::PlayerAbility)AbilityP3Status);
-		int AbilityP4Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player4AbilitySet, 1, 5, 4);
-		if (AbilityP4Status != (int)CompPlus_Settings::Player4AbilitySet) ChangeAbility(4, (CompPlus_Settings::PlayerAbility)AbilityP4Status);
+		int AbilityP1Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player1AbilitySet, 0, 5, 1, isUp);
+		if (AbilityP1Status != (int)CompPlus_Settings::Player1AbilitySet) ChangeAbility(1, (CompPlus_Settings::PlayerAbility)AbilityP1Status, isUp);
+		int AbilityP2Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player2AbilitySet, 0, 5, 2, isUp);
+		if (AbilityP2Status != (int)CompPlus_Settings::Player2AbilitySet) ChangeAbility(2, (CompPlus_Settings::PlayerAbility)AbilityP2Status, isUp);
+		int AbilityP3Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player3AbilitySet, 0, 5, 3, isUp);
+		if (AbilityP3Status != (int)CompPlus_Settings::Player3AbilitySet) ChangeAbility(3, (CompPlus_Settings::PlayerAbility)AbilityP3Status, isUp);
+		int AbilityP4Status = UpDownController(SwapAbilityController, (int)CompPlus_Settings::Player4AbilitySet, 0, 5, 4, isUp);
+		if (AbilityP4Status != (int)CompPlus_Settings::Player4AbilitySet) ChangeAbility(4, (CompPlus_Settings::PlayerAbility)AbilityP4Status, isUp);
 
 		//Peelout Toggle
-		bool PeeloutStateP1Status = ToggleController(PeeloutController, (bool)CompPlus_Settings::Player1PeeloutAbility, 1);
-		if (PeeloutStateP1Status != (bool)CompPlus_Settings::Player1PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(1, PeeloutStateP1Status);
-		bool PeeloutStateP2Status = ToggleController(PeeloutController, (bool)CompPlus_Settings::Player2PeeloutAbility, 2);
-		if (PeeloutStateP2Status != (bool)CompPlus_Settings::Player2PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(2, PeeloutStateP2Status);
-		bool PeeloutStateP3Status = ToggleController(PeeloutController, (bool)CompPlus_Settings::Player3PeeloutAbility, 3);
-		if (PeeloutStateP3Status != (bool)CompPlus_Settings::Player3PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(3, PeeloutStateP3Status);
-		bool PeeloutStateP4Status = ToggleController(PeeloutController, (bool)CompPlus_Settings::Player4PeeloutAbility, 4);
-		if (PeeloutStateP4Status != (bool)CompPlus_Settings::Player4PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(4, PeeloutStateP4Status);
+        int PeeloutStateP1Status = UpDownController(PeeloutController, (int)CompPlus_Settings::Player1PeeloutAbility, 0, 2, 1, isUp);
+		if (PeeloutStateP1Status != (int)CompPlus_Settings::Player1PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(1, (CompPlus_Settings::ThreeStateBool)PeeloutStateP1Status);
+        int PeeloutStateP2Status = UpDownController(PeeloutController, (int)CompPlus_Settings::Player2PeeloutAbility, 0, 2, 2, isUp);
+		if (PeeloutStateP2Status != (int)CompPlus_Settings::Player2PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(2, (CompPlus_Settings::ThreeStateBool)PeeloutStateP2Status);
+        int PeeloutStateP3Status = UpDownController(PeeloutController, (int)CompPlus_Settings::Player3PeeloutAbility, 0, 2, 3, isUp);
+		if (PeeloutStateP3Status != (int)CompPlus_Settings::Player3PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(3, (CompPlus_Settings::ThreeStateBool)PeeloutStateP3Status);
+		int PeeloutStateP4Status = UpDownController(PeeloutController, (int)CompPlus_Settings::Player4PeeloutAbility, 0, 2, 4, isUp);
+		if (PeeloutStateP4Status != (int)CompPlus_Settings::Player4PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(4, (CompPlus_Settings::ThreeStateBool)PeeloutStateP4Status);
 
 		//Inital Lives NUD
 		int LivesStatus = UpDownController(LivesNUDController, CompPlus_Settings::InitalLives, 1, 100);
@@ -518,17 +638,41 @@ namespace CompPlus_HubWorld
         int NumberOfRoundsStatus = UpDownController(NumberOfRoundsController, (int)CompPlus_Settings::NumberOfRounds, 2, 99);
         if (NumberOfRoundsStatus != (int)CompPlus_Settings::NumberOfRounds) CompPlus_Settings::SetNumberOfRounds(NumberOfRoundsStatus);
 
-		CompPlus_Settings::FixAbilites(&Player1);
-		CompPlus_Settings::FixAbilites(&Player2);
-		CompPlus_Settings::FixAbilites(&Player3);
-		CompPlus_Settings::FixAbilites(&Player4);
-
 		if (SettingWaitTimer != 0) SettingWaitTimer = SettingWaitTimer - 1;
 	}
 
 	#pragma endregion
 
 	#pragma region Controller/Statistic Drawing Methods
+
+    void UpdatePeeloutDisplay(int SlotID, int x, int y, CompPlus_Settings::ThreeStateBool State, int index) 
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        Label3.Position.X = x;
+        Label3.Position.Y = y;
+
+        Label3.Text = (wchar_t*)Strings[index];
+
+        if (State == CompPlus_Settings::ThreeStateBool::False)
+        {
+            char* on_text = (char*)"FORCE ON";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)8;
+        }
+        else if (State == CompPlus_Settings::ThreeStateBool::True)
+        {
+            char* on_text = (char*)"FORCE OFF";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)9;
+        }
+        else if (State == CompPlus_Settings::ThreeStateBool::Indeterminate)
+        {
+            char* on_text = (char*)"DEFAULT";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)7;
+        }
+    }
 
 	void UpdateAbilitySwapperDisplay(int SlotID, int x, int y, CompPlus_Settings::PlayerAbility Ability, int index)
 	{
@@ -569,7 +713,7 @@ namespace CompPlus_HubWorld
 			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
 			Label3.TextLength = (WORD)3;
 		}
-		else if (Ability == CompPlus_Settings::AbilitySet_Default)
+		else if (Ability == CompPlus_Settings::AbilitySet_Compatibility)
 		{
 			char* on_text = (char*)"DEFAULT";
 			ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
@@ -845,7 +989,7 @@ namespace CompPlus_HubWorld
         Label3.DrawOrder = 12;
 
         char* _text = (char*)__text.c_str();
-        Label3.Text = (wchar_t*)Strings[0];
+        Label3.Text = (wchar_t*)Strings[index];
         ConvertASCII2Unicode(Label3.Text, _text, strlen(_text), -32);
         Label3.TextLength = __text.length();
     }
@@ -1178,10 +1322,10 @@ namespace CompPlus_HubWorld
 		UpdateAbilitySwapperDisplay(SwapAbilityText_P3, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 16, CompPlus_Settings::Player3AbilitySet, 6);
 		UpdateAbilitySwapperDisplay(SwapAbilityText_P4, Pos_SwapAbilityText.X, Pos_SwapAbilityText.Y - 0, CompPlus_Settings::Player4AbilitySet, 7);
 		//Peelout Ability Display
-		UpdateToggleDisplay(PeeloutToggleText_P1, Pos_PeeloutText.X, Pos_PeeloutText.Y - 48, CompPlus_Settings::Player1PeeloutAbility, 8);
-		UpdateToggleDisplay(PeeloutToggleText_P2, Pos_PeeloutText.X, Pos_PeeloutText.Y - 32, CompPlus_Settings::Player2PeeloutAbility, 9);
-		UpdateToggleDisplay(PeeloutToggleText_P3, Pos_PeeloutText.X, Pos_PeeloutText.Y - 16, CompPlus_Settings::Player3PeeloutAbility, 10);
-		UpdateToggleDisplay(PeeloutToggleText_P4, Pos_PeeloutText.X, Pos_PeeloutText.Y - 0, CompPlus_Settings::Player4PeeloutAbility, 11);
+		UpdatePeeloutDisplay(PeeloutToggleText_P1, Pos_PeeloutText.X, Pos_PeeloutText.Y - 48, CompPlus_Settings::Player1PeeloutAbility, 8);
+		UpdatePeeloutDisplay(PeeloutToggleText_P2, Pos_PeeloutText.X, Pos_PeeloutText.Y - 32, CompPlus_Settings::Player2PeeloutAbility, 9);
+        UpdatePeeloutDisplay(PeeloutToggleText_P3, Pos_PeeloutText.X, Pos_PeeloutText.Y - 16, CompPlus_Settings::Player3PeeloutAbility, 10);
+        UpdatePeeloutDisplay(PeeloutToggleText_P4, Pos_PeeloutText.X, Pos_PeeloutText.Y - 0, CompPlus_Settings::Player4PeeloutAbility, 11);
 		//Dropdash Display
 		UpdateToggleDisplay(DropDashToggleText, Pos_DropDashText.X, Pos_DropDashText.Y, CompPlus_Settings::DropdashAbility, 12);
 		//Insta-Sheild Display
@@ -1276,6 +1420,18 @@ namespace CompPlus_HubWorld
 
         Pos_NumberOfRoundsText.X = E14.Position.X + OffsetX;
         Pos_NumberOfRoundsText.Y = E14.Position.Y + OffsetY_2;
+       
+        Entity& QuickWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_WarpHub);
+        Entity& RankingWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_Ranking);
+        Entity& OtherOptionsSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_OtherSettings);
+        Entity& PlayerOptionsSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_PlayerSettings);
+        Entity& LevelSelectSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_LevelSelect);
+
+        WarpDest_PlayerSettings = INT_Position(PlayerOptionsSpawn.Position.X, PlayerOptionsSpawn.Position.Y);
+        WarpDest_OtherSettings = INT_Position(OtherOptionsSpawn.Position.X, OtherOptionsSpawn.Position.Y);
+        WarpDest_Ranking = INT_Position(RankingWarpSpawn.Position.X, RankingWarpSpawn.Position.Y);
+        WarpDest_LevelSelect = INT_Position(LevelSelectSpawn.Position.X, LevelSelectSpawn.Position.Y);
+        WarpDest_WarpHub = INT_Position(QuickWarpSpawn.Position.X, QuickWarpSpawn.Position.Y);
 	}
 
 	#pragma endregion
@@ -1446,10 +1602,10 @@ namespace CompPlus_HubWorld
             P4_LastWarpPosition.Y = (int)Player4.Position.Y;
         }
 
-        if (PlayerControllers[1].Y.Press && !P1_IsInWarpRoom && Player1.Grounded && Player1.XVelocity == 0 && Player1.YVelocity == 0) QueueWarp(Player1, 14400, 4750, true, 1);
-        if (PlayerControllers[2].Y.Press && !P2_IsInWarpRoom && Player2.Grounded && Player2.XVelocity == 0 && Player2.YVelocity == 0) QueueWarp(Player2, 14400, 4750, true, 2);
-        if (PlayerControllers[3].Y.Press && !P3_IsInWarpRoom && Player3.Grounded && Player3.XVelocity == 0 && Player3.YVelocity == 0) QueueWarp(Player3, 14400, 4750, true, 3);
-        if (PlayerControllers[4].Y.Press && !P4_IsInWarpRoom && Player4.Grounded && Player4.XVelocity == 0 && Player4.YVelocity == 0) QueueWarp(Player4, 14400, 4750, true, 4);
+        if (PlayerControllers[1].Y.Press && !P1_IsInWarpRoom && Player1.Grounded && Player1.XVelocity == 0 && Player1.YVelocity == 0) QueueWarp(Player1, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 1);
+        if (PlayerControllers[2].Y.Press && !P2_IsInWarpRoom && Player2.Grounded && Player2.XVelocity == 0 && Player2.YVelocity == 0) QueueWarp(Player2, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 2);
+        if (PlayerControllers[3].Y.Press && !P3_IsInWarpRoom && Player3.Grounded && Player3.XVelocity == 0 && Player3.YVelocity == 0) QueueWarp(Player3, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 3);
+        if (PlayerControllers[4].Y.Press && !P4_IsInWarpRoom && Player4.Grounded && Player4.XVelocity == 0 && Player4.YVelocity == 0) QueueWarp(Player4, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 4);
     }
 
     void CheckPlayerReturnWarp(SonicMania::EntityPlayer& Player, int SlotID, int X1, int Y1, int X2, int Y2, int PlayerID)
@@ -1533,10 +1689,10 @@ namespace CompPlus_HubWorld
     {
         UpdateWarpEffects();
         CheckQuickWarp();
-        CheckPlayersQuickWarp(WarpSlotID_PlayerSettings, -50, -50, 50, 50, 15922, 16200);
-        CheckPlayersQuickWarp(WarpSlotID_OtherSettings, -50, -50, 50, 50, 11299, 10907);
-        CheckPlayersQuickWarp(WarpSlotID_Ranking, -50, -50, 50, 50, 8580, 10398);
-        CheckPlayersQuickWarp(WarpSlotID_LevelSelect, -50, -50, 50, 50, 9553, 10310);
+        CheckPlayersQuickWarp(WarpSlotID_PlayerSettings, -50, -50, 50, 50, WarpDest_PlayerSettings.X, WarpDest_PlayerSettings.Y);
+        CheckPlayersQuickWarp(WarpSlotID_OtherSettings, -50, -50, 50, 50, WarpDest_OtherSettings.X, WarpDest_OtherSettings.Y);
+        CheckPlayersQuickWarp(WarpSlotID_Ranking, -50, -50, 50, 50, WarpDest_Ranking.X, WarpDest_Ranking.Y);
+        CheckPlayersQuickWarp(WarpSlotID_LevelSelect, -50, -50, 50, 50, WarpDest_LevelSelect.X, WarpDest_LevelSelect.Y);
         CheckPlayersReturnWarp(WarpSlotID_ReturnToLast, -50, -55, 50, 50);
     }
 
@@ -1701,7 +1857,7 @@ namespace CompPlus_HubWorld
 
     void Init()
     {
-        for (int i = 0; i < 110; ++i)
+        for (int i = 0; i < 120; ++i)
             Strings[i] = (wchar_t*)malloc(128);
     }
 

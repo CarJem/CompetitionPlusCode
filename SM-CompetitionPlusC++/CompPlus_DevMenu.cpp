@@ -11,7 +11,7 @@ DataPointer(BYTE, Key_Up, 0x004416D8);
 DataPointer(BYTE, Key_Down, 0x004416E4);
 DataPointer(HWND, MainWindowHandle, 0x00A53C10);
 
-static bool TrackerP, TrackerS, Tracker1, Tracker2, Tracker3, Tracker4;
+static bool TrackerP, TrackerS, Tracker1, Tracker2, Tracker3, Tracker4, TrackerO;
 
 void* OriginalDevMenu;
 bool OriginalDevMenuSaved = false;
@@ -127,6 +127,11 @@ void UpdateCompPlusDevMenu()
         KeySHeld = true;
     }
     else KeySHeld = false;
+
+    if (CheckKey('O', keyState, &TrackerO))
+    {
+        CompPlus_Settings::LoadSettings();
+    }
 
     if (CheckKey('1', keyState, &Tracker1) && CompPlus_Settings::EnableDevMode && !Key1Held)
     {

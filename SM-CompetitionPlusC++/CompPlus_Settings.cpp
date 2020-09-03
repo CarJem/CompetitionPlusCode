@@ -84,20 +84,20 @@ namespace CompPlus_Settings
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
 
-    bool Player1PeeloutAbility = false;
-    bool Player2PeeloutAbility = false;
-    bool Player3PeeloutAbility = false;
-    bool Player4PeeloutAbility = false;
+    ThreeStateBool Player1PeeloutAbility = ThreeStateBool::Indeterminate;
+    ThreeStateBool Player2PeeloutAbility = ThreeStateBool::Indeterminate;
+    ThreeStateBool Player3PeeloutAbility = ThreeStateBool::Indeterminate;
+    ThreeStateBool Player4PeeloutAbility = ThreeStateBool::Indeterminate;
 
-    ChosenPlayer Player1ChosenPlayer = ChosenPlayer_Default;
-    ChosenPlayer Player2ChosenPlayer = ChosenPlayer_Default;
-    ChosenPlayer Player3ChosenPlayer = ChosenPlayer_Default;
-    ChosenPlayer Player4ChosenPlayer = ChosenPlayer_Default;
+    ChosenPlayer Player1ChosenPlayer = ChosenPlayer_Sonic;
+    ChosenPlayer Player2ChosenPlayer = ChosenPlayer_Tails;
+    ChosenPlayer Player3ChosenPlayer = ChosenPlayer_Knuckles;
+    ChosenPlayer Player4ChosenPlayer = ChosenPlayer_Mighty;
 
-    PlayerAbility Player1AbilitySet = AbilitySet_Default;
-    PlayerAbility Player2AbilitySet = AbilitySet_Default;
-    PlayerAbility Player3AbilitySet = AbilitySet_Default;
-    PlayerAbility Player4AbilitySet = AbilitySet_Default;
+    PlayerAbility Player1AbilitySet = AbilitySet_Compatibility;
+    PlayerAbility Player2AbilitySet = AbilitySet_Compatibility;
+    PlayerAbility Player3AbilitySet = AbilitySet_Compatibility;
+    PlayerAbility Player4AbilitySet = AbilitySet_Compatibility;
 
     //Status States
     int CurrentLevelSelect = 0;
@@ -135,136 +135,10 @@ namespace CompPlus_Settings
         SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
         SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
 
-        CompPlus_Settings::UpdatePlayer(1, P1_Char, false);
-        CompPlus_Settings::UpdatePlayer(2, P2_Char, false);
-        CompPlus_Settings::UpdatePlayer(3, P3_Char, false);
-        CompPlus_Settings::UpdatePlayer(4, P4_Char, false);
-    }
-
-    void FixAbilites(SonicMania::EntityPlayer* Player)
-    {
-        int RealID = 1;
-
-        if (Player == &Player1) RealID = 1;
-        else if (Player == &Player2) RealID = 2;
-        else if (Player == &Player3) RealID = 3;
-        else if (Player == &Player4) RealID = 4;
-
-        if (Player->Character == Character_Sonic)
-        {
-            if (Player->Moveset == MOVESET_SONIC)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_TAILS)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_KNUX)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_MIGHTY)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_RAY)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
-            }
-        }
-        else if (Player->Character == Character_Tails)
-        {
-            if (Player->Moveset == MOVESET_SONIC)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_TAILS)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_KNUX)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_MIGHTY)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_RAY)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
-            }
-        }
-        else if (Player->Character == Character_Knux)
-        {
-            if (Player->Moveset == MOVESET_SONIC)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_TAILS)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Knuckles);
-            }
-            else if (Player->Moveset == MOVESET_KNUX)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_MIGHTY)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_RAY)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
-            }
-        }
-        else if (Player->Character == Character_Mighty)
-        {
-            if (Player->Moveset == MOVESET_SONIC)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_TAILS)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_KNUX)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_MIGHTY)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_RAY)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Sonic);
-            }
-        }
-        else if (Player->Character == Character_Ray)
-        {
-            if (Player->Moveset == MOVESET_SONIC)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_TAILS)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_KNUX)
-            {
-                SetAbility(RealID, CompPlus_Settings::AbilitySet_Mighty);
-            }
-            else if (Player->Moveset == MOVESET_MIGHTY)
-            {
-
-            }
-            else if (Player->Moveset == MOVESET_RAY)
-            {
-
-            }
-        }
+        CompPlus_Settings::UpdatePlayer(1, P1_Char, true);
+        CompPlus_Settings::UpdatePlayer(2, P2_Char, true);
+        CompPlus_Settings::UpdatePlayer(3, P3_Char, true);
+        CompPlus_Settings::UpdatePlayer(4, P4_Char, true);
     }
 
     void FixRayAndMighty2P()
@@ -311,7 +185,7 @@ namespace CompPlus_Settings
         //2  : Dropdash Only			      - (Mania)
         //8  : Instasheild Only		          - (S3&K)
 
-        int MovesetID = 21;
+        int MovesetID = 22;
 
         if (DropdashAbility && InstaSheildAbility) MovesetID = 13;	      // Max Control Moveset
         else if (DropdashAbility && !InstaSheildAbility) MovesetID = 0;	  // Mania Moveset
@@ -334,30 +208,39 @@ namespace CompPlus_Settings
         else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
 
 
+        if (Force) 
+        {
+            if (SonicMania::Player1.Camera == nullptr) Force = false;
+        }
+
         int CharacterID = (int)Character;
         //SonicMania::Options->CompetitionSession.CharacterFlags &= 0xFFFFFFFF ^ (0xFF << (PlayerID - 1));
 
         if (PlayerID == 1)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            Player1.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
             CompPlus_Settings::Player1ChosenPlayer = Player;
         }
         else if (PlayerID == 2)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            Player2.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
             CompPlus_Settings::Player2ChosenPlayer = Player;
         }
         else if (PlayerID == 3)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            Player3.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
             CompPlus_Settings::Player3ChosenPlayer = Player;
         }
         else if (PlayerID == 4)
         {
             if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            Player4.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
             CompPlus_Settings::Player4ChosenPlayer = Player;
         }
@@ -400,11 +283,12 @@ namespace CompPlus_Settings
         SaveSettings();
     }
 
-    void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability)
+    void SetAbility(int PlayerID, CompPlus_Settings::PlayerAbility Ability, bool Force)
 	{
 		if (PlayerID == 1)
 		{
 			CompPlus_Settings::Player1AbilitySet = Ability;
+            if (!Force) return;
 			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player1.Moveset = MOVESET_SONIC;
 			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player1.Moveset = MOVESET_TAILS;
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player1.Moveset = MOVESET_KNUX;
@@ -414,6 +298,7 @@ namespace CompPlus_Settings
 		else if (PlayerID == 2)
 		{
 			CompPlus_Settings::Player2AbilitySet = Ability;
+            if (!Force) return;
 			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player2.Moveset = MOVESET_SONIC;
 			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player2.Moveset = MOVESET_TAILS;
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player2.Moveset = MOVESET_KNUX;
@@ -423,6 +308,7 @@ namespace CompPlus_Settings
 		else if (PlayerID == 3)
 		{
 			CompPlus_Settings::Player3AbilitySet = Ability;
+            if (!Force) return;
 			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player3.Moveset = MOVESET_SONIC;
 			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player3.Moveset = MOVESET_TAILS;
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player3.Moveset = MOVESET_KNUX;
@@ -432,6 +318,7 @@ namespace CompPlus_Settings
 		else if (PlayerID == 4)
 		{
 			CompPlus_Settings::Player4AbilitySet = Ability;
+            if (!Force) return;
 			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player4.Moveset = MOVESET_SONIC;
 			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player4.Moveset = MOVESET_TAILS;
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player4.Moveset = MOVESET_KNUX;
@@ -447,27 +334,27 @@ namespace CompPlus_Settings
         SaveSettings();
 	}
 
-	void SetPeeloutAbility(int PlayerID, bool State)
+	void SetPeeloutAbility(int PlayerID, ThreeStateBool State)
 	{
 		SonicMania::Ability PeeloutState = MOVESET_NONE;
-		if (State == true) PeeloutState = UpAbility_Peelout;
+		if (State == ThreeStateBool::True) PeeloutState = UpAbility_Peelout;
 
-		if (PlayerID == 1)
+		if (PlayerID == 1 && State != ThreeStateBool::Indeterminate)
 		{
 			Player1.UpAbility = PeeloutState;
 			CompPlus_Settings::Player1PeeloutAbility = State;
 		}
-		else if (PlayerID == 2)
+		else if (PlayerID == 2 && State != ThreeStateBool::Indeterminate)
 		{
 			Player2.UpAbility = PeeloutState;
 			CompPlus_Settings::Player2PeeloutAbility = State;
 		}
-		else if (PlayerID == 3)
+		else if (PlayerID == 3 && State != ThreeStateBool::Indeterminate)
 		{
 			Player3.UpAbility = PeeloutState;
 			CompPlus_Settings::Player3PeeloutAbility = State;
 		}
-		else if (PlayerID == 4)
+		else if (PlayerID == 4 && State != ThreeStateBool::Indeterminate)
 		{
 			Player4.UpAbility = PeeloutState;
 			CompPlus_Settings::Player4PeeloutAbility = State;
@@ -592,7 +479,7 @@ namespace CompPlus_Settings
         }
     }
 
-    void UpdateTimer(bool isLimited)
+    void UpdateTimer()
     {
         void* extended_time_address = (void*)(baseAddress + 0x535BD);
         void* time_limit_kill_jne_address = (void*)(baseAddress + 0xADD03);
@@ -611,7 +498,7 @@ namespace CompPlus_Settings
             HasCopiedOriginalTimeCode = true;
         }
 
-        if (!isLimited)
+        if (!TimeLimit)
         {
             if (!IsUnlimitedWriten)
             {
@@ -815,19 +702,16 @@ namespace CompPlus_Settings
 
     void RefreshSettings()
     {
-        SetAbility(1, Player1AbilitySet);
-        SetAbility(2, Player2AbilitySet);
-        SetAbility(3, Player3AbilitySet);
-        SetAbility(4, Player4AbilitySet);
-
-        FixAbilites(&Player1);
-        FixAbilites(&Player2);
-        FixAbilites(&Player3);
-        FixAbilites(&Player4);
-
+        SetAbility(1, Player1AbilitySet, true);
         SetPeeloutAbility(1, Player1PeeloutAbility);
+
+        SetAbility(2, Player2AbilitySet, true);
         SetPeeloutAbility(2, Player2PeeloutAbility);
+
+        SetAbility(3, Player3AbilitySet, true);
         SetPeeloutAbility(3, Player3PeeloutAbility);
+
+        SetAbility(4, Player4AbilitySet, true);
         SetPeeloutAbility(4, Player4PeeloutAbility);
 
         UpdateSonicAbilities();
@@ -860,7 +744,7 @@ namespace CompPlus_Settings
     {
         const char* str_value = xmlOption->GetText();
         bool value;
-        if (str_value == "1") value = true;
+        if ((!strcmp(str_value, "1"))) value = true;
         else value = false;
 
         return value;
@@ -931,34 +815,6 @@ namespace CompPlus_Settings
                         InstaSheildAbility = value;
 
                         LogLoadSetting("UseInstaSheild", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "PeeloutP1"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        Player1PeeloutAbility = value;
-
-                        LogLoadSetting("PeeloutP1", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "PeeloutP2"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        Player2PeeloutAbility = value;
-
-                        LogLoadSetting("PeeloutP2", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "PeeloutP3"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        Player3PeeloutAbility = value;
-
-                        LogLoadSetting("PeeloutP3", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "PeeloutP4"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        Player4PeeloutAbility = value;
-
-                        LogLoadSetting("PeeloutP4", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "CurrentLSelect"))
                     {
@@ -1055,24 +911,19 @@ namespace CompPlus_Settings
             AddtoSaveSettings("CurrentLSelect", IntToString(CurrentLevelSelect), text);
             AddtoSaveSettings("VictoryStyle", IntToString(VictoryStyle), text);
 
-            AddtoSaveSettings("UseDropdash", IntToString(DropdashAbility), text);
-            AddtoSaveSettings("UseInstaSheild", IntToString(InstaSheildAbility), text);
-
-            AddtoSaveSettings("PeeloutP1", IntToString(Player1PeeloutAbility), text);
-            AddtoSaveSettings("PeeloutP2", IntToString(Player2PeeloutAbility), text);
-            AddtoSaveSettings("PeeloutP3", IntToString(Player3PeeloutAbility), text);
-            AddtoSaveSettings("PeeloutP4", IntToString(Player4PeeloutAbility), text);
+            AddtoSaveSettings("UseDropdash", BoolToString(DropdashAbility), text);
+            AddtoSaveSettings("UseInstaSheild", BoolToString(InstaSheildAbility), text);
 
             AddtoSaveSettings("InitalLives", IntToString(InitalLives), text);
             AddtoSaveSettings("TimeLimit", IntToString(TimeLimit), text);
-            AddtoSaveSettings("EndlessRounds", IntToString(EndlessRounds), text);
+            AddtoSaveSettings("EndlessRounds", BoolToString(EndlessRounds), text);
             AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text);
             AddtoSaveSettings("MonitorMode", IntToString(MonitorTypes), text);
 
-            AddtoSaveSettings("EnableDebugMode", IntToString(EnableDebugMode), text);
-            AddtoSaveSettings("EnableDevMode", IntToString(EnableDevMode), text);
-            AddtoSaveSettings("DarkDevMenu", IntToString(DarkDevMenu), text);
-            if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", IntToString(LHPZ_SecretUnlocked), text);
+            AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
+            AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
+            AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
+            if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
 
             text += "</Settings>";
             document.Parse((const char*)text.c_str());
@@ -1090,22 +941,28 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    void OnStageChange() 
+    void OnFixPlayers() 
     {
-
+        if (FixPlayers && SonicMania::Player1.Active)
+        {
+            UpdatePlayer(1, Player1ChosenPlayer, true);
+            UpdatePlayer(2, Player2ChosenPlayer, true);
+            UpdatePlayer(3, Player3ChosenPlayer, true);
+            UpdatePlayer(4, Player4ChosenPlayer, true);
+            FixPlayers = false;
+        }
     }
 
     void OnFrame()
     {
         if (SettingsLoaded) 
         {
-            if (FixPlayers) FixPlayers = false;
-            
+            OnFixPlayers();
             UpdateVSControlLockState();
             UpdateLives();
             UpdateStockSettings();
             UpdateMultiPlayerSprites();
-            UpdateTimer(!TimeLimit);
+            UpdateTimer();
             DevModeLoop();
         }
     }

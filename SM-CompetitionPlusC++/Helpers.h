@@ -16,6 +16,7 @@ extern void LogError(const char* name, const char* text, ...);
 extern void LogWarn(const char* name, const char* text, ...);
 extern void LogInfo(const char* name, const char* text, ...);
 extern std::string IntToString(int a);
+extern std::string BoolToString(bool a);
 
 inline BOOL ReplaceJNEwithJump(void* writeaddress, void* funcaddress)
 {

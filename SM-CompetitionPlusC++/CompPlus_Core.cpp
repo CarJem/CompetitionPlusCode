@@ -19,6 +19,7 @@
 #include "GeneralTweaks.h"
 #include "CreditsScene.h"
 #include "CompPlus_Scoring.h"
+#include "GustPlanet.h"
 
 #include "CompPlus_Announcers.h"
 
@@ -122,6 +123,9 @@ namespace CompPlus_Core
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            else if (!strcmp(CurrentStage.StageKey, "CPGPZ")) CompPlus_Scene_GustPlanet::OnFrame();
+            else if (!strcmp(CurrentStage.StageKey, "CPGPZE")) CompPlus_Scene_GustPlanet::OnFrame();
             CompPlus_Credits::OnFrame(!strcmp(CurrentStage.StageKey, "CPCREDITS"));
 
             CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
@@ -159,12 +163,19 @@ namespace CompPlus_Core
 			CompPlus_CustomLevelSelect::CheckForPointRefresh();
 			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
             CompPlus_Settings::RefreshSettings();
-            CompPlus_Settings::SaveSettings();
 			StageRefresh = false;
 		}
 	}
 
-	void UpdateMenus()
+    void OnSceneReset()
+    {
+        if (!(GameState & GameState_SoftPause)) CompPlus_HubWorld::isRestart = true;
+        CompPlus_Credits::ResetScene();
+        CompPlus_Settings::RefreshSettings();
+        CompPlus_Scene_GustPlanet::OnReset();
+    }
+
+	void OnFrame()
 	{
         FrameInit();
         OnLegacySceneChange();
@@ -176,12 +187,6 @@ namespace CompPlus_Core
 		if (CurrentStage.StageKey) InfinityZoneLoop();
 		else GenericZoneLoop();
 	}
-
-    void OnSceneReset() 
-    {
-        CompPlus_HubWorld::isRestart = true;
-        CompPlus_Credits::ResetScene();
-    }
 
 	void DrawHook() 
 	{
