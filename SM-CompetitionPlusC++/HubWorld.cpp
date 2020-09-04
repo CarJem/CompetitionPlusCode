@@ -658,17 +658,17 @@ namespace CompPlus_HubWorld
 
         Label3.Text = (wchar_t*)Strings[index];
 
-        if (State == CompPlus_Settings::ThreeStateBool::False)
+        if (State == CompPlus_Settings::ThreeStateBool::True)
         {
-            char* on_text = (char*)"FORCE ON";
+            char* on_text = (char*)"ON";
             ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
-            Label3.TextLength = (WORD)8;
+            Label3.TextLength = (WORD)2;
         }
-        else if (State == CompPlus_Settings::ThreeStateBool::True)
+        else if (State == CompPlus_Settings::ThreeStateBool::False)
         {
-            char* on_text = (char*)"FORCE OFF";
+            char* on_text = (char*)"OFF";
             ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
-            Label3.TextLength = (WORD)9;
+            Label3.TextLength = (WORD)3;
         }
         else if (State == CompPlus_Settings::ThreeStateBool::Indeterminate)
         {

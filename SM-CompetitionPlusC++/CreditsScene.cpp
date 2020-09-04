@@ -117,6 +117,7 @@ namespace CompPlus_Credits
             Label2.TextLength = (WORD)15;
             CompPlus_Settings::LHPZ_SecretUnlocked = true;
             LHPZSecretTriggered = true;
+            CompPlus_Settings::SaveSettings();
         }
 
 

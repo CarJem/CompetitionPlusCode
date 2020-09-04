@@ -320,24 +320,24 @@ namespace CompPlus_Settings
 		SonicMania::Ability PeeloutState = MOVESET_NONE;
 		if (State == ThreeStateBool::True) PeeloutState = UpAbility_Peelout;
 
-		if (PlayerID == 1 && State != ThreeStateBool::Indeterminate)
+		if (PlayerID == 1)
 		{
-			Player1.UpAbility = PeeloutState;
+            if (State != ThreeStateBool::Indeterminate) Player1.UpAbility = PeeloutState;
 			CompPlus_Settings::Player1PeeloutAbility = State;
 		}
-		else if (PlayerID == 2 && State != ThreeStateBool::Indeterminate)
+		else if (PlayerID == 2)
 		{
-			Player2.UpAbility = PeeloutState;
+            if (State != ThreeStateBool::Indeterminate) Player2.UpAbility = PeeloutState;
 			CompPlus_Settings::Player2PeeloutAbility = State;
 		}
-		else if (PlayerID == 3 && State != ThreeStateBool::Indeterminate)
+		else if (PlayerID == 3)
 		{
-			Player3.UpAbility = PeeloutState;
+            if (State != ThreeStateBool::Indeterminate) Player3.UpAbility = PeeloutState;
 			CompPlus_Settings::Player3PeeloutAbility = State;
 		}
-		else if (PlayerID == 4 && State != ThreeStateBool::Indeterminate)
+		else if (PlayerID == 4)
 		{
-			Player4.UpAbility = PeeloutState;
+            if (State != ThreeStateBool::Indeterminate) Player4.UpAbility = PeeloutState;
 			CompPlus_Settings::Player4PeeloutAbility = State;
 		}
 		UpdateSonicAbilities();  
