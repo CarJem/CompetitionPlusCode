@@ -5,12 +5,12 @@
 #include "SonicMania.h"
 #include "CompPlus_Core.h"
 #include "CompPlus_Settings.h"
+#include "CompPlus_Scoring.h"
 
 namespace CompPlus_Common
 {
 	using namespace SonicMania;
 	using namespace CompPlus_Core;
-
 
 	void LoadLevel_IZ(const char* key)
 	{
@@ -27,6 +27,16 @@ namespace CompPlus_Common
 		CompPlus_Core::StageRefresh = true;
 		CompPlus_Core::IdleTime = 10;
 	}
+
+    void LoadHUBWorld()
+    {
+        LoadLevel_IZ("CPHW");
+    }
+
+    void LoadLevel_IZ_CompPlus(const char* key)
+    {
+        LoadLevel_IZ(key);
+    }
 
 	void PlayMenuMoveSoundFX(bool isClassic)
 	{

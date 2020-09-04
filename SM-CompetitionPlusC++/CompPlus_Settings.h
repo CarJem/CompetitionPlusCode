@@ -63,8 +63,7 @@ namespace CompPlus_Settings
         Announcer_Classic = 1,
         Announcer_Garrulous64 = 2,
         Announcer_Angelthegamer = 3,
-        Announcer_Daniel = 4,
-        Announcer_Memes = 5
+        Announcer_Memes = 4
     };
 
 

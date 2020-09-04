@@ -139,6 +139,9 @@
     <ClInclude Include="GustPlanet.h">
       <Filter>Scenes\Custom Scenes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="LHPZ.h">
+      <Filter>Scenes\Custom Scenes\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PointScrolling.cpp">
@@ -218,6 +221,9 @@
       <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="GustPlanet.cpp">
+      <Filter>Scenes\Custom Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="LHPZ.cpp">
       <Filter>Scenes\Custom Scenes</Filter>
     </ClCompile>
   </ItemGroup>

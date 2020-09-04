@@ -20,6 +20,7 @@
 #include "CreditsScene.h"
 #include "CompPlus_Scoring.h"
 #include "GustPlanet.h"
+#include "LHPZ.h"
 
 #include "CompPlus_Announcers.h"
 
@@ -104,7 +105,7 @@ namespace CompPlus_Core
 	void ManiaMenuLinking() 
 	{
 		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
-		else if (CurrentSceneInt == 140) CompPlus_Common::LoadLevel_IZ("CPHW");
+        else if (CurrentSceneInt == 140) CompPlus_Common::LoadHUBWorld();
 		else if (CurrentSceneInt == 141) CompPlus_Common::LoadLastLevelSelect();
 		else if (CurrentSceneInt == 142) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
 	}
@@ -126,6 +127,8 @@ namespace CompPlus_Core
             else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
             else if (!strcmp(CurrentStage.StageKey, "CPGPZ")) CompPlus_Scene_GustPlanet::OnFrame();
             else if (!strcmp(CurrentStage.StageKey, "CPGPZE")) CompPlus_Scene_GustPlanet::OnFrame();
+            else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1")) CompPlus_Scene_LHPZ::OnFrame();
+            else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1E")) CompPlus_Scene_LHPZ::OnFrame();
             CompPlus_Credits::OnFrame(!strcmp(CurrentStage.StageKey, "CPCREDITS"));
 
             CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);

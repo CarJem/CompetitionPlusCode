@@ -207,39 +207,33 @@ namespace CompPlus_Settings
         else if (Character == Character_Mighty) Player = CompPlus_Settings::ChosenPlayer_Mighty;
         else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
 
-
-        if (Force) 
-        {
-            if (SonicMania::Player1.Camera == nullptr) Force = false;
-        }
-
         int CharacterID = (int)Character;
         //SonicMania::Options->CompetitionSession.CharacterFlags &= 0xFFFFFFFF ^ (0xFF << (PlayerID - 1));
 
         if (PlayerID == 1)
         {
-            if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            if (Force) SonicMania::Player1.Character = Character;
             Player1.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
             CompPlus_Settings::Player1ChosenPlayer = Player;
         }
         else if (PlayerID == 2)
         {
-            if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            if (Force) SonicMania::Player2.Character = Character;
             Player2.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
             CompPlus_Settings::Player2ChosenPlayer = Player;
         }
         else if (PlayerID == 3)
         {
-            if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            if (Force) SonicMania::Player3.Character = Character;
             Player3.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
             CompPlus_Settings::Player3ChosenPlayer = Player;
         }
         else if (PlayerID == 4)
         {
-            if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            if (Force) SonicMania::Player4.Character = Character;
             Player4.Character = Character;
             SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
             CompPlus_Settings::Player4ChosenPlayer = Player;
@@ -875,7 +869,7 @@ namespace CompPlus_Settings
                     else if (!strcmp(xmlOption->Name(), "LHPZ_SecretUnlocked"))
                     {
                     bool value = XMLGetBool(xmlOption);
-                    DarkDevMenu = value;
+                    LHPZ_SecretUnlocked = value;
 
                     LogLoadSetting("LHPZ_SecretUnlocked", std::to_string(value));
                     }
@@ -943,7 +937,8 @@ namespace CompPlus_Settings
 
     void OnFixPlayers() 
     {
-        if (FixPlayers && SonicMania::Player1.Active)
+
+        if (FixPlayers)
         {
             UpdatePlayer(1, Player1ChosenPlayer, true);
             UpdatePlayer(2, Player2ChosenPlayer, true);

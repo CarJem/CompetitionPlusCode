@@ -17,6 +17,7 @@ namespace CompPlus_Scoring
         int Value;
         int PlayerID = 0;
         bool HasWon = false;
+        int RealPosition = 0;
 
         ScorableInt()
         {
@@ -32,6 +33,7 @@ namespace CompPlus_Scoring
 
     struct ScorableTime
     {
+        int RealPosition = 0;
         int Position = 0;
         int Minutes;
         int Seconds;
@@ -51,6 +53,12 @@ namespace CompPlus_Scoring
             Centiseconds = s;
         }
 
+        bool operator != (const ScorableTime& time) const
+        {
+            int first = (Minutes * 6000) + (Seconds * 100) + Centiseconds;
+            int second = (time.Minutes * 6000) + (time.Seconds * 100) + time.Centiseconds;
+            return first != second;
+        }
 
         bool operator < (const ScorableTime& time) const
         {
@@ -60,9 +68,19 @@ namespace CompPlus_Scoring
         }
     };
 
+    extern std::vector<ScorableTime> TimeRanking;
+    extern std::vector<ScorableInt> TotalRingRanking;
+    extern std::vector<ScorableInt> ScoreRanking;
+    extern std::vector<ScorableInt> RingRanking;
+    extern std::vector<ScorableInt> ItemRanking;
+    extern std::vector<ScorableInt> AverageRanking;
+    extern std::vector<ScorableInt> AntiRingRanking;
+
     extern SonicMania::CompetitionSession LastSession;
 
     extern bool AllowUpdateVictory;
+
+    extern bool PodeiumSpawnActive;
 
     extern const char* LastZone;
 

@@ -1,5 +1,5 @@
 <Stages>
-	<Stage stageName="SMCP Mania Level Select" stageID="ManiaLSelect" stageKey="CPMLS" flags="255">
+	<Stage stageName="SMCP Mania Level Select" stageID="SMCP_LSelect/ManiaLSelect" stageKey="CPMLS" flags="255">
     <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -10,7 +10,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Encore Level Select" stageID="EncoreLSelect" stageKey="CPELS" flags="255">
+	<Stage stageName="SMCP Encore Level Select" stageID="SMCP_LSelect/EncoreLSelect" stageKey="CPELS" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -21,7 +21,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Encore.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Custom Level Select" stageID="CustomLSelect" stageKey="CPCLS" flags="255">
+	<Stage stageName="SMCP Custom Level Select" stageID="SMCP_LSelect/CustomLSelect" stageKey="CPCLS" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -32,7 +32,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Custom.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Chaotix Level Select" stageID="ChaotixLSelect" stageKey="CPCXLS" flags="255">
+	<Stage stageName="SMCP Chaotix Level Select" stageID="SMCP_LSelect/ChaotixLSelect" stageKey="CPCXLS" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -43,7 +43,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Chaotix.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Phantom Level Select" stageID="PhantomLSelect" stageKey="CPPLS" flags="255">
+	<Stage stageName="SMCP Phantom Level Select" stageID="SMCP_LSelect/PhantomLSelect" stageKey="CPPLS" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -59,12 +59,12 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-	<Stage stageName="SMCP Settings Menu" stageID="CompetitionPlusSettingsWorld" stageKey="CPSW" flags="255">
+	<Stage stageName="SMCP Settings Menu" stageID="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="CPSW" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
   </Stage>
-	<Stage stageName="SMCP HUB World" stageID="CompetitionPlusHUB" stageKey="CPHW" flags="3">
+	<Stage stageName="SMCP HUB World" stageID="SMCP_Misc/CompetitionPlusHUB" stageKey="CPHW" flags="3">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -102,7 +102,7 @@
 		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		  
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Credits Zone" stageID="CP_CustomStages/CP_Credits" stageKey="CPCREDITS" flags="3">
+	<Stage stageName="SMCP Credits Zone" stageID="SMCP_Misc/CP_Credits" stageKey="CPCREDITS" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -120,7 +120,7 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-	<Stage stageName="SMCP Logos" stageID="CompPlusLogos" stageKey="CPLOGOS" flags="255">
+	<Stage stageName="SMCP Logos Pt. 1" stageID="SMCP_Logos/CompPlusLogos" stageKey="CPLOGOS" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -131,7 +131,7 @@
 		  <Asset basePath="Data/Sprites/Logos/Logos.bin"  newPath="Data/Sprites/CP_Logos/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 2" stageID="CompPlusLogos2" stageKey="CPLOGOS2" flags="255">
+	<Stage stageName="SMCP Logos Pt. 2" stageID="SMCP_Logos/CompPlusLogos2" stageKey="CPLOGOS2" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -142,7 +142,7 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos2/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 3" stageID="CompPlusLogos3" stageKey="CPLOGOS3" flags="255">
+	<Stage stageName="SMCP Logos Pt. 3" stageID="SMCP_Logos/CompPlusLogos3" stageKey="CPLOGOS3" flags="255">
 	  <Scenes>
       <Scene id="1" />
     </Scenes>
@@ -153,7 +153,7 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos3/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 4" stageID="CompPlusLogos4" stageKey="CPLOGOS4" flags="255">
+	<Stage stageName="SMCP Logos Pt. 4" stageID="SMCP_Logos/CompPlusLogos4" stageKey="CPLOGOS4" flags="255">
 		<Scenes>
 		  <Scene id="1" />
 		</Scenes>
@@ -177,7 +177,7 @@
 		  <Core_AIZ/>
 	  </StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Desert Hill Zone M" stageID="CP_CustomStages/CP_DHZ" stageKey="CPDHZ" flags="3">
+	<Stage stageName="SMCP Desert Hill Zone M" stageID="SMCP_CustomStages/SMCP_DHZ" stageKey="CPDHZ" flags="3">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -189,7 +189,7 @@
 		  <Core_MSZ/>
 	  </StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Desert Hill Zone E" stageID="CP_CustomStages/CP_DHZ" stageKey="CPDHZE" flags="5">
+	<Stage stageName="SMCP Desert Hill Zone E" stageID="SMCP_CustomStages/SMCP_DHZ" stageKey="CPDHZE" flags="5">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -201,7 +201,7 @@
 			<Asset basePath="Data/Music/DesertHill.ogg" newPath="Data/Music/CP_Custom/DesertHill.ogg" />
 		</StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Gust Planet Zone M" stageID="CP_CustomStages/CP_GPZ" stageKey="CPGPZ" flags="3">
+	<Stage stageName="SMCP Gust Planet Zone M" stageID="SMCP_CustomStages/SMCP_GPZ" stageKey="CPGPZ" flags="3">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -226,7 +226,7 @@
 		<FBZ_Button/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Gust Planet Zone E" stageID="CP_CustomStages/CP_GPZ" stageKey="CPGPZE" flags="5">
+	<Stage stageName="SMCP Gust Planet Zone E" stageID="SMCP_CustomStages/SMCP_GPZ" stageKey="CPGPZE" flags="5">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -252,7 +252,7 @@
 		<FBZ_Button/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Special Zone M" stageID="CP_CustomStages/CP_SZ" stageKey="CPSZ" flags="3">
+	<Stage stageName="SMCP Special Zone M" stageID="SMCP_CustomStages/SMCP_SZ" stageKey="CPSZ" flags="3">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -266,7 +266,7 @@
         <Core_LRZ3/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Special Zone E" stageID="CP_CustomStages/CP_SZ" stageKey="CPSZE" flags="5">
+	<Stage stageName="SMCP Special Zone E" stageID="SMCP_CustomStages/SMCP_SZ" stageKey="CPSZE" flags="5">
 	<Scenes>
       <Scene id="1" />
     </Scenes>
@@ -280,7 +280,7 @@
         <Core_LRZ3/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Test Set Zone M" stageID="CP_CustomStages/CP_TSZ" stageKey="CPTSZ" flags="3">
+	<Stage stageName="SMCP Test Set Zone M" stageID="SMCP_CustomStages/SMCP_TSZ" stageKey="CPTSZ" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -293,7 +293,7 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-	<Stage stageName="SMCP LHPZ Zone M" stageID="HPZ" stageKey="LHPZ1" flags="3">
+	<Stage stageName="SMCP LHPZ Zone M" stageID="SMCP_CustomStages/SMCP_LHPZ" stageKey="SMCP_LHPZ1" flags="3">
 	  <Scenes>
       <Scene id="1" />
      </Scenes>
@@ -322,7 +322,7 @@
 		<Asset basePath="Data/Palettes/EncoreHCZw.act"     newPath="Data/Palettes/EncoreHPZw.act" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP LHPZ Zone E" stageID="HPZ" stageKey="LHPZ1E" flags="5">
+	<Stage stageName="SMCP LHPZ Zone E" stageID="SMCP_CustomStages/SMCP_LHPZ" stageKey="SMCP_LHPZ1E" flags="5">
 		  <Scenes>
       <Scene id="1" />
      </Scenes>
@@ -356,7 +356,7 @@
 			<Scene id="1" />
 		</Scenes>
 	</Stage>
-	<Stage stageName="CP-CXM Isolated Island M" stageID="CP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1" flags="3">
+	<Stage stageName="CP-CXM Isolated Island M" stageID="SMCP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -718,7 +718,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Isolated Island E" stageID="CP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1E" flags="5">
+	<Stage stageName="CP-CXM Isolated Island E" stageID="SMCP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1E" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -1080,7 +1080,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Amazing Arena M" stageID="CP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZ" flags="3">
+	<Stage stageName="CP-CXM Amazing Arena M" stageID="SMCP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZ" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -1442,7 +1442,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Amazing Arena E" stageID="CP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZE" flags="5">
+	<Stage stageName="CP-CXM Amazing Arena E" stageID="SMCP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZE" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -1804,7 +1804,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Speed Slider M" stageID="CP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1" flags="3">
+	<Stage stageName="CP-CXM Speed Slider M" stageID="SMCP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -2167,7 +2167,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Speed Slider E" stageID="CP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1E" flags="5">
+	<Stage stageName="CP-CXM Speed Slider E" stageID="SMCP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1E" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -2530,7 +2530,7 @@
 			<Core_SSZ1/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Botanic Base M" stageID="CP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZ" flags="3">
+	<Stage stageName="CP-CXM Botanic Base M" stageID="SMCP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZ" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -2892,7 +2892,7 @@
 			<Core_HCZ/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Botanic Base E" stageID="CP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZE" flags="5">
+	<Stage stageName="CP-CXM Botanic Base E" stageID="SMCP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZE" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -3254,7 +3254,7 @@
 			<Core_HCZ/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Marina Madness M" stageID="CP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1" flags="3">
+	<Stage stageName="CP-CXM Marina Madness M" stageID="SMCP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -3616,7 +3616,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Marina Madness E" stageID="CP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1E" flags="5">
+	<Stage stageName="CP-CXM Marina Madness E" stageID="SMCP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1E" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -3978,7 +3978,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Techno Tower M" stageID="CP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1" flags="3">
+	<Stage stageName="CP-CXM Techno Tower M" stageID="SMCP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -4340,7 +4340,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Techno Tower E" stageID="CP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1E" flags="5">
+	<Stage stageName="CP-CXM Techno Tower E" stageID="SMCP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1E" flags="5">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>

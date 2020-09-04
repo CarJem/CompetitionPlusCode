@@ -37,7 +37,6 @@ extern "C"
 			LoadSoundFX(SFX_CompPlus2, Scope_Global);
             LoadSoundFX(SFX_CompPlus3, Scope_Global);
             LoadSoundFX(SFX_CompPlus4, Scope_Global);
-			CompPlus_Core::InitAnnouncerFX();
 			LoadedSounds = true;
 		}
 	}
@@ -96,6 +95,7 @@ extern "C"
 		IZAPI::LoadStagesFile((path_cpp + "\\Stages.xml").c_str());
 		IZAPI::RegisterStageLoadEvent(CompPlus_Core::OnStageLoad);
 		IZAPI::RegisterStageUnloadEvent(CompPlus_Core::OnStageUnload);
+        CompPlus_Core::InitAnnouncerFX();
 	}
 
 	__declspec(dllexport) void Init(const char* path)

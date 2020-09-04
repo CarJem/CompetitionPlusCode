@@ -17,6 +17,8 @@ namespace CompPlus_HubWorld
 	#pragma region Reserved Slot IDs
 
 	int EnterLSelectButton = 67;
+    int AltSpawnSlotID = 439;
+    int PlayerSpawnSlotID = 68;
 
 	//Player Setting Controllers
 	int SwapPlayerController = 110;
@@ -882,9 +884,6 @@ namespace CompPlus_HubWorld
 			case CompPlus_Settings::Announcer_Angelthegamer:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"ANGELTHEGAMER", 13, index);
 				break;
-			case CompPlus_Settings::Announcer_Daniel:
-				UpdateGeneralDisplay(SlotID, x, y, (char*)"DANIEL UK", 9, index);
-				break;
 			case CompPlus_Settings::Announcer_Memes:
 				UpdateGeneralDisplay(SlotID, x, y, (char*)"MEMES", 5, index);
 				break;
@@ -1076,7 +1075,7 @@ namespace CompPlus_HubWorld
         Entity& HUD_Winner = *GetEntityFromSceneSlot<Entity>(CrownSlot);
 
         HUD_PlayerID.DrawOrder = Player.DrawOrder;
-        HUD_Statistics.DrawOrder = Player.DrawOrder;
+        HUD_Statistics.DrawOrder = (Player.DrawOrder + 1 <= 14 ? Player.DrawOrder + 1 : Player.DrawOrder);
         HUD_Extra.DrawOrder = Player.DrawOrder;
         HUD_Winner.DrawOrder = Player.DrawOrder;
 
@@ -1445,6 +1444,9 @@ namespace CompPlus_HubWorld
         Entity& ThirdPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_ThirdPlace);
         Entity& ForthPlacePodieumSpawn = *GetEntityFromSceneSlot<Entity>(RespawnObject_FouthPlace);
 
+        Entity& InitalSpawn = *GetEntityFromSceneSlot<Entity>(PlayerSpawnSlotID);
+        Entity& AltSpawn = *GetEntityFromSceneSlot<Entity>(AltSpawnSlotID);
+
         if (Placement == 1)
         {
             Player.Position.X = FirstPlacePodieumSpawn.Position.X;
@@ -1465,6 +1467,16 @@ namespace CompPlus_HubWorld
             Player.Position.X = ForthPlacePodieumSpawn.Position.X;
             Player.Position.Y = ForthPlacePodieumSpawn.Position.Y;
         }
+        else if (CompPlus_Scoring::PodeiumSpawnActive)
+        {
+            Player.Position.X = InitalSpawn.Position.X;
+            Player.Position.Y = InitalSpawn.Position.Y;
+        }
+        else 
+        {
+            Player.Position.X = AltSpawn.Position.X;
+            Player.Position.Y = AltSpawn.Position.Y;
+        }
 
         if (Player.Camera != nullptr)
         {
@@ -1475,6 +1487,10 @@ namespace CompPlus_HubWorld
 
     void SetSpawnPositions()
     {
+
+
+
+
         SetSpawnPosition(Player1, CompPlus_Scoring::P1_LastPlacement);
         SetSpawnPosition(Player2, CompPlus_Scoring::P2_LastPlacement);
         SetSpawnPosition(Player3, CompPlus_Scoring::P3_LastPlacement);

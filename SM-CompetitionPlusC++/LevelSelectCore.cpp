@@ -29,7 +29,7 @@ namespace CompPlus_LevelSelectCore
             if (level.isIZ)
             {
                 CompPlus_Scoring::LastZone = level.CP_Name;
-                CompPlus_Common::LoadLevel_IZ(level.LevelID_IZ);
+                CompPlus_Common::LoadLevel_IZ_CompPlus(level.LevelID_IZ);
             }
             else
             {
@@ -152,7 +152,7 @@ namespace CompPlus_LevelSelectCore
 
 		if (SceneLoadWaitTimer >= SceneLoadWaitMax)
 		{
-			LoadLevel_IZ(levelID);
+            LoadLevel_IZ_CompPlus(levelID);
 			SceneLoadWaitTimer = 0;
 			LevelSelected = false;
 			LevelSelectedWarpSoundPlayed = false;
@@ -245,6 +245,7 @@ namespace CompPlus_LevelSelectCore
 		Entity& target = *GetEntityFromSceneSlot<Entity>(slotID);
 		target.Position.X = targetPos.Position.X + x;
 		target.Position.Y = targetPos.Position.Y + y;
+        target.DrawOrder = 14;
 	}
 
 	void SetUIInfoLabelDescription(int SlotID, char* _text, int size, int index)
@@ -252,6 +253,7 @@ namespace CompPlus_LevelSelectCore
 		EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
 		Label.Text = (wchar_t*)Strings[index];
 		Label.Visible = true;
+        Label.DrawOrder = 14;
 		ConvertASCII2Unicode(Label.Text, _text, strlen(_text), -32);
 		Label.TextLength = (WORD)size;
 		

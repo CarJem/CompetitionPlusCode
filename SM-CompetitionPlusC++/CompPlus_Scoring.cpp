@@ -43,6 +43,7 @@ namespace CompPlus_Scoring
 
      int LastCurrentRound = 0;
 
+     bool PodeiumSpawnActive = false;
      bool ThisMatchIsTied = false;
      bool CanGoToFinalResults = false;
 
@@ -485,44 +486,64 @@ namespace CompPlus_Scoring
 
         return PlayerScores;
     }
+     int ConvertPositionToAverage(int Position)
+     {
+         if (Position == 1) return 4;
+         else if (Position == 2) return 3;
+         else if (Position == 3) return 2;
+         else if (Position == 4) return 1;
+         else return 0;
+     }
+
+     int ConvertWinToAverage(bool hasWon) 
+     {
+         if (hasWon) return 1;
+         else return 0;
+     }
+
+     int GetPlayerAverage(int PlayerID)
+     {
+         int CurrentScore = 0;
+
+         for (int j = 0; j < GetNumberOfPlayers(); j++)
+         {
+             if (TimeRanking[j].PlayerID == PlayerID)
+             {
+                 CurrentScore += ConvertWinToAverage(TimeRanking[j].HasWon);
+             }
+             if (ScoreRanking[j].PlayerID == PlayerID)
+             {
+                 CurrentScore += ConvertWinToAverage(ScoreRanking[j].HasWon);
+             }
+             if (RingRanking[j].PlayerID == PlayerID)
+             {
+                 CurrentScore += ConvertWinToAverage(RingRanking[j].HasWon);
+             }
+             if (ItemRanking[j].PlayerID == PlayerID)
+             {
+                 CurrentScore += ConvertWinToAverage(ItemRanking[j].HasWon);
+             }
+             if (TotalRingRanking[j].PlayerID == PlayerID)
+             {
+                 CurrentScore += ConvertWinToAverage(TotalRingRanking[j].HasWon);
+             }
+         }
+         return CurrentScore;
+     }
 
      std::vector<ScorableInt> GetAverageRanking()
     {
+         int NumberOfPlayers = GetNumberOfPlayers();
+
         int P1_TotalScore = 0;
         int P2_TotalScore = 0;
         int P3_TotalScore = 0;
         int P4_TotalScore = 0;
 
-        for (int i = 0; i < GetNumberOfPlayers(); i++)
-        {
-            int CurrentScore = 0;
-            int PlayerID = i + 1;
-            if (TimeRanking[i].PlayerID == PlayerID)
-            {
-                CurrentScore += TimeRanking[i].Position;
-            }
-            if (ScoreRanking[i].PlayerID == PlayerID)
-            {
-                CurrentScore += ScoreRanking[i].Position;
-            }
-            if (RingRanking[i].PlayerID == PlayerID)
-            {
-                CurrentScore += RingRanking[i].Position;
-            }
-            if (ItemRanking[i].PlayerID == PlayerID)
-            {
-                CurrentScore += ItemRanking[i].Position;
-            }
-            if (TotalRingRanking[i].PlayerID == PlayerID)
-            {
-                CurrentScore += TotalRingRanking[i].Position;
-            }
-
-            if (PlayerID == 1) P1_TotalScore = CurrentScore;
-            else if (PlayerID == 2) P2_TotalScore = CurrentScore;
-            else if (PlayerID == 3) P3_TotalScore = CurrentScore;
-            else if (PlayerID == 4) P4_TotalScore = CurrentScore;
-        }
+        if (NumberOfPlayers >= 1) P1_TotalScore = GetPlayerAverage(1);
+        if (NumberOfPlayers >= 2) P2_TotalScore = GetPlayerAverage(2);
+        if (NumberOfPlayers >= 3) P3_TotalScore = GetPlayerAverage(3);
+        if (NumberOfPlayers >= 4) P4_TotalScore = GetPlayerAverage(4);
 
         ScorableInt Player1Score = ScorableInt(P1_TotalScore, 1);
         ScorableInt Player2Score = ScorableInt(P2_TotalScore, 2);
@@ -531,13 +552,12 @@ namespace CompPlus_Scoring
 
 
         std::vector<ScorableInt> PlayerScores;
-        int NumberOfPlayers = GetNumberOfPlayers();
+
         if (NumberOfPlayers == 1) PlayerScores = { Player1Score };
         if (NumberOfPlayers == 2) PlayerScores = { Player1Score, Player2Score };
         if (NumberOfPlayers == 3) PlayerScores = { Player1Score, Player2Score, Player3Score };
         if (NumberOfPlayers == 4) PlayerScores = { Player1Score, Player2Score, Player3Score, Player4Score };
         std::sort(PlayerScores.begin(), PlayerScores.end(), ScoreSorter);
-        std::reverse(PlayerScores.begin(), PlayerScores.end());
 
         int Position = GetNumberOfPlayers();
         int MaxValue = 0;
@@ -761,6 +781,7 @@ namespace CompPlus_Scoring
         P2_Placement = 0;
         P3_Placement = 0;
         P4_Placement = 0;
+        PodeiumSpawnActive = true;
     }
 
     void ClearMatchResults()
@@ -788,6 +809,7 @@ namespace CompPlus_Scoring
         SonicMania::Options->CompetitionSession.Wins_P3 = 0;
         SonicMania::Options->CompetitionSession.Wins_P4 = 0;
         LastZone = "???";
+        PodeiumSpawnActive = false;
     }
 
     void ClearInternalWins()

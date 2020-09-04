@@ -2,6 +2,7 @@
 #include "include/SonicMania.h"
 #include "CompPlus_Settings.h"
 #include "include/ManiaModLoader.h"
+#include "Helpers.h"
 
 namespace CompPlus_Announcers
 {
@@ -290,13 +291,13 @@ namespace CompPlus_Announcers
 
     inline void SwapSound(int* Path, char* String)
     {
-        //LogInfo("CompPlus_Announcers::SwapSound", "Swaping SoundFX: %s", String);
+        LogInfo("CompPlus_Announcers::SwapSound", "Swaping SoundFX: %s", String);
         *Path = (int)(&String[0]);
     }
 
     inline void LoadSoundFX_Debug(const char* path, SonicMania::Scope scope)
     {
-        //LogInfo("CompPlus_Announcers::LoadSoundFX", "Loading SoundFX: %s", path);
+        LogInfo("CompPlus_Announcers::LoadSoundFX", "Loading SoundFX: %s", path);
         LoadSoundFX(path, scope);
     }
 
@@ -409,41 +410,6 @@ namespace CompPlus_Announcers
 
             SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Memes);
             SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Memes);
-        }
-        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Daniel)
-        {
-            SwapSound(Player1_MemoryAdd, (char*)Player1_DanielUK);
-            SwapSound(Player2_MemoryAdd, (char*)Player2_DanielUK);
-            SwapSound(Player3_MemoryAdd, (char*)Player3_DanielUK);
-            SwapSound(Player4_MemoryAdd, (char*)Player4_DanielUK);
-
-            SwapSound(SonicWins_MemoryAdd, (char*)SonicWins_DanielUK);
-            SwapSound(TailsWins_MemoryAdd, (char*)TailsWins_DanielUK);
-            SwapSound(KnuxWins_MemoryAdd, (char*)KnuxWins_DanielUK);
-            SwapSound(MightyWins_MemoryAdd, (char*)MightyWins_DanielUK);
-            SwapSound(RayWins_MemoryAdd, (char*)RayWins_DanielUK);
-
-            SwapSound(ItsADraw_MemoryAdd, (char*)ItsADraw_DanielUK);
-            SwapSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_DanielUK);
-
-            SwapSound(Three_MemoryAdd, (char*)Three_DanielUK);
-            SwapSound(Two_MemoryAdd, (char*)Two_DanielUK);
-            SwapSound(One_MemoryAdd, (char*)One_DanielUK);
-            SwapSound(Go_MemoryAdd, (char*)Go_DanielUK);
-
-            SwapSound(Sonic_MemoryAdd, (char*)Sonic_DanielUK);
-            SwapSound(Tails_MemoryAdd, (char*)Tails_DanielUK);
-            SwapSound(Knuckles_MemoryAdd, (char*)Knuckles_DanielUK);
-            SwapSound(Mighty_MemoryAdd, (char*)Mighty_DanielUK);
-            SwapSound(Ray_MemoryAdd, (char*)Ray_DanielUK);
-
-            SwapSound(Goal_MemoryAdd, (char*)Goal_DanielUK);
-            SwapSound(Goal_MemoryAdd_2, (char*)Goal_DanielUK);
-
-            SwapSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_DanielUK);
-
-            SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_DanielUK);
-            SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_DanielUK);
         }
         else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Classic)
         {
@@ -613,36 +579,6 @@ namespace CompPlus_Announcers
                 LoadSoundFX_Debug(ItsADraw_Set_Memes, Scope_Global);
                 LoadSoundFX_Debug(NewRecordMid_Memes, Scope_Global);
                 LoadSoundFX_Debug(NewRecordTop_Memes, Scope_Global);
-            }
-            else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Daniel)
-            {
-                LoadSoundFX_Debug(Player1_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Player2_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Player3_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Player4_DanielUK, Scope_Global);
-
-                LoadSoundFX_Debug(Three_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Two_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(One_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Go_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Goal_DanielUK, Scope_Global);
-
-                LoadSoundFX_Debug(Sonic_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(SonicWins_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Tails_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(TailsWins_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Knuckles_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(KnuxWins_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Mighty_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(MightyWins_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(Ray_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(RayWins_DanielUK, Scope_Global);
-
-                LoadSoundFX_Debug(TheWinnerIs_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Set_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(NewRecordMid_DanielUK, Scope_Global);
-                LoadSoundFX_Debug(NewRecordTop_DanielUK, Scope_Global);
             }
             else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Classic)
             {

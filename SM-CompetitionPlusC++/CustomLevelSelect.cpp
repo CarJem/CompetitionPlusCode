@@ -6,6 +6,7 @@
 #include "CompPlus_Core.h"
 #include "CompPlus_Common.h"
 #include "LevelSelectCore.h"
+#include "CompPlus_Settings.h"
 
 namespace CompPlus_CustomLevelSelect
 {
@@ -66,7 +67,7 @@ namespace CompPlus_CustomLevelSelect
 		CLS_MenuPoints[0][2] = MenuPoint(startingSlot + 1, "CPDHZ", "DESERT HILL ZONE", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[0][3] = MenuPoint(startingSlot + 2, "CPSZ", "SPECIAL STAGE ZONE", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[0][4] = MenuPoint(startingSlot + 3, "CPGPZ", "GUST PLANET ZONE ACT 1", "ANGELTHEGAMER", " ");
-		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, true);
+		CLS_MenuPoints[0][5] = MenuPoint(startingSlot + 4, "SMCP_LHPZ1", "LOST HIDDEN PALACE ZONE ACT 1", "CARJEM GENERATIONS [ALPHA RELEASE]", " ");
 		CLS_MenuPoints[0][6] = MenuPoint(startingSlot + 5, true);
 		CLS_MenuPoints[0][7] = MenuPoint(true, 7, 1);
 
@@ -75,7 +76,7 @@ namespace CompPlus_CustomLevelSelect
 		CLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "CPDHZE", "DESERT HILL ZONE (ENCORE)", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, "CPSZE", "SPECIAL STAGE ZONE (ENCORE)", "ANGELTHEGAMER", " ");
 		CLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, "CPGPZE", "GUST PLANET ZONE ACT 1 (ENCORE)", "ANGELTHEGAMER", " ");
-		CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, true);
+        CLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, "SMCP_LHPZ1E", "LOST HIDDEN PALACE ZONE ACT 1 (ENCORE)", "CARJEM GENERATIONS [ALPHA RELEASE]", " ");
 		CLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, true);
 		CLS_MenuPoints[1][7] = MenuPoint(CLS_MenuPointRight, "CPCXLS", " ", " ", " ");
 
@@ -132,6 +133,44 @@ namespace CompPlus_CustomLevelSelect
 		bg3.Alpha = 120;
 	}
 
+    void LHPZSecret() 
+    {
+        if (!CompPlus_Settings::LHPZ_SecretUnlocked)
+        {
+
+            EntityUIPicture& Picture1 = *GetEntityFromSceneSlot<EntityUIPicture>(94);
+            EntityUIPicture& Picture2 = *GetEntityFromSceneSlot<EntityUIPicture>(100);
+
+            EntityUIInfoLabel& TextA = *GetEntityFromSceneSlot<EntityUIInfoLabel>(218);
+            EntityUIInfoLabel& TextB = *GetEntityFromSceneSlot<EntityUIInfoLabel>(217);
+            EntityUIInfoLabel& TextC = *GetEntityFromSceneSlot<EntityUIInfoLabel>(219);
+
+            TextA.Visible = false;
+            TextB.Visible = false;
+            TextC.Visible = false;
+
+            CLS_MenuPoints[0][5].isLocked = true;
+            CLS_MenuPoints[1][5].isLocked = true;
+
+            Picture1.AnimData.CurrentFrame = 4;
+            Picture2.AnimData.CurrentFrame = 4;
+
+            CLS_MenuPoints[1][5].CP_Author = "GO TO CREDITS";
+            CLS_MenuPoints[0][5].CP_Author = "GO TO CREDITS";
+
+            CLS_MenuPoints[1][5].CP_Name = "???";
+            CLS_MenuPoints[0][5].CP_Name = "???";
+        }
+        else
+        {
+            EntityUIInfoLabel& LockedTextA = *GetEntityFromSceneSlot<EntityUIInfoLabel>(179);
+            EntityUIInfoLabel& LockedTextB = *GetEntityFromSceneSlot<EntityUIInfoLabel>(185);
+
+            LockedTextA.Visible = false;
+            LockedTextB.Visible = false;
+        }
+    }
+
 	void CheckForPointRefresh() 
 	{
 		AreMenuPointsLoaded = false;
@@ -143,6 +182,7 @@ namespace CompPlus_CustomLevelSelect
 		UniversalLSelectLoop();
 		if (!AreMenuPointsLoaded) SetupCustomLSelectMenuPoints();
 		SetupCustomSelector();
+        LHPZSecret();
 
 		FixSummary();
 
