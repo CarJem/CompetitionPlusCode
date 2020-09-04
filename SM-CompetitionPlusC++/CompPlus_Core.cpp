@@ -73,7 +73,7 @@ namespace CompPlus_Core
     {
         if (!HasStartupInit)
         {
-            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPHW");
+            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
             HasStartupInit = true;
         }
     }

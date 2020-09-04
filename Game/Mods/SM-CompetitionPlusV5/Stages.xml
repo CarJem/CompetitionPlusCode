@@ -102,7 +102,7 @@
 		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		  
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Credits Zone" stageID="SMCP_Misc/CP_Credits" stageKey="CPCREDITS" flags="3">
+	<Stage stageName="SMCP Credits Zone" stageID="SMCP_Misc/SMCP_Credits" stageKey="CPCREDITS" flags="3">
 		<Scenes>
 			<Scene id="1" />
 		</Scenes>
@@ -111,7 +111,7 @@
 			<FBZ_Button />
 		</StageUnlocks>
 		<StageAssets>
-			<Asset basePath="Data/Sprites/FBZ/Objects.bin"  newPath="Data/Sprites/CP_Cred/Objects.bin" />
+			<Asset basePath="Data/Sprites/FBZ/Objects.gif"  newPath="Data/Sprites/CP_Cred/Objects.gif" />
 		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
 		</StageAssets>
 	</Stage>

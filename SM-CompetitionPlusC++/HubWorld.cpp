@@ -1837,7 +1837,7 @@ namespace CompPlus_HubWorld
 			SceneLoadWaitTimer = 0;
 			LevelSelected = false;
 			LevelSelectedWarpSoundPlayed = false;
-			CompPlus_Common::LoadLevel(141);
+			CompPlus_Common::LoadLevel(66);
 		}
 		else
 		{

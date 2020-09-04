@@ -65,7 +65,7 @@ namespace CompPlus_Credits
 
     //Timers
     int UnlockWait = 0;
-    int UnlockWaitMax = 750;
+    int UnlockWaitMax = 950;
     int IncrementWait = 0;
     int IncrementWaitMax = 1;
     int SceneLoadWaitTimer = 0;
@@ -144,7 +144,7 @@ namespace CompPlus_Credits
             {
                 Entity& entity = *GetEntityFromSceneSlot<Entity>(i);
 
-                if (entity.ObjectID == 89 && i != RingCounterSlotID)
+                if (entity.ObjectID == 88 && i != RingCounterSlotID)
                 {
                     CurrentSpawns.insert(CurrentSpawns.begin(), i);
                 }
@@ -466,10 +466,10 @@ namespace CompPlus_Credits
 
         }
 
-        if (Timer.TimerSecond >= 3)
+        if (Timer.TimerSecond >= 8)
         {
             if (HasStartedRolling == false) HasStartedRolling = true;
-            if (Timer.TimerSecond >= 4) Timer.ResetTimer();
+            if (Timer.TimerSecond >= 8) Timer.ResetTimer();
         }
 
         if (HasStartedRolling)
