@@ -78,7 +78,7 @@ namespace CompPlus_Scene_GustPlanet
             {
                 SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
 
-                if (entity.ObjectID == 57)
+                if (entity.ObjectID == 56)
                 {
                     CurrentSpawns.insert(CurrentSpawns.begin(), i);
                 }
@@ -94,21 +94,52 @@ namespace CompPlus_Scene_GustPlanet
         for (int i = 0; i < length; ++i) ButtonCheckSingle(i);
     }
 
+    int SpeedShoesAcceleration = 6144;
+    int SpeedShoesAirAcceleration = 12288;
+    int SpeedShoesGravityStrength = 14336;
+    int SpeedShoesJumpStrength = 425984;
+
+    int NormalAcceleration = 3072;
+    int NormalAirAcceleration = 6144;
+    int NormalGravityStrength = 14336;
+    int NormalJumpStrength = 425984;
+
     void ApplyAntiGravityToPlayer(SonicMania::EntityPlayer& Player, bool State)
     {
         if (State) 
         {
-            Player.GravityStrength = 4168;
-            Player.Acceleration = 1072;
-            Player.AirAcceleration = 2144;
+            if (Player.SpeedShoesTTL != 0)
+            {
+                Player.Acceleration = SpeedShoesAcceleration - 2000;
+                Player.AirAcceleration = SpeedShoesAirAcceleration - 4000;
+                Player.GravityStrength = SpeedShoesGravityStrength - 10168;
+            }
+            else
+            {
+                Player.Acceleration = NormalAcceleration - 2000;
+                Player.AirAcceleration = NormalAirAcceleration - 4000;
+                Player.GravityStrength = NormalGravityStrength - 10168;
+            }
+
             Player.InkEffect = SonicMania::Ink_Alpha;
             Player.Alpha = 200;
         }
         else 
         {
-            Player.GravityStrength = 14336;
-            Player.Acceleration = 3072;
-            Player.AirAcceleration = 6144;
+            if (Player.SpeedShoesTTL != 0) 
+            {
+                Player.Acceleration = SpeedShoesAcceleration;
+                Player.AirAcceleration = SpeedShoesAirAcceleration;
+                Player.GravityStrength = SpeedShoesGravityStrength;
+            }
+            else 
+            {
+                Player.Acceleration = NormalAcceleration;
+                Player.AirAcceleration = NormalAirAcceleration;
+                Player.GravityStrength = NormalGravityStrength;
+            }
+
+
             Player.InkEffect = SonicMania::Ink_None;
             Player.Alpha = 256;
         }
@@ -116,6 +147,12 @@ namespace CompPlus_Scene_GustPlanet
 
     void ApplyAntiGravity() 
     {
+
+        if (SonicMania::Player1.Position.Y <= -20) SonicMania::Player1.Position.Y = -20;
+        if (SonicMania::Player2.Position.Y <= -20) SonicMania::Player2.Position.Y = -20;
+        if (SonicMania::Player3.Position.Y <= -20) SonicMania::Player3.Position.Y = -20;
+        if (SonicMania::Player4.Position.Y <= -20) SonicMania::Player4.Position.Y = -20;
+
         ApplyAntiGravityToPlayer(SonicMania::Player1, P1_HasAntiGrav);
         ApplyAntiGravityToPlayer(SonicMania::Player2, P2_HasAntiGrav);
         ApplyAntiGravityToPlayer(SonicMania::Player3, P3_HasAntiGrav);

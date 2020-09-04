@@ -169,7 +169,7 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-	<Stage stageName="SMCP Angel Island Zone" stageID="CP_StockStages/AIZ" stageKey="CPAIZEX" flags="3">
+    <Stage stageName="SMCP Angel Island Zone" stageID="SMCP_StockStages/AIZ" stageKey="CPAIZEX" flags="3">
 		<Scenes>
 		  <Scene id="EXT" />
 		</Scenes>
@@ -206,7 +206,6 @@
       <Scene id="1" />
     </Scenes>
 		<StageAssets>
-		  <Asset basePath="Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin" newPath="Data/Objects/CompPlus/36D61A3DE508B500AE0ECF8D33F32943.bin" />
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 	      <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
@@ -231,7 +230,6 @@
       <Scene id="1" />
     </Scenes>
 		<StageAssets>
-		  <Asset basePath="Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin" newPath="Data/Objects/CompPlus/36D61A3DE508B500AE0ECF8D33F32943.bin" />
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />

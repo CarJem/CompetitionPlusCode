@@ -935,6 +935,30 @@ namespace CompPlus_Scoring
         }
     }
 
+    bool HasTimePeaked(int PlayerID) 
+    {
+        if (PlayerID == 1) 
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
+        }
+        else if (PlayerID == 2)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P2 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P2 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P2 == 99);
+        }
+        else if (PlayerID == 3)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P3 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P3 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P3 == 99);
+        }
+        else if (PlayerID == 4)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P4 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P4 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P4 == 99);
+        }
+        else 
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
+        }
+    }
+
     void UpdatePlayerResults()
     {
         int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
@@ -949,7 +973,12 @@ namespace CompPlus_Scoring
         bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
         bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
 
-        if (P1_Finished && P2_Finished && P3_Finished && P4_Finished && SonicMania::Timer.Enabled) SetRoundEndWinner();
+        bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
+        bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
+        bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
+        bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
+
+        if (P1_Done && P2_Done && P3_Done && P4_Done) SetRoundEndWinner();
         else AllowUpdateVictory = true;
     }
 

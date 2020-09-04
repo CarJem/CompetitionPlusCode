@@ -270,11 +270,12 @@ namespace CompPlus_Settings
 		{
 			CompPlus_Settings::Player1AbilitySet = Ability;
             if (!Force) return;
-			if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player1.Moveset = MOVESET_SONIC;
-			else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player1.Moveset = MOVESET_TAILS;
-			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player1.Moveset = MOVESET_KNUX;
-			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player1.Moveset = MOVESET_MIGHTY;
-			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player1.Moveset = MOVESET_RAY;
+            if (Ability == CompPlus_Settings::AbilitySet_Sonic) Player1.Moveset = MOVESET_SONIC;
+            else if (Ability == CompPlus_Settings::AbilitySet_Tails) Player1.Moveset = MOVESET_TAILS;
+            else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player1.Moveset = MOVESET_KNUX;
+            else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player1.Moveset = MOVESET_MIGHTY;
+            else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player1.Moveset = MOVESET_RAY;
+            else if (Ability == CompPlus_Settings::AbilitySet_Compatibility) Player1.Moveset = SonicMania::GetMoveSetByCharacter(Player1.Character);
 		}
 		else if (PlayerID == 2)
 		{
@@ -285,6 +286,7 @@ namespace CompPlus_Settings
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player2.Moveset = MOVESET_KNUX;
 			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player2.Moveset = MOVESET_MIGHTY;
 			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player2.Moveset = MOVESET_RAY;
+            else if (Ability == CompPlus_Settings::AbilitySet_Compatibility) Player2.Moveset = SonicMania::GetMoveSetByCharacter(Player2.Character);
 		}
 		else if (PlayerID == 3)
 		{
@@ -295,6 +297,7 @@ namespace CompPlus_Settings
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player3.Moveset = MOVESET_KNUX;
 			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player3.Moveset = MOVESET_MIGHTY;
 			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player3.Moveset = MOVESET_RAY;
+            else if (Ability == CompPlus_Settings::AbilitySet_Compatibility) Player3.Moveset = SonicMania::GetMoveSetByCharacter(Player3.Character);
 		}
 		else if (PlayerID == 4)
 		{
@@ -305,6 +308,7 @@ namespace CompPlus_Settings
 			else if (Ability == CompPlus_Settings::AbilitySet_Knuckles)Player4.Moveset = MOVESET_KNUX;
 			else if (Ability == CompPlus_Settings::AbilitySet_Mighty) Player4.Moveset = MOVESET_MIGHTY;
 			else if (Ability == CompPlus_Settings::AbilitySet_Ray) Player4.Moveset = MOVESET_RAY;
+            else if (Ability == CompPlus_Settings::AbilitySet_Compatibility) Player4.Moveset = SonicMania::GetMoveSetByCharacter(Player4.Character);
 		}      
 	}
 
@@ -486,7 +490,7 @@ namespace CompPlus_Settings
             {
                 WriteData(extended_time_address, nops2, 0x02);
                 ReplaceJNEwithJump(time_limit_kill_jne_address, time_limit_skip_jne_adderss);
-                WriteData(time_limit_kill_jmp_nop_address, nops1, 0x06);
+                WriteData(time_limit_kill_jmp_nop_address, nops1, 0x01);
                 IsUnlimitedWriten = true;
                 IsLimitedWriten = false;
             }
@@ -685,7 +689,7 @@ namespace CompPlus_Settings
     void RefreshSettings()
     {
         UpdatePlayer(1, Player1ChosenPlayer, false);
-        SetAbility(1, Player1AbilitySet, false);
+        SetAbility(1, Player1AbilitySet, true);
         SetPeeloutAbility(1, Player1PeeloutAbility);
 
         UpdatePlayer(2, Player2ChosenPlayer, false);
