@@ -6,6 +6,7 @@
 #include "CompPlus_Settings.h"
 #include "SonicMania.h"
 #include "CompPlus_Scoring.h"
+#include "CompPlus_Core.h"
 
 namespace CompPlus_CompetitionMenu
 {
@@ -375,72 +376,53 @@ namespace CompPlus_CompetitionMenu
         Label3.TextLength = __text.length();
     }
 
-    void UpdateResultHighlights(EntityUIVsResults& Results, int PlayerID)
+    void UpdateResultHighlights(EntityUIVsResults& Results, bool HasWon)
     {
-        if (SonicMania::Options->CompetitionSession.inMatch == false || SonicMania::Options->CompetitionSession.NumberOfPlayers == 0) return;
         for (int i = 0; i < SonicMania::Options->CompetitionSession.NumberOfPlayers; i++) 
         {
             switch (CompPlus_Settings::VictoryStyle)
             {
                 case CompPlus_Settings::VictoryMode_Time:
-                    if (CompPlus_Scoring::TimeRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row0Highlight = false;
-                        Results.Row1Highlight = false;
-                        Results.Row2Highlight = false;
-                        Results.Row3Highlight = false;
-                        Results.Row4Highlight = CompPlus_Scoring::TimeRanking[i].HasWon;
-                    }
+                    Results.Row0Highlight = false;
+                    Results.Row1Highlight = false;
+                    Results.Row2Highlight = false;
+                    Results.Row3Highlight = false;
+                    Results.Row4Highlight = HasWon;
                     break;
                 case CompPlus_Settings::VictoryMode_Score:
-                    if (CompPlus_Scoring::ScoreRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row0Highlight = false;
-                        Results.Row1Highlight = false;
-                        Results.Row3Highlight = false;
-                        Results.Row4Highlight = false;
-                        Results.Row2Highlight = CompPlus_Scoring::ScoreRanking[i].HasWon;
-                    }
+                    Results.Row0Highlight = false;
+                    Results.Row1Highlight = false;
+                    Results.Row3Highlight = false;
+                    Results.Row4Highlight = false;
+                    Results.Row2Highlight = HasWon;
                     break;
                 case CompPlus_Settings::VictoryMode_Rings:
-                    if (CompPlus_Scoring::RingRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row1Highlight = false;
-                        Results.Row2Highlight = false;
-                        Results.Row3Highlight = false;
-                        Results.Row4Highlight = false;
-                        Results.Row0Highlight = CompPlus_Scoring::RingRanking[i].HasWon;
-                    }
+                    Results.Row1Highlight = false;
+                    Results.Row2Highlight = false;
+                    Results.Row3Highlight = false;
+                    Results.Row4Highlight = false;
+                    Results.Row0Highlight = HasWon;
                     break;
                 case CompPlus_Settings::VictoryMode_TotalRings:
-                    if (CompPlus_Scoring::TotalRingRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row0Highlight = false;
-                        Results.Row2Highlight = false;
-                        Results.Row3Highlight = false;
-                        Results.Row4Highlight = false;
-                        Results.Row1Highlight = CompPlus_Scoring::TotalRingRanking[i].HasWon;
-                    }
+                    Results.Row0Highlight = false;
+                    Results.Row2Highlight = false;
+                    Results.Row3Highlight = false;
+                    Results.Row4Highlight = false;
+                    Results.Row1Highlight = HasWon;
                     break;
                 case CompPlus_Settings::VictoryMode_Items:
-                    if (CompPlus_Scoring::ItemRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row0Highlight = false;
-                        Results.Row1Highlight = false;
-                        Results.Row2Highlight = false;
-                        Results.Row4Highlight = false;
-                        Results.Row3Highlight = CompPlus_Scoring::ItemRanking[i].HasWon;
-                    }
+                    Results.Row0Highlight = false;
+                    Results.Row1Highlight = false;
+                    Results.Row2Highlight = false;
+                    Results.Row4Highlight = false;
+                    Results.Row3Highlight = HasWon;
                     break;
                 case CompPlus_Settings::VictoryMode_AntiRings:
-                    if (CompPlus_Scoring::AntiRingRanking[i].PlayerID == PlayerID)
-                    {
-                        Results.Row0Highlight = false;
-                        Results.Row2Highlight = false;
-                        Results.Row3Highlight = false;
-                        Results.Row4Highlight = false;
-                        Results.Row1Highlight = CompPlus_Scoring::AntiRingRanking[i].HasWon;
-                    }
+                    Results.Row0Highlight = false;
+                    Results.Row2Highlight = false;
+                    Results.Row3Highlight = false;
+                    Results.Row4Highlight = false;
+                    Results.Row1Highlight = HasWon;
                     break;
             }
         }
@@ -467,7 +449,7 @@ namespace CompPlus_CompetitionMenu
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 1)
         {
             UpdateWinsDisplay(1, CompPlus_Scoring::P1_WinsPlus, P1_Results.Position.X, P1_Results.Position.Y - OffsetY, P1_SlotIDs);
-            if (!isFinalResults) UpdateResultHighlights(P1_Results, 1);
+            if (!isFinalResults) UpdateResultHighlights(P1_Results, CompPlus_Scoring::P1_HasWon_Round);
         }
         else 
         {
@@ -476,7 +458,7 @@ namespace CompPlus_CompetitionMenu
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2)
         {
             UpdateWinsDisplay(2, CompPlus_Scoring::P2_WinsPlus, P2_Results.Position.X, P2_Results.Position.Y - OffsetY, P2_SlotIDs);
-            if (!isFinalResults) UpdateResultHighlights(P2_Results, 2);
+            if (!isFinalResults) UpdateResultHighlights(P2_Results, CompPlus_Scoring::P2_HasWon_Round);
         }
         else
         {
@@ -485,7 +467,7 @@ namespace CompPlus_CompetitionMenu
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 3)
         {
             UpdateWinsDisplay(3, CompPlus_Scoring::P3_WinsPlus, P3_Results.Position.X, P3_Results.Position.Y - OffsetY, P3_SlotIDs);
-            if (!isFinalResults) UpdateResultHighlights(P3_Results, 3);
+            if (!isFinalResults) UpdateResultHighlights(P3_Results, CompPlus_Scoring::P3_HasWon_Round);
         }
         else
         {
@@ -494,7 +476,7 @@ namespace CompPlus_CompetitionMenu
         if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 4)
         {
             UpdateWinsDisplay(4, CompPlus_Scoring::P4_WinsPlus, P4_Results.Position.X, P4_Results.Position.Y - OffsetY, P4_SlotIDs);
-            if (!isFinalResults) UpdateResultHighlights(P4_Results, 4);
+            if (!isFinalResults) UpdateResultHighlights(P4_Results, CompPlus_Scoring::P4_HasWon_Round);
         }
         else
         {
@@ -589,20 +571,20 @@ namespace CompPlus_CompetitionMenu
         //object.Obfuscate = true;
         object.XOut = false;
         object.ZoneID = 11;
-        object.Act = 106;
+        object.Act = 31;
 
         SonicMania::UIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(591);
         object2.Disabled = false;
         //object2.Obfuscate = true;
         object2.XOut = false;
         object2.ZoneID = 11;
-        object2.Act = 107;
+        object2.Act = 32;
 
         EntityUIControl& CompetitionLevelSelect = *GetEntityFromSceneSlot<EntityUIControl>(UIVsLevelSelectUIControl);
 
         if (CompetitionLevelSelect.Visible) 
         {
-            CompPlus_Scoring::ClearInternalWins();
+            CompPlus_Scoring::ClearTemporaryResults();
             StoredResults = false;
         }
     }

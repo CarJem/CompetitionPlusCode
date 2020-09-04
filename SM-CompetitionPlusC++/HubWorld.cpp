@@ -441,12 +441,14 @@ namespace CompPlus_HubWorld
 
 	void ChangeCharacter(int PlayerID, int Value) 
 	{
-		CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, false);
-		CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, false);
+		CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, true);
+		CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, true);
 	}
 
 	void ChangeAbility(int PlayerID, int Value, bool isUp)
 	{
+        bool CanForce = true;
+
         CompPlus_Settings::PlayerAbility Ability = (CompPlus_Settings::PlayerAbility)Value;
         CompPlus_Settings::ChosenPlayer ChosenPlayer;
 
@@ -455,63 +457,63 @@ namespace CompPlus_HubWorld
         if (PlayerID == 2) ChosenPlayer = CompPlus_Settings::Player2ChosenPlayer;
         else ChosenPlayer = CompPlus_Settings::Player1ChosenPlayer;
         
-        CompPlus_Settings::SetAbility(PlayerID, Ability, false);
+        CompPlus_Settings::SetAbility(PlayerID, Ability, CanForce);
 
         if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Sonic)
         {
             if (isUp)
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, CanForce);
             }
             else
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
             }
         }
         if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Tails)
         {
             if (isUp)
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, CanForce);
             }
             else
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Tails, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
             }
         }
         if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Knuckles)
         {
             if (isUp)
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, CanForce);
             }
             else
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Knuckles, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
             }
 
         }
@@ -519,38 +521,38 @@ namespace CompPlus_HubWorld
         {
             if (isUp)
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Compatibility, CanForce);
             }
             else
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
             }
         }
         if (ChosenPlayer == CompPlus_Settings::ChosenPlayer_Ray)
         {
             if (isUp)
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, CanForce);
             }
             else
             {
-                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, false);
-                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, false);
+                if (Ability == CompPlus_Settings::AbilitySet_Sonic) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Tails) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Knuckles) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Sonic, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Mighty) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Mighty, CanForce);
+                else if (Ability == CompPlus_Settings::AbilitySet_Ray) SetAbility(PlayerID, CompPlus_Settings::AbilitySet_Ray, CanForce);
             }
         }
 	}
@@ -1359,9 +1361,9 @@ namespace CompPlus_HubWorld
 		//X: 11264 Y: 11123
 
 		int OffsetX = 0;
-		int OffsetY = 85;
+		int OffsetY = 88;
 
-		int OffsetY_2 = 45;
+		int OffsetY_2 = 48;
 
 		Entity& E1 = *GetEntityFromSceneSlot<Entity>(SwapPlayerController);
 		Entity& E2 = *GetEntityFromSceneSlot<Entity>(SwapAbilityController);
@@ -1487,10 +1489,6 @@ namespace CompPlus_HubWorld
 
     void SetSpawnPositions()
     {
-
-
-
-
         SetSpawnPosition(Player1, CompPlus_Scoring::P1_LastPlacement);
         SetSpawnPosition(Player2, CompPlus_Scoring::P2_LastPlacement);
         SetSpawnPosition(Player3, CompPlus_Scoring::P3_LastPlacement);

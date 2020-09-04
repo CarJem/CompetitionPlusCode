@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CompPlus_DevMenu.h"
+#include "CompPlus_Core.h"
 #include "ManiaModLoader.h"
 #include "SonicMania.h"
 #include "CompPlus_Settings.h"
@@ -76,37 +77,38 @@ void PatchOriginalDevMenu()
 
 void UpdateCompPlusDevMenu()
 {
-    bool keyState = GetCtrlKeyState();
-
-    if (CheckKey('P', keyState, &TrackerP) && CompPlus_Settings::EnableDevMode && !KeyPHeld)
+    if (CompPlus_Settings::EnableDevMode && !CompPlus_Core::NonDeveloperBuild) 
     {
-        if (!InCompetitionPlusDevMenu)
-        {
-            SonicMania::PlaySoundFXS("Global/BlueShield.wav");
-            PatchCompetitionPlusDevMenu();
-            InCompetitionPlusDevMenu = true;
-        }
-        else
-        {
-            SonicMania::PlaySoundFXS("Global/Hurt.wav");
-            if (OriginalDevMenuSaved) PatchOriginalDevMenu();
-            InCompetitionPlusDevMenu = false;
-        }
-        KeyPHeld = true;
-    }
-    else KeyPHeld = false;
+        bool keyState = GetCtrlKeyState();
 
-    if (CheckKey('S', keyState, &TrackerS) && CompPlus_Settings::DevMode_ControllerSwap && CompPlus_Settings::EnableDevMode && !KeySHeld)
-    {
-        SonicMania::PlaySoundFXS("Global/Swap.wav");
-        CompPlus_Settings::DevMode_ControlPlayer1 = false;
-        CompPlus_Settings::DevMode_ControlPlayer2 = false;
-        CompPlus_Settings::DevMode_ControlPlayer3 = false;
-        CompPlus_Settings::DevMode_ControlPlayer4 = false;
-        CompPlus_Settings::DevMode_ControllerSwapPosition++;
-        if (CompPlus_Settings::DevMode_ControllerSwapPosition > 3) CompPlus_Settings::DevMode_ControllerSwapPosition = 0;
-        switch (CompPlus_Settings::DevMode_ControllerSwapPosition)
+        if (CheckKey('P', keyState, &TrackerP) && !KeyPHeld)
         {
+            if (!InCompetitionPlusDevMenu)
+            {
+                SonicMania::PlaySoundFXS("Global/BlueShield.wav");
+                PatchCompetitionPlusDevMenu();
+                InCompetitionPlusDevMenu = true;
+            }
+            else
+            {
+                SonicMania::PlaySoundFXS("Global/Hurt.wav");
+                if (OriginalDevMenuSaved) PatchOriginalDevMenu();
+                InCompetitionPlusDevMenu = false;
+            }
+            KeyPHeld = true;
+        }
+        else KeyPHeld = false;
+        if (CheckKey('S', keyState, &TrackerS) && CompPlus_Settings::DevMode_ControllerSwap && !KeySHeld)
+        {
+            SonicMania::PlaySoundFXS("Global/Swap.wav");
+            CompPlus_Settings::DevMode_ControlPlayer1 = false;
+            CompPlus_Settings::DevMode_ControlPlayer2 = false;
+            CompPlus_Settings::DevMode_ControlPlayer3 = false;
+            CompPlus_Settings::DevMode_ControlPlayer4 = false;
+            CompPlus_Settings::DevMode_ControllerSwapPosition++;
+            if (CompPlus_Settings::DevMode_ControllerSwapPosition > 3) CompPlus_Settings::DevMode_ControllerSwapPosition = 0;
+            switch (CompPlus_Settings::DevMode_ControllerSwapPosition)
+            {
             case 0:
                 CompPlus_Settings::DevMode_ControlPlayer1 = true;
                 SonicMania::PlaySoundFXS("VO/Player1.wav");
@@ -123,44 +125,43 @@ void UpdateCompPlusDevMenu()
                 CompPlus_Settings::DevMode_ControlPlayer4 = true;
                 SonicMania::PlaySoundFXS("VO/Player4.wav");
                 break;
+            }
+            KeySHeld = true;
         }
-        KeySHeld = true;
+        else KeySHeld = false;
+        if (CheckKey('O', keyState, &TrackerO))
+        {
+            CompPlus_Settings::LoadSettings();
+        }
+        if (CheckKey('1', keyState, &Tracker1) && !Key1Held)
+        {
+            SonicMania::PlaySoundFXS("Global/Teleport.wav");
+            CompPlus_Settings::DevMode_WarpAllPlayersTo(1);
+            Key1Held = true;
+        }
+        else Key1Held = false;
+        if (CheckKey('2', keyState, &Tracker1) && !Key2Held)
+        {
+            SonicMania::PlaySoundFXS("Global/Teleport.wav");
+            CompPlus_Settings::DevMode_WarpAllPlayersTo(2);
+            Key2Held = true;
+        }
+        else Key2Held = false;
+        if (CheckKey('3', keyState, &Tracker1) && !Key3Held)
+        {
+            SonicMania::PlaySoundFXS("Global/Teleport.wav");
+                CompPlus_Settings::DevMode_WarpAllPlayersTo(3);
+                Key3Held = true;
+        }
+        else Key3Held = false;
+        if (CheckKey('4', keyState, &Tracker1) && !Key4Held)
+        {
+            SonicMania::PlaySoundFXS("Global/Teleport.wav");
+                CompPlus_Settings::DevMode_WarpAllPlayersTo(4);
+                Key4Held = true;
+        }
+        else Key4Held = false;
     }
-    else KeySHeld = false;
-
-    if (CheckKey('O', keyState, &TrackerO))
-    {
-        CompPlus_Settings::LoadSettings();
-    }
-
-    if (CheckKey('1', keyState, &Tracker1) && CompPlus_Settings::EnableDevMode && !Key1Held)
-    {
-        SonicMania::PlaySoundFXS("Global/Teleport.wav");
-        CompPlus_Settings::DevMode_WarpAllPlayersTo(1);
-        Key1Held = true;
-    }
-    else Key1Held = false;
-    if (CheckKey('2', keyState, &Tracker1) && CompPlus_Settings::EnableDevMode && !Key2Held)
-    {
-        SonicMania::PlaySoundFXS("Global/Teleport.wav");
-        CompPlus_Settings::DevMode_WarpAllPlayersTo(2);
-        Key2Held = true;
-    }
-    else Key2Held = false;
-    if (CheckKey('3', keyState, &Tracker1) && CompPlus_Settings::EnableDevMode && !Key3Held)
-    {
-        SonicMania::PlaySoundFXS("Global/Teleport.wav");
-        CompPlus_Settings::DevMode_WarpAllPlayersTo(3);
-        Key3Held = true;
-    }
-    else Key3Held = false;
-    if (CheckKey('4', keyState, &Tracker1) && CompPlus_Settings::EnableDevMode && !Key4Held)
-    {
-        SonicMania::PlaySoundFXS("Global/Teleport.wav");
-        CompPlus_Settings::DevMode_WarpAllPlayersTo(4);
-        Key4Held = true;
-    }
-    else Key4Held = false;
 }
 
 int CompetitionPlus_MainDevMenu()

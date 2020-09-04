@@ -132,6 +132,7 @@ namespace CompPlus_Core
 
 	extern bool StageRefresh;
 	extern int IdleTime;
+    extern bool NonDeveloperBuild;
 
 	//extern IZAPI::StageInfo GetCurrentStage();
 	//typedef void(__cdecl* IZChangeStage_Type)(const char*);

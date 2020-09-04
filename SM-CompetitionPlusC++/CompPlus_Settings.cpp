@@ -18,7 +18,6 @@ namespace CompPlus_Settings
     #pragma region Internal Variables
 
     int NumberOfAnnouncers = 6;
-    bool FixPlayers = false;
     std::string Settings_FilePath;
     bool SettingsLoaded = false;
     int DevMode_ControllerSwapPosition = 0;
@@ -130,15 +129,15 @@ namespace CompPlus_Settings
 
     void FixUnmatchingVSPlayers()
     {
-        SonicMania::Character P1_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x00 & 0xFF >> 1);
-        SonicMania::Character P2_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x08 & 0xFF >> 1);
-        SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
-        SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
+        SonicMania::Character P1_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[0]);
+        SonicMania::Character P2_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[1]);
+        SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[2]);
+        SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[3]);
 
-        CompPlus_Settings::UpdatePlayer(1, P1_Char, true);
-        CompPlus_Settings::UpdatePlayer(2, P2_Char, true);
-        CompPlus_Settings::UpdatePlayer(3, P3_Char, true);
-        CompPlus_Settings::UpdatePlayer(4, P4_Char, true);
+        CompPlus_Settings::UpdatePlayer(1, P1_Char, false);
+        CompPlus_Settings::UpdatePlayer(2, P2_Char, false);
+        CompPlus_Settings::UpdatePlayer(3, P3_Char, false);
+        CompPlus_Settings::UpdatePlayer(4, P4_Char, false);
     }
 
     void FixRayAndMighty2P()
@@ -148,7 +147,7 @@ namespace CompPlus_Settings
         int OffsetNormal = 0xC31E5;
         for (i = 0; i < 6; i++)
         {
-            WriteData<1>((void*)(baseAddress + OffsetNormal), PatchP2Ray[i]);//put data back.
+            WriteData<1>((void*)(baseAddress + OffsetNormal), PatchP2Ray[i]); //put data back.
             OffsetNormal++;
 
         }
@@ -160,14 +159,7 @@ namespace CompPlus_Settings
 
     void UpdatePlayerSprites(SonicMania::EntityPlayer& Player)
     {
-        if (Player.Character == Characters_Sonic)
-        {
-            if (Player.State == PLAYERSTATE_HAMMERDROP)
-            {
-                //Player.Animation.CurrentAnimation = 54; //551
-                //SetSpriteAnimation(0, 54, &Player.Animation, true, 6);
-            }
-        }
+
     }
 
     void UpdateMultiPlayerSprites()
@@ -208,34 +200,29 @@ namespace CompPlus_Settings
         else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
 
         int CharacterID = (int)Character;
-        //SonicMania::Options->CompetitionSession.CharacterFlags &= 0xFFFFFFFF ^ (0xFF << (PlayerID - 1));
 
         if (PlayerID == 1)
         {
-            if (Force) SonicMania::Player1.Character = Character;
-            Player1.Character = Character;
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (0 * 8);
+            if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
             CompPlus_Settings::Player1ChosenPlayer = Player;
         }
         else if (PlayerID == 2)
         {
-            if (Force) SonicMania::Player2.Character = Character;
-            Player2.Character = Character;
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (1 * 8);
+            if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
             CompPlus_Settings::Player2ChosenPlayer = Player;
         }
         else if (PlayerID == 3)
         {
-            if (Force) SonicMania::Player3.Character = Character;
-            Player3.Character = Character;
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (2 * 8);
+            if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
             CompPlus_Settings::Player3ChosenPlayer = Player;
         }
         else if (PlayerID == 4)
         {
-            if (Force) SonicMania::Player4.Character = Character;
-            Player4.Character = Character;
-            SonicMania::Options->CompetitionSession.CharacterFlags |= Character << (3 * 8);
+            if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
             CompPlus_Settings::Player4ChosenPlayer = Player;
         }
         FixRayAndMighty2P();
@@ -475,6 +462,7 @@ namespace CompPlus_Settings
 
     void UpdateTimer()
     {
+        if (SonicMania::Timer.Enabled == false) return;
         void* extended_time_address = (void*)(baseAddress + 0x535BD);
         void* time_limit_kill_jne_address = (void*)(baseAddress + 0xADD03);
         void* time_limit_skip_jne_adderss = (void*)(baseAddress + 0x00ADDE7);
@@ -696,21 +684,23 @@ namespace CompPlus_Settings
 
     void RefreshSettings()
     {
-        SetAbility(1, Player1AbilitySet, true);
+        UpdatePlayer(1, Player1ChosenPlayer, false);
+        SetAbility(1, Player1AbilitySet, false);
         SetPeeloutAbility(1, Player1PeeloutAbility);
 
+        UpdatePlayer(2, Player2ChosenPlayer, false);
         SetAbility(2, Player2AbilitySet, true);
         SetPeeloutAbility(2, Player2PeeloutAbility);
 
+        UpdatePlayer(3, Player3ChosenPlayer, false);
         SetAbility(3, Player3AbilitySet, true);
         SetPeeloutAbility(3, Player3PeeloutAbility);
 
+        UpdatePlayer(4, Player4ChosenPlayer, false);
         SetAbility(4, Player4AbilitySet, true);
         SetPeeloutAbility(4, Player4PeeloutAbility);
 
         UpdateSonicAbilities();
-
-        FixPlayers = true;
     }
 
     void LogLoadSetting(const char* Name, std::string Value)
@@ -845,21 +835,21 @@ namespace CompPlus_Settings
 
                         LogLoadSetting("NumberOfRounds", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "EnableDebugMode"))
+                    else if (!strcmp(xmlOption->Name(), "EnableDebugMode") && !CompPlus_Core::NonDeveloperBuild)
                     {
                         bool value = XMLGetBool(xmlOption);
                         EnableDebugMode = value;
 
                         LogLoadSetting("EnableDebugMode", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "EnableDevMode"))
+                    else if (!strcmp(xmlOption->Name(), "EnableDevMode") && !CompPlus_Core::NonDeveloperBuild)
                     {
                         bool value = XMLGetBool(xmlOption);
                         EnableDevMode = value;
 
                         LogLoadSetting("EnableDevMode", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "DarkDevMenu"))
+                    else if (!strcmp(xmlOption->Name(), "DarkDevMenu") && !CompPlus_Core::NonDeveloperBuild)
                     {
                         bool value = XMLGetBool(xmlOption);
                         DarkDevMenu = value;
@@ -914,10 +904,17 @@ namespace CompPlus_Settings
             AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text);
             AddtoSaveSettings("MonitorMode", IntToString(MonitorTypes), text);
 
-            AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
-            AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
-            AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
             if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
+
+            if (!CompPlus_Core::NonDeveloperBuild) 
+            {
+                AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
+                AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
+                AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
+            }
+
+
+
 
             text += "</Settings>";
             document.Parse((const char*)text.c_str());
@@ -935,24 +932,10 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    void OnFixPlayers() 
-    {
-
-        if (FixPlayers)
-        {
-            UpdatePlayer(1, Player1ChosenPlayer, true);
-            UpdatePlayer(2, Player2ChosenPlayer, true);
-            UpdatePlayer(3, Player3ChosenPlayer, true);
-            UpdatePlayer(4, Player4ChosenPlayer, true);
-            FixPlayers = false;
-        }
-    }
-
     void OnFrame()
     {
         if (SettingsLoaded) 
         {
-            OnFixPlayers();
             UpdateVSControlLockState();
             UpdateLives();
             UpdateStockSettings();

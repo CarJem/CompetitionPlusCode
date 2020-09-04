@@ -2768,7 +2768,7 @@ namespace SonicMania
         int MonitorMode;
         int Unknown_78;
         int Unknown_Gap_7C[12];
-        int CharacterFlags;
+        BYTE CharacterFlags[4];
         BYTE WinnerFlag[12];
         int Rings_P1;
         int Rings_P2;

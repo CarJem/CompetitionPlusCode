@@ -36,10 +36,15 @@ namespace CompPlus_Scoring
      int P3_WinsPlus = 0;
      int P4_WinsPlus = 0;
 
-     bool P1_HasWon = false;
-     bool P2_HasWon = false;
-     bool P3_HasWon = false;
-     bool P4_HasWon = false;
+     bool P1_HasWon_Round = false;
+     bool P2_HasWon_Round = false;
+     bool P3_HasWon_Round = false;
+     bool P4_HasWon_Round = false;
+
+     bool P1_HasWon_Match = false;
+     bool P2_HasWon_Match = false;
+     bool P3_HasWon_Match = false;
+     bool P4_HasWon_Match = false;
 
      int LastCurrentRound = 0;
 
@@ -615,13 +620,14 @@ namespace CompPlus_Scoring
 
     void SetFinalRanking_ForLoop(int CurrentPlayer, bool& HasWon, bool& isTied, int& WinnerID, int Position, bool& HasWinner, int& WinnerPlayerID)
     {
-        int P1_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x00 & 0xFF >> 1);
-        int P2_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x08 & 0xFF >> 1);
-        int P3_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x10 & 0xFF >> 1);
-        int P4_Char = (SonicMania::Options->CompetitionSession.CharacterFlags >> 0x18 & 0xFF >> 1);
+        int P1_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[0]);
+        int P2_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[1]);
+        int P3_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[2]);
+        int P4_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[3]);
 
         if (CurrentPlayer == 1)
         {
+            P1_HasWon_Round = HasWon;
             if (HasWon)
             {
                 WinnerPlayerID = 1;
@@ -633,6 +639,7 @@ namespace CompPlus_Scoring
         }
         else if (CurrentPlayer == 2)
         {
+            P2_HasWon_Round = HasWon;
             if (HasWon)
             {
                 WinnerPlayerID = 2;
@@ -644,6 +651,7 @@ namespace CompPlus_Scoring
         }
         else if (CurrentPlayer == 3)
         {
+            P3_HasWon_Round = HasWon;
             if (HasWon)
             {
                 WinnerPlayerID = 3;
@@ -655,6 +663,7 @@ namespace CompPlus_Scoring
         }
         else if (CurrentPlayer == 4)
         {
+            P4_HasWon_Round = HasWon;
             if (HasWon)
             {
                 WinnerPlayerID = 4;
@@ -799,10 +808,14 @@ namespace CompPlus_Scoring
         P2_WinsPlus = 0;
         P3_WinsPlus = 0;
         P4_WinsPlus = 0;
-        P1_HasWon = false;
-        P2_HasWon = false;
-        P3_HasWon = false;
-        P4_HasWon = false;
+        P1_HasWon_Match = false;
+        P2_HasWon_Match = false;
+        P3_HasWon_Match = false;
+        P4_HasWon_Match = false;
+        P1_HasWon_Round = false;
+        P2_HasWon_Round = false;
+        P3_HasWon_Round = false;
+        P4_HasWon_Round = false;
         CanGoToFinalResults = false;
         SonicMania::Options->CompetitionSession.Wins_P1 = 0;
         SonicMania::Options->CompetitionSession.Wins_P2 = 0;
@@ -812,7 +825,7 @@ namespace CompPlus_Scoring
         PodeiumSpawnActive = false;
     }
 
-    void ClearInternalWins()
+    void ClearTemporaryResults()
     {
         if (!CanGoToFinalResults)
         {
@@ -820,6 +833,10 @@ namespace CompPlus_Scoring
             SonicMania::Options->CompetitionSession.Wins_P2 = 0;
             SonicMania::Options->CompetitionSession.Wins_P3 = 0;
             SonicMania::Options->CompetitionSession.Wins_P4 = 0;
+            P1_HasWon_Round = false;
+            P2_HasWon_Round = false;
+            P3_HasWon_Round = false;
+            P4_HasWon_Round = false;
             LastZone = "???";
         }
     }
@@ -847,10 +864,10 @@ namespace CompPlus_Scoring
                 if (P3_WinsPlus > MaxWins) MaxWins = P3_WinsPlus;
                 if (P4_WinsPlus > MaxWins) MaxWins = P4_WinsPlus;
 
-                if (MaxWins == P1_WinsPlus) P1_HasWon = true;
-                if (MaxWins == P2_WinsPlus) P2_HasWon = true;
-                if (MaxWins == P3_WinsPlus) P3_HasWon = true;
-                if (MaxWins == P4_WinsPlus) P4_HasWon = true;
+                if (MaxWins == P1_WinsPlus) P1_HasWon_Match = true;
+                if (MaxWins == P2_WinsPlus) P2_HasWon_Match = true;
+                if (MaxWins == P3_WinsPlus) P3_HasWon_Match = true;
+                if (MaxWins == P4_WinsPlus) P4_HasWon_Match = true;
                 CanGoToFinalResults = true;
             }
             else
@@ -865,10 +882,10 @@ namespace CompPlus_Scoring
                 // Player at or over WinThreshold is overall winner (could be a tie)
                 if (MaxWins >= WinThreshold)
                 {
-                    if (MaxWins == P1_WinsPlus) P1_HasWon = true;
-                    if (MaxWins == P2_WinsPlus) P2_HasWon = true;
-                    if (MaxWins == P3_WinsPlus) P3_HasWon = true;
-                    if (MaxWins == P4_WinsPlus) P4_HasWon = true;
+                    if (MaxWins == P1_WinsPlus) P1_HasWon_Match = true;
+                    if (MaxWins == P2_WinsPlus) P2_HasWon_Match = true;
+                    if (MaxWins == P3_WinsPlus) P3_HasWon_Match = true;
+                    if (MaxWins == P4_WinsPlus) P4_HasWon_Match = true;
                     CanGoToFinalResults = true;
                 }
                 else
@@ -904,10 +921,10 @@ namespace CompPlus_Scoring
             SaveRoundsStats();
             SetCurrentRound(2);
             SonicMania::Options->CompetitionSession.TotalRounds = 2;
-            SonicMania::Options->CompetitionSession.Wins_P1 = (CompPlus_Scoring::P1_HasWon ? 2 : 0);
-            SonicMania::Options->CompetitionSession.Wins_P2 = (CompPlus_Scoring::P2_HasWon ? 2 : 0);
-            SonicMania::Options->CompetitionSession.Wins_P3 = (CompPlus_Scoring::P3_HasWon ? 2 : 0);
-            SonicMania::Options->CompetitionSession.Wins_P4 = (CompPlus_Scoring::P4_HasWon ? 2 : 0);
+            SonicMania::Options->CompetitionSession.Wins_P1 = (CompPlus_Scoring::P1_HasWon_Match ? 2 : 0);
+            SonicMania::Options->CompetitionSession.Wins_P2 = (CompPlus_Scoring::P2_HasWon_Match ? 2 : 0);
+            SonicMania::Options->CompetitionSession.Wins_P3 = (CompPlus_Scoring::P3_HasWon_Match ? 2 : 0);
+            SonicMania::Options->CompetitionSession.Wins_P4 = (CompPlus_Scoring::P4_HasWon_Match ? 2 : 0);
         }
 
 

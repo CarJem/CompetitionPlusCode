@@ -102,10 +102,15 @@ namespace CompPlus_Scoring
     extern int P3_WinsPlus;
     extern int P4_WinsPlus;
 
-    extern bool P1_HasWon;
-    extern bool P2_HasWon;
-    extern bool P3_HasWon;
-    extern bool P4_HasWon;
+    extern bool P1_HasWon_Round;
+    extern bool P2_HasWon_Round;
+    extern bool P3_HasWon_Round;
+    extern bool P4_HasWon_Round;
+
+    extern bool P1_HasWon_Match;
+    extern bool P2_HasWon_Match;
+    extern bool P3_HasWon_Match;
+    extern bool P4_HasWon_Match;
 
     extern int LastCurrentRound;
 
@@ -118,7 +123,7 @@ namespace CompPlus_Scoring
 
     extern void ClearMatchResults();
 
-    extern void ClearInternalWins();
+    extern void ClearTemporaryResults();
 
     extern void OnFrame();
 }

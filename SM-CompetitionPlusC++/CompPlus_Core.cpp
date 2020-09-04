@@ -38,6 +38,7 @@ namespace CompPlus_Core
 
     bool HasStartupInit = false;
 	bool StartupStageEnabled = false;
+    bool NonDeveloperBuild = true;
 
 	bool StageRefresh = true;
     int LastSceneID = 0;
@@ -105,9 +106,9 @@ namespace CompPlus_Core
 	void ManiaMenuLinking() 
 	{
 		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
-        else if (CurrentSceneInt == 140) CompPlus_Common::LoadHUBWorld();
-		else if (CurrentSceneInt == 141) CompPlus_Common::LoadLastLevelSelect();
-		else if (CurrentSceneInt == 142) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
+        else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
+		else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
+        else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
 	}
 
 	void InfinityZoneLoop() 
@@ -221,7 +222,7 @@ namespace CompPlus_Core
 		CurrentStage = { };
 		StageRefresh = true;
 		IdleTime = 10;
-		if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(142);
+        if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(123);
         OnSceneReset();
     }
 
