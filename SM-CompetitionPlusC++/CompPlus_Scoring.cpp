@@ -21,6 +21,8 @@ namespace CompPlus_Scoring
      int WinWait = 0;
      int WinWaitMax = 100;
 
+     bool RoundStatsSaved = false;
+
      int P1_Placement = 0;
      int P2_Placement = 0;
      int P3_Placement = 0;
@@ -51,6 +53,10 @@ namespace CompPlus_Scoring
      bool PodeiumSpawnActive = false;
      bool ThisMatchIsTied = false;
      bool CanGoToFinalResults = false;
+
+     DataPointer(int, HaveAllCrossedTheFinishLine, 0x46C160);
+     DataPointer(int, CountdownTimer, 0x6A74D4);
+     DataPointer(int, InitalCountdown, 0x6A7074);
 
     std::vector<ScorableTime> TimeRanking;
     std::vector<ScorableInt> TotalRingRanking;
@@ -192,7 +198,6 @@ namespace CompPlus_Scoring
     }
 
     #pragma endregion
-
 
     #pragma region Comparors/Helpers
 
@@ -588,8 +593,6 @@ namespace CompPlus_Scoring
 
     void SetFinalRanking_Final(bool isTied, bool HasWinner, int CurrentRound, int WinnerID, int WinnerPlayerID)
     {
-
-
         if (isTied || !HasWinner) SonicMania::Options->CompetitionSession.WinnerFlag[CurrentRound] = 0;
         else 
         {
@@ -715,65 +718,66 @@ namespace CompPlus_Scoring
         SetFinalRanking_Final(isTied, HasWinner, CurrentRound, WinnerID, WinnerPlayerID);
     }
 
-    void SetWinnerBasedOnSpecific(CompPlus_Settings::VictoryMode Setting)
-    {
-        switch (Setting)
-        {
-        case CompPlus_Settings::VictoryMode_Time:
-            SetFinalRanking(TimeRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_Score:
-            SetFinalRanking(ScoreRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_Rings:
-            SetFinalRanking(RingRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_TotalRings:
-            SetFinalRanking(TotalRingRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_Items:
-            SetFinalRanking(ItemRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_Default:
-            SetFinalRanking(AverageRanking);
-            break;
-        case CompPlus_Settings::VictoryMode_AntiRings:
-            SetFinalRanking(AntiRingRanking);
-            break;
-        }
-    }
-
     void SetRoundEndWinner()
     {
-        if (AllowUpdateVictory)
-        {
-            if (WinWait <= WinWaitMax)
+        if (HaveAllCrossedTheFinishLine && AllowUpdateVictory)
+        {  
+            TimeRanking = GetTimeRanking();
+            RingRanking = GetRingsRanking();
+            TotalRingRanking = GetTotalRingsRanking();
+            ScoreRanking = GetScoreRanking();
+            ItemRanking = GetItemRanking();
+            AverageRanking = GetAverageRanking();
+            AntiRingRanking = GetAntiRingsRanking();
+
+            switch (CompPlus_Settings::VictoryStyle)
             {
-                TimeRanking = GetTimeRanking();
-                RingRanking = GetRingsRanking();
-                TotalRingRanking = GetTotalRingsRanking();
-                ScoreRanking = GetScoreRanking();
-                ItemRanking = GetItemRanking();
-                AverageRanking = GetAverageRanking();
-                AntiRingRanking = GetAntiRingsRanking();
-
-                SetWinnerBasedOnSpecific(CompPlus_Settings::VictoryStyle);
-
-                WinWait = 0;
-                AllowUpdateVictory = false;
+                case CompPlus_Settings::VictoryMode_Time:
+                    SetFinalRanking(TimeRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_Score:
+                    SetFinalRanking(ScoreRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_Rings:
+                    SetFinalRanking(RingRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_TotalRings:
+                    SetFinalRanking(TotalRingRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_Items:
+                    SetFinalRanking(ItemRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_Default:
+                    SetFinalRanking(AverageRanking);
+                    break;
+                case CompPlus_Settings::VictoryMode_AntiRings:
+                    SetFinalRanking(AntiRingRanking);
+                    break;
             }
-            else
-            {
-                WinWait += 1;
-            }
 
+            AllowUpdateVictory = false;
         }
 
+        if (InitalCountdown != 0) 
+        {
+            AllowUpdateVictory = true;
+        }
     }
 
     #pragma endregion
 
     #pragma region Match/Round Reset Methods
+
+    void ApplyPoyoPoyoRuleset()
+    {
+        if (SonicMania::Options->CompetitionSession.inMatch)
+        {
+            if (SonicMania::Options->CompetitionSession.CurrentRound == SonicMania::Options->CompetitionSession.TotalRounds)
+            {
+                CanGoToFinalResults = false;
+            }
+        }
+    }
 
     void SyncLastResults()
     {
@@ -823,6 +827,7 @@ namespace CompPlus_Scoring
         SonicMania::Options->CompetitionSession.Wins_P4 = 0;
         LastZone = "???";
         PodeiumSpawnActive = false;
+        AllowUpdateVictory = true;
     }
 
     void ClearTemporaryResults()
@@ -896,8 +901,6 @@ namespace CompPlus_Scoring
         }
     }
 
-    bool RoundStatsSaved = false;
-
     void SaveRoundsStats() 
     {
         if (!RoundStatsSaved) 
@@ -959,35 +962,17 @@ namespace CompPlus_Scoring
         }
     }
 
-    void UpdatePlayerResults()
-    {
-        int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-        int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
-        int P1_FinishFlag = TotalPlayers >= 1 ? (FinishFlags >> 0x00 & 0xFF) : 0;
-        int P2_FinishFlag = TotalPlayers >= 2 ? (FinishFlags >> 0x08 & 0xFF) : 0;
-        int P3_FinishFlag = TotalPlayers >= 3 ? (FinishFlags >> 0x10 & 0xFF) : 0;
-        int P4_FinishFlag = TotalPlayers >= 4 ? (FinishFlags >> 0x18 & 0xFF) : 0;
-
-        bool P1_Finished = TotalPlayers >= 1 ? P1_FinishFlag != 0 : true;
-        bool P2_Finished = TotalPlayers >= 2 ? P2_FinishFlag != 0 : true;
-        bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
-        bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
-
-        bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
-        bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
-        bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
-        bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
-
-        if (P1_Done && P2_Done && P3_Done && P4_Done) SetRoundEndWinner();
-        else AllowUpdateVictory = true;
-    }
-
     #pragma endregion
+
+    void OnSceneReset()
+    {
+
+    }
 
     void OnFrame()
     {
-        UpdatePlayerResults();
         UpdateRounds();
         UpdateMatchLength();
+        SetRoundEndWinner();
     }
 }

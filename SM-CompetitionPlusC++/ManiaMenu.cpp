@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "CompetitionManiaMenu.h"
+#include "ManiaMenu.h"
 #include "ManiaModLoader.h"
 #include "PointScrolling.h"
 #include "ManiaExt.h"
@@ -7,8 +7,9 @@
 #include "SonicMania.h"
 #include "CompPlus_Scoring.h"
 #include "CompPlus_Core.h"
+#include "CompPlus_Common.h"
 
-namespace CompPlus_CompetitionMenu
+namespace CompPlus_ManiaMenu
 {
     using namespace SonicMania;
 
@@ -59,15 +60,6 @@ namespace CompPlus_CompetitionMenu
             isPatched = true;
         }
 
-    }
-
-    void UpdatePreMatchStuff()
-    {
-        if (!inMatch)
-        {
-            CompPlus_Settings::FixUnmatchingVSPlayers();
-            inMatch = true;
-        }
     }
 
     void SetPosition(SonicMania::Entity& object, int x, int y)
@@ -491,6 +483,11 @@ namespace CompPlus_CompetitionMenu
         SetUIBG_FGHighColor(57, 178, 206);
     }
 
+    void UpdatePreMatchStuff()
+    {
+        CompPlus_Common::FixUnmatchingVSPlayers();
+    }
+
     void UpdateOptionsPage() 
     {
         EntityUIVsRoundPicker& roundPicker = *GetEntityFromSceneSlot<EntityUIVsRoundPicker>(232);
@@ -501,23 +498,21 @@ namespace CompPlus_CompetitionMenu
 
         if (CompetitionSettingsPage.SelectedElement == 0) CompetitionSettingsPage.SelectedElement = 2;
         else if (CompetitionSettingsPage.SelectedElement == 1) CompetitionSettingsPage.SelectedElement = 3;
+
+        UpdatePreMatchStuff();
     }
 
     void UpdateMiscStuff() 
     {
         Entity& diaorma = *GetEntityFromSceneSlot<Entity>(285);
         diaorma.Visible = false;
-        
-
-        if (SonicMania::Options->CompetitionSession.inMatch == 1) UpdatePreMatchStuff();
-        else inMatch = false;
     }
 
     void UpdateFinalResultsPage() 
     {
         EntityUIControl& CompetitionFinalResultsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsFinalResultsScreenUIControl);
 
-        if (CompetitionFinalResultsPage.Visible)
+        if (CompetitionFinalResultsPage.InBounds)
         {
             UpdateResultsScoreboard(true);
         }
@@ -539,14 +534,14 @@ namespace CompPlus_CompetitionMenu
 
         EntityUIControl& CompetitionResultsPage = *GetEntityFromSceneSlot<EntityUIControl>(UIVsResultsScreenUIControl);
 
-        if (CompetitionResultsPage.Visible && StoredResults == false)
+        if (CompetitionResultsPage.InBounds && StoredResults == false)
         {
             CompPlus_Scoring::SyncLastResults();
             SonicMania::Options->CompetitionSession.FinishFlags = 0;
             StoredResults = true;
         }
 
-        if (CompetitionResultsPage.Visible) 
+        if (CompetitionResultsPage.InBounds)
         {
             UpdateResultsScoreboard(false);
         }
@@ -558,7 +553,7 @@ namespace CompPlus_CompetitionMenu
     void UpdatePlayerSelectPage() 
     {
         EntityUIControl& CompetitionPlayerSelect = *GetEntityFromSceneSlot<EntityUIControl>(UIVsPlayerSelectUIControl);
-        if (CompetitionPlayerSelect.Visible)
+        if (CompetitionPlayerSelect.InBounds)
         {
             CompPlus_Scoring::ClearMatchResults();
         }
@@ -582,7 +577,7 @@ namespace CompPlus_CompetitionMenu
 
         EntityUIControl& CompetitionLevelSelect = *GetEntityFromSceneSlot<EntityUIControl>(UIVsLevelSelectUIControl);
 
-        if (CompetitionLevelSelect.Visible) 
+        if (CompetitionLevelSelect.InBounds)
         {
             CompPlus_Scoring::ClearTemporaryResults();
             StoredResults = false;

@@ -1,28 +1,31 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
-#include "PointScrolling.h"
-#include "ManiaExt.h"
-#include "CompPlus_Settings.h"
-
 #include "SonicMania.h"
+#include "ManiaExt.h"
+
+#include "ManiaMenu.h"
+#include "SceneTweaks.h"
+#include "GustPlanet.h"
+#include "LHPZ.h"
+
+#include "HubWorld.h"
+#include "CreditsScene.h"
+#include "SettingsMenu.h"
+#include "GenericLogos.h"
+
 #include "ManiaLevelSelect.h"
 #include "EncoreLevelSelect.h"
 #include "CustomLevelSelect.h"
 #include "ChaotixLevelSelect.h"
 #include "PhantomLevelSelect.h"
-#include "CompetitionManiaMenu.h"
 #include "LevelSelectCore.h"
-#include "CompPlus_Common.h"
-#include "HubWorld.h"
-#include "SettingsMenu.h"
-#include "GenericLogos.h"
-#include "GeneralTweaks.h"
-#include "CreditsScene.h"
-#include "CompPlus_Scoring.h"
-#include "GustPlanet.h"
-#include "LHPZ.h"
 
+#include "CompPlus_Scoring.h"
 #include "CompPlus_Announcers.h"
+#include "CompPlus_Controllers.h"
+#include "CompPlus_Internal.h"
+#include "CompPlus_Common.h"
+#include "CompPlus_Settings.h"
 
 #include "IZAPI.h"
 
@@ -36,15 +39,18 @@ namespace CompPlus_Core
 
     #pragma region Variables
 
-    bool HasStartupInit = false;
-	bool StartupStageEnabled = false;
-    bool NonDeveloperBuild = true;
 
-	bool StageRefresh = true;
+    //Internal Paramater Variables
+    bool StartupStageEnabled = false;
+    bool NonDeveloperBuild = false;
+
+    //Status Variables
+    bool HasStartupInit = false;
+    bool StageRefresh = true;
     int LastSceneID = 0;
-	int IdleTime = 0;
-	HMODULE InfinityZoneDLL = nullptr;
-	IZAPI::StageInfo CurrentStage = {};
+    int IZ_SceneChangeIdleTime = 0;
+    HMODULE InfinityZoneDLL = nullptr;
+    IZAPI::StageInfo CurrentStage = {};
 
     #pragma endregion
 
@@ -54,7 +60,7 @@ namespace CompPlus_Core
     {
         CompPlus_LevelSelectCore::Init();
         CompPlus_HubWorld::Init();
-        CompPlus_CompetitionMenu::Init();
+        CompPlus_ManiaMenu::Init();
         CompPlus_Credits::Init();
     }
 
@@ -69,52 +75,14 @@ namespace CompPlus_Core
         CompPlus_Settings::LoadSettings();
     }
 
-    void FrameInit()
-    {
-        if (!HasStartupInit)
-        {
-            if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
-            HasStartupInit = true;
-        }
-    }
-
     #pragma endregion
 
-    #pragma region General Methods
+    #pragma region Zone Loops
 
-    void OnLegacySceneChange()
+    void InfinityZoneLoop()
     {
-        if (LastSceneID == CurrentSceneInt)
+        if (IZ_SceneChangeIdleTime == 0)
         {
-            LastSceneID = CurrentSceneInt;
-            StageRefresh = true;
-        }
-    }
-
-	void LogoLinking() 
-	{
-		if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
-
-		if (CurrentSceneInt == 1) 
-		{
-			SetUIBG_BGColor(199, 235, 255);
-			SetUIBG_FGLowColor(247, 146, 24);
-			SetUIBG_FGHighColor(57, 178, 206);
-		}
-	}
-
-	void ManiaMenuLinking() 
-	{
-		if (CurrentSceneInt == 0 || CurrentSceneInt == 1) LogoLinking();
-        else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
-		else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
-        else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
-	}
-
-	void InfinityZoneLoop() 
-	{
-		if (IdleTime == 0)
-		{
             if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
             else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
             else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
@@ -131,45 +99,51 @@ namespace CompPlus_Core
             else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1")) CompPlus_Scene_LHPZ::OnFrame();
             else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1E")) CompPlus_Scene_LHPZ::OnFrame();
             CompPlus_Credits::OnFrame(!strcmp(CurrentStage.StageKey, "CPCREDITS"));
-
-            CompPlus_GeneralTweaks::UpdateScenes(CurrentStage.StageKey);
-		}
-		else
-		{
-			IdleTime = IdleTime - 1;
-		}
-	}
-
-    void PoyoPoyoRuleset() 
-    {
-        if (SonicMania::Options->CompetitionSession.inMatch) 
-        {
-            if (SonicMania::Options->CompetitionSession.CurrentRound == SonicMania::Options->CompetitionSession.TotalRounds)
-            {
-                CompPlus_Scoring::CanGoToFinalResults = false;
-            }
+            CompPlus_SceneTweaks::UpdateScenes(CurrentStage.StageKey);
         }
-
+        else
+        {
+            IZ_SceneChangeIdleTime = IZ_SceneChangeIdleTime - 1;
+        }
     }
 
-	void GenericZoneLoop() 
+    void GenericZoneLoop()
+    {
+        if (CurrentSceneInt == 0) CompPlus_SceneTweaks::UpdateScenes("1");
+        else if (CurrentSceneInt == 1) CompPlus_SceneTweaks::UpdateScenes("0");
+        else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
+        else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
+        else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
+        else if (CurrentSceneInt == 2) CompPlus_ManiaMenu::UpdateManiaMenu();
+        else if (CurrentSceneInt == SceneExt::Scene_PuyoPuyo) CompPlus_Scoring::ApplyPoyoPoyoRuleset();
+    }
+
+    #pragma endregion
+
+    #pragma region General Methods
+
+    void OnInit()
+    {
+        if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+        HasStartupInit = true;
+    }
+
+	void OnStageRefresh() 
 	{
-        if (CurrentSceneInt == 2) CompPlus_CompetitionMenu::UpdateManiaMenu();
-        else if (CurrentSceneInt == SceneExt::Scene_PuyoPuyo) PoyoPoyoRuleset();
+        CompPlus_ManiaLevelSelect::CheckForPointRefresh();
+        CompPlus_EncoreLevelSelect::CheckForPointRefresh();
+        CompPlus_CustomLevelSelect::CheckForPointRefresh();
+        CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
+        CompPlus_Settings::RefreshSettings();
+        CompPlus_Scoring::OnSceneReset();
+        StageRefresh = false;
 	}
 
-	void CheckForStageRefresh() 
-	{
-		if (StageRefresh)
-		{
-			CompPlus_ManiaLevelSelect::CheckForPointRefresh();
-			CompPlus_EncoreLevelSelect::CheckForPointRefresh();
-			CompPlus_CustomLevelSelect::CheckForPointRefresh();
-			CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
-            CompPlus_Settings::RefreshSettings();
-			StageRefresh = false;
-		}
-	}
+    void OnLegacySceneChange()
+    {
+        LastSceneID = CurrentSceneInt;
+        StageRefresh = true;
+    }
 
     void OnSceneReset()
     {
@@ -181,37 +155,37 @@ namespace CompPlus_Core
 
 	void OnFrame()
 	{
-        FrameInit();
-        OnLegacySceneChange();
+        if (!HasStartupInit) OnInit();
+        if (StageRefresh) OnStageRefresh();
+        if (LastSceneID != CurrentSceneInt) OnLegacySceneChange();
         CompPlus_Settings::OnFrame();
-		ManiaMenuLinking();
-		CheckForStageRefresh();
         CompPlus_Scoring::OnFrame();
-
+        CompPlus_Controllers::OnFrame();
+        CompPlus_Internal::OnFrame();
 		if (CurrentStage.StageKey) InfinityZoneLoop();
 		else GenericZoneLoop();
 	}
 
-	void DrawHook() 
+	void OnDraw() 
 	{
 		CompPlus_Settings_Base::DoMenuOnScreenDraw();
 	}
 
+    void OnActClear() 
+    {
+
+    }
+
     #pragma endregion
 
     #pragma region InfinityZone Calls
-
-    void IZChangeStage(const char* key)
-    {
-        IZAPI::ChangeStage(key);
-    }
 
 	void __cdecl OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase)
 	{
 		printf("StageLoad: %s\n", info.StageName);
 		CurrentStage = info;
 		StageRefresh = true;
-		IdleTime = 10;
+		IZ_SceneChangeIdleTime = 10;
         CompPlus_Announcers::ChangeAnnouncer();
         OnSceneReset();
     }
@@ -221,7 +195,7 @@ namespace CompPlus_Core
 		printf("StageUnload: %s\n", info.StageName);
 		CurrentStage = { };
 		StageRefresh = true;
-		IdleTime = 10;
+		IZ_SceneChangeIdleTime = 10;
         if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(123);
         OnSceneReset();
     }

@@ -1,4 +1,4 @@
-#include "GeneralTweaks.h"
+#include "SceneTweaks.h"
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "ManiaExt.h"
@@ -9,11 +9,10 @@
 #include <fstream>
 
 #include "CompPlus_Scoring.h"
+#include "CompPlus_Common.h"
 
-namespace CompPlus_GeneralTweaks
+namespace CompPlus_SceneTweaks
 {
-
-    bool GustPlanetGravityEnabled = false;
 
     void UpdateSZ() 
     {
@@ -34,9 +33,23 @@ namespace CompPlus_GeneralTweaks
         SonicMania::Player4.Right = true;
     }
 
+    void LogoLinking()
+    {
+        if (SonicMania::CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
+
+        if (SonicMania::CurrentSceneInt == 1)
+        {
+            SetUIBG_BGColor(199, 235, 255);
+            SetUIBG_FGLowColor(247, 146, 24);
+            SetUIBG_FGHighColor(57, 178, 206);
+        }
+    }
+
     void UpdateScenes(const char* CurrentScene) 
     {
-        if (!strcmp(CurrentScene, "CPSZ")) UpdateSZ();
+        if (!strcmp(CurrentScene, "0")) LogoLinking();
+        else if (!strcmp(CurrentScene, "1")) LogoLinking();
+        else if (!strcmp(CurrentScene, "CPSZ")) UpdateSZ();
         else if (!strcmp(CurrentScene, "CPSZE")) UpdateSZ();    
         else if (!strcmp(CurrentScene, "CPTSZ")) UpdateTSZ();
     }

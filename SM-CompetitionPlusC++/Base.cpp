@@ -60,7 +60,7 @@ extern "C"
 
 	void DoMenuOnScreenDraw()
 	{
-		CompPlus_Core::DrawHook();
+		CompPlus_Core::OnDraw();
 	}
 
 	static int OnScreenDrawReturn = baseAddress + 0x7FFE;
@@ -87,8 +87,15 @@ extern "C"
 
     const char* FullPath;
 
+    SonicMania::GameStates ActComplete_hook()
+    {
+        CompPlus_Core::OnActClear();
+        return SonicMania::GameState;
+    }
+
 	__declspec(dllexport) void PostInit(const char* path)
 	{
+        WriteJump((void*)(baseAddress + 0x001EF0B2), ActComplete_hook);
 		const std::string path_cpp = path;
 		IZAPI::IZInit();
 		CompPlus_Core::InitSettings((path_cpp + "\\Settings.xml").c_str());

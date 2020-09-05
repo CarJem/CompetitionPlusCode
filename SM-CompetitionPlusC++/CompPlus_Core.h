@@ -37,6 +37,7 @@ namespace CompPlus_Core
         Scene_HCZ1,
         Scene_HCZ2,
         Scene_MSZ1,
+        Scene_MSZ1_ST,
         Scene_MSZ2,
         Scene_OOZ1,
         Scene_OOZ2,
@@ -131,19 +132,15 @@ namespace CompPlus_Core
     };
 
 	extern bool StageRefresh;
-	extern int IdleTime;
+	extern int IZ_SceneChangeIdleTime;
     extern bool NonDeveloperBuild;
 
-	//extern IZAPI::StageInfo GetCurrentStage();
-	//typedef void(__cdecl* IZChangeStage_Type)(const char*);
-	//
-	extern void IZChangeStage(const char* key);
-
 	extern void OnFrame();
-	extern void DrawHook();
+	extern void OnDraw();
 
     extern void OnSceneReset();
-
+    
+    extern void OnActClear();
 	extern void OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 	extern void OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <sstream>
 #include "Helpers.h"
+#include "CompPlus_Common.h"
 
 namespace CompPlus_Settings 
 {
@@ -20,56 +21,25 @@ namespace CompPlus_Settings
     int NumberOfAnnouncers = 6;
     std::string Settings_FilePath;
     bool SettingsLoaded = false;
-    int DevMode_ControllerSwapPosition = 0;
-
-    bool HasCopiedOriginalTimeCode = false;
-    bool IsLimitedWriten = false;
-    bool IsUnlimitedWriten = false;
-    char ETA_OriginalCode[0x02];
-    char TLK_OriginalCode[0x06];
-
-    bool isUnlockWriten = false;
-    bool isLockWriten = false;
-    bool isVSControllerInputUnlocked = false;
-    bool HasCopiedOriginalControlUnlockCode = false;
-    char ControlLock_OriginalCode[0x06];
-
-
-    bool DevMenuEnabledMemory;
-
-    Controller InitalInputP1;
-    Controller InitalInputP2;
-    Controller InitalInputP3;
-    Controller InitalInputP4;
-
-    bool P1_InputSaved = false;
-    bool P2_InputSaved = false;
-    bool P3_InputSaved = false;
-    bool P4_InputSaved = false;
-
-    bool InitalInputCollected = false;
-
 
     #pragma endregion
 
+    #pragma region Status Variables
+
+    bool isVSControllerInputUnlocked = false;
+    int CurrentLevelSelect = 0;
+
+    #pragma endregion
 
     #pragma region Setting Variables
 
     //Developer Settings
     bool EnableDevMode = true;
     bool EnableDebugMode = true;
-    bool DevMode_ControllerSwap = false;
     bool DarkDevMenu = true;
 
-    bool DevMode_ControlPlayer1 = true;
-    bool DevMode_ControlPlayer2 = false;
-    bool DevMode_ControlPlayer3 = false;
-    bool DevMode_ControlPlayer4 = false;
-
-    bool LHPZ_SecretUnlocked = false;
-
     //Stock Competition Settings
-    int NumberOfRounds = 3; // Ignored when EndlessRounds = true;
+    int NumberOfRounds = 3; 
     ItemsConfig MonitorTypes = ItemsConfig_Default;
 
     //Competition Plus Settings
@@ -79,28 +49,30 @@ namespace CompPlus_Settings
     bool EndlessRounds = false;
     bool DropdashAbility = true;
     bool InstaSheildAbility = false;
-    VictoryMode VictoryStyle = VictoryMode_Time;
+    VictoryMode VictoryStyle = VictoryMode_Default;
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
 
+    //Peelout Ability Settings
     ThreeStateBool Player1PeeloutAbility = ThreeStateBool::Indeterminate;
     ThreeStateBool Player2PeeloutAbility = ThreeStateBool::Indeterminate;
     ThreeStateBool Player3PeeloutAbility = ThreeStateBool::Indeterminate;
     ThreeStateBool Player4PeeloutAbility = ThreeStateBool::Indeterminate;
 
+    //Chosen Player Settings
     ChosenPlayer Player1ChosenPlayer = ChosenPlayer_Sonic;
     ChosenPlayer Player2ChosenPlayer = ChosenPlayer_Tails;
     ChosenPlayer Player3ChosenPlayer = ChosenPlayer_Knuckles;
     ChosenPlayer Player4ChosenPlayer = ChosenPlayer_Mighty;
 
+    //Ability Set Settings
     PlayerAbility Player1AbilitySet = AbilitySet_Compatibility;
     PlayerAbility Player2AbilitySet = AbilitySet_Compatibility;
     PlayerAbility Player3AbilitySet = AbilitySet_Compatibility;
     PlayerAbility Player4AbilitySet = AbilitySet_Compatibility;
 
-    //Status States
-    int CurrentLevelSelect = 0;
-
+    //Secret Settings
+    bool LHPZ_SecretUnlocked = false;
     #pragma endregion
 
     #pragma region Get Methods
@@ -117,58 +89,7 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    #pragma region Fix Methods
-
-    void DisableVSPointAddingAddress() 
-    {
-        void* vs_incrementing_address = (void*)(baseAddress + 0xE35C);
-        char nops[2];
-        memset(nops, 0x90, sizeof nops);
-        WriteData(vs_incrementing_address, nops, 0x02);
-    }
-
-    void FixUnmatchingVSPlayers()
-    {
-        SonicMania::Character P1_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[0]);
-        SonicMania::Character P2_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[1]);
-        SonicMania::Character P3_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[2]);
-        SonicMania::Character P4_Char = (SonicMania::Character)(SonicMania::Options->CompetitionSession.CharacterFlags[3]);
-
-        CompPlus_Settings::UpdatePlayer(1, P1_Char, false);
-        CompPlus_Settings::UpdatePlayer(2, P2_Char, false);
-        CompPlus_Settings::UpdatePlayer(3, P3_Char, false);
-        CompPlus_Settings::UpdatePlayer(4, P4_Char, false);
-    }
-
-    void FixRayAndMighty2P()
-    {
-        int PatchP2Ray[] = { 0xE9, 0xC4, 0x01, 0x00, 0x00, 0x90 };
-        int i;
-        int OffsetNormal = 0xC31E5;
-        for (i = 0; i < 6; i++)
-        {
-            WriteData<1>((void*)(baseAddress + OffsetNormal), PatchP2Ray[i]); //put data back.
-            OffsetNormal++;
-
-        }
-    }
-
-    #pragma endregion
-
-    #pragma region Update Player Methods
-
-    void UpdatePlayerSprites(SonicMania::EntityPlayer& Player)
-    {
-
-    }
-
-    void UpdateMultiPlayerSprites()
-    {
-        UpdatePlayerSprites(Player1);
-        UpdatePlayerSprites(Player2);
-        UpdatePlayerSprites(Player3);
-        UpdatePlayerSprites(Player4);
-    }
+    #pragma region Change Settings Methods
 
     void UpdateSonicAbilities()
     {
@@ -188,69 +109,6 @@ namespace CompPlus_Settings
         BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
         WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)MovesetID);
     }
-
-    void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force)
-    {
-        CompPlus_Settings::ChosenPlayer Player = CompPlus_Settings::ChosenPlayer_Default;
-
-        if (Character == Characters_Sonic) Player = CompPlus_Settings::ChosenPlayer_Sonic;
-        else if (Character == Characters_Tails) Player = CompPlus_Settings::ChosenPlayer_Tails;
-        else if (Character == Characters_Knuckles) Player = CompPlus_Settings::ChosenPlayer_Knuckles;
-        else if (Character == Character_Mighty) Player = CompPlus_Settings::ChosenPlayer_Mighty;
-        else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
-
-        int CharacterID = (int)Character;
-
-        if (PlayerID == 1)
-        {
-            if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
-            CompPlus_Settings::Player1ChosenPlayer = Player;
-        }
-        else if (PlayerID == 2)
-        {
-            if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
-            CompPlus_Settings::Player2ChosenPlayer = Player;
-        }
-        else if (PlayerID == 3)
-        {
-            if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
-            CompPlus_Settings::Player3ChosenPlayer = Player;
-        }
-        else if (PlayerID == 4)
-        {
-            if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
-            CompPlus_Settings::Player4ChosenPlayer = Player;
-        }
-        FixRayAndMighty2P();
-    }
-
-    void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force)
-    {
-        SonicMania::Character Player = SonicMania::Character_None;
-
-        if (Character == ChosenPlayer_Sonic) Player = SonicMania::Character_Sonic;
-        else if (Character == ChosenPlayer_Tails) Player = SonicMania::Character_Tails;
-        else if (Character == ChosenPlayer_Knuckles) Player = SonicMania::Character_Knux;
-        else if (Character == ChosenPlayer_Mighty) Player = SonicMania::Character_Mighty;
-        else if (Character == ChosenPlayer_Ray) Player = SonicMania::Character_Ray;
-        else if (Character == ChosenPlayer_Default)
-        {
-            if (PlayerID == 1) Player = Player1.Character;
-            if (PlayerID == 2) Player = Player2.Character;
-            if (PlayerID == 3) Player = Player3.Character;
-            if (PlayerID == 4) Player = Player4.Character;
-        }
-
-        UpdatePlayer(PlayerID, Player, Force);
-    }
-
-    #pragma endregion
-
-    #pragma region Change Settings Methods
 
     void SetMonitorMode(CompPlus_Settings::ItemsConfig Value) 
     {
@@ -396,47 +254,11 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-
-
     #pragma region Update Methods
-
-    void UpdateVSControlLockState()
-    {
-        void* vs_player_freeze_address = (void*)(baseAddress + 0xC3E2B);
-        // NOP bytes
-        char nops[6];
-        memset(nops, 0x90, sizeof nops);
-
-
-        if (!HasCopiedOriginalControlUnlockCode)
-        {
-            memcpy(ControlLock_OriginalCode, vs_player_freeze_address, 0x06);
-            HasCopiedOriginalControlUnlockCode = true;
-        }
-
-        if (!isVSControllerInputUnlocked)
-        {
-            if (!isLockWriten)
-            {
-                WriteData(vs_player_freeze_address, ControlLock_OriginalCode, 0x06);
-                isUnlockWriten = false;
-                isLockWriten = true;
-            }
-        }
-        else
-        {
-            if (!isUnlockWriten)
-            {
-                WriteData(vs_player_freeze_address, nops, 0x06);
-                isLockWriten = false;
-                isUnlockWriten = true;
-            }
-        }
-    }
 
     void UpdateStockSettings() 
     {
-        DisableVSPointAddingAddress();
+        CompPlus_Common::DisableVSPointAddingAddress();
         if (SonicMania::Options->CompetitionSession.MonitorMode != MonitorTypes) SonicMania::Options->CompetitionSession.MonitorMode = MonitorTypes;
         if (SonicMania::Options->ItemMode != MonitorTypes) SonicMania::Options->ItemMode = MonitorTypes;
     }
@@ -464,222 +286,69 @@ namespace CompPlus_Settings
         }
     }
 
-    void UpdateTimer()
-    {
-        if (SonicMania::Timer.Enabled == false) return;
-        void* extended_time_address = (void*)(baseAddress + 0x535BD);
-        void* time_limit_kill_jne_address = (void*)(baseAddress + 0xADD03);
-        void* time_limit_skip_jne_adderss = (void*)(baseAddress + 0x00ADDE7);
-        void* time_limit_kill_jmp_nop_address = (void*)(baseAddress + 0xADD03 + 0x5);
-        // NOP bytes
-        char nops1[4];
-        char nops2[8];
-        memset(nops1, 0x90, sizeof nops1);
-        memset(nops2, 0x90, sizeof nops2);
-
-        if (!HasCopiedOriginalTimeCode)
-        {
-            memcpy(ETA_OriginalCode, extended_time_address, 0x02);
-            memcpy(TLK_OriginalCode, time_limit_kill_jne_address, 0x06);
-            HasCopiedOriginalTimeCode = true;
-        }
-
-        if (!TimeLimit)
-        {
-            if (!IsUnlimitedWriten)
-            {
-                WriteData(extended_time_address, nops2, 0x02);
-                ReplaceJNEwithJump(time_limit_kill_jne_address, time_limit_skip_jne_adderss);
-                WriteData(time_limit_kill_jmp_nop_address, nops1, 0x01);
-                IsUnlimitedWriten = true;
-                IsLimitedWriten = false;
-            }
-        }
-        else
-        {
-            if (!IsLimitedWriten)
-            {
-                WriteData(extended_time_address, ETA_OriginalCode, 0x02);
-                WriteData(time_limit_kill_jne_address, TLK_OriginalCode, 0x06);
-                IsLimitedWriten = true;
-                IsUnlimitedWriten = false;
-            }
-        }
-    }
-
     #pragma endregion
 
-    #pragma region DevMode Methods
+    #pragma region Update Player Methods
 
-    void DevMode_WarpAllPlayersTo(int PlayerID)
+
+
+    void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force)
     {
-        int x, y;
-        if (PlayerID == 4)
+        CompPlus_Settings::ChosenPlayer Player = CompPlus_Settings::ChosenPlayer_Default;
+
+        if (Character == Characters_Sonic) Player = CompPlus_Settings::ChosenPlayer_Sonic;
+        else if (Character == Characters_Tails) Player = CompPlus_Settings::ChosenPlayer_Tails;
+        else if (Character == Characters_Knuckles) Player = CompPlus_Settings::ChosenPlayer_Knuckles;
+        else if (Character == Character_Mighty) Player = CompPlus_Settings::ChosenPlayer_Mighty;
+        else if (Character == Characters_Ray) Player = CompPlus_Settings::ChosenPlayer_Ray;
+
+        int CharacterID = (int)Character;
+
+        if (PlayerID == 1)
         {
-            x = Player4.Position.X;
-            y = Player4.Position.Y;
-        }
-        else if (PlayerID == 3)
-        {
-            x = Player3.Position.X;
-            y = Player3.Position.Y;
+            if (Force) SonicMania::FastChangeCharacter(&Player1, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
+            CompPlus_Settings::Player1ChosenPlayer = Player;
         }
         else if (PlayerID == 2)
         {
-            x = Player2.Position.X;
-            y = Player2.Position.Y;
+            if (Force) SonicMania::FastChangeCharacter(&Player2, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
+            CompPlus_Settings::Player2ChosenPlayer = Player;
         }
-        else
+        else if (PlayerID == 3)
         {
-            x = Player1.Position.X;
-            y = Player1.Position.Y;
+            if (Force) SonicMania::FastChangeCharacter(&Player3, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
+            CompPlus_Settings::Player3ChosenPlayer = Player;
         }
-
-        Player1.Position.X = x;
-        Player1.Position.Y = y;
-
-        Player2.Position.X = x;
-        Player2.Position.Y = y;
-
-        Player3.Position.X = x;
-        Player3.Position.Y = y;
-
-        Player4.Position.X = x;
-        Player4.Position.Y = y;
+        else if (PlayerID == 4)
+        {
+            if (Force) SonicMania::FastChangeCharacter(&Player4, Character);
+            SonicMania::Options->CompetitionSession.CharacterFlags[PlayerID - 1] = Character;
+            CompPlus_Settings::Player4ChosenPlayer = Player;
+        }
+        CompPlus_Common::FixRayAndMighty2P();
     }
 
-    void DevMode_BindPlayer1()
+    void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force)
     {
-        if (DevMode_ControlPlayer1 || !EnableDevMode)
+        SonicMania::Character Player = SonicMania::Character_None;
+
+        if (Character == ChosenPlayer_Sonic) Player = SonicMania::Character_Sonic;
+        else if (Character == ChosenPlayer_Tails) Player = SonicMania::Character_Tails;
+        else if (Character == ChosenPlayer_Knuckles) Player = SonicMania::Character_Knux;
+        else if (Character == ChosenPlayer_Mighty) Player = SonicMania::Character_Mighty;
+        else if (Character == ChosenPlayer_Ray) Player = SonicMania::Character_Ray;
+        else if (Character == ChosenPlayer_Default)
         {
-            if (P1_InputSaved)
-            {
-                SonicMania::PlayerControllers[1] = InitalInputP1;
-                P1_InputSaved = false;
-            }
-            InitalInputP1 = SonicMania::PlayerControllers[1];
+            if (PlayerID == 1) Player = Player1.Character;
+            if (PlayerID == 2) Player = Player2.Character;
+            if (PlayerID == 3) Player = Player3.Character;
+            if (PlayerID == 4) Player = Player4.Character;
         }
 
-        if (!DevMode_ControlPlayer1)
-        {
-            if (!P1_InputSaved)
-            {
-                InitalInputP1 = SonicMania::PlayerControllers[1];
-                P1_InputSaved = true;
-
-                SonicMania::PlayerControllers[1].A.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].B.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].C.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].X.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Y.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Z.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Up.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Down.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Left.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Right.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Start.Key = (DWORD)0x0;
-                SonicMania::PlayerControllers[1].Select.Key = (DWORD)0x0;
-            }
-
-        }
-    }
-
-    void DevMode_BindController(int TargetPlayerID)
-    {
-        switch (TargetPlayerID)
-        {
-        case 2:
-            if (!P2_InputSaved)
-            {
-                InitalInputP2 = SonicMania::PlayerControllers[TargetPlayerID];
-                P2_InputSaved = true;
-            }
-            break;
-        case 3:
-            if (!P3_InputSaved)
-            {
-                InitalInputP3 = SonicMania::PlayerControllers[TargetPlayerID];
-                P3_InputSaved = true;
-            }
-            break;
-        case 4:
-            if (!P4_InputSaved)
-            {
-                InitalInputP4 = SonicMania::PlayerControllers[TargetPlayerID];
-                P4_InputSaved = true;
-            }
-            break;
-        }
-
-        SonicMania::PlayerControllers[TargetPlayerID].A.Key = InitalInputP1.A.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].B.Key = InitalInputP1.B.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].C.Key = InitalInputP1.C.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].X.Key = InitalInputP1.X.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Y.Key = InitalInputP1.Y.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Z.Key = InitalInputP1.Z.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Up.Key = InitalInputP1.Up.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Down.Key = InitalInputP1.Down.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Left.Key = InitalInputP1.Left.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Right.Key = InitalInputP1.Right.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Start.Key = InitalInputP1.Start.Key;
-        SonicMania::PlayerControllers[TargetPlayerID].Select.Key = InitalInputP1.Select.Key;
-
-    }
-
-    void DevMode_RestoreController(int TargetPlayerID)
-    {
-        switch (TargetPlayerID)
-        {
-        case 2:
-            if (P2_InputSaved)
-            {
-                SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP2;
-                P2_InputSaved = false;
-            }
-            break;
-        case 3:
-            if (P3_InputSaved)
-            {
-                SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP3;
-                P3_InputSaved = false;
-            }
-            break;
-        case 4:
-            if (P4_InputSaved)
-            {
-                SonicMania::PlayerControllers[TargetPlayerID] = InitalInputP4;
-                P4_InputSaved = false;
-            }
-            break;
-        }
-    }
-
-    void DevModeLoop()
-    {
-        if (EnableDebugMode)
-        {
-            DebugEnabled = 1;
-        }
-
-        DevMode_BindPlayer1();
-
-        if (EnableDevMode)
-        {
-            if (DevMode_ControlPlayer2) DevMode_BindController(2);
-            else DevMode_RestoreController(2);
-
-            if (DevMode_ControlPlayer3) DevMode_BindController(3);
-            else DevMode_RestoreController(3);
-
-            if (DevMode_ControlPlayer4) DevMode_BindController(4);
-            else DevMode_RestoreController(4);
-        }
-        else
-        {
-            DevMode_RestoreController(2);
-            DevMode_RestoreController(3);
-            DevMode_RestoreController(4);
-        }
+        UpdatePlayer(PlayerID, Player, Force);
     }
 
     #pragma endregion
@@ -940,15 +609,8 @@ namespace CompPlus_Settings
     {
         if (SettingsLoaded) 
         {
-            UpdateVSControlLockState();
             UpdateLives();
             UpdateStockSettings();
-            UpdateMultiPlayerSprites();
-            UpdateTimer();
-            DevModeLoop();
         }
     }
-
-
- 
 }

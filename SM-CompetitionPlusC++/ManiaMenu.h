@@ -1,5 +1,5 @@
 #pragma once
-namespace CompPlus_CompetitionMenu
+namespace CompPlus_ManiaMenu
 {
     extern void UpdateManiaMenu();
 

@@ -179,7 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChaotixLevelSelect.h" />
-    <ClInclude Include="CompetitionManiaMenu.h" />
+    <ClInclude Include="ManiaMenu.h" />
+    <ClInclude Include="CompPlus_Controllers.h" />
     <ClInclude Include="CompPlus_Core.h" />
     <ClInclude Include="CompPlus_Internal.h" />
     <ClInclude Include="CompPlus_Settings.h" />
@@ -190,7 +191,7 @@
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="CompPlus_DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
-    <ClInclude Include="GeneralTweaks.h" />
+    <ClInclude Include="SceneTweaks.h" />
     <ClInclude Include="GustPlanet.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="HubWorld.h" />
@@ -212,7 +213,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChaotixLevelSelect.cpp" />
-    <ClCompile Include="CompetitionManiaMenu.cpp" />
+    <ClCompile Include="ManiaMenu.cpp" />
+    <ClCompile Include="CompPlus_Controllers.cpp" />
     <ClCompile Include="CompPlus_Core.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -234,7 +236,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="GeneralTweaks.cpp" />
+    <ClCompile Include="SceneTweaks.cpp" />
     <ClCompile Include="GustPlanet.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="HubWorld.cpp" />

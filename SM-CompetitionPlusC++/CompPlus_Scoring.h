@@ -121,9 +121,15 @@ namespace CompPlus_Scoring
 
     extern void SyncLastResults();
 
+    extern void ApplyPoyoPoyoRuleset();
+
+    extern void SetRoundEndWinner();
+
     extern void ClearMatchResults();
 
     extern void ClearTemporaryResults();
+
+    extern void OnSceneReset();
 
     extern void OnFrame();
 }

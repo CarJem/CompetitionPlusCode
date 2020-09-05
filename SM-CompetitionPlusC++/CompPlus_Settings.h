@@ -77,6 +77,13 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
+    #pragma region Status Variables
+
+    extern bool isVSControllerInputUnlocked;
+    extern int CurrentLevelSelect;
+
+    #pragma endregion
+
     #pragma region Setting Variables
 
     //Developer Settings
@@ -84,24 +91,12 @@ namespace CompPlus_Settings
     extern bool EnableDebugMode;
     extern bool DarkDevMenu;
 
-    extern bool LHPZ_SecretUnlocked;
-
-    extern bool isVSControllerInputUnlocked;
-
-    extern bool DevMode_ControlPlayer1;
-    extern bool DevMode_ControlPlayer2;
-    extern bool DevMode_ControlPlayer3;
-    extern bool DevMode_ControlPlayer4;
-
-    extern bool DevMode_ControllerSwap;
-    extern int DevMode_ControllerSwapPosition;
-
     //Stock Competition Settings
-    extern int NumberOfRounds; // Ignored when EndlessRounds = true;
+    extern int NumberOfRounds;
     extern ItemsConfig MonitorTypes;
 
     //Competition Plus Settings
-    extern int InitalLives; // Ignored when InfiniteLives = true;
+    extern int InitalLives;
     extern bool InfiniteLives;
     extern bool TimeLimit;
     extern bool EndlessRounds;
@@ -111,27 +106,28 @@ namespace CompPlus_Settings
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
 
+    //Peelout Ability Settings
     extern ThreeStateBool Player1PeeloutAbility;
     extern ThreeStateBool Player2PeeloutAbility;
     extern ThreeStateBool Player3PeeloutAbility;
     extern ThreeStateBool Player4PeeloutAbility;
 
+    //Chosen Player Settings
     extern ChosenPlayer Player1ChosenPlayer;
     extern ChosenPlayer Player2ChosenPlayer;
     extern ChosenPlayer Player3ChosenPlayer;
     extern ChosenPlayer Player4ChosenPlayer;
 
+    //Ability Set Settings
     extern PlayerAbility Player1AbilitySet;
     extern PlayerAbility Player2AbilitySet;
     extern PlayerAbility Player3AbilitySet;
     extern PlayerAbility Player4AbilitySet;
 
-    //Status States
-    extern int CurrentLevelSelect;
+    //Secret Settings
+    extern bool LHPZ_SecretUnlocked;
 
     #pragma endregion
-
-    extern void DevMode_WarpAllPlayersTo(int PlayerID);
 
     extern void SetTimeLimit(bool Value);
 
@@ -162,8 +158,6 @@ namespace CompPlus_Settings
     extern void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force);
 
     extern void RefreshSettings();
-
-    extern void OnStageChange();
 
     extern void OnFrame();
 

@@ -11,5 +11,8 @@ namespace CompPlus_Common
 	extern void FixSummary();
     extern void LoadLastLevelSelect();
     extern void SetLastLevelSelect(int Value);
+    extern void DisableVSPointAddingAddress();
+    extern void FixUnmatchingVSPlayers();
+    extern void FixRayAndMighty2P();
 };
 

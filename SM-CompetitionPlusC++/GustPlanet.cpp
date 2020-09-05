@@ -1,6 +1,4 @@
 #include "stdafx.h"
-#include "GeneralTweaks.h"
-#include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "ManiaExt.h"
 

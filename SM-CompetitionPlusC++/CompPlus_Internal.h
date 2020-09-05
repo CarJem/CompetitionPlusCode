@@ -1,4 +1,5 @@
 #pragma once
-namespace CompPlus_Internal {
-
+namespace CompPlus_Internal 
+{
+    extern void OnFrame();
 }
