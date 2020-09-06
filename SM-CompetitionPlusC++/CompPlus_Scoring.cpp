@@ -57,6 +57,7 @@ namespace CompPlus_Scoring
      DataPointer(int, HaveAllCrossedTheFinishLine, 0x46C160);
      DataPointer(int, CountdownTimer, 0x6A74D4);
      DataPointer(int, InitalCountdown, 0x6A7074);
+     DataPointer(int, HasSomeoneCrossed, 0x33C890);
 
     std::vector<ScorableTime> TimeRanking;
     std::vector<ScorableInt> TotalRingRanking;
@@ -66,7 +67,7 @@ namespace CompPlus_Scoring
     std::vector<ScorableInt> AverageRanking;
     std::vector<ScorableInt> AntiRingRanking;
 
-    #pragma region SonicMania Header Get/Set Methods
+    #pragma region Check/Get/Set Methods
 
     void SetCurrentRound(int value) 
     {
@@ -195,6 +196,30 @@ namespace CompPlus_Scoring
     int GetNumberOfPlayers()
     {
         return SonicMania::Options->CompetitionSession.NumberOfPlayers;
+    }
+
+    bool HasTimePeaked(int PlayerID)
+    {
+        if (PlayerID == 1)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
+        }
+        else if (PlayerID == 2)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P2 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P2 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P2 == 99);
+        }
+        else if (PlayerID == 3)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P3 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P3 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P3 == 99);
+        }
+        else if (PlayerID == 4)
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P4 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P4 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P4 == 99);
+        }
+        else
+        {
+            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
+        }
     }
 
     #pragma endregion
@@ -720,7 +745,24 @@ namespace CompPlus_Scoring
 
     void SetRoundEndWinner()
     {
-        if (HaveAllCrossedTheFinishLine && AllowUpdateVictory)
+        int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
+        int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
+        int P1_FinishFlag = TotalPlayers >= 1 ? (FinishFlags >> 0x00 & 0xFF) : 0;
+        int P2_FinishFlag = TotalPlayers >= 2 ? (FinishFlags >> 0x08 & 0xFF) : 0;
+        int P3_FinishFlag = TotalPlayers >= 3 ? (FinishFlags >> 0x10 & 0xFF) : 0;
+        int P4_FinishFlag = TotalPlayers >= 4 ? (FinishFlags >> 0x18 & 0xFF) : 0;
+
+        bool P1_Finished = TotalPlayers >= 1 ? P1_FinishFlag != 0 : true;
+        bool P2_Finished = TotalPlayers >= 2 ? P2_FinishFlag != 0 : true;
+        bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
+        bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
+
+        bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
+        bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
+        bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
+        bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
+
+        if ((HaveAllCrossedTheFinishLine || (P1_Done && P2_Done && P3_Done && P4_Done)) && AllowUpdateVictory)
         {  
             TimeRanking = GetTimeRanking();
             RingRanking = GetRingsRanking();
@@ -935,30 +977,6 @@ namespace CompPlus_Scoring
         if (SonicMania::Options->CompetitionSession.inMatch == false)
         {
             ClearMatchResults();
-        }
-    }
-
-    bool HasTimePeaked(int PlayerID) 
-    {
-        if (PlayerID == 1) 
-        {
-            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
-        }
-        else if (PlayerID == 2)
-        {
-            return (SonicMania::Options->CompetitionSession.TimeMinutes_P2 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P2 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P2 == 99);
-        }
-        else if (PlayerID == 3)
-        {
-            return (SonicMania::Options->CompetitionSession.TimeMinutes_P3 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P3 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P3 == 99);
-        }
-        else if (PlayerID == 4)
-        {
-            return (SonicMania::Options->CompetitionSession.TimeMinutes_P4 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P4 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P4 == 99);
-        }
-        else 
-        {
-            return (SonicMania::Options->CompetitionSession.TimeMinutes_P1 == 9 && SonicMania::Options->CompetitionSession.TimeSeconds_P1 == 59 && SonicMania::Options->CompetitionSession.TimeCentiseconds_P1 == 99);
         }
     }
 

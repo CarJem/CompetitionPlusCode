@@ -6,5 +6,7 @@ namespace CompPlus_Announcers
 {
     extern void LoadAnnouncerFX();
 
+    extern void ReloadAnnouncerFX();
+
     extern void ChangeAnnouncer();
 }

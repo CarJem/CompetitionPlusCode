@@ -11,6 +11,7 @@
 #include <sstream>
 #include "Helpers.h"
 #include "CompPlus_Common.h"
+#include "CompPlus_Announcers.h"
 
 namespace CompPlus_Settings 
 {

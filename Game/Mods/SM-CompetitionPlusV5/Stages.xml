@@ -169,7 +169,7 @@
       <Scene id="1" />
     </Scenes>
 	</Stage>
-    <Stage stageName="SMCP Angel Island Zone" stageID="SMCP_StockStages/AIZ" stageKey="CPAIZEX" flags="3">
+    <Stage stageName="SMCP Angel Island Zone" stageID="SMCP_StockStages/AIZ" stageKey="CPAIZEX" flags="5">
 		<Scenes>
 		  <Scene id="EXT" />
 		</Scenes>

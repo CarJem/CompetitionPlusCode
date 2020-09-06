@@ -42,7 +42,7 @@ namespace CompPlus_Core
 
     //Internal Paramater Variables
     bool StartupStageEnabled = false;
-    bool NonDeveloperBuild = false;
+    bool NonDeveloperBuild = true;
 
     //Status Variables
     bool HasStartupInit = false;
@@ -186,7 +186,6 @@ namespace CompPlus_Core
 		CurrentStage = info;
 		StageRefresh = true;
 		IZ_SceneChangeIdleTime = 10;
-        CompPlus_Announcers::ChangeAnnouncer();
         OnSceneReset();
     }
 
