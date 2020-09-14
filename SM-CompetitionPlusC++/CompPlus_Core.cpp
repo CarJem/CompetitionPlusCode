@@ -130,6 +130,7 @@ namespace CompPlus_Core
 
 	void OnStageRefresh() 
 	{
+        CompPlus_Announcers::ReloadAnnouncerFX();
         CompPlus_ManiaLevelSelect::CheckForPointRefresh();
         CompPlus_EncoreLevelSelect::CheckForPointRefresh();
         CompPlus_CustomLevelSelect::CheckForPointRefresh();

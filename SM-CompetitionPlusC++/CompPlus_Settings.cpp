@@ -245,8 +245,8 @@ namespace CompPlus_Settings
     {
         CurrentAnnouncer = Value;    
         SaveSettings();
-        CompPlus_Announcers::ReloadAnnouncerFX();
-        CompPlus_Announcers::PlayAnnouncerChangeFX();
+        CompPlus_Announcers::ReloadRequired = true;
+        CompPlus_Announcers::PlayAnnouncerChangeFX(Value);
     }
 
     void SetTimeLimit(bool State) 

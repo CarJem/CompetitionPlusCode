@@ -9,7 +9,8 @@ namespace CompPlus_Announcers
 
     using namespace SonicMania;
 
-     bool AllowExperiementalMidGameAnnouncerReload = true;
+     bool AllowReload = true;
+     bool ReloadRequired = false;
 
     #pragma region VO Memory Addresses
 
@@ -353,21 +354,21 @@ namespace CompPlus_Announcers
 
     CompPlus_Settings::AnnouncerType LoadedAnnouncer;
 
-    void PlayAnnouncerChangeFX()
+    void PlayAnnouncerChangeFX(CompPlus_Settings::AnnouncerType Selection)
     {
-        if (LoadedAnnouncer == CompPlus_Settings::Announcer_Garrulous64)
+        if (Selection == CompPlus_Settings::Announcer_Garrulous64)
         {
             PlaySoundFXS((char*)Go_Garrulous64);
         }
-        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Angelthegamer)
+        else if (Selection == CompPlus_Settings::Announcer_Angelthegamer)
         {
             PlaySoundFXS((char*)Go_ATG);
         }
-        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Memes)
+        else if (Selection == CompPlus_Settings::Announcer_Memes)
         {
             PlaySoundFXS((char*)Go_Memes);
         }
-        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Classic)
+        else if (Selection == CompPlus_Settings::Announcer_Classic)
         {
             PlaySoundFXS((char*)Go_Classic);
         }
@@ -759,7 +760,6 @@ namespace CompPlus_Announcers
                 LoadSound(Three_Garrulous64, Scope_Global);
                 LoadSound(Two_Garrulous64, Scope_Global);
                 LoadSound(One_Garrulous64, Scope_Global);
-                LoadSound(Go_Garrulous64, Scope_Global);
 
                 LoadSound(Sonic_Garrulous64, Scope_Global);
                 LoadSound(Tails_Garrulous64, Scope_Global);
@@ -793,7 +793,6 @@ namespace CompPlus_Announcers
                 LoadSound(Three_ATG, Scope_Global);
                 LoadSound(Two_ATG, Scope_Global);
                 LoadSound(One_ATG, Scope_Global);
-                LoadSound(Go_ATG, Scope_Global);
 
                 LoadSound(Sonic_ATG, Scope_Global);
                 LoadSound(Tails_ATG, Scope_Global);
@@ -827,7 +826,6 @@ namespace CompPlus_Announcers
                 LoadSound(Three_Memes, Scope_Global);
                 LoadSound(Two_Memes, Scope_Global);
                 LoadSound(One_Memes, Scope_Global);
-                LoadSound(Go_Memes, Scope_Global);
 
                 LoadSound(Sonic_Memes, Scope_Global);
                 LoadSound(Tails_Memes, Scope_Global);
@@ -861,7 +859,6 @@ namespace CompPlus_Announcers
                 LoadSound(Three_Classic, Scope_Global);
                 LoadSound(Two_Classic, Scope_Global);
                 LoadSound(One_Classic, Scope_Global);
-                LoadSound(Go_Classic, Scope_Global);
 
                 LoadSound(Sonic_Classic, Scope_Global);
                 LoadSound(Tails_Classic, Scope_Global);
@@ -896,7 +893,6 @@ namespace CompPlus_Announcers
                 LoadSound(Three_Stock, Scope_Global);
                 LoadSound(Two_Stock, Scope_Global);
                 LoadSound(One_Stock, Scope_Global);
-                LoadSound(Go_Stock, Scope_Global);
 
                 LoadSound(Sonic_Stock, Scope_Global);
                 LoadSound(Tails_Stock, Scope_Global);
@@ -912,6 +908,12 @@ namespace CompPlus_Announcers
                 LoadSound(NewRecordTop_Stock, Scope_Global);
             }
 
+            LoadSound(Go_Garrulous64, Scope_Global);
+            LoadSound(Go_ATG, Scope_Global);
+            LoadSound(Go_Memes, Scope_Global);
+            LoadSound(Go_Classic, Scope_Global);
+            LoadSound(Go_Stock, Scope_Global);
+
             if (ChangeAnnouncer) CompPlus_Announcers::ChangeAnnouncer();
 
             HasAnnouncersLoaded = true;
@@ -926,11 +928,12 @@ namespace CompPlus_Announcers
 
     void ReloadAnnouncerFX()
     {
-        if (AllowExperiementalMidGameAnnouncerReload) 
+        if (AllowReload && ReloadRequired)
         {
             UnloadAnnouncer();
             HasAnnouncersLoaded = false;
             LoadAnnouncerFX(true);
+            ReloadRequired = false;
         }
     }
 }

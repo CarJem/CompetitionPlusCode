@@ -4,7 +4,9 @@
 
 namespace CompPlus_Announcers
 {
-    extern void PlayAnnouncerChangeFX();
+    extern bool ReloadRequired;
+
+    extern void PlayAnnouncerChangeFX(CompPlus_Settings::AnnouncerType Selection);
 
     extern void LoadAnnouncerFX();
 
