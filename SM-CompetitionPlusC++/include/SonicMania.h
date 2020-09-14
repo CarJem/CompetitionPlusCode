@@ -56,6 +56,9 @@ namespace SonicMania
     struct Obj_CollapsingPlatform;
     struct Obj_ForceSpin;
     struct Obj_PlaneSwitch;
+    struct Obj_GHZSetup;
+    struct Obj_LRZ1Setup;
+    struct Obj_ZONE;
     struct Obj_Clapperboard;
     struct Obj_Lovetester;
     struct Obj_PauseMenu;
@@ -559,10 +562,10 @@ namespace SonicMania
 
 #pragma endregion
 
-    // TODO: needs updating
+// TODO: needs updating
 #pragma region Constents
 
-    // Player Status
+// Player Status
 #define CONTROL_NONE                  (SonicMania::PlayerStatus)(0x00000000)
 #define CONTROL_NORMAL                (SonicMania::PlayerStatus)(baseAddress + 0x000C3E00)
 #define CONTROL_P2                    (SonicMania::PlayerStatus)(baseAddress + 0x000C4340)
@@ -577,39 +580,41 @@ namespace SonicMania
 #define PLAYERSTATE_LOOKUP            (SonicMania::PlayerStatus)(baseAddress + 0x000CBAA0)
 #define PLAYERSTATE_SPINDASH          (SonicMania::PlayerStatus)(baseAddress + 0x000CBD80)
 #define PLAYERSTATE_Roll              (SonicMania::PlayerStatus)(baseAddress + 0x000CB850)
-#define PLAYERSTATE_HURT              (SonicMania::PlayerStatus)(baseAddress + 0x004CCA00)
+#define PLAYERSTATE_HURT              (SonicMania::PlayerStatus)(baseAddress + 0x000CCA00)
 #define PLAYERSTATE_DIE               (SonicMania::PlayerStatus)(baseAddress + 0x000CCAC0)
 #define PLAYERSTATE_OUTTAHERE         (SonicMania::PlayerStatus)(baseAddress + 0x000CCE90)
 #define PLAYERSTATE_Gimmick           (SonicMania::PlayerStatus)(baseAddress + 0x000CAD70)
-#define PLAYERSTATE_Gimmick2          (SonicMania::PlayerStatus)(baseAddress + 0x004CBA90) // TODO: needs updating
-#define PLAYERSTATE_Hanging           (SonicMania::PlayerStatus)(baseAddress + 0x004CAD70) // TODO: needs updating
-#define PLAYERSTATE_SpiningTube_PGZ   (SonicMania::PlayerStatus)(baseAddress + 0x0041F7F0) // TODO: needs updating
-#define PLAYERSTATE_Frozen_PGZ        (SonicMania::PlayerStatus)(baseAddress + 0x004A3410) // TODO: needs updating
-#define PLAYERSTATE_Sliding_OOZ       (SonicMania::PlayerStatus)(baseAddress + 0x0042EB10) // TODO: needs updating
-#define PLAYERSTATE_SwitchingToBG_MMZ (SonicMania::PlayerStatus)(baseAddress + 0x004304A0) // TODO: needs updating
-#define PLAYERSTATE_SwitchingToFG_MMZ (SonicMania::PlayerStatus)(baseAddress + 0x004305B0) // TODO: needs updating
-#define PLAYERSTATE_TurningSmall_MMZ  (SonicMania::PlayerStatus)(baseAddress + 0x00431560) // TODO: needs updating
-#define PLAYERSTATE_TurningBig_MMZ    (SonicMania::PlayerStatus)(baseAddress + 0x00431690) // TODO: needs updating
-#define PLAYERSTATE_P2FLYIN           (SonicMania::PlayerStatus)(baseAddress + 0x004CD150)
-#define PLAYERSTATE_P2JUMPIN          (SonicMania::PlayerStatus)(baseAddress + 0x004CD560) 
+#define PLAYERSTATE_Gimmick2          (SonicMania::PlayerStatus)(baseAddress + 0x000CBA90) // TODO: needs updating
+#define PLAYERSTATE_Hanging           (SonicMania::PlayerStatus)(baseAddress + 0x000CAD70) // TODO: needs updating
+#define PLAYERSTATE_SpiningTube_PGZ   (SonicMania::PlayerStatus)(baseAddress + 0x0001F7F0) // TODO: needs updating
+#define PLAYERSTATE_Frozen_PGZ        (SonicMania::PlayerStatus)(baseAddress + 0x000A3410) // TODO: needs updating
+#define PLAYERSTATE_Sliding_OOZ       (SonicMania::PlayerStatus)(baseAddress + 0x0002EB10) // TODO: needs updating
+#define PLAYERSTATE_SwitchingToBG_MMZ (SonicMania::PlayerStatus)(baseAddress + 0x000304A0) // TODO: needs updating
+#define PLAYERSTATE_SwitchingToFG_MMZ (SonicMania::PlayerStatus)(baseAddress + 0x000305B0) // TODO: needs updating
+#define PLAYERSTATE_TurningSmall_MMZ  (SonicMania::PlayerStatus)(baseAddress + 0x00031560) // TODO: needs updating
+#define PLAYERSTATE_TurningBig_MMZ    (SonicMania::PlayerStatus)(baseAddress + 0x00031690) // TODO: needs updating
+#define PLAYERSTATE_P2FLYIN           (SonicMania::PlayerStatus)(baseAddress + 0x000CD150)
+#define PLAYERSTATE_P2JUMPIN          (SonicMania::PlayerStatus)(baseAddress + 0x000CD560) 
 #define PLAYERSTATE_SpringBasic       (SonicMania::PlayerStatus)(baseAddress + 0x000CB6C0)
 #define PLAYERSTATE_ScoreCard         (SonicMania::PlayerStatus)(baseAddress + 0x000CCD30)
 #define PLAYERSTATE_TransportTube_CPZ (SonicMania::PlayerStatus)(baseAddress + 0x000CBA90)
+#define PLAYERSTATE_HCZSlide          (SonicMania::PlayerStatus)(baseAddress + 0x000B9970); //Added from LHPZ Mod
+
 
 // Sonic
-#define PLAYERSTATE_DROPDASH          (SonicMania::PlayerStatus)(baseAddress + 0x004CC1F0)
-#define PLAYERSTATE_PEELOUT           (SonicMania::PlayerStatus)(baseAddress + 0x004CBF70)
+#define PLAYERSTATE_DROPDASH          (SonicMania::PlayerStatus)(baseAddress + 0x000CC1F0)
+#define PLAYERSTATE_PEELOUT           (SonicMania::PlayerStatus)(baseAddress + 0x000CBF70)
 
 // Tails
 #define PLAYERSTATE_FLYING            (SonicMania::PlayerStatus)(baseAddress + 0x000CCF30)
-#define PLAYERSTATE_FLYCARRIED        (SonicMania::PlayerStatus)(baseAddress + 0x004CDA60)
+#define PLAYERSTATE_FLYCARRIED        (SonicMania::PlayerStatus)(baseAddress + 0x000CDA60)
 
 // Knuckles
 #define PLAYERSTATE_GLIDELEFT         (SonicMania::PlayerStatus)(baseAddress + 0x000CDB10)
 #define PLAYERSTATE_GLIDERIGHT        (SonicMania::PlayerStatus)(baseAddress + 0x000CDE10)
-#define PLAYERSTATE_GLIDESLIDE        (SonicMania::PlayerStatus)(baseAddress + 0x004CE230)
+#define PLAYERSTATE_GLIDESLIDE        (SonicMania::PlayerStatus)(baseAddress + 0x000CE230)
 #define PLAYERSTATE_CLIMB             (SonicMania::PlayerStatus)(baseAddress + 0x000CE380)
-#define PLAYERSTATE_LEDGEPULLUP       (SonicMania::PlayerStatus)(baseAddress + 0x004CE6F0)
+#define PLAYERSTATE_LEDGEPULLUP       (SonicMania::PlayerStatus)(baseAddress + 0x000CE6F0)
 #define PLAYERSTATE_GLIDEDROP         (SonicMania::PlayerStatus)(baseAddress + 0x000CE110)
 
 // Mighty
@@ -634,6 +639,9 @@ namespace SonicMania
 #define PLAYERID2 1
 #define PLAYERID3 2
 #define PLAYERID4 3
+
+//not a state but calling this will hit a player, it has no checks, not even for invincible frames
+    ThiscallFunctionPointer(int, Player_Hit, (EntityPlayer* Player), 0x000C5970);
 
 #pragma endregion
 
@@ -1095,6 +1103,9 @@ namespace SonicMania
     FunctionPointer(int, LoadGameScene, (char* CategoryName, char* SceneName), 0x001F23C0);
     FunctionPointer(char, LoadTileconfig, (), 0x001BE440);
     FunctionPointer(void, LoadGameconfig, (int ths), 0x001C6510);
+    FunctionPointer(int, GetSceneLayerID, (const char* name), 0x001E1600);
+    FunctionPointer(void*, GetSceneLayerInfo, (unsigned __int16 LayerID), 0x001E16B0); //Actually returns SceneLayer* but thats not added yet
+    FunctionPointer(__int16, GetLayerSize, (unsigned __int16 LayerID, Vector2* Size, DWORD PixelSize), 0x001E16E0);
 
     // MATRICIES - Untested
     FunctionPointer(void*, MatrixTranslateXYZ, (Matrix* Matrix, int X, int Y, int Z), 0x001DD3F0);
@@ -1119,8 +1130,15 @@ namespace SonicMania
     DataPointer(EntityPlayer, Player3, 0x0046A2C0);
     DataPointer(EntityPlayer, Player4, 0x0046A718);
 
+    //Probably is just 0,0,0,0 (used as default for player if OuterBox/InnerBox isn't found)
+    DataPointer(Hitbox, DefaultHitbox, 0x0026B804);
+
     //Currently Running Entity
     DataPointer(ActiveEntityInfo*, EntityInfo, 0x00AA7634);
+
+    //Audio/Sound
+    DataPointer(float, StreamVolume, 0xA53078);
+    DataPointer(float, SFXVolume, 0xA5307C);
 
     // Other
     DataPointer(Scene, CurrentScene, 0x00A535C4);
@@ -1168,9 +1186,33 @@ namespace SonicMania
     DataPointer(Obj_ItemBox*, OBJ_ItemBox, 0x00AC6F00);
     DataPointer(Obj_SpecialRing*, OBJ_SpecialRing, 0x00AC686C);
     DataPointer(Obj_PlaneSwitch*, OBJ_PlaneSwitch, 0x00AC6C0C);
+    DataPointer(Obj_GHZSetup*, OBJ_GHZSetup, 0x00AC6C0C);
+    DataPointer(Obj_LRZ1Setup*, OBJ_LRZ1Setup, 0x00AC6DF4);
+    DataPointer(Obj_ZONE*, OBJ_ZONE, 0x00AC690C);
     DataPointer(Obj_FXRuby*, OBJ_FXRuby, 0x00AC6EF0);
     DataPointer(Obj_PauseMenu*, OBJ_PauseMenu, 0x00AC6E90);
     DataPointer(Obj_DebugMode*, OBJ_DebugMode, 0x00AC6930);
+
+#pragma endregion
+
+#pragma region Misc
+
+    // Music struct
+    struct struct_0
+    {
+        int anonymous_0;
+        int anonymous_1;
+        float volume;
+        int anonymous_3;
+        int anonymous_4;
+        int anonymous_5;
+        int anonymous_6;
+        int hasLoop;
+        __int16 anonymous_8;
+        BYTE gap22[1];
+        char playStatus;
+    };
+    DataArray(struct_0, stru_26B818, 0x0026B818, 16);
 
 #pragma endregion
 
@@ -1255,6 +1297,13 @@ namespace SonicMania
             YVelocity = (int)(YVelocity * y);
             Speed = (int)(Speed * x);
         }
+
+        bool InRange(int x1, int y1, int x2, int y2)
+        {
+            bool inRange = false;
+            inRange = (Position.X >= x1 && Position.X <= x2) && (Position.Y >= y1 && Position.Y <= y2);
+            return inRange;
+        }
     };
 
     // Struct to fill up the base class
@@ -1295,8 +1344,8 @@ namespace SonicMania
         /* 0x000000E0 */ DWORD Timer;
         /* 0x000000E4 */ DWORD OuttaHereTimer;
         /* 0x000000E8 */ DWORD AbilityTimer;
-        /* 0x000000EC */ DWORD field_EC;
-        /* 0x000000F0 */ DWORD field_F0;
+        /* 0x000000EC */ DWORD SpindashRevCharge;
+        /* 0x000000F0 */ DWORD GlideTurnCos;
         /* 0x000000F4 */ DWORD AirLeft;
         /* 0x000000F8 */ DWORD Invincibility;
         /* 0x000000FC */ DWORD SpeedShoesTTL;
@@ -1406,7 +1455,6 @@ namespace SonicMania
         /* 0x000000D8 */ EntityAnimationData DebrisData;
         /* 0x000000F0 */ int Parent;
     };
-
     struct EntityPlatform : Entity
     {
         /* 0x00000058 */ void* State;
@@ -1439,7 +1487,6 @@ namespace SonicMania
         /* 0x000000B0 */ EntityAnimationData Animation;
         /* 0x000000C8 */ DWORD ChildCount;
     };
-
     struct EntityDust : Entity
     {
         /* 0x00000058 */ int State;
@@ -1447,8 +1494,6 @@ namespace SonicMania
         /* 0x00000060 */ DWORD Parent;
         /* 0x00000064 */ EntityAnimationData Animation;
     };
-
-
     struct EntityCamera : Entity
     {
         void* State;
@@ -1481,7 +1526,6 @@ namespace SonicMania
         int MinY;
         int MaxY;
     };
-
     struct EntityRing : Entity
     {
         /* 0x00000058 */ void* State;
@@ -1502,7 +1546,6 @@ namespace SonicMania
         /* 0x00000094 */ EntityAnimationData Animation;
 
     };
-
     struct EntityFXFade : Entity
     {
         /* 0x00000058 */ void* State;
@@ -1573,7 +1616,7 @@ namespace SonicMania
         /* 0x000000D4 */ DWORD field_D4;
 
     };
-    struct UIVsZoneButton : Entity
+    struct EntityUIVsZoneButton : Entity
     {
         /* 0x00000058 */ BYTE gap[164];
         /* 0x000000FC */ DWORD Filter; //Might not Exist 
@@ -1586,22 +1629,23 @@ namespace SonicMania
     struct EntityUIText : Entity
     {
         /* 0x00000058 */ void* State;
-        /* 0x0000005C */ DWORD dword5C;
-        /* 0x00000060 */ char* Text;
-        /* 0x00000064 */ DWORD dword64;
-        /* 0x00000068 */ DWORD dword68;
-        /* 0x0000006C */ DWORD dword6C;
-        /* 0x00000070 */ DWORD dword70;
-        /* 0x00000074 */ DWORD dword74;
-        /* 0x00000078 */ DWORD dword78;
-        /* 0x0000007C */ DWORD dword7C;
-        /* 0x00000080 */ DWORD dword80;
-        /* 0x00000084 */ DWORD dword84;
-        /* 0x00000088 */ DWORD dword88;
-        /* 0x0000008C */ DWORD dword8C;
-        /* 0x00000090 */ DWORD dword90;
+        /* 0x0000005C */ void* StateDraw;
+        /* 0x00000060 */ wchar_t* Text;
+        /* 0x00000064 */ WORD TextLength;
+        /* 0x00000066 */ WORD field_66;
+        /* 0x00000068 */ DWORD Tag;
+        /* 0x0000006C */ DWORD field_6C;
+        /* 0x00000070 */ DWORD Selectable;
+        /* 0x00000074 */ WORD AnimListID;
+        /* 0x00000076 */ WORD gap76;
+        /* 0x00000078 */ DWORD Align;
+        /* 0x0000007C */ DWORD Data0;
+        /* 0x00000080 */ DWORD Data1;
+        /* 0x00000084 */ DWORD Data2;
+        /* 0x00000088 */ DWORD  Data3;
+        /* 0x0000008C */ DWORD Highlighted;
+        /* 0x00000090 */ SonicMania::EntityAnimationData  AnimData;
     };
-
     struct EntityMotoBug : Entity
     {
         /* 0x00000058 */ void* State;
@@ -1802,7 +1846,6 @@ namespace SonicMania
         /* 0x000001B8 */ BOOL JumpHold;
         /* 0x000001BC */ EntityAnimationData Animation;
     };
-
     struct EntityTitleCard : Entity
     {
         /* 00000058 */ void* State;
@@ -2340,7 +2383,6 @@ namespace SonicMania
         /* 0x00000A2B */ BYTE field_A2B;
         /* 0x00000A2C */ BYTE field_A2C;
     };
-
     struct EntitySpikes : Entity
     {
         /* 0x00000058 */ void* State;
@@ -2364,9 +2406,193 @@ namespace SonicMania
         /* 0x00000088 */ EntityAnimationData Animation;
 
     };
+    struct EntityUIPicture : Entity
+    {
+        /* 0x00000058 */ DWORD ListID;
+        /* 0x0000005C */ DWORD FrameID;
+        /* 0x00000060 */ DWORD Tag;
+        /* 0x00000064 */ BYTE ZonePalette;
+        /* 0x00000065 */ BYTE field_65;
+        /* 0x00000066 */ BYTE field_66;
+        /* 0x00000067 */ BYTE field_67;
+        /* 0x00000068 */ DWORD ZoneID;
+        /* 0x0000006C */ EntityAnimationData AnimData;
+    };
+    struct EntityUIButton : Entity {
+        /* 00000058 */ DWORD field_58;
+        /* 0000005C */ DWORD dword5C;
+        /* 00000060 */ DWORD dword60;
+        /* 00000064 */ DWORD field_64;
+        /* 00000068 */ DWORD dword68;
+        /* 0000006C */ DWORD dword6C;
+        /* 00000070 */ DWORD dword70;
+        /* 00000074 */ DWORD dword74;
+        /* 00000078 */ DWORD dword78;
+        /* 0000007C */ DWORD dword7C;
+        /* 00000080 */ BYTE gap80[128];
+        /* 00000100 */ DWORD Disabled;
+        /* 00000104 */ SonicMania::Vector2 Size;
+        /* 0000010C */ DWORD ListID;
+        /* 00000110 */ DWORD FrameID;
+        /* 00000114 */ DWORD Align;
+        /* 00000118 */ DWORD ChoiceCount;
+        /* 0000011C */ DWORD ChoiceDir;
+        /* 0000011D */ DWORD Unused1;
+        /* 0000011E */ DWORD Unused2;
+        /* 0000011F */ DWORD Unused3;
+        /* 00000120 */ DWORD Invisible;
+        /* 00000124 */ DWORD AlignsP1;
+        /* 00000128 */ DWORD FreeBindP2;
+        /* 0000012C */ DWORD Transition;
+        /* 00000130 */ DWORD StopMusic;
+        /* 00000134 */ DWORD field_134;
+        /* 00000138 */ DWORD dword138;
+        /* 0000013C */ BYTE gap13C[16];
+        /* 0000014C */ DWORD dword14C;
+        /* 00000150 */ BYTE gap150[20];
+        /* 00000164 */ SonicMania::EntityAnimationData entityanimationdata164l;
+        /* 0000017C */ WORD word17C;
+        /* 0000017E */ BYTE field_17E;
+        /* 0000017F */ BYTE field_17F;
+        /* 00000180 */ DWORD dword180;
+        /* 00000184 */ DWORD dword184;
+    };
+    struct EntityUIVsRoundPicker : Entity
+    {
+        /* 00000058 */ DWORD gap58;
+        /* 0000005C */ DWORD dword5C;
+        /* 00000060 */ DWORD dword60;
+        /* 00000064 */ BYTE Unknown1[156];
+        /* 00000100 */ DWORD Disabled;
+        /* 00000104 */ SonicMania::Vector2 Size;
+        /* 0000010C */ DWORD Align;
+        /* 00000110 */ DWORD ArrowWidth;
+        /* 00000114 */ DWORD Val;
+        /* 00000118 */ DWORD MaxVal;
+        /* 0000011C */ BYTE gap11C[4];
+        /* 00000120 */ DWORD dword120;
+        /* 00000124 */ BYTE gap124[16];
+        /* 00000134 */ DWORD dword134;
+        /* 00000138 */ BYTE gap138[12];
+        /* 00000144 */ SonicMania::EntityAnimationData AnimData1;
+        /* 0000015C */ SonicMania::EntityAnimationData AnimData2;
+        /* 00000174 */ SonicMania::EntityAnimationData AnimData3;
+        /* 0000018C */ SonicMania::EntityAnimationData AnimData4;
+        /* 000001A4 */ WORD word1A4;
+        /* 000001A6 */ BYTE field_1A6;
+        /* 000001A7 */ BYTE field_1A7;
+    };
+    struct EntityUIInfoLabel : Entity
+    {
+        /* 0x00000058 */ SonicMania::EntityAnimationData AnimData;
+        /* 0x00000070 */ BYTE field_70;
+        /* 0x00000071 */ BYTE field_71;
+        /* 0x00000072 */ BYTE field_72;
+        /* 0x00000073 */ BYTE field_73;
+        /* 0x00000074 */ BYTE field_74;
+        /* 0x00000075 */ BYTE field_75;
+        /* 0x00000076 */ BYTE field_76;
+        /* 0x00000077 */ BYTE field_77;
+        /* 0x00000078 */ SonicMania::Vector2 Size;
+        /* 0x00000080 */ wchar_t* Text;
+        /* 0x00000084 */ int TextLength;
+        /* 0x00000086 */ BYTE field_86;
+        /* 0x00000087 */ BYTE field_87;
+        /* 0x00000088 */ DWORD field_88;
+        /* 0x0000008C */ SonicMania::EntityAnimationData AnimData2;
+    };
+    struct EntityUIVsResults : Entity
+    {
+        /* 00000058*/ DWORD State;
+        /* 0000005C*/ BYTE  Unknown1[164];
+        /* 00000100*/ DWORD Disabled;
+        /* 00000104*/ DWORD PlayerID;
+        /* 00000108*/ DWORD NumRows;
+        /* 0000010C*/ DWORD TrophyCount;
+        /* 00000110*/ BYTE  Row0Label;
+        /* 00000111*/ BYTE  Row1Label;
+        /* 00000112*/ BYTE  Row2Label;
+        /* 00000113*/ BYTE  Row3Label;
+        /* 00000114*/ BYTE  Row4Label;
+        /* 00000115*/ BYTE  Row5Label;
+        /* 00000116*/ BYTE  Row6Label;
+        /* 00000117*/ BYTE  Row7Label;
+        /* 00000118*/ BYTE  Row8Label;
+        /* 00000119*/ BYTE  Row9Label;
+        /* 0000011A*/ BYTE  Row10Label;
+        /* 0000011B*/ BYTE  Row11Label;
+        /* 0000011C*/ BYTE  Row12Label;
+        /* 0000011D*/ BYTE  field_11D;
+        /* 0000011E*/ BYTE  field_11E;
+        /* 0000011F*/ BYTE  field_11F;
+        /* 00000120*/ DWORD Row0Highlight;
+        /* 00000124*/ DWORD Row1Highlight;
+        /* 00000128*/ DWORD Row2Highlight;
+        /* 0000012C*/ DWORD Row3Highlight;
+        /* 00000130*/ DWORD Row4Highlight;
+        /* 00000134*/ DWORD Row5Highlight;
+        /* 00000138*/ DWORD Row6Highlight;
+        /* 0000013C*/ DWORD Row7Highlight;
+        /* 00000140*/ DWORD Row8Highlight;
+        /* 00000144*/ DWORD Row9Highlight;
+        /* 00000148*/ DWORD Row10Highlight;
+        /* 0000014C*/ DWORD Row11Highlight;
+        /* 00000150*/ DWORD Row12Highlight;
+        /* 00000154*/ BYTE  Unknown2[104];
+        /* 000001BC*/ DWORD dword1BC;
+        /* 000001C0*/ BYTE  Unknown3[484];
+        /* 000003A4*/ WORD  word3A4;
+        /* 000003A6*/ BYTE  field_3A6;
+        /* 000003A7*/ BYTE  field_3A7;
+    };
+    struct EntityUIControl : Entity
+    {
+        /* 0x00000058 */ DWORD field_58;
+        /* 0x0000005C */ DWORD field_5C;
+        /* 0x00000060 */ DWORD SelectedElement;
+        /* 0x00000064 */ DWORD Tag;
+        /* 0x00000068 */ DWORD field_68;
+        /* 0x0000006C */ wchar_t* parentTag;
+        /* 0x00000070 */ DWORD field_70;
+        /* 0x00000074 */ DWORD ActiveOnLoad;
+        /* 0x00000078 */ DWORD NoWidgets;
+        /* 0x0000007C */ DWORD ResetSelection;
+        /* 0x00000080 */ BYTE field_80;
+        /* 0x00000081 */ BYTE byte81;
+        /* 0x00000082 */ BYTE RowCount;
+        /* 0x00000083 */ BYTE ColumnCount;
+        /* 0x00000084 */ BYTE StartingID;
+        /* 0x00000085 */ DWORD field_85;
+        /* 0x00000086 */ DWORD field_86;
+        /* 0x00000087 */ DWORD field_87;
+        /* 0x00000088 */ Vector2 Size;
+        /* 0x00000090 */ Vector2 CameraOffset;
+        /* 0x00000098 */ Vector2 ScrollSpeed;
+        /* 0x000000A0 */ DWORD NoClamp;
+        /* 0x000000A4 */ DWORD NoWrap;
+        /* 0x000000A8 */ DWORD dwordA;
+        /* 0x000000AC */ DWORD dwordAC;
+        /* 0x000000B0 */ DWORD gapB0[20];
+        /* 0x000000C4 */ DWORD dwordC4;
+        /* 0x000000C8 */ DWORD gapC8[4];
+        /* 0x000000CC */ DWORD dwordCC;
+        /* 0x000000D0 */ DWORD gapD0[4];
+        /* 0x000000D4 */ DWORD dwordD4;
+        /* 0x000000D8 */ DWORD field_D8[336];
+    };
+    struct EntityButton : Entity
+    {
+        /* 0x00000058 */ DWORD field_58;
+        /* 0x0000005C */ DWORD field_5C;
+        /* 0x00000060 */ DWORD field_60;
+        /* 0x00000064 */ WORD field_64;
+        /* 0x00000066 */ WORD field_66;
+        /* 0x00000068 */ bool Pressed;
+    };
 #pragma endregion
 
 #pragma region Object 
+
     struct Object
     {
         WORD ObjectID;
@@ -2377,7 +2603,7 @@ namespace SonicMania
     struct Obj_Ring : Object
     {
         Hitbox Hitbox;
-        WORD Pan;
+        DWORD Pan;
         WORD SpriteIndex;
         WORD SFX_Ring;
     };
@@ -2691,6 +2917,8 @@ namespace SonicMania
         //TODO: fill out later
     };
 
+
+
     struct Obj_Spikes : Object
     {
         int field_4;
@@ -2753,6 +2981,160 @@ namespace SonicMania
     struct Obj_PlaneSwitch : Object
     {
         //TO-DO: fill out later
+    };
+    struct Obj_GHZSetup : Object
+    {
+        int WaterFadeAmount;
+        int DelayA;
+        int FrameA;
+        int DelayListA[0x08];
+        int DelayB;
+        int FrameB;
+        int DelayListB[16];
+        ushort AniTiles;
+    };
+    struct Obj_LRZ1Setup : Object
+    {
+        int PalTimer;
+        int FadeTimer;
+        DWORD* BG1;
+        DWORD* BG2;
+        DWORD* FGLow;
+        DWORD* FGHigh;
+        int FGArray[0x20];
+        int BGArray[0x20];
+    };
+
+    struct Obj_UIPicture : SonicMania::Object
+    {
+        /* 0x00000004 */ WORD SpriteIndex;
+    };
+
+    struct Obj_UIText : SonicMania::Object
+    {
+        /* 0x00000004 */ WORD SpriteIndex;
+    };
+
+    struct Obj_ZONE : Object
+    {
+        DWORD Act2;
+        void* PostStageFinishEvent;
+        DWORD field_C;
+        DWORD field_10;
+        DWORD field_14;
+        DWORD field_18;
+        DWORD field_1C;
+        DWORD field_20;
+        DWORD field_24;
+        DWORD field_28;
+        DWORD field_2C;
+        DWORD field_30;
+        DWORD field_34;
+        DWORD field_38;
+        DWORD field_3C;
+        DWORD field_40;
+        DWORD field_44;
+        DWORD field_48;
+        DWORD field_4C;
+        DWORD field_50;
+        DWORD field_54;
+        DWORD field_58;
+        DWORD field_5C;
+        DWORD field_60;
+        DWORD field_64;
+        DWORD field_68;
+        DWORD field_6C;
+        DWORD field_70;
+        DWORD field_74;
+        DWORD RingFrame;
+        DWORD Timer;
+        DWORD Timer2;
+        DWORD field_84[4];
+        DWORD field_94[4];
+        DWORD field_A4[4];
+        DWORD field_B4[4];
+        DWORD field_C4[4];
+        DWORD field_D4[4];
+        DWORD field_E4[4];
+        DWORD field_F4[4];
+        DWORD field_104[4];
+        DWORD field_114;
+        BYTE field_118;
+        BYTE field_119;
+        BYTE field_11A;
+        BYTE field_11B;
+        BYTE field_11C;
+        BYTE field_11D;
+        BYTE field_11E;
+        BYTE field_11F;
+        BYTE field_120;
+        BYTE field_121;
+        BYTE field_122;
+        BYTE field_123;
+        DWORD field_124;
+        DWORD field_128;
+        BYTE field_12C;
+        BYTE field_12D;
+        BYTE field_12E;
+        BYTE field_12F;
+        BYTE field_130;
+        BYTE field_131;
+        BYTE field_132;
+        BYTE field_133;
+        BYTE field_134;
+        BYTE field_135;
+        BYTE field_136;
+        BYTE field_137;
+        BYTE field_138;
+        BYTE field_139;
+        BYTE field_13A;
+        BYTE field_13B;
+        BYTE field_13C;
+        BYTE field_13D;
+        BYTE field_13E;
+        BYTE field_13F;
+        BYTE field_140;
+        BYTE field_141;
+        BYTE field_142;
+        BYTE field_143;
+        DWORD field_144;
+        BYTE field_148;
+        BYTE field_149;
+        BYTE field_14A;
+        BYTE field_14B;
+        BYTE field_14C;
+        BYTE field_14D;
+        BYTE field_14E;
+        BYTE field_14F;
+        BYTE field_150;
+        BYTE field_151;
+        BYTE field_152;
+        BYTE field_153;
+        DWORD field_154;
+        DWORD field_158;
+        DWORD field_15C;
+        DWORD field_160;
+        WORD FGLayers;
+        WORD FGLow;
+        WORD FGHigh;
+        WORD MoveLayer;
+        WORD ScratchLayer;
+        WORD FGLow_ID;
+        WORD FGHigh_ID;
+        WORD Move_ID;
+        BYTE field_174;
+        BYTE field_175;
+        BYTE DrawOrderLow;
+        BYTE DrawOrderHigh;
+        BYTE PlayerHighLayer;
+        BYTE PlayerLowLayer;
+        BYTE field_17A;
+        BYTE field_17B;
+        WORD SFX_Fail;
+        BYTE data[17826];
+        DWORD field_4720;
+        DWORD field_4724;
+        DWORD TimeStart;
     };
 
     struct CompetitionSession
@@ -2915,6 +3297,48 @@ namespace SonicMania
 #pragma endregion
 
 #pragma region HelperFunctions
+
+    // Used to set the strings of UIText and UIInfoLabels
+    inline void ConvertASCII2Unicode(wchar_t* dest, char* src, size_t size, int offset)
+    {
+        memset(dest, 0, size * 2);
+        for (int i = 0; i < size; ++i)
+            dest[i] = src[i] + offset;
+    }
+
+    inline void SetVSScreenCount(int count)
+    {
+        BYTE* Pointer = *(BYTE**)((baseAddress + 0xA530FC));
+        WriteData((BYTE*)baseAddress + 0xA530FC, (BYTE)count);
+    }
+
+    inline BYTE* GetUIBGPointer()
+    {
+        return *(BYTE**)(baseAddress + 0xAC68E4);
+    }
+
+    inline void WriteUIBG_Color(int offset, int r, int g, int b)
+    {
+        unsigned int color = r << 16
+            | g << 8 | b; // idk if this is reversed
+        WriteData((unsigned int*)(GetUIBGPointer() + offset), color);
+    }
+
+    inline void SetUIBG_BGColor(int r, int g, int b)
+    {
+        WriteUIBG_Color(4, r, g, b);
+    }
+
+    inline void SetUIBG_FGLowColor(int r, int g, int b)
+    {
+        WriteUIBG_Color(8, r, g, b);
+    }
+
+    inline void SetUIBG_FGHighColor(int r, int g, int b)
+    {
+        WriteUIBG_Color(12, r, g, b);
+    }
+
     // Written by Sajid
     inline SHORT ToRGB565(byte R, byte G, byte B)
     {

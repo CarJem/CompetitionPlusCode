@@ -41,7 +41,7 @@ namespace CompPlus_Scene_GustPlanet
 
     void ButtonCheckSingle(int i) 
     {
-        Button& entity = *SonicMania::GetEntityFromSceneSlot<Button>(CurrentSpawns[i]);
+        SonicMania::EntityButton& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::EntityButton>(CurrentSpawns[i]);
 
         for (int RealID = 1; RealID <= 4; RealID++)
         {
@@ -54,7 +54,7 @@ namespace CompPlus_Scene_GustPlanet
             int y1 = y - 30;
             int y2 = y + 30;
 
-            bool isPlayerInRange = PlayerInRange(RealID, x1, y1, x2, y2);
+            bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
             if (isPlayerInRange && entity.Pressed)
             {
                 entity.Pressed = false;

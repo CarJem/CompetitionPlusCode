@@ -9,7 +9,7 @@ namespace CompPlus_Announcers
 
     using namespace SonicMania;
 
-    bool AllowExperiementalMidGameAnnouncerReload = false;
+     bool AllowExperiementalMidGameAnnouncerReload = true;
 
     #pragma region VO Memory Addresses
 
@@ -219,7 +219,7 @@ namespace CompPlus_Announcers
 
     #pragma endregion
 
-    #pragma region Sonic 2/3 VO Paths
+    #pragma region Classic VO Paths
 
         const char* Player1_Classic = "VO5/Player1.wav";
         const char* Player2_Classic = "VO5/Player2.wav";
@@ -250,6 +250,40 @@ namespace CompPlus_Announcers
 
         const char* NewRecordMid_Classic = "VO5/NewRecordMid.wav";
         const char* NewRecordTop_Classic = "VO5/NewRecordTop.wav";
+
+    #pragma endregion
+
+    #pragma region Blank VO Paths
+
+        const char* Player1_Blank = "VO6/Player1.wav";
+        const char* Player2_Blank = "VO6/Player2.wav";
+        const char* Player3_Blank = "VO6/Player3.wav";
+        const char* Player4_Blank = "VO6/Player4.wav";
+
+        const char* Three_Blank = "VO6/Three.wav";
+        const char* Two_Blank = "VO6/Two.wav";
+        const char* One_Blank = "VO6/One.wav";
+        const char* Go_Blank = "VO6/Go.wav";
+        const char* Goal_Blank = "VO6/Goal.wav";
+
+        const char* Sonic_Blank = "VO6/Sonic.wav";
+        const char* SonicWins_Blank = "VO6/SonicWins.wav";
+        const char* Tails_Blank = "VO6/Tails.wav";
+        const char* TailsWins_Blank = "VO6/TailsWins.wav";
+        const char* Knuckles_Blank = "VO6/Knuckles.wav";
+        const char* KnuxWins_Blank = "VO6/KnuxWins.wav";
+        const char* Mighty_Blank = "VO6/Mighty.wav";
+        const char* MightyWins_Blank = "VO6/MightyWins.wav";
+        const char* Ray_Blank = "VO6/Ray.wav";
+        const char* RayWins_Blank = "VO6/RayWins.wav";
+
+        const char* TheWinnerIs_Blank = "VO6/TheWinnerIs.wav";
+
+        const char* ItsADraw_Blank = "VO6/ItsADraw.wav";
+        const char* ItsADraw_Set_Blank = "VO6/ItsADraw_Set.wav";
+
+        const char* NewRecordMid_Blank = "VO6/NewRecordMid.wav";
+        const char* NewRecordTop_Blank = "VO6/NewRecordTop.wav";
 
     #pragma endregion
 
@@ -298,20 +332,50 @@ namespace CompPlus_Announcers
         *Path = (int)(&String[0]);
     }
 
-    inline void LoadSoundFX_Debug(const char* path, SonicMania::Scope scope)
+    inline void LoadSound(const char* path, SonicMania::Scope scope)
     {
         LogInfo("CompPlus_Announcers::LoadSoundFX", "Loading SoundFX: %s", path);
         LoadSoundFX(path, scope);
     }
 
-    inline void UnloadSound(int* memoryAddress, char* path)
+    inline void UnloadSound(const char* path)
     {
         LogInfo("CompPlus_Announcers::UnloadSound", "Unloading SoundFX: %s", path);
-        ((Scope*)(baseAddress + 0x000A5ACB))[32 * SonicMania::GetSoundFXID(path)] = Scope_None;
+        short soundFXID = SonicMania::GetSoundFXID(path);
+        if (soundFXID != -1)
+        {
+            intptr_t sfxPtr = (baseAddress + 0x00A5ACB5);
+            *((Scope*)(sfxPtr - 0 + 32 * soundFXID)) = Scope_None;
+            memset((void*)(sfxPtr - 13 + 32 * soundFXID), 0, 16);
+            memset((void*)(sfxPtr - 29 + 32 * soundFXID), 0, 16);
+        }
     }
 
-
     CompPlus_Settings::AnnouncerType LoadedAnnouncer;
+
+    void PlayAnnouncerChangeFX()
+    {
+        if (LoadedAnnouncer == CompPlus_Settings::Announcer_Garrulous64)
+        {
+            PlaySoundFXS((char*)Go_Garrulous64);
+        }
+        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Angelthegamer)
+        {
+            PlaySoundFXS((char*)Go_ATG);
+        }
+        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Memes)
+        {
+            PlaySoundFXS((char*)Go_Memes);
+        }
+        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Classic)
+        {
+            PlaySoundFXS((char*)Go_Classic);
+        }
+        else
+        {
+            PlaySoundFXS((char*)Go_Stock);
+        }
+    }
 
     void ChangeAnnouncer()
     {
@@ -455,7 +519,7 @@ namespace CompPlus_Announcers
             SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Classic);
             SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Classic);
         }
-        else
+        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Default)
         {
             SwapSound(Player1_MemoryAdd, (char*)Player1_Stock);
             SwapSound(Player2_MemoryAdd, (char*)Player2_Stock);
@@ -496,179 +560,175 @@ namespace CompPlus_Announcers
     {
         if (LoadedAnnouncer == CompPlus_Settings::Announcer_Garrulous64)
         {
-            UnloadSound(Player1_MemoryAdd, (char*)Player1_Garrulous64);
-            UnloadSound(Player2_MemoryAdd, (char*)Player2_Garrulous64);
-            UnloadSound(Player3_MemoryAdd, (char*)Player3_Garrulous64);
-            UnloadSound(Player4_MemoryAdd, (char*)Player4_Garrulous64);
+            UnloadSound((char*)Player1_Garrulous64);
+            UnloadSound((char*)Player2_Garrulous64);
+            UnloadSound((char*)Player3_Garrulous64);
+            UnloadSound((char*)Player4_Garrulous64);
 
-            UnloadSound(SonicWins_MemoryAdd, (char*)SonicWins_Garrulous64);
-            UnloadSound(TailsWins_MemoryAdd, (char*)TailsWins_Garrulous64);
-            UnloadSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Garrulous64);
-            UnloadSound(MightyWins_MemoryAdd, (char*)MightyWins_Garrulous64);
-            UnloadSound(RayWins_MemoryAdd, (char*)RayWins_Garrulous64);
+            UnloadSound((char*)SonicWins_Garrulous64);
+            UnloadSound((char*)TailsWins_Garrulous64);
+            UnloadSound((char*)KnuxWins_Garrulous64);
+            UnloadSound((char*)MightyWins_Garrulous64);
+            UnloadSound((char*)RayWins_Garrulous64);
 
-            UnloadSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Garrulous64);
-            UnloadSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Garrulous64);
+            UnloadSound((char*)ItsADraw_Garrulous64);
+            UnloadSound((char*)ItsADraw_Set_Garrulous64);
 
-            UnloadSound(Three_MemoryAdd, (char*)Three_Garrulous64);
-            UnloadSound(Two_MemoryAdd, (char*)Two_Garrulous64);
-            UnloadSound(One_MemoryAdd, (char*)One_Garrulous64);
-            UnloadSound(Go_MemoryAdd, (char*)Go_Garrulous64);
+            UnloadSound((char*)Three_Garrulous64);
+            UnloadSound((char*)Two_Garrulous64);
+            UnloadSound((char*)One_Garrulous64);
+            UnloadSound((char*)Go_Garrulous64);
 
-            UnloadSound(Sonic_MemoryAdd, (char*)Sonic_Garrulous64);
-            UnloadSound(Tails_MemoryAdd, (char*)Tails_Garrulous64);
-            UnloadSound(Knuckles_MemoryAdd, (char*)Knuckles_Garrulous64);
-            UnloadSound(Mighty_MemoryAdd, (char*)Mighty_Garrulous64);
-            UnloadSound(Ray_MemoryAdd, (char*)Ray_Garrulous64);
+            UnloadSound((char*)Sonic_Garrulous64);
+            UnloadSound((char*)Tails_Garrulous64);
+            UnloadSound((char*)Knuckles_Garrulous64);
+            UnloadSound((char*)Mighty_Garrulous64);
+            UnloadSound((char*)Ray_Garrulous64);
 
-            UnloadSound(Goal_MemoryAdd, (char*)Goal_Garrulous64);
-            UnloadSound(Goal_MemoryAdd_2, (char*)Goal_Garrulous64);
+            UnloadSound((char*)Goal_Garrulous64);
 
-            UnloadSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Garrulous64);
+            UnloadSound((char*)TheWinnerIs_Garrulous64);
 
-            UnloadSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Garrulous64);
-            UnloadSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Garrulous64);
+            UnloadSound((char*)NewRecordMid_Garrulous64);
+            UnloadSound((char*)NewRecordTop_Garrulous64);
         }
         else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Angelthegamer)
         {
-            UnloadSound(Player1_MemoryAdd, (char*)Player1_ATG);
-            UnloadSound(Player2_MemoryAdd, (char*)Player2_ATG);
-            UnloadSound(Player3_MemoryAdd, (char*)Player3_ATG);
-            UnloadSound(Player4_MemoryAdd, (char*)Player4_ATG);
+            UnloadSound((char*)Player1_ATG);
+            UnloadSound((char*)Player2_ATG);
+            UnloadSound((char*)Player3_ATG);
+            UnloadSound((char*)Player4_ATG);
 
-            UnloadSound(SonicWins_MemoryAdd, (char*)SonicWins_ATG);
-            UnloadSound(TailsWins_MemoryAdd, (char*)TailsWins_ATG);
-            UnloadSound(KnuxWins_MemoryAdd, (char*)KnuxWins_ATG);
-            UnloadSound(MightyWins_MemoryAdd, (char*)MightyWins_ATG);
-            UnloadSound(RayWins_MemoryAdd, (char*)RayWins_ATG);
+            UnloadSound((char*)SonicWins_ATG);
+            UnloadSound((char*)TailsWins_ATG);
+            UnloadSound((char*)KnuxWins_ATG);
+            UnloadSound((char*)MightyWins_ATG);
+            UnloadSound((char*)RayWins_ATG);
 
-            UnloadSound(ItsADraw_MemoryAdd, (char*)ItsADraw_ATG);
-            UnloadSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_ATG);
+            UnloadSound((char*)ItsADraw_ATG);
+            UnloadSound((char*)ItsADraw_Set_ATG);
 
-            UnloadSound(Three_MemoryAdd, (char*)Three_ATG);
-            UnloadSound(Two_MemoryAdd, (char*)Two_ATG);
-            UnloadSound(One_MemoryAdd, (char*)One_ATG);
-            UnloadSound(Go_MemoryAdd, (char*)Go_ATG);
+            UnloadSound((char*)Three_ATG);
+            UnloadSound((char*)Two_ATG);
+            UnloadSound((char*)One_ATG);
+            UnloadSound((char*)Go_ATG);
 
-            UnloadSound(Sonic_MemoryAdd, (char*)Sonic_ATG);
-            UnloadSound(Tails_MemoryAdd, (char*)Tails_ATG);
-            UnloadSound(Knuckles_MemoryAdd, (char*)Knuckles_ATG);
-            UnloadSound(Mighty_MemoryAdd, (char*)Mighty_ATG);
-            UnloadSound(Ray_MemoryAdd, (char*)Ray_ATG);
+            UnloadSound((char*)Sonic_ATG);
+            UnloadSound((char*)Tails_ATG);
+            UnloadSound((char*)Knuckles_ATG);
+            UnloadSound((char*)Mighty_ATG);
+            UnloadSound((char*)Ray_ATG);
 
-            UnloadSound(Goal_MemoryAdd, (char*)Goal_ATG);
-            UnloadSound(Goal_MemoryAdd_2, (char*)Goal_ATG);
+            UnloadSound((char*)Goal_ATG);
 
-            UnloadSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_ATG);
+            UnloadSound((char*)TheWinnerIs_ATG);
 
-            UnloadSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_ATG);
-            UnloadSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_ATG);
+            UnloadSound((char*)NewRecordMid_ATG);
+            UnloadSound((char*)NewRecordTop_ATG);
         }
         else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Memes)
         {
-            UnloadSound(Player1_MemoryAdd, (char*)Player1_Memes);
-            UnloadSound(Player2_MemoryAdd, (char*)Player2_Memes);
-            UnloadSound(Player3_MemoryAdd, (char*)Player3_Memes);
-            UnloadSound(Player4_MemoryAdd, (char*)Player4_Memes);
+            UnloadSound((char*)Player1_Memes);
+            UnloadSound((char*)Player2_Memes);
+            UnloadSound((char*)Player3_Memes);
+            UnloadSound((char*)Player4_Memes);
 
-            UnloadSound(SonicWins_MemoryAdd, (char*)SonicWins_Memes);
-            UnloadSound(TailsWins_MemoryAdd, (char*)TailsWins_Memes);
-            UnloadSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Memes);
-            UnloadSound(MightyWins_MemoryAdd, (char*)MightyWins_Memes);
-            UnloadSound(RayWins_MemoryAdd, (char*)RayWins_Memes);
+            UnloadSound((char*)SonicWins_Memes);
+            UnloadSound((char*)TailsWins_Memes);
+            UnloadSound((char*)KnuxWins_Memes);
+            UnloadSound((char*)MightyWins_Memes);
+            UnloadSound((char*)RayWins_Memes);
 
-            UnloadSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Memes);
-            UnloadSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Memes);
+            UnloadSound((char*)ItsADraw_Memes);
+            UnloadSound((char*)ItsADraw_Set_Memes);
 
-            UnloadSound(Three_MemoryAdd, (char*)Three_Memes);
-            UnloadSound(Two_MemoryAdd, (char*)Two_Memes);
-            UnloadSound(One_MemoryAdd, (char*)One_Memes);
-            UnloadSound(Go_MemoryAdd, (char*)Go_Memes);
+            UnloadSound((char*)Three_Memes);
+            UnloadSound((char*)Two_Memes);
+            UnloadSound((char*)One_Memes);
+            UnloadSound((char*)Go_Memes);
 
-            UnloadSound(Sonic_MemoryAdd, (char*)Sonic_Memes);
-            UnloadSound(Tails_MemoryAdd, (char*)Tails_Memes);
-            UnloadSound(Knuckles_MemoryAdd, (char*)Knuckles_Memes);
-            UnloadSound(Mighty_MemoryAdd, (char*)Mighty_Memes);
-            UnloadSound(Ray_MemoryAdd, (char*)Ray_Memes);
+            UnloadSound((char*)Sonic_Memes);
+            UnloadSound((char*)Tails_Memes);
+            UnloadSound((char*)Knuckles_Memes);
+            UnloadSound((char*)Mighty_Memes);
+            UnloadSound((char*)Ray_Memes);
 
-            UnloadSound(Goal_MemoryAdd, (char*)Goal_Memes);
-            UnloadSound(Goal_MemoryAdd_2, (char*)Goal_Memes);
+            UnloadSound((char*)Goal_Memes);
 
-            UnloadSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Memes);
+            UnloadSound((char*)TheWinnerIs_Memes);
 
-            UnloadSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Memes);
-            UnloadSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Memes);
+            UnloadSound((char*)NewRecordMid_Memes);
+            UnloadSound((char*)NewRecordTop_Memes);
         }
         else if (LoadedAnnouncer == CompPlus_Settings::Announcer_Classic)
         {
-            UnloadSound(Player1_MemoryAdd, (char*)Player1_Classic);
-            UnloadSound(Player2_MemoryAdd, (char*)Player2_Classic);
-            UnloadSound(Player3_MemoryAdd, (char*)Player3_Classic);
-            UnloadSound(Player4_MemoryAdd, (char*)Player4_Classic);
+            UnloadSound((char*)Player1_Classic);
+            UnloadSound((char*)Player2_Classic);
+            UnloadSound((char*)Player3_Classic);
+            UnloadSound((char*)Player4_Classic);
 
-            UnloadSound(SonicWins_MemoryAdd, (char*)SonicWins_Classic);
-            UnloadSound(TailsWins_MemoryAdd, (char*)TailsWins_Classic);
-            UnloadSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Classic);
-            UnloadSound(MightyWins_MemoryAdd, (char*)MightyWins_Classic);
-            UnloadSound(RayWins_MemoryAdd, (char*)RayWins_Classic);
+            UnloadSound((char*)SonicWins_Classic);
+            UnloadSound((char*)TailsWins_Classic);
+            UnloadSound((char*)KnuxWins_Classic);
+            UnloadSound((char*)MightyWins_Classic);
+            UnloadSound((char*)RayWins_Classic);
 
-            UnloadSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Classic);
-            UnloadSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Classic);
+            UnloadSound((char*)ItsADraw_Classic);
+            UnloadSound((char*)ItsADraw_Set_Classic);
 
-            UnloadSound(Three_MemoryAdd, (char*)Three_Classic);
-            UnloadSound(Two_MemoryAdd, (char*)Two_Classic);
-            UnloadSound(One_MemoryAdd, (char*)One_Classic);
-            UnloadSound(Go_MemoryAdd, (char*)Go_Classic);
+            UnloadSound((char*)Three_Classic);
+            UnloadSound((char*)Two_Classic);
+            UnloadSound((char*)One_Classic);
+            UnloadSound((char*)Go_Classic);
 
-            UnloadSound(Sonic_MemoryAdd, (char*)Sonic_Classic);
-            UnloadSound(Tails_MemoryAdd, (char*)Tails_Classic);
-            UnloadSound(Knuckles_MemoryAdd, (char*)Knuckles_Classic);
-            UnloadSound(Mighty_MemoryAdd, (char*)Mighty_Classic);
-            UnloadSound(Ray_MemoryAdd, (char*)Ray_Classic);
+            UnloadSound((char*)Sonic_Classic);
+            UnloadSound((char*)Tails_Classic);
+            UnloadSound((char*)Knuckles_Classic);
+            UnloadSound((char*)Mighty_Classic);
+            UnloadSound((char*)Ray_Classic);
 
-            UnloadSound(Goal_MemoryAdd, (char*)Goal_Classic);
-            UnloadSound(Goal_MemoryAdd_2, (char*)Goal_Classic);
+            UnloadSound((char*)Goal_Classic);
 
-            UnloadSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Classic);
+            UnloadSound((char*)TheWinnerIs_Classic);
 
-            UnloadSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Classic);
-            UnloadSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Classic);
+            UnloadSound((char*)NewRecordMid_Classic);
+            UnloadSound((char*)NewRecordTop_Classic);
         }
         else
         {
-            UnloadSound(Player1_MemoryAdd, (char*)Player1_Stock);
-            UnloadSound(Player2_MemoryAdd, (char*)Player2_Stock);
-            UnloadSound(Player3_MemoryAdd, (char*)Player3_Stock);
-            UnloadSound(Player4_MemoryAdd, (char*)Player4_Stock);
+            UnloadSound((char*)Player1_Stock);
+            UnloadSound((char*)Player2_Stock);
+            UnloadSound((char*)Player3_Stock);
+            UnloadSound((char*)Player4_Stock);
 
-            UnloadSound(SonicWins_MemoryAdd, (char*)SonicWins_Stock);
-            UnloadSound(TailsWins_MemoryAdd, (char*)TailsWins_Stock);
-            UnloadSound(KnuxWins_MemoryAdd, (char*)KnuxWins_Stock);
-            UnloadSound(MightyWins_MemoryAdd, (char*)MightyWins_Stock);
-            UnloadSound(RayWins_MemoryAdd, (char*)RayWins_Stock);
+            UnloadSound((char*)SonicWins_Stock);
+            UnloadSound((char*)TailsWins_Stock);
+            UnloadSound((char*)KnuxWins_Stock);
+            UnloadSound((char*)MightyWins_Stock);
+            UnloadSound((char*)RayWins_Stock);
 
-            UnloadSound(ItsADraw_MemoryAdd, (char*)ItsADraw_Stock);
-            UnloadSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_Stock);
+            UnloadSound((char*)ItsADraw_Stock);
+            UnloadSound((char*)ItsADraw_Set_Stock);
 
-            UnloadSound(Three_MemoryAdd, (char*)Three_Stock);
-            UnloadSound(Two_MemoryAdd, (char*)Two_Stock);
-            UnloadSound(One_MemoryAdd, (char*)One_Stock);
-            UnloadSound(Go_MemoryAdd, (char*)Go_Stock);
+            UnloadSound((char*)Three_Stock);
+            UnloadSound((char*)Two_Stock);
+            UnloadSound((char*)One_Stock);
+            UnloadSound((char*)Go_Stock);
 
-            UnloadSound(Sonic_MemoryAdd, (char*)Sonic_Stock);
-            UnloadSound(Tails_MemoryAdd, (char*)Tails_Stock);
-            UnloadSound(Knuckles_MemoryAdd, (char*)Knuckles_Stock);
-            UnloadSound(Mighty_MemoryAdd, (char*)Mighty_Stock);
-            UnloadSound(Ray_MemoryAdd, (char*)Ray_Stock);
+            UnloadSound((char*)Sonic_Stock);
+            UnloadSound((char*)Tails_Stock);
+            UnloadSound((char*)Knuckles_Stock);
+            UnloadSound((char*)Mighty_Stock);
+            UnloadSound((char*)Ray_Stock);
 
-            UnloadSound(Goal_MemoryAdd, (char*)Goal_Stock);
-            UnloadSound(Goal_MemoryAdd_2, (char*)Goal_Stock);
+            UnloadSound((char*)Goal_Stock);
 
-            UnloadSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_Stock);
+            UnloadSound((char*)TheWinnerIs_Stock);
 
-            UnloadSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_Stock);
-            UnloadSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_Stock);
+            UnloadSound((char*)NewRecordMid_Stock);
+            UnloadSound((char*)NewRecordTop_Stock);
         }
+
     }
 
     void LoadAnnouncerFX(bool ChangeAnnouncer = true)
@@ -677,128 +737,179 @@ namespace CompPlus_Announcers
         {
             SetWriteProtection();
             UnloadAnnouncer();
+
             LoadedAnnouncer = CompPlus_Settings::CurrentAnnouncer;
 
             if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Garrulous64)
             {
-                LoadSoundFX_Debug(Player1_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Player2_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Player3_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Player4_Garrulous64, Scope_Global);
+                LoadSound(Player1_Garrulous64, Scope_Global);
+                LoadSound(Player2_Garrulous64, Scope_Global);
+                LoadSound(Player3_Garrulous64, Scope_Global);
+                LoadSound(Player4_Garrulous64, Scope_Global);
 
-                LoadSoundFX_Debug(Three_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Two_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(One_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Go_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Goal_Garrulous64, Scope_Global);
+                LoadSound(SonicWins_Garrulous64, Scope_Global);
+                LoadSound(TailsWins_Garrulous64, Scope_Global);
+                LoadSound(KnuxWins_Garrulous64, Scope_Global);
+                LoadSound(MightyWins_Garrulous64, Scope_Global);
+                LoadSound(RayWins_Garrulous64, Scope_Global);
 
-                LoadSoundFX_Debug(Sonic_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(SonicWins_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Tails_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(TailsWins_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Knuckles_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(KnuxWins_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Mighty_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(MightyWins_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(Ray_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(RayWins_Garrulous64, Scope_Global);
+                LoadSound(ItsADraw_Garrulous64, Scope_Global);
+                LoadSound(ItsADraw_Set_Garrulous64, Scope_Global);
 
-                LoadSoundFX_Debug(TheWinnerIs_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Set_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(NewRecordMid_Garrulous64, Scope_Global);
-                LoadSoundFX_Debug(NewRecordTop_Garrulous64, Scope_Global);
+                LoadSound(Three_Garrulous64, Scope_Global);
+                LoadSound(Two_Garrulous64, Scope_Global);
+                LoadSound(One_Garrulous64, Scope_Global);
+                LoadSound(Go_Garrulous64, Scope_Global);
+
+                LoadSound(Sonic_Garrulous64, Scope_Global);
+                LoadSound(Tails_Garrulous64, Scope_Global);
+                LoadSound(Knuckles_Garrulous64, Scope_Global);
+                LoadSound(Mighty_Garrulous64, Scope_Global);
+                LoadSound(Ray_Garrulous64, Scope_Global);
+
+                LoadSound(Goal_Garrulous64, Scope_Global);
+
+                LoadSound(TheWinnerIs_Garrulous64, Scope_Global);
+
+                LoadSound(NewRecordMid_Garrulous64, Scope_Global);
+                LoadSound(NewRecordTop_Garrulous64, Scope_Global);
             }
             else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Angelthegamer)
             {
-                LoadSoundFX_Debug(Player1_ATG, Scope_Global);
-                LoadSoundFX_Debug(Player2_ATG, Scope_Global);
-                LoadSoundFX_Debug(Player3_ATG, Scope_Global);
-                LoadSoundFX_Debug(Player4_ATG, Scope_Global);
+                LoadSound(Player1_ATG, Scope_Global);
+                LoadSound(Player2_ATG, Scope_Global);
+                LoadSound(Player3_ATG, Scope_Global);
+                LoadSound(Player4_ATG, Scope_Global);
 
-                LoadSoundFX_Debug(Three_ATG, Scope_Global);
-                LoadSoundFX_Debug(Two_ATG, Scope_Global);
-                LoadSoundFX_Debug(One_ATG, Scope_Global);
-                LoadSoundFX_Debug(Go_ATG, Scope_Global);
-                LoadSoundFX_Debug(Goal_ATG, Scope_Global);
+                LoadSound(SonicWins_ATG, Scope_Global);
+                LoadSound(TailsWins_ATG, Scope_Global);
+                LoadSound(KnuxWins_ATG, Scope_Global);
+                LoadSound(MightyWins_ATG, Scope_Global);
+                LoadSound(RayWins_ATG, Scope_Global);
 
-                LoadSoundFX_Debug(Sonic_ATG, Scope_Global);
-                LoadSoundFX_Debug(SonicWins_ATG, Scope_Global);
-                LoadSoundFX_Debug(Tails_ATG, Scope_Global);
-                LoadSoundFX_Debug(TailsWins_ATG, Scope_Global);
-                LoadSoundFX_Debug(Knuckles_ATG, Scope_Global);
-                LoadSoundFX_Debug(KnuxWins_ATG, Scope_Global);
-                LoadSoundFX_Debug(Mighty_ATG, Scope_Global);
-                LoadSoundFX_Debug(MightyWins_ATG, Scope_Global);
-                LoadSoundFX_Debug(Ray_ATG, Scope_Global);
-                LoadSoundFX_Debug(RayWins_ATG, Scope_Global);
+                LoadSound(ItsADraw_ATG, Scope_Global);
+                LoadSound(ItsADraw_Set_ATG, Scope_Global);
 
-                LoadSoundFX_Debug(TheWinnerIs_ATG, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_ATG, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Set_ATG, Scope_Global);
-                LoadSoundFX_Debug(NewRecordMid_ATG, Scope_Global);
-                LoadSoundFX_Debug(NewRecordTop_ATG, Scope_Global);
+                LoadSound(Three_ATG, Scope_Global);
+                LoadSound(Two_ATG, Scope_Global);
+                LoadSound(One_ATG, Scope_Global);
+                LoadSound(Go_ATG, Scope_Global);
+
+                LoadSound(Sonic_ATG, Scope_Global);
+                LoadSound(Tails_ATG, Scope_Global);
+                LoadSound(Knuckles_ATG, Scope_Global);
+                LoadSound(Mighty_ATG, Scope_Global);
+                LoadSound(Ray_ATG, Scope_Global);
+
+                LoadSound(Goal_ATG, Scope_Global);
+
+                LoadSound(TheWinnerIs_ATG, Scope_Global);
+
+                LoadSound(NewRecordMid_ATG, Scope_Global);
+                LoadSound(NewRecordTop_ATG, Scope_Global);
             }
             else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Memes)
             {
-                LoadSoundFX_Debug(Player1_Memes, Scope_Global);
-                LoadSoundFX_Debug(Player2_Memes, Scope_Global);
-                LoadSoundFX_Debug(Player3_Memes, Scope_Global);
-                LoadSoundFX_Debug(Player4_Memes, Scope_Global);
+                LoadSound(Player1_Memes, Scope_Global);
+                LoadSound(Player2_Memes, Scope_Global);
+                LoadSound(Player3_Memes, Scope_Global);
+                LoadSound(Player4_Memes, Scope_Global);
 
-                LoadSoundFX_Debug(Three_Memes, Scope_Global);
-                LoadSoundFX_Debug(Two_Memes, Scope_Global);
-                LoadSoundFX_Debug(One_Memes, Scope_Global);
-                LoadSoundFX_Debug(Go_Memes, Scope_Global);
-                LoadSoundFX_Debug(Goal_Memes, Scope_Global);
+                LoadSound(SonicWins_Memes, Scope_Global);
+                LoadSound(TailsWins_Memes, Scope_Global);
+                LoadSound(KnuxWins_Memes, Scope_Global);
+                LoadSound(MightyWins_Memes, Scope_Global);
+                LoadSound(RayWins_Memes, Scope_Global);
 
-                LoadSoundFX_Debug(Sonic_Memes, Scope_Global);
-                LoadSoundFX_Debug(SonicWins_Memes, Scope_Global);
-                LoadSoundFX_Debug(Tails_Memes, Scope_Global);
-                LoadSoundFX_Debug(TailsWins_Memes, Scope_Global);
-                LoadSoundFX_Debug(Knuckles_Memes, Scope_Global);
-                LoadSoundFX_Debug(KnuxWins_Memes, Scope_Global);
-                LoadSoundFX_Debug(Mighty_Memes, Scope_Global);
-                LoadSoundFX_Debug(MightyWins_Memes, Scope_Global);
-                LoadSoundFX_Debug(Ray_Memes, Scope_Global);
-                LoadSoundFX_Debug(RayWins_Memes, Scope_Global);
+                LoadSound(ItsADraw_Memes, Scope_Global);
+                LoadSound(ItsADraw_Set_Memes, Scope_Global);
 
-                LoadSoundFX_Debug(TheWinnerIs_Memes, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Memes, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Set_Memes, Scope_Global);
-                LoadSoundFX_Debug(NewRecordMid_Memes, Scope_Global);
-                LoadSoundFX_Debug(NewRecordTop_Memes, Scope_Global);
+                LoadSound(Three_Memes, Scope_Global);
+                LoadSound(Two_Memes, Scope_Global);
+                LoadSound(One_Memes, Scope_Global);
+                LoadSound(Go_Memes, Scope_Global);
+
+                LoadSound(Sonic_Memes, Scope_Global);
+                LoadSound(Tails_Memes, Scope_Global);
+                LoadSound(Knuckles_Memes, Scope_Global);
+                LoadSound(Mighty_Memes, Scope_Global);
+                LoadSound(Ray_Memes, Scope_Global);
+
+                LoadSound(Goal_Memes, Scope_Global);
+
+                LoadSound(TheWinnerIs_Memes, Scope_Global);
+
+                LoadSound(NewRecordMid_Memes, Scope_Global);
+                LoadSound(NewRecordTop_Memes, Scope_Global);
             }
             else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Classic)
             {
-                LoadSoundFX_Debug(Player1_Classic, Scope_Global);
-                LoadSoundFX_Debug(Player2_Classic, Scope_Global);
-                LoadSoundFX_Debug(Player3_Classic, Scope_Global);
-                LoadSoundFX_Debug(Player4_Classic, Scope_Global);
+                LoadSound(Player1_Classic, Scope_Global);
+                LoadSound(Player2_Classic, Scope_Global);
+                LoadSound(Player3_Classic, Scope_Global);
+                LoadSound(Player4_Classic, Scope_Global);
 
-                LoadSoundFX_Debug(Three_Classic, Scope_Global);
-                LoadSoundFX_Debug(Two_Classic, Scope_Global);
-                LoadSoundFX_Debug(One_Classic, Scope_Global);
-                LoadSoundFX_Debug(Go_Classic, Scope_Global);
-                LoadSoundFX_Debug(Goal_Classic, Scope_Global);
+                LoadSound(SonicWins_Classic, Scope_Global);
+                LoadSound(TailsWins_Classic, Scope_Global);
+                LoadSound(KnuxWins_Classic, Scope_Global);
+                LoadSound(MightyWins_Classic, Scope_Global);
+                LoadSound(RayWins_Classic, Scope_Global);
 
-                LoadSoundFX_Debug(Sonic_Classic, Scope_Global);
-                LoadSoundFX_Debug(SonicWins_Classic, Scope_Global);
-                LoadSoundFX_Debug(Tails_Classic, Scope_Global);
-                LoadSoundFX_Debug(TailsWins_Classic, Scope_Global);
-                LoadSoundFX_Debug(Knuckles_Classic, Scope_Global);
-                LoadSoundFX_Debug(KnuxWins_Classic, Scope_Global);
-                LoadSoundFX_Debug(Mighty_Classic, Scope_Global);
-                LoadSoundFX_Debug(MightyWins_Classic, Scope_Global);
-                LoadSoundFX_Debug(Ray_Classic, Scope_Global);
-                LoadSoundFX_Debug(RayWins_Classic, Scope_Global);
+                LoadSound(ItsADraw_Classic, Scope_Global);
+                LoadSound(ItsADraw_Set_Classic, Scope_Global);
 
-                LoadSoundFX_Debug(TheWinnerIs_Classic, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Classic, Scope_Global);
-                LoadSoundFX_Debug(ItsADraw_Set_Classic, Scope_Global);
-                LoadSoundFX_Debug(NewRecordMid_Classic, Scope_Global);
-                LoadSoundFX_Debug(NewRecordTop_Classic, Scope_Global);
+                LoadSound(Three_Classic, Scope_Global);
+                LoadSound(Two_Classic, Scope_Global);
+                LoadSound(One_Classic, Scope_Global);
+                LoadSound(Go_Classic, Scope_Global);
 
+                LoadSound(Sonic_Classic, Scope_Global);
+                LoadSound(Tails_Classic, Scope_Global);
+                LoadSound(Knuckles_Classic, Scope_Global);
+                LoadSound(Mighty_Classic, Scope_Global);
+                LoadSound(Ray_Classic, Scope_Global);
+
+                LoadSound(Goal_Classic, Scope_Global);
+
+                LoadSound(TheWinnerIs_Classic, Scope_Global);
+
+                LoadSound(NewRecordMid_Classic, Scope_Global);
+                LoadSound(NewRecordTop_Classic, Scope_Global);
+
+            }
+            else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Default)
+            {          
+                LoadSound(Player1_Stock, Scope_Global);
+                LoadSound(Player2_Stock, Scope_Global);
+                LoadSound(Player3_Stock, Scope_Global);
+                LoadSound(Player4_Stock, Scope_Global);
+
+                LoadSound(SonicWins_Stock, Scope_Global);
+                LoadSound(TailsWins_Stock, Scope_Global);
+                LoadSound(KnuxWins_Stock, Scope_Global);
+                LoadSound(MightyWins_Stock, Scope_Global);
+                LoadSound(RayWins_Stock, Scope_Global);
+
+                LoadSound(ItsADraw_Stock, Scope_Global);
+                LoadSound(ItsADraw_Set_Stock, Scope_Global);
+
+                LoadSound(Three_Stock, Scope_Global);
+                LoadSound(Two_Stock, Scope_Global);
+                LoadSound(One_Stock, Scope_Global);
+                LoadSound(Go_Stock, Scope_Global);
+
+                LoadSound(Sonic_Stock, Scope_Global);
+                LoadSound(Tails_Stock, Scope_Global);
+                LoadSound(Knuckles_Stock, Scope_Global);
+                LoadSound(Mighty_Stock, Scope_Global);
+                LoadSound(Ray_Stock, Scope_Global);
+
+                LoadSound(Goal_Stock, Scope_Global);
+
+                LoadSound(TheWinnerIs_Stock, Scope_Global);
+
+                LoadSound(NewRecordMid_Stock, Scope_Global);
+                LoadSound(NewRecordTop_Stock, Scope_Global);
             }
 
             if (ChangeAnnouncer) CompPlus_Announcers::ChangeAnnouncer();
@@ -810,7 +921,7 @@ namespace CompPlus_Announcers
     //This Would be what LoadSounds() Calls first
     void LoadAnnouncerFX()
     {
-        //LoadAnnouncerFX(true);
+        LoadAnnouncerFX(true);
     }
 
     void ReloadAnnouncerFX()

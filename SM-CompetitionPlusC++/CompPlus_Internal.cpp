@@ -16,8 +16,6 @@ namespace CompPlus_Internal
     bool HasCopiedOriginalTimeCode = false;
     bool IsLimitedWriten = false;
     bool IsUnlimitedWriten = false;
-    char ETA_OriginalCode[0x02];
-    char TLK_OriginalCode[0x06];
 
     bool isUnlockWriten = false;
     bool isLockWriten = false;
@@ -25,6 +23,9 @@ namespace CompPlus_Internal
     char ControlLock_OriginalCode[0x06];
 
     bool InitalInputCollected = false;
+
+    DataPointer(int, HurryUpTimerA, 0x6A74D4);
+    DataPointer(int, HurryUpTimerB, 0x6AFFD4);
 
     void UpdateVSControlLockState()
     {
@@ -60,23 +61,108 @@ namespace CompPlus_Internal
         }
     }
 
+    char ExtendedTime_Code[0x02];
+    char TimeLimit_Kill_Code[0x06];
+
+    char TimeLimit_VS_Kill_Code[7];
+    char TimeLimit_VS_TimeLock1_Code[4];
+    char TimeLimit_VS_TimeLock2_Code[6];
+    char TimeLimit_VS_TimeLock3_Code[7];
+
+    char TimeLimit_VS_MaxTime1_Code[10];
+    char TimeLimit_VS_MaxTime2_Code[11];
+    char TimeLimit_VS_MaxTime3_Code[10];
+
+    void WriteUnlimitedTimeMovs(void* Min_Addr, void* Sec_Addr, void* Centi_Addr, int Mins, int Secs, int Centis)
+    {
+        uint8_t Min_Data[0x0A];
+        Min_Data[0] = 0xC7;
+        Min_Data[1] = 0x81;
+        Min_Data[2] = 0xEC;
+        Min_Data[3] = 0x00;
+        Min_Data[4] = 0x00; 
+        Min_Data[5] = 0x00;
+        *(int32_t*)(Min_Data + 6) = Mins;
+        WriteData(Min_Addr, Min_Data);
+        //SonicMania.exe+E0D1 - C7 81 EC000000 09000000
+
+        uint8_t Sec_Data[0x0B];
+        Sec_Data[0] = 0xC7;
+        Sec_Data[1] = 0x84;
+        Sec_Data[2] = 0x86;
+        Sec_Data[3] = 0xF0;
+        Sec_Data[4] = 0x00;
+        Sec_Data[5] = 0x00;
+        Sec_Data[6] = 0x00;
+        *(int32_t*)(Sec_Data + 7) = Secs;
+        WriteData(Sec_Addr, Sec_Data);
+        //SonicMania.exe+E0DB - C7 84 86 F0000000 3B000000
+
+        uint8_t Centi_Data[0x0A];
+        Centi_Data[0] = 0xC7;
+        Centi_Data[1] = 0x81;
+        Centi_Data[2] = 0xF4;
+        Centi_Data[3] = 0x00; 
+        Centi_Data[4] = 0x00;
+        Centi_Data[5] = 0x00;
+        *(int32_t*)(Centi_Data + 6) = Centis;
+        WriteData(Centi_Addr, Centi_Data);
+        //SonicMania.exe+E0E6 - C7 81 F4000000 63000000
+    }
+
+    void UpdateHurryUpTimer() 
+    {
+        if (CompPlus_Settings::NoHurryUpTimer) 
+        {
+            HurryUpTimerA = 99;
+            HurryUpTimerB = 99;
+        }
+    }
+
     void UpdateTimer()
     {
         if (SonicMania::Timer.Enabled == false) return;
-        void* extended_time_address = (void*)(baseAddress + 0x535BD);
-        void* time_limit_kill_jne_address = (void*)(baseAddress + 0xADD03);
-        void* time_limit_skip_jne_adderss = (void*)(baseAddress + 0x00ADDE7);
-        void* time_limit_kill_jmp_nop_address = (void*)(baseAddress + 0xADD03 + 0x5);
+
+        void* ExtendedTime_Addr = (void*)(baseAddress + 0x535BD);
+        void* TimeLimit_Kill_Addr = (void*)(baseAddress + 0xADD03);
+        void* TimeLimit_Skip_JNE_Addr = (void*)(baseAddress + 0x00ADDE7);
+        void* TimeLimit_Kill_JMP_Addr = (void*)(baseAddress + 0xADD03 + 0x5);
+
+        void* TimeLimit_VS_Kill_Adrr = (void*)(baseAddress + 0xADD9F);
+        void* TimeLimit_VS_TimeLock1_Adrr = (void*)(baseAddress + 0xADD21);
+        void* TimeLimit_VS_TimeLock2_Adrr = (void*)(baseAddress + 0xADD1B); 
+        void* TimeLimit_VS_TimeLock3_Adrr = (void*)(baseAddress + 0xADD25);
+
+        void* TimeLimit_VS_MaxTime1_Adrr = (void*)(baseAddress + 0xE0D1);
+        void* TimeLimit_VS_MaxTime2_Adrr = (void*)(baseAddress + 0xE0DB);
+        void* TimeLimit_VS_MaxTime3_Adrr = (void*)(baseAddress + 0xE0E6);
+
         // NOP bytes
-        char nops1[4];
-        char nops2[8];
-        memset(nops1, 0x90, sizeof nops1);
-        memset(nops2, 0x90, sizeof nops2);
+        char ExtendedTime_NOPS[8];
+        char TimeLimit_VS_Kill_NOPS[7];
+        char TimeLimit_VS_TimeLock1_NOPS[4];
+        char TimeLimit_VS_TimeLock2_NOPS[6];
+        char TimeLimit_VS_TimeLock3_NOPS[7];
+
+        // NOP Memset
+        memset(ExtendedTime_NOPS, 0x90, sizeof ExtendedTime_NOPS);
+        memset(TimeLimit_VS_Kill_NOPS, 0x90, sizeof TimeLimit_VS_Kill_NOPS);
+        memset(TimeLimit_VS_TimeLock1_NOPS, 0x90, sizeof TimeLimit_VS_TimeLock1_NOPS);
+        memset(TimeLimit_VS_TimeLock2_NOPS, 0x90, sizeof TimeLimit_VS_TimeLock2_NOPS);
+        memset(TimeLimit_VS_TimeLock3_NOPS, 0x90, sizeof TimeLimit_VS_TimeLock3_NOPS);
 
         if (!HasCopiedOriginalTimeCode)
         {
-            memcpy(ETA_OriginalCode, extended_time_address, 0x02);
-            memcpy(TLK_OriginalCode, time_limit_kill_jne_address, 0x06);
+            // Copy Original Unmodified Code
+            memcpy(ExtendedTime_Code, ExtendedTime_Addr, 0x02);
+            memcpy(TimeLimit_Kill_Code, TimeLimit_Kill_Addr, 0x06);
+            memcpy(TimeLimit_VS_Kill_Code, TimeLimit_Kill_Addr, 0x07);
+            memcpy(TimeLimit_VS_TimeLock1_Code, TimeLimit_VS_TimeLock1_Adrr, 0x04);
+            memcpy(TimeLimit_VS_TimeLock2_Code, TimeLimit_VS_TimeLock2_Adrr, 0x06);
+            memcpy(TimeLimit_VS_TimeLock3_Code, TimeLimit_VS_TimeLock3_Adrr, 0x07);
+            memcpy(TimeLimit_VS_MaxTime1_Code, TimeLimit_VS_MaxTime1_Adrr, 0x0A);
+            memcpy(TimeLimit_VS_MaxTime2_Code, TimeLimit_VS_MaxTime2_Adrr, 0x0B);
+            memcpy(TimeLimit_VS_MaxTime3_Code, TimeLimit_VS_MaxTime3_Adrr, 0x0A);
             HasCopiedOriginalTimeCode = true;
         }
 
@@ -84,9 +170,14 @@ namespace CompPlus_Internal
         {
             if (!IsUnlimitedWriten)
             {
-                WriteData(extended_time_address, nops2, 0x02);
-                ReplaceJNEwithJump(time_limit_kill_jne_address, time_limit_skip_jne_adderss);
-                WriteData(time_limit_kill_jmp_nop_address, nops1, 0x01);
+                //Disable The Time Limit
+                WriteData(ExtendedTime_Addr, ExtendedTime_NOPS, 0x02);
+                ReplaceJNEwithJump(TimeLimit_Kill_Addr, TimeLimit_Skip_JNE_Addr);
+                WriteData(TimeLimit_VS_Kill_Adrr, TimeLimit_VS_Kill_NOPS, 0x07);
+                WriteData(TimeLimit_VS_TimeLock1_Adrr, TimeLimit_VS_TimeLock1_NOPS, 0x04);
+                WriteData(TimeLimit_VS_TimeLock2_Adrr, TimeLimit_VS_TimeLock2_NOPS, 0x06);
+                WriteData(TimeLimit_VS_TimeLock3_Adrr, TimeLimit_VS_TimeLock3_NOPS, 0x07);
+                WriteUnlimitedTimeMovs(TimeLimit_VS_MaxTime1_Adrr, TimeLimit_VS_MaxTime2_Adrr, TimeLimit_VS_MaxTime3_Adrr, 99, 99, 99);
                 IsUnlimitedWriten = true;
                 IsLimitedWriten = false;
             }
@@ -95,8 +186,16 @@ namespace CompPlus_Internal
         {
             if (!IsLimitedWriten)
             {
-                WriteData(extended_time_address, ETA_OriginalCode, 0x02);
-                WriteData(time_limit_kill_jne_address, TLK_OriginalCode, 0x06);
+                //Enable The Time Limit
+                WriteData(ExtendedTime_Addr, ExtendedTime_Code, 0x02);
+                WriteData(TimeLimit_Kill_Addr, TimeLimit_Kill_Code, 0x06);
+                WriteData(TimeLimit_VS_Kill_Adrr, TimeLimit_VS_Kill_Code, 0x07);
+                WriteData(TimeLimit_VS_TimeLock1_Adrr, TimeLimit_VS_TimeLock1_Code, 0x04);
+                WriteData(TimeLimit_VS_TimeLock2_Adrr, TimeLimit_VS_TimeLock2_Code, 0x06);
+                WriteData(TimeLimit_VS_TimeLock3_Adrr, TimeLimit_VS_TimeLock3_Code, 0x07);
+                WriteData(TimeLimit_VS_MaxTime1_Adrr, TimeLimit_VS_MaxTime1_Code, 0x0A);
+                WriteData(TimeLimit_VS_MaxTime2_Adrr, TimeLimit_VS_MaxTime2_Code, 0x0B);
+                WriteData(TimeLimit_VS_MaxTime3_Adrr, TimeLimit_VS_MaxTime3_Code, 0x0A);
                 IsLimitedWriten = true;
                 IsUnlimitedWriten = false;
             }
@@ -105,6 +204,8 @@ namespace CompPlus_Internal
 
     void OnFrame() 
     {
+        UpdateHurryUpTimer();
         UpdateTimer();
+        UpdateVSControlLockState();
     }
 }

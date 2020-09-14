@@ -10,7 +10,6 @@
 #include "LHPZ.h"
 namespace CompPlus_Scene_LHPZ
 {
-    #define PlayerStatus_HCZSlide (SonicMania::PlayerStatus)(baseAddress + 0x000B9970);
 
     void SetSpringSpeed(int slot, int speed)
     {
@@ -34,10 +33,10 @@ namespace CompPlus_Scene_LHPZ
 
         if (player.Position.X >= x1 && player.Position.X <= x2 && player.Position.Y >= y1 && player.Position.Y <= y2) 
         {
-            if (player.Grounded) 
+            if (player.Grounded)  
             {
                 player.Direction = 0;
-                player.State = PlayerStatus_HCZSlide;
+                player.State = PLAYERSTATE_HCZSlide;
                 int speed = 550000;
                 player.SetVelocity(speed, speed);
             }

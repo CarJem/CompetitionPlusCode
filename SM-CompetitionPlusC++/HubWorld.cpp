@@ -55,6 +55,7 @@ namespace CompPlus_HubWorld
 	int VictoryMethodSwapperController = 182;
 	int LivesNUDController = 178;
 	int RemoveTimeToggleController = 179;
+    int HurryTimerToggleController = 475;
     int ItemBoxModeController = 180;
     int NumberOfRoundsController = 352;
 
@@ -63,6 +64,7 @@ namespace CompPlus_HubWorld
 	int VictoryMethodSwapperText = 134;
 	int LivesNUDText = 127;
 	int RemoveTimeToggleText = 130;
+    int HurryTimerToggleText = 478;
     int ItemBoxModeText = 206;
     int NumberOfRoundsText = 351;
 
@@ -212,6 +214,7 @@ namespace CompPlus_HubWorld
 	INT_Position Pos_VictoryMethodText = INT_Position();
     INT_Position Pos_ItemBoxModeText = INT_Position();
     INT_Position Pos_NumberOfRoundsText = INT_Position();
+    INT_Position Pos_HurryTimerToggleText = INT_Position();
 
 	#pragma endregion
 
@@ -282,7 +285,7 @@ namespace CompPlus_HubWorld
 			else if (RealID == 4) Player = &Player4;
 			else Player = &Player1;
 
-			if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+			if (Player->InRange(x1, y1, x2, y2) && Player->Up && !isSettingChanged)
 			{
 				if (OldValue == true) NewValue = false;
 				else NewValue = true;
@@ -290,7 +293,7 @@ namespace CompPlus_HubWorld
 				isSettingChanged = true;
 				SettingWaitTimerActivate();
 			}
-			else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+			else if (Player->InRange(x1, y1, x2, y2) && Player->Down && !isSettingChanged)
 			{
 				if (OldValue == true) NewValue = false;
 				else NewValue = true;
@@ -328,7 +331,7 @@ namespace CompPlus_HubWorld
 			else if (RealID == 4) Player = &Player4;
 			else Player = &Player1;
 
-			if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+			if (Player->InRange(x1, y1, x2, y2) && Player->Up && !isSettingChanged)
 			{
 				if (OldValue + 1 > Max) NewValue = Min;
 				else NewValue = OldValue + 1;
@@ -336,7 +339,7 @@ namespace CompPlus_HubWorld
 				isSettingChanged = true;
 				SettingWaitTimerActivate();
 			}
-			else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+			else if (Player->InRange(x1, y1, x2, y2) && Player->Down && !isSettingChanged)
 			{
 				if (OldValue - 1 < Min) NewValue = Max;
 				else NewValue = OldValue - 1;
@@ -372,7 +375,7 @@ namespace CompPlus_HubWorld
         else if (RealID == 4) Player = &Player4;
         else Player = &Player1;
 
-        if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+        if (Player->InRange(x1, y1, x2, y2) && Player->Up && !isSettingChanged)
         {
             if (OldValue == true) NewValue = false;
             else NewValue = true;
@@ -380,7 +383,7 @@ namespace CompPlus_HubWorld
             isSettingChanged = true;
             SettingWaitTimerActivate();
         }
-        else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+        else if (Player->InRange(x1, y1, x2, y2) && Player->Down && !isSettingChanged)
         {
             if (OldValue == true) NewValue = false;
             else NewValue = true;
@@ -413,7 +416,7 @@ namespace CompPlus_HubWorld
         else if (RealID == 4) Player = &Player4;
         else Player = &Player1;
 
-        if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Up && !isSettingChanged)
+        if (Player->InRange(x1, y1, x2, y2) && Player->Up && !isSettingChanged)
         {
             if (OldValue + 1 > Max) NewValue = Min;
             else NewValue = OldValue + 1;
@@ -422,7 +425,7 @@ namespace CompPlus_HubWorld
             SettingWaitTimerActivate();
             isUp = true;
         }
-        else if (PlayerInRange(Player, x1, y1, x2, y2) && Player->Down && !isSettingChanged)
+        else if (Player->InRange(x1, y1, x2, y2) && Player->Down && !isSettingChanged)
         {
             if (OldValue - 1 < Min) NewValue = Max;
             else NewValue = OldValue - 1;
@@ -621,6 +624,10 @@ namespace CompPlus_HubWorld
 		//Infinite Time Toggle
 		bool InfiniteTimeStatus = ToggleController(RemoveTimeToggleController, CompPlus_Settings::TimeLimit);
 		if (InfiniteTimeStatus != CompPlus_Settings::TimeLimit) CompPlus_Settings::SetTimeLimit(InfiniteTimeStatus);
+
+        //Hurry Timer Toggle
+        bool HurryTimerStatus = ToggleController(HurryTimerToggleController, CompPlus_Settings::NoHurryUpTimer);
+        if (HurryTimerStatus != CompPlus_Settings::NoHurryUpTimer) CompPlus_Settings::SetHurryTimer(HurryTimerStatus);
 
 		//Infinite Rounds Toggle
 		bool InfiniteRoundsStatus = ToggleController(InfiniteRoundsToggleController, CompPlus_Settings::EndlessRounds);
@@ -1340,19 +1347,21 @@ namespace CompPlus_HubWorld
 		//Lives Display
 		UpdateLivesDisplay(LivesNUDText, Pos_LivesNUDText.X, Pos_LivesNUDText.Y, 17);
 		//Remove Time Display
-		UpdateToggleDisplayInverted(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlus_Settings::TimeLimit, 18);
+        UpdateToggleDisplay(RemoveTimeToggleText, Pos_RemoveTimeText.X, Pos_RemoveTimeText.Y, CompPlus_Settings::TimeLimit, 18);
+        //Hurry Timer Display
+        UpdateToggleDisplayInverted(HurryTimerToggleText, Pos_HurryTimerToggleText.X, Pos_HurryTimerToggleText.Y, CompPlus_Settings::NoHurryUpTimer, 19);
 		//Infinite Rounds Display
-		UpdateToggleDisplay(InfiniteRoundsToggleText, Pos_InfiniteRoundsText.X, Pos_InfiniteRoundsText.Y, CompPlus_Settings::EndlessRounds, 19);
+		UpdateToggleDisplay(InfiniteRoundsToggleText, Pos_InfiniteRoundsText.X, Pos_InfiniteRoundsText.Y, CompPlus_Settings::EndlessRounds, 20);
 		//Announcer Type Display
-		UpdateAnnouncerDisplay(AnnouncerTypeText, Pos_AnnouncerTypeText.X, Pos_AnnouncerTypeText.Y, 20);
+		UpdateAnnouncerDisplay(AnnouncerTypeText, Pos_AnnouncerTypeText.X, Pos_AnnouncerTypeText.Y, 21);
 		//Victory Method Display
-		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y, 21);
+		UpdateVictoryMethodDisplay(VictoryMethodSwapperText, Pos_VictoryMethodText.X, Pos_VictoryMethodText.Y, 22);
         //Item Box Mode Type Display
-        UpdateItemBoxModeDisplay(ItemBoxModeText, Pos_ItemBoxModeText.X, Pos_ItemBoxModeText.Y, 22);
+        UpdateItemBoxModeDisplay(ItemBoxModeText, Pos_ItemBoxModeText.X, Pos_ItemBoxModeText.Y, 23);
         //Number Of Rounds Display
-        UpdateNumberOfRoundsDisplay(NumberOfRoundsText, Pos_NumberOfRoundsText.X, Pos_NumberOfRoundsText.Y, 23);
+        UpdateNumberOfRoundsDisplay(NumberOfRoundsText, Pos_NumberOfRoundsText.X, Pos_NumberOfRoundsText.Y, 24);
         //Scoreboard Displays
-        int lastIndex = UpdateScoreboardDisplays(24);
+        int lastIndex = UpdateScoreboardDisplays(25);
         lastIndex = UpdateHUBPrivateHUDs(lastIndex);
 	}
 
@@ -1379,6 +1388,7 @@ namespace CompPlus_HubWorld
 		Entity& E12 = *GetEntityFromSceneSlot<Entity>(RemoveTimeToggleController);
         Entity& E13 = *GetEntityFromSceneSlot<Entity>(ItemBoxModeController);
         Entity& E14 = *GetEntityFromSceneSlot<Entity>(NumberOfRoundsController);
+        Entity& E15 = *GetEntityFromSceneSlot<Entity>(HurryTimerToggleController);
 
 		Pos_SwapPlayerText.X = E1.Position.X + OffsetX;
 		Pos_SwapPlayerText.Y = E1.Position.Y + OffsetY;
@@ -1421,6 +1431,9 @@ namespace CompPlus_HubWorld
 
         Pos_NumberOfRoundsText.X = E14.Position.X + OffsetX;
         Pos_NumberOfRoundsText.Y = E14.Position.Y + OffsetY_2;
+
+        Pos_HurryTimerToggleText.X = E15.Position.X + OffsetX;
+        Pos_HurryTimerToggleText.Y = E15.Position.Y + OffsetY_2;
        
         Entity& QuickWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_WarpHub);
         Entity& RankingWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_Ranking);
@@ -1593,6 +1606,18 @@ namespace CompPlus_HubWorld
         Player.Position.Y = y;
     }
 
+    DataPointer(int, IsPlayerInDebugMode, 0x31F9AC);
+    DataPointer(int, IsPlayerInDebugMode_Alt, 0x30D130);
+
+    bool isPlayerInDebug() 
+    {
+        if (IsPlayerInDebugMode == 1 || IsPlayerInDebugMode_Alt == 1) 
+        {
+            return true;
+        }
+        else return false;
+    }
+
     void CheckQuickWarp()
     {
         if (P1_IsInWarpRoom == false && Player1.Active)
@@ -1616,7 +1641,10 @@ namespace CompPlus_HubWorld
             P4_LastWarpPosition.Y = (int)Player4.Position.Y;
         }
 
-        if (PlayerControllers[1].Y.Press && !P1_IsInWarpRoom && Player1.Grounded && Player1.XVelocity == 0 && Player1.YVelocity == 0) QueueWarp(Player1, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 1);
+        if (PlayerControllers[1].Y.Press && !P1_IsInWarpRoom && Player1.Grounded && Player1.XVelocity == 0 && Player1.YVelocity == 0) 
+        {
+            if (!isPlayerInDebug()) QueueWarp(Player1, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 1);
+        }
         if (PlayerControllers[2].Y.Press && !P2_IsInWarpRoom && Player2.Grounded && Player2.XVelocity == 0 && Player2.YVelocity == 0) QueueWarp(Player2, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 2);
         if (PlayerControllers[3].Y.Press && !P3_IsInWarpRoom && Player3.Grounded && Player3.XVelocity == 0 && Player3.YVelocity == 0) QueueWarp(Player3, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 3);
         if (PlayerControllers[4].Y.Press && !P4_IsInWarpRoom && Player4.Grounded && Player4.XVelocity == 0 && Player4.YVelocity == 0) QueueWarp(Player4, WarpDest_WarpHub.X, WarpDest_WarpHub.Y, true, 4);
@@ -1630,7 +1658,7 @@ namespace CompPlus_HubWorld
         int _X2 = WarpDetector.Position.X + X2;
         int _Y2 = WarpDetector.Position.Y + Y2;
 
-        if (PlayerInRange(&Player, _X1, _Y1, _X2, _Y2))
+        if (Player.InRange(_X1, _Y1, _X2, _Y2))
         {
             INT_Position Warp = GetLastWarpPosition(PlayerID);
             QueueWarp(Player, Warp.X, Warp.Y, false, PlayerID);
@@ -1645,7 +1673,7 @@ namespace CompPlus_HubWorld
         int _X2 = WarpDetector.Position.X + X2;
         int _Y2 = WarpDetector.Position.Y + Y2;
 
-        if (PlayerInRange(&Player, _X1, _Y1, _X2, _Y2))
+        if (Player.InRange(_X1, _Y1, _X2, _Y2))
         {
             QueueWarp(Player, WarpX, WarpY, false, PlayerID);
         }
@@ -1736,7 +1764,7 @@ namespace CompPlus_HubWorld
             else if (RealID == 3) Player = &Player3;
             else if (RealID == 4) Player = &Player4;
             else Player = &Player1;
-            bool isPlayerInRange = PlayerInRange(Player, 12512, 10704, 12592, 10752);
+            bool isPlayerInRange = Player->InRange(12512, 10704, 12592, 10752);
             if (isPlayerInRange && !CreditsSelected)
             {
                 CreditsSelected = true;
@@ -1797,6 +1825,7 @@ namespace CompPlus_HubWorld
 
 	void OnFrame() 
 	{	
+        
         CreditsWarp();
 		SetHUBVisualSettings();
         UpdateQuickWarpRoom();
@@ -1810,7 +1839,7 @@ namespace CompPlus_HubWorld
             isRestart = false;
         }
 
-		Button& ConfirmButton = *GetEntityFromSceneSlot<Button>(EnterLSelectButton);
+		SonicMania::EntityButton& ConfirmButton = *GetEntityFromSceneSlot<SonicMania::EntityButton>(EnterLSelectButton);
 
 		UpdateHUBPositions();
 		CheckSettings();
@@ -1822,6 +1851,7 @@ namespace CompPlus_HubWorld
         if (CreditsSelected) CreditsWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, CreditsSelected, LevelSelectedWarpSoundPlayed);
 
 		if (LevelSelected) WarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+        
 	}
 
 	void WarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)

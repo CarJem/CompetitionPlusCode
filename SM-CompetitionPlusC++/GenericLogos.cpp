@@ -26,6 +26,8 @@ namespace CompPlus_GenericLogos
 	int FadeWait = 50;
 	int SceneSkipMin = 50;
 
+
+    bool WantsToSkip = false;
 	bool FadeStarted = false;
 
 
@@ -34,10 +36,18 @@ namespace CompPlus_GenericLogos
 	{
 		if (SceneLoadWaitTimer >= SceneLoadWaitMax + FadeWait)
 		{
-			if (isIZ) LoadLevel_IZ(LevelKey);
-			else LoadLevel(LevelID);
+            if (WantsToSkip) 
+            {
+                LoadLevel(1);
+            }
+            else 
+            {
+                if (isIZ) LoadLevel_IZ(LevelKey);
+                else LoadLevel(LevelID);
+            }
 			SceneLoadWaitTimer = 0;
 			FadeStarted = false;
+            WantsToSkip = false;
 		}
 		else
 		{
@@ -71,6 +81,7 @@ namespace CompPlus_GenericLogos
 		{
 			if (PlayerControllers[0].A.Press || PlayerControllers[0].B.Press || PlayerControllers[0].C.Press || PlayerControllers[0].X.Press || PlayerControllers[0].Y.Press || PlayerControllers[0].Z.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press)
 			{
+                WantsToSkip = true;
 				if (SceneLoadWaitTimer <= SceneLoadWaitMax)
 				{
 					if (SceneLoadWaitTimer >= SceneSkipMin) SceneLoadWaitTimer = SceneLoadWaitMax;

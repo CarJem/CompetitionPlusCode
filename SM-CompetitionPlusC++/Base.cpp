@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "SonicMania.h"
+#include "ManiaExt.h"
 #include "CompPlus_Core.h"
 #include "IZAPI.h"
 #include "CompPlus_DevMenu.h"
@@ -46,16 +47,26 @@ extern "C"
 		//Code Here Runs when the Game Updates the Screen Position.
 	}
 
+
+    void OnCompPlusFrame() 
+    {
+        int multiplier = FrameMultiplier;
+        for (int i = 0; i < multiplier; i++) 
+        {
+            if (GameState & GameState_Running)
+            {
+                LoadSounds();
+                if (!(GameState & GameState_SoftPause)) CompPlus_Core::OnFrame();
+                UpdateCompPlusDevMenu();
+            }
+            else if (GameState & GameState_NotRunning) CompPlus_Core::OnSceneReset();
+            else if (GameState & GameState_SoftPause) CompPlus_Core::OnSceneReset();
+        }
+    }
+
 	__declspec(dllexport) void OnFrame()
 	{
-		if (GameState & GameState_Running)
-		{
-            LoadSounds();
-			if (!(GameState & GameState_SoftPause)) CompPlus_Core::OnFrame();
-			UpdateCompPlusDevMenu();
-		}
-        else if (GameState & GameState_NotRunning ) CompPlus_Core::OnSceneReset();
-        else if (GameState & GameState_SoftPause) CompPlus_Core::OnSceneReset();
+        OnCompPlusFrame();
 	}
 
 	void DoMenuOnScreenDraw()

@@ -96,7 +96,7 @@ namespace CompPlus_Credits
 
     void LHPZButton()
     {
-        Button& ButtonTrigger = *GetEntityFromSceneSlot<Button>(LHPZSecretButtonSlotID);
+        SonicMania::EntityButton& ButtonTrigger = *GetEntityFromSceneSlot<SonicMania::EntityButton>(LHPZSecretButtonSlotID);
 
         if (ButtonTrigger.Pressed && !LHPZSecretTriggered)
         {
@@ -125,7 +125,7 @@ namespace CompPlus_Credits
 
     void ExitButton()
     {
-        Button& ButtonTrigger = *GetEntityFromSceneSlot<Button>(ExitButtonSlotID);
+        SonicMania::EntityButton& ButtonTrigger = *GetEntityFromSceneSlot<SonicMania::EntityButton>(ExitButtonSlotID);
 
         if (ButtonTrigger.Pressed)
         {
@@ -251,7 +251,7 @@ namespace CompPlus_Credits
             int y1 = y - 20;
             int y2 = y + 20;
 
-            bool isPlayerInRange = PlayerInRange(RealID, x1, y1, x2, y2);
+            bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
             bool FoundAlready = CurrentSpawns[i].Collected;
             if (isPlayerInRange && !FoundAlready)
             {
@@ -285,7 +285,7 @@ namespace CompPlus_Credits
             int y1 = y - 20;
             int y2 = y + 20;
 
-            bool isPlayerInRange = PlayerInRange(RealID, x1, y1, x2, y2);
+            bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
             bool FoundAlready = CurrentSpawns[i].Collected;
             if (isPlayerInRange && !FoundAlready)
             {
@@ -345,7 +345,7 @@ namespace CompPlus_Credits
 
         if (PlayerCount >= 1)
         {
-            if (!PlayerInRange(1, x1, y1, x2, y2))
+            if (!GetPlayer(1).InRange(x1, y1, x2, y2))
             {
                 Player1.Position.X = CameraXPos;
                 Player1.Position.Y = CameraYPos;
@@ -353,7 +353,7 @@ namespace CompPlus_Credits
         }
         if (PlayerCount >= 2)
         {
-            if (!PlayerInRange(2, x1, y1, x2, y2))
+            if (!GetPlayer(2).InRange(x1, y1, x2, y2))
             {
                 Player2.Position.X = CameraXPos;
                 Player2.Position.Y = CameraYPos;
@@ -361,7 +361,7 @@ namespace CompPlus_Credits
         }
         if (PlayerCount >= 3)
         {
-            if (!PlayerInRange(3, x1, y1, x2, y2))
+            if (!GetPlayer(3).InRange(x1, y1, x2, y2))
             {
                 Player3.Position.X = CameraXPos;
                 Player3.Position.Y = CameraYPos;
@@ -369,7 +369,7 @@ namespace CompPlus_Credits
         }
         if (PlayerCount >= 4)
         {
-            if (!PlayerInRange(4, x1, y1, x2, y2))
+            if (!GetPlayer(4).InRange(x1, y1, x2, y2))
             {
                 Player4.Position.X = CameraXPos;
                 Player4.Position.Y = CameraYPos;
@@ -381,7 +381,10 @@ namespace CompPlus_Credits
     {
         if (PlayerControllers[0].Y.Down)
         {
-            CameraXPos += 1;
+            for (int i = 0; i < 4; i++) 
+            {
+                CameraXPos++;
+            }
         }
         else
         {
@@ -536,7 +539,7 @@ namespace CompPlus_Credits
             CompPlus_Settings::RefreshSettings();
             SonicMania::Timer.Enabled = true;
         }
-        SetScreenCount(1);
+        SonicMania::SetVSScreenCount(1);
         CompPlus_Settings::isVSControllerInputUnlocked = true;
     }
 

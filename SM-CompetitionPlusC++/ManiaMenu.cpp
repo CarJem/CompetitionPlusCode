@@ -499,7 +499,10 @@ namespace CompPlus_ManiaMenu
         if (CompetitionSettingsPage.SelectedElement == 0) CompetitionSettingsPage.SelectedElement = 2;
         else if (CompetitionSettingsPage.SelectedElement == 1) CompetitionSettingsPage.SelectedElement = 3;
 
-        UpdatePreMatchStuff();
+        if (CompetitionSettingsPage.InBounds)
+        {
+            UpdatePreMatchStuff();
+        }
     }
 
     void UpdateMiscStuff() 
@@ -561,14 +564,14 @@ namespace CompPlus_ManiaMenu
 
     void UpdateLevelSelect() 
     {
-        SonicMania::UIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(590);
+        SonicMania::EntityUIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(590);
         object.Disabled = false;
         //object.Obfuscate = true;
         object.XOut = false;
         object.ZoneID = 11;
         object.Act = 31;
 
-        SonicMania::UIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::UIVsZoneButton>(591);
+        SonicMania::EntityUIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(591);
         object2.Disabled = false;
         //object2.Obfuscate = true;
         object2.XOut = false;

@@ -68,8 +68,6 @@ namespace CompPlus_Settings
 
 
 
-#define UpAbility_Peelout    (SonicMania::Ability)(baseAddress + 0x000C8FF0)
-
     #pragma region Internal Variables
 
     extern int NumberOfAnnouncers;
@@ -99,6 +97,7 @@ namespace CompPlus_Settings
     extern int InitalLives;
     extern bool InfiniteLives;
     extern bool TimeLimit;
+    extern bool NoHurryUpTimer;
     extern bool EndlessRounds;
     extern bool DropdashAbility;
     extern bool InstaSheildAbility;
@@ -130,6 +129,8 @@ namespace CompPlus_Settings
     #pragma endregion
 
     extern void SetTimeLimit(bool Value);
+
+    extern void SetHurryTimer(bool Value);
 
     extern void SetCurrentLSelect(int Value);
 
@@ -164,8 +165,6 @@ namespace CompPlus_Settings
     extern void LoadSettings();
 
     extern void SaveSettings();
-
-    extern void FixUnmatchingVSPlayers();
 }
 
 

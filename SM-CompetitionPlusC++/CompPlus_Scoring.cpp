@@ -54,18 +54,18 @@ namespace CompPlus_Scoring
      bool ThisMatchIsTied = false;
      bool CanGoToFinalResults = false;
 
-     DataPointer(int, HaveAllCrossedTheFinishLine, 0x46C160);
-     DataPointer(int, CountdownTimer, 0x6A74D4);
      DataPointer(int, InitalCountdown, 0x6A7074);
+
+     DataPointer(int, HaveAllCrossedTheFinishLine, 0x46C160);
      DataPointer(int, HasSomeoneCrossed, 0x33C890);
 
-    std::vector<ScorableTime> TimeRanking;
-    std::vector<ScorableInt> TotalRingRanking;
-    std::vector<ScorableInt> ScoreRanking;
-    std::vector<ScorableInt> RingRanking;
-    std::vector<ScorableInt> ItemRanking;
-    std::vector<ScorableInt> AverageRanking;
-    std::vector<ScorableInt> AntiRingRanking;
+     std::vector<ScorableTime> TimeRanking;
+     std::vector<ScorableInt> TotalRingRanking;
+     std::vector<ScorableInt> ScoreRanking;
+     std::vector<ScorableInt> RingRanking;
+     std::vector<ScorableInt> ItemRanking;
+     std::vector<ScorableInt> AverageRanking;
+     std::vector<ScorableInt> AntiRingRanking;
 
     #pragma region Check/Get/Set Methods
 

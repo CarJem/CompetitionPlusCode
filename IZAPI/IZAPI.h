@@ -13,7 +13,7 @@ extern "C"
             StageLoadPhase_Load,
             StageLoadPhase_Loaded
         };
-
+        
         // Structs
         struct StageInfo
         {
@@ -58,7 +58,7 @@ extern "C"
 
         // Sets a stage asset redirect
         extern void SetStageAsset(const char* stageKey, const char* basePath, const char* newPath = nullptr);
-
+        
         // Sets a global asset redirect
         extern void SetGlobalAsset(const char* basePath, const char* newPath = nullptr);
     }

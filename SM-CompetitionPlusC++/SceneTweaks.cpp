@@ -39,9 +39,9 @@ namespace CompPlus_SceneTweaks
 
         if (SonicMania::CurrentSceneInt == 1)
         {
-            SetUIBG_BGColor(199, 235, 255);
-            SetUIBG_FGLowColor(247, 146, 24);
-            SetUIBG_FGHighColor(57, 178, 206);
+            SonicMania::SetUIBG_BGColor(199, 235, 255);
+            SonicMania::SetUIBG_FGLowColor(247, 146, 24);
+            SonicMania::SetUIBG_FGHighColor(57, 178, 206);
         }
     }
 

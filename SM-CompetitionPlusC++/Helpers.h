@@ -20,7 +20,7 @@ extern std::string BoolToString(bool a);
 
 inline BOOL ReplaceJNEwithJump(void* writeaddress, void* funcaddress)
 {
-    uint8_t data[6];
+    uint8_t data[7];
     data[0] = 0xE9; // JMP DWORD (relative)
     *(int32_t*)(data + 1) = (uint32_t)funcaddress - ((uint32_t)writeaddress + 5);
     data[6] = 0x90;

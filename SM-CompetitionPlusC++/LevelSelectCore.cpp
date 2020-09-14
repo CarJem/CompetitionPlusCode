@@ -93,7 +93,7 @@ namespace CompPlus_LevelSelectCore
 
 	void UniversalLSelectLoop() 
 	{
-		SetScreenCount(1);
+        SonicMania::SetVSScreenCount(1);
 	}
 
 	void LevelSelectDelayLoop(int selectorID, int levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)

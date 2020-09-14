@@ -41,7 +41,7 @@ extern "C"
         {
             // Write placeholder
             strcpy_s(VersionString, "NOT LOADED");
-            
+
             // Detect InfinityZone
             InfinityZoneModule = DetectIZDLL();
             if (!InfinityZoneModule)
@@ -51,16 +51,16 @@ extern "C"
             }
 
             // Pull exports
-            GetIZVersion_ptr             = (GetIZVersion_type)GetProcAddress(InfinityZoneModule, "GetIZVersion");
-            GetIZAPIMajorVersion_ptr     = (GetIZVersion_type)GetProcAddress(InfinityZoneModule, "GetIZAPIMajorVersion");
-            RegisterStageLoadEvent_ptr   = (RegisterStageLoadEvent_type)GetProcAddress(InfinityZoneModule, "RegisterStageLoadEvent");
+            GetIZVersion_ptr = (GetIZVersion_type)GetProcAddress(InfinityZoneModule, "GetIZVersion");
+            GetIZAPIMajorVersion_ptr = (GetIZVersion_type)GetProcAddress(InfinityZoneModule, "GetIZAPIMajorVersion");
+            RegisterStageLoadEvent_ptr = (RegisterStageLoadEvent_type)GetProcAddress(InfinityZoneModule, "RegisterStageLoadEvent");
             RegisterStageUnloadEvent_ptr = (RegisterStageLoadEvent_type)GetProcAddress(InfinityZoneModule, "RegisterStageUnloadEvent");
-            LoadStagesFile_ptr           = (CStringFunc)GetProcAddress(InfinityZoneModule, "LoadStagesFile");
-            ChangeStage_ptr              = (CString2Func)GetProcAddress(InfinityZoneModule, "ChangeStage");
-            PerformAssetReset_ptr        = (Func)GetProcAddress(InfinityZoneModule, "PerformAssetReset");
-            GetCurrentStage_ptr          = (GetCurrentStage_type)GetProcAddress(InfinityZoneModule, "GetCurrentStage");
-            SetStageAsset_ptr            = (CString3Func)GetProcAddress(InfinityZoneModule, "SetStageAsset");
-            SetGlobalAsset_ptr           = (CString2Func)GetProcAddress(InfinityZoneModule, "SetGlobalAsset");
+            LoadStagesFile_ptr = (CStringFunc)GetProcAddress(InfinityZoneModule, "LoadStagesFile");
+            ChangeStage_ptr = (CString2Func)GetProcAddress(InfinityZoneModule, "ChangeStage");
+            PerformAssetReset_ptr = (Func)GetProcAddress(InfinityZoneModule, "PerformAssetReset");
+            GetCurrentStage_ptr = (GetCurrentStage_type)GetProcAddress(InfinityZoneModule, "GetCurrentStage");
+            SetStageAsset_ptr = (CString3Func)GetProcAddress(InfinityZoneModule, "SetStageAsset");
+            SetGlobalAsset_ptr = (CString2Func)GetProcAddress(InfinityZoneModule, "SetGlobalAsset");
 
             // Read Version from InfinityZone
             if (GetIZVersion_ptr && GetIZAPIMajorVersion_ptr)
