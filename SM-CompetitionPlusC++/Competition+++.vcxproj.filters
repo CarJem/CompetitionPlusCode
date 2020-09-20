@@ -44,6 +44,12 @@
     <Filter Include="Scenes\Custom Scenes\Headers">
       <UniqueIdentifier>{5c9e604b-ffef-429d-91aa-4a63c76fce3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DevMenu">
+      <UniqueIdentifier>{02231fe9-7209-4d39-98ab-339f59d6cf6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DevMenu\Header">
+      <UniqueIdentifier>{d99a907d-ca45-47e1-8bb6-9d77113b79ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -106,9 +112,6 @@
     <ClInclude Include="CompPlus_Common.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_DevMenu.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="include\MemAccess.h">
       <Filter>Internal</Filter>
     </ClInclude>
@@ -144,6 +147,21 @@
     </ClInclude>
     <ClInclude Include="ManiaMenu.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu.h">
+      <Filter>DevMenu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DevMenu_InputMapping.h">
+      <Filter>DevMenu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DevMenu_MainMenu.h">
+      <Filter>DevMenu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DevMenu_RankingEditor.h">
+      <Filter>DevMenu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DevMenu_SpecialSettings.h">
+      <Filter>DevMenu\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -202,9 +220,6 @@
     <ClCompile Include="CompPlus_Common.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_DevMenu.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Internal</Filter>
     </ClCompile>
@@ -231,6 +246,21 @@
     </ClCompile>
     <ClCompile Include="ManiaMenu.cpp">
       <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="DevMenu_InputMapping.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="DevMenu_MainMenu.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="DevMenu_RankingEditor.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="DevMenu_SpecialSettings.cpp">
+      <Filter>DevMenu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

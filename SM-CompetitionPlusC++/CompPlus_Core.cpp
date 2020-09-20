@@ -42,7 +42,6 @@ namespace CompPlus_Core
 
     //Internal Paramater Variables
     bool StartupStageEnabled = false;
-    bool NonDeveloperBuild = true;
 
     //Status Variables
     bool HasStartupInit = false;
@@ -171,6 +170,11 @@ namespace CompPlus_Core
 	{
 		CompPlus_Settings_Base::DoMenuOnScreenDraw();
 	}
+
+    void UpdateScreen() 
+    {
+        CompPlus_Settings::UpdateStrechScreen();
+    }
 
     void OnActClear() 
     {

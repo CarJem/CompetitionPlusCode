@@ -279,9 +279,69 @@ namespace CompPlus_Settings
         SaveSettings();
     }
 
+    void SetStrechIntensity(int value)
+    {
+        StrechEffectIntensity = value;
+        SaveSettings();
+    }
+
     #pragma endregion
 
+    #pragma region Screen Layout Methods
+
+    DataPointer(int, WindowSizeX, 0xA530E4);
+    DataPointer(int, WindowSizeY, 0xA530E8);
+    DataPointer(int, ViewPortSizeX, 0x43C70C);
+    DataPointer(int, ViewPortSizeY, 0x43C710);
+    DataPointer(int, ImageXPosition, 0x43C704);
+    DataPointer(int, ImageYPosition, 0x43C708);
+    DataPointer(BYTE, ScreenCount, 0xA530FC);
+
+    bool ScreenSizeSaved = false;
+
+    int OriginalImageXPosition = 0;
+    int OriginalImageYPosition = 0;
+
+    int ModifiedViewPortX = 1200;
+    int ModifiedViewPortY = 960;
+    int ModifiedImageXPosition = 300;
+    int ModifiedImageYPosition = 0;
+
+    int StrechEffectIntensity = 1;
+
+    void UpdateStrechScreen()
+    {
+        if (SonicMania::Options->CompetitionSession.inMatch == 1)
+        {
+            if (ScreenCount != 1 && SonicMania::Options->CompetitionSession.ReadOnlyDisplayMode == 0 && SonicMania::Options->CompetitionSession.NumberOfPlayers == 2 && StrechEffectIntensity > 1)
+            {
+                int Intensity = StrechEffectIntensity + 1;
+                if (WindowSizeX != 0 && WindowSizeY != 0 && Intensity != 0)
+                {
+                    ViewPortSizeX = WindowSizeX / 2 + (WindowSizeX / Intensity);
+                    ViewPortSizeY = WindowSizeY;
+                    int CenterX = (WindowSizeX - ViewPortSizeX );
+                    ImageXPosition = (CenterX == 0 ? 0 : CenterX / 2);
+                    ImageYPosition = 0;
+                }
+            }
+            else
+            {
+                ViewPortSizeX = WindowSizeX;
+                ViewPortSizeY = WindowSizeY;
+                ImageXPosition = OriginalImageXPosition;
+                ImageYPosition = OriginalImageYPosition;
+            }
+        }
+
+    }
+
+    #pragma endregion
+
+
     #pragma region Update Methods
+
+
 
     void UpdateStockSettings() 
     {
@@ -548,21 +608,29 @@ namespace CompPlus_Settings
 
                         LogLoadSetting("NumberOfRounds", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "EnableDebugMode") && !CompPlus_Core::NonDeveloperBuild)
+                    else if (!strcmp(xmlOption->Name(), "StrechEffectIntensity"))
+                    {
+                        bool value = XMLGetBool(xmlOption);
+                       
+                        StrechEffectIntensity = value;
+                        if (StrechEffectIntensity == 0) StrechEffectIntensity = 4;
+                        LogLoadSetting("StrechEffectIntensity", std::to_string(value));
+                    }
+                    else if (!strcmp(xmlOption->Name(), "EnableDebugMode"))
                     {
                         bool value = XMLGetBool(xmlOption);
                         EnableDebugMode = value;
 
                         LogLoadSetting("EnableDebugMode", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "EnableDevMode") && !CompPlus_Core::NonDeveloperBuild)
+                    else if (!strcmp(xmlOption->Name(), "EnableDevMode"))
                     {
                         bool value = XMLGetBool(xmlOption);
                         EnableDevMode = value;
 
                         LogLoadSetting("EnableDevMode", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "DarkDevMenu") && !CompPlus_Core::NonDeveloperBuild)
+                    else if (!strcmp(xmlOption->Name(), "DarkDevMenu"))
                     {
                         bool value = XMLGetBool(xmlOption);
                         DarkDevMenu = value;
@@ -571,10 +639,10 @@ namespace CompPlus_Settings
                     }
                     else if (!strcmp(xmlOption->Name(), "LHPZ_SecretUnlocked"))
                     {
-                    bool value = XMLGetBool(xmlOption);
-                    LHPZ_SecretUnlocked = value;
+                        bool value = XMLGetBool(xmlOption);
+                        LHPZ_SecretUnlocked = value;
 
-                    LogLoadSetting("LHPZ_SecretUnlocked", std::to_string(value));
+                        LogLoadSetting("LHPZ_SecretUnlocked", std::to_string(value));
                     }
                 }
             }
@@ -615,17 +683,15 @@ namespace CompPlus_Settings
             AddtoSaveSettings("TimeLimit", BoolToString(TimeLimit), text);
             AddtoSaveSettings("NoHurryUpTimer", BoolToString(NoHurryUpTimer), text);
             AddtoSaveSettings("EndlessRounds", BoolToString(EndlessRounds), text);
-            AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text);
+            AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text); 
+            AddtoSaveSettings("StrechEffectIntensity", IntToString(StrechEffectIntensity), text);
             AddtoSaveSettings("MonitorMode", IntToString(MonitorTypes), text);
 
             if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
 
-            if (!CompPlus_Core::NonDeveloperBuild) 
-            {
-                AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
-                AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
-                AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
-            }
+            AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
+            AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
+            AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
 
 
 

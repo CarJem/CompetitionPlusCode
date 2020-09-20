@@ -57,6 +57,7 @@ extern "C"
             {
                 LoadSounds();
                 if (!(GameState & GameState_SoftPause)) CompPlus_Core::OnFrame();
+                CompPlus_Core::UpdateScreen();
                 UpdateCompPlusDevMenu();
             }
             else if (GameState & GameState_NotRunning) CompPlus_Core::OnSceneReset();
