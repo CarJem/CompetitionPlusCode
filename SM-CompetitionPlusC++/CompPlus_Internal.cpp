@@ -156,7 +156,7 @@ namespace CompPlus_Internal
             // Copy Original Unmodified Code
             memcpy(ExtendedTime_Code, ExtendedTime_Addr, 0x02);
             memcpy(TimeLimit_Kill_Code, TimeLimit_Kill_Addr, 0x06);
-            memcpy(TimeLimit_VS_Kill_Code, TimeLimit_Kill_Addr, 0x07);
+            memcpy(TimeLimit_VS_Kill_Code, TimeLimit_VS_Kill_Adrr, 0x07);
             memcpy(TimeLimit_VS_TimeLock1_Code, TimeLimit_VS_TimeLock1_Adrr, 0x04);
             memcpy(TimeLimit_VS_TimeLock2_Code, TimeLimit_VS_TimeLock2_Adrr, 0x06);
             memcpy(TimeLimit_VS_TimeLock3_Code, TimeLimit_VS_TimeLock3_Adrr, 0x07);

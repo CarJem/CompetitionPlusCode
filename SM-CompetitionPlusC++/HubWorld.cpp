@@ -1213,7 +1213,7 @@ namespace CompPlus_HubWorld
         }
         else 
         {       
-            std::string roundNumber = std::to_string(CompPlus_Scoring::GetCurrentRound() + 1) + "\\" + std::to_string(CompPlus_Settings::NumberOfRounds);
+            std::string roundNumber = std::to_string(CompPlus_Scoring::GetPlusCurrentRound() + 1) + "\\" + std::to_string(CompPlus_Settings::NumberOfRounds);
             UpdateGeneralDisplay(RoundsCounterText, (char*)roundNumber.c_str(), roundNumber.length(), lastIndex);
             lastIndex++;
         }

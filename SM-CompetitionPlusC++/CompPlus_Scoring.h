@@ -117,7 +117,8 @@ namespace CompPlus_Scoring
     extern bool ThisMatchIsTied;
     extern bool CanGoToFinalResults;
 
-    extern int GetCurrentRound();
+    extern void SetPlusCurrentRound(int value);
+    extern int GetPlusCurrentRound();
 
     extern void SyncLastResults();
 

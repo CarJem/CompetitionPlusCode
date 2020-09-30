@@ -3142,9 +3142,9 @@ namespace SonicMania
         int Unknown_Gap_0[22];
         int inMatch;
         int NumberOfPlayers;
-        int Unknown_60;
-        int Unknown_64;
-        int Unknown_68;
+        int UIVsLevelSelectIndex;
+        int UIVsSelectedZoneID;
+        int UIVsSelectedActID;
         int CurrentRound;
         int TotalRounds;
         int MonitorMode;
@@ -3257,7 +3257,7 @@ namespace SonicMania
         int  TATableID;
         int  TATableLoaded;
         int  Stock; // Encore Lives
-        int  CharacterFlags;
+        BYTE  CharacterFlags[4];
         int  VapeMode; // Vape Mode
         int  Secrets;
         int  SuperSecret;

@@ -499,7 +499,7 @@ namespace CompPlus_ManiaMenu
         if (CompetitionSettingsPage.SelectedElement == 0) CompetitionSettingsPage.SelectedElement = 2;
         else if (CompetitionSettingsPage.SelectedElement == 1) CompetitionSettingsPage.SelectedElement = 3;
 
-        if (CompetitionSettingsPage.InBounds)
+        if (CompetitionLevelSelectPage.InBounds)
         {
             UpdatePreMatchStuff();
         }

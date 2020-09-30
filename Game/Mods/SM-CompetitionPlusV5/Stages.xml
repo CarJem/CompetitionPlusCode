@@ -1,8 +1,100 @@
-<Stages>
-	<Stage stageName="SMCP Mania Level Select" stageID="SMCP_LSelect/ManiaLSelect" stageKey="CPMLS" flags="255">
-    <Scenes>
-      <Scene id="1" />
-    </Scenes>
+<InfinityZone version="1">
+  <Categories>
+	  <Category categoryName="SMCP Presentation">
+		<Group groupName="SMCP Mania Level Select">
+			<Scene stageKey="CPMLS" sceneKey="CPMLS" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>
+	    <Group groupName="SMCP Encore Level Select">
+		    <Scene stageKey="CPELS" sceneKey="CPELS" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>
+		<Group groupName="SMCP Custom Level Select">
+		    <Scene stageKey="CPCLS" sceneKey="CPCLS" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>
+	    <Group groupName="SMCP Chaotix Level Select">
+			<Scene stageKey="CPCXLS" sceneKey="CPCXLS" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>
+	    <Group groupName="SMCP Phantom Level Select">
+			<Scene stageKey="CPPLS" sceneKey="CPPLS" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>
+		<Group groupName="SMCP Hub World">
+			<Scene stageKey="CPHW" sceneKey="CPHW" sceneID="1" sceneFlags="3" sceneName="" />
+		</Group>
+		<Group groupName="SMCP Credits">
+			<Scene stageKey="CPCREDITS" sceneKey="CPCREDITS" sceneID="1" sceneFlags="3" sceneName="" />
+		</Group>
+		<Group groupName="SMCP Settings Page">
+			<Scene stageKey="CPSW" sceneKey="CPSW" sceneID="1" sceneFlags="255" sceneName="" />
+		</Group>		
+		<Group groupName="SMCP Logos">
+			<Scene stageKey="CPLOGOS" sceneKey="CPLOGOS" sceneID="1" sceneFlags="255" sceneName="1" />
+			<Scene stageKey="CPLOGOS2" sceneKey="CPLOGOS2" sceneID="1" sceneFlags="255" sceneName="2" />
+			<Scene stageKey="CPLOGOS3" sceneKey="CPLOGOS3" sceneID="1" sceneFlags="255" sceneName="3" />
+			<Scene stageKey="CPLOGOS4" sceneKey="CPLOGOS4" sceneID="1" sceneFlags="255" sceneName="4" />
+		</Group>
+      </Category>
+	  <Category categoryName="SMCP Custom Stages">
+		<Group groupName="Flying Battery Zone (Night)">
+			<Scene stageKey="SMCP_FBZ2" sceneKey="SMCP_FBZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_FBZ2" sceneKey="SMCP_FBZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Angel Island Zone [EXT]">
+			<Scene stageKey="CPAIZEX" sceneKey="CPAIZEX" sceneID="EXT" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="CPAIZEX" sceneKey="CPAIZEX2" sceneID="EXT" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Desert Hill Zone">
+			<Scene stageKey="CPDHZ" sceneKey="CPDHZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPDHZ" sceneKey="CPDHZE" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Gust Planet Zone">
+			<Scene stageKey="CPGPZ" sceneKey="CPGPZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPGPZ" sceneKey="CPGPZE" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Special Stage Zone">
+			<Scene stageKey="CPSZ" sceneKey="CPSZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPSZ" sceneKey="CPSZE" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Test Scene Zone">
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ3" sceneID="1" sceneFlags="3" sceneName="3" />
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ4" sceneID="1" sceneFlags="3" sceneName="4" />
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ5" sceneID="1" sceneFlags="3" sceneName="5" />
+			<Scene stageKey="CPTSZ" sceneKey="CPTSZ6" sceneID="1" sceneFlags="3" sceneName="6" />
+		</Group>
+		<Group groupName="Lost Hidden Palace Zone">
+			<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+	  </Category>
+	  <Category categoryName="SMCP CXM Stages">
+		<Group groupName="Isolated Island Zone">
+			<Scene stageKey="CPCXMIIZ1" sceneKey="CPCXMIIZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMIIZ1" sceneKey="CPCXMIIZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Amazing Arena Zone">
+			<Scene stageKey="CPCXMAAZ" sceneKey="CPCXMAAZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMAAZ" sceneKey="CPCXMAAZE" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Speed Slider Zone">
+			<Scene stageKey="CPCXMSSZ1" sceneKey="CPCXMSSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMSSZ1" sceneKey="CPCXMSSZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Botanic Base Zone">
+			<Scene stageKey="CPCXMBBZ" sceneKey="CPCXMBBZ" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMBBZ" sceneKey="CPCXMBBZE" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Marina Madness Zone">
+			<Scene stageKey="CPCXMMMZ1" sceneKey="CPCXMMMZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMMMZ1" sceneKey="CPCXMMMZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Techno Tower Zone">		
+			<Scene stageKey="CPCXMTTZ1" sceneKey="CPCXMTTZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="CPCXMTTZ1" sceneKey="CPCXMTTZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+	  </Category>
+  </Categories>
+  <Stages>
+	<Stage stageName="SMCP Mania Level Select" stageDir="SMCP_LSelect/ManiaLSelect" stageKey="CPMLS">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -10,10 +102,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Encore Level Select" stageID="SMCP_LSelect/EncoreLSelect" stageKey="CPELS" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Encore Level Select" stageDir="SMCP_LSelect/EncoreLSelect" stageKey="CPELS">
     <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -21,10 +110,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Encore.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Custom Level Select" stageID="SMCP_LSelect/CustomLSelect" stageKey="CPCLS" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Custom Level Select" stageDir="SMCP_LSelect/CustomLSelect" stageKey="CPCLS">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -32,10 +118,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Custom.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Chaotix Level Select" stageID="SMCP_LSelect/ChaotixLSelect" stageKey="CPCXLS" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Chaotix Level Select" stageDir="SMCP_LSelect/ChaotixLSelect" stageKey="CPCXLS">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -43,10 +126,7 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Chaotix.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Phantom Level Select" stageID="SMCP_LSelect/PhantomLSelect" stageKey="CPPLS" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Phantom Level Select" stageDir="SMCP_LSelect/PhantomLSelect" stageKey="CPPLS">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -54,20 +134,9 @@
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK1" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
-	</Stage>
-	<Stage stageName="SMCP Settings Menu" stageID="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="CPSW" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
-  </Stage>
-	<Stage stageName="SMCP HUB World" stageID="SMCP_Misc/CompetitionPlusHUB" stageKey="CPHW" flags="3">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	
+	<Stage stageName="SMCP Settings Menu" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="CPSW"></Stage>
+	<Stage stageName="SMCP HUB World" stageDir="SMCP_Misc/CompetitionPlusHUB" stageKey="CPHW">
 	  <StageUnlocks>
 		  <FBZ_HangPoint />
 		  <GHZ_Platform />
@@ -102,10 +171,7 @@
 		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		  
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Credits Zone" stageID="SMCP_Misc/SMCP_Credits" stageKey="CPCREDITS" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="SMCP Credits Zone" stageDir="SMCP_Misc/SMCP_Credits" stageKey="CPCREDITS">
 		<StageUnlocks>
 			<Core_GHZ />
 			<FBZ_Button />
@@ -115,15 +181,8 @@
 		    <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/CP_Cred/Decoration.bin" />
 		</StageAssets>
 	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK2" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
-	</Stage>
-	<Stage stageName="SMCP Logos Pt. 1" stageID="SMCP_Logos/CompPlusLogos" stageKey="CPLOGOS" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	
+	<Stage stageName="SMCP Logos Pt. 1" stageDir="SMCP_Logos/CompPlusLogos" stageKey="CPLOGOS">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -131,10 +190,7 @@
 		  <Asset basePath="Data/Sprites/Logos/Logos.bin"  newPath="Data/Sprites/CP_Logos/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 2" stageID="SMCP_Logos/CompPlusLogos2" stageKey="CPLOGOS2" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Logos Pt. 2" stageDir="SMCP_Logos/CompPlusLogos2" stageKey="CPLOGOS2">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -142,10 +198,7 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos2/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 3" stageID="SMCP_Logos/CompPlusLogos3" stageKey="CPLOGOS3" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Logos Pt. 3" stageDir="SMCP_Logos/CompPlusLogos3" stageKey="CPLOGOS3">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -153,10 +206,7 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos3/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP Logos Pt. 4" stageID="SMCP_Logos/CompPlusLogos4" stageKey="CPLOGOS4" flags="255">
-		<Scenes>
-		  <Scene id="1" />
-		</Scenes>
+	<Stage stageName="SMCP Logos Pt. 4" stageDir="SMCP_Logos/CompPlusLogos4" stageKey="CPLOGOS4">
 	  <StageUnlocks>
 		  <Summary_UIPicture />
 	  </StageUnlocks>
@@ -164,23 +214,24 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos4/Logos.bin" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK3" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
+	
+	<Stage stageName="SMCP Flying Battery Zone (Night)" stageDir="FBZ" stageKey="SMCP_FBZ2">
+		<StageAssets>
+			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/SMCP_FBZ_Night/" />
+			<Asset basePath="Data/Stages/FBZ/16x16Tiles.gif" newPath="Data/Stages/FBZ/16x16Tiles_Night.gif" />
+			<Asset basePath="Data/Stages/FBZ/StageConfig.bin" newPath="Data/Stages/FBZ/StageConfig_Night.bin" />
+		</StageAssets>
+	   <StageUnlocks>
+		  <Core_FBZ/>
+	  </StageUnlocks>
 	</Stage>
-    <Stage stageName="SMCP Angel Island Zone" stageID="SMCP_StockStages/AIZ" stageKey="CPAIZEX" flags="5">
-		<Scenes>
-		  <Scene id="EXT" />
-		</Scenes>
+    
+	<Stage stageName="SMCP Angel Island Zone" stageDir="SMCP_StockStages/AIZ" stageKey="CPAIZEX">
 	   <StageUnlocks>
 		  <Core_AIZ/>
 	  </StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Desert Hill Zone M" stageID="SMCP_CustomStages/SMCP_DHZ" stageKey="CPDHZ" flags="3">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Desert Hill Zone" stageDir="SMCP_CustomStages/SMCP_DHZ" stageKey="CPDHZ">
 		<StageAssets>
 			<Asset basePath="Data/Music/EDesertHill.ogg" newPath="Data/Music/CP_Custom/EDesertHill.ogg" />
 			<Asset basePath="Data/Music/DesertHill.ogg" newPath="Data/Music/CP_Custom/DesertHill.ogg" />
@@ -189,22 +240,7 @@
 		  <Core_MSZ/>
 	  </StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Desert Hill Zone E" stageID="SMCP_CustomStages/SMCP_DHZ" stageKey="CPDHZE" flags="5">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
-	  <StageUnlocks>
-		  <Core_MSZ/>
-	  </StageUnlocks>
-		<StageAssets>
-			<Asset basePath="Data/Music/EDesertHill.ogg" newPath="Data/Music/CP_Custom/EDesertHill.ogg" />
-			<Asset basePath="Data/Music/DesertHill.ogg" newPath="Data/Music/CP_Custom/DesertHill.ogg" />
-		</StageAssets>
-	</Stage>
-	<Stage stageName="SMCP Gust Planet Zone M" stageID="SMCP_CustomStages/SMCP_GPZ" stageKey="CPGPZ" flags="3">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Gust Planet Zone" stageDir="SMCP_CustomStages/SMCP_GPZ" stageKey="CPGPZ">
 		<StageAssets>
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
@@ -225,76 +261,23 @@
 		<FBZ_Button/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Gust Planet Zone E" stageID="SMCP_CustomStages/SMCP_GPZ" stageKey="CPGPZE" flags="5">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
-		<StageAssets>
-		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
-		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/CP_GPZ/Enemies_Tubinaunt.gif" />
-		  <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/CP_Custom/GustPlanet1.ogg" />
-		  <Asset basePath="Data/Palettes/EncoreLRZ1.act"  newPath="Data/Palettes/CP_Custom/EncoreGPZ1.act" />
-		  <Asset basePath="Data/Sprites/FBZ/Button.bin"  newPath="Data/Sprites/CP_GPZ/Button.bin" />
-		  <Asset basePath="Data/Sprites/LRZ1/Fireworm.bin"  newPath="Data/Sprites/CP_GPZ/Fireworm.bin" />
-		  <Asset basePath="Data/Sprites/LRZ1/Platform.bin"  newPath="Data/Sprites/CP_GPZ/Platform.bin" />
-		  <Asset basePath="Data/Sprites/PSZ1/Splats.bin"  newPath="Data/Sprites/CP_GPZ/Splats.bin" />
-		  <Asset basePath="Data/Sprites/SPZ1/Tubinaut.bin"  newPath="Data/Sprites/CP_GPZ/Tubinaut.bin" />
-		  <Asset basePath="Data/Sprites/SPZ2/Tubinaut.bin"  newPath="Data/Sprites/CP_GPZ/Tubinaut.bin" />
-		  <Asset basePath="Data/Sprites/SSZ2/SpeedBooster.bin"  newPath="Data/Sprites/CP_GPZ/SpeedBooster.bin" />	  
-	  </StageAssets>
-	<StageUnlocks>
-	    <Core_LRZ1/>
-		<PSZ1_Splats />
-		<SSZ2_SpeedBooster />
-		<SPZ1_Turbinaut />
-		<FBZ_Button/>
-	</StageUnlocks>
-	</Stage>
-	<Stage stageName="SMCP Special Zone M" stageID="SMCP_CustomStages/SMCP_SZ" stageKey="CPSZ" flags="3">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
+	<Stage stageName="SMCP Special Zone" stageDir="SMCP_CustomStages/SMCP_SZ" stageKey="CPSZ">
 		<StageAssets>
 			<Asset basePath="Data/Music/ESpecialStage.ogg" newPath="Data/Music/CP_Custom/ESpecialStage.ogg" />
 			<Asset basePath="Data/Music/SpecialStage.ogg" newPath="Data/Music/CP_Custom/SpecialStage.ogg" />
 	  </StageAssets>
-	<StageUnlocks>
+		<StageUnlocks>
 		<Core_LRZ1/>
 	    <Core_LRZ2/>
         <Core_LRZ3/>
 	</StageUnlocks>
 	</Stage>
-	<Stage stageName="SMCP Special Zone E" stageID="SMCP_CustomStages/SMCP_SZ" stageKey="CPSZE" flags="5">
-	<Scenes>
-      <Scene id="1" />
-    </Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/ESpecialStage.ogg" newPath="Data/Music/CP_Custom/ESpecialStage.ogg" />
-			<Asset basePath="Data/Music/SpecialStage.ogg" newPath="Data/Music/CP_Custom/SpecialStage.ogg" />
-	  </StageAssets>
-	<StageUnlocks>
-		<Core_LRZ1/>
-	    <Core_LRZ2/>
-        <Core_LRZ3/>
-	</StageUnlocks>
-	</Stage>
-	<Stage stageName="SMCP Test Set Zone M" stageID="SMCP_CustomStages/SMCP_TSZ" stageKey="CPTSZ" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="SMCP Test Set Zone" stageDir="SMCP_CustomStages/SMCP_TSZ" stageKey="CPTSZ">
 		<StageUnlocks>
 			<Core_GHZ />
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK6" flags="255">
-	  <Scenes>
-      <Scene id="1" />
-    </Scenes>
-	</Stage>
-	<Stage stageName="SMCP LHPZ Zone M" stageID="SMCP_CustomStages/SMCP_LHPZ" stageKey="SMCP_LHPZ1" flags="3">
-	  <Scenes>
-      <Scene id="1" />
-     </Scenes>
+	<Stage stageName="SMCP LHPZ Zone" stageDir="SMCP_CustomStages/SMCP_LHPZ" stageKey="SMCP_LHPZ1">
 	  <StageUnlocks>
 		<HCZ_Decoration />
 		<HCZ_Platform />
@@ -320,44 +303,8 @@
 		<Asset basePath="Data/Palettes/EncoreHCZw.act"     newPath="Data/Palettes/EncoreHPZw.act" />
 	  </StageAssets>
 	</Stage>
-	<Stage stageName="SMCP LHPZ Zone E" stageID="SMCP_CustomStages/SMCP_LHPZ" stageKey="SMCP_LHPZ1E" flags="5">
-		  <Scenes>
-      <Scene id="1" />
-     </Scenes>
-		  <StageUnlocks>
-		<HCZ_Decoration />
-		<HCZ_Platform />
-		<HCZ_Bridge />
-		<MSZ_RotatingSpikes />
-		<MSZ_SwingRope />
-		<SSZ_SDashWheel />
-		<HPZ_Jellygnite />
-		<HPZ_Redz />
-		<HPZ_Stegway />
-		<HPZ_Batbot />
-	  </StageUnlocks>
-	  <StageAssets>
-		<Asset basePath="Data/Sprites/HCZ/AniTiles.gif"   newPath="Data/Sprites/HPZ/AniTiles.gif" />
-		<Asset basePath="Data/Sprites/HCZ/AniTiles2.gif"   newPath="Data/Sprites/HPZ/AniTiles2.gif" />
-		<Asset basePath="Data/Sprites/HCZ/AniTiles3.gif"   newPath="Data/Sprites/HPZ/AniTiles3.gif" />
-		<Asset basePath="Data/Sprites/MSZ/RotatingSpikes.bin"  newPath="Data/Sprites/HPZ/MonkeyDude.bin" />
-		<Asset basePath="Data/Sprites/HCZ/Platform.bin"    newPath="Data/Sprites/HPZ/Platform.bin" />
-		<Asset basePath="Data/Sprites/HCZ/Bridge.bin"      newPath="Data/Sprites/HPZ/Bridge.bin" />
-		<Asset basePath="Data/Sprites/HCZ/Decoration.bin"  newPath="Data/Sprites/HPZ/Decoration.bin" />
-		<Asset basePath="Data/Sprites/SSZ1/SDashWheel.bin" newPath="Data/Sprites/HPZ/SDashWheel.bin" />
-		<Asset basePath="Data/Palettes/EncoreHCZ.act"      newPath="Data/Palettes/EncoreHPZ.act" />
-		<Asset basePath="Data/Palettes/EncoreHCZw.act"     newPath="Data/Palettes/EncoreHPZw.act" />
-	  </StageAssets>
-	</Stage>
-	<Stage stageName="-------------" stageID="CompPlusWarp" stageKey="CPPBLANK4" flags="255">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-	</Stage>
-	<Stage stageName="CP-CXM Isolated Island M" stageID="SMCP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	
+	<Stage stageName="CP-CXM Isolated Island M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -382,38 +329,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Isolated Island E" stageID="SMCP_ChaotixManiaStages/CP_CXM_IIZ1" stageKey="CPCXMIIZ1E" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>
-		<StageUnlocks>
-			<Core_SPZ1/>
-			<Core_Chaotix/>
-		</StageUnlocks>
-	</Stage>
-	<Stage stageName="CP-CXM Amazing Arena M" stageID="SMCP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZ" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="CP-CXM Amazing Arena M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZ">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -438,38 +354,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Amazing Arena E" stageID="SMCP_ChaotixManiaStages/CP_CXM_AAZ" stageKey="CPCXMAAZE" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>
-		<StageUnlocks>
-			<Core_CPZ/>
-			<Core_Chaotix/>
-		</StageUnlocks>
-	</Stage>
-	<Stage stageName="CP-CXM Speed Slider M" stageID="SMCP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="CP-CXM Speed Slider M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -495,39 +380,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Speed Slider E" stageID="SMCP_ChaotixManiaStages/CP_CXM_SSZ1" stageKey="CPCXMSSZ1E" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>
-		<StageUnlocks>
-			<Core_Chaotix/>
-			<Core_SSZ/>
-			<Core_SSZ1/>
-		</StageUnlocks>
-	</Stage>
-	<Stage stageName="CP-CXM Botanic Base M" stageID="SMCP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZ" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="CP-CXM Botanic Base M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZ">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -552,38 +405,7 @@
 			<Core_HCZ/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Botanic Base E" stageID="SMCP_ChaotixManiaStages/CP_CXM_BBZ" stageKey="CPCXMBBZE" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>	
-		<StageUnlocks>
-			<Core_Chaotix/>
-			<Core_HCZ/>
-		</StageUnlocks>
-	</Stage>
-	<Stage stageName="CP-CXM Marina Madness M" stageID="SMCP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="CP-CXM Marina Madness M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -608,38 +430,7 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Marina Madness E" stageID="SMCP_ChaotixManiaStages/CP_CXM_MMZ1" stageKey="CPCXMMMZ1E" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>
-		<StageUnlocks>
-			<Core_OOZ/>
-			<Core_Chaotix/>
-		</StageUnlocks>
-	</Stage>
-	<Stage stageName="CP-CXM Techno Tower M" stageID="SMCP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1" flags="3">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
+	<Stage stageName="CP-CXM Techno Tower M" stageDir="SMCP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1">
 		<StageAssets>
 			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
 			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
@@ -664,32 +455,5 @@
 			<Core_Chaotix/>
 		</StageUnlocks>
 	</Stage>
-	<Stage stageName="CP-CXM Techno Tower E" stageID="SMCP_ChaotixManiaStages/CP_CXM_TTZ1" stageKey="CPCXMTTZ1E" flags="5">
-		<Scenes>
-			<Scene id="1" />
-		</Scenes>
-		<StageAssets>
-			<Asset basePath="Data/Music/" newPath="Data/Music/CP_CMX_Music/" />
-			<Asset basePath="Data/Palettes/" newPath="Data/Palettes/CP_CMX/" />
-			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/CP_CMX/AIZ/" />
-			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/CP_CMX/CPZ/" />
-			<Asset basePath="Data/Sprites/FBZ/" newPath="Data/Sprites/CP_CMX/FBZ/" />
-			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/CP_CMX/GHZ/" />
-			<Asset basePath="Data/Sprites/HCZ/" newPath="Data/Sprites/CP_CMX/HCZ/" />
-			<Asset basePath="Data/Sprites/HPZ/" newPath="Data/Sprites/CP_CMX/HPZ/" />
-			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/CP_CMX/MMZ/" />
-			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/CP_CMX/MSZ/" />
-			<Asset basePath="Data/Sprites/OOZ/" newPath="Data/Sprites/CP_CMX/OOZ/" />
-			<Asset basePath="Data/Sprites/PSZ1/" newPath="Data/Sprites/CP_CMX/PSZ1/" />
-			<Asset basePath="Data/Sprites/PSZ2/" newPath="Data/Sprites/CP_CMX/PSZ2/" />
-			<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/CP_CMX/SPZ1/" />
-			<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/CP_CMX/SPZ2/" />
-			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/CP_CMX/SSZ1/" />
-			<Asset basePath="Data/Sprites/SSZ2/" newPath="Data/Sprites/CP_CMX/SSZ2/" />
-		</StageAssets>			
-		<StageUnlocks>
-			<Core_PSZ1/>
-			<Core_Chaotix/>
-		</StageUnlocks>
-	</Stage>
-</Stages>
+  </Stages>
+</InfinityZone>

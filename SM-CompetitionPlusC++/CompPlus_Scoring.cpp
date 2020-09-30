@@ -49,6 +49,7 @@ namespace CompPlus_Scoring
      bool P4_HasWon_Match = false;
 
      int LastCurrentRound = 0;
+     int PlusCurrentRound = 0;
 
      bool PodeiumSpawnActive = false;
      bool ThisMatchIsTied = false;
@@ -77,6 +78,16 @@ namespace CompPlus_Scoring
     int GetCurrentRound() 
     {
         return SonicMania::Options->CompetitionSession.CurrentRound;
+    }
+
+    int GetPlusCurrentRound() 
+    {
+        return PlusCurrentRound;
+    }
+
+    void SetPlusCurrentRound(int value)
+    {
+        PlusCurrentRound = value;
     }
 
     int GetPlayerTime(int PlayerID, int Mode) 
@@ -648,10 +659,27 @@ namespace CompPlus_Scoring
 
     void SetFinalRanking_ForLoop(int CurrentPlayer, bool& HasWon, bool& isTied, int& WinnerID, int Position, bool& HasWinner, int& WinnerPlayerID)
     {
-        int P1_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[0]);
-        int P2_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[1]);
-        int P3_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[2]);
-        int P4_Char = (SonicMania::Options->CompetitionSession.CharacterFlags[3]);
+        //Flags
+        //00 - No Winner
+        //01 - P1 Wins
+        //02 - P2 Wins
+        //03 - P1/P2 Tie
+        //04 - P3 Wins
+        //05 - P1/P3 Tie
+        //06 - P2/P3 Tie
+        //07 - P1-P3 Tie
+        //08 - P4 Wins
+        //09 - P1/P4 Tie
+        //10 - P2/P4 Tie
+        //11 - P3/P4 Tie
+        //12 - P1/P2/P4 Tie
+        //13 - P1/P3/P4 Tie
+        //14 - P1-P4 Tie (All Tie)
+
+        BYTE P1_Char = SonicMania::Options->CompetitionSession.CharacterFlags[0];
+        BYTE P2_Char = SonicMania::Options->CompetitionSession.CharacterFlags[1];
+        BYTE P3_Char = SonicMania::Options->CompetitionSession.CharacterFlags[2];
+        BYTE P4_Char = SonicMania::Options->CompetitionSession.CharacterFlags[3];
 
         if (CurrentPlayer == 1)
         {
@@ -659,7 +687,7 @@ namespace CompPlus_Scoring
             if (HasWon)
             {
                 WinnerPlayerID = 1;
-                WinnerID = P1_Char;
+                WinnerID = 1;
                 if (HasWinner) isTied = true;
                 else HasWinner = true;
             }
@@ -671,7 +699,7 @@ namespace CompPlus_Scoring
             if (HasWon)
             {
                 WinnerPlayerID = 2;
-                WinnerID = P2_Char;
+                WinnerID = 2;
                 if (HasWinner) isTied = true;
                 else HasWinner = true;
             }
@@ -683,7 +711,7 @@ namespace CompPlus_Scoring
             if (HasWon)
             {
                 WinnerPlayerID = 3;
-                WinnerID = P3_Char;
+                WinnerID = 4;
                 if (HasWinner) isTied = true;
                 else HasWinner = true;
             }
@@ -695,17 +723,17 @@ namespace CompPlus_Scoring
             if (HasWon)
             {
                 WinnerPlayerID = 4;
-                WinnerID = P4_Char;
+                WinnerID = 8;
                 if (HasWinner) isTied = true;
                 else HasWinner = true;
             }
             P4_Placement = Position;
         }
+        
     }
 
     void SetFinalRanking(std::vector<ScorableInt> PlayerRanks)
     {
-        int CurrentRound = GetCurrentRound();
         bool isTied = false;
         bool HasWinner = false;
         int WinnerID = 0;
@@ -720,12 +748,11 @@ namespace CompPlus_Scoring
             SetFinalRanking_ForLoop(CurrentPlayer, HasWon, isTied, WinnerID, Position, HasWinner, WinnerPlayerID);
         }
 
-        SetFinalRanking_Final(isTied, HasWinner, CurrentRound, WinnerID, WinnerPlayerID);
+        SetFinalRanking_Final(isTied, HasWinner, 0, WinnerID, WinnerPlayerID);
     }
 
     void SetFinalRanking(std::vector<ScorableTime> PlayerRanks)
     {
-        int CurrentRound = GetCurrentRound();
         bool isTied = false;
         bool HasWinner = false;
         int WinnerID = 0;
@@ -740,40 +767,42 @@ namespace CompPlus_Scoring
             SetFinalRanking_ForLoop(CurrentPlayer, HasWon, isTied, WinnerID, Position, HasWinner, WinnerPlayerID);
         }
 
-        SetFinalRanking_Final(isTied, HasWinner, CurrentRound, WinnerID, WinnerPlayerID);
+        SetFinalRanking_Final(isTied, HasWinner, 0, WinnerID, WinnerPlayerID);
     }
 
     void SetRoundEndWinner()
     {
-        int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-        int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
-        int P1_FinishFlag = TotalPlayers >= 1 ? (FinishFlags >> 0x00 & 0xFF) : 0;
-        int P2_FinishFlag = TotalPlayers >= 2 ? (FinishFlags >> 0x08 & 0xFF) : 0;
-        int P3_FinishFlag = TotalPlayers >= 3 ? (FinishFlags >> 0x10 & 0xFF) : 0;
-        int P4_FinishFlag = TotalPlayers >= 4 ? (FinishFlags >> 0x18 & 0xFF) : 0;
+        if (SonicMania::Options->CompetitionSession.inMatch == 1)
+        {
+            int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
+            int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
+            int P1_FinishFlag = TotalPlayers >= 1 ? (FinishFlags >> 0x00 & 0xFF) : 0;
+            int P2_FinishFlag = TotalPlayers >= 2 ? (FinishFlags >> 0x08 & 0xFF) : 0;
+            int P3_FinishFlag = TotalPlayers >= 3 ? (FinishFlags >> 0x10 & 0xFF) : 0;
+            int P4_FinishFlag = TotalPlayers >= 4 ? (FinishFlags >> 0x18 & 0xFF) : 0;
 
-        bool P1_Finished = TotalPlayers >= 1 ? P1_FinishFlag != 0 : true;
-        bool P2_Finished = TotalPlayers >= 2 ? P2_FinishFlag != 0 : true;
-        bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
-        bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
+            bool P1_Finished = TotalPlayers >= 1 ? P1_FinishFlag != 0 : true;
+            bool P2_Finished = TotalPlayers >= 2 ? P2_FinishFlag != 0 : true;
+            bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
+            bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
 
-        bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
-        bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
-        bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
-        bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
+            bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
+            bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
+            bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
+            bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
 
-        if ((HaveAllCrossedTheFinishLine || (P1_Done && P2_Done && P3_Done && P4_Done)) && AllowUpdateVictory)
-        {  
-            TimeRanking = GetTimeRanking();
-            RingRanking = GetRingsRanking();
-            TotalRingRanking = GetTotalRingsRanking();
-            ScoreRanking = GetScoreRanking();
-            ItemRanking = GetItemRanking();
-            AverageRanking = GetAverageRanking();
-            AntiRingRanking = GetAntiRingsRanking();
-
-            switch (CompPlus_Settings::VictoryStyle)
+            if ((HaveAllCrossedTheFinishLine || (P1_Done && P2_Done && P3_Done && P4_Done)) && AllowUpdateVictory)
             {
+                TimeRanking = GetTimeRanking();
+                RingRanking = GetRingsRanking();
+                TotalRingRanking = GetTotalRingsRanking();
+                ScoreRanking = GetScoreRanking();
+                ItemRanking = GetItemRanking();
+                AverageRanking = GetAverageRanking();
+                AntiRingRanking = GetAntiRingsRanking();
+
+                switch (CompPlus_Settings::VictoryStyle)
+                {
                 case CompPlus_Settings::VictoryMode_Time:
                     SetFinalRanking(TimeRanking);
                     break;
@@ -795,14 +824,15 @@ namespace CompPlus_Scoring
                 case CompPlus_Settings::VictoryMode_AntiRings:
                     SetFinalRanking(AntiRingRanking);
                     break;
+                }
+
+                AllowUpdateVictory = false;
             }
 
-            AllowUpdateVictory = false;
-        }
-
-        if (InitalCountdown != 0) 
-        {
-            AllowUpdateVictory = true;
+            if (InitalCountdown != 0)
+            {
+                AllowUpdateVictory = true;
+            }
         }
     }
 
@@ -842,6 +872,7 @@ namespace CompPlus_Scoring
     void ClearMatchResults()
     {
         LastSession = SonicMania::CompetitionSession();
+        PlusCurrentRound = 0;
         P1_LastPlacement = 0;
         P2_LastPlacement = 0;
         P3_LastPlacement = 0;
@@ -894,41 +925,25 @@ namespace CompPlus_Scoring
 
     void UpdateMatchLength()
     {
-        if (SonicMania::CurrentScene == 2) 
+        if (!CompPlus_Settings::EndlessRounds) 
         {
-            int MaxRounds = CompPlus_Settings::NumberOfRounds;
-
-            // At beginning of match
-            int WinThreshold = (MaxRounds / 2) + 1;
-
-            if (GetCurrentRound() == MaxRounds)
+            if (SonicMania::CurrentScene == 2)
             {
-                // Player with most wins is overall winner (could be a tie)
-                int MaxWins = 0;
+                int MaxRounds = CompPlus_Settings::NumberOfRounds;
 
-                if (P1_WinsPlus > MaxWins) MaxWins = P1_WinsPlus;
-                if (P2_WinsPlus > MaxWins) MaxWins = P2_WinsPlus;
-                if (P3_WinsPlus > MaxWins) MaxWins = P3_WinsPlus;
-                if (P4_WinsPlus > MaxWins) MaxWins = P4_WinsPlus;
+                // At beginning of match
+                int WinThreshold = (MaxRounds / 2) + 1;
 
-                if (MaxWins == P1_WinsPlus) P1_HasWon_Match = true;
-                if (MaxWins == P2_WinsPlus) P2_HasWon_Match = true;
-                if (MaxWins == P3_WinsPlus) P3_HasWon_Match = true;
-                if (MaxWins == P4_WinsPlus) P4_HasWon_Match = true;
-                CanGoToFinalResults = true;
-            }
-            else
-            {
-                int MaxWins = 0;
-
-                if (P1_WinsPlus > MaxWins) MaxWins = P1_WinsPlus;
-                if (P2_WinsPlus > MaxWins) MaxWins = P2_WinsPlus;
-                if (P3_WinsPlus > MaxWins) MaxWins = P3_WinsPlus;
-                if (P4_WinsPlus > MaxWins) MaxWins = P4_WinsPlus;
-
-                // Player at or over WinThreshold is overall winner (could be a tie)
-                if (MaxWins >= WinThreshold)
+                if (GetPlusCurrentRound() == MaxRounds)
                 {
+                    // Player with most wins is overall winner (could be a tie)
+                    int MaxWins = 0;
+
+                    if (P1_WinsPlus > MaxWins) MaxWins = P1_WinsPlus;
+                    if (P2_WinsPlus > MaxWins) MaxWins = P2_WinsPlus;
+                    if (P3_WinsPlus > MaxWins) MaxWins = P3_WinsPlus;
+                    if (P4_WinsPlus > MaxWins) MaxWins = P4_WinsPlus;
+
                     if (MaxWins == P1_WinsPlus) P1_HasWon_Match = true;
                     if (MaxWins == P2_WinsPlus) P2_HasWon_Match = true;
                     if (MaxWins == P3_WinsPlus) P3_HasWon_Match = true;
@@ -937,7 +952,26 @@ namespace CompPlus_Scoring
                 }
                 else
                 {
-                    //No Clear Winner Yet
+                    int MaxWins = 0;
+
+                    if (P1_WinsPlus > MaxWins) MaxWins = P1_WinsPlus;
+                    if (P2_WinsPlus > MaxWins) MaxWins = P2_WinsPlus;
+                    if (P3_WinsPlus > MaxWins) MaxWins = P3_WinsPlus;
+                    if (P4_WinsPlus > MaxWins) MaxWins = P4_WinsPlus;
+
+                    // Player at or over WinThreshold is overall winner (could be a tie)
+                    if (MaxWins >= WinThreshold)
+                    {
+                        if (MaxWins == P1_WinsPlus) P1_HasWon_Match = true;
+                        if (MaxWins == P2_WinsPlus) P2_HasWon_Match = true;
+                        if (MaxWins == P3_WinsPlus) P3_HasWon_Match = true;
+                        if (MaxWins == P4_WinsPlus) P4_HasWon_Match = true;
+                        CanGoToFinalResults = true;
+                    }
+                    else
+                    {
+                        //No Clear Winner Yet
+                    }
                 }
             }
         }
@@ -947,18 +981,30 @@ namespace CompPlus_Scoring
     {
         if (!RoundStatsSaved) 
         {
-            LastCurrentRound = GetCurrentRound();
+            LastCurrentRound = GetPlusCurrentRound();
             RoundStatsSaved = true;
         }
     }
 
     void UpdateRounds()
     {
+        if (SonicMania::Options->CompetitionSession.UIVsSelectedZoneID != 0 || SonicMania::Options->CompetitionSession.UIVsSelectedZoneID != 0 || SonicMania::Options->CompetitionSession.UIVsLevelSelectIndex != 0)
+        {
+            SonicMania::Options->CompetitionSession.UIVsLevelSelectIndex = 0;
+            SonicMania::Options->CompetitionSession.UIVsSelectedZoneID = 0;
+            SonicMania::Options->CompetitionSession.UIVsSelectedActID = 0;
+        }
+
+
         if (!CompPlus_Scoring::CanGoToFinalResults)
         {
             SaveRoundsStats();
-            if (SonicMania::Options->CompetitionSession.TotalRounds != CompPlus_Settings::NumberOfRounds) SonicMania::Options->CompetitionSession.TotalRounds = CompPlus_Settings::NumberOfRounds;
-            if (CompPlus_Settings::EndlessRounds && GetCurrentRound() != 0) SetCurrentRound(0);
+            if (SonicMania::Options->CompetitionSession.TotalRounds != 14) SonicMania::Options->CompetitionSession.TotalRounds = 14;
+            if (GetCurrentRound() >= 1)
+            {
+                SetPlusCurrentRound(PlusCurrentRound + 1);
+                SetCurrentRound(0);
+            }
             RoundStatsSaved = false;
         }
         else

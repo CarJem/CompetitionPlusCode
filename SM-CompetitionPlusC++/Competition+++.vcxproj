@@ -179,6 +179,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChaotixLevelSelect.h" />
+    <ClInclude Include="DevMenu_InputMapping.h" />
+    <ClInclude Include="DevMenu_MainMenu.h" />
+    <ClInclude Include="DevMenu_SpecialSettings.h" />
+    <ClInclude Include="IZAPI.h" />
     <ClInclude Include="ManiaMenu.h" />
     <ClInclude Include="CompPlus_Controllers.h" />
     <ClInclude Include="CompPlus_Core.h" />
@@ -191,11 +195,11 @@
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="CompPlus_DevMenu.h" />
     <ClInclude Include="EncoreLevelSelect.h" />
+    <ClInclude Include="DevMenu_RankingEditor.h" />
     <ClInclude Include="SceneTweaks.h" />
     <ClInclude Include="GustPlanet.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="HubWorld.h" />
-    <ClInclude Include="include\IZAPI.h" />
     <ClInclude Include="include\ManiaModLoader.h" />
     <ClInclude Include="include\MemAccess.h" />
     <ClInclude Include="include\SonicMania.h" />
@@ -213,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChaotixLevelSelect.cpp" />
+    <ClCompile Include="DevMenu_InputMapping.cpp" />
+    <ClCompile Include="DevMenu_MainMenu.cpp" />
+    <ClCompile Include="DevMenu_SpecialSettings.cpp" />
     <ClCompile Include="ManiaMenu.cpp" />
     <ClCompile Include="CompPlus_Controllers.cpp" />
     <ClCompile Include="CompPlus_Core.cpp">
@@ -236,6 +243,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DevMenu_RankingEditor.cpp" />
     <ClCompile Include="SceneTweaks.cpp" />
     <ClCompile Include="GustPlanet.cpp" />
     <ClCompile Include="Helpers.cpp" />

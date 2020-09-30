@@ -3,9 +3,6 @@
 #include "SonicMania.h"
 #include "ManiaExt.h"
 #include "CompPlus_Core.h"
-#include "CompSettings.h"
-#include "GeneralSettings.h"
-#include "PlayerConfiguration.h"
 #include "CompPlus_Common.h"
 #include <string>
 
@@ -13,9 +10,6 @@ namespace CompPlus_Settings_Base
 {
 	using namespace SonicMania;
 	using namespace CompPlus_Core;
-	using namespace CompPlus_Settings_CompetitionPage;
-	using namespace CompPlus_Settings_GeneralPage;
-	using namespace CompPlus_Settings_PlayerConfig;
 	using namespace CompPlus_Common;
 
 	static int OnScreenDrawReturn = baseAddress + 0x7FFE;

@@ -14,7 +14,7 @@ namespace CompPlus_Common
 
 	void LoadLevel_IZ(const char* key)
 	{
-        IZAPI::ChangeStage(key);
+        IZAPI::ChangeScene(key);
 		GameState = GameStates::GameState_NotRunning;
 		CompPlus_Core::StageRefresh = true;
 		CompPlus_Core::IZ_SceneChangeIdleTime = 10;

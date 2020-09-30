@@ -83,23 +83,23 @@ namespace CompPlus_Core
     {
         if (IZ_SceneChangeIdleTime == 0)
         {
-            if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
-            else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
-            else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
-            else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::UpdateChaotixLSelect();
-            else if (!strcmp(CurrentStage.StageKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
-            else if (!strcmp(CurrentStage.StageKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
-            else if (!strcmp(CurrentStage.StageKey, "CPHW")) CompPlus_HubWorld::OnFrame();
-            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
-            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
-            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-            else if (!strcmp(CurrentStage.StageKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-            else if (!strcmp(CurrentStage.StageKey, "CPGPZ")) CompPlus_Scene_GustPlanet::OnFrame();
-            else if (!strcmp(CurrentStage.StageKey, "CPGPZE")) CompPlus_Scene_GustPlanet::OnFrame();
-            else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1")) CompPlus_Scene_LHPZ::OnFrame();
-            else if (!strcmp(CurrentStage.StageKey, "SMCP_LHPZ1E")) CompPlus_Scene_LHPZ::OnFrame();
-            CompPlus_Credits::OnFrame(!strcmp(CurrentStage.StageKey, "CPCREDITS"));
-            CompPlus_SceneTweaks::UpdateScenes(CurrentStage.StageKey);
+            if (!strcmp(CurrentStage.SceneKey, "CPMLS")) CompPlus_ManiaLevelSelect::UpdateManiaLSelect();
+            else if (!strcmp(CurrentStage.SceneKey, "CPELS")) CompPlus_EncoreLevelSelect::UpdateEncoreLSelect();
+            else if (!strcmp(CurrentStage.SceneKey, "CPCLS")) CompPlus_CustomLevelSelect::UpdateCustomLSelect();
+            else if (!strcmp(CurrentStage.SceneKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::UpdateChaotixLSelect();
+            else if (!strcmp(CurrentStage.SceneKey, "CPPLS")) CompPlus_PhantomLevelSelect::UpdatePhantomLSelect();
+            else if (!strcmp(CurrentStage.SceneKey, "CPSW")) CompPlus_Settings_Base::UpdateSettingsMenu();
+            else if (!strcmp(CurrentStage.SceneKey, "CPHW")) CompPlus_HubWorld::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
+            else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
+            else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
+            else if (!strcmp(CurrentStage.SceneKey, "CPGPZ")) CompPlus_Scene_GustPlanet::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, "CPGPZE")) CompPlus_Scene_GustPlanet::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, "SMCP_LHPZ1")) CompPlus_Scene_LHPZ::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, "SMCP_LHPZ1E")) CompPlus_Scene_LHPZ::OnFrame();
+            CompPlus_Credits::OnFrame(!strcmp(CurrentStage.SceneKey, "CPCREDITS"));
+            CompPlus_SceneTweaks::UpdateScenes(CurrentStage.SceneKey);
         }
         else
         {
@@ -111,6 +111,8 @@ namespace CompPlus_Core
     {
         if (CurrentSceneInt == 0) CompPlus_SceneTweaks::UpdateScenes("1");
         else if (CurrentSceneInt == 1) CompPlus_SceneTweaks::UpdateScenes("0");
+        else if (CurrentSceneInt == SonicMania::Scene::Scene_FBZ2) CompPlus_Common::LoadLevel_IZ("SMCP_FBZ2");
+        else if (CurrentSceneInt == SonicMania::Scene::Scene_FBZ2_e) CompPlus_Common::LoadLevel_IZ("SMCP_FBZ2E");
         else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
         else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
         else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
@@ -124,7 +126,7 @@ namespace CompPlus_Core
 
     void OnInit()
     {
-        if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+        if (StartupStageEnabled) CompPlus_Common::LoadLevel_IZ("SMCP_FBZ2");
         HasStartupInit = true;
     }
 
@@ -149,6 +151,7 @@ namespace CompPlus_Core
     void OnSceneReset()
     {
         if (!(GameState & GameState_SoftPause)) CompPlus_HubWorld::isRestart = true;
+        CompPlus_SceneTweaks::RefreshSpecialRings = true;
         CompPlus_Credits::ResetScene();
         CompPlus_Settings::RefreshSettings();
         CompPlus_Scene_GustPlanet::OnReset();

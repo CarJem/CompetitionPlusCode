@@ -72,8 +72,8 @@ namespace CompPlus_ManiaLevelSelect
 
 		MLS_MenuPoints[1][0] = MenuPoint(MLS_MenuPointLeft, "CPCXLS", " ", " ", " ");
 		MLS_MenuPoints[1][1] = MenuPoint(startingSlot + 6, (int)SceneExt::Scene_FBZ1, "FLYING BATTERY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
-		MLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, (int)SceneExt::Scene_FBZ2, "FLYING BATTERY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
-		MLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, (int)SceneExt::Scene_PSZ1, "PRESS GARDEN ZONE ACT 1", "SEGA / MANIA TEAM", " ");
+		MLS_MenuPoints[1][2] = MenuPoint(startingSlot + 7, "SMCP_FBZ2", "FLYING BATTERY ZONE ACT 2", "SEGA / MANIA TEAM (EDITS: CARJEM GENERATIONS)", " ");
+		MLS_MenuPoints[1][3] = MenuPoint(startingSlot + 8, (int)SceneExt::Scene_PSZ1, "PRESS GARDEN ZONE ACT 1", "SEGA / MANIA TEAM (EDITS: CARJEM GENERATIONS)", " ");
 		MLS_MenuPoints[1][4] = MenuPoint(startingSlot + 9, (int)SceneExt::Scene_PSZ2, "PRESS GARDEN ZONE ACT 2", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[1][5] = MenuPoint(startingSlot + 10, (int)SceneExt::Scene_SSZ1, "STARDUST SPEEDWAY ZONE ACT 1", "SEGA / MANIA TEAM", " ");
 		MLS_MenuPoints[1][6] = MenuPoint(startingSlot + 11, (int)SceneExt::Scene_SSZ2, "STARDUST SPEEDWAY ZONE ACT 2", "SEGA / MANIA TEAM", " ");
