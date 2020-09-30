@@ -17,15 +17,16 @@ namespace CompPlus_Internal
     bool IsLimitedWriten = false;
     bool IsUnlimitedWriten = false;
 
+    bool HasCopiedOriginalHurryTimerCode = false;
+    bool IsHurryTimerOffWriten = false;
+    bool IsHurryTimerOnWriten = false;
+
     bool isUnlockWriten = false;
     bool isLockWriten = false;
     bool HasCopiedOriginalControlUnlockCode = false;
     char ControlLock_OriginalCode[0x06];
 
     bool InitalInputCollected = false;
-
-    DataPointer(int, HurryUpTimerA, 0x6A74D4);
-    DataPointer(int, HurryUpTimerB, 0x6AFFD4);
 
     void UpdateVSControlLockState()
     {
@@ -61,6 +62,7 @@ namespace CompPlus_Internal
         }
     }
 
+    char HurryUpTimer_Code[0x03];
     char ExtendedTime_Code[0x02];
     char TimeLimit_Kill_Code[0x06];
 
@@ -112,10 +114,40 @@ namespace CompPlus_Internal
 
     void UpdateHurryUpTimer() 
     {
-        if (CompPlus_Settings::NoHurryUpTimer) 
+        if (SonicMania::Timer.Enabled == false) return;
+
+        void* HurryTimer_Addr = (void*)(baseAddress + 0xDE46);
+        // NOP bytes
+        char HurryTimer_NOPS[3];
+        // NOP Memset
+        memset(HurryTimer_NOPS, 0x90, sizeof HurryTimer_NOPS);
+
+        if (!HasCopiedOriginalHurryTimerCode)
         {
-            HurryUpTimerA = 99;
-            HurryUpTimerB = 99;
+            // Copy Original Unmodified Code
+            memcpy(HurryUpTimer_Code, HurryTimer_Addr, 0x03);
+            HasCopiedOriginalHurryTimerCode = true;
+        }
+
+        if (CompPlus_Settings::NoHurryUpTimer)
+        {
+            if (!IsHurryTimerOffWriten)
+            {
+                //Disable The Hurry Up Timer
+                WriteData(HurryTimer_Addr, HurryTimer_NOPS, 0x03);
+                IsHurryTimerOffWriten = true;
+                IsHurryTimerOnWriten = false;
+            }
+        }
+        else
+        {
+            if (!IsHurryTimerOnWriten)
+            {
+                //Enable The Hurry Up Timer
+                WriteData(HurryTimer_Addr, HurryUpTimer_Code, 0x03);
+                IsHurryTimerOnWriten = true;
+                IsHurryTimerOffWriten = false;
+            }
         }
     }
 

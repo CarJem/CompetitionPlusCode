@@ -110,8 +110,6 @@ namespace CompPlus_Core
     {
         if (CurrentSceneInt == 0) CompPlus_SceneTweaks::UpdateScenes("1");
         else if (CurrentSceneInt == 1) CompPlus_SceneTweaks::UpdateScenes("0");
-        else if (CurrentSceneInt == SonicMania::Scene::Scene_FBZ2) CompPlus_Common::LoadLevel_IZ("SMCP_FBZ2");
-        else if (CurrentSceneInt == SonicMania::Scene::Scene_FBZ2_e) CompPlus_Common::LoadLevel_IZ("SMCP_FBZ2E");
         else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
         else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
         else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");

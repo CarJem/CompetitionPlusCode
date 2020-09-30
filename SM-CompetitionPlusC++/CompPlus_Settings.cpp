@@ -289,8 +289,10 @@ namespace CompPlus_Settings
 
     #pragma region Screen Layout Methods
 
-    DataPointer(int, WindowSizeX, 0xA530E4);
-    DataPointer(int, WindowSizeY, 0xA530E8);
+    //DataPointer(int, WindowSizeX, 0xA530E4);
+    //DataPointer(int, WindowSizeY, 0xA530E8);
+    DataPointer(int, WindowSizeX, 0x43C6F4);
+    DataPointer(int, WindowSizeY, 0x43C6F8);
     DataPointer(int, ViewPortSizeX, 0x43C70C);
     DataPointer(int, ViewPortSizeY, 0x43C710);
     DataPointer(int, ImageXPosition, 0x43C704);
