@@ -182,7 +182,6 @@
     <ClInclude Include="DevMenu_InputMapping.h" />
     <ClInclude Include="DevMenu_MainMenu.h" />
     <ClInclude Include="DevMenu_SpecialSettings.h" />
-    <ClInclude Include="IZAPI.h" />
     <ClInclude Include="ManiaMenu.h" />
     <ClInclude Include="CompPlus_Controllers.h" />
     <ClInclude Include="CompPlus_Core.h" />
@@ -200,6 +199,7 @@
     <ClInclude Include="GustPlanet.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="HubWorld.h" />
+    <ClInclude Include="include\IZAPI.h" />
     <ClInclude Include="include\ManiaModLoader.h" />
     <ClInclude Include="include\MemAccess.h" />
     <ClInclude Include="include\SonicMania.h" />

@@ -121,6 +121,9 @@
     <ClInclude Include="stdafx.h">
       <Filter>Internal\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="include\IZAPI.h">
+      <Filter>Extensions</Filter>
+    </ClInclude>
     <ClInclude Include="include\SonicMania.h">
       <Filter>Extensions</Filter>
     </ClInclude>
@@ -139,6 +142,9 @@
     <ClInclude Include="CompPlus_Controllers.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="SceneTweaks.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="ManiaMenu.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
@@ -156,12 +162,6 @@
     </ClInclude>
     <ClInclude Include="DevMenu_SpecialSettings.h">
       <Filter>DevMenu\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTweaks.h">
-      <Filter>Scenes\Custom Scenes\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="IZAPI.h">
-      <Filter>Extensions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +241,9 @@
     <ClCompile Include="CompPlus_Controllers.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTweaks.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="ManiaMenu.cpp">
       <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
@@ -258,9 +261,6 @@
     </ClCompile>
     <ClCompile Include="DevMenu_SpecialSettings.cpp">
       <Filter>DevMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTweaks.cpp">
-      <Filter>Scenes\Custom Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

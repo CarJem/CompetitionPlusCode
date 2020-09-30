@@ -94,6 +94,7 @@ namespace CompPlus_Settings
     extern ItemsConfig MonitorTypes;
 
     //Competition Plus Settings
+    extern int StrechEffectIntensity;
     extern int InitalLives;
     extern bool InfiniteLives;
     extern bool TimeLimit;
@@ -132,6 +133,8 @@ namespace CompPlus_Settings
 
     extern void SetHurryTimer(bool Value);
 
+    extern void UpdateStrechScreen();
+
     extern void SetCurrentLSelect(int Value);
 
     extern void SetVictoryMethod(CompPlus_Settings::VictoryMode Value);
@@ -147,6 +150,8 @@ namespace CompPlus_Settings
     extern void SetPeeloutAbility(int PlayerID, ThreeStateBool Value);
 
     extern void SetInstaSheildAbility(bool Value);
+
+    extern void SetStrechIntensity(int value);
 
     extern void SetAnnouncer(AnnouncerType Value);
 

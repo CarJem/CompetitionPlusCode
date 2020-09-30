@@ -58,6 +58,7 @@ namespace CompPlus_HubWorld
     int HurryTimerToggleController = 475;
     int ItemBoxModeController = 180;
     int NumberOfRoundsController = 352;
+    int StrechIntensityNUDController = 479;
 
 	int AnnouncerTypeText = 132;
 	int InfiniteRoundsToggleText = 136;
@@ -67,6 +68,8 @@ namespace CompPlus_HubWorld
     int HurryTimerToggleText = 478;
     int ItemBoxModeText = 206;
     int NumberOfRoundsText = 351;
+    int StrechIntensityText = 480;
+
 
     int VSModeTextSlot = 361;
     int WinsTallyTextSlot = 362;
@@ -215,6 +218,7 @@ namespace CompPlus_HubWorld
     INT_Position Pos_ItemBoxModeText = INT_Position();
     INT_Position Pos_NumberOfRoundsText = INT_Position();
     INT_Position Pos_HurryTimerToggleText = INT_Position();
+    INT_Position Pos_StrechIntensityText = INT_Position();
 
 	#pragma endregion
 
@@ -621,6 +625,10 @@ namespace CompPlus_HubWorld
 		int LivesStatus = UpDownController(LivesNUDController, CompPlus_Settings::InitalLives, 1, 100);
 		if (LivesStatus != CompPlus_Settings::InitalLives) CompPlus_Settings::SetInitalLives(LivesStatus);
 
+        //Strech Effect Intensity NUD
+        int StrechStatus = UpDownController(StrechIntensityNUDController, CompPlus_Settings::StrechEffectIntensity, 1, 10);
+        if (StrechStatus != CompPlus_Settings::StrechEffectIntensity) CompPlus_Settings::SetStrechIntensity(StrechStatus);
+
 		//Infinite Time Toggle
 		bool InfiniteTimeStatus = ToggleController(RemoveTimeToggleController, CompPlus_Settings::TimeLimit);
 		if (InfiniteTimeStatus != CompPlus_Settings::TimeLimit) CompPlus_Settings::SetTimeLimit(InfiniteTimeStatus);
@@ -923,6 +931,15 @@ namespace CompPlus_HubWorld
                 break;
 		}
 	}
+
+    void UpdateIntDisplay(int SlotID, int value, int x, int y, int index) 
+    {
+        std::string s = std::to_string(value);
+        s.insert(0, "x");
+        char* text = (char*)s.c_str();
+        int size = (int)s.length();
+        UpdateGeneralDisplay(SlotID, x, y, text, size, index);
+    }
 
 	void UpdateLivesDisplay(int SlotID, int x, int y, int index)
 	{
@@ -1360,8 +1377,10 @@ namespace CompPlus_HubWorld
         UpdateItemBoxModeDisplay(ItemBoxModeText, Pos_ItemBoxModeText.X, Pos_ItemBoxModeText.Y, 23);
         //Number Of Rounds Display
         UpdateNumberOfRoundsDisplay(NumberOfRoundsText, Pos_NumberOfRoundsText.X, Pos_NumberOfRoundsText.Y, 24);
+        //Strech Internsity Display
+        UpdateIntDisplay(StrechIntensityText, CompPlus_Settings::StrechEffectIntensity, Pos_StrechIntensityText.X, Pos_StrechIntensityText.Y, 25);
         //Scoreboard Displays
-        int lastIndex = UpdateScoreboardDisplays(25);
+        int lastIndex = UpdateScoreboardDisplays(26);
         lastIndex = UpdateHUBPrivateHUDs(lastIndex);
 	}
 
@@ -1389,6 +1408,7 @@ namespace CompPlus_HubWorld
         Entity& E13 = *GetEntityFromSceneSlot<Entity>(ItemBoxModeController);
         Entity& E14 = *GetEntityFromSceneSlot<Entity>(NumberOfRoundsController);
         Entity& E15 = *GetEntityFromSceneSlot<Entity>(HurryTimerToggleController);
+        Entity& E16 = *GetEntityFromSceneSlot<Entity>(StrechIntensityNUDController);
 
 		Pos_SwapPlayerText.X = E1.Position.X + OffsetX;
 		Pos_SwapPlayerText.Y = E1.Position.Y + OffsetY;
@@ -1434,6 +1454,9 @@ namespace CompPlus_HubWorld
 
         Pos_HurryTimerToggleText.X = E15.Position.X + OffsetX;
         Pos_HurryTimerToggleText.Y = E15.Position.Y + OffsetY_2;
+
+        Pos_StrechIntensityText.X = E16.Position.X + OffsetX;
+        Pos_StrechIntensityText.Y = E16.Position.Y + OffsetY_2;
        
         Entity& QuickWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_WarpHub);
         Entity& RankingWarpSpawn = *GetEntityFromSceneSlot<Entity>(WarpDestSlotID_Ranking);

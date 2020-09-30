@@ -133,7 +133,6 @@ namespace CompPlus_Core
 
 	extern bool StageRefresh;
 	extern int IZ_SceneChangeIdleTime;
-    extern bool NonDeveloperBuild;
 
 	extern void OnFrame();
 	extern void OnDraw();
@@ -144,6 +143,7 @@ namespace CompPlus_Core
 	extern void OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 	extern void OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
 
+    extern void UpdateScreen();
     extern void InitMod();
     extern void InitAnnouncerFX();
     extern void InitSettings(const char* path);
