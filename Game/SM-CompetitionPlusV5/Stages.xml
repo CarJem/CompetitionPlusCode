@@ -16,9 +16,6 @@
 	    <Group groupName="SMCP Phantom Level Select">
 			<Scene stageKey="CPPLS" sceneKey="CPPLS" sceneID="1" sceneFlags="255" sceneName="" />
 		</Group>
-		<Group groupName="SMCP Hub World">
-			<Scene stageKey="CPHW" sceneKey="CPHW" sceneID="1" sceneFlags="3" sceneName="" />
-		</Group>
 		<Group groupName="SMCP Credits">
 			<Scene stageKey="CPCREDITS" sceneKey="CPCREDITS" sceneID="1" sceneFlags="3" sceneName="" />
 		</Group>
@@ -32,8 +29,40 @@
 			<Scene stageKey="CPLOGOS4" sceneKey="CPLOGOS4" sceneID="1" sceneFlags="255" sceneName="4" />
 		</Group>
       </Category>
+	  <Category categoryName="SMCP HUB World">
+		<Group groupName="SMCP Overworld HUB Section">
+			<Scene stageKey="SMCP_HUB1" sceneKey="SMCP_HUB1" sceneID="1" sceneFlags="3" sceneName="NRM" />
+			<Scene stageKey="SMCP_HUB1HWN" sceneKey="SMCP_HUB1HWN" sceneID="1" sceneFlags="3" sceneName="HWN" />
+		</Group>
+		<Group groupName="SMCP Rankings HUB Section">
+			<Scene stageKey="SMCP_HUB2" sceneKey="SMCP_HUB2" sceneID="1" sceneFlags="3" sceneName="" />
+		</Group>
+		<Group groupName="SMCP Options HUB Section">
+			<Scene stageKey="SMCP_HUB3" sceneKey="SMCP_HUB3" sceneID="1" sceneFlags="3" sceneName="" />
+		</Group>
+	  </Category>
 	  <Category categoryName="SMCP Stock Stages">
-		<Group groupName="Flying Battery Zone [Edits]">
+		<Group groupName="Green Hill Zone [VS]">
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Chemical Plant Zone [VS]">
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Studiopolis Zone [Adverts]">
+			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+		</Group>
+		<Group groupName="Studiopolis Zone [VS]">
+			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Flying Battery Zone [VS]">
 			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1" sceneID="1" sceneFlags="3" sceneName="1" />
 			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
 		</Group>
@@ -45,6 +74,41 @@
 			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
 			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
 		</Group>
+		<Group groupName="Press Garden Zone [VS]">
+			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Stardust Speedway Zone [VS]">
+			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Hyrdrocity Zone [VS]">
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Mirage Saloon Zone [VS]">
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1K" sceneID="1K" sceneFlags="3" sceneName="1K" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1E" sceneID="1E" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Oil Ocean [VS]">
+			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Titanic Monarch Zone [VS]">
+			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
+			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
+		</Group>	
 		<Group groupName="Angel Island Zone [Extended]">
 			<Scene stageKey="CPAIZEX" sceneKey="CPAIZEX" sceneID="EXT" sceneFlags="5" sceneName="" />
 		</Group>
@@ -139,7 +203,7 @@
 	  </StageAssets>
 	</Stage>	
 	<Stage stageName="SMCP Settings Menu" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="CPSW"></Stage>
-	<Stage stageName="SMCP HUB World" stageDir="SMCP_Misc/CompetitionPlusHUB" stageKey="CPHW">
+	<Stage stageName="SMCP HUB Overworld" stageDir="SMCP_HUB/HUB_Overworld" stageKey="SMCP_HUB1">
 	  <StageUnlocks>
 		  <FBZ_HangPoint />
 		  <GHZ_Platform />
@@ -171,7 +235,116 @@
 		  <Asset basePath="Data/Sprites/GHZ/SpikeLog.bin"  newPath="Data/Sprites/HUB/SpikeLog.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Splats.bin"  newPath="Data/Sprites/HUB/Splats.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/ZipLine.bin"  newPath="Data/Sprites/HUB/ZipLine.bin" />		  
-		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		  
+		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />		
+		  <Asset basePath="Data/Sprites/Global/Display.gif"  newPath="Data/Sprites/HUB/Display.gif" />	  
+	  </StageAssets>
+	</Stage>
+	<Stage stageName="SMCP HUB Overworld (EXE Edition)" stageDir="SMCP_HUB/HUB_Nether" stageKey="SMCP_HUB1HWN">
+	  <StageUnlocks>
+	  	<Core_GHZ/>
+		<FBZ_Button />
+	  </StageUnlocks>
+	  <StageAssets>
+		  <Asset basePath="Data/Sprites/PSZ2/Objects3.gif" newPath="Data/Sprites/HUB/Computer.gif" />
+		  <Asset basePath="Data/Sprites/CPZ/StickyPlatform.bin"  newPath="Data/Sprites/HUB/StickyPlatform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB_Nether/Batbrain.bin" />
+		  <Asset basePath="Data/Sprites/HCZ/Bridge.bin"  newPath="Data/Sprites/HUB_Nether/Bridge.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BurningLog.bin"  newPath="Data/Sprites/HUB_Nether/BurningLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BuzzBomber.bin"  newPath="Data/Sprites/HUB_Nether/BuzzBomber.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/CheckerBall.bin"  newPath="Data/Sprites/HUB_Nether/CheckerBall.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Chopper.bin"  newPath="Data/Sprites/HUB_Nether/Chopper.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Crabmeat.bin"  newPath="Data/Sprites/HUB_Nether/Crabmeat.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DDWrecker.bin"  newPath="Data/Sprites/HUB_Nether/DDWrecker.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/HUB_Nether/Decoration.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DERobot.bin"  newPath="Data/Sprites/HUB_Nether/DERobot.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Fireball.bin"  newPath="Data/Sprites/HUB_Nether/Fireball.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Icons.bin"  newPath="Data/Sprites/HUB_Nether/Icons.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Motobug.bin"  newPath="Data/Sprites/HUB_Nether/Motobug.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Newtron.bin"  newPath="Data/Sprites/HUB_Nether/Newtron.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Platform.bin"  newPath="Data/Sprites/HUB_Nether/Platform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/SpikeLog.bin"  newPath="Data/Sprites/HUB_Nether/SpikeLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Splats.bin"  newPath="Data/Sprites/HUB_Nether/Splats.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/ZipLine.bin"  newPath="Data/Sprites/HUB_Nether/ZipLine.bin" />		  
+		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB_Nether/TitleCard.bin" />
+		  <Asset basePath="Data/Sprites/Global/Display.gif"  newPath="Data/Sprites/HUB_Nether/Display.gif" />	  		
+		  <Asset basePath="Data/Sprites/GHZ/AniTiles.gif"  newPath="Data/Sprites/HUB_Nether/AniTiles.gif" />		    
+		  <Asset basePath="Data/Sprites/GHZ/Ball.gif"  newPath="Data/Sprites/HUB_Nether/Ball.gif" />	
+		  <Asset basePath="Data/Sprites/GHZ/Objects.gif"  newPath="Data/Sprites/HUB_Nether/Objects.gif" />		
+		  <Asset basePath="Data/Sprites/GHZ/Objects2.gif"  newPath="Data/Sprites/HUB_Nether/Objects2.gif" />		
+		  <Asset basePath="Data/Sprites/GHZ/DDWrecker.gif"  newPath="Data/Sprites/HUB_Nether/DDWrecker.gif" />	
+		  <Asset basePath="Data/Sprites/GHZ/DERobot.gif"  newPath="Data/Sprites/HUB_Nether/DERobot.gif" />			
+	  </StageAssets>
+	</Stage>
+	<Stage stageName="SMCP HUB Leaderboards" stageDir="SMCP_HUB/HUB_Ranking" stageKey="SMCP_HUB2">
+	  <StageUnlocks>
+		  <FBZ_HangPoint />
+		  <GHZ_Platform />
+		  <GHZ_Decoration />
+		  <GHZ_ZipLine />
+		  <HCZ_Bridge />
+		  <FBZ_Button />
+	  </StageUnlocks>
+	  <StageAssets>
+		  <Asset basePath="Data/Sprites/PSZ2/Objects3.gif" newPath="Data/Sprites/HUB/Computer.gif" />
+		  <Asset basePath="Data/Sprites/CPZ/StickyPlatform.bin"  newPath="Data/Sprites/HUB/StickyPlatform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB/Batbrain.bin" />
+		  <Asset basePath="Data/Sprites/FBZ/Objects.gif"  newPath="Data/Sprites/HUB/Objects-FBZ.gif" />
+		  <Asset basePath="Data/Sprites/HCZ/Bridge.bin"  newPath="Data/Sprites/HUB/Bridge.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BurningLog.bin"  newPath="Data/Sprites/HUB/BurningLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BuzzBomber.bin"  newPath="Data/Sprites/HUB/BuzzBomber.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/CheckerBall.bin"  newPath="Data/Sprites/HUB/CheckerBall.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Chopper.bin"  newPath="Data/Sprites/HUB/Chopper.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Crabmeat.bin"  newPath="Data/Sprites/HUB/Crabmeat.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DDWrecker.bin"  newPath="Data/Sprites/HUB/DDWrecker.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/HUB/Decoration.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DERobot.bin"  newPath="Data/Sprites/HUB/DERobot.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Fireball.bin"  newPath="Data/Sprites/HUB/Fireball.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Icons.bin"  newPath="Data/Sprites/HUB/Icons.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Motobug.bin"  newPath="Data/Sprites/HUB/Motobug.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Newtron.bin"  newPath="Data/Sprites/HUB/Newtron.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Platform.bin"  newPath="Data/Sprites/HUB/Platform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/print.txt"  newPath="Data/Sprites/HUB/print.txt" />
+		  <Asset basePath="Data/Sprites/GHZ/SpikeLog.bin"  newPath="Data/Sprites/HUB/SpikeLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Splats.bin"  newPath="Data/Sprites/HUB/Splats.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/ZipLine.bin"  newPath="Data/Sprites/HUB/ZipLine.bin" />		  
+		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />
+		  <Asset basePath="Data/Sprites/Global/Display.gif"  newPath="Data/Sprites/HUB/Display.gif" />	  		  
+	  </StageAssets>
+	</Stage>
+	<Stage stageName="SMCP HUB Settings" stageDir="SMCP_HUB/HUB_Settings" stageKey="SMCP_HUB3">
+	  <StageUnlocks>
+		  <FBZ_HangPoint />
+		  <GHZ_Platform />
+		  <GHZ_Decoration />
+		  <GHZ_ZipLine />
+		  <HCZ_Bridge />
+		  <FBZ_Button />
+	  </StageUnlocks>
+	  <StageAssets>
+		  <Asset basePath="Data/Sprites/PSZ2/Objects3.gif" newPath="Data/Sprites/HUB/Computer.gif" />
+		  <Asset basePath="Data/Sprites/CPZ/StickyPlatform.bin"  newPath="Data/Sprites/HUB/StickyPlatform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB/Batbrain.bin" />
+		  <Asset basePath="Data/Sprites/FBZ/Objects.gif"  newPath="Data/Sprites/HUB/Objects-FBZ.gif" />
+		  <Asset basePath="Data/Sprites/HCZ/Bridge.bin"  newPath="Data/Sprites/HUB/Bridge.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BurningLog.bin"  newPath="Data/Sprites/HUB/BurningLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/BuzzBomber.bin"  newPath="Data/Sprites/HUB/BuzzBomber.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/CheckerBall.bin"  newPath="Data/Sprites/HUB/CheckerBall.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Chopper.bin"  newPath="Data/Sprites/HUB/Chopper.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Crabmeat.bin"  newPath="Data/Sprites/HUB/Crabmeat.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DDWrecker.bin"  newPath="Data/Sprites/HUB/DDWrecker.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/HUB/Decoration.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/DERobot.bin"  newPath="Data/Sprites/HUB/DERobot.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Fireball.bin"  newPath="Data/Sprites/HUB/Fireball.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Icons.bin"  newPath="Data/Sprites/HUB/Icons.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Motobug.bin"  newPath="Data/Sprites/HUB/Motobug.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Newtron.bin"  newPath="Data/Sprites/HUB/Newtron.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Platform.bin"  newPath="Data/Sprites/HUB/Platform.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/print.txt"  newPath="Data/Sprites/HUB/print.txt" />
+		  <Asset basePath="Data/Sprites/GHZ/SpikeLog.bin"  newPath="Data/Sprites/HUB/SpikeLog.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Splats.bin"  newPath="Data/Sprites/HUB/Splats.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/ZipLine.bin"  newPath="Data/Sprites/HUB/ZipLine.bin" />		  
+		  <Asset basePath="Data/Sprites/Global/TitleCard.bin"  newPath="Data/Sprites/HUB/TitleCard.bin" />	
+		  <Asset basePath="Data/Sprites/Global/Display.gif"  newPath="Data/Sprites/HUB/Display.gif" />	  	  
 	  </StageAssets>
 	</Stage>
 	<Stage stageName="SMCP Credits Zone" stageDir="SMCP_Misc/SMCP_Credits" stageKey="CPCREDITS">
@@ -216,6 +389,26 @@
 		  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_Logos4/Logos.bin" />
 	  </StageAssets>
 	</Stage>
+	<Stage stageName="SMCP Green Hill Zone" stageDir="SMCP_StockStages/GHZ" stageKey="SMCP_GHZ">
+	   <StageUnlocks>
+		  <Core_GHZ/>
+	  </StageUnlocks>
+	</Stage>	
+	<Stage stageName="SMCP Chemical Plant Zone" stageDir="SMCP_StockStages/CPZ" stageKey="SMCP_CPZ">
+	   <StageUnlocks>
+		  <Core_CPZ/>
+	  </StageUnlocks>
+	</Stage>	
+	<Stage stageName="SMCP Studiopolis Zone Act 1" stageDir="SMCP_StockStages/SPZ1" stageKey="SMCP_SPZ1">
+	   <StageUnlocks>
+		  <Core_SPZ1/>
+	  </StageUnlocks>
+	</Stage>	
+	<Stage stageName="SMCP Studiopolis Zone Act 2" stageDir="SMCP_StockStages/SPZ2" stageKey="SMCP_SPZ2">
+	   <StageUnlocks>
+		  <Core_SPZ2/>
+	  </StageUnlocks>
+	</Stage>		
     <Stage stageName="SMCP Flying Battery Zone" stageDir="SMCP_StockStages/FBZ" stageKey="SMCP_FBZ">
 	   <StageUnlocks>
 		  <Core_FBZ/>
@@ -238,6 +431,61 @@
 		  <Core_PSZ1/>
 	  </StageUnlocks>
 	</Stage>
+	<Stage stageName="SMCP Press Garden Zone Act 2" stageDir="SMCP_StockStages/PSZ2" stageKey="SMCP_PGZ2">
+		<StageAssets>
+		</StageAssets>
+	   <StageUnlocks>
+		  <Core_PSZ2/>
+	  </StageUnlocks>
+	</Stage>
+	<Stage stageName="SMCP Stardust Speedway Zone Act 1" stageDir="SMCP_StockStages/SSZ1" stageKey="SMCP_SSZ1">
+	   <StageUnlocks>
+		  <Core_SSZ/>
+		  <Core_SSZ1/>
+	  </StageUnlocks>
+	</Stage>
+	<Stage stageName="SMCP Stardust Speedway Zone Act 2" stageDir="SMCP_StockStages/SSZ2" stageKey="SMCP_SSZ2">
+	   <StageUnlocks>
+		  <Core_SSZ/>
+		  <Core_SSZ2/>
+	  </StageUnlocks>
+	  <StageAssets>
+			<Asset basePath="Data/Sprites/Global/MonarchPlans.bin"  newPath="Data/Sprites/SSZ/MonarchPlans.bin" />
+	   </StageAssets>
+	</Stage>
+    <Stage stageName="SMCP Hydrocity Zone" stageDir="SMCP_StockStages/HCZ" stageKey="SMCP_HCZ">
+	   <StageUnlocks>
+		  <Core_HCZ/>
+	  </StageUnlocks>
+	</Stage>	
+    <Stage stageName="SMCP Mirage Saloon Zone" stageDir="SMCP_StockStages/MSZ" stageKey="SMCP_MSZ">
+	   <StageUnlocks>
+		  <Core_MSZ/>
+	  </StageUnlocks>
+	</Stage>
+    <Stage stageName="SMCP Oil Ocean Zone Act 1" stageDir="SMCP_StockStages/OOZ" stageKey="SMCP_OOZ1">
+	   <StageUnlocks>
+		  <Core_OOZ/>
+	  </StageUnlocks>
+	</Stage>	
+    <Stage stageName="SMCP Oil Ocean Zone Act 2" stageDir="SMCP_StockStages/OOZ" stageKey="SMCP_OOZ2">
+	   <StageUnlocks>
+		  <Core_OOZ/>
+		  <Core_OOZ2/>
+	  </StageUnlocks>
+	</Stage>		
+	<Stage stageName="SMCP Titanic Monarch Zone Act 1" stageDir="SMCP_StockStages/TMZ1" stageKey="SMCP_TMZ1">
+	   <StageUnlocks>
+		  <Core_TMZ/>
+		  <Core_TMZ1/>
+	  </StageUnlocks>
+	</Stage>
+	<Stage stageName="SMCP Titanic Monarch Zone Act 2" stageDir="SMCP_StockStages/TMZ2" stageKey="SMCP_TMZ2">
+	   <StageUnlocks>
+		  <Core_TMZ/>
+		  <Core_TMZ2/>
+	  </StageUnlocks>
+	</Stage>	
 	<Stage stageName="SMCP Angel Island Zone" stageDir="SMCP_StockStages/AIZ" stageKey="CPAIZEX">
 	   <StageUnlocks>
 		  <Core_AIZ/>
@@ -296,7 +544,7 @@
 		<HCZ_Bridge />
 		<MSZ_RotatingSpikes />
 		<MSZ_SwingRope />
-		<SSZ_SDashWheel />
+		<SSZ1_SDashWheel />
 		<HPZ_Jellygnite />
 		<HPZ_Redz />
 		<HPZ_Stegway />

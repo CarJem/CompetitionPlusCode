@@ -98,6 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;MANIAPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,6 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;MANIAPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,92 +180,86 @@
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChaotixLevelSelect.h" />
-    <ClInclude Include="DevMenu_InputMapping.h" />
-    <ClInclude Include="DevMenu_MainMenu.h" />
-    <ClInclude Include="DevMenu_SpecialSettings.h" />
-    <ClInclude Include="ManiaMenu.h" />
-    <ClInclude Include="CompPlus_Controllers.h" />
-    <ClInclude Include="CompPlus_Core.h" />
-    <ClInclude Include="CompPlus_Internal.h" />
-    <ClInclude Include="CompPlus_Settings.h" />
-    <ClInclude Include="CompPlus_Announcers.h" />
-    <ClInclude Include="CompPlus_Scoring.h" />
-    <ClInclude Include="CreditsScene.h" />
-    <ClInclude Include="CustomLevelSelect.h" />
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Announcers.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Common.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Controllers.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_DevMenu.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Scoring.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Settings.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Status.h" />
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_InputMapping.h" />
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_MainMenu.h" />
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_RankingEditor.h" />
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_SpecialSettings.h" />
+    <ClInclude Include="CompPlus_Extensions\Helpers.h" />
+    <ClInclude Include="CompPlus_Extensions\IZAPI.h" />
+    <ClInclude Include="CompPlus_Extensions\ManiaExt.h" />
+    <ClInclude Include="CompPlus_Extensions\PointScrolling.h" />
+    <ClInclude Include="CompPlus_Extensions\TitleCardColors.h" />
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h" />
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpecialRings.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\GenericLogos.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\ManiaMenu.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\SceneTweaks.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\SettingsMenu.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubControllers.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubCore.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubRanking.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubSettings.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubText.h" />
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubWorld.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\CustomLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\LevelSelectCore.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
-    <ClInclude Include="CompPlus_DevMenu.h" />
-    <ClInclude Include="EncoreLevelSelect.h" />
-    <ClInclude Include="DevMenu_RankingEditor.h" />
-    <ClInclude Include="SceneTweaks.h" />
-    <ClInclude Include="GustPlanet.h" />
-    <ClInclude Include="Helpers.h" />
-    <ClInclude Include="HubWorld.h" />
-    <ClInclude Include="include\IZAPI.h" />
-    <ClInclude Include="include\ManiaModLoader.h" />
-    <ClInclude Include="include\MemAccess.h" />
-    <ClInclude Include="include\SonicMania.h" />
-    <ClInclude Include="LevelSelectCore.h" />
-    <ClInclude Include="LHPZ.h" />
-    <ClInclude Include="ManiaExt.h" />
-    <ClInclude Include="ManiaLevelSelect.h" />
-    <ClInclude Include="CompPlus_Common.h" />
-    <ClInclude Include="PhantomLevelSelect.h" />
-    <ClInclude Include="PointScrolling.h" />
-    <ClInclude Include="SettingsMenu.h" />
-    <ClInclude Include="GenericLogos.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ChaotixLevelSelect.cpp" />
-    <ClCompile Include="DevMenu_InputMapping.cpp" />
-    <ClCompile Include="DevMenu_MainMenu.cpp" />
-    <ClCompile Include="DevMenu_SpecialSettings.cpp" />
-    <ClCompile Include="ManiaMenu.cpp" />
-    <ClCompile Include="CompPlus_Controllers.cpp" />
-    <ClCompile Include="CompPlus_Core.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Announcers.cpp" />
-    <ClCompile Include="CompPlus_Internal.cpp" />
-    <ClCompile Include="CompPlus_Settings.cpp" />
-    <ClCompile Include="CompPlus_Scoring.cpp" />
-    <ClCompile Include="CreditsScene.cpp" />
-    <ClCompile Include="CustomLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Common.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Controllers.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_DevMenu.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Scoring.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Settings.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Status.cpp" />
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_InputMapping.cpp" />
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_MainMenu.cpp" />
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_RankingEditor.cpp" />
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_SpecialSettings.cpp" />
+    <ClCompile Include="CompPlus_Extensions\dllmain.cpp" />
+    <ClCompile Include="CompPlus_Extensions\Helpers.cpp" />
+    <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp" />
+    <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp" />
+    <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\GenericLogos.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\ManiaMenu.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\SceneTweaks.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\SettingsMenu.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubControllers.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubCore.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubRanking.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubSettings.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubText.cpp" />
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubWorld.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\CustomLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\LevelSelectCore.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
-    <ClCompile Include="CompPlus_DevMenu.cpp" />
-    <ClCompile Include="dllmain.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="EncoreLevelSelect.cpp" />
     <ClCompile Include="Base.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="DevMenu_RankingEditor.cpp" />
-    <ClCompile Include="SceneTweaks.cpp" />
-    <ClCompile Include="GustPlanet.cpp" />
-    <ClCompile Include="Helpers.cpp" />
-    <ClCompile Include="HubWorld.cpp" />
-    <ClCompile Include="LevelSelectCore.cpp" />
-    <ClCompile Include="LHPZ.cpp" />
-    <ClCompile Include="ManiaExt.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="ManiaLevelSelect.cpp" />
-    <ClCompile Include="CompPlus_Common.cpp" />
-    <ClCompile Include="PhantomLevelSelect.cpp" />
-    <ClCompile Include="PointScrolling.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="SettingsMenu.cpp" />
-    <ClCompile Include="GenericLogos.cpp" />
-    <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>

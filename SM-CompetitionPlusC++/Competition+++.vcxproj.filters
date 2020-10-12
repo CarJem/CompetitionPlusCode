@@ -4,51 +4,56 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{dfa46945-ae5e-43ff-b2b2-d8c4faa49b66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Level Selects">
-      <UniqueIdentifier>{c091c5b9-4226-4b04-befc-8109701b1807}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{b1bdbe9e-a36c-4e76-8998-0003a5b1d14e}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Extensions">
-      <UniqueIdentifier>{56f541ab-8d49-4a79-a3fd-e35d9a7cecaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Depends">
       <UniqueIdentifier>{8a2a5dff-9ff0-4175-b87c-c47e20e4396b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b4e96eb8-3e5d-48f2-9f82-1e1b6e8a7242}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\Headers">
-      <UniqueIdentifier>{e6327ade-5bab-4d8a-bef2-afaf9f8af033}</UniqueIdentifier>
+      <UniqueIdentifier>{3227a906-faeb-48a7-8833-e0d9622d17c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extensions\Headers">
-      <UniqueIdentifier>{72e3e5dc-9086-4a46-b168-f79ac83777e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\General Scenes">
-      <UniqueIdentifier>{dda5318e-dd06-4602-883d-c8a8de7344bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\General Scenes\Headers">
-      <UniqueIdentifier>{ff0e87e1-f768-4091-a4ed-362e9f5ecbc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Level Selects\Headers">
-      <UniqueIdentifier>{e15aeec9-8804-4d23-9e49-a2f8f9750ac9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Internal">
-      <UniqueIdentifier>{ff8657e2-9033-4ae3-a039-7dc82d95097d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Internal\Headers">
-      <UniqueIdentifier>{23204ba7-82c3-4dcf-b1b4-0a2afb2cbbb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Custom Scenes">
-      <UniqueIdentifier>{c464cd53-764c-4dec-9d27-f3e08cc0ea8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Custom Scenes\Headers">
-      <UniqueIdentifier>{5c9e604b-ffef-429d-91aa-4a63c76fce3e}</UniqueIdentifier>
+    <Filter Include="Extensions">
+      <UniqueIdentifier>{d02e344e-f150-4f1c-ada0-ca699edea906}</UniqueIdentifier>
     </Filter>
     <Filter Include="DevMenu">
-      <UniqueIdentifier>{02231fe9-7209-4d39-98ab-339f59d6cf6c}</UniqueIdentifier>
+      <UniqueIdentifier>{e7daa728-d0d9-41ab-92be-520aa3558883}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DevMenu\Header">
-      <UniqueIdentifier>{d99a907d-ca45-47e1-8bb6-9d77113b79ad}</UniqueIdentifier>
+    <Filter Include="DevMenu\Headers">
+      <UniqueIdentifier>{b61d13f3-5ffd-4897-bdc8-5fec61a896ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\Headers">
+      <UniqueIdentifier>{85e33415-fcce-485f-a7c9-b8014568d6fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level Selects">
+      <UniqueIdentifier>{f2938a78-3ee2-4e91-9c3e-177e7f1b6a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level Selects\Headers">
+      <UniqueIdentifier>{82880c53-8515-4668-b95e-758acdc16389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\HUB World">
+      <UniqueIdentifier>{4b9261f1-9d85-4805-bc71-4a4c45d1fad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\HUB World\Headers">
+      <UniqueIdentifier>{8527fb7a-64eb-477c-949b-f20e4cfce2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\General Scenes">
+      <UniqueIdentifier>{51bb1948-609a-40a3-b2e5-33db37e575a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\General Scenes\Headers">
+      <UniqueIdentifier>{83bb740e-ce74-4a16-9655-37f6f5cdc51e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Custom Scenes">
+      <UniqueIdentifier>{69924935-b400-4321-b777-3bff8f91fcc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Custom Scenes\Headers">
+      <UniqueIdentifier>{80b6d32a-9705-4442-a1dd-26d2b056e9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Functionality">
+      <UniqueIdentifier>{a18e5e11-be40-4c54-821e-eabdf5c9fcda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Functionality\Headers">
+      <UniqueIdentifier>{c2811ec4-bf20-4ca6-bb56-4d1c657f3c9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,209 +63,234 @@
     <ClInclude Include="depends\tinyxml2\tinyxml2.h">
       <Filter>Depends</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Announcers.h">
+    <ClInclude Include="CompPlus_Core\CompPlus_Announcers.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Helpers.h">
+    <ClInclude Include="CompPlus_Core\CompPlus_Common.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Controllers.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_DevMenu.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Scoring.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Settings.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Status.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_InputMapping.h">
+      <Filter>DevMenu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_MainMenu.h">
+      <Filter>DevMenu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_RankingEditor.h">
+      <Filter>DevMenu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_DevMenu\DevMenu_SpecialSettings.h">
+      <Filter>DevMenu\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\IZAPI.h">
       <Filter>Extensions\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ManiaExt.h">
+    <ClInclude Include="CompPlus_Extensions\Helpers.h">
       <Filter>Extensions\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="PointScrolling.h">
+    <ClInclude Include="CompPlus_Extensions\ManiaExt.h">
       <Filter>Extensions\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HubWorld.h">
+    <ClInclude Include="CompPlus_Extensions\PointScrolling.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\TitleCardColors.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\LevelSelectCore.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\CustomLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubControllers.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubCore.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubRanking.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubSettings.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubText.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\HUB World\HubWorld.h">
+      <Filter>Scenes\HUB World\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsMenu.h">
+    <ClInclude Include="CompPlus_Scenes\General Scenes\GenericLogos.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ChaotixLevelSelect.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomLevelSelect.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="EncoreLevelSelect.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSelectCore.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ManiaLevelSelect.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PhantomLevelSelect.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericLogos.h">
+    <ClInclude Include="CompPlus_Scenes\General Scenes\ManiaMenu.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CreditsScene.h">
+    <ClInclude Include="CompPlus_Scenes\General Scenes\SceneTweaks.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scoring.h">
-      <Filter>Core\Headers</Filter>
+    <ClInclude Include="CompPlus_Scenes\General Scenes\SettingsMenu.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Settings.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Core.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Common.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="include\MemAccess.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Internal\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IZAPI.h">
-      <Filter>Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SonicMania.h">
-      <Filter>Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ManiaModLoader.h">
-      <Filter>Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Internal.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GustPlanet.h">
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h">
       <Filter>Scenes\Custom Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="LHPZ.h">
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h">
       <Filter>Scenes\Custom Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Controllers.h">
-      <Filter>Core\Headers</Filter>
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpecialRings.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTweaks.h">
-      <Filter>Scenes\General Scenes\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ManiaMenu.h">
-      <Filter>Scenes\General Scenes\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_DevMenu.h">
-      <Filter>DevMenu\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu_InputMapping.h">
-      <Filter>DevMenu\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu_MainMenu.h">
-      <Filter>DevMenu\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu_RankingEditor.h">
-      <Filter>DevMenu\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DevMenu_SpecialSettings.h">
-      <Filter>DevMenu\Header</Filter>
+    <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PointScrolling.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="ManiaExt.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="EncoreLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSelectCore.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="ManiaLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="PhantomLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
     <ClCompile Include="Base.cpp" />
-    <ClCompile Include="ChaotixLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
       <Filter>Depends</Filter>
     </ClCompile>
-    <ClCompile Include="HubWorld.cpp">
-      <Filter>Scenes\General Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsMenu.cpp">
-      <Filter>Scenes\General Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="GenericLogos.cpp">
-      <Filter>Scenes\General Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="CreditsScene.cpp">
-      <Filter>Scenes\General Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Scoring.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Settings.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Common.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Announcers.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Controllers.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Core.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_DevMenu.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Common.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Scoring.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Internal</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Internal</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Internal.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Settings.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Helpers.cpp">
+    <ClCompile Include="CompPlus_Core\CompPlus_Status.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\dllmain.cpp">
       <Filter>Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="GustPlanet.cpp">
-      <Filter>Scenes\Custom Scenes</Filter>
+    <ClCompile Include="CompPlus_Extensions\Helpers.cpp">
+      <Filter>Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="LHPZ.cpp">
-      <Filter>Scenes\Custom Scenes</Filter>
+    <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp">
+      <Filter>Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Controllers.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp">
+      <Filter>Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTweaks.cpp">
+    <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_InputMapping.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_MainMenu.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_RankingEditor.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_DevMenu\DevMenu_SpecialSettings.cpp">
+      <Filter>DevMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\CustomLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\LevelSelectCore.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubControllers.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubCore.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubRanking.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubSettings.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubText.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\HUB World\HubWorld.cpp">
+      <Filter>Scenes\HUB World</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp">
       <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ManiaMenu.cpp">
+    <ClCompile Include="CompPlus_Scenes\General Scenes\GenericLogos.cpp">
       <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_DevMenu.cpp">
-      <Filter>DevMenu</Filter>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\ManiaMenu.cpp">
+      <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="DevMenu_InputMapping.cpp">
-      <Filter>DevMenu</Filter>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\SceneTweaks.cpp">
+      <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="DevMenu_MainMenu.cpp">
-      <Filter>DevMenu</Filter>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\SettingsMenu.cpp">
+      <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="DevMenu_RankingEditor.cpp">
-      <Filter>DevMenu</Filter>
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp">
+      <Filter>Scenes\Custom Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="DevMenu_SpecialSettings.cpp">
-      <Filter>DevMenu</Filter>
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp">
+      <Filter>Scenes\Custom Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp">
+      <Filter>Scenes\Functionality</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
