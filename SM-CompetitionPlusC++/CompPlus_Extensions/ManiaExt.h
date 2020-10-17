@@ -44,6 +44,7 @@ extern bool DevFontLoaded;
 extern void WarpWithCamera(SonicMania::EntityPlayer& Player, int x, int y);
 extern bool IsPlayerActive(SonicMania::EntityPlayer Player);
 extern SonicMania::EntityPlayer GetPlayer(int RealID);
+extern void DrawTextSprite(std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative, int DrawOrder, int Rotation, int Angle, SonicMania::DevMenu_Alignment Alignment);
 extern void DrawTextSprite(SonicMania::EntityPlayer Player, std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative);
 extern void DrawTextSprite(std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative);
 extern void SetUIPictureFrame(int slotID, int frameID);

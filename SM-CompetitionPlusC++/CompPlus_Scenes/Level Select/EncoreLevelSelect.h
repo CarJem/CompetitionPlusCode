@@ -8,9 +8,17 @@
 
 namespace CompPlus_EncoreLevelSelect
 {
-	extern void SetEncoreLSelectBGColors();
-	extern void SetupEncoreLSelectMenuPoints();
-	extern void SetupEncoreSelector();
-	extern void OnFrame();
-	extern void CheckForPointRefresh();
+
+    extern void OnPreload();
+
+    extern void SetupMenuPoints();
+
+    extern void OnDraw();
+
+    extern void OnFrame();
+
+    extern void CheckForPointRefresh();
 };
+
+
+

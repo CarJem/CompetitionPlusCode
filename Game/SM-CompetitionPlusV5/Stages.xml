@@ -1,32 +1,129 @@
 <InfinityZone version="1">
   <Categories>
 	  <Category categoryName="SMCP Presentation">
-		<Group groupName="SMCP Mania Level Select">
-			<Scene stageKey="CPMLS" sceneKey="CPMLS" sceneID="1" sceneFlags="255" sceneName="" />
-		</Group>
-	    <Group groupName="SMCP Encore Level Select">
-		    <Scene stageKey="CPELS" sceneKey="CPELS" sceneID="1" sceneFlags="255" sceneName="" />
-		</Group>
-		<Group groupName="SMCP Custom Level Select">
-		    <Scene stageKey="CPCLS" sceneKey="CPCLS" sceneID="1" sceneFlags="255" sceneName="" />
-		</Group>
-	    <Group groupName="SMCP Chaotix Level Select">
-			<Scene stageKey="CPCXLS" sceneKey="CPCXLS" sceneID="1" sceneFlags="255" sceneName="" />
-		</Group>
-	    <Group groupName="SMCP Phantom Level Select">
-			<Scene stageKey="CPPLS" sceneKey="CPPLS" sceneID="1" sceneFlags="255" sceneName="" />
+		<Group groupName="SMCP Level Selects">
+			<Scene stageKey="CPMLS" sceneKey="CPMLS" sceneID="1" sceneFlags="3" sceneName="Mania" />
+		    <Scene stageKey="CPELS" sceneKey="CPELS" sceneID="1" sceneFlags="3" sceneName="Encore" />
+		    <Scene stageKey="CPCLS" sceneKey="CPCLS" sceneID="1" sceneFlags="3" sceneName="Custom" />
+			<Scene stageKey="CPCXLS" sceneKey="CPCXLS" sceneID="1" sceneFlags="3" sceneName="Chaotix" />
+			<Scene stageKey="SMCP_EXE_LS" sceneKey="SMCP_EXE_LS" sceneID="1" sceneFlags="3" sceneName="Exe" />
+			<Scene stageKey="CPPLS" sceneKey="CPPLS" sceneID="1" sceneFlags="3" sceneName="Phantom" />
 		</Group>
 		<Group groupName="SMCP Credits">
 			<Scene stageKey="CPCREDITS" sceneKey="CPCREDITS" sceneID="1" sceneFlags="3" sceneName="" />
-		</Group>
-		<Group groupName="SMCP Settings Page">
-			<Scene stageKey="CPSW" sceneKey="CPSW" sceneID="1" sceneFlags="255" sceneName="" />
-		</Group>		
+		</Group>	
 		<Group groupName="SMCP Logos">
 			<Scene stageKey="CPLOGOS" sceneKey="CPLOGOS" sceneID="1" sceneFlags="255" sceneName="1" />
 			<Scene stageKey="CPLOGOS2" sceneKey="CPLOGOS2" sceneID="1" sceneFlags="255" sceneName="2" />
 			<Scene stageKey="CPLOGOS3" sceneKey="CPLOGOS3" sceneID="1" sceneFlags="255" sceneName="3" />
 			<Scene stageKey="CPLOGOS4" sceneKey="CPLOGOS4" sceneID="1" sceneFlags="255" sceneName="4" />
+		</Group>
+		  <Group groupName="SMCP Settings Page (Unused)">
+			  <Scene stageKey="CPSW" sceneKey="CPSW" sceneID="1" sceneFlags="255" sceneName="" />
+		  </Group>
+	  </Category>
+	  <Category categoryName="SMCP Stock Mania Stages">
+		<Group groupName="Green Hill Zone">
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Chemical Plant Zone">
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Studiopolis Zone">
+			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Flying Battery Zone">
+			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_FBZ_Night" sceneKey="SMCP_FBZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Press Garden Zone">
+			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Stardust Speedway Zone">
+			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Hyrdrocity Zone">
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Mirage Saloon Zone">
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1K" sceneID="1K" sceneFlags="3" sceneName="1K" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Oil Ocean Zone">
+			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Lava Reef Zone">
+			<Scene stageKey="SMCP_LRZ1" sceneKey="SMCP_LRZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_LRZ2" sceneKey="SMCP_LRZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Metallic Madness Zone">
+			<Scene stageKey="SMCP_MMZ" sceneKey="SMCP_MMZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_MMZ" sceneKey="SMCP_MMZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Titanic Monarch Zone">
+			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+		</Group>	
+      </Category>	  
+	  	  <Category categoryName="SMCP Stock Encore Stages">
+		<Group groupName="Green Hill Zone+">
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Chemical Plant Zone+">
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Studiopolis Zone+">
+			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2E" sceneID="1" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Flying Battery Zone+">
+			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_FBZ_Night" sceneKey="SMCP_FBZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Press Garden Zone+">
+			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Stardust Speedway Zone+">
+			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2E" sceneID="1" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Hyrdrocity Zone+">
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Mirage Saloon Zone+">
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1E" sceneID="1E" sceneFlags="5" sceneName="1E" />
+			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
+		</Group>
+		<Group groupName="Oil Ocean Zone+">
+			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Lava Reef Zone+">
+			<Scene stageKey="SMCP_LRZ1" sceneKey="SMCP_LRZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_LRZ2" sceneKey="SMCP_LRZ2E" sceneID="1" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Metallic Madness Zone+">
+			<Scene stageKey="SMCP_MMZ" sceneKey="SMCP_MMZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageKey="SMCP_MMZ" sceneKey="SMCP_MMZ2E" sceneID="2" sceneFlags="5" sceneName="2" />
+		</Group>
+		<Group groupName="Titanic Monarch Zone+">
+			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1E" sceneID="1" sceneFlags="5" sceneName="1" />
+			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2E" sceneID="1" sceneFlags="5" sceneName="2" />
+		</Group>	
+		<Group groupName="Angel Island Zone [Extended]">
+			<Scene stageKey="CPAIZEX" sceneKey="CPAIZEX" sceneID="EXT" sceneFlags="5" sceneName="" />
 		</Group>
       </Category>
 	  <Category categoryName="SMCP HUB World">
@@ -40,79 +137,7 @@
 		<Group groupName="SMCP Options HUB Section">
 			<Scene stageKey="SMCP_HUB3" sceneKey="SMCP_HUB3" sceneID="1" sceneFlags="3" sceneName="" />
 		</Group>
-	  </Category>
-	  <Category categoryName="SMCP Stock Stages">
-		<Group groupName="Green Hill Zone [VS]">
-			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_GHZ" sceneKey="SMCP_GHZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Chemical Plant Zone [VS]">
-			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_CPZ" sceneKey="SMCP_CPZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Studiopolis Zone [Adverts]">
-			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_SPZ1" sceneKey="SMCP_SPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-		</Group>
-		<Group groupName="Studiopolis Zone [VS]">
-			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2" sceneID="1" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_SPZ2" sceneKey="SMCP_SPZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Flying Battery Zone [VS]">
-			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_FBZ" sceneKey="SMCP_FBZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-		</Group>
-		<Group groupName="Flying Battery Zone [Night]">
-			<Scene stageKey="SMCP_FBZ_Night" sceneKey="SMCP_FBZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_FBZ_Night" sceneKey="SMCP_FBZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Press Garden Zone [Warps]">
-			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_PGZ1" sceneKey="SMCP_PSZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-		</Group>
-		<Group groupName="Press Garden Zone [VS]">
-			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_PGZ2" sceneKey="SMCP_PSZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Stardust Speedway Zone [VS]">
-			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2" sceneID="1" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_SSZ1" sceneKey="SMCP_SSZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_SSZ2" sceneKey="SMCP_SSZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Hyrdrocity Zone [VS]">
-			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_HCZ" sceneKey="SMCP_HCZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Mirage Saloon Zone [VS]">
-			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1K" sceneID="1K" sceneFlags="3" sceneName="1K" />
-			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ1E" sceneID="1E" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_MSZ" sceneKey="SMCP_MSZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Oil Ocean [VS]">
-			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2" sceneID="2" sceneFlags="3" sceneName="2" />
-			<Scene stageKey="SMCP_OOZ1" sceneKey="SMCP_OOZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageKey="SMCP_OOZ2" sceneKey="SMCP_OOZ2E" sceneID="2" sceneFlags="5" sceneName="2E" />
-		</Group>
-		<Group groupName="Titanic Monarch Zone [VS]">
-			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1" sceneID="1" sceneFlags="3" sceneName="1" />
-			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2" sceneID="1" sceneFlags="3" sceneName="2" />
-			<Scene stageSetup="TMZ1" stageKey="SMCP_TMZ1" sceneKey="SMCP_TMZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
-			<Scene stageSetup="TMZ2" stageKey="SMCP_TMZ2" sceneKey="SMCP_TMZ2E" sceneID="1" sceneFlags="5" sceneName="2E" />
-		</Group>	
-		<Group groupName="Angel Island Zone [Extended]">
-			<Scene stageKey="CPAIZEX" sceneKey="CPAIZEX" sceneID="EXT" sceneFlags="5" sceneName="" />
-		</Group>
-      </Category>	  
+	  </Category>	  
 	  <Category categoryName="SMCP Custom Stages">
 		<Group groupName="Desert Hill Zone">
 			<Scene stageKey="CPDHZ" sceneKey="CPDHZ" sceneID="1" sceneFlags="3" sceneName="1" />
@@ -163,36 +188,44 @@
   </Categories>
   <Stages>
 	<Stage stageName="SMCP Mania Level Select" stageDir="SMCP_LSelect/ManiaLSelect" stageKey="CPMLS">
-	  <StageUnlocks>
-		  <Summary_UIPicture />
+	   <StageUnlocks>
+		  <Core_GHZ/>
 	  </StageUnlocks>
-	  <StageAssets>
-	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons.bin" />
-	  </StageAssets>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/Global/HUD.bin"  newPath="Data/Sprites/CP_LSelect/HUD.bin" />		
+		</StageAssets>
 	</Stage>
 	<Stage stageName="SMCP Encore Level Select" stageDir="SMCP_LSelect/EncoreLSelect" stageKey="CPELS">
-    <StageUnlocks>
-		  <Summary_UIPicture />
+	   <StageUnlocks>
+		  <Core_GHZ/>
 	  </StageUnlocks>
-	  <StageAssets>
-	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Encore.bin" />
-	  </StageAssets>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/Global/HUD.bin"  newPath="Data/Sprites/CP_LSelect/HUD.bin" />		
+		</StageAssets>
 	</Stage>
 	<Stage stageName="SMCP Custom Level Select" stageDir="SMCP_LSelect/CustomLSelect" stageKey="CPCLS">
-	  <StageUnlocks>
-		  <Summary_UIPicture />
+	   <StageUnlocks>
+		  <Core_GHZ/>
 	  </StageUnlocks>
-	  <StageAssets>
-	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Custom.bin" />
-	  </StageAssets>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/Global/HUD.bin"  newPath="Data/Sprites/CP_LSelect/HUD.bin" />		
+		</StageAssets>
 	</Stage>
 	<Stage stageName="SMCP Chaotix Level Select" stageDir="SMCP_LSelect/ChaotixLSelect" stageKey="CPCXLS">
-	  <StageUnlocks>
-		  <Summary_UIPicture />
+	   <StageUnlocks>
+		  <Core_GHZ/>
 	  </StageUnlocks>
-	  <StageAssets>
-	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons_Chaotix.bin" />
-	  </StageAssets>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/Global/HUD.bin"  newPath="Data/Sprites/CP_LSelect/HUD.bin" />		
+		</StageAssets>
+	</Stage>
+	<Stage stageName="SMCP EXE Level Select" stageDir="SMCP_LSelect/ExeLSelect" stageKey="SMCP_EXE_LS">
+	   <StageUnlocks>
+		  <Core_GHZ/>
+	  </StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Sprites/Global/HUD.bin"  newPath="Data/Sprites/CP_LSelect/HUD.bin" />			
+		</StageAssets>
 	</Stage>
 	<Stage stageName="SMCP Phantom Level Select" stageDir="SMCP_LSelect/PhantomLSelect" stageKey="CPPLS">
 	  <StageUnlocks>
@@ -201,7 +234,7 @@
 	  <StageAssets>
 	  	  <Asset basePath="Data/Sprites/LSelect/Icons.bin"  newPath="Data/Sprites/CP_LSelect/Icons.bin" />
 	  </StageAssets>
-	</Stage>	
+	</Stage>		
 	<Stage stageName="SMCP Settings Menu" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="CPSW"></Stage>
 	<Stage stageName="SMCP HUB Overworld" stageDir="SMCP_HUB/HUB_Overworld" stageKey="SMCP_HUB1">
 	  <StageUnlocks>
@@ -463,17 +496,32 @@
 		  <Core_MSZ/>
 	  </StageUnlocks>
 	</Stage>
-    <Stage stageName="SMCP Oil Ocean Zone Act 1" stageDir="SMCP_StockStages/OOZ" stageKey="SMCP_OOZ1">
+    <Stage stageName="SMCP Oil Ocean Zone Act 1" stageDir="SMCP_StockStages/OOZ1" stageKey="SMCP_OOZ1">
 	   <StageUnlocks>
 		  <Core_OOZ/>
 	  </StageUnlocks>
 	</Stage>	
-    <Stage stageName="SMCP Oil Ocean Zone Act 2" stageDir="SMCP_StockStages/OOZ" stageKey="SMCP_OOZ2">
+    <Stage stageName="SMCP Oil Ocean Zone Act 2" stageDir="SMCP_StockStages/OOZ2" stageKey="SMCP_OOZ2">
 	   <StageUnlocks>
 		  <Core_OOZ/>
 		  <Core_OOZ2/>
 	  </StageUnlocks>
+	</Stage>
+	<Stage stageName="SMCP Lava Reef Zone Act 1" stageDir="SMCP_StockStages/LRZ1" stageKey="SMCP_LRZ1">
+	   <StageUnlocks>
+		  <Core_LRZ1/>
+	  </StageUnlocks>
+	</Stage>	
+    <Stage stageName="SMCP Lava Reef Zone Act 2" stageDir="SMCP_StockStages/LRZ2" stageKey="SMCP_LRZ2">
+	   <StageUnlocks>
+		  <Core_LRZ2/>
+	  </StageUnlocks>
 	</Stage>		
+	<Stage stageName="SMCP Metallic Madness Zone" stageDir="SMCP_StockStages/MMZ" stageKey="SMCP_MMZ">
+	   <StageUnlocks>
+		  <Core_MMZ/>
+	  </StageUnlocks>
+	</Stage>			
 	<Stage stageName="SMCP Titanic Monarch Zone Act 1" stageDir="SMCP_StockStages/TMZ1" stageKey="SMCP_TMZ1">
 	   <StageUnlocks>
 		  <Core_TMZ/>

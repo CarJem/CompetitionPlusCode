@@ -175,6 +175,27 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\Halloween2018.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\Drawing.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\EntityLoop.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
@@ -290,6 +311,27 @@
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\Drawing.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\EntityLoop.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
   </ItemGroup>

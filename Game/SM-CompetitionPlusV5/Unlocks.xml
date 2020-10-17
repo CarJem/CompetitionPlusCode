@@ -163,6 +163,8 @@
     <MSZ_SwingRope/>
     <MSZ_Tornado/>
     <MSZ_Vultron/>
+	<MSZ_Cutscene/>
+	<MSZ_Parallax/>
   </Core_MSZ>
   <Core_OOZ>
     <OOZ_Platform/>
@@ -182,7 +184,7 @@
     <LRZ1_Platform/>
     <LRZ1_Bridge/>
     <LRZ1_Button/>
-    <LRZ1_ButoonDoor/>
+    <LRZ1_ButtonDoor/>
     <LRZ1_DrillerDroid/>
     <LRZ1_Fireworm/>
     <LRZ1_Iwamodoki/>
@@ -198,11 +200,24 @@
     <LRZ1_WalkerLegs/>
   </Core_LRZ1>
   <Core_LRZ2>
-    <LRZ2_Parallax/>
     <LRZ2_Platform/>
+    <LRZ2_Button/>
+    <LRZ2_ButtonDoor/>
+    <LRZ2_Fireworm/>
+    <LRZ2_Iwamodoki/>
+    <LRZ2_LRZRockPile/>
+    <LRZ2_LavaGeyser/>
+    <LRZ2_OrbitSpike/>
+    <LRZ2_Parallax/>
+    <LRZ2_Rexon/>
+    <LRZ2_Toxomister/>
     <LRZ2_Flamethrower/>
     <LRZ2_ParallaxSprite/>
     <LRZ2_Turbine/>
+    <LRZ2_WalkerLegs/>
+    <LRZ2_Unknown1/>
+    <LRZ2_Unknown2/>
+    <LRZ2_Unknown3/>
   </Core_LRZ2>
   <Core_LRZ3>
     <LRZ3_HeavyKing/>
@@ -210,6 +225,7 @@
   </Core_LRZ3>
   <Core_MMZ>
     <MMZ_Platform/>
+    <MMZ_Decoration/>
     <MMZ_Bomb/>
     <MMZ_Button/>
     <MMZ_Caterkiller/>

@@ -35,6 +35,12 @@ namespace CompPlus_LevelSelectCore
 
 		int RedirectY = 0;
 
+        int ImageAnimID = 0;
+
+        int ImageFrameID = 0;
+
+        std::string CP_Title = " ";
+
 		const char* CP_Name = " ";
 
 		const char* CP_Author = " ";
@@ -126,6 +132,7 @@ namespace CompPlus_LevelSelectCore
 		}
 	};
 
+    extern void DrawMenu(MenuPoint** MenuPoints, int GridWidth, int GridHeight, int SpriteIDPanels, int SpriteIDIcons);
 	extern void UniversalLSelectLoop();
 	extern void LevelSelectDelayLoop(int selectorID, MenuPoint levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
 	extern void LevelSelectDelayLoop(int selectorID, int levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);

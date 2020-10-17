@@ -67,6 +67,11 @@ namespace CompPlus_ZoneSpecifics
         CompPlus_Status::ReplaceSpecialRings = false;
     }
 
+    void LevelSelectLikePreset() 
+    {
+        CompPlus_Status::DisableWorldPositionWrite = true;
+    }
+
     #pragma endregion
 
     #pragma region Specifics
@@ -81,7 +86,8 @@ namespace CompPlus_ZoneSpecifics
             CompPlus_Status::DisablePlayerDying = false;
             CompPlus_Status::InHolloweenHUB = false;
             CompPlus_Status::UseEXETitleCard = false;
-
+            CompPlus_Status::DisableWorldPositionWrite = false;
+            CompPlus_Status::ForceLoadChibiSprites = false;
             CompPlus_Status::ReplaceSpecialRings = true;
 
             LastSpecific = CurrentSpecific;
@@ -97,7 +103,7 @@ namespace CompPlus_ZoneSpecifics
         CompPlus_Status::DisablePlayerDying = false;
         CompPlus_Status::InHolloweenHUB = false;
         CompPlus_Status::UseEXETitleCard = false;
-
+        CompPlus_Status::ForceLoadChibiSprites = false;
         CompPlus_Status::ReplaceSpecialRings = true;
 
         CurrentSpecific = 0;
@@ -127,6 +133,23 @@ namespace CompPlus_ZoneSpecifics
         CurrentSpecific = 3;
     }
 
+    void SetLevelSelectSpecifics()
+    {
+        ResetSpecifics();
+
+        LevelSelectLikePreset();
+        SetDynamicCameraDisabledState(true);
+        CurrentSpecific = 4;
+    }
+
+    void SetMMZ2LevelSpecifics() 
+    {
+        ResetSpecifics();
+
+        CompPlus_Status::ForceLoadChibiSprites = true;
+        CurrentSpecific = 5;
+    }
+
     void UpdateSpecifics(const char* CurrentScene, int LevelID)
     {
         CurrentScene_IZ = (char*)CurrentScene;
@@ -137,6 +160,12 @@ namespace CompPlus_ZoneSpecifics
         else if (!strcmp(CurrentScene, "SMCP_HUB2")) SetHUBSpecifics();
         else if (!strcmp(CurrentScene, "SMCP_HUB3")) SetHUBSpecifics();
         else if (!strcmp(CurrentScene, "CPCREDITS")) SetCreditsSpecifics();
+        else if (!strcmp(CurrentScene, "CPMLS")) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, "CPELS")) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, "CPCLS")) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, "CPCXLS")) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, "SMCP_EXE_LS")) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, "SMCP_MMZ")) SetMMZ2LevelSpecifics();
         else SetDefaultSpecifics();
     }
 

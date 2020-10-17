@@ -13,9 +13,9 @@
 
 namespace CompPlus_LevelSelectCore
 {
-	using namespace CompPlus_Common;
+    using namespace CompPlus_Common;
 
-	static wchar_t* Strings[3];
+    static wchar_t* Strings[3];
 
 	void LevelSelectDelayLoop(int selectorID, MenuPoint level, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
 	{
@@ -189,7 +189,6 @@ namespace CompPlus_LevelSelectCore
         else selector.Visible = 0;
 
     }
-
 
 	void LevelSelectDelayLoop(int selectorID, const char* levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
 	{

@@ -10,4 +10,6 @@ namespace CompPlus_Status
     bool IsHolloween = true;
     bool InHolloweenHUB = false;
     bool UseEXETitleCard = false;
+    bool DisableWorldPositionWrite = false;
+    bool ForceLoadChibiSprites = false;
 }

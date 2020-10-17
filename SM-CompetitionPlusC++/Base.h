@@ -65,20 +65,20 @@ extern "C"
             Scene_HCZ2_e,
             Scene_MSZ1_e,
             Scene_MSZ2_e,
-            Scene_OOZ1_e,
-            Scene_OOZ2_e,
-            Scene_LRZ1_e,
-            Scene_LRZ2_e,
-            Scene_LRZ3_e,
-            Scene_MMZ1_e,
-            Scene_MMZ2_e,
-            Scene_TMZ1_e,
-            Scene_TMZ2_e,
-            Scene_TMZ3_e,
-            // Special Stage
-            Scene_SpecialStage1,
-            Scene_SpecialStage2,
-            Scene_SpecialStage3,
+                Scene_OOZ1_e,
+                Scene_OOZ2_e,
+                Scene_LRZ1_e,
+                Scene_LRZ2_e,
+                Scene_LRZ3_e,
+                Scene_MMZ1_e,
+                Scene_MMZ2_e,
+                Scene_TMZ1_e,
+                Scene_TMZ2_e,
+                Scene_TMZ3_e,
+                // Special Stage
+                Scene_SpecialStage1,
+                Scene_SpecialStage2,
+                Scene_SpecialStage3,
             Scene_SpecialStage4,
             Scene_SpecialStage5,
             Scene_SpecialStage6,
@@ -104,16 +104,16 @@ extern "C"
             Scene_Cutscene_AngelIsland,
             Scene_Cutscene_AngelIsland_e,
             Scene_Cutscene_GreenHillZone,
-            Scene_Cutscene_GreenHillZone2,
-            Scene_Cutscene_MirageSaloonKnucklesIntro,
-            Scene_Cutscene_StardustSpeedwayTimeTravel,
-            Scene_TryAgain,
-            Scene_Cutscene_MirageSaloonEnd_e,
+                Scene_Cutscene_GreenHillZone2,
+                Scene_Cutscene_MirageSaloonKnucklesIntro,
+                Scene_Cutscene_StardustSpeedwayTimeTravel,
+                Scene_TryAgain,
+                Scene_Cutscene_MirageSaloonEnd_e,
             Scene_TryAgain_e,
-            // Video
-            Scene_BadEnd_Sonic,
-            Scene_BadEnd_Sonic2,
-            Scene_BadEnd_Tails,
+                // Video
+                Scene_BadEnd_Sonic,
+                Scene_BadEnd_Sonic2,
+                Scene_BadEnd_Tails,
             Scene_BadEnd_Knux,
             Scene_BadEnd_Mighty,
             Scene_BadEnd_Ray,
@@ -128,10 +128,8 @@ extern "C"
             Scene_CompPlus_HubWorld = 138
         };
 
-
         extern bool StageRefresh;
         extern int IZ_SceneChangeIdleTime;
-
 
         extern void OnConstantFrame();
         extern void OnRunning();
@@ -142,10 +140,6 @@ extern "C"
         extern void OnActClear();
         extern void OnStageLoad(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
         extern void OnStageUnload(IZAPI::StageInfo info, IZAPI::StageLoadPhase phase);
-
-        extern void InitMod();
-        extern void InitAnnouncerFX();
-        extern void InitSettings(const char* path);
     }
 
     namespace CompPlus_Internal

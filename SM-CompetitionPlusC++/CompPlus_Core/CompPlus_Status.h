@@ -11,4 +11,6 @@ namespace CompPlus_Status
     extern bool InHolloweenHUB;
     extern bool isVSControllerInputUnlocked;
     extern int CurrentLevelSelect;
+    extern bool DisableWorldPositionWrite;
+    extern bool ForceLoadChibiSprites;
 }

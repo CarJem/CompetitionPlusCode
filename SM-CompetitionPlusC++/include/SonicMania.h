@@ -507,6 +507,8 @@ namespace SonicMania
         ObjectType_MatryoshkaBom = 0x00AC6C30,
         ObjectType_Scarab = 0x00AC69A8,
         ObjectType_PohBee = 0x00AC6950,
+        ObjectType_RPlaneShifter = 0x00AC6AD8,
+        ObjectType_SizeLazer = 0x00AC6758,
         // Titanic Monarch Zone
         ObjectType_SentryBug = 0x00AC6E70,
         ObjectType_TurboTurtle = 0x00AC683C,
@@ -855,6 +857,13 @@ namespace SonicMania
 
         }
 
+        Color(int r, int g, int b)
+        {
+            Red = r & 0xFF;
+            Green = g & 0xFF;
+            Blue = b & 0xFF;
+        }
+
         Color(int rgb)
         {
             Red = (rgb >> 16) & 0xFF;
@@ -932,6 +941,7 @@ namespace SonicMania
         /* 0x00000078 */ ControllerInput Start;
         /* 0x00000084 */ ControllerInput Select;
     };
+
     struct __declspec(align(4)) EntityAnimationData
     {
         /* 0x00000000 */ void* Animationptr;

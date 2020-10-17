@@ -115,6 +115,34 @@ void MoveTransition(int speed)
 	}
 }
 
+void ScrollToPosition(short x1, short y1, short x2, short y2, int &DestX, int &DestY, bool startFresh)
+{
+    if (startFresh)
+    {
+        HasTransValsBeenDefined = false;
+        HasTransCompleted = false;
+    }
+
+    if (HasTransValsBeenDefined == false || HasTransCompleted == false)
+    {
+        if (HasTransValsBeenDefined == false) UpdateTransitionObjective(x1, y1, x2, y2);
+        MoveTransition(7);
+
+        DestX = PosXCurrent;
+        DestY = PosYCurrent;
+
+        if (DestReached())
+        {
+            HasTransCompleted = true;
+        }
+    }
+    else
+    {
+        DestX = x1;
+        DestY = y1;
+    }
+}
+
 
 void ScrollToPosition(short x1, short y1, short x2, short y2, int viewSlotID, bool startFresh)
 {

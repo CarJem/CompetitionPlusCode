@@ -9,11 +9,11 @@
 namespace CompPlus_ManiaLevelSelect
 {
 
-	extern void SetManiaLSelectBGColors();
+    extern void OnPreload();
 
-	extern void SetupManiaLSelectMenuPoints();
+	extern void SetupMenuPoints();
 
-	extern void SetupManiaSelector();
+    extern void OnDraw();
 
 	extern void OnFrame();
 

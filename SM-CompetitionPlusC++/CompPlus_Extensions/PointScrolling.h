@@ -19,5 +19,6 @@ extern bool DestReached();
 extern void UpdatePosXCurrent(int speed);
 extern void UpdatePosYCurrent(int speed);
 extern void MoveTransition(int speed);
+extern void ScrollToPosition(short x1, short y1, short x2, short y2, int& DestX, int& DestY, bool startFresh);
 extern void ScrollToPosition(short x1, short y1, short x2, short y2, int viewSlotID, bool startFresh);
 

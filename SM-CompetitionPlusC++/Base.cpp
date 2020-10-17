@@ -17,11 +17,14 @@
 
 #include "CompPlus_Scenes/Functionality/ZoneSpecifics.h"
 #include "CompPlus_Scenes/Functionality/SpecialRings.h"
+#include "CompPlus_Scenes/Functionality/EntityLoop.h"
+#include "CompPlus_Scenes/Functionality/SizeLazer.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/CustomLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/ChaotixLevelSelect.h"
+#include "CompPlus_Scenes/Level Select/ExeLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/PhantomLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/LevelSelectCore.h"
 
@@ -84,11 +87,32 @@ extern "C"
                     jmp OnScreenDrawReturn
             }
         }
-
         void PatchOnScreenDrawHook()
         {
             WriteData<7>((void*)(baseAddress + 0x535FA), 0x90);
             WriteJump((void*)(baseAddress + 0x535FA), OnScreenDrawHook);
+        }
+
+        static int OnMenuScreenDrawReturn = baseAddress + 0x7FFE;
+        static __declspec(naked) void OnMenuScreenDrawHook()
+        {
+            __asm
+            {
+                pushad;
+            }
+            DoMenuOnScreenDraw();
+            __asm
+            {
+                popad;
+                mov edi, ecx
+                    mov[ebp - 0x10], eax
+                    jmp OnMenuScreenDrawReturn
+            }
+        }
+        void PatchMenuOnScreenDrawHook()
+        {
+            WriteData<5>((void*)(baseAddress + 0x7FF9), 0x90);
+            WriteJump((void*)(baseAddress + 0x7FF9), OnMenuScreenDrawHook);
         }
 
         SonicMania::GameStates ActComplete_hook()
@@ -107,6 +131,7 @@ extern "C"
         bool InitalInputCollected = false;
         bool HasCopiedOriginalControlUnlockCode = false;
         bool HasCopiedSpecialRingWarpCode = false;
+        bool HasCopiedWorldPositionWriteCode = false;
 
         bool isUnlockWriten = false;
         bool isLockWriten = false;
@@ -116,6 +141,7 @@ extern "C"
         bool IsHurryTimerOffWriten = false;
         bool IsHurryTimerOnWriten = false;
         bool IsDisableSpecialRingWarpWritten = false;
+        bool IsWorldPositionWriteDisableWritten = false;
 
         char PlayerKill_OriginalCode[0x02];
         char ControlLock_OriginalCode[0x06];
@@ -135,6 +161,65 @@ extern "C"
         char TimeLimit_VS_MaxTime3_Code[0x0A];
         char SpecialRingWarp_Code[0x02];
         char SpecialRingWarp2_Code[0x06];
+        char worldX_write1_Code[0x07];
+        char worldX_write2_Code[0x07];
+        char worldX_write3_Code[0x07];
+        char worldY_write1_Code[0x07];
+        char worldY_write2_Code[0x07];
+        char worldY_write3_Code[0x07];
+
+        void UpdateWorldPositionWriteDisable()
+        {
+            void* worldX_write_address_1 = (void*)(baseAddress + 0x1FC4);
+            void* worldX_write_address_2 = (void*)(baseAddress + 0x1F05);
+            void* worldX_write_address_3 = (void*)(baseAddress + 0x1F42);
+            void* worldY_write_address_1 = (void*)(baseAddress + 0x1F25);
+            void* worldY_write_address_2 = (void*)(baseAddress + 0x1FD8);
+            void* worldY_write_address_3 = (void*)(baseAddress + 0x1F89);
+
+            // NOP bytes
+            char nops[7];
+            memset(nops, 0x90, sizeof nops);
+
+
+            if (!HasCopiedWorldPositionWriteCode)
+            {
+                memcpy(worldX_write1_Code, worldX_write_address_1, 0x07);
+                memcpy(worldX_write2_Code, worldX_write_address_2, 0x07);
+                memcpy(worldX_write3_Code, worldX_write_address_3, 0x07);
+                memcpy(worldY_write1_Code, worldY_write_address_1, 0x07);
+                memcpy(worldY_write2_Code, worldY_write_address_2, 0x07);
+                memcpy(worldY_write3_Code, worldY_write_address_3, 0x07);
+                HasCopiedWorldPositionWriteCode = true;
+            }
+
+            if (CompPlus_Status::DisableWorldPositionWrite)
+            {
+                if (!IsWorldPositionWriteDisableWritten)
+                {
+                    WriteData(worldX_write_address_1, nops, 0x07);
+                    WriteData(worldX_write_address_2, nops, 0x07);
+                    WriteData(worldX_write_address_3, nops, 0x07);
+                    WriteData(worldY_write_address_1, nops, 0x07);
+                    WriteData(worldY_write_address_2, nops, 0x07);
+                    WriteData(worldY_write_address_3, nops, 0x07);
+                    IsWorldPositionWriteDisableWritten = true;
+                }
+            }
+            else
+            {
+                if (IsWorldPositionWriteDisableWritten)
+                {
+                    WriteData(worldX_write_address_1, worldX_write1_Code, 0x07);
+                    WriteData(worldX_write_address_2, worldX_write2_Code, 0x07);
+                    WriteData(worldX_write_address_3, worldX_write3_Code, 0x07);
+                    WriteData(worldY_write_address_1, worldY_write1_Code, 0x07);
+                    WriteData(worldY_write_address_2, worldY_write2_Code, 0x07);
+                    WriteData(worldY_write_address_3, worldY_write3_Code, 0x07);
+                    IsWorldPositionWriteDisableWritten = false;
+                }
+            }
+        }
 
         void UpdateDisableSpecialRingWarp()
         {
@@ -508,6 +593,7 @@ extern "C"
             UpdateTimer();
             UpdateVSControlLockState();
             UpdatePlayerKillAbility();
+            UpdateWorldPositionWriteDisable();
         }
 
         void OnFrame_Running() 
@@ -562,7 +648,8 @@ extern "C"
             // Load files here
             SetCurrentDirectoryA(buffer);
             PatchOnScreenDrawHook();
-            CompPlus_Core::InitMod();
+            //PatchMenuOnScreenDrawHook();
+            InitMod();
             TileCardColors::Init();
         }
 
@@ -571,11 +658,11 @@ extern "C"
             WriteJump((void*)(baseAddress + 0x001EF0B2), ActComplete_hook);
             const std::string path_cpp = path;
             IZAPI::IZInit();
-            CompPlus_Core::InitSettings((path_cpp + "\\Settings.xml").c_str());
+            InitSettings((path_cpp + "\\Settings.xml").c_str());
             IZAPI::LoadStagesFile((path_cpp + "\\Stages.xml").c_str());
             IZAPI::RegisterStageLoadEvent(CompPlus_Core::OnStageLoad);
             IZAPI::RegisterStageUnloadEvent(CompPlus_Core::OnStageUnload);
-            CompPlus_Core::InitAnnouncerFX();
+            InitAnnouncerFX();
         }
 
         __declspec(dllexport) ModInfo ManiaModInfo = { ModLoaderVer, GameVer };
@@ -613,6 +700,7 @@ extern "C"
                 else if (!strcmp(CurrentStage.SceneKey, "CPCLS")) CompPlus_CustomLevelSelect::OnFrame();
                 else if (!strcmp(CurrentStage.SceneKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnFrame();
                 else if (!strcmp(CurrentStage.SceneKey, "CPPLS")) CompPlus_PhantomLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnFrame();
                 else if (!strcmp(CurrentStage.SceneKey, "CPSW")) CompPlus_Settings_Base::OnFrame();
                 else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
                 else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
@@ -658,7 +746,15 @@ extern "C"
 
         void OnConstantFrame() 
         {
-            if (CurrentStage.StageKey) CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.StageKey, -1);
+            if (CurrentStage.StageKey) 
+            {
+                if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnPreload();
+                CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.StageKey, -1);
+            }
             else CompPlus_ZoneSpecifics::UpdateSpecifics("", CurrentSceneInt);
         }
 
@@ -666,7 +762,7 @@ extern "C"
         {
             if (StartupStageEnabled)
             {
-                CompPlus_Common::LoadLevel_IZ("SMCP_HUB3");
+                CompPlus_Common::LoadLevel_IZ("SMCP_MMZ2");
             }
             HasStartupInit = true;
         }
@@ -674,13 +770,18 @@ extern "C"
         void OnStageRefresh()
         {
             CompPlus_Announcers::ReloadAnnouncerFX();
+            CompPlus_Settings::RefreshSettings();
+            CompPlus_Scoring::OnSceneReset();
+            StageRefresh = false;
+        }
+
+        void ResetLSelects() 
+        {
             CompPlus_ManiaLevelSelect::CheckForPointRefresh();
             CompPlus_EncoreLevelSelect::CheckForPointRefresh();
             CompPlus_CustomLevelSelect::CheckForPointRefresh();
             CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
-            CompPlus_Settings::RefreshSettings();
-            CompPlus_Scoring::OnSceneReset();
-            StageRefresh = false;
+            CompPlus_ExeLevelSelect::CheckForPointRefresh();
         }
 
         void OnLegacySceneChange()
@@ -693,10 +794,12 @@ extern "C"
         {
             if (!(GameState & GameState_NotRunning)) CompPlus_HubWorld::isRestart = true;
             if (!(GameState & GameState_NotRunning)) CompPlus_HubCore::isRestart = true;
+            ResetLSelects();
             CompPlus_Status::SpecialRingsNeedRefresh = true;
             CompPlus_Credits::ResetScene();
             CompPlus_Settings::RefreshSettings();
             CompPlus_Scene_GustPlanet::OnReset();
+            CompPlus_SizeLazer::RefreshChibiSprites = true;
         }
 
         void OnRunning()
@@ -709,6 +812,7 @@ extern "C"
             CompPlus_Controllers::OnFrame();
             CompPlus_Internal::DynamicPatchesOnFrame();
             CompPlus_SpecialRings::UpdateSpecialRings();
+            CompPlus_EntityLoop::OnFrame();
             RunningSceneLoop();
         }
 
@@ -716,10 +820,18 @@ extern "C"
         {
             CompPlus_Settings_Base::DoMenuOnScreenDraw();
 
-            if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1")) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1HWN")) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB2")) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB3")) CompPlus_HubCore::OnDraw();
+            if (CurrentStage.SceneKey) 
+            {
+                if (!strcmp(CurrentStage.SceneKey, "CPMLS")) CompPlus_ManiaLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "CPELS")) CompPlus_EncoreLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "CPCLS")) CompPlus_CustomLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1")) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1HWN")) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB2")) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB3")) CompPlus_HubCore::OnDraw();
+            }
         }
 
         void OnActClear()

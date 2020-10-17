@@ -192,6 +192,7 @@
     <ClInclude Include="CompPlus_DevMenu\DevMenu_MainMenu.h" />
     <ClInclude Include="CompPlus_DevMenu\DevMenu_RankingEditor.h" />
     <ClInclude Include="CompPlus_DevMenu\DevMenu_SpecialSettings.h" />
+    <ClInclude Include="CompPlus_Extensions\Drawing.h" />
     <ClInclude Include="CompPlus_Extensions\Helpers.h" />
     <ClInclude Include="CompPlus_Extensions\IZAPI.h" />
     <ClInclude Include="CompPlus_Extensions\ManiaExt.h" />
@@ -199,6 +200,10 @@
     <ClInclude Include="CompPlus_Extensions\TitleCardColors.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\EntityLoop.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\Halloween2018.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\SpecialRings.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h" />
@@ -215,8 +220,10 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\CustomLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\LevelSelectCore.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
   </ItemGroup>
@@ -233,12 +240,17 @@
     <ClCompile Include="CompPlus_DevMenu\DevMenu_RankingEditor.cpp" />
     <ClCompile Include="CompPlus_DevMenu\DevMenu_SpecialSettings.cpp" />
     <ClCompile Include="CompPlus_Extensions\dllmain.cpp" />
+    <ClCompile Include="CompPlus_Extensions\Drawing.cpp" />
     <ClCompile Include="CompPlus_Extensions\Helpers.cpp" />
     <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp" />
     <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp" />
     <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\EntityLoop.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp" />
@@ -255,8 +267,10 @@
     <ClCompile Include="CompPlus_Scenes\Level Select\ChaotixLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\CustomLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\LevelSelectCore.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="Base.cpp">
