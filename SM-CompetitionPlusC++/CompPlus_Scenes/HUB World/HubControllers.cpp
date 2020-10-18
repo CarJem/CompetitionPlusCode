@@ -84,7 +84,7 @@ namespace CompPlus_HubControllers
         return NewValue;
     }
 
-    int UpDownController(int ControlSlotID, int OldValue, int Min, int Max)
+    int SingleUpDownController(int ControlSlotID, int OldValue, int Min, int Max, bool& isUp)
     {
         Entity& Controller = *GetEntityFromSceneSlot<Entity>(ControlSlotID);
 
@@ -110,6 +110,7 @@ namespace CompPlus_HubControllers
                 CompPlus_Common::PlayMenuMoveSoundFX(false);
                 isSettingChanged = true;
                 SettingWaitTimerActivate();
+                isUp = true;
             }
             else if (Player->InRange(x1, y1, x2, y2) && Player->Down && !isSettingChanged)
             {
@@ -118,6 +119,7 @@ namespace CompPlus_HubControllers
                 CompPlus_Common::PlayMenuMoveSoundFX(false);
                 isSettingChanged = true;
                 SettingWaitTimerActivate();
+                isUp = false;
             }
             else if (!Player->Up && !Player->Down && isSettingChanged)
             {
@@ -128,6 +130,12 @@ namespace CompPlus_HubControllers
         }
 
         return NewValue;
+    }
+
+    int SingleUpDownController(int ControlSlotID, int OldValue, int Min, int Max)
+    {
+        bool Dummy = false;
+        return SingleUpDownController(ControlSlotID, OldValue, Min, Max, Dummy);
     }
 
     bool ToggleController(int ControlSlotID, bool OldValue, int RealID)

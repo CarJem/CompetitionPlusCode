@@ -117,9 +117,6 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scenes\Level Select\LevelSelectCore.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
     </ClInclude>
@@ -257,9 +254,6 @@
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Level Select\LevelSelectCore.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp">

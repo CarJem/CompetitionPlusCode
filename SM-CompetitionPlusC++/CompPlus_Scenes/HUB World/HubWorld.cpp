@@ -160,9 +160,9 @@ namespace CompPlus_HubWorld
     void CheckHUBSettings() 
     {
         //Level Select NUD
-        int LevelStatus = CompPlus_HubControllers::UpDownController(SwapLevelSelectController, CompPlus_Status::CurrentLevelSelect, 0, 3);
+        int LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController, CompPlus_Status::CurrentLevelSelect, 0, 4);
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Status::CurrentLevelSelect = LevelStatus;
-        LevelStatus = CompPlus_HubControllers::UpDownController(SwapLevelSelectController2, LevelStatus, 0, 3);
+        LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController2, LevelStatus, 0, 4);
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Status::CurrentLevelSelect = LevelStatus;
 
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Settings::SaveSettings();
@@ -544,13 +544,13 @@ namespace CompPlus_HubWorld
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;
-            CompPlus_Common::LoadLevel_IZ("SMCP_HUB2");
+            CompPlus_Common::LoadLevel_IZ(CompPlus_Common::HUBRanking);
         }
         else
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
@@ -586,13 +586,13 @@ namespace CompPlus_HubWorld
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;
-            CompPlus_Common::LoadLevel_IZ("SMCP_HUB3");
+            CompPlus_Common::LoadLevel_IZ(CompPlus_Common::HUBSettings);
         }
         else
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
@@ -635,7 +635,7 @@ namespace CompPlus_HubWorld
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));

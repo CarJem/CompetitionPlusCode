@@ -62,6 +62,18 @@ namespace CompPlus_HubSettings
     int DevModeController = 184;
     int DebugModeController = 185;
 
+    int EncoreVapeMusicController = 977;
+    int EncoreVapeMusicText = 982;
+
+    int SpotlightModeController = 975;
+    int SpotlightModeText = 983;
+
+    int SeasonSwitchController = 976;
+    int SeasonSwitchText = 993;
+
+    int TailsFlightDropController = 972;
+    int TailsFlightDropText = 987;
+
     int DynCamToggleText_P1 = 845;
     int DynCamToggleText_P2 = 826;
     int DynCamToggleText_P3 = 839;
@@ -188,6 +200,18 @@ namespace CompPlus_HubSettings
         //Strech Internsity Display
         UpdateIntDisplay(StrechIntensityText, CompPlus_Settings::StrechEffectIntensity, 1, StringIndex);
         StringIndex++;
+        //Encore Vape Music Display
+        UpdateToggleDisplay(EncoreVapeMusicText, CompPlus_Settings::UseEncoreVapeMusic, 1, StringIndex);
+        StringIndex++;
+        //Tails Flight Drop Display
+        UpdateToggleDisplay(TailsFlightDropText, CompPlus_Settings::TailsFlightDrop, 1, StringIndex);
+        StringIndex++;
+        //Spotlight Mode Display
+        UpdateToggleDisplay(SpotlightModeText, CompPlus_Settings::SpotLightChallenge, 1, StringIndex);
+        StringIndex++;
+        //Season Switch Display
+        UpdateSeasonDisplay(SeasonSwitchText, CompPlus_Settings::CurrentSeason, 1, StringIndex);
+        StringIndex++;
 
         return StringIndex;
     }
@@ -216,52 +240,68 @@ namespace CompPlus_HubSettings
 
         //Character NUD
         bool isUp = false;
-        int CharacterP1Status = UpDownController(SwapPlayerController_P1, (int)CompPlus_Settings::Player1ChosenPlayer, 1, 5, 1, isUp);
+        int CharacterP1Status = SingleUpDownController(SwapPlayerController_P1, (int)CompPlus_Settings::Player1ChosenPlayer, 1, 5, isUp);
         if (CharacterP1Status != (int)CompPlus_Settings::Player1ChosenPlayer) ChangeCharacter(1, (CompPlus_Settings::ChosenPlayer)CharacterP1Status);
-        int CharacterP2Status = UpDownController(SwapPlayerController_P2, (int)CompPlus_Settings::Player2ChosenPlayer, 1, 5, 2, isUp);
+        int CharacterP2Status = SingleUpDownController(SwapPlayerController_P2, (int)CompPlus_Settings::Player2ChosenPlayer, 1, 5, isUp);
         if (CharacterP2Status != (int)CompPlus_Settings::Player2ChosenPlayer) ChangeCharacter(2, (CompPlus_Settings::ChosenPlayer)CharacterP2Status);
-        int CharacterP3Status = UpDownController(SwapPlayerController_P3, (int)CompPlus_Settings::Player3ChosenPlayer, 1, 5, 3, isUp);
+        int CharacterP3Status = SingleUpDownController(SwapPlayerController_P3, (int)CompPlus_Settings::Player3ChosenPlayer, 1, 5, isUp);
         if (CharacterP3Status != (int)CompPlus_Settings::Player3ChosenPlayer) ChangeCharacter(3, (CompPlus_Settings::ChosenPlayer)CharacterP3Status);
-        int CharacterP4Status = UpDownController(SwapPlayerController_P4, (int)CompPlus_Settings::Player4ChosenPlayer, 1, 5, 4, isUp);
+        int CharacterP4Status = SingleUpDownController(SwapPlayerController_P4, (int)CompPlus_Settings::Player4ChosenPlayer, 1, 5, isUp);
         if (CharacterP4Status != (int)CompPlus_Settings::Player4ChosenPlayer) ChangeCharacter(4, (CompPlus_Settings::ChosenPlayer)CharacterP4Status);
 
         //Ability NUD
-        int AbilityP1Status = UpDownController(SwapAbilityController_P1, (int)CompPlus_Settings::Player1AbilitySet, 0, 5, 1, isUp);
+        int AbilityP1Status = SingleUpDownController(SwapAbilityController_P1, (int)CompPlus_Settings::Player1AbilitySet, 0, 5, isUp);
         if (AbilityP1Status != (int)CompPlus_Settings::Player1AbilitySet) ChangeAbility(1, (CompPlus_Settings::PlayerAbility)AbilityP1Status, isUp);
-        int AbilityP2Status = UpDownController(SwapAbilityController_P2, (int)CompPlus_Settings::Player2AbilitySet, 0, 5, 2, isUp);
+        int AbilityP2Status = SingleUpDownController(SwapAbilityController_P2, (int)CompPlus_Settings::Player2AbilitySet, 0, 5, isUp);
         if (AbilityP2Status != (int)CompPlus_Settings::Player2AbilitySet) ChangeAbility(2, (CompPlus_Settings::PlayerAbility)AbilityP2Status, isUp);
-        int AbilityP3Status = UpDownController(SwapAbilityController_P3, (int)CompPlus_Settings::Player3AbilitySet, 0, 5, 3, isUp);
+        int AbilityP3Status = SingleUpDownController(SwapAbilityController_P3, (int)CompPlus_Settings::Player3AbilitySet, 0, 5, isUp);
         if (AbilityP3Status != (int)CompPlus_Settings::Player3AbilitySet) ChangeAbility(3, (CompPlus_Settings::PlayerAbility)AbilityP3Status, isUp);
-        int AbilityP4Status = UpDownController(SwapAbilityController_P4, (int)CompPlus_Settings::Player4AbilitySet, 0, 5, 4, isUp);
+        int AbilityP4Status = SingleUpDownController(SwapAbilityController_P4, (int)CompPlus_Settings::Player4AbilitySet, 0, 5, isUp);
         if (AbilityP4Status != (int)CompPlus_Settings::Player4AbilitySet) ChangeAbility(4, (CompPlus_Settings::PlayerAbility)AbilityP4Status, isUp);
 
         //DynCam Toggle
-        bool DynCamStatus_P1 = UpDownController(DynCamController_P1, (int)CompPlus_Settings::Player1DynCam, 0, 1, 1, isUp);
+        bool DynCamStatus_P1 = SingleUpDownController(DynCamController_P1, (int)CompPlus_Settings::Player1DynCam, 0, 1, isUp);
         if (DynCamStatus_P1 != (int)CompPlus_Settings::Player1DynCam) CompPlus_Settings::SetDynCamMode(1, DynCamStatus_P1);
-        bool DynCamStatus_P2 = UpDownController(DynCamController_P2, (int)CompPlus_Settings::Player2DynCam, 0, 1, 2, isUp);
+        bool DynCamStatus_P2 = SingleUpDownController(DynCamController_P2, (int)CompPlus_Settings::Player2DynCam, 0, 1, isUp);
         if (DynCamStatus_P2 != (int)CompPlus_Settings::Player2DynCam) CompPlus_Settings::SetDynCamMode(2, DynCamStatus_P2);
-        bool DynCamStatus_P3 = UpDownController(DynCamController_P3, (int)CompPlus_Settings::Player3DynCam, 0, 1, 3, isUp);
+        bool DynCamStatus_P3 = SingleUpDownController(DynCamController_P3, (int)CompPlus_Settings::Player3DynCam, 0, 1, isUp);
         if (DynCamStatus_P3 != (int)CompPlus_Settings::Player3DynCam) CompPlus_Settings::SetDynCamMode(3, DynCamStatus_P3);
-        bool DynCamStatus_P4 = UpDownController(DynCamController_P4, (int)CompPlus_Settings::Player4DynCam, 0, 1, 4, isUp);
+        bool DynCamStatus_P4 = SingleUpDownController(DynCamController_P4, (int)CompPlus_Settings::Player4DynCam, 0, 1, isUp);
         if (DynCamStatus_P4 != (int)CompPlus_Settings::Player4DynCam) CompPlus_Settings::SetDynCamMode(4, DynCamStatus_P4);
 
         //Peelout Toggle
-        int PeeloutStateP1Status = UpDownController(PeeloutController_P1, (int)CompPlus_Settings::Player1PeeloutAbility, 0, 2, 1, isUp);
+        int PeeloutStateP1Status = SingleUpDownController(PeeloutController_P1, (int)CompPlus_Settings::Player1PeeloutAbility, 0, 2, isUp);
         if (PeeloutStateP1Status != (int)CompPlus_Settings::Player1PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(1, (CompPlus_Settings::ThreeStateBool)PeeloutStateP1Status);
-        int PeeloutStateP2Status = UpDownController(PeeloutController_P2, (int)CompPlus_Settings::Player2PeeloutAbility, 0, 2, 2, isUp);
+        int PeeloutStateP2Status = SingleUpDownController(PeeloutController_P2, (int)CompPlus_Settings::Player2PeeloutAbility, 0, 2, isUp);
         if (PeeloutStateP2Status != (int)CompPlus_Settings::Player2PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(2, (CompPlus_Settings::ThreeStateBool)PeeloutStateP2Status);
-        int PeeloutStateP3Status = UpDownController(PeeloutController_P3, (int)CompPlus_Settings::Player3PeeloutAbility, 0, 2, 3, isUp);
+        int PeeloutStateP3Status = SingleUpDownController(PeeloutController_P3, (int)CompPlus_Settings::Player3PeeloutAbility, 0, 2, isUp);
         if (PeeloutStateP3Status != (int)CompPlus_Settings::Player3PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(3, (CompPlus_Settings::ThreeStateBool)PeeloutStateP3Status);
-        int PeeloutStateP4Status = UpDownController(PeeloutController_P4, (int)CompPlus_Settings::Player4PeeloutAbility, 0, 2, 4, isUp);
+        int PeeloutStateP4Status = SingleUpDownController(PeeloutController_P4, (int)CompPlus_Settings::Player4PeeloutAbility, 0, 2, isUp);
         if (PeeloutStateP4Status != (int)CompPlus_Settings::Player4PeeloutAbility) CompPlus_Settings::SetPeeloutAbility(4, (CompPlus_Settings::ThreeStateBool)PeeloutStateP4Status);
 
         //Inital Lives NUD
-        int LivesStatus = UpDownController(LivesNUDController, CompPlus_Settings::InitalLives, 1, 100);
+        int LivesStatus = SingleUpDownController(LivesNUDController, CompPlus_Settings::InitalLives, 1, 100);
         if (LivesStatus != CompPlus_Settings::InitalLives) CompPlus_Settings::SetInitalLives(LivesStatus);
 
         //Strech Effect Intensity NUD
-        int StrechStatus = UpDownController(StrechIntensityNUDController, CompPlus_Settings::StrechEffectIntensity, 1, 10);
+        int StrechStatus = SingleUpDownController(StrechIntensityNUDController, CompPlus_Settings::StrechEffectIntensity, 1, 10);
         if (StrechStatus != CompPlus_Settings::StrechEffectIntensity) CompPlus_Settings::SetStrechIntensity(StrechStatus);
+
+        //Tails Flight Drop Toggle
+        bool TailsFlightDropStatus = ToggleController(TailsFlightDropController, CompPlus_Settings::TailsFlightDrop);
+        if (TailsFlightDropStatus != CompPlus_Settings::TailsFlightDrop) CompPlus_Settings::SetTailsFlightDrop(TailsFlightDropStatus);
+
+        //Encore Vape Music Toggle
+        bool VapeStatus = ToggleController(EncoreVapeMusicController, CompPlus_Settings::UseEncoreVapeMusic);
+        if (VapeStatus != CompPlus_Settings::UseEncoreVapeMusic) CompPlus_Settings::SetEncoreVapeMusic(VapeStatus);
+
+        //Spotlight Mode Toggle
+        bool SpotLightStatus = ToggleController(SpotlightModeController, CompPlus_Settings::SpotLightChallenge);
+        if (SpotLightStatus != CompPlus_Settings::SpotLightChallenge) CompPlus_Settings::SetSpotlightChallenge(SpotLightStatus);
+
+        //Season Switch NUD
+        int SeasonalStatus = SingleUpDownController(SeasonSwitchController, CompPlus_Settings::CurrentSeason, 0, 1);
+        if (SeasonalStatus != CompPlus_Settings::CurrentSeason) CompPlus_Settings::SetSeason((CompPlus_Settings::SeasonType)SeasonalStatus);
 
         //Infinite Time Toggle
         bool InfiniteTimeStatus = ToggleController(RemoveTimeToggleController, CompPlus_Settings::TimeLimit);
@@ -276,19 +316,19 @@ namespace CompPlus_HubSettings
         if (InfiniteRoundsStatus != CompPlus_Settings::EndlessRounds) CompPlus_Settings::SetEndlessRounds(InfiniteRoundsStatus);
 
         //Announcer Type NUD
-        int AnnouncerTypeStatus = UpDownController(AnnouncerTypeController, (int)CompPlus_Settings::CurrentAnnouncer, 0, CompPlus_Settings::NumberOfAnnouncers - 1);
+        int AnnouncerTypeStatus = SingleUpDownController(AnnouncerTypeController, (int)CompPlus_Settings::CurrentAnnouncer, 0, CompPlus_Settings::NumberOfAnnouncers - 1);
         if (AnnouncerTypeStatus != (int)CompPlus_Settings::CurrentAnnouncer) CompPlus_Settings::SetAnnouncer((CompPlus_Settings::AnnouncerType)AnnouncerTypeStatus);
 
         //Victory Type NUD
-        int VictoryTypeStatus = UpDownController(VictoryMethodSwapperController, (int)CompPlus_Settings::VictoryStyle, 0, 5);
+        int VictoryTypeStatus = SingleUpDownController(VictoryMethodSwapperController, (int)CompPlus_Settings::VictoryStyle, 0, 5);
         if (VictoryTypeStatus != (int)CompPlus_Settings::VictoryStyle) CompPlus_Settings::SetVictoryMethod((CompPlus_Settings::VictoryMode)VictoryTypeStatus);
 
         //Item Box Config NUD
-        int ItemBoxStatus = UpDownController(ItemBoxModeController, (int)CompPlus_Settings::MonitorTypes, 0, 2);
+        int ItemBoxStatus = SingleUpDownController(ItemBoxModeController, (int)CompPlus_Settings::MonitorTypes, 0, 2);
         if (ItemBoxStatus != (int)CompPlus_Settings::MonitorTypes) CompPlus_Settings::SetMonitorMode((CompPlus_Settings::ItemsConfig)ItemBoxStatus);
 
         //Number of Rounds NUD
-        int NumberOfRoundsStatus = UpDownController(NumberOfRoundsController, (int)CompPlus_Settings::NumberOfRounds, 2, 99);
+        int NumberOfRoundsStatus = SingleUpDownController(NumberOfRoundsController, (int)CompPlus_Settings::NumberOfRounds, 2, 99);
         if (NumberOfRoundsStatus != (int)CompPlus_Settings::NumberOfRounds) CompPlus_Settings::SetNumberOfRounds(NumberOfRoundsStatus);
 
         if (SettingWaitTimer != 0) SettingWaitTimer = SettingWaitTimer - 1;
@@ -411,14 +451,21 @@ namespace CompPlus_HubSettings
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;
-            CompPlus_Common::LoadHUBWorld();
-            CompPlus_HubCore::ReturnDestination = 1;
+            if (SonicMania::Options->CompetitionSession.inMatch == 1) 
+            {
+                CompPlus_Common::LoadHUBWorld();
+                CompPlus_HubCore::ReturnDestination = 1;
+            }
+            else 
+            {
+                CompPlus_Common::LoadLevel(2);
+            }
         }
         else
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
@@ -454,13 +501,13 @@ namespace CompPlus_HubSettings
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;
-            CompPlus_Common::LoadLevel_IZ("CPCREDITS");
+            CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Credits);
         }
         else
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
@@ -487,6 +534,14 @@ namespace CompPlus_HubSettings
     void OnFrame() 
     {
         CompPlus_HubCore::SetHUBVisualSettings();
+
+        if (SonicMania::Options->CompetitionSession.inMatch == 0)
+        {
+            SonicMania::Player2.InkEffect = SonicMania::Ink_Alpha;
+            SonicMania::Player2.Alpha = 0;
+            SonicMania::Player2.Position.X = 0;
+            SonicMania::Player2.Position.Y = 0;
+        }
 
         SceneWarp();
         PlayerSettingsWarp();

@@ -95,7 +95,7 @@ namespace CompPlus_SceneTweaks
 
     void LogoLinking()
     {
-        if (SonicMania::CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ("CPLOGOS");
+        if (SonicMania::CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Logos1);
 
         if (SonicMania::CurrentSceneInt == 1)
         {
@@ -107,14 +107,14 @@ namespace CompPlus_SceneTweaks
 
     void UpdateScenes(const char* CurrentScene) 
     {
-        if (!strcmp(CurrentScene, "SMCP_FBZ2")) UpdateFBZ2(true);
-        else if (!strcmp(CurrentScene, "SMCP_FBZ2E")) UpdateFBZ2(true);
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2)) UpdateFBZ2(true);
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2E)) UpdateFBZ2(true);
         else UpdateFBZ2(false);
 
         if (!strcmp(CurrentScene, "0")) LogoLinking();
         else if (!strcmp(CurrentScene, "1")) LogoLinking();
-        else if (!strcmp(CurrentScene, "CPSZ")) UpdateSZ();
-        else if (!strcmp(CurrentScene, "CPSZE")) UpdateSZ();    
-        else if (!strcmp(CurrentScene, "CPTSZ")) UpdateTSZ();
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SZ)) UpdateSZ();
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SZE)) UpdateSZ();
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TSZ)) UpdateTSZ();
     }
 }

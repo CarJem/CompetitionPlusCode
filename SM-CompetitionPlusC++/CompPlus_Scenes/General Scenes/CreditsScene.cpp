@@ -3,8 +3,10 @@
 #include "CreditsScene.h"
 #include "include/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "CompPlus_Scenes/Level Select/LevelSelectCore.h"
+#include "CompPlus_Scenes/Level Select/NextGenerationLevelSelectCore.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
+#include "CompPlus_Core/CompPlus_Common.h"
+#include "CompPlus_Scenes/HUB World/HubCore.h"
 
 namespace CompPlus_Credits
 {
@@ -100,7 +102,7 @@ namespace CompPlus_Credits
 
         if (ButtonTrigger.Pressed && !LHPZSecretTriggered)
         {
-            SonicMania::PlaySoundFXS("CompPlus/LHPZSecret.wav");
+            SonicMania::PlaySoundFXS(CompPlus_Common::SFX_LHPZSecret);
             //TODO - Add Secret Trigger
             char* TextPart1 = (char*)"GO TO THE LOST...";
             char* TextPart2 = (char*)"HIDDEN PALACE!";
@@ -123,13 +125,55 @@ namespace CompPlus_Credits
 
     }
 
+    void ExitDelayLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+    {
+        if (FastWarp && SceneLoadWaitTimer < 50)
+        {
+            SceneLoadWaitTimer = 50;
+        }
+
+
+        if (SceneLoadWaitTimer >= SceneLoadWaitMax)
+        {
+            CompPlus_Common::LoadLevel_IZ(CompPlus_Common::HUBSettings);
+            SceneLoadWaitTimer = 0;
+            LevelSelected = false;
+            LevelSelectedWarpSoundPlayed = false;
+        }
+        else
+        {
+            if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
+            {
+                PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
+                LevelSelectedWarpSoundPlayed = true;
+
+                Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
+                EntityFXFade* FxFadeR = (EntityFXFade*)FXFade;
+
+                FxFadeR->Time = 0;
+                FxFadeR->SpeedIn = 10;
+                FxFadeR->Wait = 3;
+                FxFadeR->SpeedOut = 0;
+                FxFadeR->Color = 0x000000;
+                FxFadeR->OneWay = true;
+                FxFadeR->EventOnly = false;
+                FxFadeR->Overhud = false;
+                FxFadeR->FadeOutBlack = true;
+
+            }
+            SceneLoadWaitTimer++;
+        }
+
+        stru_26B818[0].playStatus = 0;
+    }
+
     void ExitButton()
     {
         SonicMania::EntityButton& ButtonTrigger = *GetEntityFromSceneSlot<SonicMania::EntityButton>(ExitButtonSlotID);
 
         if (ButtonTrigger.Pressed)
         {
-            CompPlus_LevelSelectCore::LevelSelectDelayLoop(0, "CPHW", true, SceneLoadWaitTimer, SwapLevelSelectMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+            ExitDelayLoop(0, SceneLoadWaitTimer, SwapLevelSelectMax, LevelSelected, LevelSelectedWarpSoundPlayed);
         }
     }
 

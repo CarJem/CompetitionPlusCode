@@ -46,6 +46,7 @@ namespace CompPlus_Settings
     bool EndlessRounds = false;
     bool DropdashAbility = true;
     bool InstaSheildAbility = false;
+    bool TailsFlightDrop = false;
     VictoryMode VictoryStyle = VictoryMode_Default;
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
@@ -57,7 +58,7 @@ namespace CompPlus_Settings
     ThreeStateBool Player4PeeloutAbility = ThreeStateBool::Indeterminate;
 
     //DynCam Settings
-    bool Player1DynCam = true;
+    bool Player1DynCam = false;
     bool Player2DynCam = false;
     bool Player3DynCam = false;
     bool Player4DynCam = false;
@@ -73,6 +74,11 @@ namespace CompPlus_Settings
     PlayerAbility Player2AbilitySet = AbilitySet_Compatibility;
     PlayerAbility Player3AbilitySet = AbilitySet_Compatibility;
     PlayerAbility Player4AbilitySet = AbilitySet_Compatibility;
+
+    //Game Mode Settings
+    bool SpotLightChallenge = false;
+    bool UseEncoreVapeMusic = true;
+    SeasonType CurrentSeason = SeasonType::Season_EXE;
 
     //Secret Settings
     bool LHPZ_SecretUnlocked = false;
@@ -112,6 +118,30 @@ namespace CompPlus_Settings
 
         BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
         WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)MovesetID);
+    }
+
+    void SetTailsFlightDrop(bool Value)
+    {
+        TailsFlightDrop = Value;
+        SaveSettings();
+    }
+
+    void SetSpotlightChallenge(bool Value)
+    {
+        SpotLightChallenge = Value;
+        SaveSettings();
+    }
+
+    void SetEncoreVapeMusic(bool Value)
+    {
+        UseEncoreVapeMusic = Value;
+        SaveSettings();
+    }
+
+    void SetSeason(CompPlus_Settings::SeasonType Season) 
+    {
+        CurrentSeason = Season;
+        SaveSettings();
     }
 
     void SetMonitorMode(CompPlus_Settings::ItemsConfig Value) 
@@ -742,6 +772,34 @@ namespace CompPlus_Settings
 
                         LogLoadSetting("DarkDevMenu", std::to_string(value));
                     }
+                    else if (!strcmp(xmlOption->Name(), "CurrentSeason"))
+                    {
+                        int value = XMLGetInt(xmlOption);
+                        CurrentSeason = (SeasonType)value;
+
+                        LogLoadSetting("CurrentSeason", std::to_string(value));
+                    }
+                    else if (!strcmp(xmlOption->Name(), "TailsFlightDrop"))
+                    {
+                        bool value = XMLGetBool(xmlOption);
+                        TailsFlightDrop = value;
+
+                        LogLoadSetting("TailsFlightDrop", std::to_string(value));
+                    }
+                    else if (!strcmp(xmlOption->Name(), "SpotLightChallenge"))
+                    {
+                        bool value = XMLGetBool(xmlOption);
+                        SpotLightChallenge = value;
+
+                        LogLoadSetting("SpotLightChallenge", std::to_string(value));
+                    }
+                    else if (!strcmp(xmlOption->Name(), "UseEncoreVapeMusic"))
+                    {
+                        bool value = XMLGetBool(xmlOption);
+                        UseEncoreVapeMusic = value;
+
+                        LogLoadSetting("UseEncoreVapeMusic", std::to_string(value));
+                    }
                     else if (!strcmp(xmlOption->Name(), "LHPZ_SecretUnlocked"))
                     {
                         bool value = XMLGetBool(xmlOption);
@@ -791,6 +849,11 @@ namespace CompPlus_Settings
             AddtoSaveSettings("NumberOfRounds", IntToString(NumberOfRounds), text); 
             AddtoSaveSettings("StrechEffectIntensity", IntToString(StrechEffectIntensity), text);
             AddtoSaveSettings("MonitorMode", IntToString(MonitorTypes), text);
+
+            AddtoSaveSettings("CurrentSeason", IntToString(CurrentSeason), text);
+            AddtoSaveSettings("UseEncoreVapeMusic", BoolToString(UseEncoreVapeMusic), text);
+            AddtoSaveSettings("TailsFlightDrop", BoolToString(TailsFlightDrop), text);
+            AddtoSaveSettings("SpotLightChallenge", BoolToString(SpotLightChallenge), text);
 
             if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
 

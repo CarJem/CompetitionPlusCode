@@ -155,17 +155,17 @@ namespace CompPlus_ZoneSpecifics
         CurrentScene_IZ = (char*)CurrentScene;
         CurrentScene_SM = LevelID;
 
-        if (!strcmp(CurrentScene, "SMCP_HUB1")) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, "SMCP_HUB1HWN")) SetHauntedHUBSpecifics();
-        else if (!strcmp(CurrentScene, "SMCP_HUB2")) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, "SMCP_HUB3")) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, "CPCREDITS")) SetCreditsSpecifics();
-        else if (!strcmp(CurrentScene, "CPMLS")) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, "CPELS")) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, "CPCLS")) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, "CPCXLS")) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, "SMCP_EXE_LS")) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, "SMCP_MMZ")) SetMMZ2LevelSpecifics();
+        if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld_EXE)) SetHauntedHUBSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBRanking)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBSettings)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_Credits)) SetCreditsSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Mania)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Encore)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Custom)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Chaotix)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Exe)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene, CompPlus_Common::SceneID_MMZ)) SetMMZ2LevelSpecifics();
         else SetDefaultSpecifics();
     }
 

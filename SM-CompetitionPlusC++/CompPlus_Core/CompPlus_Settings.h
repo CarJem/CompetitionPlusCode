@@ -66,6 +66,11 @@ namespace CompPlus_Settings
         Announcer_Memes = 4
     };
 
+    enum SeasonType : int {
+        Season_Normal = 0,
+        Season_EXE = 1
+    };
+
 
 
     #pragma region Internal Variables
@@ -101,6 +106,7 @@ namespace CompPlus_Settings
     extern bool EndlessRounds;
     extern bool DropdashAbility;
     extern bool InstaSheildAbility;
+    extern bool TailsFlightDrop;
     extern VictoryMode VictoryStyle;
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
@@ -129,10 +135,23 @@ namespace CompPlus_Settings
     extern PlayerAbility Player3AbilitySet;
     extern PlayerAbility Player4AbilitySet;
 
+    //Game Mode Settings
+    extern bool SpotLightChallenge;
+    extern bool UseEncoreVapeMusic;
+    extern SeasonType CurrentSeason;
+
     //Secret Settings
     extern bool LHPZ_SecretUnlocked;
 
     #pragma endregion
+
+    extern void SetTailsFlightDrop(bool Value);
+
+    extern void SetSpotlightChallenge(bool Value);
+
+    extern void SetEncoreVapeMusic(bool Value);
+
+    extern void SetSeason(CompPlus_Settings::SeasonType Season);
 
     extern void SetTimeLimit(bool Value);
 

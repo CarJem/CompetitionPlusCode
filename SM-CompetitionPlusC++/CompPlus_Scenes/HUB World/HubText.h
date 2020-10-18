@@ -17,6 +17,8 @@ namespace CompPlus_HubText
 
     extern void UpdatePlayerSwapperDisplay(int SlotID, CompPlus_Settings::ChosenPlayer Player, int StageIndex, int Index);
 
+    extern void UpdateSeasonDisplay(int SlotID, CompPlus_Settings::SeasonType Season, int StageIndex, int Index);
+
     extern void UpdateLevelSelectStatusDisplay(int State, int StageIndex, int Index, int SlotID);
 
     extern void UpdateToggleDisplay(int SlotID, bool State, int StageIndex, int Index);

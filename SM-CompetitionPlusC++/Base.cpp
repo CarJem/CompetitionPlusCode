@@ -26,7 +26,7 @@
 #include "CompPlus_Scenes/Level Select/ChaotixLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/ExeLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/PhantomLevelSelect.h"
-#include "CompPlus_Scenes/Level Select/LevelSelectCore.h"
+#include "CompPlus_Scenes/Level Select/NextGenerationLevelSelectCore.h"
 
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Scoring.h"
@@ -52,13 +52,6 @@ extern "C"
     namespace CompPlus_Internal
     {
         const char* FullPath;
-
-        //SoundFX Defines from SonicMania/Data/Sounds/
-        const char* SFX_CompPlus1 = "CompPlus/MenuBleepClassic.wav";
-        const char* SFX_CompPlus2 = "CompPlus/MenuAcceptClassic.wav";
-        const char* SFX_CompPlus3 = "CompPlus/LHPZSecret.wav";
-        const char* SFX_CompPlus4 = "CompPlus/GPZ_Button.wav";
-        /*----------------------------------------------*/
 
         bool LoadedSounds = false;
 
@@ -546,7 +539,6 @@ extern "C"
 
         extern void InitMod()
         {
-            CompPlus_LevelSelectCore::Init();
             CompPlus_HubText::Init();
             CompPlus_ManiaMenu::Init();
             CompPlus_Credits::Init();
@@ -572,10 +564,10 @@ extern "C"
             if (!LoadedSounds)
             {
                 //Load Sounds on First Run. //Global Scope fine for most things
-                SonicMania::LoadSoundFX(SFX_CompPlus1, SonicMania::Scope_Global);
-                SonicMania::LoadSoundFX(SFX_CompPlus2, SonicMania::Scope_Global);
-                SonicMania::LoadSoundFX(SFX_CompPlus3, SonicMania::Scope_Global);
-                SonicMania::LoadSoundFX(SFX_CompPlus4, SonicMania::Scope_Global);
+                SonicMania::LoadSoundFX(CompPlus_Common::SFX_MenuBleepClassic, SonicMania::Scope_Global);
+                SonicMania::LoadSoundFX(CompPlus_Common::SFX_MenuAcceptClassic, SonicMania::Scope_Global);
+                SonicMania::LoadSoundFX(CompPlus_Common::SFX_GPZButton, SonicMania::Scope_Global);
+                SonicMania::LoadSoundFX(CompPlus_Common::SFX_LHPZSecret, SonicMania::Scope_Global);
                 LoadedSounds = true;
             }
         }
@@ -651,6 +643,7 @@ extern "C"
             //PatchMenuOnScreenDrawHook();
             InitMod();
             TileCardColors::Init();
+            CompPlus_NextGenerationLevelSelectCore::Init(path);
         }
 
         __declspec(dllexport) void PostInit(const char* path)
@@ -663,6 +656,7 @@ extern "C"
             IZAPI::RegisterStageLoadEvent(CompPlus_Core::OnStageLoad);
             IZAPI::RegisterStageUnloadEvent(CompPlus_Core::OnStageUnload);
             InitAnnouncerFX();
+
         }
 
         __declspec(dllexport) ModInfo ManiaModInfo = { ModLoaderVer, GameVer };
@@ -677,7 +671,7 @@ extern "C"
         char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
 
         //Internal Paramater Variables
-        bool StartupStageEnabled = true;
+        bool StartupStageEnabled = false;
 
         //Status Variables
         bool HasStartupInit = false;
@@ -695,26 +689,25 @@ extern "C"
         {
             if (IZ_SceneChangeIdleTime == 0)
             {
-                if (!strcmp(CurrentStage.SceneKey, "CPMLS")) CompPlus_ManiaLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPELS")) CompPlus_EncoreLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPCLS")) CompPlus_CustomLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPPLS")) CompPlus_PhantomLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPSW")) CompPlus_Settings_Base::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS2")) CompPlus_GenericLogos::UpdateATGLogos();
-                else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS3")) CompPlus_GenericLogos::UpdateCJLogos();
-                else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-                else if (!strcmp(CurrentStage.SceneKey, "CPLOGOS4")) CompPlus_GenericLogos::UpdateIZLogos();
-                else if (!strcmp(CurrentStage.SceneKey, "CPGPZ")) CompPlus_Scene_GustPlanet::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "CPGPZE")) CompPlus_Scene_GustPlanet::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_LHPZ1")) CompPlus_Scene_LHPZ::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_LHPZ1E")) CompPlus_Scene_LHPZ::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1")) CompPlus_HubWorld::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1HWN")) CompPlus_HubWorld::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB2")) CompPlus_HubRanking::OnFrame();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB3")) CompPlus_HubSettings::OnFrame();
-                CompPlus_Credits::OnFrame(!strcmp(CurrentStage.SceneKey, "CPCREDITS"));
+                if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania)) CompPlus_ManiaLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Encore)) CompPlus_EncoreLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Custom)) CompPlus_CustomLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Chaotix)) CompPlus_ChaotixLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Phantom)) CompPlus_PhantomLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Exe)) CompPlus_ExeLevelSelect::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Unused_SettingsWorld)) CompPlus_Settings_Base::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos2)) CompPlus_GenericLogos::UpdateATGLogos();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos3)) CompPlus_GenericLogos::UpdateCJLogos();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos4)) CompPlus_GenericLogos::UpdateIZLogos();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_GPZ1)) CompPlus_Scene_GustPlanet::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_GPZ1E)) CompPlus_Scene_GustPlanet::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_LHPZ1)) CompPlus_Scene_LHPZ::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_LHPZ1E)) CompPlus_Scene_LHPZ::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld)) CompPlus_HubWorld::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) CompPlus_HubWorld::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubRanking::OnFrame();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubSettings::OnFrame();
+                CompPlus_Credits::OnFrame(!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits));
                 CompPlus_SceneTweaks::UpdateScenes(CurrentStage.SceneKey);
             }
             else
@@ -729,8 +722,9 @@ extern "C"
             else if (CurrentSceneInt == 1) CompPlus_SceneTweaks::UpdateScenes("0");
             else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
             else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
-            else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ("CPLOGOS2");
+            else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Logos2);
             else if (CurrentSceneInt == 2) CompPlus_ManiaMenu::UpdateManiaMenu();
+            else if (CurrentSceneInt == SceneExt::Scene_Credits) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::HUBSettings);
             else if (CurrentSceneInt == SceneExt::Scene_PuyoPuyo) CompPlus_Scoring::ApplyPoyoPoyoRuleset();
         }
 
@@ -746,14 +740,14 @@ extern "C"
 
         void OnConstantFrame() 
         {
-            if (CurrentStage.StageKey) 
+            if (CurrentStage.SceneKey)
             {
-                if (!strcmp(CurrentStage.StageKey, "CPMLS")) CompPlus_ManiaLevelSelect::OnPreload();
-                else if (!strcmp(CurrentStage.StageKey, "CPELS")) CompPlus_EncoreLevelSelect::OnPreload();
-                else if (!strcmp(CurrentStage.StageKey, "CPCLS")) CompPlus_CustomLevelSelect::OnPreload();
-                else if (!strcmp(CurrentStage.StageKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnPreload();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnPreload();
-                CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.StageKey, -1);
+                if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania)) CompPlus_ManiaLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Encore)) CompPlus_EncoreLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Custom)) CompPlus_CustomLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Chaotix)) CompPlus_ChaotixLevelSelect::OnPreload();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Exe)) CompPlus_ExeLevelSelect::OnPreload();
+                CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.SceneKey, -1);
             }
             else CompPlus_ZoneSpecifics::UpdateSpecifics("", CurrentSceneInt);
         }
@@ -762,9 +756,18 @@ extern "C"
         {
             if (StartupStageEnabled)
             {
-                CompPlus_Common::LoadLevel_IZ("SMCP_MMZ2");
+                CompPlus_Common::LoadLevel(2);
             }
             HasStartupInit = true;
+        }
+
+        void ResetLSelects()
+        {
+            CompPlus_ManiaLevelSelect::CheckForPointRefresh();
+            CompPlus_EncoreLevelSelect::CheckForPointRefresh();
+            CompPlus_CustomLevelSelect::CheckForPointRefresh();
+            CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
+            CompPlus_ExeLevelSelect::CheckForPointRefresh();
         }
 
         void OnStageRefresh()
@@ -772,16 +775,8 @@ extern "C"
             CompPlus_Announcers::ReloadAnnouncerFX();
             CompPlus_Settings::RefreshSettings();
             CompPlus_Scoring::OnSceneReset();
+            ResetLSelects();
             StageRefresh = false;
-        }
-
-        void ResetLSelects() 
-        {
-            CompPlus_ManiaLevelSelect::CheckForPointRefresh();
-            CompPlus_EncoreLevelSelect::CheckForPointRefresh();
-            CompPlus_CustomLevelSelect::CheckForPointRefresh();
-            CompPlus_ChaotixLevelSelect::CheckForPointRefresh();
-            CompPlus_ExeLevelSelect::CheckForPointRefresh();
         }
 
         void OnLegacySceneChange()
@@ -822,15 +817,15 @@ extern "C"
 
             if (CurrentStage.SceneKey) 
             {
-                if (!strcmp(CurrentStage.SceneKey, "CPMLS")) CompPlus_ManiaLevelSelect::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "CPELS")) CompPlus_EncoreLevelSelect::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "CPCLS")) CompPlus_CustomLevelSelect::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "CPCXLS")) CompPlus_ChaotixLevelSelect::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_EXE_LS")) CompPlus_ExeLevelSelect::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1")) CompPlus_HubCore::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB1HWN")) CompPlus_HubCore::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB2")) CompPlus_HubCore::OnDraw();
-                else if (!strcmp(CurrentStage.SceneKey, "SMCP_HUB3")) CompPlus_HubCore::OnDraw();
+                if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania)) CompPlus_ManiaLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Encore)) CompPlus_EncoreLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Custom)) CompPlus_CustomLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Chaotix)) CompPlus_ChaotixLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Exe)) CompPlus_ExeLevelSelect::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld)) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubCore::OnDraw();
             }
         }
 
@@ -849,6 +844,7 @@ extern "C"
             CurrentStage = info;
             StageRefresh = true;
             IZ_SceneChangeIdleTime = 10;
+            CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.SceneKey, CurrentSceneInt);
             OnSceneReset();
         }
 
@@ -858,7 +854,8 @@ extern "C"
             CurrentStage = { };
             StageRefresh = true;
             IZ_SceneChangeIdleTime = 10;
-            if (!strcmp(info.StageKey, "CPLOGOS") && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(123);
+            if (!strcmp(info.StageKey, CompPlus_Common::SMCP_Logos1) && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(123);
+            CompPlus_ZoneSpecifics::UpdateSpecifics("", CurrentSceneInt);
             OnSceneReset();
         }
 

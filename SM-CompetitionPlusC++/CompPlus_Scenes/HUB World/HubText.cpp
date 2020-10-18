@@ -132,6 +132,26 @@ namespace CompPlus_HubText
         }
     }
 
+    void UpdateSeasonDisplay(int SlotID, CompPlus_Settings::SeasonType Season, int StageIndex, int Index)
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        Label3.Text = (wchar_t*)Strings[StageIndex][Index];
+
+        if (Season == CompPlus_Settings::Season_EXE)
+        {
+            char* on_text = (char*)"HALLOWEEN";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)9;
+        }
+        else 
+        {
+            char* on_text = (char*)"NORMAL";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)6;
+        }
+    }
+
     void UpdateLevelSelectStatusDisplay(int State, int StageIndex, int Index, int SlotID)
     {
         EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
@@ -161,6 +181,12 @@ namespace CompPlus_HubText
             char* on_text = (char*)"LSELECT: CHAOTIX";
             ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
             Label3.TextLength = (WORD)16;
+        }
+        else if (State == 4)
+        {
+            char* on_text = (char*)"LSELECT: EXECUTOR";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)17;
         }
     }
 

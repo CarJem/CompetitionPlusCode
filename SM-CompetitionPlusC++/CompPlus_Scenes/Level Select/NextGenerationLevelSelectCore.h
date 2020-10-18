@@ -156,12 +156,15 @@ namespace CompPlus_NextGenerationLevelSelectCore
     DataPointer(int, WindowSizeX, 0x43C6F4);
     DataPointer(int, WindowSizeY, 0x43C6F8);
 
+    extern bool PaletteSaved;
+
     extern void UniversalLSelectLoop();
     extern void LevelSelectDelayLoop(int selectorID, MenuPoint levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
     extern void LevelSelectDelayLoop(int selectorID, int levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
     extern void LevelSelectDelayLoop(int selectorID, const char* levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
     extern void LevelSelectExitDelayLoop(int selectorID, const char* levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
     extern void LevelSelectDelay(bool isClassic, bool& LevelSelected);
+    extern void EnforcePalette();
     extern int GetPositionOffsetX();
     extern int GetPositionOffsetY();
     extern void SetUIBackgroundObject(UIBackgroundDefinition Definition);
@@ -180,5 +183,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
     extern void ResetMenuPos(int& MenuPos_X, int& MenuPos_Y, int& LastMenuPos_X, int& LastMenuPos_Y, bool& SwapLevelSelect);
     extern void ResetMenuPos(int& MenuPos_X, int& MenuPos_Y, int SMenuPos_X, int SMenuPos_Y, int& LastMenuPos_X, int& LastMenuPos_Y, bool& SwapLevelSelect);
     extern void UpdateLastPos(int& LastMenuPos_X, int& LastMenuPos_Y, int& MenuPos_X, int& MenuPos_Y);
+
+    extern void Init(std::string modPath);
 };
 

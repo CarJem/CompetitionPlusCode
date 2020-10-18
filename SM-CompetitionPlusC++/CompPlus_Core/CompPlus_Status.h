@@ -7,7 +7,6 @@ namespace CompPlus_Status
     extern bool DisablePlayerDying;
     extern bool DisableDynCam;
     extern bool EnableHUBSpecialRingFunctionality;
-    extern bool IsHolloween;
     extern bool InHolloweenHUB;
     extern bool isVSControllerInputUnlocked;
     extern int CurrentLevelSelect;

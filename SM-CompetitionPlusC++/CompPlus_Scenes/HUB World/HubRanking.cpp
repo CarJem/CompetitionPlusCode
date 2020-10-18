@@ -305,7 +305,7 @@ namespace CompPlus_HubRanking
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                SonicMania::PlaySoundFXS("Global/SpecialWarp.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));

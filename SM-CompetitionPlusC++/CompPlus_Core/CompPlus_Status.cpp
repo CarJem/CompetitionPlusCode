@@ -7,7 +7,6 @@ namespace CompPlus_Status
     bool DisablePlayerDying = false;
     bool DisableDynCam = false;
     bool EnableHUBSpecialRingFunctionality = false;
-    bool IsHolloween = true;
     bool InHolloweenHUB = false;
     bool UseEXETitleCard = false;
     bool DisableWorldPositionWrite = false;

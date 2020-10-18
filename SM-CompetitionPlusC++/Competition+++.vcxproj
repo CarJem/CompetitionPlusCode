@@ -221,7 +221,6 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\CustomLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h" />
-    <ClInclude Include="CompPlus_Scenes\Level Select\LevelSelectCore.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
@@ -268,7 +267,6 @@
     <ClCompile Include="CompPlus_Scenes\Level Select\CustomLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Level Select\LevelSelectCore.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp" />

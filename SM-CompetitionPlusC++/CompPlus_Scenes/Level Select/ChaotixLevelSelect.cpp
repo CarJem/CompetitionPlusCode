@@ -10,6 +10,10 @@
 #include "CompPlus_Extensions/Drawing.h"
 #include <vector>
 #include <String>
+#include <fstream>
+#include <algorithm>
+#include <iostream>
+#include <sstream>
 
 
 namespace CompPlus_ChaotixLevelSelect
@@ -130,23 +134,23 @@ namespace CompPlus_ChaotixLevelSelect
         int i = 0;
 
         MLS_MenuPoints[0][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[0][1] = CreateMenuPoint(0, 1, "CPCXMIIZ1", LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
-        MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, "CPCXMAAZ", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, false); i++;
-        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, "CPCXMSSZ1", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, false); i++;
-        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, "CPCXMBBZ", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
-        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, "CPCXMMMZ1", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
-        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, "CPCXMTTZ1", LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, false); i++;
+        MLS_MenuPoints[0][1] = CreateMenuPoint(0, 1, CompPlus_Common::SMCP_CXM_IIZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
+        MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_CXM_AAZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, false); i++;
+        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CXM_SSZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, false); i++;
+        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CXM_BBZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
+        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_CXM_MMZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
+        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_CXM_TTZ1, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, false); i++;
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
-        MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, "CPCLS", "CUSTOM", "", "", 2, 2, false);
+        MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Custom, "CUSTOM", "", "", 2, 2, false);
         MLS_MenuPoints[1][0].YellowText = true;
-        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, "CPCXMIIZ1E", LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
-        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, "CPCXMAAZE", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, false); i++;
-        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, "CPCXMSSZ1E", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, false); i++;
-        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, "CPCXMBBZE", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
-        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, "CPCXMMMZ1E", LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
-        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, "CPCXMTTZ1E", LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, false); i++;
-        MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, "SMCP_EXE_LS", "EXE", "", "", 2, 1, false);
+        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_CXM_IIZ1E, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
+        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_CXM_AAZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, false); i++;
+        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_CXM_SSZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, false); i++;
+        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_CXM_BBZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
+        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_CXM_MMZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
+        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_CXM_TTZ1E, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, false); i++;
+        MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Exe, "EXE", "", "", 2, 1, false);
         MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
@@ -184,57 +188,6 @@ namespace CompPlus_ChaotixLevelSelect
         AreMenuPointsLoaded = true;
     }
 
-    bool PaletteSaved = false;
-
-    int* PaletteStorage3;
-    int PaletteStorage3_Length;
-
-    int* PaletteStorage2;
-    int PaletteStorage2_Length;
-
-    int* PaletteStorage1;
-    int PaletteStorage1_Length;
-
-    int* PaletteStorage0;
-    int PaletteStorage0_Length;
-
-    void StorePalette(int*& PaletteStorage, int& Length, int Source, int SourceLength)
-    {
-        Length = SourceLength;
-        PaletteStorage = new int[Length];
-        for (int i = 0; i < Length; i++)
-        {
-            PaletteStorage[i] = GetPaletteEntry(Source, i);
-        }
-    }
-
-    void ApplyPalette(int*& PaletteStorage, int& Length, int Source)
-    {
-        for (int i = 0; i < Length; i++)
-        {
-            SetPaletteEntry(Source, i, PaletteStorage[i]);
-        }
-    }
-
-    void EnforcePalette()
-    {
-        if (!PaletteSaved)
-        {
-            StorePalette(PaletteStorage0, PaletteStorage0_Length, 0, Palette0_Length);
-            StorePalette(PaletteStorage1, PaletteStorage1_Length, 1, Palette1_Length);
-            StorePalette(PaletteStorage2, PaletteStorage2_Length, 2, Palette2_Length);
-            StorePalette(PaletteStorage3, PaletteStorage3_Length, 3, Palette3_Length);
-            PaletteSaved = true;
-        }
-        else
-        {
-            ApplyPalette(PaletteStorage0, PaletteStorage0_Length, 0);
-            ApplyPalette(PaletteStorage1, PaletteStorage1_Length, 1);
-            ApplyPalette(PaletteStorage2, PaletteStorage2_Length, 2);
-            ApplyPalette(PaletteStorage3, PaletteStorage3_Length, 3);
-        }
-    }
-
     bool isIconsLoaded = false;
     int IconsSpriteID = 0;
 
@@ -259,7 +212,7 @@ namespace CompPlus_ChaotixLevelSelect
 
         if (!isIconsLoaded)
         {
-            IconsSpriteID = LoadAnimation("CP_LSelect/Icons_Chaotix.bin", Scope_Global);
+            IconsSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectIcons_Chaotix, Scope_Global);
             isIconsLoaded = true;
             return;
         }

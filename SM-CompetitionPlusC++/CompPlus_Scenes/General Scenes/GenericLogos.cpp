@@ -145,12 +145,12 @@ namespace CompPlus_GenericLogos
 
 	void UpdateATGLogos() 
 	{
-		UpdateGenericLogos(true, ATG_SceneLoadWaitTimer, ATG_SceneLoadWaitMax, 0, (char*)"CPLOGOS3", true);
+		UpdateGenericLogos(true, ATG_SceneLoadWaitTimer, ATG_SceneLoadWaitMax, 0, (char*)CompPlus_Common::SMCP_Logos3, true);
 	}
 
 	void UpdateCJLogos() 
 	{
-		UpdateGenericLogos(true, CJ_SceneLoadWaitTimer, CJ_SceneLoadWaitMax, 0, (char*)"CPLOGOS4", true);
+		UpdateGenericLogos(true, CJ_SceneLoadWaitTimer, CJ_SceneLoadWaitMax, 0, (char*)CompPlus_Common::SMCP_Logos4, true);
 	}
 
 

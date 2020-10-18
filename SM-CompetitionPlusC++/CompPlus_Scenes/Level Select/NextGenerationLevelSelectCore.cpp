@@ -47,7 +47,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
         {
             if (SceneLoadWaitTimer >= 30 && !LevelSelectedWarpSoundPlayed)
             {
-                PlaySoundFXS("Global/SpecialWarp.wav");
+                PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
@@ -55,7 +55,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
 
                 if (FastWarp)
                 {
-                    PlaySoundFXS("Global/SpecialWarp.wav");
+                    PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                     LevelSelectedWarpSoundPlayed = true;
 
                     FxFadeR->Time = 0;
@@ -113,7 +113,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                PlaySoundFXS("Global/SpecialWarp.wav");
+                PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
@@ -156,7 +156,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                PlaySoundFXS("Global/SpecialWarp.wav");
+                PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
@@ -198,7 +198,7 @@ namespace CompPlus_NextGenerationLevelSelectCore
         {
             if (SceneLoadWaitTimer >= 50 && !LevelSelectedWarpSoundPlayed)
             {
-                PlaySoundFXS("Global/SpecialWarp.wav");
+                PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
                 Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
@@ -225,6 +225,123 @@ namespace CompPlus_NextGenerationLevelSelectCore
     {
         PlayMenuAcceptSoundFX(isClassic);
         LevelSelected = true;
+    }
+
+    std::string PaletteACT_FilePath;
+
+    bool PaletteSaved = false;
+
+    SHORT* PaletteStorage3;
+    int* PaletteStorage3_Old;
+    int PaletteStorage3_Length;
+
+    SHORT* PaletteStorage2;
+    int* PaletteStorage2_Old;
+    int PaletteStorage2_Length;
+
+    SHORT* PaletteStorage1;
+    int* PaletteStorage1_Old;
+    int PaletteStorage1_Length;
+
+    SHORT* PaletteStorage0;
+    int* PaletteStorage0_Old;
+    int PaletteStorage0_Length;
+
+    void OldStorePaletteLoop(int*& PaletteStorage, int& Length, int Source, int SourceLength)
+    {
+        Length = SourceLength;
+        PaletteStorage = new int[Length];
+        for (int i = 0; i < Length; i++)
+        {
+            PaletteStorage[i] = GetPaletteEntry(Source, i);
+        }
+    }
+
+    void ApplyPaletteOldLoop(int*& PaletteStorage, int& Length, int Source)
+    {
+        for (int i = 0; i < Length; i++)
+        {
+            SetPaletteEntry(Source, i, PaletteStorage[i]);
+        }
+    }
+
+    void ApplyPalette_Old()
+    {
+        GameStates OldState = GameState;
+        GameState = GameState_DevMenu;
+        ApplyPaletteOldLoop(PaletteStorage0_Old, PaletteStorage0_Length, 0);
+        ApplyPaletteOldLoop(PaletteStorage1_Old, PaletteStorage1_Length, 1);
+        ApplyPaletteOldLoop(PaletteStorage2_Old, PaletteStorage2_Length, 2);
+        ApplyPaletteOldLoop(PaletteStorage3_Old, PaletteStorage3_Length, 3);
+        GameState = OldState;
+    }
+
+    void ApplyPalette() 
+    {
+        for (int i = 0; i < PaletteStorage0_Length; i++) SonicMania::Palette0[i] = PaletteStorage0[i];
+        for (int i = 0; i < PaletteStorage1_Length; i++) SonicMania::Palette1[i] = PaletteStorage1[i];
+        for (int i = 0; i < PaletteStorage2_Length; i++) SonicMania::Palette2[i] = PaletteStorage2[i];
+        for (int i = 0; i < PaletteStorage3_Length; i++) SonicMania::Palette3[i] = PaletteStorage3[i];
+    }
+        
+    void StorePalette_Old() 
+    {
+        OldStorePaletteLoop(PaletteStorage0_Old, PaletteStorage0_Length, 0, Palette0_Length);
+        OldStorePaletteLoop(PaletteStorage1_Old, PaletteStorage1_Length, 1, Palette1_Length);
+        OldStorePaletteLoop(PaletteStorage2_Old, PaletteStorage2_Length, 2, Palette2_Length);
+        OldStorePaletteLoop(PaletteStorage3_Old, PaletteStorage3_Length, 3, Palette3_Length);
+    }
+
+    void StorePalette(std::string filepath)
+    {
+        unsigned int size = 0;
+
+        // Open file
+        std::ifstream file(filepath);
+
+        // Get size and allocate memory
+        file.seekg(0, std::ios::end);
+        size = static_cast<unsigned int>(file.tellg());
+        char* act = (char*)malloc(size);
+        file.seekg(0, std::ios::beg);
+
+        // Read file
+        file.read(act, size);
+
+        int actCount = size / 3;
+        SHORT palette[256];
+        BOOL paletteMask[256];
+        memset(paletteMask, 0, sizeof(paletteMask));
+        for (int i = 0; i < actCount; ++i)
+        {
+            int color = *(int*)(act + (i * 3)) & 0xFFFFFF;
+            paletteMask[i] = !(color == 0xFF00FF);
+            palette[i] = SonicMania::ToRGB565(color);
+        }
+
+        PaletteStorage0 = palette;
+        PaletteStorage0_Length = actCount;
+        PaletteStorage1 = palette;
+        PaletteStorage1_Length = actCount;
+        PaletteStorage2 = palette;
+        PaletteStorage2_Length = actCount;
+        PaletteStorage3 = palette;
+        PaletteStorage3_Length = actCount;
+    }
+
+    void EnforcePalette()
+    {
+        if (!PaletteSaved)
+        {
+            StorePalette_Old();
+            //StorePalette(PaletteACT_FilePath);
+            PaletteSaved = true;
+        }
+        else
+        {
+            ApplyPalette_Old();
+            //ApplyPalette();
+        }
     }
 
     int CurrentDraw_StartX = 0;
@@ -449,5 +566,10 @@ namespace CompPlus_NextGenerationLevelSelectCore
     {
         LastMenuPos_Y = MenuPos_Y;
         LastMenuPos_X = MenuPos_X;
+    }
+
+    void Init(std::string modPath) 
+    {
+        PaletteACT_FilePath = modPath + CompPlus_Common::Act_LSelect;
     }
 };

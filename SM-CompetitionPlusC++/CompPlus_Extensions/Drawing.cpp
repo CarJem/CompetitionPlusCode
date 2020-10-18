@@ -1,6 +1,8 @@
 #include "Drawing.h"
 #include "stdafx.h"
 #include <string>
+#include "CompPlus_Core/CompPlus_Common.h"
+
 namespace Drawing
 {
     using namespace SonicMania;
@@ -109,7 +111,7 @@ namespace Drawing
     {
         if (!ManiaFontLoaded)
         {
-            ManiaFontSpriteID = LoadAnimation("UI/SmallFont.bin", Scope_Global);
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Global);
             ManiaFontLoaded = true;
             return;
         }
@@ -150,7 +152,7 @@ namespace Drawing
     {
         if (!DevFontLoaded)
         {
-            DevFontSpriteID = LoadAnimation("LSelect/Text.bin", Scope_Global);
+            DevFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText, Scope_Global);
             DevFontLoaded = true;
             return;
         }
@@ -189,7 +191,7 @@ namespace Drawing
     {
         if (!DevEXEFontLoaded)
         {
-            DevEXEFontSpriteID = LoadAnimation("CP_LSelect/Text_EXE.bin", Scope_Global);
+            DevEXEFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText_Exe, Scope_Global);
             DevEXEFontLoaded = true;
             return;
         }

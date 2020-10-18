@@ -147,7 +147,7 @@ namespace CompPlus_SpecialRings
     void UpdateSpecialRingVisuals() 
     {
         if (CompPlus_Status::InHolloweenHUB) EXESpecialRingColors();
-        else if (!CompPlus_Status::InHolloweenHUB && CompPlus_Status::IsHolloween) EXESpecialRingColorsDeluxe();
+        else if (!CompPlus_Status::InHolloweenHUB && CompPlus_Settings::CurrentSeason == CompPlus_Settings::Season_EXE) EXESpecialRingColorsDeluxe();
         else NormalSpecialRingColors();
     }
 

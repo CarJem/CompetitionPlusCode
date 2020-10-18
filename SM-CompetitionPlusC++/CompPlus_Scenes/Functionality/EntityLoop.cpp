@@ -14,7 +14,6 @@
 #include "CompPlus_Extensions/Helpers.h"
 
 #include "CompPlus_Core/CompPlus_Scoring.h"
-#include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Status.h"
 
