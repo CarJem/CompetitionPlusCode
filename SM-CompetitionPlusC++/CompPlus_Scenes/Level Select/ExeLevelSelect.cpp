@@ -22,8 +22,8 @@ namespace CompPlus_ExeLevelSelect
 
     std::vector<std::string> LevelTitles =
     {
-        "GHZ 1",
-        "GHZ 2",
+        "HZ 1",
+        "HZ 2",
 
         "CPZ 1",
         "CPZ 2",
@@ -61,8 +61,8 @@ namespace CompPlus_ExeLevelSelect
 
     std::vector<std::string> LevelNames =
     {
-        "GREEN HILL ZONE ACT 1",
-        "GREEN HILL ZONE ACT 2",
+        "HILL ZONE ACT 1",
+        "HILL ZONE ACT 2",
 
         "CHEMICAL PLANT ZONE ACT 1",
         "CHEMICAL PLANT ZONE ACT 2",
@@ -150,41 +150,41 @@ namespace CompPlus_ExeLevelSelect
 
 
         MLS_MenuPoints[0][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[0][1] = CreateMenuPoint(0, 1, CompPlus_Common::SMCP_GHZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
-        MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_GHZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
-        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CPZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
-        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
-        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
-        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[0][1] = CreateMenuPoint(0, 1, CompPlus_Common::SMCP_GHZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
+        MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_GHZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
+        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
+        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
+        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Chaotix, "CHAOTIX", "", "", 2, 2, false);
         MLS_MenuPoints[1][0].YellowText = true;
-        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_FBZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 3, false); i++;
-        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_FBZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
-        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_PGZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
-        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_PGZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 4, false); i++;
-        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_SSZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
-        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_SSZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
+        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_FBZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 3, false); i++;
+        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_FBZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
+        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_PGZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
+        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_PGZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 4, false); i++;
+        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_SSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
+        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_SSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
         MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Mania, "MANIA", "", "", 2, 1, false);
         MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, CompPlus_Common::SMCP_HCZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
-        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, CompPlus_Common::SMCP_HCZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
-        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, CompPlus_Common::SMCP_MSZ1K, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 7, false); i++;
-        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, CompPlus_Common::SMCP_MSZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 7, false); i++;
-        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, CompPlus_Common::SMCP_OOZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
-        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, CompPlus_Common::SMCP_OOZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
+        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, CompPlus_Common::SMCP_HCZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
+        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, CompPlus_Common::SMCP_HCZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
+        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, CompPlus_Common::SMCP_MSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 7, false); i++;
+        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, CompPlus_Common::SMCP_MSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 7, false); i++;
+        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, CompPlus_Common::SMCP_OOZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
+        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, CompPlus_Common::SMCP_OOZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
         MLS_MenuPoints[2][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[3][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[3][1] = CreateMenuPoint(3, 1, CompPlus_Common::SMCP_LRZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
-        MLS_MenuPoints[3][2] = CreateMenuPoint(3, 2, CompPlus_Common::SMCP_LRZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
-        MLS_MenuPoints[3][3] = CreateMenuPoint(3, 3, CompPlus_Common::SMCP_MMZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
-        MLS_MenuPoints[3][4] = CreateMenuPoint(3, 4, CompPlus_Common::SMCP_MMZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
-        MLS_MenuPoints[3][5] = CreateMenuPoint(3, 5, CompPlus_Common::SMCP_TMZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
-        MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, CompPlus_Common::SMCP_TMZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
+        MLS_MenuPoints[3][1] = CreateMenuPoint(3, 1, CompPlus_Common::SMCP_LRZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
+        MLS_MenuPoints[3][2] = CreateMenuPoint(3, 2, CompPlus_Common::SMCP_LRZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
+        MLS_MenuPoints[3][3] = CreateMenuPoint(3, 3, CompPlus_Common::SMCP_MMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
+        MLS_MenuPoints[3][4] = CreateMenuPoint(3, 4, CompPlus_Common::SMCP_MMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
+        MLS_MenuPoints[3][5] = CreateMenuPoint(3, 5, CompPlus_Common::SMCP_TMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
+        MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, CompPlus_Common::SMCP_TMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
         MLS_MenuPoints[3][7] = CreateBlankMenuPoint(7, 1);
 
 

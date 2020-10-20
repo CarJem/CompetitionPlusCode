@@ -205,6 +205,7 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\SpecialRings.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\VapeMusic.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\GenericLogos.h" />
@@ -248,9 +249,11 @@
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\EntityLoop.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018_SinglePlayer.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\GenericLogos.cpp" />

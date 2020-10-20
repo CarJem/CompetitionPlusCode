@@ -19,6 +19,8 @@
 #include "CompPlus_Scenes/Functionality/SpecialRings.h"
 #include "CompPlus_Scenes/Functionality/EntityLoop.h"
 #include "CompPlus_Scenes/Functionality/SizeLazer.h"
+#include "CompPlus_Scenes/Functionality/Halloween2018.h"
+#include "CompPlus_Scenes/Functionality/VapeMusic.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -49,6 +51,9 @@ extern "C"
 {
     using namespace SonicMania;
 
+    HMODULE InfinityZoneDLL = nullptr;
+    IZAPI::StageInfo CurrentStage = {};
+
     namespace CompPlus_Internal
     {
         const char* FullPath;
@@ -63,6 +68,15 @@ extern "C"
             {
                 CompPlus_Core::OnDraw();
             }
+        }
+
+        typedef int(__cdecl PlayMusicFile_BASS_type)(const char* name, unsigned int slot, int a3, unsigned int loopstart, int a5);
+        PlayMusicFile_BASS_type* PlayMusicFile_BASS = nullptr;
+        bool tog = true;
+        int __cdecl PlayMusicFile_BASS_r(const char* name, unsigned int a2, int a3, unsigned int loopstart, int a5)
+        {
+            CompPlus_VapeMusic::OnLoad((char*)CurrentStage.SceneKey, name, a2, a3, loopstart, a5);
+            return PlayMusicFile_BASS(name, a2, a3, loopstart, a5);
         }
 
         static int OnScreenDrawReturn = baseAddress + 0x53600;
@@ -106,6 +120,18 @@ extern "C"
         {
             WriteData<5>((void*)(baseAddress + 0x7FF9), 0x90);
             WriteJump((void*)(baseAddress + 0x7FF9), OnMenuScreenDrawHook);
+        }
+
+        void PatchCompetitionPlusTMZ() 
+        {
+            //TMZ2: CrashTest
+            WriteData<2>((void*)(baseAddress + 0x100E0A), 0x90); //Instant Respawn
+            //WriteData((void*)(baseAddress + 0x100A00), { (byte)0x7E, (byte)0x09 }); //Instant Launch
+            WriteData((void*)(baseAddress + 0x1009AE), { (byte)0xF6, (byte)0x46, (byte)0x64, (byte)0x0F }); //Remove Player 1 Requirement
+
+            //TMZ2: MetalArm
+            WriteData((void*)(baseAddress + 0x159C47), { (byte)0xF6, (byte)0x80, (byte)0x80, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x0F }); //Remove Player 1 Requirement 
+            WriteData((void*)(baseAddress + 0x159CB7), { (byte)0xF6, (byte)0x81, (byte)0x80, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x0F }); //Remove Player 1 Requirement (Return Trip)
         }
 
         SonicMania::GameStates ActComplete_hook()
@@ -568,6 +594,8 @@ extern "C"
                 SonicMania::LoadSoundFX(CompPlus_Common::SFX_MenuAcceptClassic, SonicMania::Scope_Global);
                 SonicMania::LoadSoundFX(CompPlus_Common::SFX_GPZButton, SonicMania::Scope_Global);
                 SonicMania::LoadSoundFX(CompPlus_Common::SFX_LHPZSecret, SonicMania::Scope_Global);
+                LoadSoundFX(CompPlus_Common::SFX_EXE_KYS, Scope_Global);
+                LoadSoundFX(CompPlus_Common::SFX_EXE_Laugh, Scope_Global);
                 LoadedSounds = true;
             }
         }
@@ -643,7 +671,20 @@ extern "C"
             //PatchMenuOnScreenDrawHook();
             InitMod();
             TileCardColors::Init();
+            PatchCompetitionPlusTMZ();
             CompPlus_NextGenerationLevelSelectCore::Init(path);
+
+
+
+            DWORD Bassreturn;
+            int BassLocation = baseAddress + 0x001BC600;
+            VirtualProtect((void*)BassLocation, 0x00178000, PAGE_EXECUTE_READWRITE, &Bassreturn);
+
+            PlayMusicFile_BASS = (PlayMusicFile_BASS_type*)GetAddressFromJump(baseAddress + 0x001BC640);
+            WriteJump((void*)(baseAddress + 0x001BC640), PlayMusicFile_BASS_r);
+
+
+            CompPlus_Halloween2018::Init();
         }
 
         __declspec(dllexport) void PostInit(const char* path)
@@ -671,15 +712,13 @@ extern "C"
         char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
 
         //Internal Paramater Variables
-        bool StartupStageEnabled = false;
+        bool StartupStageEnabled = true;
 
         //Status Variables
         bool HasStartupInit = false;
         bool StageRefresh = true;
         int LastSceneID = 0;
         int IZ_SceneChangeIdleTime = 0;
-        HMODULE InfinityZoneDLL = nullptr;
-        IZAPI::StageInfo CurrentStage = {};
 
         #pragma endregion
 
@@ -738,8 +777,25 @@ extern "C"
 
         #pragma region General Methods
 
+        void UpdateEXETitleCardGraphics() 
+        {
+            if (CompPlus_Status::IsExecutorStage) 
+            {
+                IZAPI::SetGlobalAsset("Data/Sprites/Global/TitleCard.bin", "Data/Sprites/SMCP_Executor/TitleCard.bin");
+            }
+            else 
+            {
+                IZAPI::SetGlobalAsset("Data/Sprites/Global/TitleCard.bin", nullptr);
+            }
+        }
+
         void OnConstantFrame() 
         {
+            bool IsNotRunning = (!(GameState & GameState_Running));
+            bool IsSoftPause = (GameState == GameState_SoftPause);
+            bool IsHardPause = (GameState == GameState_HardPause);
+
+            UpdateEXETitleCardGraphics();
             if (CurrentStage.SceneKey)
             {
                 if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania)) CompPlus_ManiaLevelSelect::OnPreload();
@@ -756,7 +812,8 @@ extern "C"
         {
             if (StartupStageEnabled)
             {
-                CompPlus_Common::LoadLevel(2);
+                //CompPlus_Common::LoadLevel(2);
+                CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_GHZ1E);
             }
             HasStartupInit = true;
         }
@@ -770,12 +827,13 @@ extern "C"
             CompPlus_ExeLevelSelect::CheckForPointRefresh();
         }
 
-        void OnStageRefresh()
+        void OnStageInit()
         {
             CompPlus_Announcers::ReloadAnnouncerFX();
             CompPlus_Settings::RefreshSettings();
             CompPlus_Scoring::OnSceneReset();
             ResetLSelects();
+            CompPlus_Credits::ResetScene();
             StageRefresh = false;
         }
 
@@ -800,8 +858,9 @@ extern "C"
         void OnRunning()
         {
             if (!HasStartupInit) OnInit();
-            if (StageRefresh) OnStageRefresh();
+            if (StageRefresh) OnStageInit();
             if (LastSceneID != CurrentSceneInt) OnLegacySceneChange();
+            CompPlus_Halloween2018::OnFrame();
             CompPlus_Settings::OnFrame();
             CompPlus_Scoring::OnFrame();
             CompPlus_Controllers::OnFrame();
@@ -814,6 +873,7 @@ extern "C"
         void OnDraw()
         {
             CompPlus_Settings_Base::DoMenuOnScreenDraw();
+            if (CompPlus_Status::IsExecutorStage) CompPlus_Halloween2018::OnDraw();
 
             if (CurrentStage.SceneKey) 
             {
@@ -826,6 +886,7 @@ extern "C"
                 else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) CompPlus_HubCore::OnDraw();
                 else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubCore::OnDraw();
                 else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubCore::OnDraw();
+                else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits)) CompPlus_Credits::OnDraw();
             }
         }
 

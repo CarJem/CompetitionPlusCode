@@ -7,6 +7,7 @@
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Scenes/HUB World/HubCore.h"
+#include "CompPlus_Extensions/Drawing.h"
 
 namespace CompPlus_Credits
 {
@@ -246,6 +247,50 @@ namespace CompPlus_Credits
         Label1.TextLength = (WORD)ringCounter.length();
     }
 
+    DataPointer(int, ScreenOffsetX, 0x782A98);
+    DataPointer(int, WindowSizeX, 0x43C6F4);
+
+    void OnDraw()
+    {
+        SonicMania::Entity& CameraObject = *GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
+
+        SyncRingCount();
+
+        int PlayerCount = SonicMania::Options->CompetitionSession.NumberOfPlayers;
+
+
+
+        int center_x = ScreenOffsetX;
+        int center_y = 5;
+
+        std::string ringCounter = "";
+        ringCounter += std::to_string(RingCountP1);
+        if (PlayerCount >= 2)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP2);
+        }
+        if (PlayerCount >= 3)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP3);
+        }
+        if (PlayerCount >= 4)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP4);
+        }
+
+        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+
+        int SizeX = (WindowSizeX != 0 ? WindowSizeX : 0); //15
+        int SizeY = 10;
+
+        Canvas->DrawOrder = 12;
+        DrawRect(ScreenOffsetX - (SizeX / 2), center_y - (SizeY / 2), SizeX, SizeY, 0x000000, 255, InkEffect::Ink_Alpha, true);
+        Drawing::DrawDevTextSprite(ringCounter, SonicMania::Vector2(center_x, center_y), true, 12, 0, 0, SonicMania::DevMenu_Alignment::Alignment_Center, false);
+    }
+
     void SpawnRingsAtPosition(Vector2 Position, int Num, int Speed)
     {
         float AngleD = 101.25;
@@ -368,10 +413,10 @@ namespace CompPlus_Credits
         SonicMania::Entity& CameraObject = *GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
         SonicMania::Entity& WallR = *GetEntityFromSceneSlot<SonicMania::Entity>(WallRightID);
         SonicMania::Entity& WallL = *GetEntityFromSceneSlot<SonicMania::Entity>(WallLeftID);
-        EntityUIInfoLabel& Label1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(RingCounterSlotID);
+        //EntityUIInfoLabel& Label1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(RingCounterSlotID);
 
-        Label1.Position.X = CameraXPos;
-        Label1.Position.Y = RingCounterYPos;
+        //Label1.Position.X = CameraXPos;
+        //Label1.Position.Y = RingCounterYPos;
 
         CameraObject.Position.X = CameraXPos;
         CameraObject.Position.Y = CameraYPos;
@@ -514,10 +559,9 @@ namespace CompPlus_Credits
 
         }
 
-        if (Timer.TimerSecond >= 8)
+        if (Timer.TimerSecond >= 8 && !HasStartedRolling)
         {
             if (HasStartedRolling == false) HasStartedRolling = true;
-            if (Timer.TimerSecond >= 8) Timer.ResetTimer();
         }
 
         if (HasStartedRolling)
@@ -569,6 +613,7 @@ namespace CompPlus_Credits
     {
         if (!DeIntZoneInitalized)
         {
+            Drawing::ReloadDrawables();
             ResetScene();
             DeIntZoneInitalized = true;
         }
@@ -588,7 +633,7 @@ namespace CompPlus_Credits
     void ZoneLoop()
     {
         ZoneLoopInit();
-        RingCountHUD();
+        //RingCountHUD();
         RingSpawnLoop();
         LHPZButton();
         ExitButton();
@@ -600,6 +645,8 @@ namespace CompPlus_Credits
 
     void OnFrame(bool inZone)
     {
+        if (SonicMania::Timer.Enabled == false && HasStartedRolling) ResetScene();
+
         if (inZone) ZoneLoop();
         else OfflineLoop();
     }

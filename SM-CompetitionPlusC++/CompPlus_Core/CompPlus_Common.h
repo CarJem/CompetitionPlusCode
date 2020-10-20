@@ -11,6 +11,9 @@ namespace CompPlus_Common
     extern const char* SFX_LHPZSecret;
     extern const char* SFX_GPZButton;
 
+    extern const char* SFX_EXE_KYS;
+    extern const char* SFX_EXE_Laugh;
+
     extern const char* Act_LSelect;
 
     extern const char* Anim_LSelectIcons_Mania;
@@ -24,6 +27,8 @@ namespace CompPlus_Common
     extern const char* Anim_UISmallFont;
     extern const char* Anim_LSelectText;
     extern const char* Anim_LSelectText_Exe;
+
+    extern const char* Anim_EXE_Sprites;
 
     extern const char* SMCP_Unused_SettingsWorld;
     extern const char* SMCP_Credits;
@@ -80,6 +85,31 @@ namespace CompPlus_Common
     extern const char* SMCP_MMZ2E;
     extern const char* SMCP_TMZ1E;
     extern const char* SMCP_TMZ2E;
+
+    extern const char* SMCP_GHZ1_EXE;
+    extern const char* SMCP_GHZ2_EXE;
+    extern const char* SMCP_CPZ1_EXE;
+    extern const char* SMCP_CPZ2_EXE;
+    extern const char* SMCP_SPZ1_EXE;
+    extern const char* SMCP_SPZ2_EXE;
+    extern const char* SMCP_FBZ1_EXE;
+    extern const char* SMCP_FBZ2_EXE;
+    extern const char* SMCP_PGZ1_EXE;
+    extern const char* SMCP_PGZ2_EXE;
+    extern const char* SMCP_SSZ1_EXE;
+    extern const char* SMCP_SSZ2_EXE;
+    extern const char* SMCP_HCZ1_EXE;
+    extern const char* SMCP_HCZ2_EXE;
+    extern const char* SMCP_MSZ1_EXE;
+    extern const char* SMCP_MSZ2_EXE;
+    extern const char* SMCP_OOZ1_EXE;
+    extern const char* SMCP_OOZ2_EXE;
+    extern const char* SMCP_LRZ1_EXE;
+    extern const char* SMCP_LRZ2_EXE;
+    extern const char* SMCP_MMZ1_EXE;
+    extern const char* SMCP_MMZ2_EXE;
+    extern const char* SMCP_TMZ1_EXE;
+    extern const char* SMCP_TMZ2_EXE;
 
     extern const char* SMCP_AIZ_EXT;
 

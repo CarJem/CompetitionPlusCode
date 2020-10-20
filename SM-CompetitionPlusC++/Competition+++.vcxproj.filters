@@ -193,6 +193,9 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\VapeMusic.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
@@ -326,6 +329,12 @@
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018_SinglePlayer.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
   </ItemGroup>

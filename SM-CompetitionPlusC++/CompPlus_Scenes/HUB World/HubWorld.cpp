@@ -530,6 +530,10 @@ namespace CompPlus_HubWorld
         {
             LevelSelected = true;
         }
+        else if (ConfirmButton.Pressed)
+        {
+            ConfirmButton.Pressed = false;
+        }
     }
 
     void RankingWarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)

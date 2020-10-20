@@ -26,6 +26,7 @@
     <CPZ_SpringTube/>
     <CPZ_Decoration/>
     <CPZ_Platform/>
+    <CPZ_Staircase/>
   </Core_CPZ>
   <Core_SPZ1>
     <SPZ1_Parallax/>

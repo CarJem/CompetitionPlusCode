@@ -5,6 +5,8 @@
 #include <cmath>
 #include <ctime>
 #include <algorithm>
+#include "CompPlus_Core/CompPlus_Common.h"
+#include "CompPlus_Core/CompPlus_Status.h"
 
 namespace CompPlus_Halloween2018
 {
@@ -13,23 +15,19 @@ namespace CompPlus_Halloween2018
     int offsetX = 0;
     int offsetY = 0;
     int Timeout = 0;
-    //SoundFX Defines 
-    const char* SFX_KYS = "KYS.wav";
-    const char* SFX_laugh = "laugh.wav";
-    /*----------------------------------------------*/
 
-    bool LoadedSounds = false;
-    void LoadSounds()
+    int EXEAnimID = 0;
+
+    int EXEObjectID = 0;
+
+
+    void LoadSprites()
     {
-        if (!LoadedSounds)
-        {
-            //Load Sounds on First Run.
-            LoadSoundFX(SFX_KYS, Scope_Global);
-            LoadSoundFX(SFX_laugh, Scope_Global);
-            LoadedSounds = true;
-        }
+        //GetSpritePointer(0xAC6D84, 0x04)
+        EXEAnimID = LoadAnimation(CompPlus_Common::Anim_EXE_Sprites, Scope_Stage);
+        //*(BYTE*)GetAddress(baseAddress + 0xAC6D84, 0x04) = EXEAnimID;
     }
-    /*----------------------------------------------*/
+
     Vector2 MoveToPoint(Vector2 CurrentPosition, Vector2 GoalPosition, int Speed)
     {
         //Working Values
@@ -65,26 +63,98 @@ namespace CompPlus_Halloween2018
         return GoalPosition;
     }
 
-    bool EXEActive = false;
-    int exetime = 0;
-    int EXESpeedMod = 0;
-    int exetouch = 0;
+    bool EXEActiveP1 = false;
+    int exetimeP1 = 0;
+    int EXESpeedModP1 = 0;
+    int exetouchP1 = 0;
 
-    void DoChase()
+    bool EXEActiveP2 = false;
+    int exetimeP2 = 0;
+    int EXESpeedModP2 = 0;
+    int exetouchP2 = 0;
+
+    bool EXEActiveP3 = false;
+    int exetimeP3 = 0;
+    int EXESpeedModP3 = 0;
+    int exetouchP3 = 0;
+
+    bool EXEActiveP4 = false;
+    int exetimeP4 = 0;
+    int EXESpeedModP4 = 0;
+    int exetouchP4 = 0;
+
+
+
+    bool GetEXEActive(int PlayerID)
     {
-        exetime = 0;
+        if (PlayerID == 1) return EXEActiveP1;
+        else if (PlayerID == 2) return EXEActiveP2;
+        else if (PlayerID == 3) return EXEActiveP3;
+        else if (PlayerID == 4) return EXEActiveP4;
+    }
+
+    void SetEXEActive(bool value, int PlayerID)
+    {
+        if (PlayerID == 1) EXEActiveP1 = value;
+        else if (PlayerID == 2) EXEActiveP2 = value;
+        else if (PlayerID == 3) EXEActiveP3 = value;
+        else if (PlayerID == 4) EXEActiveP4 = value;
+    }
+
+    int GetEXETouch(int PlayerID)
+    {
+        if (PlayerID == 1) return exetouchP1;
+        else if (PlayerID == 2) return exetouchP2;
+        else if (PlayerID == 3) return exetouchP3;
+        else if (PlayerID == 4) return exetouchP4;
+    }
+
+    void SetEXETouch(int value, int PlayerID)
+    {
+        if (PlayerID == 1) exetouchP1 = value;
+        else if (PlayerID == 2) exetouchP2 = value;
+        else if (PlayerID == 3) exetouchP3 = value;
+        else if (PlayerID == 4) exetouchP4 = value;
+    }
+
+    void SetEXESpeedMod(int value, int PlayerID)
+    {
+        if (PlayerID == 1) EXESpeedModP1 = value;
+        else if (PlayerID == 2) EXESpeedModP2 = value;
+        else if (PlayerID == 3) EXESpeedModP3 = value;
+        else if (PlayerID == 4) EXESpeedModP4 = value;
+    }
+
+    int GetEXESpeedMod(int PlayerID)
+    {
+        if (PlayerID == 1) return EXESpeedModP1;
+        else if (PlayerID == 2) return EXESpeedModP2;
+        else if (PlayerID == 3) return EXESpeedModP3;
+        else if (PlayerID == 4) return EXESpeedModP4;
+    }
+
+    int GetEXETime(int PlayerID)
+    {
+        if (PlayerID == 1) return exetimeP1;
+        else if (PlayerID == 2) return exetimeP2;
+        else if (PlayerID == 3) return exetimeP3;
+        else if (PlayerID == 4) return exetimeP4;
+    }
+
+    void SetEXETime(int value, int PlayerID)
+    {
+        if (PlayerID == 1) exetimeP1 = value;
+        else if (PlayerID == 2) exetimeP2 = value;
+        else if (PlayerID == 3) exetimeP3 = value;
+        else if (PlayerID == 4) exetimeP4 = value;
+    }
+
+
+    void DoChase(EntityPlayer* Player, int PlayerID)
+    {
+        SetEXETime(0, PlayerID);
         EntityPlayer* ThisObject = (EntityPlayer*)GetAddress(baseAddress + 0xAA7634, 0, 0);
         EntityRing* RingTemp2 = (EntityRing*)ThisObject;
-        if ((ThisObject->Position.X - Player1.Position.X) > 0)
-        {
-            printf("Setsprite Left \n");
-            SetSpriteAnimation(GetSpritePointer(0xAC6D84, 0x04), 5, &RingTemp2->Animation, true, 1);
-        }
-        else
-        {
-            printf("Setsprite Right. \n");
-            SetSpriteAnimation(GetSpritePointer(0xAC6D84, 0x04), 5, &RingTemp2->Animation, true, 0);
-        }
         float angle = ThisObject->dword200;
         int radius = 4;
         int Counter = ThisObject->dword218;
@@ -121,7 +191,7 @@ namespace CompPlus_Halloween2018
 
 
         ThisObject->Direction = false;
-        ThisObject->DrawOrder = Player1.DrawOrder;
+        ThisObject->DrawOrder = Player->DrawOrder;
 
         ThisObject->Position.Y = workingY;
         ThisObject->dword200 = angle;
@@ -131,7 +201,7 @@ namespace CompPlus_Halloween2018
 
 
         //ThisObject->Position.Y = workingY;
-        if (ThisObject->Position.CalculateDistance(Player1.Position) < 140)
+        if (ThisObject->Position.CalculateDistance(Player->Position) < 140)
         {
             ThisObject->dword208 = 1;
             printf("IS IN RANGE! \n");
@@ -140,55 +210,55 @@ namespace CompPlus_Halloween2018
         if (ThisObject->dword208 == 1)
         {
             //You Set it off! 
-            //MoveToPoint(Vector2(ThisObject->Position.X, ThisObject->Position.Y), Player1.Position, 5);
+            //MoveToPoint(Vector2(ThisObject->Position.X, ThisObject->Position.Y), Player->Position, 5);
             Vector2 Temp = Vector2(0, 0);
-            ThisObject->Position = MoveToPoint(Vector2(ThisObject->dword20C, workingY), Player1.Position, (4 + EXESpeedMod));
+            ThisObject->Position = MoveToPoint(Vector2(ThisObject->dword20C, workingY), Player->Position, (4 + GetEXESpeedMod(PlayerID)));
             ThisObject->dword20C = ThisObject->Position.X;
             ThisObject->dword210 = ThisObject->Position.Y;
             EntityRing* RingTemp = (EntityRing*)ThisObject;
 
             printf("SHOULD BE FOLLOWING \n");
         }
-        if (ThisObject->Position.CalculateDistance(Player1.Position) < 10)
+        if (ThisObject->Position.CalculateDistance(Player->Position) < 10)
         {
-            if (Player1.RingCount > 0 && exetouch < 3)
+            if (Player->RingCount > 0 && GetEXETouch(PlayerID) < 3)
             {
-                Player1.RingCount = 0;
+                Player->RingCount = 0;
                 PlaySoundFXS("Global/Hurt.wav");
-                Player1.State = PLAYERSTATE_HURT;
-                switch (Player1.Character)
+                Player->State = PLAYERSTATE_HURT;
+                switch (Player->Character)
                 {
                 case Characters_Sonic:
-                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA08), 18, &Player1.Animation, false, 0);
+                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA08), 18, &Player->Animation, false, 0);
                     break;
                 case Characters_Tails:
-                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA0C), 18, &Player1.Animation, false, 0);
+                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA0C), 18, &Player->Animation, false, 0);
                     break;
                 case Characters_Knuckles:
-                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA10), 18, &Player1.Animation, false, 0);
+                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA10), 18, &Player->Animation, false, 0);
                     break;
                 case Characters_Mighty:
-                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA12), 18, &Player1.Animation, false, 0);
+                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA12), 18, &Player->Animation, false, 0);
                     break;
                 case Characters_Ray:
-                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA14), 18, &Player1.Animation, false, 0);
+                    SetSpriteAnimation(GetSpritePointer(0xAC6838, 0xA14), 18, &Player->Animation, false, 0);
                     break;
                 }
-                Player1.XVelocity = (Player1.XVelocity * -1);
-                Player1.Grounded = 0;
-                Player1.YVelocity = -400000;
-                exetouch++;
+                Player->XVelocity = (Player->XVelocity * -1);
+                Player->Grounded = 0;
+                Player->YVelocity = -400000;
+                SetEXETouch(GetEXETouch(PlayerID) + 1, PlayerID);
             }
             else
             {
-                Player1.Kill();
-                PlaySoundFXS(SFX_KYS);
-                exetouch = 0;
+                Player->Kill();
+                PlaySoundFXS(CompPlus_Common::SFX_EXE_KYS);
+                SetEXETouch(0, PlayerID);
             }
-            EXEActive = false;
-            if (EXESpeedMod < 6)
+            SetEXEActive(false, PlayerID);
+            if (GetEXESpeedMod(PlayerID) < 6)
             {
-                EXESpeedMod++;
+                SetEXESpeedMod(GetEXESpeedMod(PlayerID) + 1, PlayerID);
             }
 
             DespawnEntity(ThisObject);
@@ -196,20 +266,40 @@ namespace CompPlus_Halloween2018
         }
     }
 
-    void ActiveObjectMoveUp()
+    void DoChase1P()
+    {
+        DoChase(&Player1, 1);
+    }
+
+    void DoChase2P()
+    {
+        DoChase(&Player2, 2);
+    }
+
+    void DoChase3P()
+    {
+        DoChase(&Player3, 3);
+    }
+
+    void DoChase4P()
+    {
+        DoChase(&Player4, 4);
+    }
+
+    void ActiveObjectMoveUp(EntityPlayer* Player, int PlayerID)
     {
         EntityPlayer* ThisObject = (EntityPlayer*)GetAddress(baseAddress + 0xAA7634, 0, 0);
 
         //ThisObject->dword210 = ThisObject->dword210 - 1;
 
-        if (EXEActive == true)
+        if (GetEXEActive(PlayerID) == true)
         {
             ThisObject->Alpha = TransparencyFlag_Transparent;
         }
         else
         {
             ThisObject->Alpha = TransparencyFlag_Opaque;
-            ThisObject->DrawOrder = Player1.DrawOrder;
+            ThisObject->DrawOrder = Player->DrawOrder;
             float angle = ThisObject->dword200;
             int radius = 4;
             int Counter = ThisObject->dword218;
@@ -243,21 +333,6 @@ namespace CompPlus_Halloween2018
             //workingX += ThisObject->dword20C;
             workingY += ThisObject->dword210;
 
-            if (ThisObject->dword208 == 0)
-            {
-                //ThisObject->dword210--;
-                EntityRing* RingTemp = (EntityRing*)ThisObject;
-
-                if ((ThisObject->Position.X - Player1.Position.X) > 0)
-                {
-                    SetSpriteAnimation(GetSpritePointer(0xAC6D84, 0x04), 4, &RingTemp->Animation, true, 1);
-                }
-                else
-                {
-                    SetSpriteAnimation(GetSpritePointer(0xAC6D84, 0x04), 4, &RingTemp->Animation, true, 0);
-                }
-            }
-
 
             ThisObject->DrawOrder = 14;
 
@@ -267,14 +342,19 @@ namespace CompPlus_Halloween2018
             ThisObject->dword218 = Counter;
             ThisObject->dword21C = Direction;
             //ThisObject->Position.Y = workingY;
-            if (ThisObject->Position.CalculateDistance(Player1.Position) < 140)
+            if (ThisObject->Position.CalculateDistance(Player->Position) < 140)
             {
                 ThisObject->dword208 = 1;
                 printf("IS IN RANGE! THEN CHANGE STATE \n");
-                ThisObject->State = DoChase;
+
+                if (PlayerID == 1) ThisObject->State = DoChase1P;
+                else if (PlayerID == 2) ThisObject->State = DoChase2P;
+                else if (PlayerID == 3) ThisObject->State = DoChase3P;
+                else if (PlayerID == 4) ThisObject->State = DoChase4P;
+
                 ThisObject->Alpha = TransparencyFlag_Opaque;
-                EXEActive = true;
-                PlaySoundFXS(SFX_laugh);
+                SetEXEActive(true, PlayerID);
+                PlaySoundFXS(CompPlus_Common::SFX_EXE_Laugh);
             }
         }
 
@@ -282,47 +362,95 @@ namespace CompPlus_Halloween2018
 
     }
 
+    void ActiveObjectMoveUp1P()
+    {
+        ActiveObjectMoveUp(&Player1, 1);
+    }
+
+    void ActiveObjectMoveUp2P()
+    {
+        ActiveObjectMoveUp(&Player2, 2);
+    }
+
+    void ActiveObjectMoveUp3P()
+    {
+        ActiveObjectMoveUp(&Player3, 3);
+    }
+
+    void ActiveObjectMoveUp4P()
+    {
+        ActiveObjectMoveUp(&Player4, 4);
+    }
+
     int RandomNumber(int min, int max)
     {
         return rand() % (max - min) + min;
     }
 
-    void ReplaceEntityCustom(EntityPlayer* player)
+    void SpawnEXE(int TempXlocation, int TempYlocation, int PlayerID)
+    {
+        int NumberOfPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
+
+        if (PlayerID == 2 && NumberOfPlayers < 2) return;
+        if (PlayerID == 3 && NumberOfPlayers < 3) return;
+        if (PlayerID == 4 && NumberOfPlayers < 4) return;
+
+
+        EntityPlayer* Spawned = (EntityPlayer*)SpawnObject(GetObjectIDFromType(ObjectType_Ring), 0, Vector2(TempXlocation, TempYlocation));
+
+
+        if (PlayerID == 1) Spawned->State = ActiveObjectMoveUp1P;
+        else if (PlayerID == 2) Spawned->State = ActiveObjectMoveUp2P;
+        else if (PlayerID == 3) Spawned->State = ActiveObjectMoveUp3P;
+        else if (PlayerID == 4) Spawned->State = ActiveObjectMoveUp4P;
+
+
+        Spawned->InkEffect = Ink_Alpha;
+        Spawned->Alpha = 0;
+
+        EXEObjectID = Spawned->ObjectID;
+        //Spawned->Status = 0x00000000;
+        Spawned->dword20C = TempXlocation;
+        Spawned->dword210 = TempYlocation;
+        EntityRing* RingTemp = (EntityRing*)Spawned;
+        //SetSpriteAnimation(EXEAnimID, 4, &RingTemp->Animation, false, 0);
+        float angle = 0;
+        Spawned->dword200 = RandomNumber(1, 358);;//Angle
+        Spawned->dword204 = RandomNumber(0, 2);//Type
+        Spawned->dword208 = 0; // Chase Enabled 
+        Spawned->dword214 = RandomNumber(4, 32);//Radius
+        Spawned->dword218 = 0; //count
+        Spawned->dword21C = 0; //Direction
+        Spawned->dword140 = PlayerID; //PlayerID
+    }
+
+    void ReplaceEntityCustom()
     {
         Entity* ClosestEntity = nullptr;
         for (int i = 0; i < 2301; ++i)
         {
             auto entity = GetEntityFromSceneSlot<Entity>(i);
-            // Skip itself
-            if (entity == player)
-                continue;
 
             if (entity->ObjectID != GetObjectIDFromType(ObjectType_Ring))
                 continue;
 
-            if (((EntityRing*)entity)->Type != 2)
+            if (((EntityRing*)entity)->Type != 1)
                 continue;
+
+            if (((EntityRing*)entity)->field_57 != 0)
+                continue;
+
             printf("Called Changed Entity \n");
             int TempXlocation = entity->Position.X;
             int TempYlocation = entity->Position.Y;
 
             printf("X: %d \n", TempXlocation);
             printf("Y: %d \n", TempYlocation);
-            EntityPlayer* Spawned = (EntityPlayer*)SpawnObject(GetObjectIDFromType(ObjectType_Ring), 0, Vector2(TempXlocation, TempYlocation));
 
-            Spawned->State = ActiveObjectMoveUp;
-            //Spawned->Status = 0x00000000;
-            Spawned->dword20C = TempXlocation;
-            Spawned->dword210 = TempYlocation;
-            EntityRing* RingTemp = (EntityRing*)Spawned;
-            //SetSpriteAnimation(GetSpritePointer(0xAC6D84, 0x04), 4, &RingTemp->Animation, false, 0);
-            float angle = 0;
-            Spawned->dword200 = RandomNumber(1, 358);;//Angle
-            Spawned->dword204 = RandomNumber(0, 2);//Type
-            Spawned->dword208 = 0; // Chase Enabled 
-            Spawned->dword214 = RandomNumber(4, 32);//Radius
-            Spawned->dword218 = 0; //count
-            Spawned->dword21C = 0; //Direction
+            SpawnEXE(TempXlocation, TempYlocation, 1);
+            SpawnEXE(TempXlocation, TempYlocation, 2);
+            SpawnEXE(TempXlocation, TempYlocation, 3);
+            SpawnEXE(TempXlocation, TempYlocation, 4);
 
             DespawnEntity(entity);
         }
@@ -331,11 +459,35 @@ namespace CompPlus_Halloween2018
 
     void DoOnStartTimer()
     {
-        ReplaceEntityCustom(&Player1);
-        EXEActive = false;
-        exetime = 0;
-        EXESpeedMod = 0;
-        exetouch = 0;
+        if (CompPlus_Status::IsExecutorStage)
+        {
+            LoadSprites();
+            ReplaceEntityCustom();
+        }
+
+        int i = 1;
+        SetEXEActive(false, i);
+        SetEXETime(0, i);
+        SetEXESpeedMod(0, i);
+        SetEXETouch(0, i);
+
+        i++;
+        SetEXEActive(false, i);
+        SetEXETime(0, i);
+        SetEXESpeedMod(0, i);
+        SetEXETouch(0, i);
+
+        i++;
+        SetEXEActive(false, i);
+        SetEXETime(0, i);
+        SetEXESpeedMod(0, i);
+        SetEXETouch(0, i);
+
+        i++;
+        SetEXEActive(false, i);
+        SetEXETime(0, i);
+        SetEXESpeedMod(0, i);
+        SetEXETouch(0, i);
 
     }
 
@@ -363,13 +515,8 @@ namespace CompPlus_Halloween2018
         WriteJump((void*)(baseAddress + 0x01602D), HookTimer);
     }
 
-    void Init(const char* path)
+    void Init()
     {
-        char buffer[MAX_PATH];
-        GetCurrentDirectoryA(MAX_PATH, buffer);
-        SetCurrentDirectoryA(path);
-        // Load files here
-        SetCurrentDirectoryA(buffer);
         // LB
         BYTE LBPatch[6]{ (BYTE)0x09, (BYTE)0x42, (BYTE)0x4C, (BYTE)0x90, (BYTE)0x90, (BYTE)0x90 };
         WriteData((BYTE*)(baseAddress + 0x001E6358), LBPatch, 6);
@@ -378,40 +525,229 @@ namespace CompPlus_Halloween2018
         WriteData((BYTE*)(baseAddress + 0x001E6362), RBPatch, 6);
 
         //Unbind C
-        WriteData<3>((void*)(baseAddress + 0x000C3EB7), 0x90);
+        //WriteData<3>((void*)(baseAddress + 0x000C3EB7), 0x90);
         DWORD PatchOnTimerStart;
         int PatchOnTimerCode = baseAddress + 0x16000;
         VirtualProtect((void*)PatchOnTimerCode, 0x00178000, PAGE_EXECUTE_READWRITE, &PatchOnTimerStart);
         PatchHookOnStartTimer();
     }
 
-    void OnFrame()
+    bool CanDrawP1 = false;
+    bool CanDrawP2 = false;
+    bool CanDrawP3 = false;
+    bool CanDrawP4 = false;
+
+    void EndDraw(int pointer)
     {
-        if (GameState & GameState_Running && !(GameState & GameState_SoftPause))
+        if (pointer == 0) CanDrawP1 = false;
+        else if (pointer == 1) CanDrawP2 = false;
+        else if (pointer == 2) CanDrawP3 = false;
+        else if (pointer == 3) CanDrawP4 = false;
+    }
+
+    bool CanDraw(int pointer)
+    {
+        if (pointer == 0) return CanDrawP1;
+        else if (pointer == 1) return CanDrawP2;
+        else if (pointer == 2) return CanDrawP3;
+        else if (pointer == 3) return CanDrawP4;
+    }
+
+    void DrawEXE(SonicMania::EntityPlayer Player, Vector2 LocationStart, bool ScreenRelative, int AnimID, int FrameID)
+    {
+        if (ScreenRelative)
         {
-            LoadSounds();
-            if (Player1.State == PLAYERSTATE_DIE)
+            int x = SonicMania::OBJ_Camera->XPos;
+            int y = SonicMania::OBJ_Camera->YPos;
+
+            LocationStart = Vector2(x + LocationStart.GetFullX(), y + LocationStart.GetFullY());
+        }
+
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+
+        //RingTemp->DrawOrder = Player.DrawOrder;
+        RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
+        RingTemp->ActiveScreens = Player.ActiveScreens;
+        RingTemp->Rotation = Player.Rotation;
+        RingTemp->Angle = Player.Angle;
+        SetSpriteAnimation(EXEAnimID, AnimID, &RingTemp->ActNumbersData, true, FrameID);
+        DrawSprite(&RingTemp->ActNumbersData, &LocationStart, true);
+    }
+
+    bool IsActiveObjectMoveUp(EntityPlayer* Player, int PlayerID)
+    {
+        if (PlayerID == 1 && Player->State == ActiveObjectMoveUp1P) return true;
+        else if (PlayerID == 2 && Player->State == ActiveObjectMoveUp2P) return true;
+        else if (PlayerID == 3 && Player->State == ActiveObjectMoveUp3P) return true;
+        else if (PlayerID == 4 && Player->State == ActiveObjectMoveUp4P) return true;
+        return false;
+    }
+
+    bool IsDoChase(EntityPlayer* Player, int PlayerID)
+    {
+        if (PlayerID == 1 && Player->State == DoChase1P) return true;
+        else if (PlayerID == 2 && Player->State == DoChase2P) return true;
+        else if (PlayerID == 3 && Player->State == DoChase3P) return true;
+        else if (PlayerID == 4 && Player->State == DoChase4P) return true;
+        return false;
+    }
+
+    void OnPlayerDraw(EntityPlayer EXE, EntityPlayer* Player, int offset)
+    {
+        Vector2 Position = Vector2((EXE.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (EXE.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+        if (EXE.dword208 == 1)
+        {
+            if ((EXE.Position.X - Player->Position.X) > 0) DrawEXE(*Player, Position, false, 5, 1);
+            else DrawEXE(*Player, Position, false, 5, 0);
+        }
+        else if (EXE.dword208 == 0)
+        {
+            if ((EXE.Position.X - Player->Position.X) > 0) DrawEXE(*Player, Position, false, 4, 1);
+            else DrawEXE(*Player, Position, false, 4, 0);
+        }
+    }
+
+    int ColorStorage[16] = {};
+
+    void SetTempColors() 
+    {
+        ColorStorage[0] = Palette0[208];
+        ColorStorage[1] = Palette0[209];
+        ColorStorage[2] = Palette0[210];
+        ColorStorage[3] = Palette0[211];
+        ColorStorage[4] = Palette0[212];
+        ColorStorage[5] = Palette0[213];
+        ColorStorage[6] = Palette0[214];
+        ColorStorage[7] = Palette0[215];
+        ColorStorage[8] = Palette0[216];
+        ColorStorage[9] = Palette0[217];
+        ColorStorage[10] = Palette0[218];
+        ColorStorage[11] = Palette0[219];
+        ColorStorage[12] = Palette0[220];
+        ColorStorage[13] = Palette0[221];
+        ColorStorage[14] = Palette0[222];
+        ColorStorage[15] = Palette0[223];
+
+        Palette0[208] = SonicMania::ToRGB565(0x000058);
+        Palette0[209] = SonicMania::ToRGB565(0x00386F);
+        Palette0[210] = SonicMania::ToRGB565(0x006872);
+        Palette0[211] = SonicMania::ToRGB565(0x188896);
+        Palette0[212] = SonicMania::ToRGB565(0x30A0A5);
+        Palette0[213] = SonicMania::ToRGB565(0x68D0BB);
+        Palette0[214] = SonicMania::ToRGB565(0x18585A);
+        Palette0[215] = SonicMania::ToRGB565(0x60A099);
+        Palette0[216] = SonicMania::ToRGB565(0xA0E0CD);
+        Palette0[217] = SonicMania::ToRGB565(0xE0E0C2);
+        Palette0[218] = SonicMania::ToRGB565(0x400000);
+        Palette0[219] = SonicMania::ToRGB565(0x902800);
+        Palette0[220] = SonicMania::ToRGB565(0xE03700);
+        Palette0[221] = SonicMania::ToRGB565(0x9F6830);
+        Palette0[222] = SonicMania::ToRGB565(0xBD9060);
+        Palette0[223] = SonicMania::ToRGB565(0xCDB090);
+    }
+
+    void ResetColors() 
+    {
+         Palette0[208] = ColorStorage[0];
+         Palette0[209] = ColorStorage[1];
+         Palette0[210] = ColorStorage[2];
+         Palette0[211] = ColorStorage[3];
+         Palette0[212] = ColorStorage[4];
+         Palette0[213] = ColorStorage[5];
+         Palette0[214] = ColorStorage[6];
+         Palette0[215] = ColorStorage[7];
+         Palette0[216] = ColorStorage[8];
+         Palette0[217] = ColorStorage[9];
+         Palette0[218] = ColorStorage[10];
+         Palette0[219] = ColorStorage[11];
+         Palette0[220] = ColorStorage[12];
+         Palette0[221] = ColorStorage[13];
+         Palette0[222] = ColorStorage[14];
+         Palette0[223] = ColorStorage[15];
+    }
+
+
+    void OnDraw()
+    {
+        ushort pointer = GetSpritePointer(0xAA7634, 0x14);
+        int screen = 0;
+
+        if (pointer == 0) screen = 0;
+        else if (pointer == 1) screen = 1;
+        else if (pointer == 2) screen = 2;
+        else if (pointer == 3) screen = 3;
+
+
+
+        if (CompPlus_Status::IsExecutorStage)
+        {
+            if (CanDraw(screen))
             {
-                EXEActive = false;
-                exetime = 0;
-                EXESpeedMod = 0;
-                exetouch = 0;
-            }
-            if (EXEActive)
-            {
-                if (exetime > 60)
+                SetTempColors();
+                int offset = 0x96030 * screen;
+                for (int i = 0; i < 2301; ++i)
                 {
-                    exetime = 0;
-                    EXEActive = false;
-                    if (EXESpeedMod < 6)
+                    SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
+
+                    if (entity.ObjectID == EXEObjectID && entity.Alpha == 0)
                     {
-                        EXESpeedMod++;
+                        EntityPlayer* Spawned = SonicMania::GetEntityFromSceneSlot<SonicMania::EntityPlayer>(i);
+
+                        if (Spawned->dword140 == 1 && screen == 0) OnPlayerDraw(*Spawned, &Player1, offset);
+                        else if (Spawned->dword140 == 2 && screen == 1) OnPlayerDraw(*Spawned, &Player2, offset);
+                        else if (Spawned->dword140 == 3 && screen == 2) OnPlayerDraw(*Spawned, &Player3, offset);
+                        else if (Spawned->dword140 == 4 && screen == 3) OnPlayerDraw(*Spawned, &Player4, offset);
                     }
                 }
-                else
+                ResetColors();
+            }
+        }
+
+        EndDraw(screen);
+    }
+
+    void OnPlayerFrame(EntityPlayer* Player, int PlayerID)
+    {
+        if (Player->State == PLAYERSTATE_DIE)
+        {
+            SetEXEActive(false, PlayerID);
+            SetEXETime(0, PlayerID);
+            SetEXESpeedMod(0, PlayerID);
+            SetEXETouch(0, PlayerID);
+        }
+        if (GetEXEActive(PlayerID))
+        {
+            if (GetEXETime(PlayerID) > 60)
+            {
+                SetEXETime(0, PlayerID);
+                SetEXEActive(false, PlayerID);
+                if (GetEXESpeedMod(PlayerID) < 6)
                 {
-                    exetime++;
+                    SetEXESpeedMod(GetEXESpeedMod(PlayerID) + 1, PlayerID);
                 }
+            }
+            else
+            {
+                SetEXETime(GetEXETime(PlayerID) + 1, PlayerID);
+            }
+        }
+    }
+
+    void OnFrame()
+    {
+        if (CompPlus_Status::IsExecutorStage)
+        {
+            CanDrawP1 = true;
+            CanDrawP2 = true;
+            CanDrawP3 = true;
+            CanDrawP4 = true;
+
+            if (GameState & GameState_Running && !(GameState & GameState_SoftPause))
+            {
+                OnPlayerFrame(&Player1, 1);
+                OnPlayerFrame(&Player2, 2);
+                OnPlayerFrame(&Player3, 3);
+                OnPlayerFrame(&Player4, 4);
             }
         }
     }

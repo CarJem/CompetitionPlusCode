@@ -17,11 +17,12 @@
 
 namespace CompPlus_RPlaneShifter
 {
-    #define RPlaneShifter_Normal    (void*)(0x00BA84B0)
-    #define RPlaneShifter_Rotating  (void*)(0x00BA87B0)
+    #define RPlaneShifter_Rotating (void*)(baseAddress + 0x1787B0)
+    #define RPlaneShifter_SwitchingToBG (void*)(baseAddress + 0x1784B0)
+    #define RPlaneShifter_SwitchingToFG (void*)(baseAddress + 0x178B30)
 
-    #define RPlaneShifter_Player_Normal    (void*)(0x00AFAD80)
-    #define RPlaneShifter_Player_Rotating  (void*)(0x00AFAD70)
+    #define RPlaneShifter_Player_Normal    (void*)(baseAddress + 0xCAD80)
+    #define RPlaneShifter_Player_Rotating  (void*)(baseAddress + 0xCAD70)
 
     struct RPlaneShifter : SonicMania::Entity
     {
@@ -117,13 +118,17 @@ namespace CompPlus_RPlaneShifter
             
             if (SetPosition == 0)
             {
-                Player.CollisionPlane = 0;
-                Player.DrawOrder = 12;
+                Player.CollisionPlane = SonicMania::OBJ_ZONE->PlayerLowLayer;
+                Player.DrawOrder = SonicMania::OBJ_ZONE->DrawOrderLow;
+                //Player.CollisionPlane = 0;
+                //Player.DrawOrder = 12;
             }
             else
             {
-                Player.CollisionPlane = 1;
-                Player.DrawOrder = 4;
+                Player.CollisionPlane = SonicMania::OBJ_ZONE->PlayerHighLayer;
+                Player.DrawOrder = SonicMania::OBJ_ZONE->DrawOrderHigh;
+                //Player.CollisionPlane = 1;
+                //Player.DrawOrder = 4;
             }
 
         }
@@ -204,7 +209,7 @@ namespace CompPlus_RPlaneShifter
 
             if (Player.InRange(x1, y1, x2, y2)) 
             {
-                if (Player.State == RPlaneShifter_Player_Rotating && !CooldownActive)
+                    if (Player.State == RPlaneShifter_Player_Rotating && !CooldownActive)
                 {
                     HasBeenRotating = true;
                     LockXY(Player, PlayerID);

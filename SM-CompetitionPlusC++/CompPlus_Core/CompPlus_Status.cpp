@@ -11,4 +11,7 @@ namespace CompPlus_Status
     bool UseEXETitleCard = false;
     bool DisableWorldPositionWrite = false;
     bool ForceLoadChibiSprites = false;
+    bool IsExecutorStage = false;
+    bool IsChaotixStage = false;
+    bool IsChaotixStageEncore = false;
 }

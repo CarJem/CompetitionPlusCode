@@ -17,6 +17,8 @@
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Status.h"
 
+#include "CompPlus_Scenes/Functionality/Halloween2018.h"
+
 namespace CompPlus_EntityLoop
 {
     void OnFrame() 

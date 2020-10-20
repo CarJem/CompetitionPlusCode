@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/ManiaExt.h"
+#include "CompPlus_Core/CompPlus_Common.h"
 
 #include "include/SonicMania.h"
 #include <iostream>
@@ -58,7 +59,7 @@ namespace CompPlus_Scene_GustPlanet
             if (isPlayerInRange && entity.Pressed)
             {
                 entity.Pressed = false;
-                SonicMania::PlaySoundFXS("CompPlus/GPZ_Button.wav");
+                SonicMania::PlaySoundFXS(CompPlus_Common::SFX_GPZButton);
                 if (RealID == 1) SwapGravity(RealID, !P1_HasAntiGrav);
                 else if (RealID == 2) SwapGravity(RealID, !P2_HasAntiGrav);
                 else if (RealID == 3) SwapGravity(RealID, !P3_HasAntiGrav);
@@ -76,7 +77,7 @@ namespace CompPlus_Scene_GustPlanet
             {
                 SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
 
-                if (entity.ObjectID == 56)
+                if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_Button))
                 {
                     CurrentSpawns.insert(CurrentSpawns.begin(), i);
                 }

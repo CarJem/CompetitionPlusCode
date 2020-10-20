@@ -179,6 +179,7 @@ namespace CompPlus_SpecialRings
                         Temp.RingAmount = 5;
                         Temp.PlaneFilter = specialRing.PlaneFilter;
                         Temp.Priority = specialRing.Priority;
+                        Temp.field_57 = 1;
                         SonicMania::SetSpriteAnimation(RingSpriteID, 1, &Temp.Animation, true, 0);
                     }
                 }

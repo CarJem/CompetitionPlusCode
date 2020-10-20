@@ -12,4 +12,7 @@ namespace CompPlus_Status
     extern int CurrentLevelSelect;
     extern bool DisableWorldPositionWrite;
     extern bool ForceLoadChibiSprites;
+    extern bool IsExecutorStage;
+    extern bool IsChaotixStage;
+    extern bool IsChaotixStageEncore;
 }

@@ -153,6 +153,8 @@ namespace CompPlus_NextGenerationLevelSelectCore
         }
     };
 
+    //DataPointer(int, WindowSizeX, 0x43C70C); //ViewPortSizeX
+    //DataPointer(int, WindowSizeY, 0x43C710); //ViewPortSizeY
     DataPointer(int, WindowSizeX, 0x43C6F4);
     DataPointer(int, WindowSizeY, 0x43C6F8);
 

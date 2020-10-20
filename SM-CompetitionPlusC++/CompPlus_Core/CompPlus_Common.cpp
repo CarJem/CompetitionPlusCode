@@ -22,6 +22,9 @@ namespace CompPlus_Common
     const char* SFX_LHPZSecret = "CompPlus/LHPZSecret.wav";
     const char* SFX_GPZButton = "CompPlus/GPZ_Button.wav";
 
+    const char* SFX_EXE_KYS = "SMCP_Executor/KYS.wav";
+    const char* SFX_EXE_Laugh = "SMCP_Executor/Laugh.wav";
+
     const char* Act_LSelect = "/Data/Palettes/SMCP_LSelect/LSelect.act";
 
     const char* Anim_LSelectIcons_Mania = "SMCP_LSelect/Icons.bin";
@@ -31,6 +34,8 @@ namespace CompPlus_Common
     const char* Anim_LSelectIcons_Exe = "SMCP_LSelect/Icons_Exe.bin";
 
     const char* Anim_HubCrown = "HUB/Crown.bin";
+
+    const char* Anim_EXE_Sprites = "SMCP_Executor/Explosions.bin";
 
     const char* Anim_UISmallFont = "UI/SmallFont.bin";
     const char* Anim_LSelectText = "LSelect/Text.bin";
@@ -91,6 +96,31 @@ namespace CompPlus_Common
     const char* SMCP_MMZ2E = "SMCP_MMZ2E";
     const char* SMCP_TMZ1E = "SMCP_TMZ1E";
     const char* SMCP_TMZ2E = "SMCP_TMZ2E";
+
+    const char* SMCP_GHZ1_EXE = "SMCP_GHZ1_EXE";
+    const char* SMCP_GHZ2_EXE = "SMCP_GHZ2_EXE";
+    const char* SMCP_CPZ1_EXE = "SMCP_CPZ1_EXE";
+    const char* SMCP_CPZ2_EXE = "SMCP_CPZ2_EXE";
+    const char* SMCP_SPZ1_EXE = "SMCP_SPZ1_EXE";
+    const char* SMCP_SPZ2_EXE = "SMCP_SPZ2_EXE";
+    const char* SMCP_FBZ1_EXE = "SMCP_FBZ1_EXE";
+    const char* SMCP_FBZ2_EXE = "SMCP_FBZ2_EXE";
+    const char* SMCP_PGZ1_EXE = "SMCP_PGZ1_EXE";
+    const char* SMCP_PGZ2_EXE = "SMCP_PGZ2_EXE";
+    const char* SMCP_SSZ1_EXE = "SMCP_SSZ1_EXE";
+    const char* SMCP_SSZ2_EXE = "SMCP_SSZ2_EXE";
+    const char* SMCP_HCZ1_EXE = "SMCP_HCZ1_EXE";
+    const char* SMCP_HCZ2_EXE = "SMCP_HCZ2_EXE";
+    const char* SMCP_MSZ1_EXE = "SMCP_MSZ1_EXE";
+    const char* SMCP_MSZ2_EXE = "SMCP_MSZ2_EXE";
+    const char* SMCP_OOZ1_EXE = "SMCP_OOZ1_EXE";
+    const char* SMCP_OOZ2_EXE = "SMCP_OOZ2_EXE";
+    const char* SMCP_LRZ1_EXE = "SMCP_LRZ1_EXE";
+    const char* SMCP_LRZ2_EXE = "SMCP_LRZ2_EXE";
+    const char* SMCP_MMZ1_EXE = "SMCP_MMZ1_EXE";
+    const char* SMCP_MMZ2_EXE = "SMCP_MMZ2_EXE";
+    const char* SMCP_TMZ1_EXE = "SMCP_TMZ1_EXE";
+    const char* SMCP_TMZ2_EXE = "SMCP_TMZ2_EXE";
 
     const char* SMCP_AIZ_EXT = "SMCP_AIZ_EX";
 

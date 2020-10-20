@@ -373,7 +373,7 @@ namespace CompPlus_Settings
                 {
                     ViewPortSizeX = WindowSizeX / 2 + (WindowSizeX / Intensity);
                     ViewPortSizeY = WindowSizeY;
-                    int CenterX = (WindowSizeX - ViewPortSizeX );
+                    int CenterX = (WindowSizeX - ViewPortSizeX);
                     ImageXPosition = (CenterX == 0 ? 0 : CenterX / 2);
                     ImageYPosition = 0;
                 }

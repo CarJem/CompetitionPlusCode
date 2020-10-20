@@ -34,21 +34,29 @@ namespace CompPlus_SizeLazer
 
     bool IsValidToRefresh() 
     {
-        if (CurrentTimeOut >= FrameTimeOut)
+        if (RefreshChibiSprites) 
         {
-            CurrentTimeOut = 0;
-            return true;
+            if (CurrentTimeOut >= FrameTimeOut)
+            {
+                CurrentTimeOut = 0;
+                return true;
+            }
+            else
+            {
+                CurrentTimeOut++;
+                return false;
+            }
         }
         else 
         {
-            CurrentTimeOut++;
+            CurrentTimeOut = 0;
             return false;
         }
     }
 
     void LoadChibiSprites()
     {
-        if (RefreshChibiSprites && CompPlus_Status::ForceLoadChibiSprites && SonicMania::Timer.Enabled)
+        if (IsValidToRefresh() && CompPlus_Status::ForceLoadChibiSprites && SonicMania::Timer.Enabled)
         {
             if (GetAddress(baseAddress + 0xAC6758, 0x6E))
             {
