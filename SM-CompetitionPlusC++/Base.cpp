@@ -70,7 +70,7 @@ extern "C"
         char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
 
         //Internal Paramater Variables
-        bool StartupStage_Enabled = true;
+        bool StartupStage_Enabled = false;
         bool StartupStage_UseIZ = true;
         Scene StartupStage_Normal = Scene_Title;
         const char* StartupStage_Infinity = CompPlus_Common::SMCP_Credits;
