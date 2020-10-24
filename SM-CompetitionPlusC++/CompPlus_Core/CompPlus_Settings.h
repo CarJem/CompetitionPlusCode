@@ -80,12 +80,6 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    #pragma region Status Variables
-
-
-
-    #pragma endregion
-
     #pragma region Setting Variables
 
     //Developer Settings
@@ -106,7 +100,7 @@ namespace CompPlus_Settings
     extern bool EndlessRounds;
     extern bool DropdashAbility;
     extern bool InstaSheildAbility;
-    extern bool TailsFlightDrop;
+    extern bool TailsFlightCancel;
     extern VictoryMode VictoryStyle;
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
@@ -145,7 +139,7 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    extern void SetTailsFlightDrop(bool Value);
+    extern void SetTailsFlightCancel(bool Value);
 
     extern void SetSpotlightChallenge(bool Value);
 
@@ -156,8 +150,6 @@ namespace CompPlus_Settings
     extern void SetTimeLimit(bool Value);
 
     extern void SetHurryTimer(bool Value);
-
-    extern void UpdateStrechScreen();
 
     extern void SetCurrentLSelect(int Value);
 

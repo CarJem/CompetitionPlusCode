@@ -5,7 +5,7 @@
 #include "SonicMania.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"
-#include "NextGenerationLevelSelectCore.h"
+#include "CoreLevelSelect.h"
 #include "Base.h"
 #include "CompPlus_Extensions/Drawing.h"
 #include <vector>
@@ -17,7 +17,7 @@ namespace CompPlus_ExeLevelSelect
     using namespace SonicMania;
     using namespace CompPlus_Core;
     using namespace CompPlus_Common;
-    using namespace CompPlus_NextGenerationLevelSelectCore;
+    using namespace CompPlus_CoreLevelSelect;
 
 
     std::vector<std::string> LevelTitles =
@@ -207,7 +207,7 @@ namespace CompPlus_ExeLevelSelect
     bool isIconsLoaded = false;
     int IconsSpriteID = 0;
 
-    void CheckForPointRefresh()
+    void Reload()
     {
         AreMenuPointsLoaded = false;
         PaletteSaved = false;

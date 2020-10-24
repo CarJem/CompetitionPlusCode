@@ -185,6 +185,7 @@
     <ClInclude Include="CompPlus_Core\CompPlus_Common.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_Controllers.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_DevMenu.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Patches.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_Scoring.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_Settings.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_Status.h" />
@@ -200,7 +201,15 @@
     <ClInclude Include="CompPlus_Extensions\TitleCardColors.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\CustomScreenStretch.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\DynCam.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\EntityLoop.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\PlayerSkins.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpotlightC.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\TailsFlightCancel.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\DAGarden.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\TitleScreen.h" />
+    <ClInclude Include="CompPlus_Scenes\Stock Scenes\FBZ2.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\Halloween2018.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h" />
@@ -210,7 +219,7 @@
     <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\GenericLogos.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\ManiaMenu.h" />
-    <ClInclude Include="CompPlus_Scenes\General Scenes\SceneTweaks.h" />
+    <ClInclude Include="CompPlus_Core\CompPlus_Scenes.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\SettingsMenu.h" />
     <ClInclude Include="CompPlus_Scenes\HUB World\HubControllers.h" />
     <ClInclude Include="CompPlus_Scenes\HUB World\HubCore.h" />
@@ -223,7 +232,7 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h" />
-    <ClInclude Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.h" />
+    <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
   </ItemGroup>
@@ -232,6 +241,7 @@
     <ClCompile Include="CompPlus_Core\CompPlus_Common.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Controllers.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_DevMenu.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Patches.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Scoring.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Settings.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Status.cpp" />
@@ -247,9 +257,16 @@
     <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\CustomScreenStretch.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\DynCam.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\EntityLoop.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\PlayerSkins.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpotlightC.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\TailsFlightCancel.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\DAGarden.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\TitleScreen.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Stock Scenes\FBZ2.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018_SinglePlayer.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp" />
@@ -258,7 +275,7 @@
     <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\GenericLogos.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\ManiaMenu.cpp" />
-    <ClCompile Include="CompPlus_Scenes\General Scenes\SceneTweaks.cpp" />
+    <ClCompile Include="CompPlus_Core\CompPlus_Scenes.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\SettingsMenu.cpp" />
     <ClCompile Include="CompPlus_Scenes\HUB World\HubControllers.cpp" />
     <ClCompile Include="CompPlus_Scenes\HUB World\HubCore.cpp" />
@@ -271,7 +288,7 @@
     <ClCompile Include="CompPlus_Scenes\Level Select\EncoreLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Level Select\CoreLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="Base.cpp">

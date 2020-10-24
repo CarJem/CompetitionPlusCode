@@ -35,10 +35,25 @@ void WarpWithCamera(SonicMania::EntityPlayer& Player, int x, int y)
 
     if (Player.Camera != nullptr) 
     {
+        Player.CameraOffset = 0;
+        //Player.Camera->PanType = 1;
         Player.Camera->Position.X = x;
         Player.Camera->Position.Y = y;
+        //Player.Camera->BoundPanningSpeedX = INT_MAX;
+        //Player.Camera->BoundPanningSpeedY = INT_MAX;
+        //Player.Camera->PanSpeed = INT_MAX;
+        //Player.Camera->PanProgress = INT_MAX;
+        //Player.Camera->MinX = INT_MIN;
+        //Player.Camera->MinY = INT_MIN;
+        //Player.Camera->MaxX = INT_MAX;
+        //Player.Camera->MaxY = INT_MAX;
+        //Player.Camera->AdjustY = 0;
+        //Player.Camera->DestinationOffsetX = 0;
+        //Player.Camera->DestinationOffsetY = 0;
         Player.Camera->LastXPos = x;
         Player.Camera->LastYPos = y;
+        //Player.Camera->XVelocity = INT_MAX;
+       // Player.Camera->YVelocity = INT_MAX;
         Player.Camera->PanToPositionSTart.X = x;
         Player.Camera->PanToPositionSTart.Y = y;
         Player.Camera->PanToPositionEnd.X = x;

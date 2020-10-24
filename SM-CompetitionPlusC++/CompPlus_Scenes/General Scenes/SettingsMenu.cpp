@@ -5,7 +5,7 @@
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include <string>
-#include "Base.h"
+#include "CompPlus_Core/CompPlus_Patches.h"
 
 namespace CompPlus_Settings_Base
 {
@@ -37,7 +37,7 @@ namespace CompPlus_Settings_Base
 
 	void OnFrame()
 	{
-        CompPlus_Internal::FixSummary();
+        CompPlus_Patches::FixSummary();
 		if (!IsInit) InitSettings();
 	}
 };

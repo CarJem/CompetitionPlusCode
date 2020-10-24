@@ -29,6 +29,8 @@ namespace CompPlus_HubWorld
     int P3_WinsCounterText = 269;
     int P4_WinsCounterText = 270;
 
+    int UIVersionTitleSlotID = 363;
+
     int WarpSlotID_PlayerSettings = 80;
     int WarpSlotID_OtherSettings = 81;
     int WarpSlotID_Ranking = 79;
@@ -113,6 +115,306 @@ namespace CompPlus_HubWorld
 
     #pragma endregion
 
+    #pragma region Billboard Palette Systems
+
+    bool PaletteLoaded = false;
+    std::vector<SHORT> PaletteMemory = std::vector<SHORT>(256);
+    std::vector<SHORT> PaletteStorage;
+
+    void LoadPalette() 
+    {
+        if (PaletteLoaded) return;
+
+        int i = 0;
+        PaletteStorage = std::vector<SHORT>(256);
+
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000080); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x0038C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x0068F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x1888F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x30A0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x185868); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x60A0B0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x98C8C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA0E0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC06830); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE09060); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B090); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D0C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x400000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x900000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE00000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x800000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB03000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE07000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE0A000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE0C000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x200008); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x700010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE00020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE84848); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE87878); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE89898); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x700000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC00010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x282028); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x383040); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x484868); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x587090); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x80A0B0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x98C0C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB0D0D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC0E0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE0E0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x401000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x883800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB86800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x200000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x480008); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x900010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE00000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF08C18); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x604080); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA0A0C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x283898); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x3050A8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x881020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC04000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x505878); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE07000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000080); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x0038C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x0068F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x1888F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x30A0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x7F0300); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xAC1A00); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xCD4F00); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xDC7800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE48E00); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xECA600); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x005800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x00A000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x00C800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD8D020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x580018); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x980030); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD00040); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE82858); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF06080); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF08088); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x400068); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x900088); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF00098); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A0C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x501010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x882020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA83030); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC84040); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE06868); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF09098); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA86020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD08840); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE8A860); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D090); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x780000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA80000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x087858); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x08C890); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x883000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA06800); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB88810); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD0A810); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE0C020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE8D038); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E078); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB05000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC87048); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE8A078); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x5801B8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA001F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC818F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE828F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x203830); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x205038); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x306850); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x38A078); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x50B898); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x58C8B8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x88D8D8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC8E8E8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x482010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x602010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x883810); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC85010); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE87820); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A020); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0C860); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E0B8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x280120); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x400130); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x580150); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x680148); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x880150); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA80158); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC00148); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF00148); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x100150); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x011078); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x083098); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x1058B0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x1078C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x3090D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x88C8E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA0D8E8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB8E0E8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC8E8F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD0F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE8F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x6878C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x6880D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x6890D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x68A0D8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x60B0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x60C0E8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x50E0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x60E8C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x80F0C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xA8F0C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E8D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC8F0E0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC8C0B8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE0D0C0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE8D8C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC08868); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD08860); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD89050); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE89858); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A048); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B070); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0C880); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E0A8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A848); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD86848); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF07848); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF09858); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x9868C8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB068D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC868D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD868D8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE868D8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE878D0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB860B0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xC860A0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD06098); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD86890); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE86880); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xE87888); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x209048); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x30A058); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x40B068); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x50C078); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x60D088); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x70D898); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x78E0A0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF00101); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x48D8F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x98E0F0); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0D8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xF098A8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0x01F080); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xD89058); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xB850B8); i++;
+        PaletteStorage[i] = SonicMania::ToRGB565(0xFFFFFF); i++;
+
+        PaletteLoaded = true;
+    }
+
+    void SetObjectPalette()
+    {
+        LoadPalette();
+
+        for (int i = 0; i < 256; i++)
+        {
+            PaletteMemory[i] = SonicMania::Palette0[i];
+        }
+
+        for (int i = 0; i < 256; i++)
+        {
+            SonicMania::Palette0[i] = PaletteStorage[i];
+        }
+    }
+
+    void UnsetObjectPalette()
+    {
+        for (int i = 0; i < 256; i++)
+        {
+            SonicMania::Palette0[i] = PaletteMemory[i];
+        }
+
+        PaletteMemory.clear();
+    }
+
+    #pragma endregion
+
     #pragma region Controller/Drawing Methods
 
     int UpdateHUBDisplays() 
@@ -152,6 +454,14 @@ namespace CompPlus_HubWorld
         StringIndex++;
 
         CompPlus_HubText::UpdateVSModeDisplay(VSModeTextSlot, 0, StringIndex);
+        StringIndex++;
+
+        std::string VersionNumber = CompPlus_Common::Internal_VersionNumberAlt;
+        std::string VersionName = CompPlus_Common::Internal_VersionNameShort;
+
+        std::string VersionDescriptor = ("COMPETITION+ " + VersionNumber + " (" + VersionName + ")");
+
+        CompPlus_HubText::UpdateGeneralDisplay(UIVersionTitleSlotID, (char*)VersionDescriptor.c_str(), VersionDescriptor.length(), 0, StringIndex);
         StringIndex++;
 
         return StringIndex;
@@ -203,25 +513,21 @@ namespace CompPlus_HubWorld
         { 
             P1_WarpQueue = CompPlus_HubCore::INT_Position(x,y);
             P1_IsInWarpLoop = true;
-            if (!isEnter) P1_WarpAlpha = 0;
         }
         else if (PlayerID == 2) 
         {
             P2_WarpQueue = CompPlus_HubCore::INT_Position(x, y);
             P2_IsInWarpLoop = true;
-            if (!isEnter) P2_WarpAlpha = 0;
         }
         else if (PlayerID == 3) 
         {
             P3_WarpQueue = CompPlus_HubCore::INT_Position(x, y);
             P3_IsInWarpLoop = true;
-            if (!isEnter) P3_WarpAlpha = 0;
         }
         else if (PlayerID == 4) 
         {
             P4_WarpQueue = CompPlus_HubCore::INT_Position(x, y);
             P4_IsInWarpLoop = true;
-            if (!isEnter) P4_WarpAlpha = 0;
         }
 
         SetIsInWarpRoomState(PlayerID, isEnter);
@@ -233,6 +539,11 @@ namespace CompPlus_HubWorld
 
         Player.Position.X = x;
         Player.Position.Y = y;
+
+        if (SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2) 
+        {
+            Player.KillFlag = 1;
+        }
 
         if (Player.Camera != nullptr)
         {
@@ -262,24 +573,17 @@ namespace CompPlus_HubWorld
                 WriteData((int*)(checkpoint_Offset + 0x37), 1);
                 break;
         }
-
-        //Player.Kill();
-
     }
 
-    //0x486A548
-    //0x486A54C
+
 
     bool isPlayerInDebug() 
-    {
-        /*
-        if (IsPlayerInDebugMode == 1 || IsPlayerInDebugMode_Alt == 1) 
+    {       
+        if (IsPlayerInDebugMode == 1) //|| IsPlayerInDebugMode_Alt == 1) 
         {
             return true;
         }
         else return false;
-        */
-        return false;
     }
 
     void CheckQuickWarp()
@@ -315,17 +619,24 @@ namespace CompPlus_HubWorld
         CheckPlayerQuickWarp(SonicMania::Player4, SlotID, X1, Y1, X2, Y2, WarpX, WarpY, 4);
     }
 
+    int SavedPanningSpeedX = 0;
+    int SavedPanningSpeedY = 0;
+    int SavedPanSpeed = 0;
+
     void QuickWarpLoop(SonicMania::EntityPlayer& Player, int PlayerID, int& WarpAlpha, bool& IsInWarpLoop, CompPlus_HubCore::INT_Position& WarpQueue)
     {
-        bool isActive = Player.Camera != nullptr && Player.Grounded;
+        bool isActive = Player.Camera != nullptr;
         if (isActive && IsInWarpLoop)
         {
             Player.InkEffect = SonicMania::Ink_Alpha;
             if (IsInWarpLoop)
             {
                 Player.Alpha = (WarpAlpha > 0 ? WarpAlpha : 0);
-                if (WarpAlpha > 0) WarpAlpha = WarpAlpha - 10;
-                else 
+                if (WarpAlpha > 0)
+                {
+                    WarpAlpha = WarpAlpha - 10;
+                }
+                else
                 {
                     WarpAlpha = 0;
                     TeleQuickWarp(Player, WarpQueue.X, WarpQueue.Y, PlayerID);
@@ -333,6 +644,7 @@ namespace CompPlus_HubWorld
                 }
             }
         }
+        else if (Player.State == PLAYERSTATE_DIE) WarpAlpha = 0;
         else if (!IsInWarpLoop)
         {
             Player.Alpha = (WarpAlpha < 256 ? WarpAlpha : 256);
@@ -386,31 +698,26 @@ namespace CompPlus_HubWorld
         {
             x = NormalSpawn.Position.X;
             y = NormalSpawn.Position.Y;
-            CompPlus_HubCore::ReturnDestination = 0;
         }
         else if (Placement == 1)
         {
             x = SettingsSpawn.Position.X;
             y = SettingsSpawn.Position.Y;
-            CompPlus_HubCore::ReturnDestination = 0;
         }
         else if (Placement == 2)
         {
             x = RankingSpawn.Position.X;
             y = RankingSpawn.Position.Y;
-            CompPlus_HubCore::ReturnDestination = 0;
         }
         else if (Placement == 3)
         {
             x = LevelSelectSpawn.Position.X;
             y = LevelSelectSpawn.Position.Y;
-            CompPlus_HubCore::ReturnDestination = 0;
         }
         else 
         {
             x = NormalSpawn.Position.X;
             y = NormalSpawn.Position.Y;
-            CompPlus_HubCore::ReturnDestination = 0;
         }
 
         Player.Position.X = x;
@@ -428,6 +735,8 @@ namespace CompPlus_HubWorld
         SetSpawnPosition(SonicMania::Player2, CompPlus_HubCore::ReturnDestination);
         SetSpawnPosition(SonicMania::Player3, CompPlus_HubCore::ReturnDestination);
         SetSpawnPosition(SonicMania::Player4, CompPlus_HubCore::ReturnDestination);
+
+        CompPlus_HubCore::ReturnDestination = 0;
     }
 
     #pragma endregion
@@ -462,32 +771,45 @@ namespace CompPlus_HubWorld
 
         int NumberOfPlayers = (SonicMania::Options->CompetitionSession.inMatch == 1 ? SonicMania::Options->CompetitionSession.NumberOfPlayers : 1);
 
-        for (int RealID = 1; RealID <= 4; RealID++)
+        if (SonicMania::Player1.Camera != nullptr) 
         {
-            SonicMania::EntityPlayer* Player;
-            if (RealID == 1) Player = &SonicMania::Player1;
-            else if (RealID == 2) Player = &SonicMania::Player2;
-            else if (RealID == 3) Player = &SonicMania::Player3;
-            else if (RealID == 4) Player = &SonicMania::Player4;
-            else Player = &SonicMania::Player1;
+            bool isPlayerInRangeOfRanking = SonicMania::Player1.InRange(x1_ranking, y1_ranking, x2_ranking, y2_ranking);
+            bool isPlayerInRangeOfSettings = SonicMania::Player1.InRange(x1_settings, y1_settings, x2_settings, y2_settings);
+            bool isPlayerInRangeOfButton = SonicMania::Player1.InRange(x1_levelSelect, y1_levelSelect, x2_levelSelect, y2_levelSelect);
 
-            bool isPlayerInRangeOfRanking = Player->InRange(x1_ranking, y1_ranking, x2_ranking, y2_ranking);
-            bool isPlayerInRangeOfSettings = Player->InRange(x1_settings, y1_settings, x2_settings, y2_settings);
-            bool isPlayerInRangeOfButton = Player->InRange(x1_levelSelect, y1_levelSelect, x2_levelSelect, y2_levelSelect);
+            if (isPlayerInRangeOfRanking) RankingCount += 1;
+            if (isPlayerInRangeOfSettings) SettingsCount += 1;
+            if (isPlayerInRangeOfButton) ButtonCount += 1;
+        }
+        if (SonicMania::Player2.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfRanking = SonicMania::Player2.InRange(x1_ranking, y1_ranking, x2_ranking, y2_ranking);
+            bool isPlayerInRangeOfSettings = SonicMania::Player2.InRange(x1_settings, y1_settings, x2_settings, y2_settings);
+            bool isPlayerInRangeOfButton = SonicMania::Player2.InRange(x1_levelSelect, y1_levelSelect, x2_levelSelect, y2_levelSelect);
 
+            if (isPlayerInRangeOfRanking) RankingCount += 1;
+            if (isPlayerInRangeOfSettings) SettingsCount += 1;
+            if (isPlayerInRangeOfButton) ButtonCount += 1;
+        }
+        if (SonicMania::Player3.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfRanking = SonicMania::Player3.InRange(x1_ranking, y1_ranking, x2_ranking, y2_ranking);
+            bool isPlayerInRangeOfSettings = SonicMania::Player3.InRange(x1_settings, y1_settings, x2_settings, y2_settings);
+            bool isPlayerInRangeOfButton = SonicMania::Player3.InRange(x1_levelSelect, y1_levelSelect, x2_levelSelect, y2_levelSelect);
 
-            if (isPlayerInRangeOfRanking)
-            {
-                RankingCount += 1;
-            }
-            if (isPlayerInRangeOfSettings)
-            {
-                SettingsCount += 1;
-            }
-            if (isPlayerInRangeOfButton)
-            {
-                ButtonCount += 1;
-            }
+            if (isPlayerInRangeOfRanking) RankingCount += 1;
+            if (isPlayerInRangeOfSettings) SettingsCount += 1;
+            if (isPlayerInRangeOfButton) ButtonCount += 1;
+        }
+        if (SonicMania::Player4.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfRanking = SonicMania::Player4.InRange(x1_ranking, y1_ranking, x2_ranking, y2_ranking);
+            bool isPlayerInRangeOfSettings = SonicMania::Player4.InRange(x1_settings, y1_settings, x2_settings, y2_settings);
+            bool isPlayerInRangeOfButton = SonicMania::Player4.InRange(x1_levelSelect, y1_levelSelect, x2_levelSelect, y2_levelSelect);
+
+            if (isPlayerInRangeOfRanking) RankingCount += 1;
+            if (isPlayerInRangeOfSettings) SettingsCount += 1;
+            if (isPlayerInRangeOfButton) ButtonCount += 1;
         }
 
 

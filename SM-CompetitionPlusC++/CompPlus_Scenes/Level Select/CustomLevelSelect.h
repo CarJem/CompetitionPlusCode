@@ -17,7 +17,7 @@ namespace CompPlus_CustomLevelSelect
 
     extern void OnFrame();
 
-    extern void CheckForPointRefresh();
+    extern void Reload();
 };
 
 

@@ -55,6 +55,12 @@
     <Filter Include="Scenes\Functionality\Headers">
       <UniqueIdentifier>{c2811ec4-bf20-4ca6-bb56-4d1c657f3c9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Stock Scenes">
+      <UniqueIdentifier>{5ef6419c-49cb-4418-b0f7-a7846e300a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stock Scenes\Headers">
+      <UniqueIdentifier>{f2c3e778-162e-4c86-9ca4-a2b3b509ec5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -153,9 +159,6 @@
     <ClInclude Include="CompPlus_Scenes\General Scenes\ManiaMenu.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scenes\General Scenes\SceneTweaks.h">
-      <Filter>Scenes\General Scenes\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Scenes\General Scenes\SettingsMenu.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
@@ -178,9 +181,6 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.h">
-      <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Extensions\Drawing.h">
       <Filter>Extensions\Headers</Filter>
     </ClInclude>
@@ -194,6 +194,39 @@
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Functionality\VapeMusic.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Stock Scenes\FBZ2.h">
+      <Filter>Scenes\Stock Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h">
+      <Filter>Scenes\Level Selects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Patches.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Core\CompPlus_Scenes.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\TailsFlightCancel.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\DynCam.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\CustomScreenStretch.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpotlightC.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\General Scenes\DAGarden.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\General Scenes\TitleScreen.h">
+      <Filter>Scenes\General Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\PlayerSkins.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -292,9 +325,6 @@
     <ClCompile Include="CompPlus_Scenes\General Scenes\ManiaMenu.cpp">
       <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\General Scenes\SceneTweaks.cpp">
-      <Filter>Scenes\General Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="CompPlus_Scenes\General Scenes\SettingsMenu.cpp">
       <Filter>Scenes\General Scenes</Filter>
     </ClCompile>
@@ -316,9 +346,6 @@
     <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Level Select\NextGenerationLevelSelectCore.cpp">
-      <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
     <ClCompile Include="CompPlus_Extensions\Drawing.cpp">
       <Filter>Extensions</Filter>
     </ClCompile>
@@ -331,10 +358,40 @@
     <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018_SinglePlayer.cpp">
+    <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp">
+    <ClCompile Include="CompPlus_Scenes\Stock Scenes\FBZ2.cpp">
+      <Filter>Scenes\Stock Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Level Select\CoreLevelSelect.cpp">
+      <Filter>Scenes\Level Selects</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Core\CompPlus_Patches.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Core\CompPlus_Scenes.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\CustomScreenStretch.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\DynCam.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\TailsFlightCancel.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpotlightC.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\TitleScreen.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\General Scenes\DAGarden.cpp">
+      <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\PlayerSkins.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
   </ItemGroup>

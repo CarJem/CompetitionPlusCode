@@ -3,11 +3,12 @@
 #include "CreditsScene.h"
 #include "include/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "CompPlus_Scenes/Level Select/NextGenerationLevelSelectCore.h"
+#include "CompPlus_Scenes/Level Select/CoreLevelSelect.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Scenes/HUB World/HubCore.h"
 #include "CompPlus_Extensions/Drawing.h"
+#include <string>
 
 namespace CompPlus_Credits
 {
@@ -15,14 +16,84 @@ namespace CompPlus_Credits
 
     #pragma region Variables
 
+    struct CollectableChar 
+    {
+        Vector2 Position;
+        bool Collected = false;
+        int RingCount = 4;
+        int RingVelocity = 4;
+        const char* SoundFXPath = "Global/Destroy.wav";
+        const char* SecondFXPath = "Global/HyperRing.wav";
+        bool SecondFX = false;
+        bool HasRotationEnded = false;
+        int RotationLoopCount = 5;
+        int RotationCurrentLoop = 0;
+        int Rotation = 0;
+
+        CollectableChar()
+        {
+            int RandomGen = Rand(0, 10);
+            if (RandomGen != 4) 
+            {
+                RingCount = 0;
+                RingVelocity = 0;
+                SecondFX = false;
+            }
+            else 
+            {
+                RingCount = Rand(10, 15);
+                RingVelocity = 6;
+                SecondFX = true;
+            }
+
+        }
+
+        CollectableChar(Vector2 _Pos) : CollectableChar()
+        {
+            Position = _Pos;
+        }
+
+        int GetRotation() 
+        {       
+            if (!HasRotationEnded)
+            {
+                if (RotationCurrentLoop >= RotationLoopCount) 
+                {
+                    HasRotationEnded = true;
+                }
+                else 
+                {
+                    if (Rotation >= 360) 
+                    {
+                        RotationCurrentLoop += 1;
+                        Rotation = 0;
+                    }
+                    else 
+                    {
+                        Rotation += 16;
+                    }
+                }
+            }
+
+            double radians = (Rotation * M_PI) / 180;
+            return (int)((radians) * (512 / (M_PI * 2)));
+        }
+    };
+
     struct CollectableText
     {
         int SlotID;
-        bool Collected = false;
+        bool PictureCollected = false;
+
         bool isText = true;
-        const char* SoundFXPath = "Global/Destroy.wav";
-        int RingCount = 15;
-        int RingVelocity = 4;
+        std::wstring Text;
+        bool isTextStored = false;
+        std::vector<CollectableChar> Characters;
+
+        const char* PictureSoundFXPath = "Global/Destroy.wav";
+        int PictureRingCount = 15;
+        int PictureRingVelocity = 4;
+
 
         CollectableText()
         {
@@ -34,10 +105,16 @@ namespace CompPlus_Credits
             SlotID = _SlotID;
         }
 
+        CollectableText(int _SlotID, int TextLength) : CollectableText() 
+        {
+            SlotID = _SlotID;
+            isText = true;
+        }
+
         CollectableText(int _SlotID, const char* _CustomPath) : CollectableText()
         {
             SlotID = _SlotID;
-            SoundFXPath = _CustomPath;
+            PictureSoundFXPath = _CustomPath;
             isText = false;
         }
     };
@@ -50,9 +127,9 @@ namespace CompPlus_Credits
     int CameraXEndPos = 8960;
     int CameraYEndPos = 904;
     int RingCounterYPos = 1023;
+    int CameraSpeed = 1;
 
     //Object Slot ID
-    int RingCounterSlotID = 273;
     int CameraLockedObjectID = 65;
     int ExitButtonSlotID = 252;
     int LHPZSecretButtonSlotID = 268;
@@ -60,6 +137,7 @@ namespace CompPlus_Credits
     int LHPZSecretText2SlotID = 269;
     int WallRightID = 250;
     int WallLeftID = 251;
+    int VersionDescriptorSlotID = 243;
 
     //Camera/Credit States
     bool HasReachedTheEndOfCredits = false;
@@ -190,9 +268,10 @@ namespace CompPlus_Credits
             {
                 Entity& entity = *GetEntityFromSceneSlot<Entity>(i);
 
-                if (entity.ObjectID == 88 && i != RingCounterSlotID)
+                if (entity.ObjectID == 88)
                 {
-                    CurrentSpawns.insert(CurrentSpawns.begin(), i);
+                    EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(i);
+                    CurrentSpawns.insert(CurrentSpawns.begin(), CollectableText(i, Label.TextLength));
                 }
             }
             RingProvidersInit = true;
@@ -212,84 +291,9 @@ namespace CompPlus_Credits
         Player4.RingCount = 0;
     }
 
-    void RingCountHUD()
-    {
-        int PlayerCount = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-
-        SyncRingCount();
-
-        std::string ringCounter = "";
-        ringCounter += std::to_string(RingCountP1);
-        if (PlayerCount >= 2) 
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP2);
-        }
-        if (PlayerCount >= 3)
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP3);
-        }
-        if (PlayerCount >= 4)
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP4);
-        }
-
-        EntityUIInfoLabel& Label1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(RingCounterSlotID);
-
-        Label1.DrawOrder = 12;
-        Label1.Position.X = CameraXPos;
-        Label1.Position.Y = RingCounterYPos;
-
-        Label1.Text = (wchar_t*)Strings[2];
-        ConvertASCII2Unicode(Label1.Text, (char*)ringCounter.c_str(), strlen(ringCounter.c_str()), -32);
-        Label1.TextLength = (WORD)ringCounter.length();
-    }
-
     DataPointer(int, ScreenOffsetX, 0x782A98);
     DataPointer(int, WindowSizeX, 0x43C6F4);
-
-    void OnDraw()
-    {
-        SonicMania::Entity& CameraObject = *GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
-
-        SyncRingCount();
-
-        int PlayerCount = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-
-
-
-        int center_x = ScreenOffsetX;
-        int center_y = 5;
-
-        std::string ringCounter = "";
-        ringCounter += std::to_string(RingCountP1);
-        if (PlayerCount >= 2)
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP2);
-        }
-        if (PlayerCount >= 3)
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP3);
-        }
-        if (PlayerCount >= 4)
-        {
-            ringCounter += " : ";
-            ringCounter += std::to_string(RingCountP4);
-        }
-
-        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
-
-        int SizeX = (WindowSizeX != 0 ? WindowSizeX : 0); //15
-        int SizeY = 10;
-
-        Canvas->DrawOrder = 12;
-        DrawRect(ScreenOffsetX - (SizeX / 2), center_y - (SizeY / 2), SizeX, SizeY, 0x000000, 255, InkEffect::Ink_Alpha, true);
-        Drawing::DrawDevTextSprite(ringCounter, SonicMania::Vector2(center_x, center_y), true, 12, 0, 0, SonicMania::DevMenu_Alignment::Alignment_Center, false);
-    }
+    DataPointer(int, WindowSizeY, 0x43C6F6);
 
     void SpawnRingsAtPosition(Vector2 Position, int Num, int Speed)
     {
@@ -341,12 +345,13 @@ namespace CompPlus_Credits
             int y2 = y + 20;
 
             bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
-            bool FoundAlready = CurrentSpawns[i].Collected;
+            bool FoundAlready = CurrentSpawns[i].PictureCollected;
             if (isPlayerInRange && !FoundAlready)
             {
-                SonicMania::PlaySoundFXS(CurrentSpawns[i].SoundFXPath);
-                CurrentSpawns[i].Collected = true;
-                SpawnRingsAtPosition(Vector2(x, y), CurrentSpawns[i].RingCount, CurrentSpawns[i].RingVelocity);
+                SonicMania::PlaySoundFXS(CurrentSpawns[i].PictureSoundFXPath);
+                CurrentSpawns[i].PictureCollected = true;
+                SpawnRingsAtPosition(Vector2(x, y), CurrentSpawns[i].PictureRingCount, CurrentSpawns[i].PictureRingVelocity);
+                SpawnObject(GetObjectIDFromType(ObjectType_ScoreBonus), 0, Vector2(x, y));
             }
 
             if (FoundAlready)
@@ -361,32 +366,32 @@ namespace CompPlus_Credits
     {
         EntityUIInfoLabel& entity = *GetEntityFromSceneSlot<EntityUIInfoLabel>(CurrentSpawns[i].SlotID);
 
+        if (!entity.InBounds) return;
         for (int RealID = 1; RealID <= 4; RealID++)
         {
+            int textLength = CurrentSpawns[i].Characters.size();
+            for (int c = 0; c < textLength; c++) 
+            {             
+                int x = CurrentSpawns[i].Characters[c].Position.X;
+                int y = CurrentSpawns[i].Characters[c].Position.Y;
 
-            int x = entity.Position.X;
-            int y = entity.Position.Y;
+                int x1 = x - 10;
+                int x2 = x + 10;
+                int y1 = y - 10;
+                int y2 = y + 10;
 
-            int width = entity.TextLength / 2;
-
-            int x1 = x - 20;
-            int x2 = x + 20;
-            int y1 = y - 20;
-            int y2 = y + 20;
-
-            bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
-            bool FoundAlready = CurrentSpawns[i].Collected;
-            if (isPlayerInRange && !FoundAlready)
-            {
-                SonicMania::PlaySoundFXS(CurrentSpawns[i].SoundFXPath);
-                CurrentSpawns[i].Collected = true;
-                SpawnRingsAtPosition(Vector2(x, y), CurrentSpawns[i].RingCount, CurrentSpawns[i].RingVelocity);
-            }
-
-            if (FoundAlready)
-            {
                 entity.InkEffect = Ink_Alpha;
-                entity.Alpha = 150;
+                entity.Alpha = 0;
+
+                bool isPlayerInRange = GetPlayer(RealID).InRange(x1, y1, x2, y2);
+                bool FoundAlready = CurrentSpawns[i].Characters[c].Collected;
+                if (isPlayerInRange && !FoundAlready)
+                {
+                    SonicMania::PlaySoundFXS(CurrentSpawns[i].Characters[c].SoundFXPath);
+                    if (CurrentSpawns[i].Characters[c].SecondFX) SonicMania::PlaySoundFXS(CurrentSpawns[i].Characters[c].SecondFXPath);
+                    CurrentSpawns[i].Characters[c].Collected = true;
+                    SpawnRingsAtPosition(Vector2(x, y), CurrentSpawns[i].Characters[c].RingCount, CurrentSpawns[i].Characters[c].RingVelocity);
+                }
             }
         }
     }
@@ -400,6 +405,178 @@ namespace CompPlus_Credits
             if (CurrentSpawns[i].isText) RingSpawnTrigger_Text(i);
             else RingSpawnTrigger_UIPicture(i);
         }
+    }
+
+    std::wstring ConvertMStringToWString(wchar_t* text, int length)
+    {
+        std::wstring dest;
+        for (int i = 0; i < length; ++i)
+            dest += text[i] + 32;
+        return dest;
+    }
+
+    int ManiaFontSpriteID = 0;
+    bool ManiaFontLoaded = false;
+
+    void StoreText(int i, DevMenu_Alignment Alignment = Alignment_Right)
+    {
+        EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(CurrentSpawns[i].SlotID);
+        std::wstring Name = ConvertMStringToWString(Label.Text, Label.TextLength);
+
+        CurrentSpawns[i].Text = Name;
+        CurrentSpawns[i].isTextStored = true;
+
+        int SpriteFrame = 0;
+        int RealSpriteFrame = 0;
+        int BuildLength = 0;
+
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+
+        Vector2 LocationStart = Label.Position;
+
+        int Length = Name.length();
+
+        for (int j = 0; j < Length; j++)
+        {
+            RealSpriteFrame = int(Name[j]);
+            SpriteFrame = int(Name[j]) - 32;
+            SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
+            Drawing::AnimationFrame Frame = *Drawing::GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
+            BuildLength = BuildLength + Frame.Width;
+        }
+
+        if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
+        else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) + BuildLength % 2 : 0);
+
+        
+        for (int j = 0; j < Length; j++)
+        {
+            RealSpriteFrame = int(Name[j]);
+            SpriteFrame = int(Name[j]) - 32;
+            SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
+            Drawing::AnimationFrame Frame = *Drawing::GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
+            Vector2 FramePosition = Drawing::GetFramePosition(LocationStart, Frame);
+            CurrentSpawns[i].Characters.insert(CurrentSpawns[i].Characters.end(), CollectableChar(FramePosition));
+            LocationStart.X = LocationStart.X + Frame.Width;
+        }
+    }
+
+    void DrawCreditsTextSprite(std::wstring Name, Vector2 LocationStart, CollectableText& Parent, bool ScreenRelative, DevMenu_Alignment Alignment = Alignment_Right)
+    {
+        if (!ManiaFontLoaded)
+        {
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_Cred_UISmallFont, Scope_Global);
+            ManiaFontLoaded = true;
+            return;
+        }
+
+        int SpriteFrame = 0;
+        int RealSpriteFrame = 0;
+        int BuildLength = 0;
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+        for (int i = 0; i < Name.length(); i++)
+        {
+            RealSpriteFrame = int(Name[i]);
+            SpriteFrame = int(Name[i]) - 32;
+            SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
+            Drawing::AnimationFrame Frame = *Drawing::GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
+            BuildLength = BuildLength + Frame.Width;
+        }
+        if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
+        else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) + BuildLength % 2 : 0);
+        //Offset lenth to build to our point. 
+
+        for (int i = 0; i < Name.length(); i++)
+        {
+            bool Collected = Parent.Characters[i].Collected;
+            RealSpriteFrame = int(Name[i]);
+            SpriteFrame = int(Name[i]) - 32;
+            RingTemp->Alpha = (Collected ? 128 : 255);
+            RingTemp->DrawFX = DrawingFX_Rotate;
+            if (Collected)
+            {
+                int Rotation = Parent.Characters[i].GetRotation();
+                RingTemp->Angle = Rotation;
+                RingTemp->Rotation = Rotation;
+            }
+            else 
+            {
+                RingTemp->Angle = 0;
+                RingTemp->Rotation = 0;
+            }
+
+            RingTemp->InkEffect = Ink_Alpha;
+            RingTemp->DrawOrder = 5;
+            SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
+            Drawing::AnimationFrame Frame = *Drawing::GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
+            Vector2 FramePosition = Drawing::GetFramePosition(LocationStart, Frame);
+            DrawSprite(&RingTemp->ActNumbersData, &FramePosition, ScreenRelative);
+            LocationStart.X = LocationStart.X + Frame.Width;
+        }
+    }
+
+
+    void OnDrawText() 
+    {
+        int Offset_X = GetPointer(0xAA7628, 0x96000);
+        int Offset_Y = GetPointer(0xAA7628, 0x96004);
+
+        for (int i = 0; i < CurrentSpawns.size(); ++i)
+        {
+            if (CurrentSpawns[i].isText) 
+            {
+                EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(CurrentSpawns[i].SlotID);
+                Vector2 Position = Vector2(Label.Position.X - Offset_X, Label.Position.Y - Offset_Y);
+                if (!CurrentSpawns[i].isTextStored) StoreText(i, Alignment_Center);
+                DrawCreditsTextSprite(CurrentSpawns[i].Text, Label.Position, CurrentSpawns[i], false, Alignment_Center);
+            }
+        }
+    }
+
+    void OnDraw()
+    {
+        SonicMania::Entity& CameraObject = *GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
+
+        SyncRingCount();
+
+        int PlayerCount = SonicMania::Options->CompetitionSession.NumberOfPlayers;
+
+
+
+        int center_x = ScreenOffsetX;
+        int center_y = 245;
+
+        std::string ringCounter = "";
+        ringCounter += std::to_string(RingCountP1);
+        if (PlayerCount >= 2)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP2);
+        }
+        if (PlayerCount >= 3)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP3);
+        }
+        if (PlayerCount >= 4)
+        {
+            ringCounter += " : ";
+            ringCounter += std::to_string(RingCountP4);
+        }
+
+        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+
+        int SizeX = 208; //15
+        int SizeY = 10;
+
+        int offset_y = -10;
+
+        Canvas->DrawOrder = 12;
+        DrawCircle(ScreenOffsetX - (SizeX / 2), center_y - (SizeY / 2), SizeY, 0x000000, 255, InkEffect::Ink_Alpha, true);
+        DrawCircle(ScreenOffsetX + (SizeX / 2), center_y - (SizeY / 2), SizeY, 0x000000, 255, InkEffect::Ink_Alpha, true);
+        DrawRect(ScreenOffsetX - (SizeX / 2), center_y - (SizeY / 2) + offset_y, SizeX, SizeY, 0x000000, 255, InkEffect::Ink_Alpha, true);
+        Drawing::DrawDevTextSprite(ringCounter, SonicMania::Vector2(center_x, center_y + offset_y), true, 12, 0, 0, SonicMania::DevMenu_Alignment::Alignment_Center, false);
+        OnDrawText();
     }
 
     #pragma endregion
@@ -468,47 +645,58 @@ namespace CompPlus_Credits
 
     void IncrementCamera()
     {
-        if (PlayerControllers[0].Y.Down)
+        if (PlayerControllers[0].X.Down)
         {
-            for (int i = 0; i < 4; i++) 
-            {
-                CameraXPos++;
-            }
+            CameraXPos += 5;
+            CameraSpeed = 5;
         }
         else
         {
             CameraXPos++;
+            CameraSpeed = 1;
         }
+        
     }
 
     void SetPlayerCamera()
     {
         if (!HasReachedTheEndOfCredits)
         {
+            auto Cam = GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
             if (Player1.Camera != nullptr)
             {
-                Player1.Camera->CameraTarget = GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
-                Player1.Camera->Position.X = CameraXPos;
-                Player1.Camera->Position.Y = CameraYPos;
+                if (Player1.Camera->CameraTarget != Cam) 
+                {
+                    Player1.Camera->CameraTarget = Cam;
+                }
+                //Player1.Camera->Speed = CameraSpeed;
             }
             if (Player2.Camera != nullptr)
             {
-                Player2.Camera->CameraTarget = GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
-                Player2.Camera->Position.X = CameraXPos;
-                Player2.Camera->Position.Y = CameraYPos;
+                if (Player2.Camera->CameraTarget != Cam)
+                {
+                    Player2.Camera->CameraTarget = Cam;
+                }
+                //Player2.Camera->Speed = CameraSpeed;
             }
             if (Player3.Camera != nullptr)
             {
-                Player3.Camera->CameraTarget = GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
-                Player3.Camera->Position.X = CameraXPos;
-                Player3.Camera->Position.Y = CameraYPos;
+                if (Player3.Camera->CameraTarget != Cam)
+                {
+                    Player3.Camera->CameraTarget = Cam;
+                }
+                //Player3.Camera->Speed = CameraSpeed;
             }
             if (Player4.Camera != nullptr)
             {
-                Player4.Camera->CameraTarget = GetEntityFromSceneSlot<SonicMania::Entity>(CameraLockedObjectID);
-                Player4.Camera->Position.X = CameraXPos;
-                Player4.Camera->Position.Y = CameraYPos;
+                if (Player4.Camera->CameraTarget != Cam)
+                {
+                    Player4.Camera->CameraTarget = Cam;
+                }
+                //Player4.Camera->Speed = CameraSpeed;
             }
+            if (Cam->Position.X != CameraXPos) Cam->Position.X += 1;
+            Cam->Position.Y = CameraYPos;
         }
         else if (isUnlockedCamera)
         {
@@ -589,6 +777,102 @@ namespace CompPlus_Credits
 
     #pragma endregion
 
+    #pragma region Text Update Methods
+
+    void UpdateUIInfoLabel(std::string text, int index, int SlotID)
+    {
+        EntityUIInfoLabel& PositionLabel = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        char* _text = (char*)text.c_str();
+        PositionLabel.Text = (wchar_t*)Strings[index];
+        ConvertASCII2Unicode(PositionLabel.Text, _text, strlen(_text), -32);
+        PositionLabel.TextLength = text.length();
+    }
+
+    void UpdateVersionLabels()
+    {
+        std::string VersionNumber = CompPlus_Common::Internal_VersionNumber;
+        std::string VersionName = CompPlus_Common::Internal_VersionName;
+
+        std::string MainLabel = ("VERSION " + VersionNumber + " (" + VersionName + ")");
+        UpdateUIInfoLabel(MainLabel, 3, VersionDescriptorSlotID);
+    }
+
+    #pragma endregion
+
+    #pragma region Player Collision Assist Methods
+
+    int IdleTimer1P = 0;
+    int IdleTimer2P = 0;
+    int IdleTimer3P = 0;
+    int IdleTimer4P = 0;
+
+    int DeCollisionizeTimer1P = 0;
+    int DeCollisionizeTimer2P = 0;
+    int DeCollisionizeTimer3P = 0;
+    int DeCollisionizeTimer4P = 0;
+
+    int OldCollisionLayers1P = 0;
+    int OldCollisionLayers2P = 0;
+    int OldCollisionLayers3P = 0;
+    int OldCollisionLayers4P = 0;
+
+    int IdleMax = 25;
+
+    int DeCollisionizeMax = 15;
+
+    void HelpPlayer(EntityPlayer* Player, int& IdleTimer, int& DeCollisionizeTimer, int& OldCollisionLayers)
+    {
+        int MaxY = 1024 - 32;
+        bool inRange = Player->Position.Y < MaxY;
+        bool inRangeX = Player->Position.X < CameraXEndPos;
+        if (inRange && inRangeX && Player->GetController().Down.Down && Player->XVelocity == 0 && Player->YVelocity == 0 && Player->State == PLAYERSTATE_LOOKDOWN)
+        {
+            if (IdleTimer >= IdleMax)
+            {
+                if (OldCollisionLayers == 0) OldCollisionLayers = Player->CollisionLayers;
+                Player->CollisionLayers = 0;
+                SetSpriteAnimation(Player->SpriteIndex, 10, &Player->Animation, false, 0);
+                Player->State = PLAYERSTATE_JUMP;
+                DeCollisionizeTimer += 1;
+            }
+            else IdleTimer += 1;
+        }
+        else if (DeCollisionizeTimer >= 1) 
+        {
+            if (DeCollisionizeTimer >= DeCollisionizeMax)
+            {
+                if (OldCollisionLayers != 0) Player->CollisionLayers = OldCollisionLayers;
+                OldCollisionLayers = 0;
+                IdleTimer = 0;
+                DeCollisionizeTimer = 0;
+            }
+            else 
+            {
+                DeCollisionizeTimer += 1;
+            }
+        }
+        else 
+        {
+            if (OldCollisionLayers != 0) Player->CollisionLayers = OldCollisionLayers;
+            OldCollisionLayers = 0;
+            IdleTimer = 0;
+            DeCollisionizeTimer = 0;
+        }
+    }
+
+    void HelpPlayers() 
+    {
+        HelpPlayer(&Player1, IdleTimer1P, DeCollisionizeTimer1P, OldCollisionLayers1P);
+        HelpPlayer(&Player2, IdleTimer2P, DeCollisionizeTimer2P, OldCollisionLayers2P);
+        HelpPlayer(&Player3, IdleTimer3P, DeCollisionizeTimer3P, OldCollisionLayers3P);
+        HelpPlayer(&Player4, IdleTimer4P, DeCollisionizeTimer4P, OldCollisionLayers4P);
+    }
+
+
+    #pragma endregion
+
+
     #pragma region General Methods
 
     void ResetScene()
@@ -607,6 +891,7 @@ namespace CompPlus_Credits
         RingCountP4 = 0;
 
         RingProvidersInit = false;
+        ManiaFontLoaded = false;
     }
 
     void OfflineLoop()
@@ -633,10 +918,11 @@ namespace CompPlus_Credits
     void ZoneLoop()
     {
         ZoneLoopInit();
-        //RingCountHUD();
         RingSpawnLoop();
         LHPZButton();
         ExitButton();
+        UpdateVersionLabels();
+        HelpPlayers();
 
         SetPlayerCamera();
         UpdateCameraLoop();
@@ -653,7 +939,7 @@ namespace CompPlus_Credits
 
     void Init()
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 4; ++i)
             Strings[i] = (wchar_t*)malloc(128);
     }
 

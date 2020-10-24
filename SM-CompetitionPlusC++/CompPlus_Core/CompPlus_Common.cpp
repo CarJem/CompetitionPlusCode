@@ -12,6 +12,11 @@
 
 namespace CompPlus_Common
 {
+    const char* Internal_VersionNumber = "5.0";
+    const char* Internal_VersionNumberAlt = "5.0.EXE";
+    const char* Internal_VersionName = "HALLOWEEN DEMO";
+    const char* Internal_VersionNameShort = "DEMO";
+
 
     const char* SFX_MenuBleep = "Global/MenuBleep.wav";
     const char* SFX_MenuAccept = "Global/MenuAccept.wav";
@@ -40,9 +45,16 @@ namespace CompPlus_Common
     const char* Anim_UISmallFont = "UI/SmallFont.bin";
     const char* Anim_LSelectText = "LSelect/Text.bin";
     const char* Anim_LSelectText_Exe = "SMCP_LSelect/Text_EXE.bin";
+    const char* Anim_Cred_UISmallFont = "SMCP_Cred/SmallFont.bin";
 
     const char* SMCP_Unused_SettingsWorld = "SMCP_SW";
     const char* SMCP_Credits = "SMCP_CREDITS";
+
+    const char* SMCP_DAGarden = "SMCP_DAGARDEN_1";
+    const char* SMCP_DAGarden_Mania = "SMCP_DAGARDEN_2";
+    const char* SMCP_DAGarden_Encore = "SMCP_DAGARDEN_3";
+    const char* SMCP_DAGarden_Custom = "SMCP_DAGARDEN_4";
+    const char* SMCP_DAGarden_Chaotix = "SMCP_DAGARDEN_5";
 
 
     const char* SceneID_MMZ = "MMZ";
@@ -143,14 +155,23 @@ namespace CompPlus_Common
     const char* SMCP_DHZ = "SMCP_DHZ";
     const char* SMCP_DHZE = "SMCP_DHZE";
 
-    const char* SMCP_SZ = "CPSZ";
-    const char* SMCP_SZE = "CPSZE";
+    const char* SMCP_SZ = "SMCP_SZ";
+    const char* SMCP_SZE = "SMCP_SZE";
 
     const char* SMCP_GPZ1 = "SMCP_GPZ";
     const char* SMCP_GPZ1E = "SMCP_GPZE";
 
     const char* SMCP_LHPZ1 = "SMCP_LHPZ1";
     const char* SMCP_LHPZ1E = "SMCP_LHPZ1E";
+
+    const char* SMCP_STHZ1 = "SMCP_STHZ1";
+    const char* SMCP_STHZ2 = "SMCP_STHZ1";
+
+    const char* SMCP_MBZ1 = "SMCP_MBZ1";
+    const char* SMCP_MBZ2 = "SMCP_MBZ1";
+
+    const char* SMCP_GGZ1 = "SMCP_GGZ1";
+    const char* SMCP_GGZ2 = "SMCP_GGZ2";
 
     const char* SMCP_Logos1 = "SMCP_LOGOS";
     const char* SMCP_Logos2 = "SMCP_LOGOS2";
@@ -185,8 +206,6 @@ namespace CompPlus_Common
 		CompPlus_Core::IZ_SceneChangeIdleTime = 10;
 	}
 
-
-
     void LoadHUBWorld(bool ForcedOverworld = false)
     {
         if (CompPlus_Scoring::PodeiumSpawnActive && !ForcedOverworld)
@@ -210,27 +229,14 @@ namespace CompPlus_Common
 
 	void PlayMenuMoveSoundFX(bool isClassic)
 	{
-		if (isClassic)
-		{
-			PlaySoundFXS(SFX_MenuBleepClassic);
-		}
-		else
-		{
-			PlaySoundFXS(SFX_MenuBleep);
-		}
+		if (isClassic) PlaySoundFXS(SFX_MenuBleepClassic);
+		else PlaySoundFXS(SFX_MenuBleep);
 	}
 
 	void PlayMenuAcceptSoundFX(bool isClassic)
-	{
-		if (isClassic)
-		{
-			PlaySoundFXS(SFX_MenuAcceptClassic);
-		}
-		else
-		{
-			PlaySoundFXS(SFX_MenuAccept);
-		}
-
+	{    
+		if (isClassic) PlaySoundFXS(SFX_MenuAccept);
+        else PlaySoundFXS(SFX_MenuAcceptClassic);
 	}
 
     void LoadLastLevelSelect() 

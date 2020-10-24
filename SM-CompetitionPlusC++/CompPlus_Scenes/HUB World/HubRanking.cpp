@@ -253,19 +253,26 @@ namespace CompPlus_HubRanking
 
         int NumberOfPlayers = (SonicMania::Options->CompetitionSession.inMatch == 1 ? SonicMania::Options->CompetitionSession.NumberOfPlayers : 1);
 
-        for (int RealID = 1; RealID <= 4; RealID++)
+
+        if (SonicMania::Player1.Camera != nullptr)
         {
-            SonicMania::EntityPlayer* Player;
-            if (RealID == 1) Player = &SonicMania::Player1;
-            else if (RealID == 2) Player = &SonicMania::Player2;
-            else if (RealID == 3) Player = &SonicMania::Player3;
-            else if (RealID == 4) Player = &SonicMania::Player4;
-            else Player = &SonicMania::Player1;
-            bool isPlayerInRangeOfExit = Player->InRange(x1_exit, y1_exit, x2_exit, y2_exit);
-            if (isPlayerInRangeOfExit)
-            {
-                ExitCount += 1;
-            }
+            bool isPlayerInRangeOfExit = Player1.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player2.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfExit = Player2.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player3.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfExit = Player3.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player4.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfExit = Player4.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfExit) ExitCount += 1;
         }
 
         SpecialRing& ExitRing = *SonicMania::GetEntityFromSceneSlot<SpecialRing>(ExitRingSlot);

@@ -2,6 +2,11 @@
 #include <String>
 namespace CompPlus_Common
 {
+    extern const char* Internal_VersionNumber;
+    extern const char* Internal_VersionNumberAlt;
+    extern const char* Internal_VersionName;
+    extern const char* Internal_VersionNameShort;
+
     extern const char* SFX_MenuBleep;
     extern const char* SFX_MenuAccept;
     extern const char* SFX_SpecialWarp;
@@ -27,12 +32,18 @@ namespace CompPlus_Common
     extern const char* Anim_UISmallFont;
     extern const char* Anim_LSelectText;
     extern const char* Anim_LSelectText_Exe;
+    extern const char* Anim_Cred_UISmallFont;
 
     extern const char* Anim_EXE_Sprites;
 
     extern const char* SMCP_Unused_SettingsWorld;
     extern const char* SMCP_Credits;
 
+    extern const char* SMCP_DAGarden;
+    extern const char* SMCP_DAGarden_Mania;
+    extern const char* SMCP_DAGarden_Encore;
+    extern const char* SMCP_DAGarden_Custom;
+    extern const char* SMCP_DAGarden_Chaotix;
 
     extern const char* SceneID_MMZ;
 
@@ -140,6 +151,15 @@ namespace CompPlus_Common
 
     extern const char* SMCP_LHPZ1;
     extern const char* SMCP_LHPZ1E;
+
+    extern const char* SMCP_STHZ1;
+    extern const char* SMCP_STHZ2;
+
+    extern const char* SMCP_MBZ1;
+    extern const char* SMCP_MBZ2;
+
+    extern const char* SMCP_GGZ1;
+    extern const char* SMCP_GGZ2;
 
     extern const char* SMCP_Logos1;
     extern const char* SMCP_Logos2;

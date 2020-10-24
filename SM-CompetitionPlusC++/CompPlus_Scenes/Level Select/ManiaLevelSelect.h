@@ -17,7 +17,7 @@ namespace CompPlus_ManiaLevelSelect
 
 	extern void OnFrame();
 
-	extern void CheckForPointRefresh();
+	extern void Reload();
 };
 
 

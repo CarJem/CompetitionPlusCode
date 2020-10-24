@@ -434,6 +434,7 @@ namespace SonicMania
         ObjectType_ScoreBonus = 0x00AC6D80,
         ObjectType_Explosion = 0x00AC6D84,
         ObjectType_PlathSwapper = 0x00AC6C0C,
+        ObjectType_TitleCard = 0x00AC671C,
 
         // Green Hill Zone
         ObjectType_Motobug = 0x00AC6B60,
@@ -2503,7 +2504,7 @@ namespace SonicMania
         /* 0x00000077 */ BYTE field_77;
         /* 0x00000078 */ SonicMania::Vector2 Size;
         /* 0x00000080 */ wchar_t* Text;
-        /* 0x00000084 */ int TextLength;
+        /* 0x00000084 */ short TextLength;
         /* 0x00000086 */ BYTE field_86;
         /* 0x00000087 */ BYTE field_87;
         /* 0x00000088 */ DWORD field_88;

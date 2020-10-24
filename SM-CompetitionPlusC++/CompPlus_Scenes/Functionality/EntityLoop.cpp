@@ -21,8 +21,11 @@
 
 namespace CompPlus_EntityLoop
 {
+    bool LastSizeLazerState = false;
+
     void OnFrame() 
     {
+        bool HasSizeLazer = false;
         for (int i = 0; i < 2301; ++i)
         {
             SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
@@ -34,7 +37,14 @@ namespace CompPlus_EntityLoop
             if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_SizeLazer))
             {
                 CompPlus_SizeLazer::OnObject(i);
+                HasSizeLazer = true;
             }
+        }
+
+        if (LastSizeLazerState != HasSizeLazer) 
+        {
+            CompPlus_Status::ForceLoadChibiSprites = HasSizeLazer;
+            LastSizeLazerState = HasSizeLazer;
         }
 
         CompPlus_RPlaneShifter::OnFrame();

@@ -11,7 +11,8 @@
 #include "GustPlanet.h"
 namespace CompPlus_Scene_GustPlanet 
 {
-
+    int Grav_ShakeX = 15;
+    int Grav_ShakeY = 0;
     bool P1_HasAntiGrav = false;
     bool P2_HasAntiGrav = false;
     bool P3_HasAntiGrav = false;
@@ -24,18 +25,38 @@ namespace CompPlus_Scene_GustPlanet
     {
         if (Player == 1) 
         {
+            if (SonicMania::Player1.Camera != nullptr) 
+            {
+                SonicMania::Player1.Camera->ShakeX = Grav_ShakeX;
+                SonicMania::Player1.Camera->ShakeY = Grav_ShakeY;
+            }
             P1_HasAntiGrav = State;
         }
         else if (Player == 2)
         {
+            if (SonicMania::Player2.Camera != nullptr)
+            {
+                SonicMania::Player2.Camera->ShakeX = Grav_ShakeX;
+                SonicMania::Player2.Camera->ShakeY = Grav_ShakeY;
+            }
             P2_HasAntiGrav = State;
         }
         else if (Player == 3)
         {
+            if (SonicMania::Player3.Camera != nullptr)
+            {
+                SonicMania::Player3.Camera->ShakeX = Grav_ShakeX;
+                SonicMania::Player3.Camera->ShakeY = Grav_ShakeY;
+            }
             P3_HasAntiGrav = State;
         }
         else if (Player == 4)
         {
+            if (SonicMania::Player4.Camera != nullptr)
+            {
+                SonicMania::Player4.Camera->ShakeX = Grav_ShakeX;
+                SonicMania::Player4.Camera->ShakeY = Grav_ShakeY;
+            }
             P4_HasAntiGrav = State;
         }
     }

@@ -12,8 +12,8 @@
 #include "CompPlus_Status.h"
 #include "CompPlus_Extensions/Helpers.h"
 #include "CompPlus_Common.h"
-#include "Base.h"
 #include "CompPlus_Announcers.h"
+#include "CompPlus_Patches.h"
 
 namespace CompPlus_Settings 
 {
@@ -46,10 +46,11 @@ namespace CompPlus_Settings
     bool EndlessRounds = false;
     bool DropdashAbility = true;
     bool InstaSheildAbility = false;
-    bool TailsFlightDrop = false;
+    bool TailsFlightCancel = false;
     VictoryMode VictoryStyle = VictoryMode_Default;
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
+    int StrechEffectIntensity = 1;
 
     //Peelout Ability Settings
     ThreeStateBool Player1PeeloutAbility = ThreeStateBool::Indeterminate;
@@ -120,9 +121,9 @@ namespace CompPlus_Settings
         WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)MovesetID);
     }
 
-    void SetTailsFlightDrop(bool Value)
+    void SetTailsFlightCancel(bool Value)
     {
-        TailsFlightDrop = Value;
+        TailsFlightCancel = Value;
         SaveSettings();
     }
 
@@ -338,108 +339,11 @@ namespace CompPlus_Settings
 
     #pragma endregion
 
-    #pragma region Screen Layout Methods
-
-    //DataPointer(int, WindowSizeX, 0xA530E4);
-    //DataPointer(int, WindowSizeY, 0xA530E8);
-    DataPointer(int, WindowSizeX, 0x43C6F4);
-    DataPointer(int, WindowSizeY, 0x43C6F8);
-    DataPointer(int, ViewPortSizeX, 0x43C70C);
-    DataPointer(int, ViewPortSizeY, 0x43C710);
-    DataPointer(int, ImageXPosition, 0x43C704);
-    DataPointer(int, ImageYPosition, 0x43C708);
-    DataPointer(BYTE, ScreenCount, 0xA530FC);
-
-    bool ScreenSizeSaved = false;
-
-    int OriginalImageXPosition = 0;
-    int OriginalImageYPosition = 0;
-
-    int ModifiedViewPortX = 1200;
-    int ModifiedViewPortY = 960;
-    int ModifiedImageXPosition = 300;
-    int ModifiedImageYPosition = 0;
-
-    int StrechEffectIntensity = 1;
-
-    void UpdateStrechScreen()
-    {
-        if (SonicMania::Options->CompetitionSession.inMatch == 1)
-        {
-            if (ScreenCount != 1 && SonicMania::Options->CompetitionSession.ReadOnlyDisplayMode == 0 && SonicMania::Options->CompetitionSession.NumberOfPlayers == 2 && StrechEffectIntensity > 1)
-            {
-                int Intensity = StrechEffectIntensity + 1;
-                if (WindowSizeX != 0 && WindowSizeY != 0 && Intensity != 0)
-                {
-                    ViewPortSizeX = WindowSizeX / 2 + (WindowSizeX / Intensity);
-                    ViewPortSizeY = WindowSizeY;
-                    int CenterX = (WindowSizeX - ViewPortSizeX);
-                    ImageXPosition = (CenterX == 0 ? 0 : CenterX / 2);
-                    ImageYPosition = 0;
-                }
-            }
-            else
-            {
-                ViewPortSizeX = WindowSizeX;
-                ViewPortSizeY = WindowSizeY;
-                ImageXPosition = OriginalImageXPosition;
-                ImageYPosition = OriginalImageYPosition;
-            }
-        }
-
-    }
-
-    #pragma endregion
-
-    #pragma region DynCam Methods
-
-    static int Speed1 = 1;
-    static int Speed2 = 3;
-
-    void UpdateDynCam(SonicMania::EntityPlayer* Player) 
-    {
-        if (Player->Camera != nullptr)
-        {
-            if (Player->Speed >= 400000)
-            {
-                if (Player->Camera->OffsetX < 0)
-                    Player->Camera->OffsetX += Speed2;
-                else if (Player->Camera->OffsetX <= 128)
-                    Player->Camera->OffsetX += Speed1;
-            }
-            else if (Player->Speed <= -400000)
-            {
-                if (Player->Camera->OffsetX > 0)
-                    Player->Camera->OffsetX -= Speed2;
-                else if (Player->Camera->OffsetX >= -128)
-                    Player->Camera->OffsetX -= Speed1;
-            }
-            else if (Player->Camera->OffsetX < 0)
-                Player->Camera->OffsetX += Speed1;
-            else if (Player->Camera->OffsetX > 0)
-                Player->Camera->OffsetX -= Speed1;
-        }
-
-    }
-
-    void UpdateDynCams() 
-    {
-        if (!CompPlus_Status::DisableDynCam)
-        {
-            if (Player1DynCam) UpdateDynCam(&Player1);
-            if (Player2DynCam) UpdateDynCam(&Player2);
-            if (Player3DynCam) UpdateDynCam(&Player3);
-            if (Player4DynCam) UpdateDynCam(&Player4);
-        }
-    }
-
-    #pragma endregion
-
     #pragma region Update Methods
 
     void UpdateStockSettings() 
     {
-        CompPlus_Internal::DisableVSPointAddingAddress();
+        CompPlus_Patches::DisableVSPointAddingAddress();
         if (SonicMania::Options->CompetitionSession.MonitorMode != MonitorTypes) SonicMania::Options->CompetitionSession.MonitorMode = MonitorTypes;
         if (SonicMania::Options->ItemMode != MonitorTypes) SonicMania::Options->ItemMode = MonitorTypes;
     }
@@ -550,7 +454,7 @@ namespace CompPlus_Settings
             SonicMania::Player4.Character = Character;
             CompPlus_Settings::Player4ChosenPlayer = Player;
         }
-        CompPlus_Internal::FixRayAndMighty2P();
+        CompPlus_Patches::FixRayAndMighty2P();
     }
 
     void UpdatePlayer(int PlayerID, CompPlus_Settings::ChosenPlayer Character, bool Force)
@@ -779,12 +683,12 @@ namespace CompPlus_Settings
 
                         LogLoadSetting("CurrentSeason", std::to_string(value));
                     }
-                    else if (!strcmp(xmlOption->Name(), "TailsFlightDrop"))
+                    else if (!strcmp(xmlOption->Name(), "TailsFlightCancel"))
                     {
                         bool value = XMLGetBool(xmlOption);
-                        TailsFlightDrop = value;
+                        TailsFlightCancel = value;
 
-                        LogLoadSetting("TailsFlightDrop", std::to_string(value));
+                        LogLoadSetting("TailsFlightCancel", std::to_string(value));
                     }
                     else if (!strcmp(xmlOption->Name(), "SpotLightChallenge"))
                     {
@@ -852,7 +756,7 @@ namespace CompPlus_Settings
 
             AddtoSaveSettings("CurrentSeason", IntToString(CurrentSeason), text);
             AddtoSaveSettings("UseEncoreVapeMusic", BoolToString(UseEncoreVapeMusic), text);
-            AddtoSaveSettings("TailsFlightDrop", BoolToString(TailsFlightDrop), text);
+            AddtoSaveSettings("TailsFlightCancel", BoolToString(TailsFlightCancel), text);
             AddtoSaveSettings("SpotLightChallenge", BoolToString(SpotLightChallenge), text);
 
             if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
@@ -884,7 +788,6 @@ namespace CompPlus_Settings
     {
         if (SettingsLoaded) 
         {
-            UpdateDynCams();
             UpdateLives();
             UpdateStockSettings();
         }

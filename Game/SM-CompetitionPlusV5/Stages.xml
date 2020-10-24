@@ -10,8 +10,13 @@
 			<Scene stageKey="SMCP_LOGOS3" sceneKey="SMCP_LOGOS3" sceneID="1" sceneFlags="255" sceneName="3" />
 			<Scene stageKey="SMCP_LOGOS4" sceneKey="SMCP_LOGOS4" sceneID="1" sceneFlags="255" sceneName="4" />
 		</Group>
-		  <Group groupName="Settings Page (Unused)">
-			  <Scene stageKey="SMCP_SW" sceneKey="SMCP_SW" sceneID="1" sceneFlags="255" sceneName="" />
+		  <Group groupName="SMCP D.A. Gardens">
+			  <Scene stageKey="SMCP_DAGARDEN" sceneKey="SMCP_DAGARDEN_1" sceneID="SMCP" sceneFlags="255" sceneName="1"></Scene>
+			  <Scene stageKey="SMCP_DAGARDEN" sceneKey="SMCP_DAGARDEN_2" sceneID="MANI" sceneFlags="255" sceneName="2"></Scene>
+			  <Scene stageKey="SMCP_DAGARDEN" sceneKey="SMCP_DAGARDEN_3" sceneID="ENCO" sceneFlags="255" sceneName="3"></Scene>
+			  <Scene stageKey="SMCP_DAGARDEN" sceneKey="SMCP_DAGARDEN_4" sceneID="CUST" sceneFlags="255" sceneName="4"></Scene>
+			  <Scene stageKey="SMCP_DAGARDEN" sceneKey="SMCP_DAGARDEN_5" sceneID="CTXM" sceneFlags="255" sceneName="5"></Scene>
+			  <Scene stageKey="SMCP_SW" sceneKey="SMCP_SW" sceneID="1" sceneFlags="255" sceneName="W" />
 		  </Group>
 	  </Category>
 	  <Category categoryName="SMCP : Mania Stages">
@@ -167,6 +172,18 @@
 			<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1" sceneID="1" sceneFlags="3" sceneName="1" />
 			<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1E" sceneID="1" sceneFlags="5" sceneName="1E" />
 		</Group>
+		<Group groupName="Seatide Hill Zone">
+			<Scene stageKey="SMCP_STHZ" sceneKey="SMCP_STHZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_STHZ" sceneKey="SMCP_STHZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Metroptropic Beach Zone">
+			<Scene stageKey="SMCP_MBZ1" sceneKey="SMCP_MBZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_MBZ2" sceneKey="SMCP_MBZ2" sceneID="1" sceneFlags="3" sceneName="2" />
+		</Group>
+		<Group groupName="Ghostly Galleon Zone">
+			<Scene stageKey="SMCP_GGZ" sceneKey="SMCP_GGZ1" sceneID="1" sceneFlags="3" sceneName="1" />
+			<Scene stageKey="SMCP_GGZ" sceneKey="SMCP_GGZ2" sceneID="2" sceneFlags="3" sceneName="2" />
+		</Group>
 		<Group groupName="Test Scene Zone">
 			<Scene stageKey="SMCP_TSZ" sceneKey="SMCP_TSZ" sceneID="1" sceneFlags="3" sceneName="" />
 		</Group>
@@ -298,6 +315,7 @@
 	  </StageAssets>
 	</Stage>		
 	<Stage stageName="SMCP Settings Menu" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="SMCP_SW"></Stage>
+	<Stage stageName="SMCP D.A. Garden" stageDir="SMCP_DAGarden" stageKey="SMCP_DAGARDEN"></Stage>
 	<Stage stageName="SMCP HUB Overworld" stageDir="SMCP_HUB/HUB_Overworld" stageKey="SMCP_HUB1">
 	  <StageUnlocks>
 		  <FBZ_HangPoint />
@@ -340,6 +358,7 @@
 		<FBZ_Button />
 	  </StageUnlocks>
 	  <StageAssets>
+		  <Asset basePath="Data/Sprites/FBZ/Objects.gif"  newPath="Data/Sprites/HUB/Objects-FBZ.gif" />
 		  <Asset basePath="Data/Sprites/PSZ2/Objects3.gif" newPath="Data/Sprites/HUB/Computer.gif" />
 		  <Asset basePath="Data/Sprites/CPZ/StickyPlatform.bin"  newPath="Data/Sprites/HUB/StickyPlatform.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Batbrain.bin"  newPath="Data/Sprites/HUB_Nether/Batbrain.bin" />
@@ -350,7 +369,7 @@
 		  <Asset basePath="Data/Sprites/GHZ/Chopper.bin"  newPath="Data/Sprites/HUB_Nether/Chopper.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Crabmeat.bin"  newPath="Data/Sprites/HUB_Nether/Crabmeat.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/DDWrecker.bin"  newPath="Data/Sprites/HUB_Nether/DDWrecker.bin" />
-		  <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/HUB_Nether/Decoration.bin" />
+		  <Asset basePath="Data/Sprites/GHZ/Decoration.bin"  newPath="Data/Sprites/HUB/Decoration.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/DERobot.bin"  newPath="Data/Sprites/HUB_Nether/DERobot.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Fireball.bin"  newPath="Data/Sprites/HUB_Nether/Fireball.bin" />
 		  <Asset basePath="Data/Sprites/GHZ/Icons.bin"  newPath="Data/Sprites/HUB_Nether/Icons.bin" />
@@ -521,6 +540,80 @@
 			<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_HILL/" />
 			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_HILL/" />
 		</StageAssets>
+	</Stage>
+	<Stage stageName="SMCP Seatide Hill Zone" stageDir="SMCP_CustomStages/SMCP_STHZ" stageKey="SMCP_STHZ">
+		<StageUnlocks>
+			<Core_GHZ/>
+			<AIZ_Bloominator/>
+			<AIZ_Sweep/>
+			<AIZ_Rhinobot/>
+		</StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_STHZ/" />
+			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_STHZ/GHZ/" />
+		</StageAssets>
+	</Stage>	
+	<Stage stageName="SMCP Metroptropic Beach Zone Act 1" stageDir="SMCP_CustomStages/SMCP_MBZ/MSZ" stageKey="SMCP_MBZ1">
+		<StageUnlocks>
+			<Core_MSZ/>
+			<AIZ_AIZTornado/>
+			<GHZ_BuzzBomber/>
+			<GHZ_Bridge/>
+			<MSZ_RollerMKII/>
+			<MSZ_Vultron/>
+			<MSZ_Bumpalo/>
+			<AIZ_SwingRope/>
+		</StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_Custom/SMCP_MBZ/" />
+			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/AIZ/" />
+			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/CPZ/" />
+			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/GHZ/" />
+			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/MMZ/" />
+			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/MSZ/" />
+			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/SSZ1/" />
+			<Asset basePath="Data/Sprites/TMZ1/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/TMZ1/" />
+		</StageAssets>
+	</Stage>
+	<Stage stageName="SMCP Metroptropic Beach Zone Act 2" stageDir="SMCP_CustomStages/SMCP_MBZ/MMZ" stageKey="SMCP_MBZ2">
+		<StageUnlocks>
+			<Core_MMZ/>
+			<AIZ_AIZTornado/>
+			<GHZ_BuzzBomber/>
+			<GHZ_Bridge/>
+			<MSZ_RollerMKII/>
+			<MSZ_Vultron/>
+			<MSZ_Bumpalo/>
+			<AIZ_SwingRope/>
+		</StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_Custom/SMCP_MBZ/" />
+			<Asset basePath="Data/Sprites/AIZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/AIZ/" />
+			<Asset basePath="Data/Sprites/CPZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/CPZ/" />
+			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/GHZ/" />
+			<Asset basePath="Data/Sprites/MMZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/MMZ/" />
+			<Asset basePath="Data/Sprites/MSZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/MSZ/" />
+			<Asset basePath="Data/Sprites/SSZ1/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/SSZ1/" />
+			<Asset basePath="Data/Sprites/TMZ1/" newPath="Data/Sprites/SMCP_Custom/SMCP_MBZ/TMZ1/" />
+		</StageAssets>
+	</Stage>		
+	<Stage stageName="SMCP Ghostly Galleon Zone" stageDir="SMCP_CustomStages/SMCP_GGZ" stageKey="SMCP_GGZ">
+		<StageUnlocks>
+			<Core_FBZ/>
+			<TMZ_SentryBug/>
+		</StageUnlocks>
+	</Stage>	
+	<Stage stageName="SMCP Seatide Hill Zone" stageDir="SMCP_CustomStages/SMCP_STHZ" stageKey="SMCP_STHZ">
+		<StageUnlocks>
+			<Core_GHZ/>
+			<AIZ_Bloominator/>
+			<AIZ_Sweep/>
+			<AIZ_Rhinobot/>
+		</StageUnlocks>
+		<StageAssets>
+			<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_Custom/SMCP_STHZ/" />
+			<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_Custom/SMCP_STHZ/GHZ/" />
+		</StageAssets>
 	</Stage>	
 	<Stage stageName="SMCP Desert Hill Zone" stageDir="SMCP_CustomStages/SMCP_DHZ" stageKey="SMCP_DHZ">
 		<StageAssets>
@@ -533,6 +626,7 @@
 	</Stage>
 	<Stage stageName="SMCP Gust Planet Zone" stageDir="SMCP_CustomStages/SMCP_GPZ" stageKey="SMCP_GPZ">
 		<StageAssets>
+		  <Asset basePath="Data/Palettes/EncoreLRZ1.act" newPath="Data/Palettes/SMCP_Custom/EncoreGPZ1.act" />
 		  <Asset basePath="Data/Sprites/SPZ1/Enemies.gif" newPath="Data/Sprites/SMCP_GPZ/Enemies_Tubinaunt.gif" />
 		  <Asset basePath="Data/Sprites/SPZ2/Enemies.gif" newPath="Data/Sprites/SMCP_GPZ/Enemies_Tubinaunt.gif" />
 	      <Asset basePath="Data/Music/GustPlanet1.ogg" newPath="Data/Music/SMCP_Custom/GustPlanet1.ogg" />

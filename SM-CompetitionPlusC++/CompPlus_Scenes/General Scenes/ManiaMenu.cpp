@@ -8,11 +8,41 @@
 #include "CompPlus_Core/CompPlus_Scoring.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"
+#include "CompPlus_Scenes/General Scenes/TitleScreen.h"
 
 namespace CompPlus_ManiaMenu
 {
     using namespace SonicMania;
 
+    static int FrameID_SingleTrophy_Blank = 0;
+    static int FrameID_SingleTrophy_1st = 1;
+    static int FrameID_SingleTrophy_2nd = 2;
+    static int FrameID_SingleTrophy_3rd = 3;
+    static int FrameID_SingleTrophy_4th = 4;
+
+    static int FrameID_FivesTrophy_Blank = 5;
+    static int FrameID_FivesTrophy_1st = 6;
+    static int FrameID_FivesTrophy_2nd = 7;
+    static int FrameID_FivesTrophy_3rd = 8;
+    static int FrameID_FivesTrophy_4th = 9;
+
+    static int FrameID_TensTrophy_Blank = 10;
+    static int FrameID_TensTrophy_1st = 11;
+    static int FrameID_TensTrophy_2nd = 12;
+    static int FrameID_TensTrophy_3rd = 13;
+    static int FrameID_TensTrophy_4th = 14;
+
+    static int FrameID_FithtiesTrophy_Blank = 15;
+    static int FrameID_FithtiesTrophy_1st = 16;
+    static int FrameID_FithtiesTrophy_2nd = 17;
+    static int FrameID_FithtiesTrophy_3rd = 18;
+    static int FrameID_FithtiesTrophy_4th = 19;
+               
+    static int FrameID_HundredsTrophy_Blank = 20;
+    static int FrameID_HundredsTrophy_1st = 21;
+    static int FrameID_HundredsTrophy_2nd = 22;
+    static int FrameID_HundredsTrophy_3rd = 23;
+    static int FrameID_HundredsTrophy_4th = 24;
 
     int LastMenuModWriteState = 0;
     int UIVsRoundPickerSlotID = 228;
@@ -46,21 +76,14 @@ namespace CompPlus_ManiaMenu
     int UIInfoRoundLabel2_SlotID = 705;
     int UIInfoRoundLabel3_SlotID = 68;
 
+    int UIInfoLabel_VersionInfo_1_SlotID = 730;
+    int UIInfoLabel_VersionInfo_2_SlotID = 57;
+    int UIInfoLabel_VersionInfo_3_SlotID = 598;
+
     int UIInfoModeLabel = 749;
 
 
-    static wchar_t* Strings[10];
-
-    bool isPatched = false;
-
-    void PatchCompetitionString()
-    {
-        if (!isPatched)
-        {
-            isPatched = true;
-        }
-
-    }
+    static wchar_t* Strings[13];
 
     void SetPosition(SonicMania::Entity& object, int x, int y)
     {
@@ -85,6 +108,9 @@ namespace CompPlus_ManiaMenu
             break;
         case CompPlus_Settings::VictoryMode_TotalRings:
             __text = (char*)"VS MODE - ALL RINGS";
+            break;
+        case CompPlus_Settings::VictoryMode_AntiRings:
+            __text = (char*)"VS MODE - ANTI-RINGS";
             break;
         case CompPlus_Settings::VictoryMode_Score:
             __text = (char*)"VS MODE - SCORE";
@@ -237,93 +263,168 @@ namespace CompPlus_ManiaMenu
         SetPosition(FiftiesTrophyMultiplier, x - 21, y - 2);
         SetPosition(HundredsTrophyMultiplier, x - 42, y - 2);
 
-        if (Hundreds >= 1) HundredsTrophy.AnimData.CurrentFrame = 9;
-        else HundredsTrophy.AnimData.CurrentFrame = 8;
+        int Position = 1;
+        if (PlayerID == 1) Position = CompPlus_Scoring::P1_LastPlacement;
+        else if (PlayerID == 2) Position = CompPlus_Scoring::P2_LastPlacement;
+        else if (PlayerID == 3) Position = CompPlus_Scoring::P3_LastPlacement;
+        else if (PlayerID == 4) Position = CompPlus_Scoring::P4_LastPlacement;
 
-        if (Fifties >= 1) FiftiesTrophy.AnimData.CurrentFrame = 7;
-        else FiftiesTrophy.AnimData.CurrentFrame = 6;
+        if (Hundreds >= 1) 
+        {
+            if (Position == 1) HundredsTrophy.AnimData.CurrentFrame = FrameID_HundredsTrophy_1st;
+            else if (Position == 2) HundredsTrophy.AnimData.CurrentFrame = FrameID_HundredsTrophy_2nd;
+            else if (Position == 3) HundredsTrophy.AnimData.CurrentFrame = FrameID_HundredsTrophy_3rd;
+            else if (Position == 4) HundredsTrophy.AnimData.CurrentFrame = FrameID_HundredsTrophy_4th;
+        }
+        else 
+        {
+            HundredsTrophy.AnimData.CurrentFrame = FrameID_HundredsTrophy_Blank;
+        }
 
-        if (Tens >= 1) TensTrophy.AnimData.CurrentFrame = 5;
-        else TensTrophy.AnimData.CurrentFrame = 4;
+        if (Fifties >= 1)
+        {
+            if (Position == 1) FiftiesTrophy.AnimData.CurrentFrame = FrameID_FithtiesTrophy_1st;
+            else if (Position == 2) FiftiesTrophy.AnimData.CurrentFrame = FrameID_FithtiesTrophy_2nd;
+            else if (Position == 3) FiftiesTrophy.AnimData.CurrentFrame = FrameID_FithtiesTrophy_3rd;
+            else if (Position == 4) FiftiesTrophy.AnimData.CurrentFrame = FrameID_FithtiesTrophy_4th;
+        }
+        else
+        {
+            FiftiesTrophy.AnimData.CurrentFrame = FrameID_FithtiesTrophy_Blank;
+        }
 
-        if (Fives >= 1) FivesTrophy.AnimData.CurrentFrame = 3;
+        if (Tens >= 1)
+        {
+            if (Position == 1) TensTrophy.AnimData.CurrentFrame = FrameID_TensTrophy_1st;
+            else if (Position == 2) TensTrophy.AnimData.CurrentFrame = FrameID_TensTrophy_2nd;
+            else if (Position == 3) TensTrophy.AnimData.CurrentFrame = FrameID_TensTrophy_3rd;
+            else if (Position == 4) TensTrophy.AnimData.CurrentFrame = FrameID_TensTrophy_4th;
+        }
+        else
+        {
+            TensTrophy.AnimData.CurrentFrame = FrameID_TensTrophy_Blank;
+        }
 
+        if (Fives >= 1)
+        {
+            if (Position == 1) FivesTrophy.AnimData.CurrentFrame = FrameID_FivesTrophy_1st;
+            else if (Position == 2) FivesTrophy.AnimData.CurrentFrame = FrameID_FivesTrophy_2nd;
+            else if (Position == 3) FivesTrophy.AnimData.CurrentFrame = FrameID_FivesTrophy_3rd;
+            else if (Position == 4) FivesTrophy.AnimData.CurrentFrame = FrameID_FivesTrophy_4th;
+        }
+        else
+        {
+            FivesTrophy.AnimData.CurrentFrame = FrameID_FivesTrophy_Blank;
+        }
 
+        if (Ones >= 1)
+        {
+            if (Position == 1) SingleTrophy1.AnimData.CurrentFrame = FrameID_SingleTrophy_1st;
+            else if (Position == 2) SingleTrophy1.AnimData.CurrentFrame = FrameID_SingleTrophy_2nd;
+            else if (Position == 3) SingleTrophy1.AnimData.CurrentFrame = FrameID_SingleTrophy_3rd;
+            else if (Position == 4) SingleTrophy1.AnimData.CurrentFrame = FrameID_SingleTrophy_4th;
+        }
+        else
+        {
+            SingleTrophy1.AnimData.CurrentFrame = FrameID_SingleTrophy_Blank;
+        }
 
-        else FivesTrophy.AnimData.CurrentFrame = 2;
+        if (Ones >= 2)
+        {
+            if (Position == 1) SingleTrophy2.AnimData.CurrentFrame = FrameID_SingleTrophy_1st;
+            else if (Position == 2) SingleTrophy2.AnimData.CurrentFrame = FrameID_SingleTrophy_2nd;
+            else if (Position == 3) SingleTrophy2.AnimData.CurrentFrame = FrameID_SingleTrophy_3rd;
+            else if (Position == 4) SingleTrophy2.AnimData.CurrentFrame = FrameID_SingleTrophy_4th;
+        }
+        else
+        {
+            SingleTrophy2.AnimData.CurrentFrame = FrameID_SingleTrophy_Blank;
+        }
 
-        if (Ones >= 1) SingleTrophy1.AnimData.CurrentFrame = 1;
-        else SingleTrophy1.AnimData.CurrentFrame = 0;
+        if (Ones >= 3)
+        {
+            if (Position == 1) SingleTrophy3.AnimData.CurrentFrame = FrameID_SingleTrophy_1st;
+            else if (Position == 2) SingleTrophy3.AnimData.CurrentFrame = FrameID_SingleTrophy_2nd;
+            else if (Position == 3) SingleTrophy3.AnimData.CurrentFrame = FrameID_SingleTrophy_3rd;
+            else if (Position == 4) SingleTrophy3.AnimData.CurrentFrame = FrameID_SingleTrophy_4th;
+        }
+        else
+        {
+            SingleTrophy3.AnimData.CurrentFrame = FrameID_SingleTrophy_Blank;
+        }
 
-        if (Ones >= 2) SingleTrophy2.AnimData.CurrentFrame = 1;
-        else SingleTrophy2.AnimData.CurrentFrame = 0;
-
-        if (Ones >= 3) SingleTrophy3.AnimData.CurrentFrame = 1;
-        else SingleTrophy3.AnimData.CurrentFrame = 0;
-
-        if (Ones >= 4) SingleTrophy4.AnimData.CurrentFrame = 1;
-        else SingleTrophy4.AnimData.CurrentFrame = 0;
+        if (Ones >= 4)
+        {
+            if (Position == 1) SingleTrophy4.AnimData.CurrentFrame = FrameID_SingleTrophy_1st;
+            else if (Position == 2) SingleTrophy4.AnimData.CurrentFrame = FrameID_SingleTrophy_2nd;
+            else if (Position == 3) SingleTrophy4.AnimData.CurrentFrame = FrameID_SingleTrophy_3rd;
+            else if (Position == 4) SingleTrophy4.AnimData.CurrentFrame = FrameID_SingleTrophy_4th;
+        }
+        else
+        {
+            SingleTrophy4.AnimData.CurrentFrame = FrameID_SingleTrophy_Blank;
+        }
 
 
         switch (Tens)
         {
-        case 0:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 0;
-            break;
-        case 1:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 1 - 1;
-            break;
-        case 2:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 2 - 1;
-            break;
-        case 3:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 3 - 1;
-            break;
-        case 4:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 4 - 1;
-            break;
-        default:
-            TensTrophyMultiplier.AnimData.CurrentFrame = 0;
-            break;
+            case 0:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 0;
+                break;
+            case 1:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 1 - 1;
+                break;
+            case 2:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 2 - 1;
+                break;
+            case 3:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 3 - 1;
+                break;
+            case 4:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 4 - 1;
+                break;
+            default:
+                TensTrophyMultiplier.AnimData.CurrentFrame = 0;
+                break;
         }
 
         FiftiesTrophyMultiplier.AnimData.CurrentFrame = 0;
 
         switch (Hundreds)
         {
-        case 0:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 0;
-            break;
-        case 1:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 1 - 1;
-            break;
-        case 2:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 2 - 1;
-            break;
-        case 3:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 3 - 1;
-            break;
-        case 4:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 4 - 1;
-            break;
-        case 5:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 5 - 1;
-            break;
-        case 6:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 6 - 1;
-            break;
-        case 7:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 7 - 1;
-            break;
-        case 8:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 8 - 1;
-            break;
-        case 9:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 9 - 1;
-            break;
-        default:
-            HundredsTrophyMultiplier.AnimData.CurrentFrame = 0;
-            break;
+            case 0:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 0;
+                break;
+            case 1:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 1 - 1;
+                break;
+            case 2:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 2 - 1;
+                break;
+            case 3:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 3 - 1;
+                break;
+            case 4:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 4 - 1;
+                break;
+            case 5:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 5 - 1;
+                break;
+            case 6:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 6 - 1;
+                break;
+            case 7:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 7 - 1;
+                break;
+            case 8:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 8 - 1;
+                break;
+            case 9:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 9 - 1;
+                break;
+            default:
+                HundredsTrophyMultiplier.AnimData.CurrentFrame = 0;
+                break;
         }
     }
 
@@ -478,6 +579,7 @@ namespace CompPlus_ManiaMenu
 
     void UpdateGlobalBGColors() 
     {
+        if (CompPlus_TitleScreen::StillDrawing) return;
         SetUIBG_BGColor(74, 211, 156);
         SetUIBG_FGLowColor(247, 146, 24);
         SetUIBG_FGHighColor(57, 178, 206);
@@ -587,9 +689,34 @@ namespace CompPlus_ManiaMenu
         }
     }
 
+    void UpdateUIInfoLabel(std::string text, int index, int SlotID)
+    {
+        EntityUIInfoLabel& PositionLabel = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        char* _text = (char*)text.c_str();
+        PositionLabel.Text = (wchar_t*)Strings[index];
+        ConvertASCII2Unicode(PositionLabel.Text, _text, strlen(_text), -32);
+        PositionLabel.TextLength = text.length();
+    }
+
+    void UpdateVersionLabels() 
+    {
+        std::string VersionNumber = CompPlus_Common::Internal_VersionNumber;
+        std::string VersionNumberAlt = CompPlus_Common::Internal_VersionNumberAlt;
+        std::string VersionName = CompPlus_Common::Internal_VersionName;
+
+        std::string MainLabel = ("VERSION " + VersionNumber + " (" + VersionName + ")");
+        std::string PlayerSelectLabel = ("VERSION " + VersionNumberAlt);
+        std::string LevelSelectLabel = ("VERSION " + VersionNumberAlt);
+
+        UpdateUIInfoLabel(MainLabel, 10, UIInfoLabel_VersionInfo_1_SlotID);
+        UpdateUIInfoLabel(PlayerSelectLabel, 11, UIInfoLabel_VersionInfo_2_SlotID);
+        UpdateUIInfoLabel(LevelSelectLabel, 12, UIInfoLabel_VersionInfo_3_SlotID);
+ 
+    }   
+        
 	void UpdateManiaMenu()
 	{
-        PatchCompetitionString();
         UpdateLevelSelect();
         UpdateGlobalBGColors();
         UpdateOptionsPage();
@@ -600,11 +727,13 @@ namespace CompPlus_ManiaMenu
         UpdateLastRoundLabel();
         UpdateCurrentRoundLabels();
         UpdateFinalResultsPage();
+
+        UpdateVersionLabels();
 	}
 
     void Init() 
     {
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < 13; ++i)
             Strings[i] = (wchar_t*)malloc(128);
     }
 };

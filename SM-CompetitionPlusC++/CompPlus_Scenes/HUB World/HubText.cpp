@@ -281,6 +281,9 @@ namespace CompPlus_HubText
         case CompPlus_Settings::VictoryMode_Rings:
             UpdateGeneralDisplay(SlotID, (char*)"RINGS", 5, StageIndex, Index);
             break;
+        case CompPlus_Settings::VictoryMode_AntiRings:
+            UpdateGeneralDisplay(SlotID, (char*)"ANTI-RINGS", 10, StageIndex, Index);
+            break;
         case CompPlus_Settings::VictoryMode_TotalRings:
             UpdateGeneralDisplay(SlotID, (char*)"ALL RINGS", 9, StageIndex, Index);
             break;
@@ -386,24 +389,27 @@ namespace CompPlus_HubText
 
         switch (CompPlus_Settings::VictoryStyle)
         {
-        case CompPlus_Settings::VictoryMode_Default:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ORIGINAL", 18, StageIndex, Index);
-            break;
-        case CompPlus_Settings::VictoryMode_Time:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - TIME", 14, StageIndex, Index);
-            break;
-        case CompPlus_Settings::VictoryMode_Rings:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - RINGS", 15, StageIndex, Index);
-            break;
-        case CompPlus_Settings::VictoryMode_TotalRings:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ALL RINGS", 19, StageIndex, Index);
-            break;
-        case CompPlus_Settings::VictoryMode_Score:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - SCORE", 15, StageIndex, Index);
-            break;
-        case CompPlus_Settings::VictoryMode_Items:
-            UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ITEMS", 15, StageIndex, Index);
-            break;
+            case CompPlus_Settings::VictoryMode_Default:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ORIGINAL", 18, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_Time:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - TIME", 14, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_Rings:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - RINGS", 15, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_TotalRings:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ALL RINGS", 19, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_AntiRings:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ANTI-RINGS", 20, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_Score:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - SCORE", 15, StageIndex, Index);
+                break;
+            case CompPlus_Settings::VictoryMode_Items:
+                UpdateGeneralDisplay(SlotID, (char*)"VS MODE - ITEMS", 15, StageIndex, Index);
+                break;
         }
     }
 

@@ -326,7 +326,7 @@ namespace CompPlus_Scoring
         }
         else
         {
-            PlayerScore.Value = 999;
+            PlayerScore.Value = INT_MAX;
             PlayerScore.PlayerID = PlayerID;
         }
         return PlayerScore;
@@ -434,7 +434,7 @@ namespace CompPlus_Scoring
         return PlayerScores;
     }
 
-     std::vector<ScorableInt> GetAntiRingsRanking()
+    std::vector<ScorableInt> GetAntiRingsRanking()
     {
         ScorableInt Player1Score = GetAntiRings(1);
         ScorableInt Player2Score = GetAntiRings(2);
@@ -467,7 +467,7 @@ namespace CompPlus_Scoring
         return PlayerScores;
     }
 
-     std::vector<ScorableInt> GetScoreRanking()
+    std::vector<ScorableInt> GetScoreRanking()
     {
          ScorableInt Player1Score = ScorableInt(GetPlayerScore(1), 1);
          ScorableInt Player2Score = ScorableInt(GetPlayerScore(2), 2);
@@ -500,7 +500,7 @@ namespace CompPlus_Scoring
         return PlayerScores;
     }
 
-     std::vector<ScorableInt> GetItemRanking()
+    std::vector<ScorableInt> GetItemRanking()
     {
          ScorableInt Player1Score = ScorableInt(GetPlayerItems(1), 1);
          ScorableInt Player2Score = ScorableInt(GetPlayerItems(2), 2);

@@ -8,6 +8,8 @@
 #include "CompPlus_Extensions/Helpers.h"
 namespace DevMenu_MainMenu
 {
+    using namespace CompPlus_DevMenu;
+
     DataPointer(DWORD, dword_6F0AE4, 0x002FBB4C);
     DataPointer(BYTE, Key_Enter, 0x00441754);
 

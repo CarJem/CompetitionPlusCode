@@ -5,10 +5,12 @@
 #include <sstream>
 #include "HubCore.h"
 #include "HubText.h"
+#include "HubWorld.h"
 #include "CompPlus_Core/CompPlus_Announcers.h"
 #include "CompPlus_Core/CompPlus_Scoring.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "Base.h"
+#include "CompPlus_Extensions/Drawing.h"
 
 namespace CompPlus_HubCore
 {
@@ -88,6 +90,7 @@ namespace CompPlus_HubCore
         else if (pointer == 1) return CanDrawP2;
         else if (pointer == 2) return CanDrawP3;
         else if (pointer == 3) return CanDrawP4;
+        else return false;
     }
 
     Hitbox Player1Box;
@@ -133,6 +136,31 @@ namespace CompPlus_HubCore
 
     }
 
+    void DrawKillScreens(int screen, int offset)
+    {
+        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = Canvas->DrawOrder;
+        Canvas->DrawOrder = 15;
+
+
+        int P1_Alpha = 255 - CompPlus_HubWorld::P1_WarpAlpha;
+        int P2_Alpha = 255 - CompPlus_HubWorld::P2_WarpAlpha;
+        int P3_Alpha = 255 - CompPlus_HubWorld::P3_WarpAlpha;
+        int P4_Alpha = 255 - CompPlus_HubWorld::P4_WarpAlpha;
+
+        Vector2 position_p1 = Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y);
+        Vector2 position_p2 = Vector2(SonicMania::Player2.Position.X, SonicMania::Player2.Position.Y);
+        Vector2 position_p3 = Vector2(SonicMania::Player3.Position.X, SonicMania::Player3.Position.Y);
+        Vector2 position_p4 = Vector2(SonicMania::Player4.Position.X, SonicMania::Player4.Position.Y);
+
+
+        if (screen == 0) DrawRect(0, 0, 500, 500, 0xFFFFFF, P1_Alpha, Ink_Alpha, true);
+        if (screen == 1) DrawRect(0, 0, 500, 500, 0xFFFFFF, P2_Alpha, Ink_Alpha, true);
+        if (screen == 2) DrawRect(0, 0, 500, 500, 0xFFFFFF, P3_Alpha, Ink_Alpha, true);
+        if (screen == 3) DrawRect(0, 0, 500, 500, 0xFFFFFF, P4_Alpha, Ink_Alpha, true);
+        //Canvas->DrawOrder = OldDrawOrder;
+    }
+
     void OnDraw()
     {
         ushort pointer = GetSpritePointer(0xAA7634, 0x14);
@@ -148,7 +176,6 @@ namespace CompPlus_HubCore
             int offset = 0x96030 * screen;
 
             DrawWaitingForPlayers(offset);
-
 
             if (Player1.Camera != nullptr)
             {
@@ -192,6 +219,8 @@ namespace CompPlus_HubCore
                 if (CompPlus_Scoring::P4_LastPlacement == 1) DrawCrownSprite(Player4, position_p4_top, false);
                 //if (screen == 3) OnUnusedDraw(&Player4, offset);
             }
+
+            DrawKillScreens(screen, offset);
 
             EndDraw(screen);
         }

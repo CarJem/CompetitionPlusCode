@@ -71,8 +71,8 @@ namespace CompPlus_HubSettings
     int SeasonSwitchController = 976;
     int SeasonSwitchText = 993;
 
-    int TailsFlightDropController = 972;
-    int TailsFlightDropText = 987;
+    int TailsFlightCancelController = 972;
+    int TailsFlightCancelText = 987;
 
     int DynCamToggleText_P1 = 845;
     int DynCamToggleText_P2 = 826;
@@ -204,7 +204,7 @@ namespace CompPlus_HubSettings
         UpdateToggleDisplay(EncoreVapeMusicText, CompPlus_Settings::UseEncoreVapeMusic, 1, StringIndex);
         StringIndex++;
         //Tails Flight Drop Display
-        UpdateToggleDisplay(TailsFlightDropText, CompPlus_Settings::TailsFlightDrop, 1, StringIndex);
+        UpdateToggleDisplay(TailsFlightCancelText, CompPlus_Settings::TailsFlightCancel, 1, StringIndex);
         StringIndex++;
         //Spotlight Mode Display
         UpdateToggleDisplay(SpotlightModeText, CompPlus_Settings::SpotLightChallenge, 1, StringIndex);
@@ -287,9 +287,9 @@ namespace CompPlus_HubSettings
         int StrechStatus = SingleUpDownController(StrechIntensityNUDController, CompPlus_Settings::StrechEffectIntensity, 1, 10);
         if (StrechStatus != CompPlus_Settings::StrechEffectIntensity) CompPlus_Settings::SetStrechIntensity(StrechStatus);
 
-        //Tails Flight Drop Toggle
-        bool TailsFlightDropStatus = ToggleController(TailsFlightDropController, CompPlus_Settings::TailsFlightDrop);
-        if (TailsFlightDropStatus != CompPlus_Settings::TailsFlightDrop) CompPlus_Settings::SetTailsFlightDrop(TailsFlightDropStatus);
+        //Tails Flight Cancel Toggle
+        bool TailsFlightCancelStatus = ToggleController(TailsFlightCancelController, CompPlus_Settings::TailsFlightCancel);
+        if (TailsFlightCancelStatus != CompPlus_Settings::TailsFlightCancel) CompPlus_Settings::SetTailsFlightCancel(TailsFlightCancelStatus);
 
         //Encore Vape Music Toggle
         bool VapeStatus = ToggleController(EncoreVapeMusicController, CompPlus_Settings::UseEncoreVapeMusic);
@@ -320,7 +320,7 @@ namespace CompPlus_HubSettings
         if (AnnouncerTypeStatus != (int)CompPlus_Settings::CurrentAnnouncer) CompPlus_Settings::SetAnnouncer((CompPlus_Settings::AnnouncerType)AnnouncerTypeStatus);
 
         //Victory Type NUD
-        int VictoryTypeStatus = SingleUpDownController(VictoryMethodSwapperController, (int)CompPlus_Settings::VictoryStyle, 0, 5);
+        int VictoryTypeStatus = SingleUpDownController(VictoryMethodSwapperController, (int)CompPlus_Settings::VictoryStyle, 0, 6);
         if (VictoryTypeStatus != (int)CompPlus_Settings::VictoryStyle) CompPlus_Settings::SetVictoryMethod((CompPlus_Settings::VictoryMode)VictoryTypeStatus);
 
         //Item Box Config NUD
@@ -347,13 +347,64 @@ namespace CompPlus_HubSettings
         {
             WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
+        if (SonicMania::Player1.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player1.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player1.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+
+        if (SonicMania::Player2.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
         if (SonicMania::Player2.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
         {
             WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
+        if (SonicMania::Player2.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player2.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+
+        if (SonicMania::Player3.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player3.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
         if (SonicMania::Player3.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
         {
             WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player3.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+
+        if (SonicMania::Player4.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player4.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+        }
+        if (SonicMania::Player4.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
+        {
+            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
         if (SonicMania::Player4.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
         {
@@ -395,24 +446,33 @@ namespace CompPlus_HubSettings
 
         int NumberOfPlayers = (SonicMania::Options->CompetitionSession.inMatch == 1 ? SonicMania::Options->CompetitionSession.NumberOfPlayers : 1);
 
-        for (int RealID = 1; RealID <= 4; RealID++)
+        if (SonicMania::Player1.Camera != nullptr)
         {
-            SonicMania::EntityPlayer* Player;
-            if (RealID == 1) Player = &SonicMania::Player1;
-            else if (RealID == 2) Player = &SonicMania::Player2;
-            else if (RealID == 3) Player = &SonicMania::Player3;
-            else if (RealID == 4) Player = &SonicMania::Player4;
-            else Player = &SonicMania::Player1;
-            bool isPlayerInRangeOfCredits = Player->InRange(x1_credits, y1_credits, x2_credits, y2_credits);
-            bool isPlayerInRangeOfExit = Player->InRange(x1_exit, y1_exit, x2_exit, y2_exit);
-            if (isPlayerInRangeOfCredits)
-            {
-                CreditsCount += 1;
-            }
-            if (isPlayerInRangeOfExit)
-            {
-                ExitCount += 1;
-            }
+            bool isPlayerInRangeOfCredits = Player1.InRange(x1_credits, y1_credits, x2_credits, y2_credits);
+            bool isPlayerInRangeOfExit = Player1.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfCredits) CreditsCount += 1;
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player2.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfCredits = Player2.InRange(x1_credits, y1_credits, x2_credits, y2_credits);
+            bool isPlayerInRangeOfExit = Player2.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfCredits) CreditsCount += 1;
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player3.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfCredits = Player3.InRange(x1_credits, y1_credits, x2_credits, y2_credits);
+            bool isPlayerInRangeOfExit = Player3.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfCredits) CreditsCount += 1;
+            if (isPlayerInRangeOfExit) ExitCount += 1;
+        }
+        if (SonicMania::Player4.Camera != nullptr)
+        {
+            bool isPlayerInRangeOfCredits = Player4.InRange(x1_credits, y1_credits, x2_credits, y2_credits);
+            bool isPlayerInRangeOfExit = Player4.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            if (isPlayerInRangeOfCredits) CreditsCount += 1;
+            if (isPlayerInRangeOfExit) ExitCount += 1;
         }
 
         SpecialRing& ExitRing = *SonicMania::GetEntityFromSceneSlot<SpecialRing>(ExitRingSlot);

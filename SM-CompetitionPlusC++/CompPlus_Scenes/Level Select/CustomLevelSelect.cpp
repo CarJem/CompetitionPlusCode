@@ -5,9 +5,10 @@
 #include "SonicMania.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"
-#include "NextGenerationLevelSelectCore.h"
+#include "CoreLevelSelect.h"
 #include "Base.h"
 #include "CompPlus_Extensions/Drawing.h"
+#include "CompPlus_Core/CompPlus_Settings.h"
 #include <vector>
 #include <String>
 
@@ -17,13 +18,13 @@ namespace CompPlus_CustomLevelSelect
     using namespace SonicMania;
     using namespace CompPlus_Core;
     using namespace CompPlus_Common;
-    using namespace CompPlus_NextGenerationLevelSelectCore;
+    using namespace CompPlus_CoreLevelSelect;
 
 
     std::vector<std::string> LevelTitles =
     {
         "-----",
-        "  ?  ",
+        " --- ",
         "AIZ EX",
         "DHZ",
         "SPSTZ",
@@ -33,7 +34,13 @@ namespace CompPlus_CustomLevelSelect
         "DHZ+",
         "SPSTZ+",
         "GPZ 1+",
-        "LHPZ 1+"
+        "LHPZ 1+",
+        "SHZ 1",
+        "SHZ 2",
+        "MBZ 1",
+        "MBZ 2",
+        "GGZ 1",
+        "GGZ 2"
     };
 
     std::vector<std::string> LevelNames =
@@ -49,7 +56,13 @@ namespace CompPlus_CustomLevelSelect
         "DESERT HILL ZONE (ENCORE)",
         "SPECIAL STAGE ZONE (ENCORE)",
         "GUST PLANET ZONE ACT 1 (ENCORE)",
-        "LOST HIDDEN PALACE ZONE ACT 1 (ENCORE)"
+        "LOST HIDDEN PALACE ZONE ACT 1 (ENCORE)",
+        "SEATIDE HILL ZONE ACT 1",
+        "SEATIDE HILL ZONE ACT 2",
+        "METROPTROPIC BEACH ZONE ACT 1",
+        "METROPTROPIC BEACH ZONE ACT 2",
+        "GHOSTLY GALLEON ZONE ACT 1",
+        "GHOSTLY GALLEON ZONE ACT 2"
     };
 
     std::vector<std::string> AuthorNames =
@@ -59,7 +72,9 @@ namespace CompPlus_CustomLevelSelect
         "ANGELTHEGAMER",
         "CARJEM GENERATIONS",
         "GO TO CREDITS",
-        "CARJEM GENERATIONS [ALPHA RELEASE]"
+        "CARJEM GENERATIONS [ALPHA RELEASE]",
+        "CAMJAM33",
+        "CYBER1204"
     };
 
     bool SwapLevelSelect = false;
@@ -110,7 +125,8 @@ namespace CompPlus_CustomLevelSelect
         MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_DHZ, LevelTitles[3], LevelNames[3], AuthorNames[2], 1, 7, false);
         MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_SZ, LevelTitles[4], LevelNames[4], AuthorNames[2], 1, 1, false);
         MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_GPZ1, LevelTitles[5], LevelNames[5], AuthorNames[2], 1, 9, false);
-        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_LHPZ1, LevelTitles[6], LevelNames[6], AuthorNames[5], 2, 6, false);
+        if (CompPlus_Settings::LHPZ_SecretUnlocked) MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_LHPZ1, LevelTitles[6], LevelNames[6], AuthorNames[5], 2, 6, false);
+        else MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_LHPZ1, LevelTitles[1], LevelNames[1], AuthorNames[4], 2, 4, true);
         MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
@@ -119,17 +135,18 @@ namespace CompPlus_CustomLevelSelect
         MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_DHZE, LevelTitles[8], LevelNames[8], AuthorNames[2], 1, 7, false);
         MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_SZE, LevelTitles[9], LevelNames[9], AuthorNames[2], 1, 1, false);
         MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_GPZ1E, LevelTitles[10], LevelNames[10], AuthorNames[2], 1, 9, false);
-        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_LHPZ1E, LevelTitles[11], LevelNames[11], AuthorNames[5], 2, 6, false);
+        if (CompPlus_Settings::LHPZ_SecretUnlocked) MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_LHPZ1E, LevelTitles[11], LevelNames[11], AuthorNames[5], 2, 6, false);
+        else MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_LHPZ1E, LevelTitles[1], LevelNames[1], AuthorNames[4], 2, 4, true);
         MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
         MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Chaotix, "CHAOTIX", "", "", 2, 1, false); MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
-        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
-        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
-        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
-        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
-        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, "", LevelTitles[0], LevelNames[0], AuthorNames[0], 2, 3, true);
+        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, CompPlus_Common::SMCP_STHZ1, LevelTitles[12], LevelNames[12], AuthorNames[6], 1, 2, false);
+        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, CompPlus_Common::SMCP_STHZ2, LevelTitles[13], LevelNames[13], AuthorNames[6], 1, 2, false);
+        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, CompPlus_Common::SMCP_MBZ1, LevelTitles[14], LevelNames[14], AuthorNames[7], 2, 3, false);
+        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, CompPlus_Common::SMCP_MBZ2, LevelTitles[15], LevelNames[15], AuthorNames[7], 2, 3, false);
+        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, CompPlus_Common::SMCP_GGZ1, LevelTitles[16], LevelNames[16], AuthorNames[6], 2, 3, false);
+        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, CompPlus_Common::SMCP_GGZ2, LevelTitles[17], LevelNames[17], AuthorNames[6], 2, 3, false);
         MLS_MenuPoints[2][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[3][0] = CreateBlankMenuPoint(0, 1);
@@ -162,7 +179,7 @@ namespace CompPlus_CustomLevelSelect
     bool isIconsLoaded = false;
     int IconsSpriteID = 0;
 
-    void CheckForPointRefresh()
+    void Reload()
     {
         AreMenuPointsLoaded = false;
         PaletteSaved = false;

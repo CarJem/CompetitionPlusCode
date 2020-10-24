@@ -20,41 +20,9 @@ namespace CompPlus_ZoneSpecifics
     int CurrentSpecific = 0;
     int LastSpecific = 0;
 
-    char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
-
     char* CurrentScene_IZ;
     int CurrentScene_SM;
 
-    #pragma region DynCam Validation
-
-    bool IsValidDynCamScene()
-    {
-        if (strcmp(SceneDirectory, "Pinball") == 0) return false;
-        if (strcmp(SceneDirectory, "SpecialBS") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO1") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO2") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO3") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO4") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO5") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO6") == 0) return false;
-        if (strcmp(SceneDirectory, "UFO7") == 0) return false;
-        return true;
-    }
-
-    void SetDynamicCameraDisabledState(bool State)
-    {
-        if (!IsValidDynCamScene())
-        {
-            if (CompPlus_Status::DisableDynCam == false) CompPlus_Status::DisableDynCam = true;
-            return;
-        }
-        else
-        {
-            CompPlus_Status::DisableDynCam = State;
-        }
-    }
-
-    #pragma endregion
 
     #pragma region Presets
 
@@ -62,7 +30,7 @@ namespace CompPlus_ZoneSpecifics
     {
         CompPlus_Status::EnableHUBSpecialRingFunctionality = false;
         CompPlus_Status::isVSControllerInputUnlocked = false;
-        SetDynamicCameraDisabledState(false);
+        CompPlus_Status::DisableDynCam = false;
         CompPlus_Status::DisablePlayerDying = false;
         CompPlus_Status::InHolloweenHUB = false;
         CompPlus_Status::UseEXETitleCard = false;
@@ -113,7 +81,7 @@ namespace CompPlus_ZoneSpecifics
     {
         ResetSpecifics();
         HubLikePreset();
-        SetDynamicCameraDisabledState(true);
+        CompPlus_Status::DisableDynCam = true;
         CurrentSpecific = 1;
     }
 
@@ -136,18 +104,9 @@ namespace CompPlus_ZoneSpecifics
     void SetLevelSelectSpecifics()
     {
         ResetSpecifics();
-
         LevelSelectLikePreset();
-        SetDynamicCameraDisabledState(true);
+        CompPlus_Status::DisableDynCam = true;
         CurrentSpecific = 4;
-    }
-
-    void SetMMZ2LevelSpecifics() 
-    {
-        ResetSpecifics();
-
-        CompPlus_Status::ForceLoadChibiSprites = true;
-        CurrentSpecific = 5;
     }
 
     void SetEXELevelSpecifics()
@@ -155,111 +114,183 @@ namespace CompPlus_ZoneSpecifics
         ResetSpecifics();
         CompPlus_Status::IsExecutorStage = true;
         CompPlus_Status::UseEXETitleCard = true;
-        CurrentSpecific = 6;
-    }
-
-    void SetMMZ2EXELevelSpecifics()
-    {
-        ResetSpecifics();
-        CompPlus_Status::IsExecutorStage = true;
-        CompPlus_Status::UseEXETitleCard = true;
-        CompPlus_Status::ForceLoadChibiSprites = true;
-        CurrentSpecific = 7;
+        CurrentSpecific = 5;
     }
 
     void SetChaotixLevelSpecifics()
     {
         ResetSpecifics();
         CompPlus_Status::IsChaotixStage = true;
-        CurrentSpecific = 8;
+        CurrentSpecific = 6;
     }
 
     void SetChaotixEncoreLevelSpecifics()
     {
         ResetSpecifics();
         CompPlus_Status::IsChaotixStageEncore = true;
-        CurrentSpecific = 9;
+        CurrentSpecific = 7;
+    }
+
+    bool IsInternalStage(const char* CurrentScene)
+    {
+        if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBRanking)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBSettings)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_Credits)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Mania)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Encore)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Custom)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Chaotix)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Exe)) return true;
+        else return false;
+    }
+
+    bool IsManiaStage(const char* CurrentScene)
+    {
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ1K)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2)) return true;
+        else return false;
+    }
+
+    bool IsEncoreStage(const char* CurrentScene)
+    {
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2E)) return true;
+        else return false;
+    }
+
+    bool IsCustomStage(const char* CurrentScene)
+    {
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_AIZ_EXT)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_DHZ)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_DHZE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SZ)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SZE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GPZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GPZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TSZ)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LHPZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LHPZ1E)) return true;
+        else return false;
     }
     
     bool IsExecutorStage(const char* CurrentScene)
     {
-        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ2_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2_EXE)) SetMMZ2EXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1_EXE)) SetEXELevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2_EXE)) SetEXELevelSpecifics();
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1_EXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2_EXE)) return true;
         else return false;
-
-        return true;
     }
 
     bool IsChaotixStage(const char* CurrentScene)
     {
-        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_AAZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_AAZ1E)) SetChaotixEncoreLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_BBZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_BBZ1E)) SetChaotixEncoreLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_IIZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_IIZ1E)) SetChaotixEncoreLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_MMZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_MMZ1E)) SetChaotixEncoreLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_SSZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_SSZ1E)) SetChaotixEncoreLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_TTZ1)) SetChaotixLevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_TTZ1E)) SetChaotixEncoreLevelSpecifics();
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_AAZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_BBZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_IIZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_MMZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_SSZ1)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_TTZ1)) return true;
         else return false;
-        
-        return true;
     }
 
-
-    void UpdateSpecifics(const char* CurrentScene, int LevelID)
+    bool IsChaotixEncoreStage(const char* CurrentScene)
     {
-        CurrentScene_IZ = (char*)CurrentScene;
+        if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_AAZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_BBZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_IIZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_MMZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_SSZ1E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CXM_TTZ1E)) return true;
+        else return false;
+    }
+
+    void UpdateSpecifics(const char* CurrentSceneIZ, int LevelID)
+    {
+        CurrentScene_IZ = (char*)CurrentSceneIZ;
         CurrentScene_SM = LevelID;
 
-        if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld)) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld_EXE)) SetHauntedHUBSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::HUBRanking)) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::HUBSettings)) SetHUBSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_Credits)) SetCreditsSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Mania)) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Encore)) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Custom)) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Chaotix)) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::LSelect_Exe)) SetLevelSelectSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2)) SetMMZ2LevelSpecifics();
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2E)) SetMMZ2LevelSpecifics();
-        else if (IsExecutorStage(CurrentScene)) return;
-        else if (IsChaotixStage(CurrentScene)) return;
+        if (!strcmp(CurrentScene_IZ, CompPlus_Common::HUBWorld)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::HUBWorld_EXE)) SetHauntedHUBSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::HUBRanking)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::HUBSettings)) SetHUBSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::SMCP_Credits)) SetCreditsSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::LSelect_Mania)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::LSelect_Encore)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::LSelect_Custom)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::LSelect_Chaotix)) SetLevelSelectSpecifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::LSelect_Exe)) SetLevelSelectSpecifics();
+        else if (IsExecutorStage(CurrentScene_IZ)) SetEXELevelSpecifics();
+        else if (IsChaotixStage(CurrentScene_IZ)) SetChaotixLevelSpecifics();
+        else if (IsChaotixEncoreStage(CurrentScene_IZ)) SetChaotixEncoreLevelSpecifics();
         else SetDefaultSpecifics();
     }
 
     #pragma endregion
-
-
-
-
-
-
 
 }

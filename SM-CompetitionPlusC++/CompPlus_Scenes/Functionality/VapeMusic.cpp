@@ -21,6 +21,7 @@ namespace CompPlus_VapeMusic
     // AIZ - "EAngelIsland2.ogg"
     // SSZ2 METAL - "EMetalSonic.ogg"
     // MSZ1 (ST) - "EMirageSaloon1.ogg"
+
     const char* Music_GHZ1E = "SMCP_Vape/EGreenHill1.ogg";
     const char* Music_GHZ2E = "SMCP_Vape/EGreenHill2.ogg";
     const char* Music_CPZ1E = "SMCP_Vape/EChemicalPlant1.ogg";
@@ -123,15 +124,18 @@ namespace CompPlus_VapeMusic
 
     void SetMusic(const char* NormalPath, const char* VapePath, int NormalLoop, int VapeLoop, const char*& name, unsigned int& a2, int& a3, unsigned int& loopstart, int& a5)
     {
-        if (CompPlus_Settings::UseEncoreVapeMusic) 
+        if (a2 == 0) 
         {
-            name = VapePath;
-            loopstart = VapeLoop;
-        }
-        else 
-        {
-            name = NormalPath;
-            loopstart = NormalLoop;
+            if (CompPlus_Settings::UseEncoreVapeMusic)
+            {
+                name = VapePath;
+                loopstart = VapeLoop;
+            }
+            else
+            {
+                name = NormalPath;
+                loopstart = NormalLoop;
+            }
         }
     }
 
