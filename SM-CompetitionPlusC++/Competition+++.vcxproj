@@ -84,7 +84,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)include;$(IncludePath)</IncludePath>
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -149,7 +149,7 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>start "" /b "D:\Steam\steamapps\common\Sonic Mania\ManiaModManager.exe"</Command>
+      <Command>xcopy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Game\SM-CompetitionPlusV5\" /F /Y </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>TASKKILL /F /IM SonicMania.exe 2&gt;nul &amp;set errorlevel=0</Command>
