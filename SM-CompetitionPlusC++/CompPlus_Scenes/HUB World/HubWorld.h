@@ -4,6 +4,7 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "SonicMania.h"
 #include "HubCore.h"
+#include <string>
 
 namespace CompPlus_HubWorld
 {
@@ -25,5 +26,6 @@ namespace CompPlus_HubWorld
     extern int UpdateHUBDisplays();
     extern void OnFrame();
     extern void WarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);
+    extern void Init(std::string modPath);
 };
 

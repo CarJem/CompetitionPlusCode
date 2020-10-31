@@ -233,6 +233,8 @@ namespace CompPlus_EncoreLevelSelect
         }
 
         EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int DrawOrderOld = Canvas->DrawOrder;
+        Canvas->DrawOrder = CompPlus_CoreLevelSelect::GeneralDrawOrder;
 
         SonicMania::Vector2 CurrentPosition = SonicMania::Vector2(PosXCurrent + GetPositionOffsetX(), PosYCurrent + GetPositionOffsetY());
         int HalfSize = (WindowSizeX != 0 ? WindowSizeX / 2 : 0);
@@ -252,8 +254,8 @@ namespace CompPlus_EncoreLevelSelect
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, TopPanelY + PanelBarsHeight, WindowSizeX, CenterPanelHeight, 0x8204C6, 128, InkEffect::Ink_Alpha);
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, BottomPanelY, WindowSizeX, PanelBarsHeight, 0x000000, 255, InkEffect::Ink_Alpha);
 
-        Drawing::DrawDevTextSprite("ENCORE STAGES", Vector2(150, 190 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
-        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, 610 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("ENCORE STAGES", Vector2(150, 190 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, 610 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
 
 
         //Draw Zone Buttons
@@ -281,6 +283,7 @@ namespace CompPlus_EncoreLevelSelect
         //Draw Zone Info Stuff
         MenuPoint Point = MLS_MenuPoints[MenuPos_Y][MenuPos_X];
         DrawZoneInfo(Point, Canvas);
+        Canvas->DrawOrder = DrawOrderOld;
     }
 
     bool CooldownActive = false;

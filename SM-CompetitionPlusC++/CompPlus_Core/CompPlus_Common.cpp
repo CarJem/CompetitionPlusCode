@@ -31,6 +31,10 @@ namespace CompPlus_Common
     const char* SFX_EXE_Laugh = "SMCP_Executor/Laugh.wav";
 
     const char* Act_LSelect = "/Data/Palettes/SMCP_LSelect/LSelect.act";
+    const char* Act_HUB_Objects = "/Data/Palettes/SMCP_Custom/HUB_Objects.act";
+    const char* Act_MBZ_Day = "/Data/Palettes/SMCP_MBZ/MBZ_Day.act";
+    const char* Act_MBZ_Sunset = "/Data/Palettes/SMCP_MBZ/MBZ_Sunset2.act";
+    const char* Act_MBZ_Night = "/Data/Palettes/SMCP_MBZ/MBZ_Night.act";
 
     const char* Anim_LSelectIcons_Mania = "SMCP_LSelect/Icons.bin";
     const char* Anim_LSelectIcons_Encore = "SMCP_LSelect/Icons_Encore.bin";
@@ -165,10 +169,10 @@ namespace CompPlus_Common
     const char* SMCP_LHPZ1E = "SMCP_LHPZ1E";
 
     const char* SMCP_STHZ1 = "SMCP_STHZ1";
-    const char* SMCP_STHZ2 = "SMCP_STHZ1";
+    const char* SMCP_STHZ2 = "SMCP_STHZ2";
 
     const char* SMCP_MBZ1 = "SMCP_MBZ1";
-    const char* SMCP_MBZ2 = "SMCP_MBZ1";
+    const char* SMCP_MBZ2 = "SMCP_MBZ2";
 
     const char* SMCP_GGZ1 = "SMCP_GGZ1";
     const char* SMCP_GGZ2 = "SMCP_GGZ2";
@@ -234,18 +238,17 @@ namespace CompPlus_Common
 	}
 
 	void PlayMenuAcceptSoundFX(bool isClassic)
-	{    
-		if (isClassic) PlaySoundFXS(SFX_MenuAccept);
-        else PlaySoundFXS(SFX_MenuAcceptClassic);
+	{
+		if (isClassic) PlaySoundFXS(SFX_MenuAcceptClassic);
+        else PlaySoundFXS(SFX_MenuAccept);
 	}
 
     void LoadLastLevelSelect() 
     {
-        if (CompPlus_Status::CurrentLevelSelect == 0) LoadLevel_IZ(LSelect_Mania);
-        else if (CompPlus_Status::CurrentLevelSelect == 1) LoadLevel_IZ(LSelect_Encore);
+        if (CompPlus_Status::CurrentLevelSelect == 1) LoadLevel_IZ(LSelect_Encore);
         else if (CompPlus_Status::CurrentLevelSelect == 2) LoadLevel_IZ(LSelect_Custom);
         else if (CompPlus_Status::CurrentLevelSelect == 3) LoadLevel_IZ(LSelect_Chaotix);
-        else if (CompPlus_Status::CurrentLevelSelect == 4) LoadLevel_IZ(LSelect_Exe);
+        else LoadLevel_IZ(LSelect_Mania);
     }
 
     void SetLastLevelSelect(int Value) 

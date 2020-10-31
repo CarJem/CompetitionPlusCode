@@ -238,6 +238,7 @@ namespace CompPlus_Credits
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;
@@ -266,6 +267,7 @@ namespace CompPlus_Credits
         {
             for (int i = 0; i < 2301; ++i)
             {
+                if (i == 271 || i == 269 || i == 270 || i == 253) continue;
                 Entity& entity = *GetEntityFromSceneSlot<Entity>(i);
 
                 if (entity.ObjectID == 88)

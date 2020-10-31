@@ -179,6 +179,7 @@
     <OOZ_Valve/>
   </Core_OOZ>
   <Core_OOZ2>
+    <OOZ2_WarpDoor/>
     <OOZ2_Parallax/>
   </Core_OOZ2>
   <Core_LRZ1>

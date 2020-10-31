@@ -47,6 +47,8 @@ namespace CompPlus_HubCore
             LocationStart = Vector2(x + LocationStart.GetFullX(), y + LocationStart.GetFullY());
         }
 
+        //CompPlus_HubWorld::SetObjectPalette();
+
 
         int SpriteFrame = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
@@ -59,6 +61,8 @@ namespace CompPlus_HubCore
         SetSpriteAnimation(HUDSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
         DrawSprite(&RingTemp->ActNumbersData, &LocationStart, true);
         LocationStart.X = LocationStart.X + 8;
+
+        //CompPlus_HubWorld::UnsetObjectPalette();
     }
 
     char* GetPosition(int PlayerID)
@@ -69,10 +73,10 @@ namespace CompPlus_HubCore
         else if (PlayerID == 3) Position = CompPlus_Scoring::P3_LastPlacement;
         else if (PlayerID == 4) Position = CompPlus_Scoring::P4_LastPlacement;
 
-        if (Position == 1) return (char*)"1st";
-        else if (Position == 2) return (char*)"2nd";
-        else if (Position == 3) return (char*)"3rd";
-        else if (Position == 4) return (char*)"4th";
+        if (Position == 1) return (char*)"1ST";
+        else if (Position == 2) return (char*)"2ND";
+        else if (Position == 3) return (char*)"3RD";
+        else if (Position == 4) return (char*)"4TH";
         else return (char*)"   ";
     }
 
@@ -98,13 +102,6 @@ namespace CompPlus_HubCore
     Hitbox Player3Box;
     Hitbox Player4Box;
 
-    void OnUnusedDraw(EntityPlayer* ThisObject, int offset) 
-    {
-        DrawCircleOutline((ThisObject->Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (ThisObject->Position.Y - GetPointer(0xAA7628, 0x96004 + offset)), 50 + 75, 1000, ToRGB888(GetPaletteEntry(0, 1)), 140, Ink_Alpha, true);
-        DrawCircleOutline((ThisObject->Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (ThisObject->Position.Y - GetPointer(0xAA7628, 0x96004 + offset)), 50 + ThisObject->RingCount, 1000, ToRGB888(GetPaletteEntry(0, 1)), 160, Ink_Alpha, true);
-        DrawCircleOutline((ThisObject->Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (ThisObject->Position.Y - GetPointer(0xAA7628, 0x96004 + offset)), 60 + ThisObject->RingCount, 1000, ToRGB888(GetPaletteEntry(0, 1)), 250, Ink_Alpha, true);
-    }
-
     void DrawWaitingForPlayers(int offset) 
     {
         for (int i = 0; i < 2301; ++i)
@@ -116,8 +113,8 @@ namespace CompPlus_HubCore
                 if (!specialRing.Enabled)
                 {
 
-                    int X1 = specialRing.Position.X - GetPointer(0xAA7628, 0x96000 + offset) - 30;
-                    int X2 = specialRing.Position.X - GetPointer(0xAA7628, 0x96000 + offset) - 15;
+                    int X1 = specialRing.Position.X - GetPointer(0xAA7628, 0x96000 + offset);
+                    int X2 = specialRing.Position.X - GetPointer(0xAA7628, 0x96000 + offset);
                     int Y1 = specialRing.Position.Y - GetPointer(0xAA7628, 0x96004 + offset) + 45;
                     int Y2 = specialRing.Position.Y - GetPointer(0xAA7628, 0x96004 + offset) + 8 + 45;
                     int Y3 = specialRing.Position.Y - GetPointer(0xAA7628, 0x96004 + offset) + 16 + 45;
@@ -126,9 +123,9 @@ namespace CompPlus_HubCore
                     Vector2 Position2 = Vector2(X2, Y2);
                     Vector2 Position3 = Vector2(X1, Y3);
 
-                    DrawTextSprite(Player1, "Waiting", Position1, 0);
-                    DrawTextSprite(Player1, "For", Position2, 0);
-                    DrawTextSprite(Player1, "Players", Position3, 0);
+                    Drawing::DrawDevTextSprite("WAITING", Position1, true, 14, 0, 0, DevMenu_Alignment::Alignment_Center, false);
+                    Drawing::DrawDevTextSprite("FOR", Position2, true, 14, 0, 0, DevMenu_Alignment::Alignment_Center, false);
+                    Drawing::DrawDevTextSprite("PLAYERS", Position3, true, 14, 0, 0, DevMenu_Alignment::Alignment_Center, false);
                 }
             }
         }
@@ -140,7 +137,7 @@ namespace CompPlus_HubCore
     {
         EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
         int OldDrawOrder = Canvas->DrawOrder;
-        Canvas->DrawOrder = 15;
+        Canvas->DrawOrder = 14;
 
 
         int P1_Alpha = 255 - CompPlus_HubWorld::P1_WarpAlpha;
@@ -158,11 +155,14 @@ namespace CompPlus_HubCore
         if (screen == 1) DrawRect(0, 0, 500, 500, 0xFFFFFF, P2_Alpha, Ink_Alpha, true);
         if (screen == 2) DrawRect(0, 0, 500, 500, 0xFFFFFF, P3_Alpha, Ink_Alpha, true);
         if (screen == 3) DrawRect(0, 0, 500, 500, 0xFFFFFF, P4_Alpha, Ink_Alpha, true);
-        //Canvas->DrawOrder = OldDrawOrder;
+        Canvas->DrawOrder = OldDrawOrder;
     }
 
     void OnDraw()
     {
+        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = Canvas->DrawOrder;
+
         ushort pointer = GetSpritePointer(0xAA7634, 0x14);
         int screen = 0;
 
@@ -181,49 +181,78 @@ namespace CompPlus_HubCore
             {
                 Vector2 position_p1 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player1Box.Top + Player1Box.Bottom + 24);
                 Vector2 position_p1_top = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player1Box.Top - Player1Box.Bottom - 45);
-                Vector2 position_p1_top2 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 8, (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player1Box.Top - Player1Box.Bottom - 24);
-                DrawTextSprite(Player1, "1P", position_p1_top2, 0);
-                DrawTextSprite(Player1, GetPosition(1), position_p1, 0);
-                if (CompPlus_Scoring::P1_LastPlacement == 1) DrawCrownSprite(Player1, position_p1_top, false);
-                //if (screen == 0) OnUnusedDraw(&Player1, offset);
+                Vector2 position_p1_top2 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player1Box.Top - Player1Box.Bottom - 24);
+                Drawing::DrawDevTextSprite("1P", position_p1_top2, true, Player1.DrawOrder, 0, 0, Alignment_Center, false);
+
+                if (CompPlus_Scoring::P1_LastPlacement == 1) 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(1), position_p1, true, 12, 0, 0, Alignment_Center, true);
+                    DrawCrownSprite(Player1, position_p1_top, false);
+                }
+                else 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(1), position_p1, true, 12, 0, 0, Alignment_Center, false);
+                }
             }
             if (Player2.Camera != nullptr)
             {
 
                 Vector2 position_p2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player2Box.Top + Player2Box.Bottom + 24);
                 Vector2 position_p2_top = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player2Box.Top - Player2Box.Bottom - 45);
-                Vector2 position_p2_top2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 8, (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player2Box.Top - Player2Box.Bottom - 24);
-                DrawTextSprite(Player2, "2P", position_p2_top2, 0);
-                DrawTextSprite(Player2, GetPosition(2), position_p2, 0);
-                if (CompPlus_Scoring::P2_LastPlacement == 1) DrawCrownSprite(Player2, position_p2_top, false);
-                //if (screen == 1) OnUnusedDraw(&Player2, offset);
+                Vector2 position_p2_top2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player2Box.Top - Player2Box.Bottom - 24);
+                Drawing::DrawDevTextSprite("2P", position_p2_top2, true, 12, 0, 0, Alignment_Center, false);
+
+                if (CompPlus_Scoring::P2_LastPlacement == 1) 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(2), position_p2, true, 12, 0, 0, Alignment_Center, true);
+                    DrawCrownSprite(Player2, position_p2_top, false);
+                }
+                else 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(2), position_p2, true, 12, 0, 0, Alignment_Center, false);
+                }
             }
             if (Player3.Camera != nullptr)
             {
 
                 Vector2 position_p3 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player3Box.Top + Player3Box.Bottom + 24);
                 Vector2 position_p3_top = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player3Box.Top - Player3Box.Bottom - 45);
-                Vector2 position_p3_top2 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 8, (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player3Box.Top - Player3Box.Bottom - 24);
-                DrawTextSprite(Player3, "3P", position_p3_top2, 0);
-                DrawTextSprite(Player3, GetPosition(3), position_p3, 0);
-                if (CompPlus_Scoring::P3_LastPlacement == 1) DrawCrownSprite(Player3, position_p3_top, false);
-                //if (screen == 2) OnUnusedDraw(&Player3, offset);
+                Vector2 position_p3_top2 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player3Box.Top - Player3Box.Bottom - 24);
+                Drawing::DrawDevTextSprite("3P", position_p3_top2, true, 12, 0, 0, Alignment_Center, false);
+                
+                if (CompPlus_Scoring::P3_LastPlacement == 1)
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(3), position_p3, true, 12, 0, 0, Alignment_Center, true);
+                    DrawCrownSprite(Player3, position_p3_top, false);
+                }
+                else 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(3), position_p3, true, 12, 0, 0, Alignment_Center, false);
+                }
             }
             if (Player4.Camera != nullptr)
             {
                 Vector2 position_p4 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player4Box.Top + Player4Box.Bottom + 24);
                 Vector2 position_p4_top = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player4Box.Top - Player4Box.Bottom - 45);
-                Vector2 position_p4_top2 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 8, (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player4Box.Top - Player4Box.Bottom - 24);
-                DrawTextSprite(Player4, "4P", position_p4_top2, 0);
-                DrawTextSprite(Player4, GetPosition(4), position_p4, 0);
-                if (CompPlus_Scoring::P4_LastPlacement == 1) DrawCrownSprite(Player4, position_p4_top, false);
-                //if (screen == 3) OnUnusedDraw(&Player4, offset);
+                Vector2 position_p4_top2 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player4Box.Top - Player4Box.Bottom - 24);
+                Drawing::DrawDevTextSprite("4P", position_p4_top2, true, 12, 0, 0, Alignment_Center, false);
+                
+                if (CompPlus_Scoring::P4_LastPlacement == 1)
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(4), position_p4, true, 12, 0, 0, Alignment_Center, true);
+                    DrawCrownSprite(Player4, position_p4_top, false);
+                }
+                else 
+                {
+                    Drawing::DrawDevTextSprite(GetPosition(4), position_p4, true, 12, 0, 0, Alignment_Center, false);
+                }
             }
 
             DrawKillScreens(screen, offset);
 
             EndDraw(screen);
         }
+        Canvas->DrawOrder = OldDrawOrder;
     }
 
     void DisableCountdown() 

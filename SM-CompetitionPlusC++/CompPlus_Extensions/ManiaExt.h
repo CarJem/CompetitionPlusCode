@@ -3,15 +3,12 @@
 #include "ManiaModLoader.h"
 #include "SonicMania.h"
 #include <string>
-
+#include <vector>
 
 
 struct FBZStorm : SonicMania::Entity
 {
-    /* 0x00000058 */ BYTE State;
-    /* 0x00000059 */ BYTE DrawState;
-    /* 0x0000005A */ BYTE Something1;
-    /* 0x0000005B */ BYTE Something2;
+    /* 0x00000058 */ void* State;
     /* 0x0000005C */ BYTE LightningTimer;
 
 };
@@ -39,13 +36,9 @@ db is BYTE
 DataPointer(int, FrameMultiplier, 0x2680A4);
 
 
-extern bool DevFontLoaded;
-
+extern void StorePalette(std::string filepath, SHORT(&PaletteStorage)[256], int& PaletteStorage_Length);
 extern void WarpWithCamera(SonicMania::EntityPlayer& Player, int x, int y);
 extern bool IsPlayerActive(SonicMania::EntityPlayer Player);
 extern SonicMania::EntityPlayer GetPlayer(int RealID);
-extern void DrawTextSprite(std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative, int DrawOrder, int Rotation, int Angle, SonicMania::DevMenu_Alignment Alignment);
-extern void DrawTextSprite(SonicMania::EntityPlayer Player, std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative);
-extern void DrawTextSprite(std::string Name, SonicMania::Vector2 LocationStart, bool ScreenRelative);
 extern void SetUIPictureFrame(int slotID, int frameID);
 extern SonicMania::EntityUIPicture* GetEntity(int slotID);

@@ -46,21 +46,21 @@ namespace CompPlus_PlayerSkins
     int RayDropDashID = 0;
     int MightyDropDashID = 0;
 
-    const char* Anim_Default_Sonic = "SMCP_Players/Default/Players/Sonic.bin";
-    const char* Anim_Default_Tails = "SMCP_Players/Default/Players/Tails.bin";
-    const char* Anim_Default_Knux = "SMCP_Players/Default/Players/Knux.bin";
-    const char* Anim_Default_Ray = "SMCP_Players/Default/Players/Ray.bin";
-    const char* Anim_Default_Mighty = "SMCP_Players/Default/Players/Mighty.bin";
+    const char* Anim_Default_Sonic = "SMCP_Players/Sonic.bin";
+    const char* Anim_Default_Tails = "SMCP_Players/Tails.bin";
+    const char* Anim_Default_Knux = "SMCP_Players/Knux.bin";
+    const char* Anim_Default_Ray = "SMCP_Players/Ray.bin";
+    const char* Anim_Default_Mighty = "SMCP_Players/Mighty.bin";
 
-    const char* Anim_Dropdash_Tails = "SMCP_Players/DropDash/Players/Tails.bin";
-    const char* Anim_Dropdash_Knux = "SMCP_Players/DropDash/Players/Knux.bin";
-    const char* Anim_Dropdash_Ray = "SMCP_Players/DropDash/Players/Ray.bin";
-    const char* Anim_Dropdash_Mighty = "SMCP_Players/DropDash/Players/Mighty.bin";
+    const char* Anim_Dropdash_Tails = "SMCP_Players/TailsDD.bin";
+    const char* Anim_Dropdash_Knux = "SMCP_Players/KnuxDD.bin";
+    const char* Anim_Dropdash_Ray = "SMCP_Players/RayDD.bin";
+    const char* Anim_Dropdash_Mighty = "SMCP_Players/MightyDD.bin";
 
-    const char* Anim_DrillDive_Sonic = "SMCP_Players/DrillDive/Players/Sonic.bin";
-    const char* Anim_DrillDive_Tails = "SMCP_Players/DrillDive/Players/Tails.bin";
-    const char* Anim_DrillDive_Knux = "SMCP_Players/DrillDive/Players/Knux.bin";
-    const char* Anim_DrillDive_Ray = "SMCP_Players/DrillDive/Players/Ray.bin";
+    const char* Anim_DrillDive_Sonic = "SMCP_Players/SonicHD.bin";
+    const char* Anim_DrillDive_Tails = "SMCP_Players/TailsHD.bin";
+    const char* Anim_DrillDive_Knux = "SMCP_Players/KnuxHD.bin";
+    const char* Anim_DrillDive_Ray = "SMCP_Players/RayHD.bin";
 
 
     int FrameTimeOut = 30;
@@ -107,6 +107,7 @@ namespace CompPlus_PlayerSkins
             TailsDrillDiveID = SonicMania::LoadAnimation(Anim_DrillDive_Tails, SonicMania::Scope_Stage);
             KnuxDrillDiveID = SonicMania::LoadAnimation(Anim_DrillDive_Knux, SonicMania::Scope_Stage);
             RayDrillDiveID = SonicMania::LoadAnimation(Anim_DrillDive_Ray, SonicMania::Scope_Stage);
+            
             SpritesLoaded = true;
         }
     }

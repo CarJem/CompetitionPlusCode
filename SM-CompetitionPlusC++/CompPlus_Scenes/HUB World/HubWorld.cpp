@@ -118,274 +118,18 @@ namespace CompPlus_HubWorld
     #pragma region Billboard Palette Systems
 
     bool PaletteLoaded = false;
+    std::string PaletteACT_FilePath;
     std::vector<SHORT> PaletteMemory = std::vector<SHORT>(256);
-    std::vector<SHORT> PaletteStorage;
+    int PaletteStorage_Length;
+    SHORT PaletteStorage[256];
 
     void LoadPalette() 
     {
-        if (PaletteLoaded) return;
-
-        int i = 0;
-        PaletteStorage = std::vector<SHORT>(256);
-
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000080); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x0038C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x0068F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x1888F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x30A0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x185868); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x60A0B0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x98C8C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA0E0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC06830); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE09060); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B090); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D0C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x400000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x900000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE00000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x800000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB03000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE07000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE0A000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE0C000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x200008); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x700010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE00020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE84848); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE87878); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE89898); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x700000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC00010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x282028); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x383040); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x484868); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x587090); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x80A0B0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x98C0C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB0D0D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC0E0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE0E0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x401000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x883800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB86800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x200000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x480008); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x900010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE00000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF08C18); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x604080); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA0A0C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x283898); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x3050A8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x881020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC04000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x505878); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE07000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000080); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x0038C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x0068F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x1888F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x30A0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x7F0300); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xAC1A00); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xCD4F00); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xDC7800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE48E00); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xECA600); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x005800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x00A000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x00C800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD8D020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x580018); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x980030); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD00040); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE82858); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF06080); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF08088); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x400068); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x900088); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF00098); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A0C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x501010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x882020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA83030); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC84040); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE06868); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF09098); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA86020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD08840); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE8A860); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0D090); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x780000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA80000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x087858); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x08C890); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x883000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA06800); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB88810); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD0A810); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE0C020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE8D038); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E078); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB05000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC87048); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE8A078); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x5801B8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA001F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC818F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE828F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFF00FF); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x203830); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x205038); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x306850); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x38A078); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x50B898); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x58C8B8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x88D8D8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC8E8E8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x482010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x602010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x883810); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC85010); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE87820); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A020); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0C860); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E0B8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x280120); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x400130); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x580150); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x680148); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x880150); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA80158); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC00148); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF00148); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x100150); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x011078); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x083098); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x1058B0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x1078C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x3090D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x88C8E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA0D8E8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB8E0E8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC8E8F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD0F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE8F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x6878C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x6880D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x6890D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x68A0D8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x60B0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x60C0E8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x68D0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x50E0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x60E8C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x80F0C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xA8F0C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E8D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC8F0E0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC8C0B8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE0D0C0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE8D8C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC08868); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD08860); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD89050); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE89858); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A048); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0B070); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0C880); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0E0A8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0A848); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD86848); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF07848); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF09858); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x9868C8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB068D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC868D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD868D8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE868D8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE878D0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB860B0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xC860A0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD06098); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD86890); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE86880); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xE87888); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x000000); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x209048); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x30A058); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x40B068); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x50C078); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x60D088); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x70D898); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x78E0A0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF00101); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x48D8F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x98E0F0); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF0F0D8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xF098A8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0x01F080); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xD89058); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xB850B8); i++;
-        PaletteStorage[i] = SonicMania::ToRGB565(0xFFFFFF); i++;
-
-        PaletteLoaded = true;
+        if (!PaletteLoaded) 
+        {
+            StorePalette(PaletteACT_FilePath, PaletteStorage, PaletteStorage_Length);
+            PaletteLoaded = true;
+        }
     }
 
     void SetObjectPalette()
@@ -409,8 +153,6 @@ namespace CompPlus_HubWorld
         {
             SonicMania::Palette0[i] = PaletteMemory[i];
         }
-
-        PaletteMemory.clear();
     }
 
     #pragma endregion
@@ -470,9 +212,9 @@ namespace CompPlus_HubWorld
     void CheckHUBSettings() 
     {
         //Level Select NUD
-        int LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController, CompPlus_Status::CurrentLevelSelect, 0, 4);
+        int LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController, CompPlus_Status::CurrentLevelSelect, 0, 3);
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Status::CurrentLevelSelect = LevelStatus;
-        LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController2, LevelStatus, 0, 4);
+        LevelStatus = CompPlus_HubControllers::SingleUpDownController(SwapLevelSelectController2, LevelStatus, 0, 3);
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Status::CurrentLevelSelect = LevelStatus;
 
         if (LevelStatus != CompPlus_Status::CurrentLevelSelect) CompPlus_Settings::SaveSettings();
@@ -891,6 +633,7 @@ namespace CompPlus_HubWorld
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;
@@ -933,6 +676,7 @@ namespace CompPlus_HubWorld
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;
@@ -976,6 +720,7 @@ namespace CompPlus_HubWorld
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;
@@ -1008,6 +753,11 @@ namespace CompPlus_HubWorld
         if (SettingsSelected) SettingsWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, SettingsSelected, LevelSelectedWarpSoundPlayed);
         if (LevelSelected) WarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
 
+    }
+
+    void Init(std::string modPath)
+    {
+        PaletteACT_FilePath = modPath + CompPlus_Common::Act_HUB_Objects;
     }
 
 

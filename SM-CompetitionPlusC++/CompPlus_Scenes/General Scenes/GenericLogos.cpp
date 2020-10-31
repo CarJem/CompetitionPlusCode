@@ -67,6 +67,7 @@ namespace CompPlus_GenericLogos
 				FxFadeR->EventOnly = false;
 				FxFadeR->Overhud = false;
 				FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
 
 			}

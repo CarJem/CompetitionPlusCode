@@ -20,6 +20,10 @@ namespace CompPlus_Common
     extern const char* SFX_EXE_Laugh;
 
     extern const char* Act_LSelect;
+    extern const char* Act_HUB_Objects;
+    extern const char* Act_MBZ_Day;
+    extern const char* Act_MBZ_Sunset;
+    extern const char* Act_MBZ_Night;
 
     extern const char* Anim_LSelectIcons_Mania;
     extern const char* Anim_LSelectIcons_Encore;

@@ -5,7 +5,6 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Extensions/IZAPI.h"
 #include "CompPlus_Extensions/Helpers.h"
-#include "CompPlus_Extensions/TitleCardColors.h"
 
 #include "CompPlus_Scenes/Custom Scenes/GustPlanet.h"
 #include "CompPlus_Scenes/Custom Scenes/LHPZ.h"
@@ -23,6 +22,7 @@
 #include "CompPlus_Scenes/Functionality/SizeLazer.h"
 #include "CompPlus_Scenes/Functionality/Halloween2018.h"
 #include "CompPlus_Scenes/Functionality/VapeMusic.h"
+#include "CompPlus_Scenes/Functionality/DynCam.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -61,6 +61,27 @@ namespace CompPlus_Patches
             return PlayMusicFile_BASS(name, a2, a3, loopstart, a5);
         }
 
+        int DrawWater(EntityAnimationData* AnimData, Vector2* Position, BOOL ScreenRelative)
+        {
+            ushort pointer = GetSpritePointer(0xAA7634, 0x14);
+            int screen = 0;
+
+            if (pointer == 0) screen = 0;
+            else if (pointer == 1) screen = 1;
+            else if (pointer == 2) screen = 2;
+            else if (pointer == 3) screen = 3;
+
+            int offset = 0x96030 * screen;
+
+            int x = 0 - GetPointer(0xAA7628, 0x96000 + offset);
+            int y = Position->Y - GetPointer(0xAA7628, 0x96004 + offset);
+
+            auto color1 = CompPlus_Scenes::OnWaterColorDraw();
+            DrawRect(x, y, 32000, 32000, color1.Color.ToRGB888(), color1.Alpha, color1.InkEffect, true);
+            int ReturnVal = DrawSprite(AnimData, Position, ScreenRelative);
+            return ReturnVal;
+        }
+
         void OnScreenDraw()
         {
             CompPlus_Core::OnDraw();
@@ -81,6 +102,16 @@ namespace CompPlus_Patches
         static int OnControlPanelADrawReturn = baseAddress + 0x16EF19;
         static int OnControlPanelBDrawReturn = baseAddress + 0x16EF2A;
         static int OnButtonDrawReturn = baseAddress + 0x864D0;
+        static int OnWaterDrawReturn = baseAddress + 0x19B9D;
+
+        static __declspec(naked) void OnWaterDrawHook()
+        {
+            __asm
+            {
+                call DrawWater
+                    jmp OnWaterDrawReturn
+            }
+        }
 
         static __declspec(naked) void OnDecorationDrawHook()
         {
@@ -237,15 +268,32 @@ namespace CompPlus_Patches
         void DoOnStartTimer()
         {
             CompPlus_Halloween2018::OnStartTimer();
+            CompPlus_DynCam::OnStartTimer();
         }
-        static int HookStartTimerAddyJMPBACK = baseAddress + 0x016034;
+
+
+
+        //static int HookStartTimerAddyJMPBACK = baseAddress + 0x016034;
+        static int HookStartTimerAddyJMPBACK = baseAddress + 0x016046;
         static __declspec(naked) void HookTimer()
         {
+            /*
             __asm
             {
                 mov[eax + 0x30], 0x00000001
                 pushad;
-
+            }
+            DoOnStartTimer();
+            __asm
+            {
+                popad;
+                jmp HookStartTimerAddyJMPBACK
+            }
+            */
+            __asm
+            {
+                mov[eax + 0x18], 0x00000000
+                pushad;
             }
             DoOnStartTimer();
             __asm
@@ -271,6 +319,12 @@ namespace CompPlus_Patches
         {
             WriteData<5>((void*)(baseAddress + 0x7FF9), 0x90);
             WriteJump((void*)(baseAddress + 0x7FF9), OnMenuScreenDrawHook);
+        }
+
+        void PatchWaterDrawHook() 
+        {
+            WriteData<6>((void*)(baseAddress + 0x19B97), 0x90);
+            WriteJump((void*)(baseAddress + 0x19B97), OnWaterDrawHook);
         }
 
         void PatchOnTitlePlusLogoDrawHook()
@@ -311,8 +365,13 @@ namespace CompPlus_Patches
             int PatchOnTimerCode = baseAddress + 0x16000;
             VirtualProtect((void*)PatchOnTimerCode, 0x00178000, PAGE_EXECUTE_READWRITE, &PatchOnTimerStart);
 
+            /*
             WriteData<7>((void*)(baseAddress + 0x01602D), 0x90);
             WriteJump((void*)(baseAddress + 0x01602D), HookTimer);
+            */
+
+            WriteData<7>((void*)(baseAddress + 0x01603F), 0x90);
+            WriteJump((void*)(baseAddress + 0x01603F), HookTimer);
         }
 
         void LoadSounds()
@@ -329,6 +388,7 @@ namespace CompPlus_Patches
                 SoundsLoaded = true;
             }
         }
+
 
         void PatchCompetitionPlusTMZ()
         {
@@ -779,6 +839,7 @@ namespace CompPlus_Patches
         PatchOnTitlePlusLogoDrawHook();
         PatchOnDecorationScreenDrawHook();
         //PatchMenuOnScreenDrawHook();
+        PatchWaterDrawHook();
         PatchCompetitionPlusTMZ();
         PatchPlaySongBass();
         PatchHookOnStartTimer();

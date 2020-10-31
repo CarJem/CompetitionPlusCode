@@ -13,7 +13,8 @@ namespace CompPlus_Settings
         SpeedShoesModification_Default = 0,
         SpeedShoesModification_SpeedDown = 1,
         SpeedShoesModification_Freeze = 2,
-        SpeedShoesModification_HighJump = 3
+        SpeedShoesModification_HighJump = 3,
+        SpeedShoesModification_Random = 4
     };
 
     enum SonicAbility : int {
@@ -83,6 +84,10 @@ namespace CompPlus_Settings
     #pragma region Setting Variables
 
     //Developer Settings
+    extern bool StartupStage_Enabled;
+    extern bool StartupStage_UseIZ;
+    extern int StartupStage_Normal;
+    extern std::string StartupStage_Infinity;
     extern bool EnableDevMode;
     extern bool EnableDebugMode;
     extern bool DarkDevMenu;
@@ -104,6 +109,9 @@ namespace CompPlus_Settings
     extern VictoryMode VictoryStyle;
     extern AnnouncerType CurrentAnnouncer;
     extern SpeedShoesModification SpeedShoesMode;
+
+    //Player Settings
+    extern bool PlayerSettingsSaveMode;
 
     //DynCam Settings
     extern bool Player1DynCam;
@@ -138,6 +146,10 @@ namespace CompPlus_Settings
     extern bool LHPZ_SecretUnlocked;
 
     #pragma endregion
+
+    extern void SetPlayerSettingsSaveMode(bool Value);
+
+    extern void SetSpeedShoesMode(SpeedShoesModification Value);
 
     extern void SetTailsFlightCancel(bool Value);
 

@@ -114,9 +114,6 @@
     <ClInclude Include="CompPlus_Extensions\PointScrolling.h">
       <Filter>Extensions\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\TitleCardColors.h">
-      <Filter>Extensions\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
     </ClInclude>
@@ -229,6 +226,8 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\PlayerSkins.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
@@ -266,9 +265,6 @@
       <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp">
       <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_DevMenu\DevMenu_InputMapping.cpp">
@@ -394,5 +390,7 @@
     <ClCompile Include="CompPlus_Scenes\Functionality\PlayerSkins.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpeedShoesMods.cpp" />
   </ItemGroup>
 </Project>

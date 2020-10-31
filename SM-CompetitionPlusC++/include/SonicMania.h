@@ -602,7 +602,8 @@ namespace SonicMania
 #define PLAYERSTATE_SpringBasic       (SonicMania::PlayerStatus)(baseAddress + 0x000CB6C0)
 #define PLAYERSTATE_ScoreCard         (SonicMania::PlayerStatus)(baseAddress + 0x000CCD30)
 #define PLAYERSTATE_TransportTube_CPZ (SonicMania::PlayerStatus)(baseAddress + 0x000CBA90)
-#define PLAYERSTATE_HCZSlide          (SonicMania::PlayerStatus)(baseAddress + 0x000B9970); //Added from LHPZ Mod
+#define PLAYERSTATE_HCZSlide          (SonicMania::PlayerStatus)(baseAddress + 0x000B9970) //Added from LHPZ Mod
+#define PLAYERSTATE_SPZ1_TVVan        (SonicMania::PlayerStatus)(baseAddress + 0x000CAD70)
 
 
 // Sonic
@@ -3311,7 +3312,7 @@ namespace SonicMania
     inline void ConvertASCII2Unicode(wchar_t* dest, char* src, size_t size, int offset)
     {
         memset(dest, 0, size * 2);
-        for (int i = 0; i < size; ++i)
+        for (unsigned int i = 0; i < size; ++i)
             dest[i] = src[i] + offset;
     }
 

@@ -5,10 +5,10 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Extensions/IZAPI.h"
 #include "CompPlus_Extensions/Helpers.h"
-#include "CompPlus_Extensions/TitleCardColors.h"
 
 #include "CompPlus_Scenes/Custom Scenes/GustPlanet.h"
 #include "CompPlus_Scenes/Custom Scenes/LHPZ.h"
+#include "CompPlus_Scenes/Custom Scenes/MetrotropicBeach.h"
 #include "CompPlus_Scenes/Stock Scenes/FBZ2.h"
 
 #include "CompPlus_Core/CompPlus_Scenes.h"
@@ -64,6 +64,20 @@ namespace CompPlus_Scenes
             SonicMania::Player3.Right = true;
             SonicMania::Player4.Right = true;
         }
+    }
+
+    CompPlus_Patches::WaterColorDefintion OnWaterColorDraw() 
+    {
+        if (CurrentStage.SceneKey)
+        {
+            if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_MBZ1)) return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(0, 0, 255), 15, InkEffect::Ink_Alpha);
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_MBZ2)) return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(0, 0, 255), 15, InkEffect::Ink_Alpha);
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_STHZ2)) return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(97, 213, 255), 10, InkEffect::Ink_Alpha);
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DHZ)) return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(50, 0, 255), 15, InkEffect::Ink_Alpha);
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DHZE)) return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(50, 0, 255), 15, InkEffect::Ink_Alpha);
+        }
+
+        return CompPlus_Patches::WaterColorDefintion(SonicMania::Color(0, 0, 0), 0, InkEffect::Ink_Alpha);
     }
 
     void UpdateTitleCard()
@@ -130,6 +144,7 @@ namespace CompPlus_Scenes
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubCore::OnDraw();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubCore::OnDraw();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits)) CompPlus_Credits::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DAGarden_Chaotix)) CompPlus_DAGarden_Chaotix::OnDraw();
         }
         else if (CurrentSceneInt == 1) CompPlus_TitleScreen::OnDraw();
     }
@@ -187,8 +202,18 @@ namespace CompPlus_Scenes
         else IZ_SceneChangeIdleTime = IZ_SceneChangeIdleTime - 1;
     }
 
+    void AlwaysRunningLoop() 
+    {
+        if (CurrentStage.SceneKey)
+        {
+            if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_MBZ1)) CompPlus_MetrotropicBeach::OnFrame(1);
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_MBZ2)) CompPlus_MetrotropicBeach::OnFrame(2);
+        }
+    }
+
     void NormalRunningLoop()
     {
+
         if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Logos1);
         else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
         else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();

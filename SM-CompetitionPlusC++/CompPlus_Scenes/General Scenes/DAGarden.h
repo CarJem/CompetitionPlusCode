@@ -37,5 +37,9 @@ namespace CompPlus_DAGarden_Chaotix
 {
     extern void OnFrame();
 
+    extern void OnDraw();
+
+    extern void Reload();
+
     extern void Init();
 }

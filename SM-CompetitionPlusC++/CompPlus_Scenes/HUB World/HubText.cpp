@@ -210,6 +210,26 @@ namespace CompPlus_HubText
         }
     }
 
+    void UpdateSaveToggle(int SlotID, bool State, int StageIndex, int Index)
+    {
+        EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
+
+        Label3.Text = (wchar_t*)Strings[StageIndex][Index];
+
+        if (State)
+        {
+            char* on_text = (char*)"SAVE";
+            ConvertASCII2Unicode(Label3.Text, on_text, strlen(on_text), -32);
+            Label3.TextLength = (WORD)4;
+        }
+        else
+        {
+            char* off_text = (char*)"NO SAVE";
+            ConvertASCII2Unicode(Label3.Text, off_text, strlen(off_text), -32);
+            Label3.TextLength = (WORD)7;
+        }
+    }
+
     void UpdateToggleDisplayInverted(int SlotID, bool State, int StageIndex, int Index)
     {
         EntityUIInfoLabel& Label3 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(SlotID);
@@ -334,6 +354,28 @@ namespace CompPlus_HubText
             char* text = (char*)s.c_str();
             int size = (int)s.length();
             UpdateGeneralDisplay(SlotID, text, size, StageIndex, Index);
+        }
+    }
+
+    void UpdateShoesDisplay(int SlotID, int StageIndex, int Index)
+    {
+        switch (CompPlus_Settings::SpeedShoesMode)
+        {
+            case CompPlus_Settings::SpeedShoesModification_Default:
+                UpdateGeneralDisplay(SlotID, (char*)"DEFAULT", 7, StageIndex, Index);
+                break;
+            case CompPlus_Settings::SpeedShoesModification_HighJump:
+                UpdateGeneralDisplay(SlotID, (char*)"JUMP UP", 7, StageIndex, Index);
+                break;
+            case CompPlus_Settings::SpeedShoesModification_Freeze:
+                UpdateGeneralDisplay(SlotID, (char*)"FREEZE", 6, StageIndex, Index);
+                break;
+            case CompPlus_Settings::SpeedShoesModification_SpeedDown:
+                UpdateGeneralDisplay(SlotID, (char*)"SLOWDOWN", 8, StageIndex, Index);
+                break;
+            case CompPlus_Settings::SpeedShoesModification_Random:
+                UpdateGeneralDisplay(SlotID, (char*)"RANDOM", 6, StageIndex, Index);
+                break;
         }
     }
 

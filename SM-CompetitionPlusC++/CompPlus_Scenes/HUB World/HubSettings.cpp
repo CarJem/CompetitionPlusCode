@@ -106,6 +106,8 @@ namespace CompPlus_HubSettings
     int ItemBoxModeController = 180;
     int NumberOfRoundsController = 352;
     int StrechIntensityNUDController = 479;
+    int ShoesModNUDController = 974;
+    int PlayerSettingsSaveModeController = 973;
 
     int AnnouncerTypeText = 132;
     int InfiniteRoundsToggleText = 136;
@@ -116,6 +118,8 @@ namespace CompPlus_HubSettings
     int ItemBoxModeText = 206;
     int NumberOfRoundsText = 351;
     int StrechIntensityText = 480;
+    int ShoesModText = 1020;
+    int PlayerSettingsSaveModeText = 1021;
 
     int UpdateHUBSettingDisplays()
     {
@@ -212,6 +216,12 @@ namespace CompPlus_HubSettings
         //Season Switch Display
         UpdateSeasonDisplay(SeasonSwitchText, CompPlus_Settings::CurrentSeason, 1, StringIndex);
         StringIndex++;
+        //Speed Shoes Mod Display
+        UpdateShoesDisplay(ShoesModText, 1, StringIndex);
+        StringIndex++;
+        //Player Settings Save Mode Display
+        UpdateSaveToggle(PlayerSettingsSaveModeText, CompPlus_Settings::PlayerSettingsSaveMode, 1, StringIndex);
+        StringIndex++;
 
         return StringIndex;
     }
@@ -228,7 +238,7 @@ namespace CompPlus_HubSettings
 
         //Dev Mode Toggle
         bool DevStatus = ToggleController(DevModeController, CompPlus_Settings::EnableDevMode);
-        if (DevStatus != CompPlus_Settings::EnableDevMode) CompPlus_Settings::EnableDevMode = DebugStatus;
+        if (DevStatus != CompPlus_Settings::EnableDevMode) CompPlus_Settings::EnableDevMode = DevStatus;
 
         //Insta-Sheild Toggle
         bool InstaSheildStatus = ToggleController(InstaSheildController, CompPlus_Settings::InstaSheildAbility);
@@ -330,6 +340,14 @@ namespace CompPlus_HubSettings
         //Number of Rounds NUD
         int NumberOfRoundsStatus = SingleUpDownController(NumberOfRoundsController, (int)CompPlus_Settings::NumberOfRounds, 2, 99);
         if (NumberOfRoundsStatus != (int)CompPlus_Settings::NumberOfRounds) CompPlus_Settings::SetNumberOfRounds(NumberOfRoundsStatus);
+
+        //Speed Shoes Mode NUD
+        int SpeedShoesModStatus = SingleUpDownController(ShoesModNUDController, (int)CompPlus_Settings::SpeedShoesMode, 0, 4);
+        if (SpeedShoesModStatus != (int)CompPlus_Settings::SpeedShoesMode) CompPlus_Settings::SetSpeedShoesMode((CompPlus_Settings::SpeedShoesModification)SpeedShoesModStatus);
+
+        //Player Settings Save NUD
+        bool PlayerSettingsSaveModeStatus = ToggleController(PlayerSettingsSaveModeController, CompPlus_Settings::PlayerSettingsSaveMode);
+        if (PlayerSettingsSaveModeStatus != CompPlus_Settings::PlayerSettingsSaveMode) CompPlus_Settings::SetPlayerSettingsSaveMode(PlayerSettingsSaveModeStatus);
 
         if (SettingWaitTimer != 0) SettingWaitTimer = SettingWaitTimer - 1;
     }
@@ -540,6 +558,7 @@ namespace CompPlus_HubSettings
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;
@@ -582,6 +601,7 @@ namespace CompPlus_HubSettings
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;

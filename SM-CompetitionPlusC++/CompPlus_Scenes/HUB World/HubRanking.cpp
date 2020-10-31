@@ -327,6 +327,7 @@ namespace CompPlus_HubRanking
                 FxFadeR->EventOnly = false;
                 FxFadeR->Overhud = false;
                 FxFadeR->FadeOutBlack = true;
+                FxFadeR->DrawOrder = 14;
 
             }
             SceneLoadWaitTimer++;

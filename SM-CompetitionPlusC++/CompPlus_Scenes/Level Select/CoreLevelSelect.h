@@ -163,6 +163,7 @@ namespace CompPlus_CoreLevelSelect
     DataPointer(int, ViewY, 0x43C6F8);
 
     extern bool PaletteSaved;
+    extern int GeneralDrawOrder;
 
     extern void UniversalLSelectLoop();
     extern void LevelSelectDelayLoop(int selectorID, MenuPoint levelID, bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed);

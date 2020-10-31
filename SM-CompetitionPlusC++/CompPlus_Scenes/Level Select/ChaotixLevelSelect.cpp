@@ -150,7 +150,7 @@ namespace CompPlus_ChaotixLevelSelect
         MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_CXM_BBZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
         MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_CXM_MMZ1E, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
         MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_CXM_TTZ1E, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, false); i++;
-        MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Exe, "EXE", "", "", 2, 1, false);
+        MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Mania, "MANIA", "", "", 2, 1, false);
         MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
@@ -218,6 +218,8 @@ namespace CompPlus_ChaotixLevelSelect
         }
 
         EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int DrawOrderOld = Canvas->DrawOrder;
+        Canvas->DrawOrder = CompPlus_CoreLevelSelect::GeneralDrawOrder;
 
         SonicMania::Vector2 CurrentPosition = SonicMania::Vector2(PosXCurrent + GetPositionOffsetX(), PosYCurrent + GetPositionOffsetY());
         int HalfSize = (WindowSizeX != 0 ? WindowSizeX / 2 : 0);
@@ -237,8 +239,8 @@ namespace CompPlus_ChaotixLevelSelect
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, TopPanelY + PanelBarsHeight, WindowSizeX, CenterPanelHeight, 0x612724, 128, InkEffect::Ink_Alpha);
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, BottomPanelY, WindowSizeX, PanelBarsHeight, 0x000000, 255, InkEffect::Ink_Alpha);
 
-        Drawing::DrawDevTextSprite("CHAOTIX STAGES", Vector2(150, 190 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
-        Drawing::DrawDevTextSprite("WELCOME TO THE NEXT LEVEL", Vector2(150, 610 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("CHAOTIX STAGES", Vector2(150, 190 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("WELCOME TO THE NEXT LEVEL", Vector2(150, 610 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
 
 
         //Draw Zone Buttons
@@ -266,6 +268,7 @@ namespace CompPlus_ChaotixLevelSelect
         //Draw Zone Info Stuff
         MenuPoint Point = MLS_MenuPoints[MenuPos_Y][MenuPos_X];
         DrawZoneInfo(Point, Canvas);
+        Canvas->DrawOrder = DrawOrderOld;
     }
 
     bool CooldownActive = false;

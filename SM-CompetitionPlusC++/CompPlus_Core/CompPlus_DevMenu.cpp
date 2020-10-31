@@ -94,10 +94,18 @@ namespace CompPlus_DevMenu
         return false;
     }
 
+    void PreserveOriginalDevMenu() 
+    {
+        if (!OriginalDevMenuSaved) 
+        {
+            OriginalDevMenu = SonicMania::GetAbsAddress<void>(baseAddress + 0x001C25DB);
+            OriginalDevMenuSaved = true;
+        }
+
+    }
+
     void PatchCompetitionPlusDevMenu()
     {
-        OriginalDevMenu = SonicMania::GetAbsAddress<void>(baseAddress + 0x001C25DB);
-        OriginalDevMenuSaved = true;
         WriteCall((void*)(baseAddress + 0x001C25DB), CompetitionPlus_MainDevMenu);
     }
 
@@ -108,45 +116,55 @@ namespace CompPlus_DevMenu
 
     void ExitDevMenu()
     {
-        if (OriginalDevMenuSaved) PatchOriginalDevMenu();
-        SonicMania::GameState = SonicMania::GameState_Running;
-        InCompetitionPlusDevMenu = false;
+        if (InCompetitionPlusDevMenu) 
+        {
+            if (OriginalDevMenuSaved) PatchOriginalDevMenu();
+            SonicMania::GameState = SonicMania::GameState_Running;
+            CompPlus_Settings::SaveSettings();
+            OriginalDevMenuSaved = false;
+            InCompetitionPlusDevMenu = false;
+        }
     }
 
     void OpenDevMenu()
     {
-        if (!InCompetitionPlusDevMenu)
+        if (SonicMania::GameState == SonicMania::GameState_Running) 
         {
-            PatchCompetitionPlusDevMenu();
-            InCompetitionPlusDevMenu = true;
+            PreserveOriginalDevMenu();
+            if (!InCompetitionPlusDevMenu && OriginalDevMenuSaved)
+            {
+                PatchCompetitionPlusDevMenu();
+                InCompetitionPlusDevMenu = true;
+            }
         }
     }
 
     void CheckForMenuEntry()
     {
-        bool keyState = GetCtrlKeyState();
-
-        if (CheckKey('P', keyState, &TrackerP) && !KeyPHeld && SonicMania::GameState == SonicMania::GameState_Running)
+        if (CompPlus_Settings::EnableDevMode)
         {
-            SonicMania::DevMenu_Option = 0;
-            OpenDevMenu();
-            KeyPHeld = true;
-        }
-        else KeyPHeld = false;
+            bool keyState = GetCtrlKeyState();
 
-        if (GetEscapeKeyState() && !Escape_Held)
-        {
-            SonicMania::DevMenu_Option = 0;
-            ExitDevMenu();
-            Escape_Held = true;
-        }
-        else if (InCompetitionPlusDevMenu && SonicMania::GameState != SonicMania::GameState_DevMenu)
-        {
-            SonicMania::GameState = SonicMania::GameState_DevMenu;
-        }
-        else Escape_Held = false;
+            if (CheckKey('P', keyState, &TrackerP) && !KeyPHeld && SonicMania::GameState == SonicMania::GameState_Running)
+            {
+                SonicMania::DevMenu_Option = 0;
+                OpenDevMenu();
+                KeyPHeld = true;
+            }
+            else KeyPHeld = false;
 
-
+            if (GetEscapeKeyState() && !Escape_Held)
+            {
+                SonicMania::DevMenu_Option = 0;
+                ExitDevMenu();
+                Escape_Held = true;
+            }
+            else if (InCompetitionPlusDevMenu && SonicMania::GameState != SonicMania::GameState_DevMenu)
+            {
+                SonicMania::GameState = SonicMania::GameState_DevMenu;
+            }
+            else Escape_Held = false;
+        }
     }
 
     void UpdateCompPlusDevMenu()

@@ -157,7 +157,7 @@ namespace CompPlus_ManiaLevelSelect
         MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
-        MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Exe, "EXE", "", "", 2, 2, false);
+        MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Chaotix, "CHAOTIX", "", "", 2, 2, false);
         MLS_MenuPoints[1][0].YellowText = true;
         MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_FBZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 3, false); i++;
         MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_FBZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
@@ -233,6 +233,8 @@ namespace CompPlus_ManiaLevelSelect
         }
 
         EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int DrawOrderOld = Canvas->DrawOrder;
+        Canvas->DrawOrder = CompPlus_CoreLevelSelect::GeneralDrawOrder;
 
         SonicMania::Vector2 CurrentPosition = SonicMania::Vector2(PosXCurrent + GetPositionOffsetX(), PosYCurrent + GetPositionOffsetY());
         int HalfSize = (WindowSizeX != 0 ? WindowSizeX / 2 : 0);
@@ -252,8 +254,8 @@ namespace CompPlus_ManiaLevelSelect
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, TopPanelY + PanelBarsHeight, WindowSizeX, CenterPanelHeight, 0x30A0F0, 128, InkEffect::Ink_Alpha);
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, BottomPanelY, WindowSizeX, PanelBarsHeight, 0x000000, 255, InkEffect::Ink_Alpha);
 
-        Drawing::DrawDevTextSprite("MANIA STAGES", Vector2(150, 190 + PanelOffset), false , 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
-        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, 610 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("MANIA STAGES", Vector2(150, 190 + PanelOffset), false , CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, 610 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
 
 
         //Draw Zone Buttons
@@ -281,6 +283,7 @@ namespace CompPlus_ManiaLevelSelect
         //Draw Zone Info Stuff
         MenuPoint Point = MLS_MenuPoints[MenuPos_Y][MenuPos_X];
         DrawZoneInfo(Point, Canvas);
+        Canvas->DrawOrder = DrawOrderOld;
     }
 
     bool CooldownActive = false;

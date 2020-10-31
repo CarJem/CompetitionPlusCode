@@ -21,9 +21,9 @@ namespace CompPlus_Settings_Base
 	{
 		if (CanDraw) 
 		{
-			DrawRect(120, 120, 12, 12, 0x00, 250, Ink_Alpha, true);
-			DrawTextSprite("HEY THERE", SonicMania::Vector2(50,10), true);
-			DrawTextSprite("I don't suck!", SonicMania::Vector2(50, 20), true);
+			//DrawRect(120, 120, 12, 12, 0x00, 250, Ink_Alpha, true);
+			//DrawTextSprite("HEY THERE", SonicMania::Vector2(50,10), true);
+			//DrawTextSprite("I don't suck!", SonicMania::Vector2(50, 20), true);
 
 			//DrawCircle(0, 0, 40, 0x00, 250, Ink_Alpha, true);
 			//DrawCircle(120, 120, 100, 0xFFFFFF, 0, Ink_None, true);

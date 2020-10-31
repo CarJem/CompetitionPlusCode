@@ -4,10 +4,10 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Extensions/IZAPI.h"
 #include "CompPlus_Extensions/Helpers.h"
-#include "CompPlus_Extensions/TitleCardColors.h"
 
 #include "CompPlus_Scenes/Custom Scenes/GustPlanet.h"
 #include "CompPlus_Scenes/Custom Scenes/LHPZ.h"
+#include "CompPlus_Scenes/Custom Scenes/MetrotropicBeach.h"
 
 #include "CompPlus_Scenes/General Scenes/ManiaMenu.h"
 #include "CompPlus_Scenes/General Scenes/CreditsScene.h"
@@ -27,6 +27,7 @@
 #include "CompPlus_Scenes/Functionality/TailsFlightCancel.h"
 #include "CompPlus_Scenes/Functionality/SpotlightC.h"
 #include "CompPlus_Scenes/Functionality/PlayerSkins.h"
+#include "CompPlus_Scenes/Functionality/SpeedShoesMods.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -69,13 +70,6 @@ extern "C"
         const char* FullPath;
         char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
 
-        //Internal Paramater Variables
-        bool StartupStage_Enabled = false;
-        bool StartupStage_UseIZ = true;
-        Scene StartupStage_Normal = Scene_Title;
-        const char* StartupStage_Infinity = CompPlus_Common::SMCP_Credits;
-
-
         //Status Variables
         bool HasStartupInit = false;
         bool StageRefresh = true;
@@ -102,8 +96,9 @@ extern "C"
             CompPlus_HubText::Init();
             CompPlus_ManiaMenu::Init();
             CompPlus_Credits::Init();
-            TileCardColors::Init();
             CompPlus_CoreLevelSelect::Init(path);
+            CompPlus_MetrotropicBeach::Init(path);
+            CompPlus_HubWorld::Init(path);
             CompPlus_Halloween2018::Init();
             CompPlus_Announcers::LoadAnnouncerFX();
             CompPlus_DAGarden::Init();
@@ -133,28 +128,33 @@ extern "C"
 
         #pragma region General Methods
 
+        int StoredDrawOrder = -1;
+
         void OnDraw() 
         {
+            EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+            StoredDrawOrder = Canvas->DrawOrder;
             CompPlus_Scenes::OnSceneDraw();
             CompPlus_SpotlightC::OnDraw();
-
-            EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
-            Canvas->DrawOrder = 12;
+            Canvas->DrawOrder = StoredDrawOrder;
         }
 
         void OnStartupInit()
         {
             if (HasStartupInit) return;
-            if (StartupStage_Enabled)
+            if (CompPlus_Settings::StartupStage_Enabled)
             {
-                if (StartupStage_UseIZ) CompPlus_Common::LoadLevel_IZ(StartupStage_Infinity);
-                else CompPlus_Common::LoadLevel(StartupStage_Normal);
+                if (CompPlus_Settings::StartupStage_UseIZ) CompPlus_Common::LoadLevel_IZ(CompPlus_Settings::StartupStage_Infinity.c_str());
+                else CompPlus_Common::LoadLevel(CompPlus_Settings::StartupStage_Normal);
             }
             HasStartupInit = true;
         }
 
         void OnSceneReset()
         {
+            if (CurrentStage.SceneKey) CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.SceneKey, CurrentSceneInt);
+            else CompPlus_ZoneSpecifics::UpdateSpecifics("", CurrentSceneInt);
+
             CompPlus_Announcers::ReloadAnnouncerFX();
             CompPlus_CustomScreenStretch::OnFrame();
 
@@ -172,6 +172,11 @@ extern "C"
             CompPlus_Scoring::OnSceneReset();
             CompPlus_TitleScreen::Reload();
             CompPlus_PlayerSkins::Reload();
+            CompPlus_DynCam::OnUnload();
+            CompPlus_Scenes::UpdateTitleCard();
+            CompPlus_MetrotropicBeach::Restart();
+            CompPlus_DAGarden_Chaotix::Reload();
+            CompPlus_SpeedShoesMods::OnSceneReset();
 
             CompPlus_Status::SpecialRingsNeedRefresh = true;
             CompPlus_SizeLazer::RefreshChibiSprites = true;
@@ -215,6 +220,7 @@ extern "C"
 
         void OnFrame_Always()
         {
+            CompPlus_Scenes::AlwaysRunningLoop();
             bool isActive = !(SonicMania::GameState & SonicMania::GameState & SonicMania::GameState_NotRunning);
             if (!isActive) return;
             CompPlus_Scenes::OnScenePreload();
@@ -243,7 +249,6 @@ extern "C"
             CurrentStage = info;
             StageRefresh = true;
             IZ_SceneChangeIdleTime = 10;
-            CompPlus_ZoneSpecifics::UpdateSpecifics(CurrentStage.SceneKey, CurrentSceneInt);
             OnSceneReset();
         }
 
@@ -254,7 +259,6 @@ extern "C"
             StageRefresh = true;
             IZ_SceneChangeIdleTime = 10;
             if (!strcmp(info.StageKey, CompPlus_Common::SMCP_Logos1) && (CurrentSceneInt == 1 || CurrentSceneInt == 4)) CompPlus_Common::LoadLevel(123);
-            CompPlus_ZoneSpecifics::UpdateSpecifics("", CurrentSceneInt);
             OnSceneReset();
         }
 

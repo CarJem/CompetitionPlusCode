@@ -30,9 +30,14 @@ namespace CompPlus_Settings
     #pragma region Setting Variables
 
     //Developer Settings
+    bool StartupStage_Enabled = false;
+    bool StartupStage_UseIZ = true;
+    int StartupStage_Normal = 0;
+    std::string StartupStage_Infinity = "";
     bool EnableDevMode = false;
     bool EnableDebugMode = false;
     bool DarkDevMenu = true;
+    bool LogAdvancedDebugOutput = false;
 
     //Stock Competition Settings
     int NumberOfRounds = 3; 
@@ -51,6 +56,9 @@ namespace CompPlus_Settings
     AnnouncerType CurrentAnnouncer = Announcer_Default;
     SpeedShoesModification SpeedShoesMode = SpeedShoesModification_Default;
     int StrechEffectIntensity = 1;
+
+    //Player Settings
+    bool PlayerSettingsSaveMode = false;
 
     //Peelout Ability Settings
     ThreeStateBool Player1PeeloutAbility = ThreeStateBool::Indeterminate;
@@ -119,6 +127,18 @@ namespace CompPlus_Settings
 
         BYTE* Pointer = *(BYTE**)((baseAddress + 0xAA763C));
         WriteData((BYTE*)(Pointer + 0x410B4), (BYTE)MovesetID);
+    }
+
+    void SetPlayerSettingsSaveMode(bool Value) 
+    {
+        PlayerSettingsSaveMode = Value;
+        SaveSettings();
+    }
+
+    void SetSpeedShoesMode(SpeedShoesModification Value) 
+    {
+        SpeedShoesMode = Value;
+        SaveSettings();
     }
 
     void SetTailsFlightCancel(bool Value)
@@ -539,6 +559,53 @@ namespace CompPlus_Settings
         return value;
     }
 
+    void LoadStringSetting(tinyxml2::XMLElement* xmlOption, const char* Setting, std::string &Resulter)
+    {
+        if (!strcmp(xmlOption->Name(), Setting))
+        {
+            const char* value = xmlOption->GetText();
+            Resulter = value;
+
+            if (LogAdvancedDebugOutput) LogLoadSetting(Setting, value);
+        }
+    }
+
+    template <typename T>
+    void LoadBoolSetting(tinyxml2::XMLElement* xmlOption, const char* Setting, T& Resulter)
+    {
+        if (!strcmp(xmlOption->Name(), Setting))
+        {
+            bool value = XMLGetBool(xmlOption);
+            Resulter = (T)value;
+
+            if (LogAdvancedDebugOutput) LogLoadSetting(Setting, std::to_string(value));
+        }
+    }
+
+    template <typename T>
+    void LoadIntSettingAlt(tinyxml2::XMLElement* xmlOption, const char* Setting, T& Resulter)
+    {
+        if (!strcmp(xmlOption->Name(), Setting))
+        {
+            int value = XMLGetInt(xmlOption);
+            Resulter = (T)value;
+            if (Resulter == 0) Resulter = (T)4;
+            if (LogAdvancedDebugOutput) LogLoadSetting(Setting, std::to_string(value));
+        }
+    }
+
+    template <typename T>
+    void LoadIntSetting(tinyxml2::XMLElement *xmlOption, const char* Setting, T &Resulter)
+    {
+        if (!strcmp(xmlOption->Name(), Setting))
+        {
+            int value = XMLGetInt(xmlOption);
+            Resulter = (T)value;
+
+            if (LogAdvancedDebugOutput) LogLoadSetting(Setting, std::to_string(value));
+        }
+    }
+
     void LoadSettings()
     {
         std::string message = "Loading \"";
@@ -570,148 +637,59 @@ namespace CompPlus_Settings
             {
                 for (auto xmlOption = xmlSettings->FirstChildElement(); xmlOption != nullptr; xmlOption = xmlOption->NextSiblingElement())
                 {
-                    if (!strcmp(xmlOption->Name(), "SelectedAnnouncer"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        CurrentAnnouncer = (AnnouncerType)value;
+                    LoadIntSetting(xmlOption, "SelectedAnnouncer", CurrentAnnouncer);
+                    LoadIntSetting(xmlOption, "InitalLives", InitalLives);
+                    LoadBoolSetting(xmlOption, "TimeLimit", TimeLimit);
+                    LoadBoolSetting(xmlOption, "NoHurryUpTimer", NoHurryUpTimer);
+                    LoadBoolSetting(xmlOption, "UseDropdash", DropdashAbility);
+                    LoadBoolSetting(xmlOption, "UseInstaSheild", InstaSheildAbility);
+                    LoadIntSetting(xmlOption, "CurrentLSelect", CompPlus_Status::CurrentLevelSelect);
+                    LoadIntSetting(xmlOption, "VictoryStyle", VictoryStyle);
+                    LoadBoolSetting(xmlOption, "EndlessRounds", EndlessRounds);
+                    LoadBoolSetting(xmlOption, "MonitorMode", MonitorTypes);
+                    LoadIntSetting(xmlOption, "NumberOfRounds", NumberOfRounds);
+                    LoadIntSettingAlt(xmlOption, "StrechEffectIntensity", StrechEffectIntensity);
+                    LoadIntSetting(xmlOption, "CurrentSeason", CurrentSeason);
+                    LoadBoolSetting(xmlOption, "TailsFlightCancel", TailsFlightCancel);
+                    LoadIntSetting(xmlOption, "SpeedShoesMode", SpeedShoesMode);
+                    LoadBoolSetting(xmlOption, "SpotLightChallenge", SpotLightChallenge);
+                    LoadBoolSetting(xmlOption, "UseEncoreVapeMusic", UseEncoreVapeMusic);
+                    LoadBoolSetting(xmlOption, "LHPZ_SecretUnlocked", LHPZ_SecretUnlocked);
+                    LoadBoolSetting(xmlOption, "PlayerSettingsSaveMode", PlayerSettingsSaveMode);
 
-                        LogLoadSetting("SelectedAnnouncer", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "InitalLives"))
+                    if (PlayerSettingsSaveMode == true) 
                     {
-                        int value = XMLGetInt(xmlOption);
-                        InitalLives = value;
+                        LoadBoolSetting(xmlOption, "Player1DynCam", Player1DynCam);
+                        LoadBoolSetting(xmlOption, "Player2DynCam", Player2DynCam);
+                        LoadBoolSetting(xmlOption, "Player3DynCam", Player3DynCam);
+                        LoadBoolSetting(xmlOption, "Player4DynCam", Player4DynCam);
 
-                        LogLoadSetting("InitalLives", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "TimeLimit"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        TimeLimit = value;
+                        LoadIntSetting(xmlOption, "Player1AbilitySet", Player1AbilitySet);
+                        LoadIntSetting(xmlOption, "Player2AbilitySet", Player2AbilitySet);
+                        LoadIntSetting(xmlOption, "Player3AbilitySet", Player3AbilitySet);
+                        LoadIntSetting(xmlOption, "Player4AbilitySet", Player4AbilitySet);
 
-                        LogLoadSetting("TimeLimit", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "NoHurryUpTimer"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        NoHurryUpTimer = value;
+                        LoadIntSetting(xmlOption, "Player1ChosenPlayer", Player1ChosenPlayer);
+                        LoadIntSetting(xmlOption, "Player2ChosenPlayer", Player2ChosenPlayer);
+                        LoadIntSetting(xmlOption, "Player3ChosenPlayer", Player3ChosenPlayer);
+                        LoadIntSetting(xmlOption, "Player4ChosenPlayer", Player4ChosenPlayer);
 
-                        LogLoadSetting("NoHurryUpTimer", std::to_string(value));
+                        LoadIntSetting(xmlOption, "Player1PeeloutAbility", Player1PeeloutAbility);
+                        LoadIntSetting(xmlOption, "Player2PeeloutAbility", Player2PeeloutAbility);
+                        LoadIntSetting(xmlOption, "Player3PeeloutAbility", Player3PeeloutAbility);
+                        LoadIntSetting(xmlOption, "Player4PeeloutAbility", Player4PeeloutAbility);
                     }
-                    else if (!strcmp(xmlOption->Name(), "UseDropdash"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        DropdashAbility = value;
+                    
+                    LoadBoolSetting(xmlOption, "EnableDevMode", EnableDevMode);
+                    LoadBoolSetting(xmlOption, "EnableDebugMode", EnableDebugMode);
+                    LoadBoolSetting(xmlOption, "DarkDevMenu", DarkDevMenu);
 
-                        LogLoadSetting("UseDropdash", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "UseInstaSheild"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        InstaSheildAbility = value;
-
-                        LogLoadSetting("UseInstaSheild", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "CurrentLSelect"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        CompPlus_Status::CurrentLevelSelect = value;
-
-                        LogLoadSetting("CurrentLSelect", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "VictoryStyle"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        VictoryStyle = (VictoryMode)value;
-
-                        LogLoadSetting("VictoryStyle", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "EndlessRounds"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        EndlessRounds = value;
-
-                        LogLoadSetting("EndlessRounds", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "MonitorMode"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        MonitorTypes = (ItemsConfig)value;
-
-                        LogLoadSetting("MonitorMode", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "NumberOfRounds"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        NumberOfRounds = value;
-
-                        LogLoadSetting("NumberOfRounds", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "StrechEffectIntensity"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                       
-                        StrechEffectIntensity = value;
-                        if (StrechEffectIntensity == 0) StrechEffectIntensity = 4;
-                        LogLoadSetting("StrechEffectIntensity", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "EnableDebugMode"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        EnableDebugMode = value;
-
-                        LogLoadSetting("EnableDebugMode", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "EnableDevMode"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        EnableDevMode = value;
-
-                        LogLoadSetting("EnableDevMode", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "DarkDevMenu"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        DarkDevMenu = value;
-
-                        LogLoadSetting("DarkDevMenu", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "CurrentSeason"))
-                    {
-                        int value = XMLGetInt(xmlOption);
-                        CurrentSeason = (SeasonType)value;
-
-                        LogLoadSetting("CurrentSeason", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "TailsFlightCancel"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        TailsFlightCancel = value;
-
-                        LogLoadSetting("TailsFlightCancel", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "SpotLightChallenge"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        SpotLightChallenge = value;
-
-                        LogLoadSetting("SpotLightChallenge", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "UseEncoreVapeMusic"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        UseEncoreVapeMusic = value;
-
-                        LogLoadSetting("UseEncoreVapeMusic", std::to_string(value));
-                    }
-                    else if (!strcmp(xmlOption->Name(), "LHPZ_SecretUnlocked"))
-                    {
-                        bool value = XMLGetBool(xmlOption);
-                        LHPZ_SecretUnlocked = value;
-
-                        LogLoadSetting("LHPZ_SecretUnlocked", std::to_string(value));
-                    }
+                    LoadBoolSetting(xmlOption, "StartupStage_Enabled", StartupStage_Enabled);
+                    LoadBoolSetting(xmlOption, "StartupStage_UseIZ", StartupStage_UseIZ);
+                    LoadIntSetting(xmlOption, "StartupStage_Normal", StartupStage_Normal);
+                    LoadStringSetting(xmlOption, "StartupStage_Infinity", StartupStage_Infinity);
                 }
+                LogInfo("CompPlus_Settings::LoadSettings", "Settings Loaded!");
             }
             else
             {
@@ -725,10 +703,18 @@ namespace CompPlus_Settings
         SettingsLoaded = true;
     }
 
+    void AddtoSaveSettingsIZString(std::string Name, std::string Value, std::string& text)
+    {
+        std::string realValue = (!Value.empty() ? Value : "IZ_NSZ");
+
+        text += "<" + Name + ">" + realValue + "</" + Name + ">";
+        if (LogAdvancedDebugOutput) LogSaveSetting(Name.c_str(), realValue);
+    }
+
     void AddtoSaveSettings(std::string Name, std::string Value, std::string& text)
     {
         text += "<" + Name + ">" + Value + "</" + Name + ">";
-        LogSaveSetting(Name.c_str(), Value);
+        if (LogAdvancedDebugOutput) LogSaveSetting(Name.c_str(), Value);
     }
 
     void SaveSettings()
@@ -745,6 +731,30 @@ namespace CompPlus_Settings
 
             AddtoSaveSettings("UseDropdash", BoolToString(DropdashAbility), text);
             AddtoSaveSettings("UseInstaSheild", BoolToString(InstaSheildAbility), text);
+            AddtoSaveSettings("PlayerSettingsSaveMode", BoolToString(PlayerSettingsSaveMode), text);
+
+            if (PlayerSettingsSaveMode == true)
+            {
+                AddtoSaveSettings("Player1DynCam", BoolToString(Player1DynCam), text);
+                AddtoSaveSettings("Player2DynCam", BoolToString(Player2DynCam), text);
+                AddtoSaveSettings("Player3DynCam", BoolToString(Player3DynCam), text);
+                AddtoSaveSettings("Player4DynCam", BoolToString(Player4DynCam), text);
+
+                AddtoSaveSettings("Player1AbilitySet", IntToString(Player1AbilitySet), text);
+                AddtoSaveSettings("Player2AbilitySet", IntToString(Player2AbilitySet), text);
+                AddtoSaveSettings("Player3AbilitySet", IntToString(Player3AbilitySet), text);
+                AddtoSaveSettings("Player4AbilitySet", IntToString(Player4AbilitySet), text);
+
+                AddtoSaveSettings("Player1ChosenPlayer", IntToString(Player1ChosenPlayer), text);
+                AddtoSaveSettings("Player2ChosenPlayer", IntToString(Player2ChosenPlayer), text);
+                AddtoSaveSettings("Player3ChosenPlayer", IntToString(Player3ChosenPlayer), text);
+                AddtoSaveSettings("Player4ChosenPlayer", IntToString(Player4ChosenPlayer), text);
+
+                AddtoSaveSettings("Player1PeeloutAbility", IntToString(Player1PeeloutAbility), text);
+                AddtoSaveSettings("Player2PeeloutAbility", IntToString(Player2PeeloutAbility), text);
+                AddtoSaveSettings("Player3PeeloutAbility", IntToString(Player3PeeloutAbility), text);
+                AddtoSaveSettings("Player4PeeloutAbility", IntToString(Player4PeeloutAbility), text);
+            }
 
             AddtoSaveSettings("InitalLives", IntToString(InitalLives), text);
             AddtoSaveSettings("TimeLimit", BoolToString(TimeLimit), text);
@@ -758,12 +768,17 @@ namespace CompPlus_Settings
             AddtoSaveSettings("UseEncoreVapeMusic", BoolToString(UseEncoreVapeMusic), text);
             AddtoSaveSettings("TailsFlightCancel", BoolToString(TailsFlightCancel), text);
             AddtoSaveSettings("SpotLightChallenge", BoolToString(SpotLightChallenge), text);
+            AddtoSaveSettings("SpeedShoesMode", BoolToString(SpeedShoesMode), text);
 
             if (LHPZ_SecretUnlocked == true) AddtoSaveSettings("LHPZ_SecretUnlocked", BoolToString(LHPZ_SecretUnlocked), text);
 
+            AddtoSaveSettings("StartupStage_Enabled", BoolToString(StartupStage_Enabled), text);
+            AddtoSaveSettings("StartupStage_UseIZ", BoolToString(StartupStage_UseIZ), text);
+            AddtoSaveSettings("StartupStage_Normal", IntToString(StartupStage_Normal), text);
+            AddtoSaveSettingsIZString("StartupStage_Infinity", StartupStage_Infinity, text);
             AddtoSaveSettings("EnableDebugMode", BoolToString(EnableDebugMode), text);
             AddtoSaveSettings("EnableDevMode", BoolToString(EnableDevMode), text);
-            AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text);
+            AddtoSaveSettings("DarkDevMenu", BoolToString(DarkDevMenu), text); 
 
 
 

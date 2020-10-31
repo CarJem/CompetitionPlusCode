@@ -15,6 +15,8 @@ namespace CompPlus_DynCam
     char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
     bool LastSceneDirectory_IsValid = false;
 
+    bool AllowDynCam = false;
+
     bool IsValidDynCamScene()
     {
         if (LastSceneDirectory != SceneDirectory)
@@ -66,12 +68,23 @@ namespace CompPlus_DynCam
 
     void OnFrame()
     {
-        if (!CompPlus_Status::DisableDynCam && IsValidDynCamScene())
+        if (!CompPlus_Status::DisableDynCam && AllowDynCam)
         {
             if (CompPlus_Settings::Player1DynCam) UpdateDynCam(&SonicMania::Player1);
             if (CompPlus_Settings::Player2DynCam) UpdateDynCam(&SonicMania::Player2);
             if (CompPlus_Settings::Player3DynCam) UpdateDynCam(&SonicMania::Player3);
             if (CompPlus_Settings::Player4DynCam) UpdateDynCam(&SonicMania::Player4);
         }
+    }
+
+    void OnUnload() 
+    {
+        AllowDynCam = false;
+    }
+
+    void OnStartTimer() 
+    {
+        if (IsValidDynCamScene()) AllowDynCam = true;
+        else AllowDynCam = false;
     }
 }

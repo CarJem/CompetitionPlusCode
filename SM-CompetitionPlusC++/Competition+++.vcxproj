@@ -198,7 +198,6 @@
     <ClInclude Include="CompPlus_Extensions\IZAPI.h" />
     <ClInclude Include="CompPlus_Extensions\ManiaExt.h" />
     <ClInclude Include="CompPlus_Extensions\PointScrolling.h" />
-    <ClInclude Include="CompPlus_Extensions\TitleCardColors.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\CustomScreenStretch.h" />
@@ -235,6 +234,8 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp" />
@@ -254,7 +255,6 @@
     <ClCompile Include="CompPlus_Extensions\Helpers.cpp" />
     <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp" />
     <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp" />
-    <ClCompile Include="CompPlus_Extensions\TitleCardColors.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\CustomScreenStretch.cpp" />
@@ -295,6 +295,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpeedShoesMods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IZAPI\IZAPI.vcxproj">

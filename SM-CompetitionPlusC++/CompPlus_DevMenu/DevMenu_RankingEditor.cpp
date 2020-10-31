@@ -52,7 +52,7 @@ namespace DevMenu_RankingEditor
         bool allowInput = false;
         bool addValue = false;
 
-        if (SonicMania::PlayerControllers[0].A.Down && InputScreen_KeyDownIdleTime == 0)
+        if (SonicMania::PlayerControllers[0].A.Down || SonicMania::PlayerControllers[0].Start.Down && InputScreen_KeyDownIdleTime == 0)
         {
             InputScreen_KeyDownIdleTime = InputScreen_KeyDownIdleTimeMax;
             allowInput = true;

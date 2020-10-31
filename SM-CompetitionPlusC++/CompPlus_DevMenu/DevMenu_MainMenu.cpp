@@ -6,6 +6,8 @@
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Controllers.h"
 #include "CompPlus_Extensions/Helpers.h"
+#include "CompPlus_Core/CompPlus_Common.h"
+
 namespace DevMenu_MainMenu
 {
     using namespace CompPlus_DevMenu;
@@ -67,19 +69,19 @@ namespace DevMenu_MainMenu
         SonicMania::DevMenu_DrawRect(0, 0, 1000, 1000, (CompPlus_Settings::DarkDevMenu ? 0x000000 : 0x009e52), 255, 0, 1);
 
         DevMenu_DrawText_(centerX, "Sonic Mania - Competition Plus", YPosition - 60, SonicMania::Alignment_Center, standard_text_color);
-        DevMenu_DrawText_(centerX, "Version 5.0.0 (POST-SAGE DEVELOPMENT)", YPosition - 48, SonicMania::Alignment_Center, standard_text_color);
+        DevMenu_DrawText_(centerX, std::string("Version " + std::string(CompPlus_Common::Internal_VersionNumberAlt)).c_str(), YPosition - 48, SonicMania::Alignment_Center, standard_text_color);
 
         DevMenu_DrawText_(centerX, "Input Mappings", YPosition, SonicMania::Alignment_Center, optionColors[0]);
         YPosition += 14;
         DevMenu_DrawText_(centerX, "Ranking Editor", YPosition, SonicMania::Alignment_Center, optionColors[1]);
         YPosition += 14;
-        DevMenu_DrawText_(centerX, "Special Options", YPosition, SonicMania::Alignment_Center, optionColors[2]);
+        DevMenu_DrawText_(centerX, "Helper Controls", YPosition, SonicMania::Alignment_Center, optionColors[2]);
         YPosition += 14;
-        DevMenu_DrawText_(centerX, "????", YPosition, SonicMania::Alignment_Center, optionColors[3]);
+        DevMenu_DrawText_(centerX, "-----", YPosition, SonicMania::Alignment_Center, optionColors[3]);
         YPosition += 14;
-        DevMenu_DrawText_(centerX, "????", YPosition, SonicMania::Alignment_Center, optionColors[4]);
+        DevMenu_DrawText_(centerX, "-----", YPosition, SonicMania::Alignment_Center, optionColors[4]);
         YPosition += 14;
-        DevMenu_DrawText_(centerX, "????", YPosition, SonicMania::Alignment_Center, optionColors[5]);
+        DevMenu_DrawText_(centerX, "-----", YPosition, SonicMania::Alignment_Center, optionColors[5]);
 
         YPosition += 55;
         DevMenu_DrawText_(centerX, "(CTRL + P) - Swap Between Dev Menus", YPosition, SonicMania::Alignment_Center, standard_text_color);

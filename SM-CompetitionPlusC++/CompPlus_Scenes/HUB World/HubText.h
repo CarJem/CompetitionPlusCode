@@ -21,6 +21,8 @@ namespace CompPlus_HubText
 
     extern void UpdateLevelSelectStatusDisplay(int State, int StageIndex, int Index, int SlotID);
 
+    extern void UpdateSaveToggle(int SlotID, bool State, int StageIndex, int Index);
+
     extern void UpdateToggleDisplay(int SlotID, bool State, int StageIndex, int Index);
 
     extern void UpdateToggleDisplayInverted(int SlotID, bool State, int StageIndex, int Index);
@@ -38,6 +40,8 @@ namespace CompPlus_HubText
     extern void UpdateLivesDisplay(int SlotID, int StageIndex, int Index);
 
     extern void UpdateNumberOfRoundsDisplay(int SlotID, int StageIndex, int Index);
+
+    extern void UpdateShoesDisplay(int SlotID, int StageIndex, int Index);
 
     extern void UpdateItemBoxModeDisplay(int SlotID, int StageIndex, int Index);
 

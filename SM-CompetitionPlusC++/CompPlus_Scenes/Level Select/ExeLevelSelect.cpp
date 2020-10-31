@@ -152,39 +152,39 @@ namespace CompPlus_ExeLevelSelect
         MLS_MenuPoints[0][0] = CreateBlankMenuPoint(0, 1);
         MLS_MenuPoints[0][1] = CreateMenuPoint(0, 1, CompPlus_Common::SMCP_GHZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
         MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_GHZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
-        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
-        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
-        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
-        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, true); i++;
+        MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, true); i++;
+        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, true); i++;
+        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, true); i++;
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Chaotix, "CHAOTIX", "", "", 2, 2, false);
         MLS_MenuPoints[1][0].YellowText = true;
-        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_FBZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 3, false); i++;
-        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_FBZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, false); i++;
-        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_PGZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, false); i++;
-        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_PGZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 4, false); i++;
-        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_SSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
-        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_SSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, false); i++;
+        MLS_MenuPoints[1][1] = CreateMenuPoint(1, 1, CompPlus_Common::SMCP_FBZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 3, true); i++;
+        MLS_MenuPoints[1][2] = CreateMenuPoint(1, 2, CompPlus_Common::SMCP_FBZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, true); i++;
+        MLS_MenuPoints[1][3] = CreateMenuPoint(1, 3, CompPlus_Common::SMCP_PGZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, true); i++;
+        MLS_MenuPoints[1][4] = CreateMenuPoint(1, 4, CompPlus_Common::SMCP_PGZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 4, true); i++;
+        MLS_MenuPoints[1][5] = CreateMenuPoint(1, 5, CompPlus_Common::SMCP_SSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, true); i++;
+        MLS_MenuPoints[1][6] = CreateMenuPoint(1, 6, CompPlus_Common::SMCP_SSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 5, true); i++;
         MLS_MenuPoints[1][7] = CreateMenuPoint(1, 7, CompPlus_Common::LSelect_Mania, "MANIA", "", "", 2, 1, false);
         MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, CompPlus_Common::SMCP_HCZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
-        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, CompPlus_Common::SMCP_HCZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, false); i++;
-        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, CompPlus_Common::SMCP_MSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 7, false); i++;
-        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, CompPlus_Common::SMCP_MSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 7, false); i++;
-        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, CompPlus_Common::SMCP_OOZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
-        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, CompPlus_Common::SMCP_OOZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, false); i++;
+        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, CompPlus_Common::SMCP_HCZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, true); i++;
+        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, CompPlus_Common::SMCP_HCZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 6, true); i++;
+        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, CompPlus_Common::SMCP_MSZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 7, true); i++;
+        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, CompPlus_Common::SMCP_MSZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 7, true); i++;
+        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, CompPlus_Common::SMCP_OOZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, true); i++;
+        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, CompPlus_Common::SMCP_OOZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 8, true); i++;
         MLS_MenuPoints[2][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[3][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[3][1] = CreateMenuPoint(3, 1, CompPlus_Common::SMCP_LRZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
-        MLS_MenuPoints[3][2] = CreateMenuPoint(3, 2, CompPlus_Common::SMCP_LRZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, false); i++;
-        MLS_MenuPoints[3][3] = CreateMenuPoint(3, 3, CompPlus_Common::SMCP_MMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
-        MLS_MenuPoints[3][4] = CreateMenuPoint(3, 4, CompPlus_Common::SMCP_MMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, false); i++;
-        MLS_MenuPoints[3][5] = CreateMenuPoint(3, 5, CompPlus_Common::SMCP_TMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
-        MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, CompPlus_Common::SMCP_TMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
+        MLS_MenuPoints[3][1] = CreateMenuPoint(3, 1, CompPlus_Common::SMCP_LRZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, true); i++;
+        MLS_MenuPoints[3][2] = CreateMenuPoint(3, 2, CompPlus_Common::SMCP_LRZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 9, true); i++;
+        MLS_MenuPoints[3][3] = CreateMenuPoint(3, 3, CompPlus_Common::SMCP_MMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, true); i++;
+        MLS_MenuPoints[3][4] = CreateMenuPoint(3, 4, CompPlus_Common::SMCP_MMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 10, true); i++;
+        MLS_MenuPoints[3][5] = CreateMenuPoint(3, 5, CompPlus_Common::SMCP_TMZ1_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, true); i++;
+        MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, CompPlus_Common::SMCP_TMZ2_EXE, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, true); i++;
         MLS_MenuPoints[3][7] = CreateBlankMenuPoint(7, 1);
 
 
@@ -234,6 +234,8 @@ namespace CompPlus_ExeLevelSelect
         }
 
         EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int DrawOrderOld = Canvas->DrawOrder;
+        Canvas->DrawOrder = CompPlus_CoreLevelSelect::GeneralDrawOrder;
 
         SonicMania::Vector2 CurrentPosition = SonicMania::Vector2(PosXCurrent + GetPositionOffsetX(), PosYCurrent + GetPositionOffsetY());
         int HalfSize = (WindowSizeX != 0 ? WindowSizeX / 2 : 0);
@@ -253,8 +255,8 @@ namespace CompPlus_ExeLevelSelect
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, TopPanelY + PanelBarsHeight, WindowSizeX, CenterPanelHeight, 0xFF0000, 128, InkEffect::Ink_Alpha);
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, BottomPanelY, WindowSizeX, PanelBarsHeight, 0x000000, 255, InkEffect::Ink_Alpha);
 
-        Drawing::DrawDevEXETextSprite("EXECUTOR STAGES", Vector2(150, 190 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
-        Drawing::DrawDevEXETextSprite("DO YOU WANT TO PLAY WITH ME", Vector2(150, 610 + PanelOffset), false, 14, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevEXETextSprite("EXECUTOR STAGES", Vector2(150, 190 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevEXETextSprite("DO YOU WANT TO PLAY WITH ME", Vector2(150, 610 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
 
 
         //Draw Zone Buttons
@@ -263,7 +265,7 @@ namespace CompPlus_ExeLevelSelect
             for (int y = 0; y < MLS_MenuMax_Y; y++)
             {
                 MenuPoint Point = MLS_MenuPoints[y][x];
-                DrawEntry(Point, x, y, IconsSpriteID, MenuPos_X, MenuPos_Y, Canvas);
+                DrawEntryChaotix(Point, x, y, IconsSpriteID, MenuPos_X, MenuPos_Y, Canvas);
             }
         }
         //Draw Zone Selector
@@ -282,6 +284,7 @@ namespace CompPlus_ExeLevelSelect
         //Draw Zone Info Stuff
         MenuPoint Point = MLS_MenuPoints[MenuPos_Y][MenuPos_X];
         DrawZoneInfo(Point, Canvas);
+        Canvas->DrawOrder = DrawOrderOld;
     }
 
     bool CooldownActive = false;

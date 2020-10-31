@@ -27,10 +27,10 @@ namespace CompPlus_Scene_FBZ2
         {
             if (!isFBZ2Init)
             {
-                char JMP_Data[2];
-                JMP_Data[0] = 0xEB;
-                JMP_Data[1] = 0x13;
-                WriteData((void*)(baseAddress + 0x125809), JMP_Data);
+                //char JMP_Data[2];
+                //JMP_Data[0] = 0xEB;
+                //JMP_Data[1] = 0x13;
+                //WriteData((void*)(baseAddress + 0x125809), JMP_Data);
                 isFBZ2Init = true;
             }
 
@@ -42,15 +42,17 @@ namespace CompPlus_Scene_FBZ2
                 {
                     if (SonicMania::Timer.Enabled)
                     {
-                        FBZStorm& storm = *SonicMania::GetEntityFromSceneSlot<FBZStorm>(i);
+                        SonicMania::DespawnEntity(&entity);
+                        //FBZStorm& storm = *SonicMania::GetEntityFromSceneSlot<FBZStorm>(i);
                         if (!InitStorm)
                         {
-                            storm.State = 128;
+                            //storm.State = 128;
                             InitStorm = true;
                         }
                         else
                         {
-                            storm.DrawOrder = 0;
+                            //storm.State = (void*)(baseAddress + 0x125820);
+                            //storm.DrawOrder = 0;
                         }
 
                     }
@@ -66,10 +68,10 @@ namespace CompPlus_Scene_FBZ2
         }
         else if (isFBZ2Init)
         {
-            char JNE_Data[2];
-            JNE_Data[0] = 0x75;
-            JNE_Data[1] = 0x13;
-            WriteData((void*)(baseAddress + 0x125809), JNE_Data);
+            //char JNE_Data[2];
+            //JNE_Data[0] = 0x75;
+            //JNE_Data[1] = 0x13;
+            //WriteData((void*)(baseAddress + 0x125809), JNE_Data);
             isFBZ2Init = false;
         }
     }

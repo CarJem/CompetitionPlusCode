@@ -96,7 +96,8 @@ namespace Drawing
         int SpriteFrame = 0;
         int RealSpriteFrame = 0;
         int BuildLength = 0;
-        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
@@ -107,14 +108,15 @@ namespace Drawing
         }
         if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) + BuildLength % 2 : 0);
-        //Offset lenth to build to our point. 
+        //Offset length to build to our point. 
+
+        RingTemp->DrawOrder = DrawOrder;
 
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
             SpriteFrame = int(Name[i]) - 32;
-            RingTemp->DrawOrder = DrawOrder;
-            //RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
+            RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
             SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
@@ -123,6 +125,7 @@ namespace Drawing
             DrawSprite(&RingTemp->ActNumbersData, &FramePosition, ScreenRelative);
             LocationStart.X = LocationStart.X + Frame.Width;
         }
+        RingTemp->DrawOrder = OldDrawOrder;
     }
 
     void DrawMenuTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right)
@@ -138,6 +141,7 @@ namespace Drawing
         int RealSpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
@@ -148,14 +152,15 @@ namespace Drawing
         }
         if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
-        //Offset lenth to build to our point. 
+        //Offset length to build to our point. 
+
+        RingTemp->DrawOrder = DrawOrder;
 
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
             SpriteFrame = int(Name[i]) - 32;
-            RingTemp->DrawOrder = DrawOrder;
-            //RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
+            RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
             SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
@@ -164,6 +169,7 @@ namespace Drawing
             DrawSprite(&RingTemp->ActNumbersData, &FramePosition, ScreenRelative);
             LocationStart.X = LocationStart.X + Frame.Width;
         }
+        RingTemp->DrawOrder = OldDrawOrder;
     }
 
     void DrawDevTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right, bool Highlighed = false)
@@ -178,7 +184,8 @@ namespace Drawing
 
         int SpriteFrame = 0;
         int BuildLength = 0;
-        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
             SetSpriteAnimation(DevFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
@@ -187,12 +194,13 @@ namespace Drawing
         }
         if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
-        //Offset lenth to build to our point. 
+        //Offset length to build to our point. 
+
+        RingTemp->DrawOrder = DrawOrder;
 
         for (int i = 0; i < Name.length(); i++)
         {
             SpriteFrame = GetAnimationIndexFromFrameID(RingTemp->ActNumbersData, int(Name[i]));
-            RingTemp->DrawOrder = DrawOrder;
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
@@ -203,6 +211,7 @@ namespace Drawing
             LocationStart.X = LocationStart.X + 8;
 
         }
+        RingTemp->DrawOrder = OldDrawOrder;
     }
 
     void DrawDevEXETextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right, bool Highlighed = false)
@@ -217,7 +226,8 @@ namespace Drawing
 
         int SpriteFrame = 0;
         int BuildLength = 0;
-        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
             SetSpriteAnimation(DevEXEFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
@@ -226,12 +236,12 @@ namespace Drawing
         }
         if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
-        //Offset lenth to build to our point. 
+        //Offset length to build to our point. 
+        RingTemp->DrawOrder = DrawOrder;
 
         for (int i = 0; i < Name.length(); i++)
         {
             SpriteFrame = GetAnimationIndexFromFrameID(RingTemp->ActNumbersData, int(Name[i]));
-            RingTemp->DrawOrder = DrawOrder;
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
@@ -242,6 +252,7 @@ namespace Drawing
             LocationStart.X = LocationStart.X + 8;
 
         }
+        RingTemp->DrawOrder = OldDrawOrder;
     }
 
 
