@@ -226,8 +226,12 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\PlayerSkins.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h" />
+    <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h">
+      <Filter>Scenes\Custom Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h">
+      <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
@@ -390,7 +394,11 @@
     <ClCompile Include="CompPlus_Scenes\Functionality\PlayerSkins.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\SpeedShoesMods.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\SpeedShoesMods.cpp">
+      <Filter>Scenes\Functionality</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp">
+      <Filter>Scenes\Custom Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -105,8 +105,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Game\SM-CompetitionPlusV5\$(TargetName)Debug.dll*" /D /Y </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>TASKKILL /F /IM SonicMania.exe 2&gt;nul &amp;set errorlevel=0</Command>

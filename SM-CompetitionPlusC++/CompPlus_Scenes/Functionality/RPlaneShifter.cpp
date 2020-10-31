@@ -118,17 +118,13 @@ namespace CompPlus_RPlaneShifter
             
             if (SetPosition == 0)
             {
-                Player.CollisionPlane = SonicMania::OBJ_ZONE->PlayerLowLayer;
                 Player.DrawOrder = SonicMania::OBJ_ZONE->DrawOrderLow;
-                //Player.CollisionPlane = 0;
-                //Player.DrawOrder = 12;
+                Player.CollisionPlane = 1;
             }
             else
             {
-                Player.CollisionPlane = SonicMania::OBJ_ZONE->PlayerHighLayer;
                 Player.DrawOrder = SonicMania::OBJ_ZONE->DrawOrderHigh;
-                //Player.CollisionPlane = 1;
-                //Player.DrawOrder = 4;
+                Player.CollisionPlane = 0;
             }
 
         }
