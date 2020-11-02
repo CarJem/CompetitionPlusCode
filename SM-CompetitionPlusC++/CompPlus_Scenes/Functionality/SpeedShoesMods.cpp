@@ -28,24 +28,23 @@ namespace CompPlus_SpeedShoesMods
     {
         if (CurrentModification == CompPlus_Settings::SpeedShoesModification_Default)
         {
-            IZAPI::SetGlobalAsset("Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin", nullptr);
-            IZAPI::SetGlobalAsset("Data/Sprites/Global/ItemBox.bin", "Data/Sprites/SMCP_ItemMods/ItemBox_Normal.bin");
-           
+            IZAPI::SetGlobalAsset(CompPlus_Common::Obj_SpeedShoes_Original, nullptr);
+            IZAPI::SetGlobalAsset(CompPlus_Common::Anim_ItemBox_Original, CompPlus_Common::Anim_ItemBox_Stock);        
         }
         else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_HighJump)
         {
-            IZAPI::SetGlobalAsset("Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin", "Data/Objects/CompPlus_SpeedShoesAbility/JumpBoost.bin");
-            IZAPI::SetGlobalAsset("Data/Sprites/Global/ItemBox.bin", "Data/Sprites/SMCP_ItemMods/ItemBox_JumpBoost.bin");
+            IZAPI::SetGlobalAsset(CompPlus_Common::Obj_SpeedShoes_Original, CompPlus_Common::Obj_SpeedShoes_JumpUp);
+            IZAPI::SetGlobalAsset(CompPlus_Common::Anim_ItemBox_Original, CompPlus_Common::Anim_ItemBox_JumpUp);
         }
         else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_Freeze)
         {
-            IZAPI::SetGlobalAsset("Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin", "Data/Objects/CompPlus_SpeedShoesAbility/Freeze.bin");
-            IZAPI::SetGlobalAsset("Data/Sprites/Global/ItemBox.bin", "Data/Sprites/SMCP_ItemMods/ItemBox_Freeze.bin");
+            IZAPI::SetGlobalAsset(CompPlus_Common::Obj_SpeedShoes_Original, CompPlus_Common::Obj_SpeedShoes_Freeze);
+            IZAPI::SetGlobalAsset(CompPlus_Common::Anim_ItemBox_Original, CompPlus_Common::Anim_ItemBox_Freeze);
         }
         else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_SpeedDown)
         {
-            IZAPI::SetGlobalAsset("Data/Objects/Static/36D61A3DE508B500AE0ECF8D33F32943.bin", "Data/Objects/CompPlus_SpeedShoesAbility/SpeedDown.bin");
-            IZAPI::SetGlobalAsset("Data/Sprites/Global/ItemBox.bin", "Data/Sprites/SMCP_ItemMods/ItemBox_SpeedDown.bin");
+            IZAPI::SetGlobalAsset(CompPlus_Common::Obj_SpeedShoes_Original, CompPlus_Common::Obj_SpeedShoes_Slowdown);
+            IZAPI::SetGlobalAsset(CompPlus_Common::Anim_ItemBox_Original, CompPlus_Common::Anim_ItemBox_Slowdown);
         }
     }
     

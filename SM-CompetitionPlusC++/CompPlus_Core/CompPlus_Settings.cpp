@@ -395,11 +395,6 @@ namespace CompPlus_Settings
 
     #pragma region Update Player Methods
 
-    void UpdateCharacter(SonicMania::EntityPlayer* Player, SonicMania::Character Character)
-    {
-        SonicMania::FastChangeCharacter(Player, Character);
-    }
-
     void UpdatePlayer(int PlayerID, SonicMania::Character Character, bool Force)
     {
         CompPlus_Settings::ChosenPlayer Player = CompPlus_Settings::ChosenPlayer_Default;
@@ -431,49 +426,11 @@ namespace CompPlus_Settings
             CharID = 16;
         }
 
-        if (Force) 
-        {
-            std::string message = "Changing Player ";
-            message += IntToString(PlayerID);
-            message += " Forcefully";
-            message += " to Character ";
-            message += IntToString(Character);
-            message += "!";
-            LogInfo("CompPlus_Settings::UpdatePlayer", message.c_str());
-        }
+        if (PlayerID == 1) CompPlus_Settings::Player1ChosenPlayer = Player;
+        else if (PlayerID == 2) CompPlus_Settings::Player2ChosenPlayer = Player;
+        else if (PlayerID == 3) CompPlus_Settings::Player3ChosenPlayer = Player;
+        else if (PlayerID == 4) CompPlus_Settings::Player4ChosenPlayer = Player;
 
-        if (PlayerID == 1)
-        {
-            if (Force) UpdateCharacter(&Player1, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[0] = CharID;
-            SonicMania::Options->CharacterFlags[0] = CharID;
-            SonicMania::Player1.Character = Character;
-            CompPlus_Settings::Player1ChosenPlayer = Player;
-        }
-        else if (PlayerID == 2)
-        {
-            if (Force) UpdateCharacter(&Player2, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[1] = CharID;
-            SonicMania::Options->CharacterFlags[1] = CharID;
-            SonicMania::Player2.Character = Character;
-            CompPlus_Settings::Player2ChosenPlayer = Player;
-        }
-        else if (PlayerID == 3)
-        {
-            if (Force) UpdateCharacter(&Player3, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[2] = CharID;
-            SonicMania::Options->CharacterFlags[2] = CharID;
-            SonicMania::Player3.Character = Character;
-            CompPlus_Settings::Player3ChosenPlayer = Player;
-        }
-        else if (PlayerID == 4)
-        {
-            if (Force) UpdateCharacter(&Player4, Character);
-            SonicMania::Options->CompetitionSession.CharacterFlags[3] = CharID;
-            SonicMania::Options->CharacterFlags[3] = CharID;
-            SonicMania::Player4.Character = Character;
-            CompPlus_Settings::Player4ChosenPlayer = Player;
-        }
         CompPlus_Patches::FixRayAndMighty2P();
     }
 

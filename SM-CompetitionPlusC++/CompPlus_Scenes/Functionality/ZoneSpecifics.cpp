@@ -223,28 +223,6 @@ namespace CompPlus_ZoneSpecifics
     {
         if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ1_EXE)) return true;
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_GHZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SSZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_HCZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MSZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_OOZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_LRZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1_EXE)) return true;
-        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2_EXE)) return true;
         else return false;
     }
 

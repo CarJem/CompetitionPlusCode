@@ -9,7 +9,6 @@
 #include "CompPlus_Scenes/Custom Scenes/GustPlanet.h"
 #include "CompPlus_Scenes/Custom Scenes/LHPZ.h"
 #include "CompPlus_Scenes/Custom Scenes/MetrotropicBeach.h"
-#include "CompPlus_Scenes/Stock Scenes/FBZ2.h"
 
 #include "CompPlus_Core/CompPlus_Scenes.h"
 #include "CompPlus_Scenes/General Scenes/ManiaMenu.h"
@@ -197,7 +196,6 @@ namespace CompPlus_Scenes
 
             //Unique Coded Levels
             CompPlus_Credits::OnFrame(!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits));
-            CompPlus_Scene_FBZ2::OnFrame(CurrentStage.SceneKey);
         }
         else IZ_SceneChangeIdleTime = IZ_SceneChangeIdleTime - 1;
     }

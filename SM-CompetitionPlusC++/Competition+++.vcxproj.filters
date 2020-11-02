@@ -193,9 +193,6 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\VapeMusic.h">
       <Filter>Scenes\Functionality\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="CompPlus_Scenes\Stock Scenes\FBZ2.h">
-      <Filter>Scenes\Stock Scenes\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
     </ClInclude>
@@ -231,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h">
       <Filter>Scenes\Functionality\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Scenes\Functionality\FBZStorm.h">
+      <Filter>Scenes\Stock Scenes\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -361,9 +361,6 @@
     <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp">
       <Filter>Scenes\Functionality</Filter>
     </ClCompile>
-    <ClCompile Include="CompPlus_Scenes\Stock Scenes\FBZ2.cpp">
-      <Filter>Scenes\Stock Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Level Select\CoreLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
     </ClCompile>
@@ -399,6 +396,9 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp">
       <Filter>Scenes\Custom Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Scenes\Functionality\FBZStorm.cpp">
+      <Filter>Scenes\Stock Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

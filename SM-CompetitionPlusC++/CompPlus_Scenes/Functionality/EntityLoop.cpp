@@ -10,6 +10,7 @@
 
 #include "RPlaneShifter.h"
 #include "SizeLazer.h"
+#include "FBZStorm.h"
 
 #include "CompPlus_Extensions/Helpers.h"
 
@@ -34,9 +35,14 @@ namespace CompPlus_EntityLoop
             {
                 CompPlus_RPlaneShifter::OnObject(i);
             }
-            if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_SizeLazer))
+            else if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_SizeLazer))
             {
                 CompPlus_SizeLazer::OnObject(i);
+                HasSizeLazer = true;
+            }
+            else if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FBZStorm))
+            {
+                CompPlus_FBZStorm::OnObject(i);
                 HasSizeLazer = true;
             }
         }

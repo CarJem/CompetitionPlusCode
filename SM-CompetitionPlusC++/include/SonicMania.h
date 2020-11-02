@@ -435,6 +435,7 @@ namespace SonicMania
         ObjectType_Explosion = 0x00AC6D84,
         ObjectType_PlathSwapper = 0x00AC6C0C,
         ObjectType_TitleCard = 0x00AC671C,
+        ObjectType_Decoration = 0x00AC6A90,
 
         // Green Hill Zone
         ObjectType_Motobug = 0x00AC6B60,
@@ -464,6 +465,7 @@ namespace SonicMania
         ObjectType_TechnoSqueek = 0x00AC69FC,
         ObjectType_Blaster = 0x00AC6A6C,
         ObjectType_Clucker = 0x00AC6C88,
+        ObjectType_FBZStorm = 0x00AC6DDC,
         // Press Garden Zone
         ObjectType_Dragonfly = 0x00AC6928,
         ObjectType_Jugglesaw = 0x00AC6688,

@@ -207,7 +207,7 @@
     <ClInclude Include="CompPlus_Scenes\Functionality\TailsFlightCancel.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\DAGarden.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\TitleScreen.h" />
-    <ClInclude Include="CompPlus_Scenes\Stock Scenes\FBZ2.h" />
+    <ClInclude Include="CompPlus_Scenes\Functionality\FBZStorm.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\Halloween2018.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h" />
     <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h" />
@@ -264,7 +264,7 @@
     <ClCompile Include="CompPlus_Scenes\Functionality\TailsFlightCancel.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\DAGarden.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\TitleScreen.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Stock Scenes\FBZ2.cpp" />
+    <ClCompile Include="CompPlus_Scenes\Functionality\FBZStorm.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp" />
     <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp" />

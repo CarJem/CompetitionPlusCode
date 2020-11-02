@@ -157,7 +157,7 @@ namespace CompPlus_SpecialRings
         {
             if (!RingSpritesLoaded)
             {
-                RingSpriteID = SonicMania::LoadAnimation("Global/Ring.bin", SonicMania::Scope_Global);
+                RingSpriteID = SonicMania::LoadAnimation(CompPlus_Common::Anim_Ring_Normal, SonicMania::Scope_Global);
                 RingSpritesLoaded = true;
             }
 

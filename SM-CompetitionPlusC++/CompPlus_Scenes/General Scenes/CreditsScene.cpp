@@ -226,19 +226,7 @@ namespace CompPlus_Credits
                 PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
-                Entity* FXFade = SpawnObject(GetObjectIDFromType(ObjectType_FXFade), 0, Vector2(Player1.Position.X, Player1.Position.Y - 30));
-                EntityFXFade* FxFadeR = (EntityFXFade*)FXFade;
-
-                FxFadeR->Time = 0;
-                FxFadeR->SpeedIn = 10;
-                FxFadeR->Wait = 3;
-                FxFadeR->SpeedOut = 0;
-                FxFadeR->Color = 0x000000;
-                FxFadeR->OneWay = true;
-                FxFadeR->EventOnly = false;
-                FxFadeR->Overhud = false;
-                FxFadeR->FadeOutBlack = true;
-                FxFadeR->DrawOrder = 14;
+                CompPlus_Common::SpawnFadeOut(0, 10, 3, 0, 0x000000, true, false, false, true, 14);
 
             }
             SceneLoadWaitTimer++;

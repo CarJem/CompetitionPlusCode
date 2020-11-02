@@ -621,20 +621,7 @@ namespace CompPlus_HubWorld
                 SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
-                SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
-                SonicMania::EntityFXFade* FxFadeR = (SonicMania::EntityFXFade*)FXFade;
-
-                FxFadeR->Time = 0;
-                FxFadeR->SpeedIn = 10;
-                FxFadeR->Wait = 3;
-                FxFadeR->SpeedOut = 0;
-                FxFadeR->Color = 0x000000;
-                FxFadeR->OneWay = true;
-                FxFadeR->EventOnly = false;
-                FxFadeR->Overhud = false;
-                FxFadeR->FadeOutBlack = true;
-                FxFadeR->DrawOrder = 14;
-
+                CompPlus_Common::SpawnFadeOut(0, 10, 3, 0, 0x000000, true, false, false, true, 14);
             }
             SceneLoadWaitTimer++;
         }
@@ -664,19 +651,7 @@ namespace CompPlus_HubWorld
                 SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
 
-                SonicMania::Entity* FXFade = SonicMania::SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
-                SonicMania::EntityFXFade* FxFadeR = (SonicMania::EntityFXFade*)FXFade;
-
-                FxFadeR->Time = 0;
-                FxFadeR->SpeedIn = 10;
-                FxFadeR->Wait = 3;
-                FxFadeR->SpeedOut = 0;
-                FxFadeR->Color = 0x000000;
-                FxFadeR->OneWay = true;
-                FxFadeR->EventOnly = false;
-                FxFadeR->Overhud = false;
-                FxFadeR->FadeOutBlack = true;
-                FxFadeR->DrawOrder = 14;
+                CompPlus_Common::SpawnFadeOut(0, 10, 3, 0, 0x000000, true, false, false, true, 14);
 
             }
             SceneLoadWaitTimer++;
@@ -707,21 +682,7 @@ namespace CompPlus_HubWorld
             {
                 SonicMania::PlaySoundFXS(CompPlus_Common::SFX_SpecialWarp);
                 LevelSelectedWarpSoundPlayed = true;
-
-                SonicMania::Entity* FXFade = SpawnObject(SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FXFade), 0, SonicMania::Vector2(SonicMania::Player1.Position.X, SonicMania::Player1.Position.Y - 30));
-                SonicMania::EntityFXFade* FxFadeR = (SonicMania::EntityFXFade*)FXFade;
-
-                FxFadeR->Time = 0;
-                FxFadeR->SpeedIn = 10;
-                FxFadeR->Wait = 3;
-                FxFadeR->SpeedOut = 0;
-                FxFadeR->Color = 0x000000;
-                FxFadeR->OneWay = true;
-                FxFadeR->EventOnly = false;
-                FxFadeR->Overhud = false;
-                FxFadeR->FadeOutBlack = true;
-                FxFadeR->DrawOrder = 14;
-
+                CompPlus_Common::SpawnFadeOut(0, 10, 3, 0, 0x000000, true, false, false, true, 14);
             }
             SceneLoadWaitTimer++;
         }
@@ -731,6 +692,25 @@ namespace CompPlus_HubWorld
     }
 
     #pragma endregion
+
+    void FixText() 
+    {
+        if (CompPlus_Core::CurrentStage.SceneKey) 
+        {
+            if (!strcmp(CompPlus_Core::CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) 
+            {
+                for (int i = 0; i < 2301; ++i)
+                {
+                    SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
+
+                    if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_Decoration))
+                    {
+                        entity.DrawOrder = 1;
+                    }
+                }
+            }
+        }
+    }
 
     void OnFrame()
     {
@@ -744,6 +724,7 @@ namespace CompPlus_HubWorld
 
         if (isRestart && SonicMania::Timer.Enabled)
         {
+            FixText();
             SetSpawnPositions();
             ResetQuickWarps();
             isRestart = false;

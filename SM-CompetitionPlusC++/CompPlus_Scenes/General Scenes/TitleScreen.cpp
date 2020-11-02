@@ -48,7 +48,7 @@ namespace CompPlus_TitleScreen
 
         if (!CompPlusLogoLoaded)
         {
-            CompPlusLogoID = LoadAnimation("Title/PlusLogoSMCP.bin", Scope_Stage);
+            CompPlusLogoID = LoadAnimation(CompPlus_Common::Anim_Title_CompPlusLogo, Scope_Stage);
             CompPlusLogoLoaded = true;
         }
 

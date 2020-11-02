@@ -158,19 +158,19 @@
 		<Category categoryName="SMCP : Custom Stages">
 			<Group groupName="Desert Hill Zone">
 				<Scene stageKey="SMCP_DHZ" sceneKey="SMCP_DHZ" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_DHZ" sceneKey="SMCP_DHZE" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_DHZ" sceneKey="SMCP_DHZE" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Gust Planet Zone">
 				<Scene stageKey="SMCP_GPZ" sceneKey="SMCP_GPZ" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_GPZ" sceneKey="SMCP_GPZE" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_GPZ" sceneKey="SMCP_GPZE" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Special Stage Zone">
 				<Scene stageKey="SMCP_SZ" sceneKey="SMCP_SZ" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_SZ" sceneKey="SMCP_SZE" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_SZ" sceneKey="SMCP_SZE" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Lost Hidden Palace Zone">
 				<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1E" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_LHPZ1" sceneKey="SMCP_LHPZ1E" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Seatide Hill Zone">
 				<Scene stageKey="SMCP_STHZ" sceneKey="SMCP_STHZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
@@ -188,6 +188,14 @@
 				<Scene stageKey="SMCP_HILL" sceneKey="SMCP_GHZ1_EXE" sceneID="1_EXE" sceneFlags="3" sceneName="1"/>
 				<Scene stageKey="SMCP_HILL" sceneKey="SMCP_GHZ2_EXE" sceneID="2_EXE" sceneFlags="3" sceneName="2"/>
 			</Group>
+			<Group groupName="Studiopolis Zone DX">
+				<Scene stageKey="SMCP_SPZ1_DX" sceneKey="SMCP_SPZ1_DX" sceneID="1" sceneFlags="3" sceneName="1"/>
+				<Scene stageKey="SMCP_SPZ2_DX" sceneKey="SMCP_SPZ2_DX" sceneID="1" sceneFlags="3" sceneName="2"/>
+			</Group>
+			<Group groupName="Studiopolis Zone DX+">
+				<Scene stageKey="SMCP_SPZ1_DX" sceneKey="SMCP_SPZ1_DXE" sceneID="1" sceneFlags="5" sceneName="1"/>
+				<Scene stageKey="SMCP_SPZ2_DX" sceneKey="SMCP_SPZ2_DXE" sceneID="1" sceneFlags="5" sceneName="2"/>
+			</Group>
 			<Group groupName="Test Scene Zone">
 				<Scene stageKey="SMCP_TSZ" sceneKey="SMCP_TSZ" sceneID="1" sceneFlags="3" sceneName=""/>
 			</Group>
@@ -195,27 +203,27 @@
 		<Category categoryName="SMCP : Chaotix Stages">
 			<Group groupName="Isolated Island Zone">
 				<Scene stageKey="SMCP_CXM_IIZ1" sceneKey="SMCP_CXM_IIZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_IIZ1" sceneKey="SMCP_CXM_IIZ1E" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_IIZ1" sceneKey="SMCP_CXM_IIZ1E" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Amazing Arena Zone">
 				<Scene stageKey="SMCP_CXM_AAZ" sceneKey="SMCP_CXM_AAZ" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_AAZ" sceneKey="SMCP_CXM_AAZE" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_AAZ" sceneKey="SMCP_CXM_AAZE" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Speed Slider Zone">
 				<Scene stageKey="SMCP_CXM_SSZ1" sceneKey="SMCP_CXM_SSZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_SSZ1" sceneKey="SMCP_CXM_SSZ1E" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_SSZ1" sceneKey="SMCP_CXM_SSZ1E" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Botanic Base Zone">
 				<Scene stageKey="SMCP_CXM_BBZ" sceneKey="SMCP_CXM_BBZ" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_BBZ" sceneKey="SMCP_CXM_BBZE" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_BBZ" sceneKey="SMCP_CXM_BBZE" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Marina Madness Zone">
 				<Scene stageKey="SMCP_CXM_MMZ1" sceneKey="SMCP_CXM_MMZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_MMZ1" sceneKey="SMCP_CXM_MMZ1E" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_MMZ1" sceneKey="SMCP_CXM_MMZ1E" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 			<Group groupName="Techno Tower Zone">
 				<Scene stageKey="SMCP_CXM_TTZ1" sceneKey="SMCP_CXM_TTZ1" sceneID="1" sceneFlags="3" sceneName="1"/>
-				<Scene stageKey="SMCP_CXM_TTZ1" sceneKey="SMCP_CXM_TTZ1E" sceneID="1" sceneFlags="5" sceneName="1E"/>
+				<Scene stageKey="SMCP_CXM_TTZ1" sceneKey="SMCP_CXM_TTZ1E" sceneID="1" sceneFlags="5" sceneName="1+"/>
 			</Group>
 		</Category>
 	</Categories>
@@ -731,6 +739,22 @@
 				<Asset basePath="Data/Sprites/SSZ1/SDashWheel.bin" newPath="Data/Sprites/SMCP_LHPZ/SDashWheel.bin"/>
 				<Asset basePath="Data/Palettes/EncoreHCZ.act" newPath="Data/Palettes/SMCP_Custom/EncoreHPZ.act"/>
 				<Asset basePath="Data/Palettes/EncoreHCZw.act" newPath="Data/Palettes/SMCP_Custom/EncoreHPZw.act"/>
+			</StageAssets>
+		</Stage>
+		<Stage stageName="SMCP Studiopolis Zone Act 1 (Directors Cut)" stageDir="SMCP_CustomStages/SMCP_DX_SPZ1" stageKey="SMCP_SPZ1_DX">
+			<StageUnlocks>
+				<Core_SPZ1/>
+			</StageUnlocks>
+			<StageAssets>
+				<Asset basePath="Data/Sprites/SPZ1/" newPath="Data/Sprites/SMCP_Custom/SMCP_DX_SPZ1/"/>
+			</StageAssets>
+		</Stage>
+		<Stage stageName="SMCP Studiopolis Zone Act 2 (Directors Cut)" stageDir="SMCP_CustomStages/SMCP_DX_SPZ2" stageKey="SMCP_SPZ2_DX">
+			<StageUnlocks>
+				<Core_SPZ2/>
+			</StageUnlocks>
+			<StageAssets>
+				<Asset basePath="Data/Sprites/SPZ2/" newPath="Data/Sprites/SMCP_Custom/SMCP_DX_SPZ2/"/>
 			</StageAssets>
 		</Stage>
 		<Stage stageName="SMCP-CXM Isolated Island" stageDir="SMCP_ChaotixManiaStages/IIZ1" stageKey="SMCP_CXM_IIZ1">

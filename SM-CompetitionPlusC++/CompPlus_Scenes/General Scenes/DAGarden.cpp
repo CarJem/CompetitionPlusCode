@@ -348,7 +348,7 @@ namespace CompPlus_DAGarden_Chaotix
     {
         if (!SpritesLoaded) 
         {
-            SpriteID = LoadAnimation("SMCP_DAGarden/Objects_Chaotix.bin", Scope_Stage);
+            SpriteID = LoadAnimation(CompPlus_Common::Anim_DAGarden_Chaotix, Scope_Stage);
             SpritesLoaded = true;
         }
     }

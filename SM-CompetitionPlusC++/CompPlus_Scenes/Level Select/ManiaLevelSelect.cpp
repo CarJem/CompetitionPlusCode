@@ -28,8 +28,8 @@ namespace CompPlus_ManiaLevelSelect
         "CPZ 1",
         "CPZ 2",
 
-        "SPZ 1",
-        "SPZ 2",
+        "SPZ1 CC",
+        "SPZ2 CC",
 
         "FBZ 1",
         "FBZ 2",
@@ -56,7 +56,12 @@ namespace CompPlus_ManiaLevelSelect
         "MMZ 2",
 
         "TMZ 1",
-        "TMZ 2"
+        "TMZ 2",
+
+        "SPZ 1",
+        "SPZ 2",
+        
+        "X"
     };
 
     std::vector<std::string> LevelNames =
@@ -67,8 +72,8 @@ namespace CompPlus_ManiaLevelSelect
         "CHEMICAL PLANT ZONE ACT 1",
         "CHEMICAL PLANT ZONE ACT 2",
 
-        "STUDIOPOLIS ZONE ACT 1",
-        "STUDIOPOLIS ZONE ACT 2",
+        "STUDIOPOLIS ZONE ACT 1 (COMPETITION CUT)",
+        "STUDIOPOLIS ZONE ACT 2 (COMPETITION CUT)",
 
         "FLYING BATTERY ZONE ACT 1",
         "FLYING BATTERY ZONE ACT 2",
@@ -95,14 +100,20 @@ namespace CompPlus_ManiaLevelSelect
         "METALLIC MADNESS ZONE ACT 2",
 
         "TITANIC MONARCH ZONE ACT 1",
-        "TITANIC MONARCH ZONE ACT 2"
+        "TITANIC MONARCH ZONE ACT 2",
+
+        "STUDIOPOLIS ZONE ACT 1",
+        "STUDIOPOLIS ZONE ACT 2",
+
+        "X"
     };
 
     std::vector<std::string> AuthorNames =
     {
         "SEGA / MANIA TEAM",
         "SEGA / MANIA TEAM (EDITS: CARJEM GENERATIONS)",
-        "SEGA / MANIA TEAM (EDITS: SONIKKO)"
+        "SEGA / MANIA TEAM (EDITS: SONIKKO)",
+        "SEGA / MANIA TEAM (EDITS: XANMAN)"
     };
 
 	bool SwapLevelSelect = false;
@@ -124,7 +135,7 @@ namespace CompPlus_ManiaLevelSelect
 	bool UpdateMenuScroll = false;
 
 	int MLS_MenuMax_X = 8;
-	int MLS_MenuMax_Y = 4;
+	int MLS_MenuMax_Y = 5;
 
     int Draw_StartX = 256;
     int Draw_StartY = 256;
@@ -153,8 +164,8 @@ namespace CompPlus_ManiaLevelSelect
         MLS_MenuPoints[0][2] = CreateMenuPoint(0, 2, CompPlus_Common::SMCP_GHZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, false); i++;
         MLS_MenuPoints[0][3] = CreateMenuPoint(0, 3, CompPlus_Common::SMCP_CPZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
         MLS_MenuPoints[0][4] = CreateMenuPoint(0, 4, CompPlus_Common::SMCP_CPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 1, false); i++;
-        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
-        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[0][5] = CreateMenuPoint(0, 5, CompPlus_Common::SMCP_SPZ1_DX, LevelTitles[i], LevelNames[i], AuthorNames[3], 1, 2, false); i++;
+        MLS_MenuPoints[0][6] = CreateMenuPoint(0, 6, CompPlus_Common::SMCP_SPZ2_DX, LevelTitles[i], LevelNames[i], AuthorNames[3], 1, 2, false); i++;
         MLS_MenuPoints[0][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[1][0] = CreateMenuPoint(1, 0, CompPlus_Common::LSelect_Chaotix, "CHAOTIX", "", "", 2, 2, false);
@@ -186,6 +197,14 @@ namespace CompPlus_ManiaLevelSelect
         MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, CompPlus_Common::SMCP_TMZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 11, false); i++;
         MLS_MenuPoints[3][7] = CreateBlankMenuPoint(7, 1);
 
+        MLS_MenuPoints[4][0] = CreateBlankMenuPoint(0, 1);
+        MLS_MenuPoints[4][1] = CreateMenuPoint(4, 1, CompPlus_Common::SMCP_SPZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[4][2] = CreateMenuPoint(4, 2, CompPlus_Common::SMCP_SPZ2, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 2, false); i++;
+        MLS_MenuPoints[4][3] = CreateMenuPoint(4, 3, "", LevelTitles[i], "", "", 2, 3, true);
+        MLS_MenuPoints[4][4] = CreateMenuPoint(4, 4, "", LevelTitles[i], "", "", 2, 3, true);
+        MLS_MenuPoints[4][5] = CreateMenuPoint(4, 5, "", LevelTitles[i], "", "", 2, 3, true);
+        MLS_MenuPoints[4][6] = CreateMenuPoint(4, 6, "", LevelTitles[i], "", "", 2, 3, true);
+        MLS_MenuPoints[4][7] = CreateBlankMenuPoint(7, 1);
 
 		int reset_x = 1;
 		int reset_y = 0;
@@ -241,7 +260,8 @@ namespace CompPlus_ManiaLevelSelect
 
         int PanelBarsHeight = 30;
         
-        int PanelOffset = 10;
+        int PanelOffset = 16;
+        int PanelTextOffset = PanelOffset;
 
         int TopPanelY = Draw_StartY - PanelBarsHeight - 50 + PanelOffset;
         int BottomPanelY = Draw_StartY + MLS_MenuMax_Y * Draw_SpacingY - PanelBarsHeight - 15 + PanelOffset;
@@ -254,8 +274,8 @@ namespace CompPlus_ManiaLevelSelect
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, TopPanelY + PanelBarsHeight, WindowSizeX, CenterPanelHeight, 0x30A0F0, 128, InkEffect::Ink_Alpha);
         Drawing::DrawTitleCardRect(CurrentPosition.X - HalfSize, BottomPanelY, WindowSizeX, PanelBarsHeight, 0x000000, 255, InkEffect::Ink_Alpha);
 
-        Drawing::DrawDevTextSprite("MANIA STAGES", Vector2(150, 190 + PanelOffset), false , CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
-        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, 610 + PanelOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("MANIA STAGES", Vector2(150, TopPanelY + PanelTextOffset), false , CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
+        Drawing::DrawDevTextSprite("BY THE MANIA, FOR THE MANIA", Vector2(150, BottomPanelY + PanelTextOffset), false, CompPlus_CoreLevelSelect::GeneralDrawOrder, 0, 0, DevMenu_Alignment::Alignment_Right, false);
 
 
         //Draw Zone Buttons

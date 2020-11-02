@@ -224,13 +224,13 @@ namespace CompPlus_HubControllers
 
     void ChangeCharacter(int PlayerID, int Value)
     {
-        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, true);
-        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, true);
+        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, false);
+        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, false);
     }
 
     void ChangeAbility(int PlayerID, int Value, bool isUp)
     {
-        bool CanForce = true;
+        bool CanForce = false;
 
         CompPlus_Settings::PlayerAbility Ability = (CompPlus_Settings::PlayerAbility)Value;
         CompPlus_Settings::ChosenPlayer ChosenPlayer;

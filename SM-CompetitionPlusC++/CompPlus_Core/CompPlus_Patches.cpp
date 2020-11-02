@@ -104,6 +104,15 @@ namespace CompPlus_Patches
         static int OnButtonDrawReturn = baseAddress + 0x864D0;
         static int OnWaterDrawReturn = baseAddress + 0x19B9D;
 
+        static __declspec(naked) void FixSwapBoxFunction()
+        {
+            SonicMania::PlaySoundFXS("Global/SwapFail.wav");
+            __asm
+            {
+                ret
+            }
+        }
+
         static __declspec(naked) void OnWaterDrawHook()
         {
             __asm
@@ -357,6 +366,21 @@ namespace CompPlus_Patches
             //Control Panel B
             WriteData<6>((void*)(baseAddress + 0x16EF24), 0x90);
             WriteJump((void*)(baseAddress + 0x16EF24), OnControlPanelBDrawHook);
+        }
+
+        void DisableSwapBox() 
+        {
+            WriteData<5>((void*)(baseAddress + 0xA8A0C), 0x90);
+            WriteData<5>((void*)(baseAddress + 0xA8A1D), 0x90);
+            WriteData<5>((void*)(baseAddress + 0xA8A2E), 0x90);
+            WriteData<5>((void*)(baseAddress + 0xA8A3F), 0x90);
+            WriteData<5>((void*)(baseAddress + 0xA8A50), 0x90);
+
+            WriteCall((void*)(baseAddress + 0xA8A0C), FixSwapBoxFunction);
+            WriteCall((void*)(baseAddress + 0xA8A1D), FixSwapBoxFunction);
+            WriteCall((void*)(baseAddress + 0xA8A2E), FixSwapBoxFunction);
+            WriteCall((void*)(baseAddress + 0xA8A3F), FixSwapBoxFunction);
+            WriteCall((void*)(baseAddress + 0xA8A50), FixSwapBoxFunction);
         }
 
         void PatchHookOnStartTimer()
@@ -838,6 +862,7 @@ namespace CompPlus_Patches
         SonicMania::BindLBAndRB();
         PatchOnTitlePlusLogoDrawHook();
         PatchOnDecorationScreenDrawHook();
+        DisableSwapBox();
         //PatchMenuOnScreenDrawHook();
         PatchWaterDrawHook();
         PatchCompetitionPlusTMZ();
