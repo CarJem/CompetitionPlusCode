@@ -232,7 +232,7 @@ namespace CompPlus_PlayerSkins
 
     #pragma endregion
 
-    bool AllowUsage = true;
+    bool AllowUsage = false;
 
     const char* IZ_Anim_Compatibility_Sonic = "Data/Sprites/Players/Sonic.bin";
     const char* IZ_Anim_Compatibility_Tails = "Data/Sprites/Players/Tails.bin";
