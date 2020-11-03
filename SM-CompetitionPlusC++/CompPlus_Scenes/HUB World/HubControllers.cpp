@@ -222,15 +222,17 @@ namespace CompPlus_HubControllers
         return NewValue;
     }
 
+    bool CanDynamicallyChangeEffects = false;
+
     void ChangeCharacter(int PlayerID, int Value)
     {
-        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, false);
-        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, false);
+        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, CanDynamicallyChangeEffects);
+        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, CanDynamicallyChangeEffects);
     }
 
     void ChangeAbility(int PlayerID, int Value, bool isUp)
     {
-        bool CanForce = false;
+        bool CanForce = CanDynamicallyChangeEffects;
 
         CompPlus_Settings::PlayerAbility Ability = (CompPlus_Settings::PlayerAbility)Value;
         CompPlus_Settings::ChosenPlayer ChosenPlayer;
