@@ -199,26 +199,26 @@
     <ClInclude Include="CompPlus_Extensions\PointScrolling.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\GustPlanet.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\CustomScreenStretch.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\DynCam.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\EntityLoop.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\PlayerSkins.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\SpotlightC.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\TailsFlightCancel.h" />
+    <ClInclude Include="CompPlus_Functionality\CustomScreenStretch.h" />
+    <ClInclude Include="CompPlus_Functionality\DynCam.h" />
+    <ClInclude Include="CompPlus_Functionality\EntityLoop.h" />
+    <ClInclude Include="CompPlus_Functionality\PlayerSkins.h" />
+    <ClInclude Include="CompPlus_Functionality\SpotlightC.h" />
+    <ClInclude Include="CompPlus_Functionality\TailsFlightCancel.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\DAGarden.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\TitleScreen.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\FBZStorm.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\Halloween2018.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\RPlaneShifter.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\SizeLazer.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\SpecialRings.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\VapeMusic.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\ZoneSpecifics.h" />
+    <ClInclude Include="CompPlus_Functionality\FBZStorm.h" />
+    <ClInclude Include="CompPlus_Functionality\Halloween2018.h" />
+    <ClInclude Include="CompPlus_Functionality\RPlaneShifter.h" />
+    <ClInclude Include="CompPlus_Functionality\SizeLazer.h" />
+    <ClInclude Include="CompPlus_Functionality\SpecialRings.h" />
+    <ClInclude Include="CompPlus_Functionality\VapeMusic.h" />
+    <ClInclude Include="CompPlus_Functionality\ZoneSpecifics.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\CreditsScene.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\GenericLogos.h" />
     <ClInclude Include="CompPlus_Scenes\General Scenes\ManiaMenu.h" />
     <ClInclude Include="CompPlus_Core\CompPlus_Scenes.h" />
-    <ClInclude Include="CompPlus_Scenes\General Scenes\SettingsMenu.h" />
+    <ClInclude Include="CompPlus_Scenes\General Scenes\PlayerSettings.h" />
     <ClInclude Include="CompPlus_Scenes\HUB World\HubControllers.h" />
     <ClInclude Include="CompPlus_Scenes\HUB World\HubCore.h" />
     <ClInclude Include="CompPlus_Scenes\HUB World\HubRanking.h" />
@@ -234,7 +234,7 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
-    <ClInclude Include="CompPlus_Scenes\Functionality\SpeedShoesMods.h" />
+    <ClInclude Include="CompPlus_Functionality\SpeedShoesMods.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp" />
@@ -256,26 +256,26 @@
     <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\GustPlanet.cpp" />
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\LHPZ.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\CustomScreenStretch.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\DynCam.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\EntityLoop.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\PlayerSkins.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\SpotlightC.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\TailsFlightCancel.cpp" />
+    <ClCompile Include="CompPlus_Functionality\CustomScreenStretch.cpp" />
+    <ClCompile Include="CompPlus_Functionality\DynCam.cpp" />
+    <ClCompile Include="CompPlus_Functionality\EntityLoop.cpp" />
+    <ClCompile Include="CompPlus_Functionality\PlayerSkins.cpp" />
+    <ClCompile Include="CompPlus_Functionality\SpotlightC.cpp" />
+    <ClCompile Include="CompPlus_Functionality\TailsFlightCancel.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\DAGarden.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\TitleScreen.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\FBZStorm.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\Halloween2018.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\RPlaneShifter.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\SizeLazer.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\SpecialRings.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\VapeMusic.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\ZoneSpecifics.cpp" />
+    <ClCompile Include="CompPlus_Functionality\FBZStorm.cpp" />
+    <ClCompile Include="CompPlus_Functionality\Halloween2018.cpp" />
+    <ClCompile Include="CompPlus_Functionality\RPlaneShifter.cpp" />
+    <ClCompile Include="CompPlus_Functionality\SizeLazer.cpp" />
+    <ClCompile Include="CompPlus_Functionality\SpecialRings.cpp" />
+    <ClCompile Include="CompPlus_Functionality\VapeMusic.cpp" />
+    <ClCompile Include="CompPlus_Functionality\ZoneSpecifics.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\CreditsScene.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\GenericLogos.cpp" />
     <ClCompile Include="CompPlus_Scenes\General Scenes\ManiaMenu.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Scenes.cpp" />
-    <ClCompile Include="CompPlus_Scenes\General Scenes\SettingsMenu.cpp" />
+    <ClCompile Include="CompPlus_Scenes\General Scenes\PlayerSettings.cpp" />
     <ClCompile Include="CompPlus_Scenes\HUB World\HubControllers.cpp" />
     <ClCompile Include="CompPlus_Scenes\HUB World\HubCore.cpp" />
     <ClCompile Include="CompPlus_Scenes\HUB World\HubRanking.cpp" />
@@ -295,7 +295,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp" />
-    <ClCompile Include="CompPlus_Scenes\Functionality\SpeedShoesMods.cpp" />
+    <ClCompile Include="CompPlus_Functionality\SpeedShoesMods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IZAPI\IZAPI.vcxproj">

@@ -70,7 +70,7 @@ namespace CompPlus_Common
 
     #pragma region Scene IDs
 
-    extern const char* SMCP_Unused_SettingsWorld;
+    extern const char* SMCP_PlayerSettings;
     extern const char* SMCP_Credits;
 
     extern const char* SMCP_DAGarden;

@@ -24,45 +24,41 @@ namespace CompPlus_HubCore
 
     bool isRestart = true;
 
-    bool HUDDrawOrderSet = false;
-    int HUDDrawOrder = 0;
     int HUDSpriteID = 0;
     bool HUDSpriteLoaded = false;
 
-    void DrawCrownSprite(SonicMania::EntityPlayer Player, Vector2 LocationStart, bool ScreenRelative)
+    Hitbox Player1Box;
+    Hitbox Player2Box;
+    Hitbox Player3Box;
+    Hitbox Player4Box;
+
+    void DrawCrownSprite(Vector2 LocationStart, bool ScreenRelative, int DrawOrder, int Rotation, int Angle)
     {
         if (!HUDSpriteLoaded)
         {
-            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Global);
+            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Stage);
             HUDSpriteLoaded = true;
             return;
         }
 
-
-        if (ScreenRelative)
-        {
-            int x = SonicMania::OBJ_Camera->XPos;
-            int y = SonicMania::OBJ_Camera->YPos;
-
-            LocationStart = Vector2(x + LocationStart.GetFullX(), y + LocationStart.GetFullY());
-        }
-
-        //CompPlus_HubWorld::SetObjectPalette();
-
-
         int SpriteFrame = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
 
-        RingTemp->DrawOrder = Player.DrawOrder;
+        RingTemp->DrawOrder = DrawOrder;
         RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
-        RingTemp->ActiveScreens = Player.ActiveScreens;
-        RingTemp->Rotation = Player.Rotation;
-        RingTemp->Angle = Player.Angle;
+        RingTemp->Rotation = Rotation;
+        RingTemp->Angle = Angle;
         SetSpriteAnimation(HUDSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
         DrawSprite(&RingTemp->ActNumbersData, &LocationStart, true);
-        LocationStart.X = LocationStart.X + 8;
+    }
 
-        //CompPlus_HubWorld::UnsetObjectPalette();
+    char* GetPlayerID(int PlayerID)
+    {
+        if (PlayerID == 1) return (char*)"1P";
+        else if (PlayerID == 2) return (char*)"2P";
+        else if (PlayerID == 3) return (char*)"3P";
+        else if (PlayerID == 4) return (char*)"4P";
+        else return (char*)"WORLD";
     }
 
     char* GetPosition(int PlayerID)
@@ -96,11 +92,6 @@ namespace CompPlus_HubCore
         else if (pointer == 3) return CanDrawP4;
         else return false;
     }
-
-    Hitbox Player1Box;
-    Hitbox Player2Box;
-    Hitbox Player3Box;
-    Hitbox Player4Box;
 
     void DrawWaitingForPlayers(int offset) 
     {
@@ -150,7 +141,6 @@ namespace CompPlus_HubCore
         Vector2 position_p3 = Vector2(SonicMania::Player3.Position.X, SonicMania::Player3.Position.Y);
         Vector2 position_p4 = Vector2(SonicMania::Player4.Position.X, SonicMania::Player4.Position.Y);
 
-
         if (screen == 0) DrawRect(0, 0, 500, 500, 0xFFFFFF, P1_Alpha, Ink_Alpha, true);
         if (screen == 1) DrawRect(0, 0, 500, 500, 0xFFFFFF, P2_Alpha, Ink_Alpha, true);
         if (screen == 2) DrawRect(0, 0, 500, 500, 0xFFFFFF, P3_Alpha, Ink_Alpha, true);
@@ -158,11 +148,28 @@ namespace CompPlus_HubCore
         Canvas->DrawOrder = OldDrawOrder;
     }
 
+    void DrawPlayerHUD(Vector2 PlayerPosition, int offset, int LastPlacement, int PlayerID, int DrawOrder, Hitbox Hitbox)
+    {
+        Vector2 Position = Vector2((PlayerPosition.X - GetPointer(0xAA7628, 0x96000 + offset)), (PlayerPosition.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+
+        Vector2 TextPosition = Vector2(Position.X, Position.Y + Hitbox.Top + Hitbox.Bottom + 24);
+        Vector2 CrownPosition = Vector2(Position.X, Position.Y - Hitbox.Top - Hitbox.Bottom - 45);
+        Vector2 PlayerIDPosition = Vector2(Position.X, Position.Y - Hitbox.Top - Hitbox.Bottom - 24);
+        Drawing::DrawDevTextSprite(GetPlayerID(PlayerID), PlayerIDPosition, true, DrawOrder, 0, 0, Alignment_Center, false);
+
+        if (LastPlacement == 1)
+        {
+            Drawing::DrawDevTextSprite(GetPosition(PlayerID), TextPosition, true, DrawOrder, 0, 0, Alignment_Center, true);
+            DrawCrownSprite(CrownPosition, false, DrawOrder, 0, 0);
+        }
+        else
+        {
+            Drawing::DrawDevTextSprite(GetPosition(PlayerID), TextPosition, true, DrawOrder, 0, 0, Alignment_Center, false);
+        }
+    }
+
     void OnDraw()
     {
-        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
-        int OldDrawOrder = Canvas->DrawOrder;
-
         ushort pointer = GetSpritePointer(0xAA7634, 0x14);
         int screen = 0;
 
@@ -177,87 +184,15 @@ namespace CompPlus_HubCore
 
             DrawWaitingForPlayers(offset);
 
-            if (Player1.Camera != nullptr)
-            {
-                Vector2 position_p1 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player1Box.Top + Player1Box.Bottom + 24);
-                Vector2 position_p1_top = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player1Box.Top - Player1Box.Bottom - 45);
-                Vector2 position_p1_top2 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player1Box.Top - Player1Box.Bottom - 24);
-                Drawing::DrawDevTextSprite("1P", position_p1_top2, true, Player1.DrawOrder, 0, 0, Alignment_Center, false);
-
-                if (CompPlus_Scoring::P1_LastPlacement == 1) 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(1), position_p1, true, 12, 0, 0, Alignment_Center, true);
-                    DrawCrownSprite(Player1, position_p1_top, false);
-                }
-                else 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(1), position_p1, true, 12, 0, 0, Alignment_Center, false);
-                }
-            }
-            if (Player2.Camera != nullptr)
-            {
-
-                Vector2 position_p2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player2Box.Top + Player2Box.Bottom + 24);
-                Vector2 position_p2_top = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player2Box.Top - Player2Box.Bottom - 45);
-                Vector2 position_p2_top2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player2Box.Top - Player2Box.Bottom - 24);
-                Drawing::DrawDevTextSprite("2P", position_p2_top2, true, 12, 0, 0, Alignment_Center, false);
-
-                if (CompPlus_Scoring::P2_LastPlacement == 1) 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(2), position_p2, true, 12, 0, 0, Alignment_Center, true);
-                    DrawCrownSprite(Player2, position_p2_top, false);
-                }
-                else 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(2), position_p2, true, 12, 0, 0, Alignment_Center, false);
-                }
-            }
-            if (Player3.Camera != nullptr)
-            {
-
-                Vector2 position_p3 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player3Box.Top + Player3Box.Bottom + 24);
-                Vector2 position_p3_top = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player3Box.Top - Player3Box.Bottom - 45);
-                Vector2 position_p3_top2 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player3Box.Top - Player3Box.Bottom - 24);
-                Drawing::DrawDevTextSprite("3P", position_p3_top2, true, 12, 0, 0, Alignment_Center, false);
-                
-                if (CompPlus_Scoring::P3_LastPlacement == 1)
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(3), position_p3, true, 12, 0, 0, Alignment_Center, true);
-                    DrawCrownSprite(Player3, position_p3_top, false);
-                }
-                else 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(3), position_p3, true, 12, 0, 0, Alignment_Center, false);
-                }
-            }
-            if (Player4.Camera != nullptr)
-            {
-                Vector2 position_p4 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)) - 11, (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) + Player4Box.Top + Player4Box.Bottom + 24);
-                Vector2 position_p4_top = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player4Box.Top - Player4Box.Bottom - 45);
-                Vector2 position_p4_top2 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)) - Player4Box.Top - Player4Box.Bottom - 24);
-                Drawing::DrawDevTextSprite("4P", position_p4_top2, true, 12, 0, 0, Alignment_Center, false);
-                
-                if (CompPlus_Scoring::P4_LastPlacement == 1)
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(4), position_p4, true, 12, 0, 0, Alignment_Center, true);
-                    DrawCrownSprite(Player4, position_p4_top, false);
-                }
-                else 
-                {
-                    Drawing::DrawDevTextSprite(GetPosition(4), position_p4, true, 12, 0, 0, Alignment_Center, false);
-                }
-            }
+            if (Player1.Camera != nullptr) DrawPlayerHUD(Player1.Position, offset, CompPlus_Scoring::P1_LastPlacement, 1, 14, Player1Box);
+            if (Player2.Camera != nullptr) DrawPlayerHUD(Player2.Position, offset, CompPlus_Scoring::P2_LastPlacement, 2, 14, Player2Box);
+            if (Player3.Camera != nullptr) DrawPlayerHUD(Player3.Position, offset, CompPlus_Scoring::P3_LastPlacement, 3, 14, Player3Box);
+            if (Player4.Camera != nullptr) DrawPlayerHUD(Player4.Position, offset, CompPlus_Scoring::P4_LastPlacement, 4, 14, Player4Box);
 
             DrawKillScreens(screen, offset);
 
             EndDraw(screen);
         }
-        Canvas->DrawOrder = OldDrawOrder;
-    }
-
-    void DisableCountdown() 
-    {
-        SonicMania::Timer.Enabled = true;
     }
 
     void SetHUBVisualSettings()
@@ -268,30 +203,31 @@ namespace CompPlus_HubCore
             if (Player2.Camera != nullptr) Hitbox Player2Box = *GetHitbox(&Player2.Animation, 1);
             if (Player3.Camera != nullptr) Hitbox Player3Box = *GetHitbox(&Player3.Animation, 1);
             if (Player4.Camera != nullptr) Hitbox Player4Box = *GetHitbox(&Player4.Animation, 1);
-            //DevFontLoaded = false;
-            //HUDSpriteLoaded = false;
+            HUDSpriteLoaded = false;
             isRestart = false;
         }
 
         //Stop Countdown
-        DisableCountdown();
+        SonicMania::Timer.Enabled = true;
 
         //Disable Timer
         SonicMania::Timer.ResetTimer();
 
-        //Disable HUD
-        //WriteData((BYTE*)(baseAddress + 0x47B065), (BYTE)0);
-
         //Player Life Count Infinite
-        SonicMania::Player1.LifeCount = 99;
-        SonicMania::Player2.LifeCount = 99;
-        SonicMania::Player3.LifeCount = 99;
-        SonicMania::Player4.LifeCount = 99;
+        SonicMania::Player1.LifeCount = 100;
+        SonicMania::Player2.LifeCount = 100;
+        SonicMania::Player3.LifeCount = 100;
+        SonicMania::Player4.LifeCount = 100;
 
         //Allow Draw
         CanDrawP1 = true;
         CanDrawP2 = true;
         CanDrawP3 = true;
         CanDrawP4 = true;
+    }
+
+    void UnloadDrawables() 
+    {
+        HUDSpriteLoaded = false;
     }
 }

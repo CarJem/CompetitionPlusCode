@@ -13,17 +13,17 @@
 #include "CompPlus_Core/CompPlus_Scenes.h"
 #include "CompPlus_Scenes/General Scenes/ManiaMenu.h"
 #include "CompPlus_Scenes/General Scenes/CreditsScene.h"
-#include "CompPlus_Scenes/General Scenes/SettingsMenu.h"
+#include "CompPlus_Scenes/General Scenes/PlayerSettings.h"
 #include "CompPlus_Scenes/General Scenes/GenericLogos.h"
 #include "CompPlus_Scenes/General Scenes/DAGarden.h"
 #include "CompPlus_Scenes/General Scenes/TitleScreen.h"
 
-#include "CompPlus_Scenes/Functionality/ZoneSpecifics.h"
-#include "CompPlus_Scenes/Functionality/SpecialRings.h"
-#include "CompPlus_Scenes/Functionality/EntityLoop.h"
-#include "CompPlus_Scenes/Functionality/SizeLazer.h"
-#include "CompPlus_Scenes/Functionality/Halloween2018.h"
-#include "CompPlus_Scenes/Functionality/VapeMusic.h"
+#include "CompPlus_Functionality/ZoneSpecifics.h"
+#include "CompPlus_Functionality/SpecialRings.h"
+#include "CompPlus_Functionality/EntityLoop.h"
+#include "CompPlus_Functionality/SizeLazer.h"
+#include "CompPlus_Functionality/Halloween2018.h"
+#include "CompPlus_Functionality/VapeMusic.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -128,7 +128,7 @@ namespace CompPlus_Scenes
 
     void OnSceneDraw() 
     {
-        CompPlus_Settings_Base::DoMenuOnScreenDraw();
+
         if (CompPlus_Status::IsExecutorStage) CompPlus_Halloween2018::OnDraw();
 
         if (CurrentStage.SceneKey)
@@ -144,6 +144,7 @@ namespace CompPlus_Scenes
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubCore::OnDraw();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits)) CompPlus_Credits::OnDraw();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DAGarden_Chaotix)) CompPlus_DAGarden_Chaotix::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings)) CompPlus_PlayerSettings::DoMenuOnScreenDraw();
         }
         else if (CurrentSceneInt == 1) CompPlus_TitleScreen::OnDraw();
     }
@@ -186,6 +187,7 @@ namespace CompPlus_Scenes
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) CompPlus_HubWorld::OnFrame();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubRanking::OnFrame();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubSettings::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings)) CompPlus_PlayerSettings::OnFrame();
             // Custom Levels
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_SZ)) UpdateSZ();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_SZE)) UpdateSZ();

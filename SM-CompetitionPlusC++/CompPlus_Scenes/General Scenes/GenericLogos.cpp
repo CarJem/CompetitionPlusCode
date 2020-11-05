@@ -63,7 +63,7 @@ namespace CompPlus_GenericLogos
 
 	void UpdateGenericLogos(bool AllowSkip, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, int NextStageID, char* NextStageKey, bool isIZ)
 	{
-		CompPlus_Patches::FixSummary();
+		CompPlus_Patches::PatchSummaryFix();
 		if (AllowSkip) 
 		{
 			if (PlayerControllers[0].A.Press || PlayerControllers[0].B.Press || PlayerControllers[0].C.Press || PlayerControllers[0].X.Press || PlayerControllers[0].Y.Press || PlayerControllers[0].Z.Press || PlayerControllers[0].Start.Press || PlayerControllers[0].Select.Press)

@@ -14,4 +14,7 @@ namespace CompPlus_Status
     bool IsExecutorStage = false;
     bool IsChaotixStage = false;
     bool IsChaotixStageEncore = false;
+
+    bool Abilities_CanDynamicallyChangeEffects = false;
+    bool Abilities_EnableSkins = false;
 }

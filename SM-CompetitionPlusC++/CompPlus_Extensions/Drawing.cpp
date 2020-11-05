@@ -40,7 +40,7 @@ namespace Drawing
         return Vector2(Position.X + AdditionalX, Position.Y - 1);
     }
 
-    void ReloadDrawables()
+    void UnloadDrawables()
     {
         DevFontSpriteID = 0;
         DevFontLoaded = false;
@@ -88,7 +88,7 @@ namespace Drawing
     {
         if (!ManiaFontLoaded)
         {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Global);
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_None);
             ManiaFontLoaded = true;
             return;
         }
@@ -97,6 +97,7 @@ namespace Drawing
         int RealSpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        if (!&RingTemp->ActNumbersData) return;
         int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
@@ -110,8 +111,6 @@ namespace Drawing
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) + BuildLength % 2 : 0);
         //Offset length to build to our point. 
 
-        RingTemp->DrawOrder = DrawOrder;
-
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
@@ -119,6 +118,7 @@ namespace Drawing
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
+            RingTemp->DrawOrder = DrawOrder;
             SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
             AnimationFrame Frame = *GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
             Vector2 FramePosition = GetFramePosition(LocationStart, Frame);
@@ -132,7 +132,7 @@ namespace Drawing
     {
         if (!ManiaFontLoaded)
         {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Global);
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Stage);
             ManiaFontLoaded = true;
             return;
         }
@@ -141,6 +141,7 @@ namespace Drawing
         int RealSpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        if (!&RingTemp->ActNumbersData) return;
         int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
@@ -154,8 +155,6 @@ namespace Drawing
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
         //Offset length to build to our point. 
 
-        RingTemp->DrawOrder = DrawOrder;
-
         for (int i = 0; i < Name.length(); i++)
         {
             RealSpriteFrame = int(Name[i]);
@@ -163,6 +162,7 @@ namespace Drawing
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
+            RingTemp->DrawOrder = DrawOrder;
             SetSpriteAnimation(ManiaFontSpriteID, 0, &RingTemp->ActNumbersData, true, SpriteFrame);
             AnimationFrame Frame = *GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, RealSpriteFrame);
             Vector2 FramePosition = GetFramePosition(LocationStart, Frame);
@@ -176,7 +176,7 @@ namespace Drawing
     {
         if (!DevFontLoaded)
         {
-            DevFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText, Scope_Global);
+            DevFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText, Scope_Stage);
             DevFontLoaded = true;
             return;
         }
@@ -185,6 +185,7 @@ namespace Drawing
         int SpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        if (!&RingTemp->ActNumbersData) return;
         int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
@@ -196,14 +197,13 @@ namespace Drawing
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
         //Offset length to build to our point. 
 
-        RingTemp->DrawOrder = DrawOrder;
-
         for (int i = 0; i < Name.length(); i++)
         {
             SpriteFrame = GetAnimationIndexFromFrameID(RingTemp->ActNumbersData, int(Name[i]));
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
+            RingTemp->DrawOrder = DrawOrder;
             AnimationFrame Frame = *GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, SpriteFrame);
             Vector2 FramePosition = GetFramePosition(LocationStart, Frame);
             SetSpriteAnimation(DevFontSpriteID, (Highlighed ? 1 : 0), &RingTemp->ActNumbersData, true, SpriteFrame);
@@ -218,7 +218,7 @@ namespace Drawing
     {
         if (!DevEXEFontLoaded)
         {
-            DevEXEFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText_Exe, Scope_Global);
+            DevEXEFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText_Exe, Scope_Stage);
             DevEXEFontLoaded = true;
             return;
         }
@@ -237,7 +237,6 @@ namespace Drawing
         if (Alignment == DevMenu_Alignment::Alignment_Left) LocationStart.X = LocationStart.X - BuildLength;
         else if (Alignment == DevMenu_Alignment::Alignment_Center) LocationStart.X = LocationStart.X - (BuildLength != 0 ? (BuildLength / 2) : 0);
         //Offset length to build to our point. 
-        RingTemp->DrawOrder = DrawOrder;
 
         for (int i = 0; i < Name.length(); i++)
         {
@@ -245,6 +244,7 @@ namespace Drawing
             RingTemp->DrawFX = SonicMania::DrawingFX_Rotate;
             RingTemp->Rotation = Rotation;
             RingTemp->Angle = Angle;
+            RingTemp->DrawOrder = DrawOrder;
             AnimationFrame Frame = *GetAnimationFrameFromFrameID(RingTemp->ActNumbersData, SpriteFrame);
             Vector2 FramePosition = GetFramePosition(LocationStart, Frame);
             SetSpriteAnimation(DevEXEFontSpriteID, (Highlighed ? 1 : 0), &RingTemp->ActNumbersData, true, SpriteFrame);

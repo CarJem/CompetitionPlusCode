@@ -3,6 +3,7 @@
 #include "SonicMania.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Common.h"
+#include "CompPlus_Core/CompPlus_Status.h"
 #include "HubControllers.h"
 namespace CompPlus_HubControllers
 {
@@ -222,17 +223,15 @@ namespace CompPlus_HubControllers
         return NewValue;
     }
 
-    bool CanDynamicallyChangeEffects = false;
-
     void ChangeCharacter(int PlayerID, int Value)
     {
-        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, CanDynamicallyChangeEffects);
-        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, CanDynamicallyChangeEffects);
+        CompPlus_Settings::UpdatePlayer(PlayerID, (CompPlus_Settings::ChosenPlayer)Value, CompPlus_Status::Abilities_CanDynamicallyChangeEffects);
+        CompPlus_Settings::SetAbility(PlayerID, (CompPlus_Settings::PlayerAbility)Value, CompPlus_Status::Abilities_CanDynamicallyChangeEffects);
     }
 
     void ChangeAbility(int PlayerID, int Value, bool isUp)
     {
-        bool CanForce = CanDynamicallyChangeEffects;
+        bool CanForce = CompPlus_Status::Abilities_CanDynamicallyChangeEffects;
 
         CompPlus_Settings::PlayerAbility Ability = (CompPlus_Settings::PlayerAbility)Value;
         CompPlus_Settings::ChosenPlayer ChosenPlayer;

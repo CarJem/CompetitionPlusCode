@@ -83,7 +83,7 @@ namespace CompPlus_ManiaMenu
     int UIInfoModeLabel = 749;
 
 
-    static wchar_t* Strings[13];
+    static wchar_t* Strings[14];
 
     void SetPosition(SonicMania::Entity& object, int x, int y)
     {

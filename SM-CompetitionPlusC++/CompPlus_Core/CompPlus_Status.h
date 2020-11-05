@@ -15,4 +15,7 @@ namespace CompPlus_Status
     extern bool IsExecutorStage;
     extern bool IsChaotixStage;
     extern bool IsChaotixStageEncore;
+
+    extern bool Abilities_CanDynamicallyChangeEffects;
+    extern bool Abilities_EnableSkins;
 }

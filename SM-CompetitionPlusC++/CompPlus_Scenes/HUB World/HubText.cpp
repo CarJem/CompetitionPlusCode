@@ -285,6 +285,9 @@ namespace CompPlus_HubText
         case CompPlus_Settings::Announcer_Memes:
             UpdateGeneralDisplay(SlotID, (char*)"MEMES", 5, StageIndex, Index);
             break;
+        case CompPlus_Settings::Announcer_KC3K:
+            UpdateGeneralDisplay(SlotID, (char*)"KNUX3&KC", 8, StageIndex, Index);
+            break;
         }
     }
 

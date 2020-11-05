@@ -455,7 +455,7 @@ namespace CompPlus_Credits
     {
         if (!ManiaFontLoaded)
         {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_Cred_UISmallFont, Scope_Global);
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_Cred_UISmallFont, Scope_Stage);
             ManiaFontLoaded = true;
             return;
         }
@@ -888,7 +888,6 @@ namespace CompPlus_Credits
     {
         if (!DeIntZoneInitalized)
         {
-            Drawing::ReloadDrawables();
             ResetScene();
             DeIntZoneInitalized = true;
         }

@@ -82,7 +82,7 @@ namespace CompPlus_Scoring
 
     extern bool PodeiumSpawnActive;
 
-    extern const char* LastZone;
+    extern std::string LastZone;
 
     extern int WinWait;
     extern int WinWaitMax;

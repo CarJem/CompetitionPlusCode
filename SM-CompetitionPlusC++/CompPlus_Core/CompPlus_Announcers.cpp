@@ -289,6 +289,40 @@ namespace CompPlus_Announcers
 
     #pragma endregion
 
+    #pragma region Stock VO Paths
+
+        const char* Player1_KC3K = "VO_KC3K/Player1.wav";
+        const char* Player2_KC3K = "VO_KC3K/Player2.wav";
+        const char* Player3_KC3K = "VO_KC3K/Player3.wav";
+        const char* Player4_KC3K = "VO_KC3K/Player4.wav";
+
+        const char* Three_KC3K = "VO_KC3K/Three.wav";
+        const char* Two_KC3K = "VO_KC3K/Two.wav";
+        const char* One_KC3K = "VO_KC3K/One.wav";
+        const char* Go_KC3K = "VO_KC3K/Go.wav";
+        const char* Goal_KC3K = "VO_KC3K/Goal.wav";
+
+        const char* Sonic_KC3K = "VO_KC3K/Sonic.wav";
+        const char* SonicWins_KC3K = "VO_KC3K/SonicWins.wav";
+        const char* Tails_KC3K = "VO_KC3K/Tails.wav";
+        const char* TailsWins_KC3K = "VO_KC3K/TailsWins.wav";
+        const char* Knuckles_KC3K = "VO_KC3K/Knuckles.wav";
+        const char* KnuxWins_KC3K = "VO_KC3K/KnuxWins.wav";
+        const char* Mighty_KC3K = "VO_KC3K/Mighty.wav";
+        const char* MightyWins_KC3K = "VO_KC3K/MightyWins.wav";
+        const char* Ray_KC3K = "VO_KC3K/Ray.wav";
+        const char* RayWins_KC3K = "VO_KC3K/RayWins.wav";
+
+        const char* TheWinnerIs_KC3K = "VO_KC3K/TheWinnerIs.wav";
+
+        const char* ItsADraw_KC3K = "VO_KC3K/ItsADraw.wav";
+        const char* ItsADraw_Set_KC3K = "VO_KC3K/ItsADraw_Set.wav";
+
+        const char* NewRecordMid_KC3K = "VO_KC3K/NewRecordMid.wav";
+        const char* NewRecordTop_KC3K = "VO_KC3K/NewRecordTop.wav";
+
+    #pragma endregion
+
 
     bool HasAnnouncersLoaded = false;
 
@@ -372,6 +406,10 @@ namespace CompPlus_Announcers
         else if (Selection == CompPlus_Settings::Announcer_Classic)
         {
             PlaySoundFXS((char*)Go_Classic);
+        }
+        else if (Selection == CompPlus_Settings::Announcer_KC3K)
+        {
+            PlaySoundFXS((char*)Go_KC3K);
         }
         else
         {
@@ -696,6 +734,41 @@ namespace CompPlus_Announcers
             UnloadSound((char*)NewRecordMid_Classic);
             UnloadSound((char*)NewRecordTop_Classic);
         }
+        else if (LoadedAnnouncer == CompPlus_Settings::Announcer_KC3K) 
+        {
+            SwapSound(Player1_MemoryAdd, (char*)Player1_KC3K);
+            SwapSound(Player2_MemoryAdd, (char*)Player2_KC3K);
+            SwapSound(Player3_MemoryAdd, (char*)Player3_KC3K);
+            SwapSound(Player4_MemoryAdd, (char*)Player4_KC3K);
+
+            SwapSound(SonicWins_MemoryAdd, (char*)SonicWins_KC3K);
+            SwapSound(TailsWins_MemoryAdd, (char*)TailsWins_KC3K);
+            SwapSound(KnuxWins_MemoryAdd, (char*)KnuxWins_KC3K);
+            SwapSound(MightyWins_MemoryAdd, (char*)MightyWins_KC3K);
+            SwapSound(RayWins_MemoryAdd, (char*)RayWins_KC3K);
+
+            SwapSound(ItsADraw_MemoryAdd, (char*)ItsADraw_KC3K);
+            SwapSound(ItsADraw_Set_MemoryAdd, (char*)ItsADraw_Set_KC3K);
+
+            SwapSound(Three_MemoryAdd, (char*)Three_KC3K);
+            SwapSound(Two_MemoryAdd, (char*)Two_KC3K);
+            SwapSound(One_MemoryAdd, (char*)One_KC3K);
+            SwapSound(Go_MemoryAdd, (char*)Go_KC3K);
+
+            SwapSound(Sonic_MemoryAdd, (char*)Sonic_KC3K);
+            SwapSound(Tails_MemoryAdd, (char*)Tails_KC3K);
+            SwapSound(Knuckles_MemoryAdd, (char*)Knuckles_KC3K);
+            SwapSound(Mighty_MemoryAdd, (char*)Mighty_KC3K);
+            SwapSound(Ray_MemoryAdd, (char*)Ray_KC3K);
+
+            SwapSound(Goal_MemoryAdd, (char*)Goal_KC3K);
+            SwapSound(Goal_MemoryAdd_2, (char*)Goal_KC3K);
+
+            SwapSound(TheWinnerIs_MemoryAdd, (char*)TheWinnerIs_KC3K);
+
+            SwapSound(NewRecordMid_MemoryAdd, (char*)NewRecordMid_KC3K);
+            SwapSound(NewRecordTop_MemoryAdd, (char*)NewRecordTop_KC3K);
+        }
         else
         {
             UnloadSound((char*)Player1_Stock);
@@ -875,6 +948,39 @@ namespace CompPlus_Announcers
                 LoadSound(NewRecordTop_Classic, Scope_Global);
 
             }
+            else if (LoadedAnnouncer == CompPlus_Settings::Announcer_KC3K) 
+            {
+                LoadSound(Player1_KC3K, Scope_Global);
+                LoadSound(Player2_KC3K, Scope_Global);
+                LoadSound(Player3_KC3K, Scope_Global);
+                LoadSound(Player4_KC3K, Scope_Global);
+
+                LoadSound(SonicWins_KC3K, Scope_Global);
+                LoadSound(TailsWins_KC3K, Scope_Global);
+                LoadSound(KnuxWins_KC3K, Scope_Global);
+                LoadSound(MightyWins_KC3K, Scope_Global);
+                LoadSound(RayWins_KC3K, Scope_Global);
+
+                LoadSound(ItsADraw_KC3K, Scope_Global);
+                LoadSound(ItsADraw_Set_KC3K, Scope_Global);
+
+                LoadSound(Three_KC3K, Scope_Global);
+                LoadSound(Two_KC3K, Scope_Global);
+                LoadSound(One_KC3K, Scope_Global);
+
+                LoadSound(Sonic_KC3K, Scope_Global);
+                LoadSound(Tails_KC3K, Scope_Global);
+                LoadSound(Knuckles_KC3K, Scope_Global);
+                LoadSound(Mighty_KC3K, Scope_Global);
+                LoadSound(Ray_KC3K, Scope_Global);
+
+                LoadSound(Goal_KC3K, Scope_Global);
+
+                LoadSound(TheWinnerIs_KC3K, Scope_Global);
+
+                LoadSound(NewRecordMid_KC3K, Scope_Global);
+                LoadSound(NewRecordTop_KC3K, Scope_Global);
+            }
             else if (CompPlus_Settings::CurrentAnnouncer == CompPlus_Settings::Announcer_Default)
             {          
                 LoadSound(Player1_Stock, Scope_Global);
@@ -913,6 +1019,7 @@ namespace CompPlus_Announcers
             LoadSound(Go_ATG, Scope_Global);
             LoadSound(Go_Memes, Scope_Global);
             LoadSound(Go_Classic, Scope_Global);
+            LoadSound(Go_KC3K, Scope_Global);
             LoadSound(Go_Stock, Scope_Global);
 
             if (ChangeAnnouncer) CompPlus_Announcers::ChangeAnnouncer();

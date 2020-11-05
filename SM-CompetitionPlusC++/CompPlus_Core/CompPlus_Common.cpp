@@ -81,7 +81,7 @@ namespace CompPlus_Common
 
     #pragma region Scene IDs
 
-     const char* SMCP_Unused_SettingsWorld = "SMCP_SW";
+     const char* SMCP_PlayerSettings = "SMCP_SW";
      const char* SMCP_Credits = "SMCP_CREDITS";
 
      const char* SMCP_DAGarden = "SMCP_DAGARDEN_1";

@@ -23,6 +23,8 @@ namespace CompPlus_HubCore
 
     extern int ReturnDestination;
 
+    extern void UnloadDrawables();
+
     extern void OnDraw();
 
     extern void SetHUBVisualSettings();

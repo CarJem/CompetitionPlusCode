@@ -64,7 +64,8 @@ namespace CompPlus_Settings
         Announcer_Classic = 1,
         Announcer_Garrulous64 = 2,
         Announcer_Angelthegamer = 3,
-        Announcer_Memes = 4
+        Announcer_Memes = 4,
+        Announcer_KC3K = 5
     };
 
     enum SeasonType : int {

@@ -16,7 +16,6 @@
 				<Scene stageKey="SMCP_ENCORE_DAGARDEN" sceneKey="SMCP_DAGARDEN_3" sceneID="ENCO" sceneFlags="255" sceneName="3"></Scene>
 				<Scene stageKey="SMCP_CUST_DAGARDEN" sceneKey="SMCP_DAGARDEN_4" sceneID="CUST" sceneFlags="255" sceneName="4"></Scene>
 				<Scene stageKey="SMCP_CHAOTIX_DAGARDEN" sceneKey="SMCP_DAGARDEN_5" sceneID="CTXM" sceneFlags="255" sceneName="5"></Scene>
-				<Scene stageKey="SMCP_SW" sceneKey="SMCP_SW" sceneID="1" sceneFlags="255" sceneName="W"/>
 			</Group>
 		</Category>
 		<Category categoryName="SMCP : Mania Stages">
@@ -154,6 +153,9 @@
 			<Group groupName="Options Section">
 				<Scene stageKey="SMCP_HUB3" sceneKey="SMCP_HUB3" sceneID="1" sceneFlags="3" sceneName=""/>
 			</Group>
+			<Group groupName="Player Settings">
+				<Scene stageKey="SMCP_SW" sceneKey="SMCP_SW" sceneID="1" sceneFlags="255" sceneName=""/>
+			</Group>
 		</Category>
 		<Category categoryName="SMCP : Custom Stages">
 			<Group groupName="Desert Hill Zone">
@@ -276,7 +278,7 @@
 				<Asset basePath="Data/Sprites/LSelect/Icons.bin" newPath="Data/Sprites/SMCP_LSelect/Icons.bin"/>
 			</StageAssets>
 		</Stage>
-		<Stage stageName="SMCP Settings Menu" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="SMCP_SW"></Stage>
+
 		<Stage stageName="SMCP D.A. Garden (SMCP)" stageDir="SMCP_DAGarden/CompPlus" stageKey="SMCP_COMPPLUS_DAGARDEN"></Stage>
 		<Stage stageName="SMCP D.A. Garden (Mania)" stageDir="SMCP_DAGarden/Mania" stageKey="SMCP_MANIA_DAGARDEN"></Stage>
 		<Stage stageName="SMCP D.A. Garden (Encore)" stageDir="SMCP_DAGarden/Encore" stageKey="SMCP_ENCORE_DAGARDEN"></Stage>
@@ -391,7 +393,6 @@
 				<Asset basePath="Data/Sprites/GHZ/Motobug.bin" newPath="Data/Sprites/HUB/Motobug.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Newtron.bin" newPath="Data/Sprites/HUB/Newtron.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Platform.bin" newPath="Data/Sprites/HUB/Platform.bin"/>
-				<Asset basePath="Data/Sprites/GHZ/print.txt" newPath="Data/Sprites/HUB/print.txt"/>
 				<Asset basePath="Data/Sprites/GHZ/SpikeLog.bin" newPath="Data/Sprites/HUB/SpikeLog.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Splats.bin" newPath="Data/Sprites/HUB/Splats.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/ZipLine.bin" newPath="Data/Sprites/HUB/ZipLine.bin"/>
@@ -434,6 +435,7 @@
 				<Asset basePath="Data/Sprites/Global/Display.gif" newPath="Data/Sprites/HUB/Display.gif"/>
 			</StageAssets>
 		</Stage>
+		<Stage stageName="SMCP HUB Player Settings" stageDir="SMCP_Misc/CompetitionPlusSettingsWorld" stageKey="SMCP_SW"></Stage>
 		<Stage stageName="SMCP Credits Zone" stageDir="SMCP_Misc/SMCP_Credits" stageKey="SMCP_CREDITS">
 			<StageUnlocks>
 				<Core_GHZ/>

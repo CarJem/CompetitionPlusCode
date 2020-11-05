@@ -11,23 +11,25 @@
 
 #include "CompPlus_Scenes/General Scenes/ManiaMenu.h"
 #include "CompPlus_Scenes/General Scenes/CreditsScene.h"
-#include "CompPlus_Scenes/General Scenes/SettingsMenu.h"
+#include "CompPlus_Scenes/General Scenes/PlayerSettings.h"
 #include "CompPlus_Scenes/General Scenes/GenericLogos.h"
 #include "CompPlus_Scenes/General Scenes/DAGarden.h"
 #include "CompPlus_Scenes/General Scenes/TitleScreen.h"
 
-#include "CompPlus_Scenes/Functionality/ZoneSpecifics.h"
-#include "CompPlus_Scenes/Functionality/SpecialRings.h"
-#include "CompPlus_Scenes/Functionality/EntityLoop.h"
-#include "CompPlus_Scenes/Functionality/SizeLazer.h"
-#include "CompPlus_Scenes/Functionality/Halloween2018.h"
-#include "CompPlus_Scenes/Functionality/VapeMusic.h"
-#include "CompPlus_Scenes/Functionality/CustomScreenStretch.h"
-#include "CompPlus_Scenes/Functionality/DynCam.h"
-#include "CompPlus_Scenes/Functionality/TailsFlightCancel.h"
-#include "CompPlus_Scenes/Functionality/SpotlightC.h"
-#include "CompPlus_Scenes/Functionality/PlayerSkins.h"
-#include "CompPlus_Scenes/Functionality/SpeedShoesMods.h"
+#include "CompPlus_Extensions/Drawing.h"
+
+#include "CompPlus_Functionality/ZoneSpecifics.h"
+#include "CompPlus_Functionality/SpecialRings.h"
+#include "CompPlus_Functionality/EntityLoop.h"
+#include "CompPlus_Functionality/SizeLazer.h"
+#include "CompPlus_Functionality/Halloween2018.h"
+#include "CompPlus_Functionality/VapeMusic.h"
+#include "CompPlus_Functionality/CustomScreenStretch.h"
+#include "CompPlus_Functionality/DynCam.h"
+#include "CompPlus_Functionality/TailsFlightCancel.h"
+#include "CompPlus_Functionality/SpotlightC.h"
+#include "CompPlus_Functionality/PlayerSkins.h"
+#include "CompPlus_Functionality/SpeedShoesMods.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -100,7 +102,6 @@ extern "C"
             CompPlus_MetrotropicBeach::Init(path);
             CompPlus_HubWorld::Init(path);
             CompPlus_Halloween2018::Init();
-            CompPlus_Announcers::LoadAnnouncerFX();
             CompPlus_DAGarden::Init();
             CompPlus_DAGarden_Mania::Init();
             CompPlus_DAGarden_Encore::Init();
@@ -128,15 +129,25 @@ extern "C"
 
         #pragma region General Methods
 
-        int StoredDrawOrder = -1;
-
         void OnDraw() 
         {
             EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
-            StoredDrawOrder = Canvas->DrawOrder;
+            int DrawOrder = Canvas->DrawOrder;
+            int Angle = Canvas->Angle;
+            DrawingFX DrawFX = Canvas->DrawFX;
+            int Rotation = Canvas->Rotation;
+            int Direction = Canvas->Direction;
+
+            Canvas->Direction = 0;
+
             CompPlus_Scenes::OnSceneDraw();
             CompPlus_SpotlightC::OnDraw();
-            Canvas->DrawOrder = StoredDrawOrder;
+
+            Canvas->DrawOrder = DrawOrder;
+            Canvas->Angle = Angle;
+            Canvas->DrawFX = DrawFX;
+            Canvas->Rotation = Rotation;
+            Canvas->Direction = Direction;
         }
 
         void OnStartupInit()
@@ -177,6 +188,10 @@ extern "C"
             CompPlus_MetrotropicBeach::Restart();
             CompPlus_DAGarden_Chaotix::Reload();
             CompPlus_SpeedShoesMods::OnSceneReset();
+            Drawing::UnloadDrawables();
+            CompPlus_HubCore::UnloadDrawables();
+            CompPlus_SpecialRings::UnloadDrawables();
+            CompPlus_PlayerSettings::Reload();
 
             CompPlus_Status::SpecialRingsNeedRefresh = true;
             CompPlus_SizeLazer::RefreshChibiSprites = true;

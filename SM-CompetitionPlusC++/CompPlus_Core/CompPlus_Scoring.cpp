@@ -16,7 +16,7 @@ namespace CompPlus_Scoring
 
      bool AllowUpdateVictory = false;
 
-     const char* LastZone = "???";
+     std::string LastZone = "???";
 
      int WinWait = 0;
      int WinWaitMax = 100;
@@ -299,7 +299,7 @@ namespace CompPlus_Scoring
         return PlayerTime;
     }
 
-     ScorableInt GetAntiRings(int PlayerID)
+    ScorableInt GetAntiRings(int PlayerID)
     {
         ScorableInt PlayerScore;
         PlayerScore.PlayerID = PlayerID;
@@ -332,7 +332,7 @@ namespace CompPlus_Scoring
         return PlayerScore;
     }
 
-     std::vector<ScorableTime> GetTimeRanking()
+    std::vector<ScorableTime> GetTimeRanking()
     {
         ScorableTime Player1Time = GetPlayerTime(1);
         ScorableTime Player2Time = GetPlayerTime(2);
@@ -368,12 +368,12 @@ namespace CompPlus_Scoring
         return PlayerTimes;
     }
 
-     std::vector<ScorableInt> GetTotalRingsRanking()
+    std::vector<ScorableInt> GetTotalRingsRanking()
     {
-         ScorableInt Player1Score = ScorableInt(GetPlayerTotalRings(1), 1);
-         ScorableInt Player2Score = ScorableInt(GetPlayerTotalRings(2), 2);
-         ScorableInt Player3Score = ScorableInt(GetPlayerTotalRings(3), 3);
-         ScorableInt Player4Score = ScorableInt(GetPlayerTotalRings(4), 4);
+        ScorableInt Player1Score = ScorableInt(GetPlayerTotalRings(1), 1);
+        ScorableInt Player2Score = ScorableInt(GetPlayerTotalRings(2), 2);
+        ScorableInt Player3Score = ScorableInt(GetPlayerTotalRings(3), 3);
+        ScorableInt Player4Score = ScorableInt(GetPlayerTotalRings(4), 4);
 
         std::vector<ScorableInt> PlayerScores;
         int NumberOfPlayers = GetNumberOfPlayers();
@@ -401,7 +401,7 @@ namespace CompPlus_Scoring
         return PlayerScores;
     }
 
-     std::vector<ScorableInt> GetRingsRanking()
+    std::vector<ScorableInt> GetRingsRanking()
     {
         ScorableInt Player1Score = ScorableInt(GetPlayerRings(1), 1);
         ScorableInt Player2Score = ScorableInt(GetPlayerRings(2), 2);
@@ -436,10 +436,10 @@ namespace CompPlus_Scoring
 
     std::vector<ScorableInt> GetAntiRingsRanking()
     {
-        ScorableInt Player1Score = GetAntiRings(1);
-        ScorableInt Player2Score = GetAntiRings(2);
-        ScorableInt Player3Score = GetAntiRings(3);
-        ScorableInt Player4Score = GetAntiRings(4);
+        ScorableInt Player1Score = ScorableInt(GetPlayerTotalRings(1), 1);
+        ScorableInt Player2Score = ScorableInt(GetPlayerTotalRings(2), 2);
+        ScorableInt Player3Score = ScorableInt(GetPlayerTotalRings(3), 3);
+        ScorableInt Player4Score = ScorableInt(GetPlayerTotalRings(4), 4);
 
         std::vector<ScorableInt> PlayerScores;
         int NumberOfPlayers = GetNumberOfPlayers();
@@ -450,18 +450,18 @@ namespace CompPlus_Scoring
         std::sort(PlayerScores.begin(), PlayerScores.end(), AntiScoreSorter);
 
         int Position = GetNumberOfPlayers();
-        int MaxValue = 0;
+        int MinValue = 0;
 
         for (int i = 0; i < GetNumberOfPlayers(); i++)
         {
             PlayerScores[i].Position = Position;
-            if (PlayerScores[i].Value > MaxValue) MaxValue = PlayerScores[i].Value;
+            if (PlayerScores[i].Value < MinValue) MinValue = PlayerScores[i].Value;
             Position--;
         }
 
         for (int i = 0; i < GetNumberOfPlayers(); i++)
         {
-            if (PlayerScores[i].Value == MaxValue) PlayerScores[i].HasWon = true;
+            if (PlayerScores[i].Value == MinValue) PlayerScores[i].HasWon = true;
         }
 
         return PlayerScores;
@@ -469,10 +469,10 @@ namespace CompPlus_Scoring
 
     std::vector<ScorableInt> GetScoreRanking()
     {
-         ScorableInt Player1Score = ScorableInt(GetPlayerScore(1), 1);
-         ScorableInt Player2Score = ScorableInt(GetPlayerScore(2), 2);
-         ScorableInt Player3Score = ScorableInt(GetPlayerScore(3), 3);
-         ScorableInt Player4Score = ScorableInt(GetPlayerScore(4), 4);
+        ScorableInt Player1Score = ScorableInt(GetPlayerScore(1), 1);
+        ScorableInt Player2Score = ScorableInt(GetPlayerScore(2), 2);
+        ScorableInt Player3Score = ScorableInt(GetPlayerScore(3), 3);
+        ScorableInt Player4Score = ScorableInt(GetPlayerScore(4), 4);
 
         std::vector<ScorableInt> PlayerScores;
         int NumberOfPlayers = GetNumberOfPlayers();
@@ -502,10 +502,10 @@ namespace CompPlus_Scoring
 
     std::vector<ScorableInt> GetItemRanking()
     {
-         ScorableInt Player1Score = ScorableInt(GetPlayerItems(1), 1);
-         ScorableInt Player2Score = ScorableInt(GetPlayerItems(2), 2);
-         ScorableInt Player3Score = ScorableInt(GetPlayerItems(3), 3);
-         ScorableInt Player4Score = ScorableInt(GetPlayerItems(4), 4);
+        ScorableInt Player1Score = ScorableInt(GetPlayerItems(1), 1);
+        ScorableInt Player2Score = ScorableInt(GetPlayerItems(2), 2);
+        ScorableInt Player3Score = ScorableInt(GetPlayerItems(3), 3);
+        ScorableInt Player4Score = ScorableInt(GetPlayerItems(4), 4);
 
         std::vector<ScorableInt> PlayerScores;
         int NumberOfPlayers = GetNumberOfPlayers();
@@ -532,54 +532,55 @@ namespace CompPlus_Scoring
 
         return PlayerScores;
     }
-     int ConvertPositionToAverage(int Position)
-     {
-         if (Position == 1) return 4;
-         else if (Position == 2) return 3;
-         else if (Position == 3) return 2;
-         else if (Position == 4) return 1;
-         else return 0;
-     }
 
-     int ConvertWinToAverage(bool hasWon) 
-     {
-         if (hasWon) return 1;
-         else return 0;
-     }
-
-     int GetPlayerAverage(int PlayerID)
-     {
-         int CurrentScore = 0;
-
-         for (int j = 0; j < GetNumberOfPlayers(); j++)
-         {
-             if (TimeRanking[j].PlayerID == PlayerID)
-             {
-                 CurrentScore += ConvertWinToAverage(TimeRanking[j].HasWon);
-             }
-             if (ScoreRanking[j].PlayerID == PlayerID)
-             {
-                 CurrentScore += ConvertWinToAverage(ScoreRanking[j].HasWon);
-             }
-             if (RingRanking[j].PlayerID == PlayerID)
-             {
-                 CurrentScore += ConvertWinToAverage(RingRanking[j].HasWon);
-             }
-             if (ItemRanking[j].PlayerID == PlayerID)
-             {
-                 CurrentScore += ConvertWinToAverage(ItemRanking[j].HasWon);
-             }
-             if (TotalRingRanking[j].PlayerID == PlayerID)
-             {
-                 CurrentScore += ConvertWinToAverage(TotalRingRanking[j].HasWon);
-             }
-         }
-         return CurrentScore;
-     }
-
-     std::vector<ScorableInt> GetAverageRanking()
+    int ConvertPositionToAverage(int Position)
     {
-         int NumberOfPlayers = GetNumberOfPlayers();
+        if (Position == 1) return 4;
+        else if (Position == 2) return 3;
+        else if (Position == 3) return 2;
+        else if (Position == 4) return 1;
+        else return 0;
+    }
+
+    int ConvertWinToAverage(bool hasWon)
+    {
+        if (hasWon) return 1;
+        else return 0;
+    }
+
+    int GetPlayerAverage(int PlayerID)
+    {
+        int CurrentScore = 0;
+
+        for (int j = 0; j < GetNumberOfPlayers(); j++)
+        {
+            if (TimeRanking[j].PlayerID == PlayerID)
+            {
+                CurrentScore += ConvertWinToAverage(TimeRanking[j].HasWon);
+            }
+            if (ScoreRanking[j].PlayerID == PlayerID)
+            {
+                CurrentScore += ConvertWinToAverage(ScoreRanking[j].HasWon);
+            }
+            if (RingRanking[j].PlayerID == PlayerID)
+            {
+                CurrentScore += ConvertWinToAverage(RingRanking[j].HasWon);
+            }
+            if (ItemRanking[j].PlayerID == PlayerID)
+            {
+                CurrentScore += ConvertWinToAverage(ItemRanking[j].HasWon);
+            }
+            if (TotalRingRanking[j].PlayerID == PlayerID)
+            {
+                CurrentScore += ConvertWinToAverage(TotalRingRanking[j].HasWon);
+            }
+        }
+        return CurrentScore;
+    }
+
+    std::vector<ScorableInt> GetAverageRanking()
+    {
+        int NumberOfPlayers = GetNumberOfPlayers();
 
         int P1_TotalScore = 0;
         int P2_TotalScore = 0;
@@ -774,35 +775,16 @@ namespace CompPlus_Scoring
     {
         if (SonicMania::Options->CompetitionSession.inMatch == 1)
         {
-            int TotalPlayers = SonicMania::Options->CompetitionSession.NumberOfPlayers;
-            int FinishFlags = SonicMania::Options->CompetitionSession.FinishFlags;
-            int P1_FinishFlag = TotalPlayers >= 1 ? (FinishFlags >> 0x00 & 0xFF) : 0;
-            int P2_FinishFlag = TotalPlayers >= 2 ? (FinishFlags >> 0x08 & 0xFF) : 0;
-            int P3_FinishFlag = TotalPlayers >= 3 ? (FinishFlags >> 0x10 & 0xFF) : 0;
-            int P4_FinishFlag = TotalPlayers >= 4 ? (FinishFlags >> 0x18 & 0xFF) : 0;
+            TimeRanking = GetTimeRanking();
+            RingRanking = GetRingsRanking();
+            TotalRingRanking = GetTotalRingsRanking();
+            ScoreRanking = GetScoreRanking();
+            ItemRanking = GetItemRanking();
+            AverageRanking = GetAverageRanking();
+            AntiRingRanking = GetAntiRingsRanking();
 
-            bool P1_Finished = TotalPlayers >= 1 ? P1_FinishFlag != 0 : true;
-            bool P2_Finished = TotalPlayers >= 2 ? P2_FinishFlag != 0 : true;
-            bool P3_Finished = TotalPlayers >= 3 ? P3_FinishFlag != 0 : true;
-            bool P4_Finished = TotalPlayers >= 4 ? P4_FinishFlag != 0 : true;
-
-            bool P1_Done = (P1_Finished || HasTimePeaked(P1_Finished) && SonicMania::Player1.KillFlag == 1);
-            bool P2_Done = (P2_Finished || HasTimePeaked(P2_Finished) && SonicMania::Player2.KillFlag == 1);
-            bool P3_Done = (P3_Finished || HasTimePeaked(P3_Finished) && SonicMania::Player3.KillFlag == 1);
-            bool P4_Done = (P4_Finished || HasTimePeaked(P4_Finished) && SonicMania::Player4.KillFlag == 1);
-
-            if ((HaveAllCrossedTheFinishLine || (P1_Done && P2_Done && P3_Done && P4_Done)) && AllowUpdateVictory)
+            switch (CompPlus_Settings::VictoryStyle)
             {
-                TimeRanking = GetTimeRanking();
-                RingRanking = GetRingsRanking();
-                TotalRingRanking = GetTotalRingsRanking();
-                ScoreRanking = GetScoreRanking();
-                ItemRanking = GetItemRanking();
-                AverageRanking = GetAverageRanking();
-                AntiRingRanking = GetAntiRingsRanking();
-
-                switch (CompPlus_Settings::VictoryStyle)
-                {
                 case CompPlus_Settings::VictoryMode_Time:
                     SetFinalRanking(TimeRanking);
                     break;
@@ -824,14 +806,6 @@ namespace CompPlus_Scoring
                 case CompPlus_Settings::VictoryMode_AntiRings:
                     SetFinalRanking(AntiRingRanking);
                     break;
-                }
-
-                AllowUpdateVictory = false;
-            }
-
-            if (InitalCountdown != 0)
-            {
-                AllowUpdateVictory = true;
             }
         }
     }
@@ -1037,6 +1011,5 @@ namespace CompPlus_Scoring
     {
         UpdateRounds();
         UpdateMatchLength();
-        SetRoundEndWinner();
     }
 }

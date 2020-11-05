@@ -150,8 +150,6 @@ namespace CompPlus_ManiaLevelSelect
 
 	void SetupMenuPoints()
 	{
-        Drawing::ReloadDrawables();
-
         InitDrawVariables(Draw_StartX, Draw_StartY, Draw_SpacingX, Draw_SpacingY);
 
 		MLS_MenuPoints = new MenuPoint*[MLS_MenuMax_Y];
@@ -230,7 +228,6 @@ namespace CompPlus_ManiaLevelSelect
         AreMenuPointsLoaded = false;
         PaletteSaved = false;
         isIconsLoaded = false;
-        Drawing::ReloadDrawables();
 	}
 
     void OnPreload() 
@@ -246,7 +243,7 @@ namespace CompPlus_ManiaLevelSelect
 
         if (!isIconsLoaded)
         {
-            IconsSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectIcons_Mania, Scope_Global);
+            IconsSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectIcons_Mania, Scope_Stage);
             isIconsLoaded = true;
             return;
         }

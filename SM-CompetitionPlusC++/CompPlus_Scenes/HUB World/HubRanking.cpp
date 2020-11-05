@@ -2,6 +2,7 @@
 #include "CompPlus_Core/CompPlus_Scoring.h"
 #include "HubText.h"
 #include "HubCore.h"
+#include "CompPlus_Core/CompPlus_Scoring.h"
 
 namespace CompPlus_HubRanking
 {
@@ -302,11 +303,12 @@ namespace CompPlus_HubRanking
 
         if (SceneLoadWaitTimer >= SceneLoadWaitMax)
         {
+            if (CompPlus_Scoring::PodeiumSpawnActive) CompPlus_Scoring::PodeiumSpawnActive = false;
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;
             CompPlus_Common::LoadHUBWorld();
-            CompPlus_HubCore::ReturnDestination = 2;
+            CompPlus_HubCore::ReturnDestination = 1;
         }
         else
         {
