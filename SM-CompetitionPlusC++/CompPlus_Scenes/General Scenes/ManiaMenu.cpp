@@ -666,19 +666,48 @@ namespace CompPlus_ManiaMenu
 
     void UpdateLevelSelect() 
     {
+        EntityUIInfoLabel& Label1_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(601);
+        EntityUIInfoLabel& Label1_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(603);
+        EntityUIInfoLabel& Label2_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(600);
+        EntityUIInfoLabel& Label2_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(602);
+        EntityUIInfoLabel& Label3_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(604);
+        EntityUIInfoLabel& Label3_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(605);
+
+        Label1_1.InkEffect = Ink_Alpha;
+        Label1_2.InkEffect = Ink_Alpha;
+        Label2_1.InkEffect = Ink_Alpha;
+        Label2_2.InkEffect = Ink_Alpha;
+        Label3_1.InkEffect = Ink_Alpha;
+        Label3_2.InkEffect = Ink_Alpha;
+
+
         SonicMania::EntityUIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(590);
-        object.Disabled = false;
+        object.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         //object.Obfuscate = true;
-        object.XOut = false;
+        object.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         object.ZoneID = 11;
         object.Act = 31;
 
         SonicMania::EntityUIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(591);
-        object2.Disabled = false;
+        object2.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         //object2.Obfuscate = true;
-        object2.XOut = false;
+        object2.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         object2.ZoneID = 11;
         object2.Act = 32;
+
+        SonicMania::EntityUIVsZoneButton& object3 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(592);
+        object3.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? false : true);
+        //object2.Obfuscate = true;
+        object3.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? false : true);
+        object3.ZoneID = 11;
+        object3.Act = 33;
+
+        Label1_1.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
+        Label1_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
+        Label2_1.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
+        Label2_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
+        Label3_1.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 255 : 128);
+        Label3_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 255 : 128);
 
         EntityUIControl& CompetitionLevelSelect = *GetEntityFromSceneSlot<EntityUIControl>(UIVsLevelSelectUIControl);
 

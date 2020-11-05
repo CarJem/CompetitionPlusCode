@@ -615,14 +615,14 @@ namespace CompPlus_HubSettings
     void OnFrame() 
     {
         CompPlus_HubCore::SetHUBVisualSettings();
-
+     
         if (SonicMania::Options->CompetitionSession.inMatch == 0)
         {
             SonicMania::Player2.InkEffect = SonicMania::Ink_Alpha;
             SonicMania::Player2.Alpha = 0;
             SonicMania::Player2.Position.X = 0;
             SonicMania::Player2.Position.Y = 0;
-        }
+        }   
 
         DeveloperSettingsBlockcade();
 

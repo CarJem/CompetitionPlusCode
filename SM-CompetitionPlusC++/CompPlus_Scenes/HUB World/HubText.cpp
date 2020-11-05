@@ -288,6 +288,9 @@ namespace CompPlus_HubText
         case CompPlus_Settings::Announcer_KC3K:
             UpdateGeneralDisplay(SlotID, (char*)"KNUX3&KC", 8, StageIndex, Index);
             break;
+        case CompPlus_Settings::Announcer_DanielUK:
+            UpdateGeneralDisplay(SlotID, (char*)"DANIEL-UK", 9, StageIndex, Index);
+            break;
         }
     }
 

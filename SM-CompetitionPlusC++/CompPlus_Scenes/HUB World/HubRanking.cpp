@@ -10,8 +10,10 @@ namespace CompPlus_HubRanking
     using namespace CompPlus_HubText;
 
     bool ExitSelected = false;
+    bool LevelSelectSelected = false;
 
     int ExitRingSlot = 74;
+    int ReturnRingSlot = 79;
 
     bool LevelSelected = false;
     bool LevelSelectedWarpSoundPlayed = false;
@@ -250,7 +252,13 @@ namespace CompPlus_HubRanking
         int x2_exit = 1215;
         int y2_exit = 1175;
 
+        int x1_return = 2206;
+        int y1_return = 1005;
+        int x2_return = 2352;
+        int y2_return = 1175;
+
         int ExitCount = 0;
+        int ReturnCount = 0;
 
         int NumberOfPlayers = (SonicMania::Options->CompetitionSession.inMatch == 1 ? SonicMania::Options->CompetitionSession.NumberOfPlayers : 1);
 
@@ -258,26 +266,34 @@ namespace CompPlus_HubRanking
         if (SonicMania::Player1.Camera != nullptr)
         {
             bool isPlayerInRangeOfExit = Player1.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            bool isPlayerInRangeOfReturn = Player1.InRange(x1_return, y1_return, x2_return, y2_return);
             if (isPlayerInRangeOfExit) ExitCount += 1;
+            if (isPlayerInRangeOfReturn) ReturnCount += 1;
         }
         if (SonicMania::Player2.Camera != nullptr)
         {
             bool isPlayerInRangeOfExit = Player2.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            bool isPlayerInRangeOfReturn = Player2.InRange(x1_return, y1_return, x2_return, y2_return);
             if (isPlayerInRangeOfExit) ExitCount += 1;
+            if (isPlayerInRangeOfReturn) ReturnCount += 1;
         }
         if (SonicMania::Player3.Camera != nullptr)
         {
             bool isPlayerInRangeOfExit = Player3.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            bool isPlayerInRangeOfReturn = Player3.InRange(x1_return, y1_return, x2_return, y2_return);
             if (isPlayerInRangeOfExit) ExitCount += 1;
+            if (isPlayerInRangeOfReturn) ReturnCount += 1;
         }
         if (SonicMania::Player4.Camera != nullptr)
         {
             bool isPlayerInRangeOfExit = Player4.InRange(x1_exit, y1_exit, x2_exit, y2_exit);
+            bool isPlayerInRangeOfReturn = Player4.InRange(x1_return, y1_return, x2_return, y2_return);
             if (isPlayerInRangeOfExit) ExitCount += 1;
+            if (isPlayerInRangeOfReturn) ReturnCount += 1;
         }
 
         SpecialRing& ExitRing = *SonicMania::GetEntityFromSceneSlot<SpecialRing>(ExitRingSlot);
-
+        SpecialRing& ReturnRing = *SonicMania::GetEntityFromSceneSlot<SpecialRing>(ReturnRingSlot);
 
         if (ExitCount >= NumberOfPlayers)
         {
@@ -288,13 +304,46 @@ namespace CompPlus_HubRanking
             ExitRing.Enabled = false;
         }
 
+        if (ReturnCount >= NumberOfPlayers)
+        {
+            ReturnRing.Enabled = true;
+        }
+        else
+        {
+            ReturnRing.Enabled = false;
+        }
+
         if (ExitRing.TriggeredState == 2 && !ExitSelected)
         {
             ExitSelected = true;
         }
+
+        if (ReturnRing.TriggeredState == 2 && !LevelSelectSelected)
+        {
+            LevelSelectSelected = true;
+        }
     }
 
-    void ExitWarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+    void ReturnToHUB(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+    {
+        if (CompPlus_Scoring::PodeiumSpawnActive) CompPlus_Scoring::PodeiumSpawnActive = false;
+        SceneLoadWaitTimer = 0;
+        LevelSelected = false;
+        LevelSelectedWarpSoundPlayed = false;
+        CompPlus_Common::LoadHUBWorld();
+        CompPlus_HubCore::ReturnDestination = 2;
+    }
+
+    void ReturnToLSelect(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
+    {
+        if (CompPlus_Scoring::PodeiumSpawnActive) CompPlus_Scoring::PodeiumSpawnActive = false;
+        SceneLoadWaitTimer = 0;
+        LevelSelected = false;
+        LevelSelectedWarpSoundPlayed = false;
+        CompPlus_Common::LoadLastLevelSelect();
+    }
+
+    void ExitWarpLoop(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed, bool isLevelSelect)
     {
         if (FastWarp && SceneLoadWaitTimer < 50)
         {
@@ -303,12 +352,8 @@ namespace CompPlus_HubRanking
 
         if (SceneLoadWaitTimer >= SceneLoadWaitMax)
         {
-            if (CompPlus_Scoring::PodeiumSpawnActive) CompPlus_Scoring::PodeiumSpawnActive = false;
-            SceneLoadWaitTimer = 0;
-            LevelSelected = false;
-            LevelSelectedWarpSoundPlayed = false;
-            CompPlus_Common::LoadHUBWorld();
-            CompPlus_HubCore::ReturnDestination = 1;
+            if (isLevelSelect) ReturnToLSelect(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
+            else ReturnToHUB(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelected, LevelSelectedWarpSoundPlayed);
         }
         else
         {
@@ -333,6 +378,7 @@ namespace CompPlus_HubRanking
         SceneWarp();
         SetSpawnPositions();
         UpdateHUBRankingDisplays();
-        if (ExitSelected) ExitWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, ExitSelected, LevelSelectedWarpSoundPlayed);
+        if (ExitSelected) ExitWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, ExitSelected, LevelSelectedWarpSoundPlayed, false);
+        else if (LevelSelectSelected) ExitWarpLoop(true, SceneLoadWaitTimer, SceneLoadWaitMax, LevelSelectSelected, LevelSelectedWarpSoundPlayed, true);
     }
 }

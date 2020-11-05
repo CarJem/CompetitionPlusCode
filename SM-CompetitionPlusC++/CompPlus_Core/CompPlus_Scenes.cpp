@@ -217,6 +217,7 @@ namespace CompPlus_Scenes
         if (CurrentSceneInt == 0) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Logos1);
         else if (CurrentSceneInt == 65) CompPlus_Common::LoadHUBWorld();
         else if (CurrentSceneInt == 66) CompPlus_Common::LoadLastLevelSelect();
+        else if (CurrentSceneInt == 67) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::HUBRanking);
         else if (CurrentSceneInt == 123) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_Logos2);
         else if (CurrentSceneInt == 2) CompPlus_ManiaMenu::UpdateManiaMenu();
         else if (CurrentSceneInt == Scene::Scene_DAGarden) CompPlus_Common::LoadLevel_IZ(CompPlus_Common::SMCP_DAGarden);
