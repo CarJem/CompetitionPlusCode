@@ -137,12 +137,13 @@ extern "C"
             DrawingFX DrawFX = Canvas->DrawFX;
             int Rotation = Canvas->Rotation;
             int Direction = Canvas->Direction;
-
+            EntityAnimationData AnimationData = Canvas->ActNumbersData;
             Canvas->Direction = 0;
 
             CompPlus_Scenes::OnSceneDraw();
             CompPlus_SpotlightC::OnDraw();
 
+            Canvas->ActNumbersData = AnimationData;
             Canvas->DrawOrder = DrawOrder;
             Canvas->Angle = Angle;
             Canvas->DrawFX = DrawFX;
@@ -246,9 +247,36 @@ extern "C"
 
         #pragma region Declspec(DllExport) Calls
 
+        static int OnUniversalDrawJMP = baseAddress + 0x1C82CC;
+        static int OnUniversalInternalAddy = baseAddress + 0xA545AC;
+        static int OnUniversalDrawReturn = baseAddress + 0x1C82D2;
+        static __declspec(naked) void OnUniversalDrawHook()
+        {
+            static int ID;
+
+            __asm
+            {
+                mov ID, ESI;
+                pushad;
+            }
+            if (ID == 0) OnDraw();
+            __asm
+            {
+                popad;
+                mov edx, OnUniversalInternalAddy
+                    jmp OnUniversalDrawReturn
+            }
+        }
+        void PatchUniversalDrawHook()
+        {
+            WriteData<6>((void*)(OnUniversalDrawJMP), 0x90);
+            WriteJump((void*)(OnUniversalDrawJMP), OnUniversalDrawHook);
+        }
+
         __declspec(dllexport) void Init(const char* path)
         {
             InitDirectory(path);
+            PatchUniversalDrawHook();
             InitMod(path);
         }
 
@@ -284,7 +312,7 @@ extern "C"
 
         __declspec(dllexport) void OnScreenDrawUpdate()
         {
-            OnDraw();
+
         }
 
         __declspec(dllexport) void OnFrame()

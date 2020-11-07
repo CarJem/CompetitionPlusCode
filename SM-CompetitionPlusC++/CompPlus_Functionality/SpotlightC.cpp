@@ -35,16 +35,10 @@ namespace CompPlus_SpotlightC
     static int RingCountMax = 50;
     static int CounterMax = 60;
 
-
     int Counter1P = 0;
     int Counter2P = 0;
     int Counter3P = 0;
     int Counter4P = 0;
-
-    bool CanDrawP1 = false;
-    bool CanDrawP2 = false;
-    bool CanDrawP3 = false;
-    bool CanDrawP4 = false;
 
     char* SceneDirectory = (char*)(baseAddress + 0xA5359C);
     const char* LastCheckedIZScene;
@@ -122,23 +116,6 @@ namespace CompPlus_SpotlightC
         }
     }
 
-    void EndDraw(int pointer)
-    {
-        if (pointer == 0) CanDrawP1 = false;
-        else if (pointer == 1) CanDrawP2 = false;
-        else if (pointer == 2) CanDrawP3 = false;
-        else if (pointer == 3) CanDrawP4 = false;
-    }
-
-    bool CanDraw(int pointer)
-    {
-        if (pointer == 0) return CanDrawP1;
-        else if (pointer == 1) return CanDrawP2;
-        else if (pointer == 2) return CanDrawP3;
-        else if (pointer == 3) return CanDrawP4;
-        else return false;
-    }
-
     void OnPlayerDraw(EntityPlayer* ThisObject, Vector2 Position)
     {
         DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeA, SpotLightWidth, ToRGB888(GetPaletteEntry(0, 1)), 140, Ink_Alpha, true);
@@ -158,32 +135,27 @@ namespace CompPlus_SpotlightC
             else if (pointer == 2) screen = 2;
             else if (pointer == 3) screen = 3;
 
-            if (CanDraw(screen))
+            int offset = 0x96030 * screen;
+
+            if (Player1.Camera != nullptr && screen == 0)
             {
-                int offset = 0x96030 * screen;
-
-                if (Player1.Camera != nullptr && screen == 0)
-                {
-                    Vector2 position_p1 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
-                    OnPlayerDraw(&Player1, position_p1);
-                }
-                if (Player2.Camera != nullptr && screen == 1)
-                {
-                    Vector2 position_p2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
-                    OnPlayerDraw(&Player2, position_p2);
-                }
-                if (Player3.Camera != nullptr && screen == 2)
-                {
-                    Vector2 position_p3 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
-                    OnPlayerDraw(&Player3, position_p3);
-                }
-                if (Player4.Camera != nullptr && screen == 3)
-                {
-                    Vector2 position_p4 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
-                    OnPlayerDraw(&Player4, position_p4);
-                }
-
-                EndDraw(screen);
+                Vector2 position_p1 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+                OnPlayerDraw(&Player1, position_p1);
+            }
+            if (Player2.Camera != nullptr && screen == 1)
+            {
+                Vector2 position_p2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+                OnPlayerDraw(&Player2, position_p2);
+            }
+            if (Player3.Camera != nullptr && screen == 2)
+            {
+                Vector2 position_p3 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+                OnPlayerDraw(&Player3, position_p3);
+            }
+            if (Player4.Camera != nullptr && screen == 3)
+            {
+                Vector2 position_p4 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
+                OnPlayerDraw(&Player4, position_p4);
             }
         }
     }
@@ -192,11 +164,6 @@ namespace CompPlus_SpotlightC
     {
         if (CompPlus_Settings::SpotLightChallenge && IsValidScene())
         {
-            CanDrawP1 = true;
-            CanDrawP2 = true;
-            CanDrawP3 = true;
-            CanDrawP4 = true;
-
             UpdatePlayersRings();
         }
     }

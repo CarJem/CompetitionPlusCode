@@ -49,11 +49,6 @@ namespace CompPlus_Halloween2018
     int exetouchP3 = 0;
     int exetouchP4 = 0;
 
-    bool CanDrawP1 = false;
-    bool CanDrawP2 = false;
-    bool CanDrawP3 = false;
-    bool CanDrawP4 = false;
-
     int ColorStorage[16] = {};
     int ColorStorage2[16] = {};
 
@@ -248,23 +243,6 @@ namespace CompPlus_Halloween2018
     #pragma endregion
 
     #pragma region Get / Set Methods
-
-    void EndDraw(int pointer)
-    {
-        if (pointer == 0) CanDrawP1 = false;
-        else if (pointer == 1) CanDrawP2 = false;
-        else if (pointer == 2) CanDrawP3 = false;
-        else if (pointer == 3) CanDrawP4 = false;
-    }
-
-    bool CanDraw(int pointer)
-    {
-        if (pointer == 0) return CanDrawP1;
-        else if (pointer == 1) return CanDrawP2;
-        else if (pointer == 2) return CanDrawP3;
-        else if (pointer == 3) return CanDrawP4;
-        else return false;
-    }
 
     bool GetEXERespawn(int PlayerID)
     {
@@ -848,10 +826,6 @@ namespace CompPlus_Halloween2018
     {
         if (CompPlus_Status::IsExecutorStage)
         {
-            CanDrawP1 = true;
-            CanDrawP2 = true;
-            CanDrawP3 = true;
-            CanDrawP4 = true;
             if (GameState & GameState_Running && !(GameState & GameState_SoftPause))
             {
                 OnPlayerFrame(&Player1, 1);
@@ -874,29 +848,24 @@ namespace CompPlus_Halloween2018
 
         if (CompPlus_Status::IsExecutorStage)
         {
-            if (CanDraw(screen))
+            SetTempColors();
+            int offset = 0x96030 * screen;
+            for (int i = 0; i < 2301; ++i)
             {
-                SetTempColors();
-                int offset = 0x96030 * screen;
-                for (int i = 0; i < 2301; ++i)
+                SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
+
+                if (entity.field_30 == 1 && entity.Alpha == 0)
                 {
-                    SonicMania::Entity& entity = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(i);
+                    EntityPlayer* Spawned = SonicMania::GetEntityFromSceneSlot<SonicMania::EntityPlayer>(i);
 
-                    if (entity.field_30 == 1 && entity.Alpha == 0)
-                    {
-                        EntityPlayer* Spawned = SonicMania::GetEntityFromSceneSlot<SonicMania::EntityPlayer>(i);
-
-                        if (Spawned->dword140 == 1 && screen == 0) OnPlayerDraw(*Spawned, &Player1, offset);
-                        else if (Spawned->dword140 == 2 && screen == 1) OnPlayerDraw(*Spawned, &Player2, offset);
-                        else if (Spawned->dword140 == 3 && screen == 2) OnPlayerDraw(*Spawned, &Player3, offset);
-                        else if (Spawned->dword140 == 4 && screen == 3) OnPlayerDraw(*Spawned, &Player4, offset);
-                    }
+                    if (Spawned->dword140 == 1 && screen == 0) OnPlayerDraw(*Spawned, &Player1, offset);
+                    else if (Spawned->dword140 == 2 && screen == 1) OnPlayerDraw(*Spawned, &Player2, offset);
+                    else if (Spawned->dword140 == 3 && screen == 2) OnPlayerDraw(*Spawned, &Player3, offset);
+                    else if (Spawned->dword140 == 4 && screen == 3) OnPlayerDraw(*Spawned, &Player4, offset);
                 }
-                ResetColors();
             }
+            ResetColors();
         }
-
-        EndDraw(screen);
     }
 
     void OnStartTimer()

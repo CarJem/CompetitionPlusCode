@@ -42,27 +42,6 @@ namespace CompPlus_MetrotropicBeach
     int FadeTime2 = 0;
     int FadeSpeed = 1;
 
-    /**
-    * interpolate 2 RGB colors
-    * @param color1    integer containing color as 0x00RRGGBB
-    * @param color2    integer containing color as 0x00RRGGBB
-    * @param fraction  how much interpolation (0..1)
-    * - 0: full color 1
-    * - 1: full color 2
-    * @return the new color after interpolation
-    */
-    SonicMania::Color interpolate(SonicMania::Color color1, SonicMania::Color color2, float fraction)
-    {
-        unsigned char   r1 = color1.Red;
-        unsigned char   r2 = color2.Red;
-        unsigned char   g1 = color1.Green;
-        unsigned char   g2 = color2.Green;
-        unsigned char   b1 = color1.Blue;
-        unsigned char   b2 = color2.Blue;
-
-        return SonicMania::Color((int)((r2 - r1) * fraction + r1), (int)((g2 - g1) * fraction + g1), (int)((b2 - b1) * fraction + b1));
-    }
-
     void ApplyStagePalette(SHORT PaletteStorage[256], int PaletteStorage_Length)
     {
         for (int i = 127; i < PaletteStorage_Length; i++)
@@ -73,7 +52,7 @@ namespace CompPlus_MetrotropicBeach
         if (NeedsFadeChange)
         {
             FadeTime2 = 0;
-            FadeTime = 1000;
+            FadeTime = 100;
             NeedsFadeChange = false;
         }
 
@@ -90,7 +69,7 @@ namespace CompPlus_MetrotropicBeach
         }
         else 
         {
-            float Progress = (1000 - FadeTime) * 0.001;
+            float Progress = (100 - FadeTime) * 0.01;
             for (int i = 127; i < PaletteStorage_Length; i++)
             {
 
@@ -100,14 +79,13 @@ namespace CompPlus_MetrotropicBeach
                 auto target = SonicMania::Color();
                 target.FromRGB565(PaletteStorage[i]);
 
-                auto result = interpolate(source, target, Progress);
+                auto result = Drawing::InterpolateColors(source, target, Progress);
 
                 SonicMania::Palette0[i] = result.ToRGB565();
                 SonicMania::Palette1[i] = result.ToRGB565();
                 SonicMania::Palette2[i] = result.ToRGB565();
                 SonicMania::Palette3[i] = result.ToRGB565();
                 SonicMania::Palette4[i] = result.ToRGB565();
-                PaletteStorageMem[i] = result.ToRGB565();
             }
             if (FadeTime2 >= FadeSpeed) 
             {
@@ -160,7 +138,6 @@ namespace CompPlus_MetrotropicBeach
     void CheckPositions(int ActID) 
     {
         int x_position = 0x1989;
-        //int x_position = 200;
 
         if (ActID == 1) 
         {

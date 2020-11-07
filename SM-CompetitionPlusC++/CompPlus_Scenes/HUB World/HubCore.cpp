@@ -17,11 +17,6 @@ namespace CompPlus_HubCore
     int ReturnDestination = 0;
     using namespace SonicMania;
 
-    bool CanDrawP1 = false;
-    bool CanDrawP2 = false;
-    bool CanDrawP3 = false;
-    bool CanDrawP4 = false;
-
     bool isRestart = true;
 
     int HUDSpriteID = 0;
@@ -74,23 +69,6 @@ namespace CompPlus_HubCore
         else if (Position == 3) return (char*)"3RD";
         else if (Position == 4) return (char*)"4TH";
         else return (char*)"   ";
-    }
-
-    void EndDraw(int pointer)
-    {
-        if (pointer == 0) CanDrawP1 = false;
-        else if (pointer == 1) CanDrawP2 = false;
-        else if (pointer == 2) CanDrawP3 = false;
-        else if (pointer == 3) CanDrawP4 = false;
-    }
-
-    bool CanDraw(int pointer)
-    {
-        if (pointer == 0) return CanDrawP1;
-        else if (pointer == 1) return CanDrawP2;
-        else if (pointer == 2) return CanDrawP3;
-        else if (pointer == 3) return CanDrawP4;
-        else return false;
     }
 
     void DrawWaitingForPlayers(int offset) 
@@ -178,21 +156,16 @@ namespace CompPlus_HubCore
         else if (pointer == 2) screen = 2;
         else if (pointer == 3) screen = 3;
 
-        if (CanDraw(screen))
-        {
-            int offset = 0x96030 * screen;
+        int offset = 0x96030 * screen;
 
-            DrawWaitingForPlayers(offset);
+        DrawWaitingForPlayers(offset);
 
-            if (Player1.Camera != nullptr) DrawPlayerHUD(Player1.Position, offset, CompPlus_Scoring::P1_LastPlacement, 1, 14, Player1Box);
-            if (Player2.Camera != nullptr) DrawPlayerHUD(Player2.Position, offset, CompPlus_Scoring::P2_LastPlacement, 2, 14, Player2Box);
-            if (Player3.Camera != nullptr) DrawPlayerHUD(Player3.Position, offset, CompPlus_Scoring::P3_LastPlacement, 3, 14, Player3Box);
-            if (Player4.Camera != nullptr) DrawPlayerHUD(Player4.Position, offset, CompPlus_Scoring::P4_LastPlacement, 4, 14, Player4Box);
+        if (Player1.Camera != nullptr) DrawPlayerHUD(Player1.Position, offset, CompPlus_Scoring::P1_LastPlacement, 1, 14, Player1Box);
+        if (Player2.Camera != nullptr) DrawPlayerHUD(Player2.Position, offset, CompPlus_Scoring::P2_LastPlacement, 2, 14, Player2Box);
+        if (Player3.Camera != nullptr) DrawPlayerHUD(Player3.Position, offset, CompPlus_Scoring::P3_LastPlacement, 3, 14, Player3Box);
+        if (Player4.Camera != nullptr) DrawPlayerHUD(Player4.Position, offset, CompPlus_Scoring::P4_LastPlacement, 4, 14, Player4Box);
 
-            DrawKillScreens(screen, offset);
-
-            EndDraw(screen);
-        }
+        DrawKillScreens(screen, offset);
     }
 
     void SetHUBVisualSettings()
@@ -218,12 +191,6 @@ namespace CompPlus_HubCore
         SonicMania::Player2.LifeCount = 100;
         SonicMania::Player3.LifeCount = 100;
         SonicMania::Player4.LifeCount = 100;
-
-        //Allow Draw
-        CanDrawP1 = true;
-        CanDrawP2 = true;
-        CanDrawP3 = true;
-        CanDrawP4 = true;
     }
 
     void UnloadDrawables() 

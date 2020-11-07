@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 #include "CompPlus_Core/CompPlus_Common.h"
+#include "depends/colorspace/ColorSpace.h"
+#include "depends/colorspace/Comparison.h"
+#include "depends/colorspace/Conversion.h"
 
 namespace Drawing
 {
@@ -16,6 +19,24 @@ namespace Drawing
 
     int DevEXEFontSpriteID = 0;
     bool DevEXEFontLoaded = false;
+
+    double Interpolate(double a, double b, float t)
+    {
+        return (1.0 - t) * a + t * b;
+    }
+
+    SonicMania::Color InterpolateColors(SonicMania::Color a, SonicMania::Color b, float t)
+    {
+        ColorSpace::Rgb _a(a.Red, a.Green, a.Blue);
+        ColorSpace::Rgb _b(b.Red, b.Green, b.Blue);
+        ColorSpace::Rgb final;
+
+        final.r = Interpolate(_a.r, _b.r, t);
+        final.g = Interpolate(_a.g, _b.g, t);
+        final.b = Interpolate(_a.b, _b.b, t);
+
+        return SonicMania::Color(final.r, final.g, final.b);
+    }
 
     Vector2 GetFramePosition(Vector2 Position, AnimationFrame Frame)
     {

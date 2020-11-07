@@ -61,14 +61,17 @@
     <Filter Include="Functionality\Headers">
       <UniqueIdentifier>{c2811ec4-bf20-4ca6-bb56-4d1c657f3c9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Depends\colorspace">
+      <UniqueIdentifier>{d1521fa3-9aaf-413c-8878-cb2c1bef70d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Depends\tinyxml2">
+      <UniqueIdentifier>{c713a0a0-4d17-48ea-80e9-b4e58860cecd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="depends\tinyxml2\tinyxml2.h">
-      <Filter>Depends</Filter>
-    </ClInclude>
     <ClInclude Include="CompPlus_Core\CompPlus_Announcers.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
@@ -232,12 +235,24 @@
     <ClInclude Include="CompPlus_Scenes\General Scenes\PlayerSettings.h">
       <Filter>Scenes\General Scenes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="depends\tinyxml2\tinyxml2.h">
+      <Filter>Depends\tinyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="depends\colorspace\ColorSpace.h">
+      <Filter>Depends\colorspace</Filter>
+    </ClInclude>
+    <ClInclude Include="depends\colorspace\Comparison.h">
+      <Filter>Depends\colorspace</Filter>
+    </ClInclude>
+    <ClInclude Include="depends\colorspace\Conversion.h">
+      <Filter>Depends\colorspace</Filter>
+    </ClInclude>
+    <ClInclude Include="depends\colorspace\Utils.h">
+      <Filter>Depends\colorspace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
-    <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
-      <Filter>Depends</Filter>
-    </ClCompile>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -399,6 +414,18 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\General Scenes\PlayerSettings.cpp">
       <Filter>Scenes\General Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="depends\tinyxml2\tinyxml2.cpp">
+      <Filter>Depends\tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="depends\colorspace\ColorSpace.cpp">
+      <Filter>Depends\colorspace</Filter>
+    </ClCompile>
+    <ClCompile Include="depends\colorspace\Comparison.cpp">
+      <Filter>Depends\colorspace</Filter>
+    </ClCompile>
+    <ClCompile Include="depends\colorspace\Conversion.cpp">
+      <Filter>Depends\colorspace</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

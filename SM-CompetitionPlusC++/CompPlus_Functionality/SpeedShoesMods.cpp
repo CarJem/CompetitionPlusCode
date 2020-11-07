@@ -24,6 +24,17 @@ namespace CompPlus_SpeedShoesMods
 
     CompPlus_Settings::SpeedShoesModification CurrentModification;
 
+    const char* Music_SpeedShoes_Stock = "Sneakers.ogg";
+    const char* Music_SpeedShoes_Default = "SMCP_Shoes/SpeedSneakers.ogg";
+    const char* Music_SpeedShoes_Freeze = "SMCP_Shoes/FreezeSneakers.ogg";
+    const char* Music_SpeedShoes_HighJump = "SMCP_Shoes/JumpSneakers.ogg";
+    const char* Music_SpeedShoes_SpeedDown = "SMCP_Shoes/SlowSneakers.ogg";
+
+    int Music_SpeedShoes_Default_LoopPoint = 120960;
+    int Music_SpeedShoes_Freeze_LoopPoint = 120960;
+    int Music_SpeedShoes_HighJump_LoopPoint = 120960;
+    int Music_SpeedShoes_SpeedDown_LoopPoint = 120960;
+
     void SetSpeedShoes() 
     {
         if (CurrentModification == CompPlus_Settings::SpeedShoesModification_Default)
@@ -66,6 +77,38 @@ namespace CompPlus_SpeedShoesMods
             CurrentModification = CompPlus_Settings::SpeedShoesMode;
         }
         SetSpeedShoes();
+    }
+
+    void SetMusic(const char* NormalPath, int NormalLoop, const char*& name, unsigned int& a2, int& a3, unsigned int& loopstart, int& a5)
+    {
+        if (a2 == 0)
+        {
+            name = NormalPath;
+            loopstart = NormalLoop;
+        }
+    }
+
+    void OnMusicLoad(char* CurrentScene, const char*& name, unsigned int& a2, int& a3, unsigned int& loopstart, int& a5)
+    {
+        if (name == Music_SpeedShoes_Stock)
+        {
+            if (CurrentModification == CompPlus_Settings::SpeedShoesModification_Default)
+            {
+                SetMusic(Music_SpeedShoes_Default, Music_SpeedShoes_Default_LoopPoint, name, a2, a3, loopstart, a5);
+            }
+            else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_HighJump)
+            {
+                SetMusic(Music_SpeedShoes_HighJump, Music_SpeedShoes_HighJump_LoopPoint, name, a2, a3, loopstart, a5);
+            }
+            else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_Freeze)
+            {
+                SetMusic(Music_SpeedShoes_Freeze, Music_SpeedShoes_Freeze_LoopPoint, name, a2, a3, loopstart, a5);
+            }
+            else if (CurrentModification == CompPlus_Settings::SpeedShoesModification_SpeedDown)
+            {
+                SetMusic(Music_SpeedShoes_SpeedDown, Music_SpeedShoes_SpeedDown_LoopPoint, name, a2, a3, loopstart, a5);
+            }
+        }
     }
 
     void OnFrame() 

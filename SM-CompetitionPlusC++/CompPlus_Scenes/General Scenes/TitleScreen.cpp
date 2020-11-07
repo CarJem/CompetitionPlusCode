@@ -6,6 +6,7 @@
 #include "SonicMania.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Core/CompPlus_Patches.h"
+#include "CompPlus_Extensions/Drawing.h"
 
 namespace CompPlus_TitleScreen 
 {
@@ -17,6 +18,8 @@ namespace CompPlus_TitleScreen
     int CurrentLifespan = 0;
     int NeededLifespan = 70;
     int Idle = 0;
+
+    const char* DX = "Director's Cut";
 
     bool StillDrawing = false;
 
@@ -41,6 +44,31 @@ namespace CompPlus_TitleScreen
         }
     }
 
+    int ColorStorage[5];
+
+
+    void FixColors(bool Mode)
+    {
+        if (Mode)
+        {
+            ColorStorage[0] = SonicMania::GetPaletteEntry(0, 1);
+            SonicMania::SetPaletteEntry(0, 1, 0x000000);
+
+            ColorStorage[1] = SonicMania::GetPaletteEntry(0, 41);
+            SonicMania::SetPaletteEntry(0, 41, 0xF0F0F0);
+
+            ColorStorage[2] = SonicMania::GetPaletteEntry(0, 37);
+            SonicMania::SetPaletteEntry(0, 37, 0x98C0C8);
+
+        }
+        else
+        {
+            SonicMania::SetPaletteEntry(0, 1, ColorStorage[0]);
+            SonicMania::SetPaletteEntry(0, 41, ColorStorage[1]);
+            SonicMania::SetPaletteEntry(0, 37, ColorStorage[2]);
+        }
+    }
+
     int OnPlusLogoDraw(EntityAnimationData* AnimData, Vector2* Position, BOOL ScreenRelative)
     {
         StillDrawing = true;
@@ -54,7 +82,7 @@ namespace CompPlus_TitleScreen
 
         SetBG();
 
-
+        int DrawOrder = EntityInfo->CurrentEntity->Base.DrawOrder;
 
         EntityInfo->CurrentEntity->Base.DrawOrder = 1;
 
@@ -73,7 +101,12 @@ namespace CompPlus_TitleScreen
 
             SonicMania::SetSpriteAnimation(CompPlusLogoID, OriginalCurrentAnimation, AnimData, true, OriginalCurrentFrame);
             SonicMania::Vector2 OurPosition = SonicMania::Vector2(EntityInfo->CurrentEntity->Base.Position.X, EntityInfo->CurrentEntity->Base.Position.Y + 20);
+            SonicMania::Vector2 OurPosition2 = SonicMania::Vector2(EntityInfo->CurrentEntity->Base.Position.X, EntityInfo->CurrentEntity->Base.Position.Y + 65);
             DrawSprite(AnimData, &OurPosition, ScreenRelative);
+
+            FixColors(true);
+            Drawing::DrawMenuTextSprite(DX, OurPosition2, ScreenRelative, 14, 0, 0, SonicMania::Alignment_Center);
+            FixColors(false);
 
             AnimData->Animationptr = OriginalPtr;
             AnimData->CurrentAnimation = OriginalCurrentAnimation;
@@ -87,6 +120,8 @@ namespace CompPlus_TitleScreen
             AnimData->UserFrameCount = OriginalUserFrameCount;
         }
         else CurrentLifespan++;
+
+        EntityInfo->CurrentEntity->Base.DrawOrder = DrawOrder;
    
         return DrawSprite(AnimData, Position, ScreenRelative);
 

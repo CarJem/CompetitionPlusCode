@@ -32,6 +32,7 @@ namespace Drawing
         }
     };
 
+    extern SonicMania::Color InterpolateColors(SonicMania::Color a, SonicMania::Color b, float t);
     extern SonicMania::Vector2 GetFramePosition(SonicMania::Vector2 Position, AnimationFrame Frame);
     extern AnimationFrame* GetAnimationFrameFromFrameID(SonicMania::EntityAnimationData Animation, int FrameID);
     extern int GetAnimationIndexFromFrameID(SonicMania::EntityAnimationData Animation, int FrameID);

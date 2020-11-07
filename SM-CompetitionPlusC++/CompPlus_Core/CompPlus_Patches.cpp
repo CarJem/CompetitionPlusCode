@@ -24,6 +24,7 @@
 #include "CompPlus_Functionality/VapeMusic.h"
 #include "CompPlus_Functionality/DynCam.h"
 #include "CompPlus_Functionality/PlayerSkins.h"
+#include "CompPlus_Functionality/SpeedShoesMods.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -110,6 +111,7 @@ namespace CompPlus_Patches
     int __cdecl PlayMusicFile_BASS_r(const char* name, unsigned int a2, int a3, unsigned int loopstart, int a5)
     {
         CompPlus_VapeMusic::OnLoad((char*)CompPlus_Core::CurrentStage.SceneKey, name, a2, a3, loopstart, a5);
+        CompPlus_SpeedShoesMods::OnMusicLoad((char*)CompPlus_Core::CurrentStage.SceneKey, name, a2, a3, loopstart, a5);
         return PlayMusicFile_BASS(name, a2, a3, loopstart, a5);
     }
 
@@ -163,41 +165,6 @@ namespace CompPlus_Patches
     {
         WriteData<6>((void*)(baseAddress + 0x19B97), 0x90);
         WriteJump((void*)(baseAddress + 0x19B97), OnWaterDrawHook);
-    }
-
-    #pragma endregion
-
-    #pragma region Universal On Screen Draw
-
-    void DoOnScreenDraw()
-    {
-        //CompPlus_Core::OnDraw();
-    }
-
-    static int OnUniversalDrawJMP = baseAddress + 0x1C82CC;
-    static int OnUniversalInternalAddy = baseAddress + 0xA545AC;
-    static int OnUniversalDrawReturn = baseAddress + 0x1C82D2;
-    static __declspec(naked) void OnUniversalDrawHook()
-    {
-        static int ID;
-
-        __asm
-        {
-            mov ID, ESI;
-            pushad;
-        }
-        if (ID == 0) DoOnScreenDraw();
-        __asm
-        {
-            popad;
-            mov edx, OnUniversalInternalAddy
-                jmp OnUniversalDrawReturn
-        }
-    }
-    void PatchUniversalDrawHook()
-    {
-        WriteData<6>((void*)(OnUniversalDrawJMP), 0x90);
-        WriteJump((void*)(OnUniversalDrawJMP), OnUniversalDrawHook);
     }
 
     #pragma endregion
@@ -391,7 +358,6 @@ namespace CompPlus_Patches
         {
             pushad;
         }
-        DoOnScreenDraw();
         __asm
         {
             popad;
@@ -402,8 +368,8 @@ namespace CompPlus_Patches
 
     void PatchOnTitlePlusLogoDrawHook()
     {
-        //WriteData<6>((void*)(baseAddress + 0x10AC83), 0x90);
-        //WriteJump((void*)(baseAddress + 0x10AC83), OnTitlePlusDrawHook);
+        WriteData<6>((void*)(baseAddress + 0x10AC83), 0x90);
+        WriteJump((void*)(baseAddress + 0x10AC83), OnTitlePlusDrawHook);
 
         WriteData<6>((void*)(baseAddress + 0x10AC94), 0x90);
         WriteJump((void*)(baseAddress + 0x10AC94), OnTitlePlusShineDrawHook);
@@ -561,21 +527,6 @@ namespace CompPlus_Patches
         WriteData<7>((void*)(baseAddress + 0x001B35E0), 0x90);
         WriteJump((void*)(baseAddress + 0x001B35E0), OverrideSetSpriteAnimation);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     #pragma endregion
 
@@ -1048,7 +999,6 @@ namespace CompPlus_Patches
         PatchCompetitionPlusTMZ();
         PatchPlaySongBass();
         PatchHookOnStartTimer();
-        PatchUniversalDrawHook();
         PatchOnRoundClearHook();
         PatchDisableVSPointIncrement();
     }

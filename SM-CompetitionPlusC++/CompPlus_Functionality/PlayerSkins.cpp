@@ -387,6 +387,11 @@ namespace CompPlus_PlayerSkins
         return SpriteIndex;
     }
 
+    void OnDraw() 
+    {
+
+    }
+
     void OnFrame() 
     {
         /*

@@ -232,6 +232,10 @@
     <ClInclude Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h" />
+    <ClInclude Include="depends\colorspace\ColorSpace.h" />
+    <ClInclude Include="depends\colorspace\Comparison.h" />
+    <ClInclude Include="depends\colorspace\Conversion.h" />
+    <ClInclude Include="depends\colorspace\Utils.h" />
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
     <ClInclude Include="CompPlus_Functionality\SpeedShoesMods.h" />
@@ -289,6 +293,9 @@
     <ClCompile Include="CompPlus_Scenes\Level Select\ManiaLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\CoreLevelSelect.cpp" />
     <ClCompile Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.cpp" />
+    <ClCompile Include="depends\colorspace\ColorSpace.cpp" />
+    <ClCompile Include="depends\colorspace\Comparison.cpp" />
+    <ClCompile Include="depends\colorspace\Conversion.cpp" />
     <ClCompile Include="depends\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="Base.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
