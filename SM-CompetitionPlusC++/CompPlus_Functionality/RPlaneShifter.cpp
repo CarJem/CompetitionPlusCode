@@ -70,22 +70,22 @@ namespace CompPlus_RPlaneShifter
         {
             case 1:
                 Player1_PlaneSwitching = true;
-                if (Player.CollisionPlane != 0) Player1_CurrentPlane = 0;
+                if (Player1_CurrentPlane != 0) Player1_CurrentPlane = 0;
                 else Player1_CurrentPlane = 1;
                 break;
             case 2:
                 Player2_PlaneSwitching = true;
-                if (Player.CollisionPlane != 0) Player2_CurrentPlane = 0;
+                if (Player2_CurrentPlane != 0) Player2_CurrentPlane = 0;
                 else Player2_CurrentPlane = 1;
                 break;
             case 3:
                 Player3_PlaneSwitching = true;
-                if (Player.CollisionPlane != 0) Player3_CurrentPlane = 0;
+                if (Player3_CurrentPlane != 0) Player3_CurrentPlane = 0;
                 else Player3_CurrentPlane = 1;
                 break;
             case 4:
                 Player4_PlaneSwitching = true;
-                if (Player.CollisionPlane != 0) Player4_CurrentPlane = 0;
+                if (Player4_CurrentPlane != 0) Player4_CurrentPlane = 0;
                 else Player4_CurrentPlane = 1;
                 break;
         }
@@ -249,6 +249,11 @@ namespace CompPlus_RPlaneShifter
         ShifterFix(SonicMania::Player2, Shifter, Player2_HasBeenRotating, Player2_HasCooldown, Player2_CooldownID, Index, 2);
         ShifterFix(SonicMania::Player3, Shifter, Player3_HasBeenRotating, Player3_HasCooldown, Player3_CooldownID, Index, 3);
         ShifterFix(SonicMania::Player4, Shifter, Player4_HasBeenRotating, Player4_HasCooldown, Player4_CooldownID, Index, 4);
+    }
+
+    void OnReload() 
+    {
+
     }
 
     void OnFrame() 
