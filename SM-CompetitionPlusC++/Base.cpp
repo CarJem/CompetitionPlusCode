@@ -127,6 +127,14 @@ extern "C"
             IZAPI::RegisterStageUnloadEvent(CompPlus_Core::OnStageUnload);
         }
 
+        bool SpritesLoaded = false;
+        void InitDrawables() 
+        {
+            Drawing::LoadDrawables();
+            CompPlus_HubCore::LoadDrawables();
+            SpritesLoaded = true;
+        }
+
         #pragma endregion
 
         #pragma region General Methods
@@ -142,7 +150,7 @@ extern "C"
             EntityAnimationData AnimationData = Canvas->ActNumbersData;
             Canvas->Direction = 0;
 
-            CompPlus_Scenes::OnSceneDraw();
+            CompPlus_Scenes::OnSceneDraw(false);
 
             Canvas->ActNumbersData = AnimationData;
             Canvas->DrawOrder = DrawOrder;
@@ -190,8 +198,6 @@ extern "C"
             CompPlus_MetrotropicBeach::Restart();
             CompPlus_DAGarden_Chaotix::Reload();
             CompPlus_SpeedShoesMods::OnSceneReset();
-            Drawing::UnloadDrawables();
-            CompPlus_HubCore::UnloadDrawables();
             CompPlus_SpecialRings::UnloadDrawables();
             CompPlus_PlayerSettings::Reload();
             CompPlus_FBZStorm::OnReset();
@@ -203,6 +209,7 @@ extern "C"
 
         void OnRunning()
         {
+            if (!SpritesLoaded) InitDrawables();
             if ((SonicMania::GameState & SonicMania::GameState_SoftPause)) return;
             CompPlus_Core::OnStartupInit();
             CompPlus_SpotlightC::OnFrame();
@@ -325,6 +332,7 @@ extern "C"
             Canvas->Direction = 0;
 
             CompPlus_SpotlightC::OnDraw();
+            CompPlus_Scenes::OnSceneDraw(true);
 
             Canvas->ActNumbersData = AnimationData;
             Canvas->DrawOrder = DrawOrder;

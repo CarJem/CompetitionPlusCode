@@ -19,8 +19,6 @@ namespace CompPlus_TitleScreen
     int NeededLifespan = 70;
     int Idle = 0;
 
-    const char* DX = "Director's Cut";
-
     bool StillDrawing = false;
 
     void OnDraw() 
@@ -105,7 +103,7 @@ namespace CompPlus_TitleScreen
             DrawSprite(AnimData, &OurPosition, ScreenRelative);
 
             FixColors(true);
-            Drawing::DrawMenuTextSprite(DX, OurPosition2, ScreenRelative, 14, 0, 0, SonicMania::Alignment_Center);
+            Drawing::DrawMenuTextSprite(CompPlus_Common::Internal_VersionName, OurPosition2, ScreenRelative, 14, 0, 0, SonicMania::Alignment_Center);
             FixColors(false);
 
             AnimData->Animationptr = OriginalPtr;

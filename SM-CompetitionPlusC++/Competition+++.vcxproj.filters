@@ -73,6 +73,9 @@
     <Filter Include="Include\ManiaAPI">
       <UniqueIdentifier>{cdd406bc-fe5b-4376-8405-ce43fd89f50f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\NewGeneration">
+      <UniqueIdentifier>{26001da1-0941-4929-856d-58645f40c8df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -259,6 +262,9 @@
     <ClInclude Include="include\ManiaAPI\SonicMania.h">
       <Filter>Include\ManiaAPI</Filter>
     </ClInclude>
+    <ClInclude Include="include\NewGeneration\NextGeneration_ManiaAPI.h">
+      <Filter>Include\NewGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp">
@@ -433,5 +439,8 @@
       <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="Base.cpp" />
+    <ClCompile Include="include\NewGeneration\NextGeneration_ManiaAPI.cpp">
+      <Filter>Include\NewGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

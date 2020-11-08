@@ -1,7 +1,8 @@
-#include "CompPlus_Patches.h"
 #include "stdafx.h"
+#include "CompPlus_Patches.h"
 #include "ManiaModLoader.h"
 #include "include/ManiaAPI/SonicMania.h"
+#include "include/NewGeneration/NextGeneration_ManiaAPI.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Extensions/IZAPI.h"
 #include "CompPlus_Extensions/Helpers.h"
@@ -186,6 +187,7 @@ namespace CompPlus_Patches
     static int OnControlPanelADrawReturn = baseAddress + 0x16EF19;
     static int OnControlPanelBDrawReturn = baseAddress + 0x16EF2A;
     static int OnButtonDrawReturn = baseAddress + 0x864D0;
+    static int DrawSpriteCallAddress = baseAddress + 0x001B3B00;
 
     static __declspec(naked) void OnDecorationDrawHook()
     {
@@ -197,7 +199,7 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite;
+            call DrawSpriteCallAddress;
             pushad;
         }
         OnHUBWorldPostDraw();
@@ -217,7 +219,7 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite;
+            call DrawSpriteCallAddress;
             pushad;
         }
         OnHUBWorldPostDraw();
@@ -237,7 +239,7 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite;
+            call DrawSpriteCallAddress;
             pushad;
         }
         OnHUBWorldPostDraw();
@@ -257,7 +259,7 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite;
+            call DrawSpriteCallAddress;
             pushad;
         }
         OnHUBWorldPostDraw();
@@ -277,8 +279,8 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite
-                pushad;
+            call DrawSpriteCallAddress;
+            pushad;
         }
         OnHUBWorldPostDraw();
         __asm
@@ -297,8 +299,8 @@ namespace CompPlus_Patches
         __asm
         {
             popad;
-            call DrawSprite
-                pushad;
+            call DrawSpriteCallAddress;
+            pushad;
         }
         OnHUBWorldPostDraw();
         __asm
@@ -994,6 +996,7 @@ namespace CompPlus_Patches
 
     void InitPatches() 
     {
+        NextGeneration_ManiaAPI::Init();
         SonicMania::BindLBAndRB();
         PatchOnTitlePlusLogoDrawHook();
         PatchOnHUBDecorationScreenDrawHook();

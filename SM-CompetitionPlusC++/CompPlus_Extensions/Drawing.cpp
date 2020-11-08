@@ -61,14 +61,25 @@ namespace Drawing
         return Vector2(Position.X + AdditionalX, Position.Y - 1);
     }
 
-    void UnloadDrawables()
+    void LoadDrawables()
     {
-        DevFontSpriteID = 0;
-        DevFontLoaded = false;
-        ManiaFontSpriteID = 0;
-        ManiaFontLoaded = false;
-        DevEXEFontSpriteID = 0;
-        DevEXEFontLoaded = false;
+        if (!ManiaFontLoaded)
+        {
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Global);
+            ManiaFontLoaded = true;
+        }
+
+        if (!DevFontLoaded)
+        {
+            DevFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText, Scope_Global);
+            DevFontLoaded = true;
+        }
+
+        if (!DevEXEFontLoaded)
+        {
+            DevEXEFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText_Exe, Scope_Global);
+            DevEXEFontLoaded = true;
+        }
     }
 
     AnimationFrame* GetAnimationFrameFromFrameID(SonicMania::EntityAnimationData Animation, int FrameID)
@@ -107,12 +118,7 @@ namespace Drawing
 
     void DrawMenuTextSprite(std::wstring Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right)
     {
-        if (!ManiaFontLoaded)
-        {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_None);
-            ManiaFontLoaded = true;
-            return;
-        }
+        if (!ManiaFontLoaded) return;
 
         int SpriteFrame = 0;
         int RealSpriteFrame = 0;
@@ -151,18 +157,13 @@ namespace Drawing
 
     void DrawMenuTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right)
     {
-        if (!ManiaFontLoaded)
-        {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_UISmallFont, Scope_Stage);
-            ManiaFontLoaded = true;
-            return;
-        }
+        if (!ManiaFontLoaded) return;
 
         int SpriteFrame = 0;
         int RealSpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
-        if (!&RingTemp->ActNumbersData) return;
+        if (!&RingTemp->ActNumbersData || &RingTemp->ActNumbersData.FrameCount == 0) return;
         int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
@@ -195,18 +196,12 @@ namespace Drawing
 
     void DrawDevTextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right, bool Highlighed = false)
     {
-        if (!DevFontLoaded)
-        {
-            DevFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText, Scope_Stage);
-            DevFontLoaded = true;
-            return;
-        }
-
+        if (!DevFontLoaded) return;
 
         int SpriteFrame = 0;
         int BuildLength = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
-        if (!&RingTemp->ActNumbersData) return;
+        if (!&RingTemp->ActNumbersData || &RingTemp->ActNumbersData.FrameCount == 0) return;
         int OldDrawOrder = RingTemp->DrawOrder;
         for (int i = 0; i < Name.length(); i++)
         {
@@ -237,13 +232,7 @@ namespace Drawing
 
     void DrawDevEXETextSprite(std::string Name, Vector2 LocationStart, bool ScreenRelative, int DrawOrder = 0, int Rotation = 0, int Angle = 0, DevMenu_Alignment Alignment = Alignment_Right, bool Highlighed = false)
     {
-        if (!DevEXEFontLoaded)
-        {
-            DevEXEFontSpriteID = LoadAnimation(CompPlus_Common::Anim_LSelectText_Exe, Scope_Stage);
-            DevEXEFontLoaded = true;
-            return;
-        }
-
+        if (!DevEXEFontLoaded) return;
 
         int SpriteFrame = 0;
         int BuildLength = 0;

@@ -32,12 +32,7 @@ namespace CompPlus_HubCore
 
     void DrawCrownSprite(Vector2 LocationStart, bool ScreenRelative, int DrawOrder, int Rotation, int Angle)
     {
-        if (!HUDSpriteLoaded)
-        {
-            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Stage);
-            HUDSpriteLoaded = true;
-            return;
-        }
+        if (!HUDSpriteLoaded) return;
 
         int SpriteFrame = 0;
         EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);;
@@ -202,8 +197,12 @@ namespace CompPlus_HubCore
         SonicMania::Player4.LifeCount = 100;
     }
 
-    void UnloadDrawables() 
+    void LoadDrawables() 
     {
-        HUDSpriteLoaded = false;
+        if (!HUDSpriteLoaded)
+        {
+            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Global);
+            HUDSpriteLoaded = true;
+        }
     }
 }

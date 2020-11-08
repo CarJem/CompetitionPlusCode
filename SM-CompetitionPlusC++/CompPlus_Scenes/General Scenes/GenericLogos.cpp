@@ -5,6 +5,7 @@
 #include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Core/CompPlus_Patches.h"
+#include "CompPlus_Extensions/Drawing.h"
 
 namespace CompPlus_GenericLogos
 {
@@ -116,6 +117,71 @@ namespace CompPlus_GenericLogos
 			Part1.DrawOrder = 14;
 		}
 	}
+
+    int ColorStorage[5];
+
+    void FixColors(bool Mode)
+    {
+        if (Mode)
+        {
+            ColorStorage[0] = SonicMania::GetPaletteEntry(0, 1);
+            SonicMania::SetPaletteEntry(0, 1, 0x000000);
+
+            ColorStorage[1] = SonicMania::GetPaletteEntry(0, 41);
+            SonicMania::SetPaletteEntry(0, 41, 0xFF0000);
+
+            ColorStorage[2] = SonicMania::GetPaletteEntry(0, 37);
+            SonicMania::SetPaletteEntry(0, 37, 0x98C0C8);
+
+            ColorStorage[3] = SonicMania::GetPaletteEntry(0, 40);
+            SonicMania::SetPaletteEntry(0, 40, 0xFFFFFF);
+
+        }
+        else
+        {
+            SonicMania::SetPaletteEntry(0, 1, ColorStorage[0]);
+            SonicMania::SetPaletteEntry(0, 41, ColorStorage[1]);
+            SonicMania::SetPaletteEntry(0, 37, ColorStorage[2]);
+            SonicMania::SetPaletteEntry(0, 40, ColorStorage[3]);
+        }
+    }
+
+    int NoticeAlpha = 0;
+
+    void OnExSEGADraw() 
+    {
+        FixColors(true);
+
+        int x = 424 / 2;
+        int y = 0;
+
+        EntityTitleCard* RingTemp = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = RingTemp->DrawOrder;
+        RingTemp->Alpha = NoticeAlpha;
+        RingTemp->DrawOrder = 0;
+        RingTemp->InkEffect = Ink_Alpha;
+
+        int DrawOrder = RingTemp->DrawOrder;
+
+        DrawRect(0, 0, 424, 48, 0x000000, (NoticeAlpha == 0 ? 0 : NoticeAlpha / 4), Ink_Alpha, true);
+
+        Drawing::DrawMenuTextSprite("NOTICE", Vector2(x, y + 16), true, DrawOrder, 0, 0, Alignment_Center);
+        Drawing::DrawDevTextSprite("THIS IS A DEMO. EVERYTHING HERE IS NOT FINAL.", Vector2(x, y + 32), true, DrawOrder, 0, 0, Alignment_Center, false);
+        Drawing::DrawDevTextSprite("ANY BUGS ARE NOT REPRESENTIVE OF THE FINAL PRODUCT.", Vector2(x, y + 40), true, DrawOrder, 0, 0, Alignment_Center, false);
+
+
+        FixColors(false);
+
+        RingTemp->DrawOrder =  OldDrawOrder;
+
+        if (NoticeAlpha > 0) NoticeAlpha -= 2;
+    }
+
+    void OnSEGADraw() 
+    {
+        if (NoticeAlpha < 255) NoticeAlpha += 10;
+        OnExSEGADraw();
+    }
 
 	void UpdateIZLogos() 
 	{

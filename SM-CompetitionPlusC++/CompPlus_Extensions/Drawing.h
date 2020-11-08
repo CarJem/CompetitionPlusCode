@@ -5,7 +5,7 @@
 #include <string>
 namespace Drawing 
 {
-    extern void UnloadDrawables();
+    extern void LoadDrawables();
 
     struct AnimationFrame //82 Bytes Total
     {

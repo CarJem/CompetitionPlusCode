@@ -240,6 +240,7 @@
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
     <ClInclude Include="CompPlus_Functionality\SpeedShoesMods.h" />
     <ClInclude Include="include\ManiaAPI\SonicMania.h" />
+    <ClInclude Include="include\NewGeneration\NextGeneration_ManiaAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp" />
@@ -303,6 +304,7 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.cpp" />
     <ClCompile Include="CompPlus_Functionality\SpeedShoesMods.cpp" />
+    <ClCompile Include="include\NewGeneration\NextGeneration_ManiaAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IZAPI\IZAPI.vcxproj">

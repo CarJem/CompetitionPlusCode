@@ -31,7 +31,7 @@ namespace CompPlus_HubCore
 
     extern HubPlace ReturnDestination;
 
-    extern void UnloadDrawables();
+    extern void LoadDrawables();
 
     extern void OnDraw();
 

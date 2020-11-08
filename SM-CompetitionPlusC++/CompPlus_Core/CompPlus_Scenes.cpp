@@ -127,27 +127,31 @@ namespace CompPlus_Scenes
         }
     }
 
-    void OnSceneDraw() 
+    void OnSceneDraw(bool HUDDraw) 
     {
 
         if (CompPlus_Status::IsExecutorStage) CompPlus_Halloween2018::OnDraw();
 
         if (CurrentStage.SceneKey)
         {
-            if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania)) CompPlus_ManiaLevelSelect::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Encore)) CompPlus_EncoreLevelSelect::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Custom)) CompPlus_CustomLevelSelect::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Chaotix)) CompPlus_ChaotixLevelSelect::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Exe)) CompPlus_ExeLevelSelect::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld)) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE)) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking)) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubCore::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits)) CompPlus_Credits::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DAGarden_Chaotix)) CompPlus_DAGarden_Chaotix::OnDraw();
-            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings)) CompPlus_PlayerSettings::DoMenuOnScreenDraw();
+            if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Mania) && HUDDraw) CompPlus_ManiaLevelSelect::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Encore) && HUDDraw) CompPlus_EncoreLevelSelect::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Custom) && HUDDraw) CompPlus_CustomLevelSelect::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Chaotix) && HUDDraw) CompPlus_ChaotixLevelSelect::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::LSelect_Exe) && HUDDraw) CompPlus_ExeLevelSelect::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld) && HUDDraw) CompPlus_HubCore::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBWorld_EXE) && HUDDraw) CompPlus_HubCore::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBRanking) && HUDDraw) CompPlus_HubCore::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings) && HUDDraw) CompPlus_HubCore::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Credits) && HUDDraw) CompPlus_Credits::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_DAGarden_Chaotix) && !HUDDraw) CompPlus_DAGarden_Chaotix::OnDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings) && !HUDDraw) CompPlus_PlayerSettings::DoMenuOnScreenDraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos1) && !HUDDraw) CompPlus_GenericLogos::OnSEGADraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos2) && !HUDDraw) CompPlus_GenericLogos::OnExSEGADraw();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_Logos3) && !HUDDraw) CompPlus_GenericLogos::OnExSEGADraw();
         }
-        else if (CurrentSceneInt == 1) CompPlus_TitleScreen::OnDraw();
+        else if (CurrentSceneInt == 1 && !HUDDraw) CompPlus_TitleScreen::OnDraw();
+        else if (CurrentSceneInt == 0 && !HUDDraw) CompPlus_GenericLogos::OnSEGADraw();
 
         CompPlus_FBZStorm::OnDraw();
     }

@@ -7,7 +7,7 @@ namespace CompPlus_Scenes
     extern void UpdateTitleCard();
     extern void OnObjectPreDraw(const char* object);
     extern void OnObjectPostDraw(const char* object);
-    extern void OnSceneDraw();
+    extern void OnSceneDraw(bool HUDDraw);
     extern void OnScenePreload();
     extern void SetSceneSpecifics();
     extern void UpdateScenes();

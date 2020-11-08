@@ -258,7 +258,7 @@ namespace CompPlus_Credits
                 if (i == 271 || i == 269 || i == 270 || i == 253) continue;
                 Entity& entity = *GetEntityFromSceneSlot<Entity>(i);
 
-                if (entity.ObjectID == 88)
+                if (entity.ObjectID == GetObjectIDFromType(ObjectType_UIInfoLabel))
                 {
                     EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(i);
                     CurrentSpawns.insert(CurrentSpawns.begin(), CollectableText(i, Label.TextLength));
@@ -411,6 +411,7 @@ namespace CompPlus_Credits
     void StoreText(int i, DevMenu_Alignment Alignment = Alignment_Right)
     {
         EntityUIInfoLabel& Label = *GetEntityFromSceneSlot<EntityUIInfoLabel>(CurrentSpawns[i].SlotID);
+        //if (Label.TextLength >= 1000) return;
         std::wstring Name = ConvertMStringToWString(Label.Text, Label.TextLength);
 
         CurrentSpawns[i].Text = Name;
@@ -455,7 +456,7 @@ namespace CompPlus_Credits
     {
         if (!ManiaFontLoaded)
         {
-            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_Cred_UISmallFont, Scope_Stage);
+            ManiaFontSpriteID = LoadAnimation(CompPlus_Common::Anim_Cred_UISmallFont, Scope_Global);
             ManiaFontLoaded = true;
             return;
         }
@@ -508,6 +509,7 @@ namespace CompPlus_Credits
 
     void OnDrawText() 
     {
+        if (SonicMania::Timer.Enabled == false) return;
         int Offset_X = GetPointer(0xAA7628, 0x96000);
         int Offset_Y = GetPointer(0xAA7628, 0x96004);
 
