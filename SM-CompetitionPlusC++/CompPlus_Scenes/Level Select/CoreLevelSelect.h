@@ -3,7 +3,7 @@
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "ManiaLevelSelect.h"
 
 namespace CompPlus_CoreLevelSelect
@@ -178,7 +178,7 @@ namespace CompPlus_CoreLevelSelect
     extern void InitDrawVariables(int StartX, int StartY, int SpacingX, int SpacingY);
     extern MenuPoint CreateBlankMenuPoint(int x, int y);
     extern MenuPoint CreateMenuPoint(int y, int x, std::string SceneID, std::string Title, std::string Name, std::string Author, int AnimID, int FrameID, bool isLocked);
-    extern MenuPoint CreateMenuPoint(int y, int x, int LevelID, std::string Title, std::string Name, std::string Author, int AnimID, int FrameID, bool isLocked);
+    extern MenuPoint CreateMenuPointClassic(int y, int x, int LevelID, std::string Title, std::string Name, std::string Author, int AnimID, int FrameID, bool isLocked);
     extern void DrawZoneInfo(MenuPoint Point, EntityTitleCard* Canvas);
     extern void DrawEntryChaotix(MenuPoint Point, int x, int y, int IconsSpriteID, int MenuPos_X, int MenuPos_Y, EntityTitleCard* Canvas);
     extern void DrawEntry(MenuPoint Point, int x, int y, int IconsSpriteID, int MenuPos_X, int MenuPos_Y, EntityTitleCard* Canvas);

@@ -4,7 +4,7 @@
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Scoring.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"

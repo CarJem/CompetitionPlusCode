@@ -1,5 +1,5 @@
 #pragma once
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Settings.h"
 
 namespace CompPlus_Announcers

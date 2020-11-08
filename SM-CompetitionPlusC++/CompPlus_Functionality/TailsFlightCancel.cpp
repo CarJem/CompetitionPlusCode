@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TailsFlightCancel.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "ManiaModLoader.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 

@@ -2,7 +2,7 @@
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CoreLevelSelect.h"
@@ -152,21 +152,21 @@ namespace CompPlus_ChaotixLevelSelect
         MLS_MenuPoints[1][7].YellowText = true;
 
         MLS_MenuPoints[2][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[2][1] = CreateMenuPoint(2, 1, (int)Scene::Scene_HCZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
-        MLS_MenuPoints[2][2] = CreateMenuPoint(2, 2, (int)Scene::Scene_HCZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, true); i++;
-        MLS_MenuPoints[2][3] = CreateMenuPoint(2, 3, (int)Scene::Scene_MSZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, true); i++;
-        MLS_MenuPoints[2][4] = CreateMenuPoint(2, 4, (int)Scene::Scene_MSZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, true); i++;
-        MLS_MenuPoints[2][5] = CreateMenuPoint(2, 5, (int)Scene::Scene_OOZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, true); i++;
-        MLS_MenuPoints[2][6] = CreateMenuPoint(2, 6, (int)Scene::Scene_OOZ2, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, true); i++;
+        MLS_MenuPoints[2][1] = CreateMenuPointClassic(2, 1, (int)Scene::Scene_HCZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
+        MLS_MenuPoints[2][2] = CreateMenuPointClassic(2, 2, (int)Scene::Scene_HCZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, true); i++;
+        MLS_MenuPoints[2][3] = CreateMenuPointClassic(2, 3, (int)Scene::Scene_MSZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, true); i++;
+        MLS_MenuPoints[2][4] = CreateMenuPointClassic(2, 4, (int)Scene::Scene_MSZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, true); i++;
+        MLS_MenuPoints[2][5] = CreateMenuPointClassic(2, 5, (int)Scene::Scene_OOZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, true); i++;
+        MLS_MenuPoints[2][6] = CreateMenuPointClassic(2, 6, (int)Scene::Scene_OOZ2, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, true); i++;
         MLS_MenuPoints[2][7] = CreateBlankMenuPoint(7, 1);
 
         MLS_MenuPoints[3][0] = CreateBlankMenuPoint(0, 1);
-        MLS_MenuPoints[3][1] = CreateMenuPoint(3, 1, (int)Scene::Scene_LRZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
-        MLS_MenuPoints[3][2] = CreateMenuPoint(3, 2, (int)Scene::Scene_LRZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, true); i++;
-        MLS_MenuPoints[3][3] = CreateMenuPoint(3, 3, (int)Scene::Scene_MMZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, true); i++;
-        MLS_MenuPoints[3][4] = CreateMenuPoint(3, 4, (int)Scene::Scene_MMZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, true); i++;
-        MLS_MenuPoints[3][5] = CreateMenuPoint(3, 5, (int)Scene::Scene_TMZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, true); i++;
-        MLS_MenuPoints[3][6] = CreateMenuPoint(3, 6, (int)Scene::Scene_TMZ2, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, true); i++;
+        MLS_MenuPoints[3][1] = CreateMenuPointClassic(3, 1, (int)Scene::Scene_LRZ1, LevelTitles[i], LevelNames[i], AuthorNames[0], 1, 0, true); i++;
+        MLS_MenuPoints[3][2] = CreateMenuPointClassic(3, 2, (int)Scene::Scene_LRZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 1, true); i++;
+        MLS_MenuPoints[3][3] = CreateMenuPointClassic(3, 3, (int)Scene::Scene_MMZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 2, true); i++;
+        MLS_MenuPoints[3][4] = CreateMenuPointClassic(3, 4, (int)Scene::Scene_MMZ2, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 3, true); i++;
+        MLS_MenuPoints[3][5] = CreateMenuPointClassic(3, 5, (int)Scene::Scene_TMZ1, LevelTitles[i], LevelNames[i], AuthorNames[1], 1, 4, true); i++;
+        MLS_MenuPoints[3][6] = CreateMenuPointClassic(3, 6, (int)Scene::Scene_TMZ2, LevelTitles[i], LevelNames[i], AuthorNames[2], 1, 5, true); i++;
         MLS_MenuPoints[3][7] = CreateBlankMenuPoint(7, 1);
 
 

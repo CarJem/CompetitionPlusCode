@@ -3,7 +3,7 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include <iostream>
 #include <fstream>
 #include <vector>

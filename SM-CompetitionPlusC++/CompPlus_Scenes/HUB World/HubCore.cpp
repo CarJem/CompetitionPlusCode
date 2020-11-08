@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include <string>
 #include <sstream>
 #include "HubCore.h"
@@ -17,6 +17,8 @@ namespace CompPlus_HubCore
 
     HubPlace ReturnDestination = HubPlace_StartPosition;
     using namespace SonicMania;
+
+    bool DisableHUD = false;
 
     bool isRestart = true;
 
@@ -149,24 +151,30 @@ namespace CompPlus_HubCore
 
     void OnDraw()
     {
-        ushort pointer = GetSpritePointer(0xAA7634, 0x14);
-        int screen = 0;
+        if (SonicMania::Timer.Enabled)
+        {
+            ushort pointer = GetSpritePointer(0xAA7634, 0x14);
+            int screen = 0;
 
-        if (pointer == 0) screen = 0;
-        else if (pointer == 1) screen = 1;
-        else if (pointer == 2) screen = 2;
-        else if (pointer == 3) screen = 3;
+            if (pointer == 0) screen = 0;
+            else if (pointer == 1) screen = 1;
+            else if (pointer == 2) screen = 2;
+            else if (pointer == 3) screen = 3;
 
-        int offset = 0x96030 * screen;
+            int offset = 0x96030 * screen;
 
-        DrawWaitingForPlayers(offset);
+            if (DisableHUD == false) 
+            {
+                DrawWaitingForPlayers(offset);
 
-        if (Player1.Camera != nullptr) DrawPlayerHUD(Player1.Position, offset, CompPlus_Scoring::P1_LastPlacement, 1, 14, Player1Box);
-        if (Player2.Camera != nullptr) DrawPlayerHUD(Player2.Position, offset, CompPlus_Scoring::P2_LastPlacement, 2, 14, Player2Box);
-        if (Player3.Camera != nullptr) DrawPlayerHUD(Player3.Position, offset, CompPlus_Scoring::P3_LastPlacement, 3, 14, Player3Box);
-        if (Player4.Camera != nullptr) DrawPlayerHUD(Player4.Position, offset, CompPlus_Scoring::P4_LastPlacement, 4, 14, Player4Box);
+                if (Player1.Camera != nullptr) DrawPlayerHUD(Player1.Position, offset, CompPlus_Scoring::P1_LastPlacement, 1, 14, Player1Box);
+                if (Player2.Camera != nullptr) DrawPlayerHUD(Player2.Position, offset, CompPlus_Scoring::P2_LastPlacement, 2, 14, Player2Box);
+                if (Player3.Camera != nullptr) DrawPlayerHUD(Player3.Position, offset, CompPlus_Scoring::P3_LastPlacement, 3, 14, Player3Box);
+                if (Player4.Camera != nullptr) DrawPlayerHUD(Player4.Position, offset, CompPlus_Scoring::P4_LastPlacement, 4, 14, Player4Box);
+            }
 
-        DrawKillScreens(screen, offset);
+            DrawKillScreens(screen, offset);
+        }
     }
 
     void SetHUBVisualSettings()

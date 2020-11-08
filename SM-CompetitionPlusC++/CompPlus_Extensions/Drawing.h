@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "ManiaModLoader.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include <string>
 namespace Drawing 
 {

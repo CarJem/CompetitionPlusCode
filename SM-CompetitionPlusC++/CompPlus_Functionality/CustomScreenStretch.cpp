@@ -1,7 +1,7 @@
 #include "CustomScreenStretch.h"
 #include "stdafx.h"
 #include "ManiaModLoader.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Status.h"
 

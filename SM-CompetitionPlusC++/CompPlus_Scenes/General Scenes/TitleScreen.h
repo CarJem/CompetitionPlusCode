@@ -1,5 +1,5 @@
 #pragma once
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 namespace CompPlus_TitleScreen
 {
     extern bool StillDrawing;

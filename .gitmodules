@@ -2,5 +2,5 @@
 	path = Game
 	url = https://github.com/CarJem/SMCP-Game
 [submodule "ManiaAPI"]
-	path = ManiaAPI
+	path = SM-CompetitionPlusC++/include/ManiaAPI
 	url = https://github.com/thesupersonic16/ManiaAPI.git

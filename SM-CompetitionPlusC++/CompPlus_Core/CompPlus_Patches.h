@@ -1,7 +1,7 @@
 #pragma once
 #include "include/stdafx.h"
 #include "include/MemAccess.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 namespace CompPlus_Patches
 {
     struct WaterColorDefintion 

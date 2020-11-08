@@ -2,7 +2,7 @@
 #include "CompPlus_DevMenu.h"
 #include "Base.h"
 #include "ManiaModLoader.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Settings.h"
 #include "CompPlus_Controllers.h"
 #include "CompPlus_DevMenu/DevMenu_MainMenu.h"

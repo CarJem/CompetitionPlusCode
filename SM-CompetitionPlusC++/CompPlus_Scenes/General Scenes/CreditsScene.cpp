@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "CreditsScene.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Scenes/Level Select/CoreLevelSelect.h"
 #include "CompPlus_Core/CompPlus_Settings.h"

@@ -1,4 +1,4 @@
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include <string>
 #pragma once
 namespace CompPlus_Settings

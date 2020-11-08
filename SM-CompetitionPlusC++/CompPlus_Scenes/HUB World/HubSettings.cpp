@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "HubSettings.h"
 #include "HubControllers.h"
 #include "HubText.h"
@@ -379,7 +379,7 @@ namespace CompPlus_HubSettings
         if (SettingWaitTimer != 0) SettingWaitTimer = SettingWaitTimer - 1;
     }
 
-    void PlayerSettingsWarp() 
+    void PlayerSettingsWarpSingle(SonicMania::EntityPlayer* Player, int ID) 
     {
         SonicMania::Entity& SettingsEnterance = *GetEntityFromSceneSlot<Entity>(PlayerSettingsWarpEnterance);
 
@@ -388,90 +388,37 @@ namespace CompPlus_HubSettings
         SonicMania::Entity& P3_Destination = *GetEntityFromSceneSlot<Entity>(PlayerSettingsDestination_P3);
         SonicMania::Entity& P4_Destination = *GetEntityFromSceneSlot<Entity>(PlayerSettingsDestination_P4);
 
-        if (SonicMania::Player1.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16)) 
+        if (Player->InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
         {
-            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+            WarpWithCamera(*Player, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
-        if (SonicMania::Player1.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
+        if (Player->InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
         {
-            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+            WarpWithCamera(*Player, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
-        if (SonicMania::Player1.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
+        if (Player->InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
         {
-            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+            WarpWithCamera(*Player, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
-        if (SonicMania::Player1.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
+        if (Player->InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
         {
-            WarpWithCamera(Player1, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
+            WarpWithCamera(*Player, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
         }
+        if (Player->InRange(SettingsEnterance.Position.X - 16, SettingsEnterance.Position.Y - 16, SettingsEnterance.Position.X + 16, SettingsEnterance.Position.Y + 16))
+        {
+            if (ID == 1) WarpWithCamera(*Player, P1_Destination.Position.X + 32, P1_Destination.Position.Y);
+            else if (ID == 2) WarpWithCamera(*Player, P2_Destination.Position.X + 32, P2_Destination.Position.Y);
+            else if (ID == 3) WarpWithCamera(*Player, P3_Destination.Position.X + 32, P3_Destination.Position.Y);
+            else if (ID == 4) WarpWithCamera(*Player, P4_Destination.Position.X + 32, P4_Destination.Position.Y);
+        }
+    }
 
-        if (SonicMania::Player2.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player2.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player2.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player2.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player2, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-
-        if (SonicMania::Player3.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player3.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player3.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player3.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player3, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-
-        if (SonicMania::Player4.InRange(P1_Destination.Position.X - 16, P1_Destination.Position.Y - 16, P1_Destination.Position.X + 16, P1_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player4.InRange(P2_Destination.Position.X - 16, P2_Destination.Position.Y - 16, P2_Destination.Position.X + 16, P2_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player4.InRange(P3_Destination.Position.X - 16, P3_Destination.Position.Y - 16, P3_Destination.Position.X + 16, P3_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-        if (SonicMania::Player4.InRange(P4_Destination.Position.X - 16, P4_Destination.Position.Y - 16, P4_Destination.Position.X + 16, P4_Destination.Position.Y + 16))
-        {
-            WarpWithCamera(Player4, SettingsEnterance.Position.X - 32, SettingsEnterance.Position.Y);
-        }
-
-        if (SonicMania::Player1.InRange(SettingsEnterance.Position.X - 16, SettingsEnterance.Position.Y - 16, SettingsEnterance.Position.X + 16, SettingsEnterance.Position.Y + 16))
-        {
-            WarpWithCamera(Player1, P1_Destination.Position.X + 32, P1_Destination.Position.Y);
-        }
-        if (SonicMania::Player2.InRange(SettingsEnterance.Position.X - 16, SettingsEnterance.Position.Y - 16, SettingsEnterance.Position.X + 16, SettingsEnterance.Position.Y + 16))
-        {
-            WarpWithCamera(Player2, P2_Destination.Position.X + 32, P2_Destination.Position.Y);
-        }
-        if (SonicMania::Player3.InRange(SettingsEnterance.Position.X - 16, SettingsEnterance.Position.Y - 16, SettingsEnterance.Position.X + 16, SettingsEnterance.Position.Y + 16))
-        {
-            WarpWithCamera(Player3, P3_Destination.Position.X + 32, P3_Destination.Position.Y);
-        }
-        if (SonicMania::Player4.InRange(SettingsEnterance.Position.X - 16, SettingsEnterance.Position.Y - 16, SettingsEnterance.Position.X + 16, SettingsEnterance.Position.Y + 16))
-        {
-            WarpWithCamera(Player4, P4_Destination.Position.X + 32, P4_Destination.Position.Y);
-        }
+    void PlayerSettingsWarp() 
+    {
+        PlayerSettingsWarpSingle(&Player1, 1);
+        PlayerSettingsWarpSingle(&Player2, 2);
+        PlayerSettingsWarpSingle(&Player3, 3);
+        PlayerSettingsWarpSingle(&Player4, 4);
     }
 
     void SceneWarp()

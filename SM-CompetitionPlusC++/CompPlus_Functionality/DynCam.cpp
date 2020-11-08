@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DynCam.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "include/MemAccess.h"
 #include "ManiaModLoader.h"
 #include "CompPlus_Core/CompPlus_Settings.h"

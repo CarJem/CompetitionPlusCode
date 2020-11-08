@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include <vector>
 #include <cmath>
 #include <ctime>

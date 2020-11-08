@@ -239,6 +239,7 @@
     <ClInclude Include="depends\tinyxml2\tinyxml2.h" />
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\MetrotropicBeach.h" />
     <ClInclude Include="CompPlus_Functionality\SpeedShoesMods.h" />
+    <ClInclude Include="include\ManiaAPI\SonicMania.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp" />
@@ -253,7 +254,6 @@
     <ClCompile Include="CompPlus_DevMenu\DevMenu_MainMenu.cpp" />
     <ClCompile Include="CompPlus_DevMenu\DevMenu_RankingEditor.cpp" />
     <ClCompile Include="CompPlus_DevMenu\DevMenu_SpecialSettings.cpp" />
-    <ClCompile Include="CompPlus_Extensions\dllmain.cpp" />
     <ClCompile Include="CompPlus_Extensions\Drawing.cpp" />
     <ClCompile Include="CompPlus_Extensions\Helpers.cpp" />
     <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp" />

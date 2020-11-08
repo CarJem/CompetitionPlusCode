@@ -13,17 +13,11 @@
     <Filter Include="Core\Headers">
       <UniqueIdentifier>{3227a906-faeb-48a7-8833-e0d9622d17c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extensions">
-      <UniqueIdentifier>{d02e344e-f150-4f1c-ada0-ca699edea906}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DevMenu">
       <UniqueIdentifier>{e7daa728-d0d9-41ab-92be-520aa3558883}</UniqueIdentifier>
     </Filter>
     <Filter Include="DevMenu\Headers">
       <UniqueIdentifier>{b61d13f3-5ffd-4897-bdc8-5fec61a896ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Extensions\Headers">
-      <UniqueIdentifier>{85e33415-fcce-485f-a7c9-b8014568d6fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes\Level Selects">
       <UniqueIdentifier>{f2938a78-3ee2-4e91-9c3e-177e7f1b6a2c}</UniqueIdentifier>
@@ -67,6 +61,18 @@
     <Filter Include="Depends\tinyxml2">
       <UniqueIdentifier>{c713a0a0-4d17-48ea-80e9-b4e58860cecd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions">
+      <UniqueIdentifier>{e2b27a8a-9f49-4598-9853-5e0b0cbbc357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\Headers">
+      <UniqueIdentifier>{7df96c00-a60d-4e3f-9fbf-0398230212f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{8c7129ec-8de9-4e8d-b9b7-4bcacc072671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\ManiaAPI">
+      <UniqueIdentifier>{cdd406bc-fe5b-4376-8405-ce43fd89f50f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -104,18 +110,6 @@
     </ClInclude>
     <ClInclude Include="CompPlus_DevMenu\DevMenu_SpecialSettings.h">
       <Filter>DevMenu\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\IZAPI.h">
-      <Filter>Extensions\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\Helpers.h">
-      <Filter>Extensions\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\ManiaExt.h">
-      <Filter>Extensions\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\PointScrolling.h">
-      <Filter>Extensions\Headers</Filter>
     </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Level Select\PhantomLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
@@ -165,12 +159,8 @@
     <ClInclude Include="CompPlus_Scenes\Custom Scenes\LHPZ.h">
       <Filter>Scenes\Custom Scenes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Base.h" />
     <ClInclude Include="CompPlus_Scenes\Level Select\ExeLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CompPlus_Extensions\Drawing.h">
-      <Filter>Extensions\Headers</Filter>
     </ClInclude>
     <ClInclude Include="CompPlus_Scenes\Level Select\CoreLevelSelect.h">
       <Filter>Scenes\Level Selects\Headers</Filter>
@@ -250,9 +240,27 @@
     <ClInclude Include="depends\colorspace\Utils.h">
       <Filter>Depends\colorspace</Filter>
     </ClInclude>
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="CompPlus_Extensions\Drawing.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\IZAPI.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\Helpers.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\ManiaExt.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CompPlus_Extensions\PointScrolling.h">
+      <Filter>Extensions\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ManiaAPI\SonicMania.h">
+      <Filter>Include\ManiaAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base.cpp" />
     <ClCompile Include="CompPlus_Core\CompPlus_Announcers.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -273,18 +281,6 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Core\CompPlus_Status.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\dllmain.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\Helpers.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp">
-      <Filter>Extensions</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp">
-      <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_DevMenu\DevMenu_InputMapping.cpp">
       <Filter>DevMenu</Filter>
@@ -348,9 +344,6 @@
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Level Select\ExeLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
-    </ClCompile>
-    <ClCompile Include="CompPlus_Extensions\Drawing.cpp">
-      <Filter>Extensions</Filter>
     </ClCompile>
     <ClCompile Include="CompPlus_Scenes\Level Select\CoreLevelSelect.cpp">
       <Filter>Scenes\Level Selects</Filter>
@@ -427,5 +420,18 @@
     <ClCompile Include="depends\colorspace\Conversion.cpp">
       <Filter>Depends\colorspace</Filter>
     </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\PointScrolling.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\Drawing.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\Helpers.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="CompPlus_Extensions\ManiaExt.cpp">
+      <Filter>Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp" />
   </ItemGroup>
 </Project>

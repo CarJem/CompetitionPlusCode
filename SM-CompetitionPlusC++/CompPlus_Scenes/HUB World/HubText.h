@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "Base.h"

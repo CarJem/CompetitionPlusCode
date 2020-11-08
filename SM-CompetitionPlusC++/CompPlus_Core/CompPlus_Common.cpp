@@ -3,7 +3,7 @@
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "Base.h"
 #include "CompPlus_Settings.h"
 #include "CompPlus_Status.h"
@@ -101,8 +101,8 @@ namespace CompPlus_Common
      const char* SMCP_SPZ2 = "SMCP_SPZ2";
      const char* SMCP_FBZ1 = "SMCP_FBZ1";
      const char* SMCP_FBZ2 = "SMCP_FBZ2";
-     const char* SMCP_PGZ1 = "SMCP_PGZ1";
-     const char* SMCP_PGZ2 = "SMCP_PGZ2";
+     const char* SMCP_PGZ1 = "SMCP_PSZ1";
+     const char* SMCP_PGZ2 = "SMCP_PSZ2";
      const char* SMCP_SSZ1 = "SMCP_SSZ1";
      const char* SMCP_SSZ2 = "SMCP_SSZ2";
      const char* SMCP_HCZ1 = "SMCP_HCZ1";
@@ -126,8 +126,8 @@ namespace CompPlus_Common
      const char* SMCP_SPZ2E = "SMCP_SPZ2E";
      const char* SMCP_FBZ1E = "SMCP_FBZ1E";
      const char* SMCP_FBZ2E = "SMCP_FBZ2E";
-     const char* SMCP_PGZ1E = "SMCP_PGZ1E";
-     const char* SMCP_PGZ2E = "SMCP_PGZ2E";
+     const char* SMCP_PGZ1E = "SMCP_PSZ1E";
+     const char* SMCP_PGZ2E = "SMCP_PSZ2E";
      const char* SMCP_SSZ1E = "SMCP_SSZ1E";
      const char* SMCP_SSZ2E = "SMCP_SSZ2E";
      const char* SMCP_HCZ1E = "SMCP_HCZ1E";

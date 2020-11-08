@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ManiaModLoader.h"
 #include "DAGarden.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include "CompPlus_Core/CompPlus_Common.h"

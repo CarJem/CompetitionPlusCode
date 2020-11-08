@@ -4,7 +4,7 @@
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "Base.h"
 
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>

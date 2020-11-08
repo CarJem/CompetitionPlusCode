@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "include/SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Settings.h"
 #include "include/ManiaModLoader.h"
 #include "CompPlus_Extensions/Helpers.h"

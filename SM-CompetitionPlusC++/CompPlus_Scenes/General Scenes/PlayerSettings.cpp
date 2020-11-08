@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerSettings.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "Base.h"
 #include "CompPlus_Core/CompPlus_Common.h"

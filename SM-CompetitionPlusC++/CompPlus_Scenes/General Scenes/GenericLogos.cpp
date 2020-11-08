@@ -2,7 +2,7 @@
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include "CompPlus_Core/CompPlus_Patches.h"
 

@@ -3,7 +3,7 @@
 #include "ManiaModLoader.h"
 #include "CompPlus_Extensions/PointScrolling.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Common.h"
 #include <vector>
 #include "CompPlus_Core/CompPlus_Scoring.h"
@@ -376,7 +376,7 @@ namespace CompPlus_CoreLevelSelect
         return Point;
     }
 
-    MenuPoint CreateMenuPoint(int y, int x, int LevelID, std::string Title, std::string Name, std::string Author, int AnimID, int FrameID, bool isLocked)
+    MenuPoint CreateMenuPointClassic(int y, int x, int LevelID, std::string Title, std::string Name, std::string Author, int AnimID, int FrameID, bool isLocked)
     {
         MenuPoint Point = MenuPoint();
         Point.Position = Vector2(CurrentDraw_StartX + x * CurrentDraw_SpacingX, CurrentDraw_StartY + y * CurrentDraw_SpacingY);

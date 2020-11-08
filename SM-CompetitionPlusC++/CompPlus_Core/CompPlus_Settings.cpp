@@ -2,7 +2,7 @@
 #include "CompPlus_Settings.h"
 #include "CompPlus_Extensions/IZAPI.h"
 #include "Base.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Extensions/ManiaExt.h"
 #include "depends/tinyxml2/tinyxml2.h"
 #include <fstream>

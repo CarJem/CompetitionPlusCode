@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CompPlus_Extensions/ManiaExt.h"
-#include "SonicMania.h"
+#include "include/ManiaAPI/SonicMania.h"
 #include "CompPlus_Core/CompPlus_Settings.h"
 #include"CompPlus_Core/CompPlus_Status.h"
 #include "CompPlus_Core/CompPlus_Common.h"
@@ -492,20 +492,20 @@ namespace CompPlus_HubWorld
         CollapsingPlatform LevelSelectBounds = *SonicMania::GetEntityFromSceneSlot<CollapsingPlatform>(SceneWarpBounds_LevelSelect_ID);
 
 
-        int x1_ranking = RankingBounds.Position.X - 256; //(RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
-        int y1_ranking = RankingBounds.Position.Y - 256; //(RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
-        int x2_ranking = RankingBounds.Position.X + 256; //(RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
-        int y2_ranking = RankingBounds.Position.Y + 256; //(RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
+        int x1_ranking = RankingBounds.Position.X - (RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
+        int y1_ranking = RankingBounds.Position.Y - (RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
+        int x2_ranking = RankingBounds.Position.X + (RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
+        int y2_ranking = RankingBounds.Position.Y + (RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
 
-        int x1_settings = SettingsBounds.Position.X - 256; //(SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
-        int y1_settings = SettingsBounds.Position.Y - 256; //(SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
-        int x2_settings = SettingsBounds.Position.X + 256; //(SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
-        int y2_settings = SettingsBounds.Position.Y + 256; //(SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
+        int x1_settings = SettingsBounds.Position.X - (SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
+        int y1_settings = SettingsBounds.Position.Y - (SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
+        int x2_settings = SettingsBounds.Position.X + (SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
+        int y2_settings = SettingsBounds.Position.Y + (SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
 
-        int x1_levelSelect = LevelSelectBounds.Position.X - 256; // (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
-        int y1_levelSelect = LevelSelectBounds.Position.Y - 256; // (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
-        int x2_levelSelect = LevelSelectBounds.Position.X + 256; // (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
-        int y2_levelSelect = LevelSelectBounds.Position.Y + 256; // (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
+        int x1_levelSelect = LevelSelectBounds.Position.X - (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
+        int y1_levelSelect = LevelSelectBounds.Position.Y - (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
+        int x2_levelSelect = LevelSelectBounds.Position.X + (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
+        int y2_levelSelect = LevelSelectBounds.Position.Y + (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
 
         int SettingsCount = 0;
         int RankingCount = 0;
