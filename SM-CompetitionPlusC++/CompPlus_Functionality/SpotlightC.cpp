@@ -25,7 +25,7 @@ namespace CompPlus_SpotlightC
     // static int OriginalRingCountMax = 50;
     // static int OriginalCounterMax = 60;
 
-    static int StandardSpotlightSize = 30;
+    static int StandardSpotlightSize = 60;
     static int SpotlightInnnerSizeA = StandardSpotlightSize + 75;
     static int SpotlightInnnerSizeB = StandardSpotlightSize;
     static int SpotlightInnnerSizeC = StandardSpotlightSize + 10;
@@ -118,46 +118,51 @@ namespace CompPlus_SpotlightC
 
     void OnPlayerDraw(EntityPlayer* ThisObject, Vector2 Position)
     {
-        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeA, SpotLightWidth, ToRGB888(GetPaletteEntry(0, 1)), 140, Ink_Alpha, true);
-        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeB + ThisObject->RingCount, SpotLightWidth, ToRGB888(GetPaletteEntry(0, 1)), 160, Ink_Alpha, true);
-        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeC + ThisObject->RingCount, SpotLightWidth, ToRGB888(GetPaletteEntry(0, 1)), 250, Ink_Alpha, true);
+        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeA, SpotLightWidth, 0x000000, 140, Ink_Alpha, true);
+        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeB + ThisObject->RingCount, SpotLightWidth, 0x000000, 160, Ink_Alpha, true);
+        DrawCircleOutline(Position.X, Position.Y, SpotlightInnnerSizeC + ThisObject->RingCount, SpotLightWidth, 0x000000, 250, Ink_Alpha, true);
     }
 
     void OnDraw() 
     {
+        EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+        int OldDrawOrder = Canvas->DrawOrder;
+        Canvas->DrawOrder = 8;
+
+        ushort pointer = GetSpritePointer(0xAA7634, 0x14);
+        int screen = 0;
+
+        if (pointer == 0) screen = 0;
+        else if (pointer == 1) screen = 1;
+        else if (pointer == 2) screen = 2;
+        else if (pointer == 3) screen = 3;
+
+        int offset = 0x96030 * screen;
+
         if (CompPlus_Settings::SpotLightChallenge && IsValidScene()) 
         {
-            ushort pointer = GetSpritePointer(0xAA7634, 0x14);
-            int screen = 0;
-
-            if (pointer == 0) screen = 0;
-            else if (pointer == 1) screen = 1;
-            else if (pointer == 2) screen = 2;
-            else if (pointer == 3) screen = 3;
-
-            int offset = 0x96030 * screen;
-
-            if (Player1.Camera != nullptr && screen == 0)
+            if (screen == 0)
             {
                 Vector2 position_p1 = Vector2((SonicMania::Player1.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player1.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
                 OnPlayerDraw(&Player1, position_p1);
             }
-            if (Player2.Camera != nullptr && screen == 1)
+            if (screen == 1)
             {
                 Vector2 position_p2 = Vector2((SonicMania::Player2.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player2.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
                 OnPlayerDraw(&Player2, position_p2);
             }
-            if (Player3.Camera != nullptr && screen == 2)
+            if (screen == 2)
             {
                 Vector2 position_p3 = Vector2((SonicMania::Player3.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player3.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
                 OnPlayerDraw(&Player3, position_p3);
             }
-            if (Player4.Camera != nullptr && screen == 3)
+            if (screen == 3)
             {
                 Vector2 position_p4 = Vector2((SonicMania::Player4.Position.X - GetPointer(0xAA7628, 0x96000 + offset)), (Player4.Position.Y - GetPointer(0xAA7628, 0x96004 + offset)));
                 OnPlayerDraw(&Player4, position_p4);
             }
         }
+        Canvas->DrawOrder = OldDrawOrder;
     }
 
     void OnFrame()

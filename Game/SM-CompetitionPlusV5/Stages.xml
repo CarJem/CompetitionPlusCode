@@ -599,7 +599,6 @@
 			<StageAssets>
 				<Asset basePath="Data/Music/" newPath="Data/Music/SMCP_HILL/"/>
 				<Asset basePath="Data/Sprites/GHZ/" newPath="Data/Sprites/SMCP_HILL/"/>
-				<Asset basePath="Data/Sprites/Global/Ring.bin" newPath="Data/Sprites/SMCP_Executor/Ring.bin"></Asset>
 			</StageAssets>
 			<TileCardColors>
 				<EncoreMode Background="0x280000" Foreground0="0x202020" Foreground1="0xC00000" Foreground2="0xFF0000" Foreground3="0x800000" Foreground4="0x800000"/>

@@ -371,15 +371,15 @@ namespace CompPlus_Settings
     {
         if (InfiniteLives)
         {
-            SonicMania::Player1.LifeCount = 99;
-            SonicMania::Player2.LifeCount = 99;
-            SonicMania::Player3.LifeCount = 99;
-            SonicMania::Player4.LifeCount = 99;
+            SonicMania::Player1.LifeCount = 100;
+            SonicMania::Player2.LifeCount = 100;
+            SonicMania::Player3.LifeCount = 100;
+            SonicMania::Player4.LifeCount = 100;
 
-            SonicMania::Options->CompetitionSession.InitalLives_P1 = 99;
-            SonicMania::Options->CompetitionSession.InitalLives_P2 = 99;
-            SonicMania::Options->CompetitionSession.InitalLives_P3 = 99;
-            SonicMania::Options->CompetitionSession.InitalLives_P4 = 99;
+            SonicMania::Options->CompetitionSession.InitalLives_P1 = 100;
+            SonicMania::Options->CompetitionSession.InitalLives_P2 = 100;
+            SonicMania::Options->CompetitionSession.InitalLives_P3 = 100;
+            SonicMania::Options->CompetitionSession.InitalLives_P4 = 100;
         }
         else 
         {
@@ -398,19 +398,19 @@ namespace CompPlus_Settings
     {
         if (Force) FastChangeCharacter(Player, Character);
 
-        if (PlayerID == 1 && Player->Camera != nullptr)
+        if (PlayerID == 1)
         {
             *(BYTE*)GetAddress(baseAddress + 0xAA763C, 0x4) = CharID;
         }
-        else if (PlayerID == 2 && Player->Camera != nullptr)
+        else if (PlayerID == 2)
         {
             *(BYTE*)GetAddress(baseAddress + 0xAA763C, 0x5) = CharID;
         }
-        else if (PlayerID == 3 && Player->Camera != nullptr)
+        else if (PlayerID == 3 && SonicMania::Options->CompetitionSession.NumberOfPlayers == 3)
         {
             *(BYTE*)GetAddress(baseAddress + 0xAA763C, 0x6) = CharID;
         }
-        else if (PlayerID == 4 && Player->Camera != nullptr)
+        else if (PlayerID == 4 && SonicMania::Options->CompetitionSession.NumberOfPlayers == 4)
         {
             *(BYTE*)GetAddress(baseAddress + 0xAA763C, 0x7) = CharID;
         }

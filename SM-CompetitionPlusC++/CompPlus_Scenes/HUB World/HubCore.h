@@ -21,7 +21,15 @@ namespace CompPlus_HubCore
 
     extern bool isRestart;
 
-    extern int ReturnDestination;
+    enum HubPlace : int
+    {
+        HubPlace_StartPosition = 0,
+        HubPlace_Settings = 1,
+        HubPlace_Ranking = 2,
+        HubPlace_LevelSelect = 3
+    };
+
+    extern HubPlace ReturnDestination;
 
     extern void UnloadDrawables();
 

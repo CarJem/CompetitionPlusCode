@@ -46,6 +46,8 @@ namespace CompPlus_VapeMusic
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_CPZ2E)) SetMusic(Music_CPZ2, Music_CPZ2E, CPZ2_TrackLoop, CPZ2_TrackLoop_E, name, a2, a3, loopstart, a5);
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1E)) SetMusic(Music_SPZ1, Music_SPZ1E, SPZ1_TrackLoop, SPZ1_TrackLoop_E, name, a2, a3, loopstart, a5);
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2E)) SetMusic(Music_SPZ2, Music_SPZ2E, SPZ2_TrackLoop, SPZ2_TrackLoop_E, name, a2, a3, loopstart, a5);
+            else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_DXE)) SetMusic(Music_SPZ1, Music_SPZ1E, SPZ1_TrackLoop, SPZ1_TrackLoop_E, name, a2, a3, loopstart, a5);
+            else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_DXE)) SetMusic(Music_SPZ2, Music_SPZ2E, SPZ2_TrackLoop, SPZ2_TrackLoop_E, name, a2, a3, loopstart, a5);
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ1E)) SetMusic(Music_FBZ1, Music_FBZ1E, FBZ1_TrackLoop, FBZ1_TrackLoop_E, name, a2, a3, loopstart, a5);
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_FBZ2E)) SetMusic(Music_FBZ2, Music_FBZ2E, FBZ2_TrackLoop, FBZ2_TrackLoop_E, name, a2, a3, loopstart, a5);
             else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_PGZ1E)) SetMusic(Music_PGZ1, Music_PGZ1E, PGZ1_TrackLoop, PGZ1_TrackLoop_E, name, a2, a3, loopstart, a5);

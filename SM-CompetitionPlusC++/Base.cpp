@@ -30,6 +30,8 @@
 #include "CompPlus_Functionality/SpotlightC.h"
 #include "CompPlus_Functionality/PlayerSkins.h"
 #include "CompPlus_Functionality/SpeedShoesMods.h"
+#include "CompPlus_Functionality/FBZStorm.h"
+#include "CompPlus_Functionality/RPlaneShifter.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -141,7 +143,6 @@ extern "C"
             Canvas->Direction = 0;
 
             CompPlus_Scenes::OnSceneDraw();
-            CompPlus_SpotlightC::OnDraw();
 
             Canvas->ActNumbersData = AnimationData;
             Canvas->DrawOrder = DrawOrder;
@@ -193,6 +194,8 @@ extern "C"
             CompPlus_HubCore::UnloadDrawables();
             CompPlus_SpecialRings::UnloadDrawables();
             CompPlus_PlayerSettings::Reload();
+            CompPlus_FBZStorm::OnReset();
+            CompPlus_RPlaneShifter::OnReset();
 
             CompPlus_Status::SpecialRingsNeedRefresh = true;
             CompPlus_SizeLazer::RefreshChibiSprites = true;
@@ -312,7 +315,23 @@ extern "C"
 
         __declspec(dllexport) void OnScreenDrawUpdate()
         {
+            EntityTitleCard* Canvas = (EntityTitleCard*)GetAddress(baseAddress + 0xAA7634, 0, 0);
+            int DrawOrder = Canvas->DrawOrder;
+            int Angle = Canvas->Angle;
+            DrawingFX DrawFX = Canvas->DrawFX;
+            int Rotation = Canvas->Rotation;
+            int Direction = Canvas->Direction;
+            EntityAnimationData AnimationData = Canvas->ActNumbersData;
+            Canvas->Direction = 0;
 
+            CompPlus_SpotlightC::OnDraw();
+
+            Canvas->ActNumbersData = AnimationData;
+            Canvas->DrawOrder = DrawOrder;
+            Canvas->Angle = Angle;
+            Canvas->DrawFX = DrawFX;
+            Canvas->Rotation = Rotation;
+            Canvas->Direction = Direction;
         }
 
         __declspec(dllexport) void OnFrame()

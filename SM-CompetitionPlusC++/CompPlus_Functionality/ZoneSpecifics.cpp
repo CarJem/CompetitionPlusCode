@@ -52,6 +52,11 @@ namespace CompPlus_ZoneSpecifics
         CompPlus_Status::ReplaceSpecialRings = false;
     }
 
+    void MMZ2LikePreset()
+    {
+        CompPlus_Status::ForceLoadChibiSprites = true;
+    }
+
     void LevelSelectLikePreset() 
     {
         CompPlus_Status::DisableWorldPositionWrite = true;
@@ -131,6 +136,13 @@ namespace CompPlus_ZoneSpecifics
         CurrentSpecific = 7;
     }
 
+    void SetMMZ2Specifics()
+    {
+        ResetSpecifics();
+        MMZ2LikePreset();
+        CurrentSpecific = 8;
+    }
+
     bool IsInternalStage(const char* CurrentScene)
     {
         if (!strcmp(CurrentScene, CompPlus_Common::HUBWorld)) return true;
@@ -172,6 +184,8 @@ namespace CompPlus_ZoneSpecifics
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2)) return true;
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1)) return true;
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_DX)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_DX)) return true;
         else return false;
     }
 
@@ -201,6 +215,8 @@ namespace CompPlus_ZoneSpecifics
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_MMZ2E)) return true;
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ1E)) return true;
         else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_TMZ2E)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ1_DXE)) return true;
+        else if (!strcmp(CurrentScene, CompPlus_Common::SMCP_SPZ2_DXE)) return true;
         else return false;
     }
 
@@ -266,6 +282,10 @@ namespace CompPlus_ZoneSpecifics
         else if (IsExecutorStage(CurrentScene_IZ)) SetEXELevelSpecifics();
         else if (IsChaotixStage(CurrentScene_IZ)) SetChaotixLevelSpecifics();
         else if (IsChaotixEncoreStage(CurrentScene_IZ)) SetChaotixEncoreLevelSpecifics();
+        else if (CurrentScene_SM == SonicMania::Scene::Scene_MMZ2) SetMMZ2Specifics();
+        else if (CurrentScene_SM == SonicMania::Scene::Scene_MMZ2_e) SetMMZ2Specifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::SMCP_MMZ2)) SetMMZ2Specifics();
+        else if (!strcmp(CurrentScene_IZ, CompPlus_Common::SMCP_MMZ2E)) SetMMZ2Specifics();
         else SetDefaultSpecifics();
     }
 

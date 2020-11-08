@@ -558,8 +558,8 @@ namespace CompPlus_HubSettings
             LevelSelectedWarpSoundPlayed = false;
             if (SonicMania::Options->CompetitionSession.inMatch == 1) 
             {
+                CompPlus_HubCore::ReturnDestination = CompPlus_HubCore::HubPlace_Settings;
                 CompPlus_Common::LoadHUBWorld();
-                CompPlus_HubCore::ReturnDestination = 1;
             }
             else 
             {

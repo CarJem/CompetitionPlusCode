@@ -426,7 +426,7 @@ namespace CompPlus_HubWorld
     #pragma region Spawn Position Methods
 
 
-    void SetSpawnPosition(SonicMania::EntityPlayer& Player, int Placement)
+    void SetSpawnPosition(SonicMania::EntityPlayer& Player, CompPlus_HubCore::HubPlace Placement)
     {
         SonicMania::Entity& SettingsSpawn = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(Spawnpoint_OtherSettings_ID);
         SonicMania::Entity& RankingSpawn = *SonicMania::GetEntityFromSceneSlot<SonicMania::Entity>(Spawnpoint_Ranking_ID);
@@ -436,22 +436,22 @@ namespace CompPlus_HubWorld
         int x = 0;
         int y = 0;
 
-        if (Placement == 0)
+        if (Placement == CompPlus_HubCore::HubPlace_StartPosition)
         {
             x = NormalSpawn.Position.X;
             y = NormalSpawn.Position.Y;
         }
-        else if (Placement == 1)
+        else if (Placement == CompPlus_HubCore::HubPlace_Settings)
         {
             x = SettingsSpawn.Position.X;
             y = SettingsSpawn.Position.Y;
         }
-        else if (Placement == 2)
+        else if (Placement == CompPlus_HubCore::HubPlace_Ranking)
         {
             x = RankingSpawn.Position.X;
             y = RankingSpawn.Position.Y;
         }
-        else if (Placement == 3)
+        else if (Placement == CompPlus_HubCore::HubPlace_LevelSelect)
         {
             x = LevelSelectSpawn.Position.X;
             y = LevelSelectSpawn.Position.Y;
@@ -478,7 +478,7 @@ namespace CompPlus_HubWorld
         SetSpawnPosition(SonicMania::Player3, CompPlus_HubCore::ReturnDestination);
         SetSpawnPosition(SonicMania::Player4, CompPlus_HubCore::ReturnDestination);
 
-        CompPlus_HubCore::ReturnDestination = 0;
+        CompPlus_HubCore::ReturnDestination = CompPlus_HubCore::HubPlace_StartPosition;
     }
 
     #pragma endregion
@@ -492,20 +492,20 @@ namespace CompPlus_HubWorld
         CollapsingPlatform LevelSelectBounds = *SonicMania::GetEntityFromSceneSlot<CollapsingPlatform>(SceneWarpBounds_LevelSelect_ID);
 
 
-        int x1_ranking = RankingBounds.Position.X - (RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
-        int y1_ranking = RankingBounds.Position.Y - (RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
-        int x2_ranking = RankingBounds.Position.X + (RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
-        int y2_ranking = RankingBounds.Position.Y + (RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
+        int x1_ranking = RankingBounds.Position.X - 256; //(RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
+        int y1_ranking = RankingBounds.Position.Y - 256; //(RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
+        int x2_ranking = RankingBounds.Position.X + 256; //(RankingBounds.SizeX == 0 ? 1 : RankingBounds.SizeX / 2);
+        int y2_ranking = RankingBounds.Position.Y + 256; //(RankingBounds.SizeY == 0 ? 1 : RankingBounds.SizeY / 2);
 
-        int x1_settings = SettingsBounds.Position.X - (SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
-        int y1_settings = SettingsBounds.Position.Y - (SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
-        int x2_settings = SettingsBounds.Position.X + (SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
-        int y2_settings = SettingsBounds.Position.Y + (SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
+        int x1_settings = SettingsBounds.Position.X - 256; //(SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
+        int y1_settings = SettingsBounds.Position.Y - 256; //(SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
+        int x2_settings = SettingsBounds.Position.X + 256; //(SettingsBounds.SizeX == 0 ? 1 : SettingsBounds.SizeX / 2);
+        int y2_settings = SettingsBounds.Position.Y + 256; //(SettingsBounds.SizeY == 0 ? 1 : SettingsBounds.SizeY / 2);
 
-        int x1_levelSelect = LevelSelectBounds.Position.X - (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
-        int y1_levelSelect = LevelSelectBounds.Position.Y - (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
-        int x2_levelSelect = LevelSelectBounds.Position.X + (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
-        int y2_levelSelect = LevelSelectBounds.Position.Y + (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
+        int x1_levelSelect = LevelSelectBounds.Position.X - 256; // (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
+        int y1_levelSelect = LevelSelectBounds.Position.Y - 256; // (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
+        int x2_levelSelect = LevelSelectBounds.Position.X + 256; // (LevelSelectBounds.SizeX == 0 ? 1 : LevelSelectBounds.SizeX / 2);
+        int y2_levelSelect = LevelSelectBounds.Position.Y + 256; // (LevelSelectBounds.SizeY == 0 ? 1 : LevelSelectBounds.SizeY / 2);
 
         int SettingsCount = 0;
         int RankingCount = 0;
@@ -720,7 +720,7 @@ namespace CompPlus_HubWorld
         CheckHUBSettings();
         SceneWarp();
 
-        if (SonicMania::Timer.Enabled == false && SonicMania::Options->CompetitionSession.NumberOfPlayers >= 2) isRestart = true;
+        if (SonicMania::Timer.Enabled == false) isRestart = true;
 
         if (isRestart && SonicMania::Timer.Enabled)
         {

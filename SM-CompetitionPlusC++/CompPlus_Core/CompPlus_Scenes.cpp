@@ -24,6 +24,7 @@
 #include "CompPlus_Functionality/SizeLazer.h"
 #include "CompPlus_Functionality/Halloween2018.h"
 #include "CompPlus_Functionality/VapeMusic.h"
+#include "CompPlus_Functionality/FBZStorm.h"
 
 #include "CompPlus_Scenes/Level Select/ManiaLevelSelect.h"
 #include "CompPlus_Scenes/Level Select/EncoreLevelSelect.h"
@@ -147,6 +148,8 @@ namespace CompPlus_Scenes
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings)) CompPlus_PlayerSettings::DoMenuOnScreenDraw();
         }
         else if (CurrentSceneInt == 1) CompPlus_TitleScreen::OnDraw();
+
+        CompPlus_FBZStorm::OnDraw();
     }
 
     void OnScenePreload()
@@ -189,6 +192,8 @@ namespace CompPlus_Scenes
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::HUBSettings)) CompPlus_HubSettings::OnFrame();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_PlayerSettings)) CompPlus_PlayerSettings::OnFrame();
             // Custom Levels
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_FBZ2)) CompPlus_FBZStorm::OnFrame();
+            else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_FBZ2E)) CompPlus_FBZStorm::OnFrame();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_SZ)) UpdateSZ();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_SZE)) UpdateSZ();
             else if (!strcmp(CurrentStage.SceneKey, CompPlus_Common::SMCP_GPZ1)) CompPlus_Scene_GustPlanet::OnFrame();

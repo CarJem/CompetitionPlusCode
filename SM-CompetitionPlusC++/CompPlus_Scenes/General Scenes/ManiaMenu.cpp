@@ -664,6 +664,8 @@ namespace CompPlus_ManiaMenu
         }
     }
 
+    bool LastPodeiumSpawnActiveState = false;
+
     void UpdateLevelSelect() 
     {
         EntityUIInfoLabel& Label1_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(601);
@@ -672,6 +674,8 @@ namespace CompPlus_ManiaMenu
         EntityUIInfoLabel& Label2_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(602);
         EntityUIInfoLabel& Label3_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(604);
         EntityUIInfoLabel& Label3_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(605);
+        EntityUIInfoLabel& Label4_1 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(599);
+        EntityUIInfoLabel& Label4_2 = *GetEntityFromSceneSlot<EntityUIInfoLabel>(606);
 
         Label1_1.InkEffect = Ink_Alpha;
         Label1_2.InkEffect = Ink_Alpha;
@@ -679,28 +683,38 @@ namespace CompPlus_ManiaMenu
         Label2_2.InkEffect = Ink_Alpha;
         Label3_1.InkEffect = Ink_Alpha;
         Label3_2.InkEffect = Ink_Alpha;
+        Label4_1.InkEffect = Ink_Alpha;
+        Label4_2.InkEffect = Ink_Alpha;
 
+        Label4_2.Position = Vector2(Label4_1.Position.X, Label4_1.Position.Y + 4);
 
         SonicMania::EntityUIVsZoneButton& object = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(590);
         object.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
-        //object.Obfuscate = true;
+        object.Obfuscate = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         object.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
-        object.ZoneID = 11;
-        object.Act = 31;
+        object.ZoneID = 0;
+        object.Act = 31 + 25;
 
         SonicMania::EntityUIVsZoneButton& object2 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(591);
         object2.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
-        //object2.Obfuscate = true;
+        object2.Obfuscate  = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         object2.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? true : false);
         object2.ZoneID = 11;
         object2.Act = 32;
 
         SonicMania::EntityUIVsZoneButton& object3 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(592);
         object3.Disabled = (CompPlus_Scoring::PodeiumSpawnActive ? false : true);
-        //object2.Obfuscate = true;
+        object3.Obfuscate = (CompPlus_Scoring::PodeiumSpawnActive ? false : true);
         object3.XOut = (CompPlus_Scoring::PodeiumSpawnActive ? false : true);
-        object3.ZoneID = 11;
-        object3.Act = 33;
+        object3.ZoneID = 1;
+        object3.Act = 33 + 23;
+
+        SonicMania::EntityUIVsZoneButton& object4 = *GetEntityFromSceneSlot<SonicMania::EntityUIVsZoneButton>(593);
+        object4.Disabled = true;
+        object4.Obfuscate = true;
+        object4.XOut = true;
+        object4.ZoneID = 11;
+        object4.Act = 34;
 
         Label1_1.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
         Label1_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
@@ -708,6 +722,8 @@ namespace CompPlus_ManiaMenu
         Label2_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 128 : 255);
         Label3_1.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 255 : 128);
         Label3_2.Alpha = (CompPlus_Scoring::PodeiumSpawnActive ? 255 : 128);
+        Label4_1.Alpha = 128;
+        Label4_2.Alpha = 128;
 
         EntityUIControl& CompetitionLevelSelect = *GetEntityFromSceneSlot<EntityUIControl>(UIVsLevelSelectUIControl);
 
@@ -716,6 +732,8 @@ namespace CompPlus_ManiaMenu
             CompPlus_Scoring::ClearTemporaryResults();
             StoredResults = false;
         }
+
+        if (LastPodeiumSpawnActiveState != CompPlus_Scoring::PodeiumSpawnActive) LastPodeiumSpawnActiveState = CompPlus_Scoring::PodeiumSpawnActive;
     }
 
     void UpdateUIInfoLabel(std::string text, int index, int SlotID)

@@ -122,8 +122,8 @@ namespace CompPlus_CoreLevelSelect
 
         if (SceneLoadWaitTimer >= SceneLoadWaitMax)
         {
-            CompPlus_Common::LoadHUBWorld(true);
-            CompPlus_HubCore::ReturnDestination = 3;
+            CompPlus_HubCore::ReturnDestination = CompPlus_HubCore::HubPlace_LevelSelect;
+            CompPlus_Common::LoadHUBWorld();
             SceneLoadWaitTimer = 0;
             LevelSelected = false;
             LevelSelectedWarpSoundPlayed = false;

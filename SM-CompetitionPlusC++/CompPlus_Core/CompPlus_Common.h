@@ -25,6 +25,9 @@ namespace CompPlus_Common
     extern const char* SFX_EXE_KYS;
     extern const char* SFX_EXE_Laugh;
 
+    extern const char* SFX_FBZ_Rain;
+    extern const char* SFX_FBZ_Thunder;
+
     #pragma endregion
 
     #pragma region Animation Paths
@@ -316,7 +319,6 @@ namespace CompPlus_Common
     extern void SpawnFadeOut(int Time, int SpeedIn, int Wait, int SpeedOut, int Color, bool OneWay, bool EventOnly, bool OverHud, bool FadeOutBlack, int DrawOrder);
 	extern void LoadLevel_IZ(const char* key);
 	extern void LoadLevel(int LevelID);
-    extern void LoadHUBWorld(bool ForcedOverworld);
     extern void LoadHUBWorld();
 	extern void PlayMenuMoveSoundFX(bool isClassic);
 	extern void PlayMenuAcceptSoundFX(bool isClassic);

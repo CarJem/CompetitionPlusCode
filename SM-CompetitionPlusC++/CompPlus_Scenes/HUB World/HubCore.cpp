@@ -14,7 +14,8 @@
 
 namespace CompPlus_HubCore
 {
-    int ReturnDestination = 0;
+
+    HubPlace ReturnDestination = HubPlace_StartPosition;
     using namespace SonicMania;
 
     bool isRestart = true;

@@ -330,8 +330,8 @@ namespace CompPlus_HubRanking
         SceneLoadWaitTimer = 0;
         LevelSelected = false;
         LevelSelectedWarpSoundPlayed = false;
+        CompPlus_HubCore::ReturnDestination = CompPlus_HubCore::HubPlace_Ranking;
         CompPlus_Common::LoadHUBWorld();
-        CompPlus_HubCore::ReturnDestination = 2;
     }
 
     void ReturnToLSelect(bool FastWarp, int& SceneLoadWaitTimer, int& SceneLoadWaitMax, bool& LevelSelected, bool& LevelSelectedWarpSoundPlayed)
@@ -340,6 +340,7 @@ namespace CompPlus_HubRanking
         SceneLoadWaitTimer = 0;
         LevelSelected = false;
         LevelSelectedWarpSoundPlayed = false;
+        CompPlus_HubCore::ReturnDestination = CompPlus_HubCore::HubPlace_LevelSelect;
         CompPlus_Common::LoadLastLevelSelect();
     }
 

@@ -429,6 +429,8 @@ namespace CompPlus_Patches
             SonicMania::LoadSoundFX(CompPlus_Common::SFX_LHPZSecret, SonicMania::Scope_Global);
             LoadSoundFX(CompPlus_Common::SFX_EXE_KYS, Scope_Global);
             LoadSoundFX(CompPlus_Common::SFX_EXE_Laugh, Scope_Global);
+            SonicMania::LoadSoundFX(CompPlus_Common::SFX_FBZ_Rain, SonicMania::Scope_Global);
+            SonicMania::LoadSoundFX(CompPlus_Common::SFX_FBZ_Thunder, SonicMania::Scope_Global);
             CompPlus_Announcers::LoadAnnouncerFX();
             SoundsLoaded = true;
         }

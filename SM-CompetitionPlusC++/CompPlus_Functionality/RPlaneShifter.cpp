@@ -64,6 +64,25 @@ namespace CompPlus_RPlaneShifter
     SonicMania::Vector2 Player3_LockedPosition = SonicMania::Vector2();
     SonicMania::Vector2 Player4_LockedPosition = SonicMania::Vector2();
 
+    void SetPlane(int PlayerID, int Value)
+    {
+        switch (PlayerID)
+        {
+            case 1:
+                Player1_CurrentPlane = Value;
+                break;
+            case 2:
+                Player2_CurrentPlane = Value;
+                break;
+            case 3:
+                Player3_CurrentPlane = Value;
+                break;
+            case 4:
+                Player4_CurrentPlane = Value;
+                break;
+        }
+    }
+
     void ChangePlane(SonicMania::EntityPlayer& Player, int Slot)
     {
         switch (Slot)
@@ -251,13 +270,21 @@ namespace CompPlus_RPlaneShifter
         ShifterFix(SonicMania::Player4, Shifter, Player4_HasBeenRotating, Player4_HasCooldown, Player4_CooldownID, Index, 4);
     }
 
-    void OnReload() 
+    void OnReset()
     {
-
+        Player1_CurrentPlane = 0;
+        Player2_CurrentPlane = 0;
+        Player3_CurrentPlane = 0;
+        Player4_CurrentPlane = 0;
     }
 
     void OnFrame() 
     {
+        if (SonicMania::Player1.KillFlag == 1) SetPlane(1, 0);
+        if (SonicMania::Player2.KillFlag == 1) SetPlane(2, 0);
+        if (SonicMania::Player3.KillFlag == 1) SetPlane(3, 0);
+        if (SonicMania::Player4.KillFlag == 1) SetPlane(4, 0);
+
         if (Player1_isPositionLocked) 
         {
             SonicMania::Player1.Position.X = Player1_LockedPosition.X;

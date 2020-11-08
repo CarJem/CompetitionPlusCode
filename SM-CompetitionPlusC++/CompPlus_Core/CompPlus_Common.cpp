@@ -36,6 +36,9 @@ namespace CompPlus_Common
      const char* SFX_EXE_KYS = "SMCP_Executor/KYS.wav";
      const char* SFX_EXE_Laugh = "SMCP_Executor/Laugh.wav";
 
+     const char* SFX_FBZ_Rain = "FBZ/Rain.wav";
+     const char* SFX_FBZ_Thunder = "FBZ/Thunder.wav";
+
     #pragma endregion
 
     #pragma region Animation Paths
@@ -357,25 +360,10 @@ namespace CompPlus_Common
 		CompPlus_Core::IZ_SceneChangeIdleTime = 10;
 	}
 
-    void LoadHUBWorld(bool ForcedOverworld = false)
-    {
-        if (CompPlus_Scoring::PodeiumSpawnActive && !ForcedOverworld)
-        {
-            CompPlus_HubCore::ReturnDestination = 2;
-            LoadLevel_IZ(HUBRanking);
-        }
-        else 
-        {
-            CompPlus_HubCore::ReturnDestination = 0;
-            if (CompPlus_Settings::CurrentSeason == CompPlus_Settings::Season_EXE) LoadLevel_IZ(HUBWorld_EXE);
-            else LoadLevel_IZ(HUBWorld);
-        }
-
-    }
-
     void LoadHUBWorld()
     {
-        LoadHUBWorld(false);
+        if (CompPlus_Settings::CurrentSeason == CompPlus_Settings::Season_EXE) LoadLevel_IZ(HUBWorld_EXE);
+        else LoadLevel_IZ(HUBWorld);
     }
 
 	void PlayMenuMoveSoundFX(bool isClassic)

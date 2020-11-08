@@ -29,7 +29,7 @@ namespace CompPlus_SizeLazer
     };
 
     bool RefreshChibiSprites = true;
-    int FrameTimeOut = 5000;
+    int FrameTimeOut = 50;
     int CurrentTimeOut = 0;
 
     bool IsValidToRefresh() 
@@ -97,6 +97,7 @@ namespace CompPlus_SizeLazer
 
     void OnObject(int Index)
     {
+        //TODO: Fix the Possibility of this ObjectID Being Wrong
         SizeLazer& Lazer = *SonicMania::GetEntityFromSceneSlot<SizeLazer>(Index);
         LoadChibiSprites();
     }

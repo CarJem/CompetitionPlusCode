@@ -43,7 +43,6 @@ namespace CompPlus_EntityLoop
             else if (entity.ObjectID == SonicMania::GetObjectIDFromType(SonicMania::ObjectType_FBZStorm))
             {
                 CompPlus_FBZStorm::OnObject(i);
-                HasSizeLazer = true;
             }
         }
 
