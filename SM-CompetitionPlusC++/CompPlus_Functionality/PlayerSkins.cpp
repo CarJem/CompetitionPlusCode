@@ -20,7 +20,7 @@ namespace CompPlus_PlayerSkins
     using namespace SonicMania;
     using namespace CompPlus_Settings;
 
-    bool SpritesLoaded = false;
+    bool SpritesLoaded = true;
 
     int SonicDefaultID = 0;
     int TailsDefaultID = 0;
@@ -250,7 +250,7 @@ namespace CompPlus_PlayerSkins
         else if (PlayerID == 3) LastP3SpriteIndex = Player->SpriteIndex;
         else if (PlayerID == 4) LastP4SpriteIndex = Player->SpriteIndex;
 
-        UpdatePlayer(PlayerID, Chosen);
+        //UpdatePlayer(PlayerID, Chosen);
     }
 
     void SetPlayerAssetOverride(int PlayerID, CompPlus_Settings::ChosenPlayer Chosen, CompPlus_Settings::PlayerAbility Ability, const char* PlayerBasePath)
@@ -394,13 +394,10 @@ namespace CompPlus_PlayerSkins
 
     void OnFrame() 
     {
-        /*
         if (CompPlus_Status::Abilities_EnableSkins) 
         {
             OnFrame_Normal();
         }
-        */
-
     }
 
     void Reload() 

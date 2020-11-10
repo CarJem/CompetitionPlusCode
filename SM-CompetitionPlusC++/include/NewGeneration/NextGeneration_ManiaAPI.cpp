@@ -432,12 +432,12 @@ namespace NextGeneration_ManiaAPI
 		WriteDataInt((void*)RuntimePointer270000(0x45F2CC + 1), &ResourceImageListStart[0].Scope);
 
         //These were originally Indexed at 1
-		WriteDataInt((void*)RuntimePointer270000(0x444C9A + 3), &ResourceImageListStart[0].Hash.A);
-		WriteDataInt((void*)RuntimePointer270000(0x444CBF + 2), &ResourceImageListStart[0].Data);
-		WriteDataInt((void*)RuntimePointer270000(0x444CA1 + 2), &ResourceImageListStart[0].Width);
-		WriteDataInt((void*)RuntimePointer270000(0x444CAB + 2), &ResourceImageListStart[0].Height);
-		WriteDataInt((void*)RuntimePointer270000(0x444CB5 + 2), &ResourceImageListStart[0].WidthInBits);
-		WriteDataInt((void*)RuntimePointer270000(0x444C93 + 2), &ResourceImageListStart[0].Scope);
+		WriteDataInt((void*)RuntimePointer270000(0x444C9A + 3), &ResourceImageListStart[1].Hash.A);
+		WriteDataInt((void*)RuntimePointer270000(0x444CBF + 2), &ResourceImageListStart[1].Data);
+		WriteDataInt((void*)RuntimePointer270000(0x444CA1 + 2), &ResourceImageListStart[1].Width);
+		WriteDataInt((void*)RuntimePointer270000(0x444CAB + 2), &ResourceImageListStart[1].Height);
+		WriteDataInt((void*)RuntimePointer270000(0x444CB5 + 2), &ResourceImageListStart[1].WidthInBits);
+		WriteDataInt((void*)RuntimePointer270000(0x444C93 + 2), &ResourceImageListStart[1].Scope);
 
 		// Some of these are the start of a different list
 		// WriteDataInt((void*)RuntimePointer270000(0x44EE63 + 1), &ResourceImageListEnd[0].Hash.A);

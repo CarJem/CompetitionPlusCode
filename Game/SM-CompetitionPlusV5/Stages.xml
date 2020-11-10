@@ -145,6 +145,7 @@
 		<Category categoryName="SMCP : HUB World">
 			<Group groupName="Overworld Section">
 				<Scene stageKey="SMCP_HUB1" sceneKey="SMCP_HUB1" sceneID="1" sceneFlags="3" sceneName="NRM"/>
+				<Scene stageKey="SMCP_HUB1" sceneKey="SMCP_HUB0" sceneID="1Original" sceneFlags="3" sceneName="BAK"/>
 				<Scene stageKey="SMCP_HUB1HWN" sceneKey="SMCP_HUB1HWN" sceneID="1" sceneFlags="3" sceneName="HWN"/>
 			</Group>
 			<Group groupName="Rankings Section">
@@ -288,7 +289,7 @@
 				<Asset basePath="Data/Sprites/Title/Background.bin" newPath="Data/Sprites/SMCP_DAGarden/Background_Custom.bin"/>
 			</StageAssets>
 		</Stage>
-		<Stage stageName="SMCP HUB Overworld" stageDir="SMCP_HUB/HUB_Overworld" stageKey="SMCP_HUB1">
+		<Stage stageName="SMCP HUB Overworld" stageDir="SMCP_HUB/HUB_Normal" stageKey="SMCP_HUB1">
 			<StageUnlocks>
 				<FBZ_HangPoint/>
 				<GHZ_Platform/>
@@ -316,7 +317,6 @@
 				<Asset basePath="Data/Sprites/GHZ/Motobug.bin" newPath="Data/Sprites/HUB/Motobug.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Newtron.bin" newPath="Data/Sprites/HUB/Newtron.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Platform.bin" newPath="Data/Sprites/HUB/Platform.bin"/>
-				<Asset basePath="Data/Sprites/GHZ/print.txt" newPath="Data/Sprites/HUB/print.txt"/>
 				<Asset basePath="Data/Sprites/GHZ/SpikeLog.bin" newPath="Data/Sprites/HUB/SpikeLog.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/Splats.bin" newPath="Data/Sprites/HUB/Splats.bin"/>
 				<Asset basePath="Data/Sprites/GHZ/ZipLine.bin" newPath="Data/Sprites/HUB/ZipLine.bin"/>

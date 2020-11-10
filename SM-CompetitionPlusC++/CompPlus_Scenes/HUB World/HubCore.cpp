@@ -201,7 +201,7 @@ namespace CompPlus_HubCore
     {
         if (!HUDSpriteLoaded)
         {
-            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Global);
+            HUDSpriteID = LoadAnimation(CompPlus_Common::Anim_HubCrown, Scope_Stage);
             HUDSpriteLoaded = true;
         }
     }
